@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routers } from '../../Routers/Routers'
 import { Layout } from '../../ProjectComponent/Layout/Layout'
-import { Container, BackstagePageTabBar, SubContainer, BasicContainer, ScrollBar, BasicButton, LineButton, Text, NativeBasicButton, NativeLineButton } from '../';
+import { Modals, Container, BackstagePageTabBar, SubContainer, BasicContainer, ScrollBar, BasicButton, LineButton, Text, NativeBasicButton, NativeLineButton } from '../';
 import styled from 'styled-components'
 //#region 引入預設字體
 // import NotoSansTCBlackotf from '../../Assets/fonts/NotoSansTC/NotoSansTC-Black.otf'
@@ -34,21 +34,28 @@ export const ContextContainerBase = (props) => {
               Author : Arhua Ho
               Content: 不隨Router re-render的組件
             */}
-            <Layout />
+            {/* <Layout /> */}
             {/* <BackstagePageTabBar /> */}
             {(localStorage.getItem("Auth") !== null) &&
                 <>
+                    <Layout />
                     {/* <MenuBar />
           <JumpAlert />
           <Portal /> */}
                 </>
             }
+            {/* 最底層Modal */}
+            <Modals />
+            {/* 次層Modal */}
+            <Modals id="top1" />
+            {/* 最上層Modal */}
+            <Modals id="top2" />
             {/* 
               Date   : 2020-06-12 12:18:46
               Author : Arhua Ho
               Content: 寫死的路由
             */}
-            {/* <Routers /> */}
+            <Routers />
         </>
     )
 }

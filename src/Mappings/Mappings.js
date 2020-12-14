@@ -1,9 +1,625 @@
 import React from 'react';
+import { Login } from '../Pages/Login/Login';
+import { Error404 } from '../Pages/Error404/Error404';
+
+import { ReactComponent as BarChartSvg } from '../Assets/img/BackstageLeftSideMenuBar/BarChart.svg'
+import { ReactComponent as MessageSvg } from '../Assets/img/BackstageLeftSideMenuBar/Message.svg'
+import { ReactComponent as ToolSvg } from '../Assets/img/BackstageLeftSideMenuBar/Tool.svg'
+import { ReactComponent as CarSvg } from '../Assets/img/BackstageLeftSideMenuBar/Car.svg'
+import { ReactComponent as ConsoleSvg } from '../Assets/img/BackstageLeftSideMenuBar/Console.svg'
+import { ReactComponent as CaseSvg } from '../Assets/img/BackstageLeftSideMenuBar/Case.svg'
+import { ReactComponent as DriverAndCarSvg } from '../Assets/img/BackstageLeftSideMenuBar/DriverAndCar.svg'
+import { ReactComponent as OrderSvg } from '../Assets/img/BackstageLeftSideMenuBar/Order.svg'
+import { ReactComponent as RouteAndStopSvg } from '../Assets/img/BackstageLeftSideMenuBar/RouteAndStop.svg'
+
+import { FareSubsidyParam } from '../Pages/Base/FareSubsidyParam/FareSubsidyParam';
+import { CarAndDriverSetting } from '../Pages/Base/CarAndDriverSetting/CarAndDriverSetting';
+import { OperatingUnitSetting } from '../Pages/Base/OperatingUnitSetting/OperatingUnitSetting';
+import { MedicalOrgManager } from '../Pages/Base/MedicalOrgManager/MedicalOrgManager';
+import { RoleManager } from '../Pages/Base/RoleManager/RoleManager';
+import { UserManager } from '../Pages/Base/UserManager/UserManager';
+import { OrgManager } from '../Pages/Base/OrgManager/OrgManager';
+//#region 派車調度
+import { WhiteConsole } from '../Pages/Dispatch/WhiteConsole/WhiteConsole';
+import { BusConsole } from '../Pages/Dispatch/BusConsole/BusConsole';
+//#endregion
+//#region 報表管理
+import { PickUpData } from '../Pages/Report/PickUpData/PickUpData';
+import { Revenue } from '../Pages/Report/Revenue/Revenue';
+import { CarUsed } from '../Pages/Report/CarUsed/CarUsed';
+import { CarAreaRate } from '../Pages/Report/CarAreaRate/CarAreaRate';
+import { ServiceMonthlyReport } from '../Pages/Report/ServiceMonthlyReport/ServiceMonthlyReport';
+import { ProblemSheet } from '../Pages/Report/ProblemSheet/ProblemSheet';
+import { ExportReport } from '../Pages/Report/ExportReport/ExportReport';
+//#endregion
+//#region 預約訂單
+import { WhiteOrder } from '../Pages/Order/WhiteOrder/WhiteOrder';
+import { WhiteOrderView } from '../Pages/Order/WhiteOrder/WhiteOrderView/WhiteOrderView';
+import { BusOrder } from '../Pages/Order/BusOrder/BusOrder';
+import { BusOrderView } from '../Pages/Order/BusOrder/BusOrderView/BusOrderView';
+import { CaseOrder } from '../Pages/Order/CaseOrder/CaseOrder';
+import { CaseOrderView } from '../Pages/Order/CaseOrder/CaseOrderView/CaseOrderView';
+import { DayCareOrder } from '../Pages/Order/DayCareOrder/DayCareOrder';
+import { DayCareOrderView } from '../Pages/Order/DayCareOrder/DayCareOrderView/DayCareOrderView';
+import { RuralOrder } from '../Pages/Order/RuralOrder/RuralOrder';
+import { RuralOrderView } from '../Pages/Order/RuralOrder/RuralOrderView/RuralOrderView';
+//#endregion
+//#region 常見問題
+import { QAndA } from '../Pages/QAndA/QAndA';
+//#endregion
+//#region 個案資料
+import { Case } from '../Pages/Case/Case';
+import { CaseAdd } from '../Pages/Case/CaseAdd/CaseAdd';
+import { CaseEdit } from '../Pages/Case/CaseEdit/CaseEdit';
+import { CaseInformation } from '../Pages/Case/CaseInformation/CaseInformation';
+import { CaseCallCar } from '../Pages/Case/CaseCallCar/CaseCallCar';
+//#region 巴士身份
+import { BusAdd } from '../Pages/Case/BusAdd/BusAdd';
+import { BusEdit } from '../Pages/Case/BusEdit/BusEdit';
+import { BusInformation } from '../Pages/Case/BusInformation/BusInformation';
+import { BusCallCar } from '../Pages/Case/BusCallCar/BusCallCar';
+//#endregion
+//#region 偏鄉身份
+import { RuralAdd } from '../Pages/Case/RuralAdd/RuralAdd';
+import { RuralEdit } from '../Pages/Case/RuralEdit/RuralEdit';
+import { RuralInformation } from '../Pages/Case/RuralInformation/RuralInformation';
+import { RuralCallCar } from '../Pages/Case/RuralCallCar/RuralCallCar';
+//#endregion
+//#region 白牌身份
+import { WhiteAdd } from '../Pages/Case/WhiteAdd/WhiteAdd';
+import { WhiteEdit } from '../Pages/Case/WhiteEdit/WhiteEdit';
+import { WhiteInformation } from '../Pages/Case/WhiteInformation/WhiteInformation';
+import { WhiteCallCar } from '../Pages/Case/WhiteCallCar/WhiteCallCar';
+//#endregion
+//#region 日照身份
+import { DayCareAdd } from '../Pages/Case/DayCareAdd/DayCareAdd';
+import { DayCareEdit } from '../Pages/Case/DayCareEdit/DayCareEdit';
+import { DayCareInformation } from '../Pages/Case/DayCareInformation/DayCareInformation';
+//#endregion
+//#endregion
+//#region 路線及站牌管理
+import { BusRoute } from '../Pages/BusRouteAndStop/BusRoute/BusRoute'
+import { BusRouteAdd } from '../Pages/BusRouteAndStop/BusRoute/BusRouteAdd/BusRouteAdd'
+import { BusRouteEdit } from '../Pages/BusRouteAndStop/BusRoute/BusRouteEdit/BusRouteEdit'
+
+import { BusStop } from '../Pages/BusRouteAndStop/BusStop/BusStop'
+import { BusStopAdd } from '../Pages/BusRouteAndStop/BusStop/BusStopAdd/BusStopAdd'
+import { BusStopEdit } from '../Pages/BusRouteAndStop/BusStop/BusStopEdit/BusStopEdit'
+//#endregion
+//#region 司機車輛管理
+import { Drivers } from '../Pages/DriverAndCar/Drivers/Drivers'
+import { DriversAdd } from '../Pages/DriverAndCar/Drivers/DriversAdd/DriversAdd'
+import { DriversEdit } from '../Pages/DriverAndCar/Drivers/DriversEdit/DriversEdit'
+import { DriversInformation } from '../Pages/DriverAndCar/Drivers/DriversInformation/DriversInformation';
+//#endregion
+//#region 司機車輛管理
+import { Cars } from '../Pages/DriverAndCar/Cars/Cars'
+import { CarsAdd } from '../Pages/DriverAndCar/Cars/CarsAdd/CarsAdd'
+import { CarsEdit } from '../Pages/DriverAndCar/Cars/CarsEdit/CarsEdit'
+import { CarsInformation } from '../Pages/DriverAndCar/Cars/CarsInformation/CarsInformation';
+//#endregion
+//#region 車輛保養紀錄
+import { CarFixedRecord } from '../Pages/DriverAndCar/CarFixedRecord/CarFixedRecord';
+//#endregion
 
 //#region 
 export const urlMapping = {
+   //#region 系統資料管理
+   "/Base/FareSubsidyParam": <FareSubsidyParam />,// 系統資料管理/補助車資參數
+   "/Base/CarAndDriverSetting": <CarAndDriverSetting />,// 系統資料管理/司機車輛設定
+   "/Base/OperatingUnitSetting": <OperatingUnitSetting />,// 系統資料管理/營運單位設定
+   "/Base/MedicalOrgManager": <MedicalOrgManager />,// 系統資料管理/醫療院所管理
+   "/Base/RoleManager": <RoleManager />,// 權限管理  (Base/RoleManager)
+   "/Base/UserManager": <UserManager />,// 系統管理員設定  (Base/UserManager)
+   "/Base/OrgManager": <OrgManager />,// 單位管理   (Base/OrgManager)
+   //#endregion
+
+   //#region 派車調度
+   "/Dispatch/OrderSearch": "調度單搜尋",// 派車調度/調度單搜尋
+   "/Dispatch/DragConsole": "拖拉式調度台",// 派車調度/拖拉式調度台
+   "/Dispatch/TableConsole": "表格式調度台",// 派車調度/表格式調度台
+   "/Dispatch/WhiteConsole": <WhiteConsole />,// 派車調度/白牌車調度台
+   "/Dispatch/BusConsole": <BusConsole />,// 派車調度/幸福巴士調度台
+   //#endregion
+
+   //#region 報表管理
+   "/Report/PickUpData": <PickUpData />,// 報表管理/接送數據
+   "/Report/Revenue": <Revenue />,// 報表管理/營收報表
+   "/Report/CarUsed": <CarUsed />,// 報表管理/車輛使用狀況
+   "/Report/CarAreaRate": <CarAreaRate />,// 報表管理/車輛使用區域比例
+   "/Report/ServiceMonthlyReport": <ServiceMonthlyReport />,// 報表管理/服務使用區域月報表
+   "/Report/ProblemSheet": <ProblemSheet />,// 報表管理/系統操作問題單
+   "/Report/ExportReport": <ExportReport />,// 報表管理/匯出報表
+   //#endregion
+
+   //#region 常見問題
+   "/QAndA": <QAndA />,// 常見問題
+   //#endregion
+
+   //#region 預約訂單
+   //#region 白牌
+   "/Order/WhiteOrder": <WhiteOrder />,// 預約訂單/白牌車訂單
+   "/Order/WhiteOrder/WhiteOrderView": <WhiteOrderView />,
+   //#endregion
+   //#region 幸福巴士
+   "/Order/BusOrder": <BusOrder />,// 預約訂單/幸福巴士訂單
+   "/Order/BusOrder/BusOrderView": <BusOrderView />,
+   //#endregion
+   //#region 長照
+   "/Order/CaseOrder": <CaseOrder />,// 預約訂單/長照訂單
+   "/Order/CaseOrder/CaseOrderView": <CaseOrderView />,
+   //#endregion
+   //#region 日照
+   "/Order/DayCareOrder": <DayCareOrder />,// 預約訂單/日照訂單
+   "/Order/DayCareOrder/DayCareOrderView": <DayCareOrderView />,
+   //#endregion
+   //#region 偏鄉運能不足
+   "/Order/RuralOrder": <RuralOrder />,// 預約訂單/偏鄉運能不足訂單
+   "/Order/RuralOrder/RuralOrderView": <RuralOrderView />,
+   //#endregion
+   //#endregion
+
+   //#region 個案資料
+   "/Case": <Case />,//個案資料
+   "/Case/Edit": <CaseEdit />, // 編輯長照個案資料
+   "/Case/Add": <CaseAdd />, // 新增長照個案資料
+   "/Case/Information": <CaseInformation />, // 檢視長照個案資料
+   "/Case/CallCar": <CaseCallCar />, // 長照叫車
+   //#region 巴士身份
+   "/Case/BusEdit": <BusEdit />, // 編輯巴士身份資料
+   "/Case/BusAdd": <BusAdd />, // 新增巴士身份資料
+   "/Case/BusInformation": <BusInformation />, // 檢視巴士身份資料
+   "/Case/BusCallCar": <BusCallCar />, // 巴士叫車
+   //#endregion
+   //#region 偏鄉身份
+   "/Case/RuralEdit": <RuralEdit />, // 編輯偏鄉身份資料
+   "/Case/RuralAdd": <RuralAdd />, // 新增偏鄉身份資料
+   "/Case/RuralInformation": <RuralInformation />, // 檢視偏鄉身份資料
+   "/Case/RuralCallCar": <RuralCallCar />, // 巴士叫車
+   //#endregion
+   //#region 白牌身份
+   "/Case/WhiteEdit": <WhiteEdit />, // 編輯白牌身份資料
+   "/Case/WhiteAdd": <WhiteAdd />, // 新增白牌身份資料
+   "/Case/WhiteInformation": <WhiteInformation />, // 檢視白牌身份資料
+   "/Case/WhiteCallCar": <WhiteCallCar />, // 巴士叫車
+   //#endregion
+   //#region 日照身份
+   "/Case/DayCareEdit": <DayCareEdit />, // 編輯日照身份資料
+   "/Case/DayCareAdd": <DayCareAdd />, // 新增日照身份資料
+   "/Case/DayCareInformation": <DayCareInformation />, // 檢視日照身份資料
+   //#endregion
+   //#endregion
+
+   //#region  路線及站牌管理
+   "/BusRouteAndStop/BusRoute": <BusRoute />, // 路線管理
+   "/BusRouteAndStop/BusRoute/Add": <BusRouteAdd />,
+   "/BusRouteAndStop/BusRoute/Edit": <BusRouteEdit />,
+   "/BusRouteAndStop/BusStop": <BusStop />, // 站牌管理
+   "/BusRouteAndStop/BusStop/Add": <BusStopAdd />,
+   "/BusRouteAndStop/BusStop/Edit": <BusStopEdit />,
+   //#endregion
+
+   "/DriverAndCar/Drivers": <Drivers />, // 司機車輛管理/司機資料
+   "/DriverAndCar/Drivers/Add": <DriversAdd />,
+   "/DriverAndCar/Drivers/Edit": <DriversEdit />,
+   "/DriverAndCar/Drivers/Information": <DriversInformation />,
+   "/DriverAndCar/Cars": <Cars />,// 司機車輛管理/車輛資料
+   "/DriverAndCar/Cars/Add": <CarsAdd />,
+   "/DriverAndCar/Cars/Edit": <CarsEdit />,
+   "/DriverAndCar/Cars/Information": <CarsInformation />,
+   "/DriverAndCar/CarFixedRecord": <CarFixedRecord />,
+
+
+   // "/RoleManager/Index": <RoleManager />,// 角色管理  (Base/RoleManager)
+   // "/UserManager/Index": <UserManager />,// 用戶管理  (Base/UserManager)
+   // "/OrgManager/Index": <OrgManager />,// 部門管理   (Base/OrgManager)
+
+   "/Login": < Login />,// 登入畫面
+   "/404": <Error404 />,// 404錯誤畫面
+}
+//#endregion
+
+//#region 
+export const pageTabBarUrlMapping = {
+   //#region 非OpenAuth路由
+
+   //#region 系統資料管理
+   "/Base/FareSubsidyParam": "補助車資參數",// 系統資料管理/補助車資參數
+   "/Base/CarAndDriverSetting": "司機車輛設定",// 系統資料管理/司機車輛設定
+   "/Base/OperatingUnitSetting": "營運單位設定",// 系統資料管理/營運單位設定
+   "/Base/MedicalOrgManager": "醫療院所管理",// 系統資料管理/醫療院所管理
+   "/Base/RoleManager": "權限管理",// 系統資料管理/權限管理
+   "/Base/OrgManager": "單位管理",// 系統資料管理/單位管理
+   "/Base/UserManager": "系統管理員設定",// 系統資料管理/系統管理員設定
+   //#endregion
+
+   //#region 派車調度
+   "/Dispatch/OrderSearch": "調度單搜尋",// 派車調度/調度單搜尋
+   "/Dispatch/DragConsole": "拖拉式調度台",// 派車調度/拖拉式調度台
+   "/Dispatch/TableConsole": "表格式調度台",// 派車調度/表格式調度台
+   "/Dispatch/WhiteConsole": "白牌車調度台",// 派車調度/白牌車調度台
+   "/Dispatch/BusConsole": "幸福巴士調度台",// 派車調度/幸福巴士調度台
+   //#endregion
+
+   //#region 報表管理
+   "/Report/PickUpData": "接送數據",// 報表管理/接送數據
+   "/Report/Revenue": "營收報表",// 報表管理/營收報表
+   "/Report/CarUsed": "車輛使用狀況",// 報表管理/車輛使用狀況
+   "/Report/CarAreaRate": "車輛使用區域比例",// 報表管理/車輛使用區域比例
+   "/Report/ServiceMonthlyReport": "服務使用區域月報表",// 報表管理/服務使用區域月報表
+   "/Report/ProblemSheet": "系統操作問題單",// 報表管理/系統操作問題單
+   "/Report/ExportReport": "匯出報表",// 報表管理/匯出報表
+   //#endregion
+
+   //#region 常見問題
+   "/QAndA": "常見問題",// 常見問題
+   //#endregion
+
+   //#region 預約訂單
+   //#region 白牌
+   "/Order/WhiteOrder": "白牌車訂單",// 預約訂單/白牌車訂單
+   //#endregion
+   //#region 幸福巴士
+   "/Order/BusOrder": "幸福巴士訂單",// 預約訂單/幸福巴士訂單
+   //#endregion
+   //#region 長照
+   "/Order/CaseOrder": "長照訂單",// 預約訂單/長照訂單
+   //#endregion
+   //#region 日照
+   "/Order/DayCareOrder": "日照訂單",// 預約訂單/日照訂單
+   //#endregion
+   //#region 偏鄉運能不足
+   "/Order/RuralOrder": "偏鄉運能不足訂單",// 預約訂單/偏鄉運能不足訂單
+   //#endregion
+   //#endregion
+
+   //#region 用戶資料
+   "/Case": "用戶資料",// 用戶資料
+   //#endregion
+
+   //#region  路線及站牌管理
+   "/BusRouteAndStop/BusRoute": "路線管理", // 路線及站牌管理/路線管理
+   "/BusRouteAndStop/BusStop": "站牌管理", // 路線及站牌管理/站牌管理
+   //#endregion
+
+   //#region 司機車輛管理
+   "/DriverAndCar/Drivers": "司機資料", // 司機車輛管理/司機資料
+   "/DriverAndCar/Cars": "車輛資料", // 司機車輛管理/車輛資料
+   "/DriverAndCar/CarFixedRecord": "車輛保養紀錄", // 司機車輛管理/車輛保養紀錄
+   //#endregion
+
+   //#region 其他
+   "/": "歡迎頁",// 歡迎頁
+   //"/404": "無此頁面",// 404錯誤畫面
+   //#endregion
+
+   //#endregion
+
+   //#region openAuth 路由
+   //#region 流程中心
+   "/Flowinstances/Disposed": "已處理流程",// 流程中心/已處理流程
+   "/Flowinstances/Wait": "待處理流程",// 流程中心/待處理流程
+   "/FlowInstances/MyFlow": "我的流程",// 流程中心/我的流程
+   //#endregion
+   //#region 倉儲中心
+   "/Warehouse/InboundOrder": "入庫訂單",// 倉儲中心/入庫訂單
+   //#endregion
+   //#region 基礎配置
+   "/FlowSchemes/Index": "流程設計",// 基礎配置/流程設計
+   "/OrgManager/Index": "部門管理",// 基礎配置/部門管理
+   "/TimingJobs/Index": "定時任務",// 基礎配置/定時任務
+   "/FormDesign/Index": "表單設計",// 基礎配置/表單設計
+   "/DataPermission/Index": "數據權限",// 基礎配置/數據權限
+   "/Categories/Index": "字典分類",// 基礎配置/字典分類
+   "/ModuleManager/Index": "模塊管理",// 基礎配置/模塊管理 /Base/ModuleManager
+   "/RoleManager/Index": "角色管理",// 基礎配置/角色管理
+   "/ResourcesManager/Index": "資源管理",// 基礎配置/資源管理
+   "/UserManager/Index": "用戶管理",// 基礎配置/用戶管理
+   //#endregion 
+   //#region 預約訂單
+   "/Order/WeeklyOrder": "本週任務",// 預約訂單/本週任務
+   "/Order/AllOrder": "全部資料",// 預約訂單/全部資料
+   "/Order/YearOrder": "今年任務",// 預約訂單/今年任務
+   "/Order/TodayOrder": "本日任務",// 預約訂單/本日任務
+   "/Order/MonthlyOrder": "本月任務",// 預約訂單/本月任務
+   //#endregion 
+   //#region 消息日誌
+   "/Log/SysLogs": "系統日誌",// 消息日誌/系統日誌
+   "/Log/SysMessages": "我的消息",// 消息日誌/我的消息
+   //#endregion 
+   //#endregion
 
 }
+//#endregion
+
+//#region 
+export const pageTextUrlMapping = {
+   //#region 非OpenAuth路由
+
+   //#region 系統資料管理
+   "/Base/FareSubsidyParam": "系統資料管理/補助車資參數",// 系統資料管理/補助車資參數
+   "/Base/CarAndDriverSetting": "系統資料管理/司機車輛設定",// 系統資料管理/司機車輛設定
+   "/Base/OperatingUnitSetting": "系統資料管理/營運單位設定",// 系統資料管理/營運單位設定
+   "/Base/MedicalOrgManager": "系統資料管理/醫療院所管理",// 系統資料管理/醫療院所管理
+   "/Base/RoleManager": "系統資料管理/權限管理",// 系統資料管理/權限管理
+   "/Base/OrgManager": "系統資料管理/單位管理",// 系統資料管理/單位管理
+   "/Base/UserManager": "系統資料管理/系統管理員設定",// 系統資料管理/系統管理員設定
+   //#endregion
+
+   //#region 派車調度
+   "/Dispatch/OrderSearch": "派車調度/調度單搜尋",// 派車調度/調度單搜尋
+   "/Dispatch/DragConsole": "派車調度/拖拉式調度台",// 派車調度/拖拉式調度台
+   "/Dispatch/TableConsole": "派車調度/表格式調度台",// 派車調度/表格式調度台
+   "/Dispatch/WhiteConsole": "派車調度/白牌車調度台",// 派車調度/白牌車調度台
+   "/Dispatch/BusConsole": "派車調度/幸福巴士調度台",// 派車調度/幸福巴士調度台
+   //#endregion
+
+   //#region 報表管理
+   "/Report/PickUpData": "報表管理/接送數據",// 報表管理/接送數據
+   "/Report/Revenue": "報表管理/營收報表",// 報表管理/營收報表
+   "/Report/CarUsed": "報表管理/車輛使用狀況",// 報表管理/車輛使用狀況
+   "/Report/CarAreaRate": "報表管理/車輛使用區域比例",// 報表管理/車輛使用區域比例
+   "/Report/ServiceMonthlyReport": "報表管理/服務使用區域月報表",// 報表管理/服務使用區域月報表
+   "/Report/ProblemSheet": "報表管理/系統操作問題單",// 報表管理/系統操作問題單
+   "/Report/ExportReport": "報表管理/匯出報表",// 報表管理/匯出報表
+   //#endregion
+
+   //#region 常見問題
+   "/QAndA": "常見問題",// 常見問題
+   //#endregion
+
+   //#region 預約訂單
+   //#region 白牌
+   "/Order/WhiteOrder": "預約訂單/白牌車訂單",// 預約訂單/白牌車訂單
+   //#endregion
+   //#region 幸福巴士
+   "/Order/BusOrder": "預約訂單/幸福巴士訂單",// 預約訂單/幸福巴士訂單
+   //#endregion
+   //#region 長照
+   "/Order/CaseOrder": "預約訂單/長照訂單",// 預約訂單/長照訂單
+   //#endregion
+   //#region 日照
+   "/Order/DayCareOrder": "預約訂單/日照訂單",// 預約訂單/日照訂單
+   //#endregion
+   //#region 偏鄉運能不足
+   "/Order/RuralOrder": "預約訂單/偏鄉運能不足訂單",// 預約訂單/偏鄉運能不足訂單
+   //#endregion
+   //#endregion
+
+   //#region 用戶資料
+   "/Case": "用戶資料",// 用戶資料
+   "/Case/Edit": "用戶資料",
+   "/Case/Add": "用戶資料",
+   "/Case/Information": "用戶資料",
+   "/Case/CallCar": "用戶資料",
+   //#region 巴士身份
+   "/Case/BusEdit": "用戶資料",
+   "/Case/BusAdd": "用戶資料",
+   "/Case/BusInformation": "用戶資料",
+   "/Case/BusCallCar": "用戶資料",
+   //#endregion
+   //#region 偏鄉身份
+   "/Case/RuralEdit": "用戶資料",
+   "/Case/RuralAdd": "用戶資料",
+   "/Case/RuralInformation": "用戶資料",
+   "/Case/RuralCallCar": "用戶資料",
+   //#endregion
+   //#region 白牌身份
+   "/Case/WhiteEdit": "用戶資料",
+   "/Case/WhiteAdd": "用戶資料",
+   "/Case/WhiteInformation": "用戶資料",
+   "/Case/WhiteCallCar": "用戶資料",
+   //#endregion
+   //#region 日照身份
+   "/Case/DayCareEdit": "用戶資料",
+   "/Case/DayCareAdd": "用戶資料",
+   "/Case/DayCareInformation": "用戶資料",
+   //#endregion
+   //#endregion
+
+   //#region  路線及站牌管理
+   "/BusRouteAndStop/BusRoute": "路線及站牌管理/路線管理", // 路線及站牌管理/路線管理
+   "/BusRouteAndStop/BusRoute/Add": "路線及站牌管理/路線管理",
+   "/BusRouteAndStop/BusRoute/Edit": "路線及站牌管理/路線管理",
+   "/BusRouteAndStop/BusStop": "路線及站牌管理/站牌管理", // 路線及站牌管理/站牌管理
+   "/BusRouteAndStop/BusStop/Add": "路線及站牌管理/站牌管理",
+   "/BusRouteAndStop/BusStop/Edit": "路線及站牌管理/站牌管理",
+   //#endregion
+
+   //#region 司機車輛管理
+   "/DriverAndCar/Drivers": "司機車輛管理/司機資料", // 司機車輛管理/司機資料
+   "/DriverAndCar/Drivers/Add": "司機車輛管理/司機資料",
+   "/DriverAndCar/Drivers/Edit": "司機車輛管理/司機資料",
+   "/DriverAndCar/Drivers/Information": "司機車輛管理/司機資料",
+   "/DriverAndCar/Cars": "司機車輛管理/車輛資料", // 司機車輛管理/司機資料
+   "/DriverAndCar/Cars/Add": "司機車輛管理/車輛資料",
+   "/DriverAndCar/Cars/Edit": "司機車輛管理/車輛資料",
+   "/DriverAndCar/Cars/Information": "司機車輛管理/車輛資料",
+   "/DriverAndCar/CarFixedRecord": "車輛保養紀錄", // 司機車輛管理/車輛保養紀錄
+   //#endregion
+
+   //#region 其他
+   "/": "歡迎頁",// 歡迎頁
+   "/404": "無此頁面",// 404錯誤畫面
+   //#endregion
+
+   //#endregion
+
+   //#region openAuth 路由
+   //#region 流程中心
+   "/Flowinstances/Disposed": "流程中心/已處理流程",// 流程中心/已處理流程
+   "/Flowinstances/Wait": "流程中心/待處理流程",// 流程中心/待處理流程
+   "/FlowInstances/MyFlow": "流程中心/我的流程",// 流程中心/我的流程
+   //#endregion
+   //#region 倉儲中心
+   "/Warehouse/InboundOrder": "倉儲中心/入庫訂單",// 倉儲中心/入庫訂單
+   //#endregion
+   //#region 基礎配置
+   "/FlowSchemes/Index": "基礎配置/流程設計",// 基礎配置/流程設計
+   "/OrgManager/Index": "基礎配置/部門管理",// 基礎配置/部門管理
+   "/TimingJobs/Index": "基礎配置/定時任務",// 基礎配置/定時任務
+   "/FormDesign/Index": "基礎配置/表單設計",// 基礎配置/表單設計
+   "/DataPermission/Index": "基礎配置/數據權限",// 基礎配置/數據權限
+   "/Categories/Index": "基礎配置/字典分類",// 基礎配置/字典分類
+   "/ModuleManager/Index": "基礎配置/模塊管理",// 基礎配置/模塊管理 /Base/ModuleManager
+   "/RoleManager/Index": "基礎配置/角色管理",// 基礎配置/角色管理
+   "/ResourcesManager/Index": "基礎配置/資源管理",// 基礎配置/資源管理
+   "/UserManager/Index": "基礎配置/用戶管理",// 基礎配置/用戶管理
+   //#endregion 
+   //#region 預約訂單
+   "/Order/WeeklyOrder": "預約訂單/本週任務",// 預約訂單/本週任務
+   "/Order/AllOrder": "預約訂單/全部資料",// 預約訂單/全部資料
+   "/Order/YearOrder": "預約訂單/今年任務",// 預約訂單/今年任務
+   "/Order/TodayOrder": "預約訂單/本日任務",// 預約訂單/本日任務
+   "/Order/MonthlyOrder": "預約訂單/本月任務",// 預約訂單/本月任務
+   //#endregion 
+   //#region 消息日誌
+   "/Log/SysLogs": "消息日誌/系統日誌",// 消息日誌/系統日誌
+   "/Log/SysMessages": "消息日誌/我的消息",// 消息日誌/我的消息
+   //#endregion 
+   //#endregion 
+
+}
+//#endregion
+
+//#region 左側欄 icon 的映射關係
+export const iconMap = {
+   "系統資料管理": (style, props) => <ToolSvg style={style} {...props} />,
+   "派車調度": (style, props) => <CarSvg style={style} {...props} />,
+   "報表管理": (style, props) => <BarChartSvg style={style} {...props} />,
+   "常見問題": (style, props) => <MessageSvg style={style} {...props} />,
+   "控制台": (style, props) => <ConsoleSvg style={style} {...props} />,
+   "用戶資料": (style, props) => <CaseSvg style={style} {...props} />,
+   "司機車輛管理": (style, props) => <DriverAndCarSvg style={style} {...props} />,
+   "預約訂單": (style, props) => <OrderSvg style={style} {...props} />,
+   "路線及站牌管理": (style, props) => <RouteAndStopSvg style={style} {...props} />,
+}
+//#endregion
+
+//#region 專案內 下拉選單直
+
+//#region 所有的用戶身份 (用在 "請選擇用戶身份" 的下拉選單) 的映射關係
+export const allCaseListMapping = {
+   "caseuser": "長照",
+   "日照個案": "日照個案",
+   "偏鄉運能不足": "偏鄉運能不足", // 未確定
+   "selfpayuser": "白牌",
+   "5": "噗噗共乘",
+   "bususer": "幸福巴士",
+   "7": "DRTS"
+}
+//#endregion
+
+//#region 所有的用戶身份 (用在 "請選擇用戶身份" 的下拉選單) 的下拉選項
+export const allCaseListSelectOption = [
+   { value: "caseuser", label: "長照個案" },
+   { value: "daycare", label: "日照個案" },
+   { value: "countrySide", label: "偏鄉運能不足" },
+   { value: "selfpayuser", label: "白牌車" },
+   { value: "5", label: "噗噗共乘" },
+   { value: "bususer", label: "幸福巴士" },
+   { value: "7", label: "DRTS" }
+]
+//#endregion
+
+//#region 新增身份彈窗 個案身份 的映射關係
+export const caseListMapping = {
+   "caseuser": "長照",
+   "daycare": "日照",
+   "countrySide": "偏鄉運能不足", // 未確定
+   "selfpayuser": "白牌",
+   "bususer": "幸福巴士",
+}
+//#endregion
+
+//#region 新增身份彈窗 的下拉選項
+export const caseListSelectOption = [
+   { value: "caseuser", label: "長照" },
+   { value: "daycare", label: "日照" },
+   { value: "countrySide", label: "偏鄉運能不足" }, // 未確定
+   { value: "selfpayuser", label: "白牌" },
+   { value: "bususer", label: "幸福巴士" },
+]
+//#endregion
+
+//#region 不可派發原因 的映射關係
+export const notDistributableReasonMapping = {
+   "1": "結案 - 移出",
+   "2": "結案 - 失能等級不符",
+   "3": "結案 - 死亡",
+   "4": "結案 - 其他",
+}
+//#endregion
+
+//#region 不可派發原因 的下拉選項
+export const notDistributableReasonSelectOption = [
+   { value: '1', label: '結案 - 移出' },
+   { value: '2', label: '結案 - 失能等級不符' },
+   { value: '3', label: '結案 - 死亡' },
+   { value: '4', label: '結案 - 其他' },
+]
+//#endregion
+
+//#region 社會福利身份 的映射關係
+export const boonTypeMapping = {
+   "0": "低收入戶", // 未確定
+   "1": "中低收入戶",
+   "2": "一般戶" // 未確定
+}
+//#endregion
+
+//#region 社會福利身份 的下拉選項
+export const boonTypeSelectOption = [
+   { value: "0", label: "低收入戶" },
+   { value: "1", label: "中低收入戶" },
+   { value: "2", label: "一般戶" }
+]
+//#endregion
+
+//#region 車輛來源 的映射關係
+export const carFromMapping = {
+   "0": "獎助", // 未確定
+   "1": "自購",
+   "2": "捐贈" // 未確定
+}
+//#endregion
+
+//#region 車輛來源 的下拉選項
+export const carFromSelectOption = [
+   { value: "0", label: '獎助' },
+   { value: "1", label: '自購' },
+   { value: "2", label: '捐贈' }
+]
+//#endregion
+
+//#region 失能等級 的映射關係
+export const disabilityLevelMapping = {
+   1: '1級(無失能)',
+   2: '2級',
+   3: '3級',
+   4: '4級',
+   5: '5級',
+   6: '6級',
+   7: '7級',
+   8: '8級',
+}
+//#endregion
+
+//#region 失能等級 的下拉選項
+export const disabilityLevelSelectOption = [
+   { value: 1, label: "1級(無失能)" },
+   { value: 2, label: "2級" },
+   { value: 3, label: "3級" },
+   { value: 4, label: "4級" },
+   { value: 5, label: "5級" },
+   { value: 6, label: "6級" },
+   { value: 7, label: "7級" },
+   { value: 8, label: "8級" },
+]
+//#endregion
+
+
+
 //#endregion
 
 //#region 地區與轄下區域
@@ -466,6 +1082,7 @@ export const cityAndCounties = {
    //#endregion
 };
 //#endregion
+
 //#region 地區
 export const Counties = [
    { value: "臺北市", label: "臺北市" },
@@ -628,7 +1245,7 @@ export const hours = [
 //#region 地區與轄下區域
 export const cityAndCountiesLite = {
    //#region 臺北市
-   臺北市: [
+   "臺北市": [
       { value: "中正區", label: "中正區" },
       { value: "大同區", label: "大同區" },
       { value: "中山區", label: "中山區" },
@@ -644,7 +1261,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 新北市
-   新北市: [
+   "新北市": [
       { value: "板橋區", label: "板橋區" },
       { value: "新莊區", label: "新莊區" },
       { value: "泰山區", label: "泰山區" },
@@ -677,7 +1294,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 基隆市
-   基隆市: [
+   "基隆市": [
       { value: "仁愛區", label: "仁愛區" },
       { value: "中正區", label: "中正區" },
       { value: "信義區", label: "信義區" },
@@ -688,7 +1305,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 桃園市
-   桃園市: [
+   "桃園市": [
       { value: "桃園區", label: "桃園區" },
       { value: "中壢區", label: "中壢區" },
       { value: "平鎮區", label: "平鎮區" },
@@ -705,7 +1322,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 新竹縣
-   新竹縣: [
+   "新竹縣": [
       { value: "竹北市", label: "竹北市" },
       { value: "竹東鎮", label: "竹東鎮" },
       { value: "新埔鎮", label: "新埔鎮" },
@@ -722,14 +1339,14 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 新竹市
-   新竹市: [
+   "新竹市": [
       { value: "東區", label: "東區" },
       { value: "北區", label: "北區" },
       { value: "香山區", label: "香山區" },
    ],
    //#endregion
    //#region 苗栗縣
-   苗栗縣: [
+   "苗栗縣": [
       { value: "苗栗市", label: "苗栗市" },
       { value: "通霄鎮", label: "通霄鎮" },
       { value: "苑裡鎮", label: "苑裡鎮" },
@@ -751,7 +1368,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 臺中市
-   臺中市: [
+   "臺中市": [
       { value: "中區", label: "中區" },
       { value: "東區", label: "東區" },
       { value: "南區", label: "南區" },
@@ -784,7 +1401,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 南投縣
-   南投縣: [
+   "南投縣": [
       { value: "南投市", label: "南投市" },
       { value: "埔里鎮", label: "埔里鎮" },
       { value: "草屯鎮", label: "草屯鎮" },
@@ -801,7 +1418,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 彰化縣
-   彰化縣: [
+   "彰化縣": [
       { value: "彰化市", label: "彰化市" },
       { value: "員林鎮", label: "員林鎮" },
       { value: "和美鎮", label: "和美鎮" },
@@ -831,7 +1448,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 雲林縣
-   雲林縣: [
+   "雲林縣": [
       { value: "斗六市", label: "斗六市" },
       { value: "斗南鎮", label: "斗南鎮" },
       { value: "虎尾鎮", label: "虎尾鎮" },
@@ -855,7 +1472,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 嘉義縣
-   嘉義縣: [
+   "嘉義縣": [
       { value: "太保市", label: "太保市" },
       { value: "朴子市", label: "朴子市" },
       { value: "布袋鎮", label: "布袋鎮" },
@@ -877,13 +1494,13 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 嘉義市
-   嘉義市: [
+   "嘉義市": [
       { value: "東區", label: "東區" },
       { value: "西區", label: "西區" },
    ],
    //#endregion
    //#region 臺南市
-   臺南市: [
+   "臺南市": [
       { value: "中西區", label: "中西區" },
       { value: "東區", label: "東區" },
       { value: "南區", label: "南區" },
@@ -924,7 +1541,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 高雄市
-   高雄市: [
+   "高雄市": [
       { value: "楠梓區", label: "楠梓區" },
       { value: "左營區", label: "左營區" },
       { value: "鼓山區", label: "鼓山區" },
@@ -966,7 +1583,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 屏東縣
-   屏東縣: [
+   "屏東縣": [
       { value: "屏東市", label: "屏東市" },
       { value: "潮州鎮", label: "潮州鎮" },
       { value: "東港鎮", label: "東港鎮" },
@@ -1003,7 +1620,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 宜蘭縣
-   宜蘭縣: [
+   "宜蘭縣": [
       { value: "宜蘭市", label: "宜蘭市" },
       { value: "羅東鎮", label: "羅東鎮" },
       { value: "蘇澳鎮", label: "蘇澳鎮" },
@@ -1019,7 +1636,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 花蓮縣
-   花蓮縣: [
+   "花蓮縣": [
       { value: "花蓮市", label: "花蓮市" },
       { value: "鳳林鎮", label: "鳳林鎮" },
       { value: "玉里鎮", label: "玉里鎮" },
@@ -1036,7 +1653,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 臺東縣
-   臺東縣: [
+   "臺東縣": [
       { value: "臺東市", label: "臺東市" },
       { value: "成功鎮", label: "成功鎮" },
       { value: "關山鎮", label: "關山鎮" },
@@ -1056,7 +1673,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 澎湖縣
-   澎湖縣: [
+   "澎湖縣": [
       { value: "馬公市", label: "馬公市" },
       { value: "湖西鄉", label: "湖西鄉" },
       { value: "白沙鄉", label: "白沙鄉" },
@@ -1066,7 +1683,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 金門縣
-   金門縣: [
+   "金門縣": [
       { value: "金城鎮", label: "金城鎮" },
       { value: "金湖鎮", label: "金湖鎮" },
       { value: "金沙鎮", label: "金沙鎮" },
@@ -1076,7 +1693,7 @@ export const cityAndCountiesLite = {
    ],
    //#endregion
    //#region 連江縣
-   連江縣: [
+   "連江縣": [
       { value: "南竿鄉", label: "南竿鄉" },
       { value: "北竿鄉", label: "北竿鄉" },
       { value: "莒光鄉", label: "莒光鄉" },
@@ -1142,6 +1759,7 @@ export const day = [
    { value: "31", label: "31 日" },
 ]
 //#endregion
+
 //#region 取透過年月取日期列表
 export const getDayByYearAndMonth = (year, month) => {
    switch (month) {
@@ -1165,4 +1783,16 @@ export const getDayByYearAndMonth = (year, month) => {
          return day;
    }
 }
- //#endregion
+//#endregion
+
+//#region 取得星期中文敘述
+export const weekDayChMapping = {
+   "1": "星期一",
+   "2": "星期二",
+   "3": "星期三",
+   "4": "星期四",
+   "5": "星期五",
+   "6": "星期六",
+   "7": "星期日",
+}
+//#endregion

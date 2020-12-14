@@ -1,0 +1,59 @@
+<svg width="375" height="477" viewBox="0 0 375 477" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<rect width="375" height="477" fill="#FAFAFA"/>
+<circle cx="288" cy="43" r="12" fill="#F0F0F0"/>
+<circle cx="370" cy="1" r="30" fill="#E6F7FF"/>
+<line x1="312" y1="18.8284" x2="289.828" y2="41" stroke="#B5F5EC" stroke-width="4" stroke-linecap="round"/>
+<circle cx="275.5" cy="16.5" r="7.5" fill="#5CDBD3"/>
+<circle cx="328.5" cy="48.5" r="7.5" fill="#E6F7FF"/>
+<line x1="427" y1="38.0711" x2="366.071" y2="99" stroke="#BAE7FF" stroke-width="10" stroke-linecap="round"/>
+<line x1="376" y1="26.2426" x2="312.243" y2="90" stroke="#91D5FF" stroke-width="6" stroke-linecap="round"/>
+<line x1="330" y1="19.4142" x2="313.414" y2="36" stroke="#FA541C" stroke-width="2" stroke-linecap="round"/>
+<circle cx="342" cy="92" r="4.5" fill="#FA8C16" stroke="#FFD591"/>
+<ellipse cx="5" cy="467.5" rx="26" ry="25.5" fill="#BAE7FF"/>
+<line x1="104" y1="460.071" x2="-37.9289" y2="602" stroke="#5CDBD3" stroke-width="10" stroke-linecap="round"/>
+<line x1="93" y1="430.828" x2="32.8284" y2="491" stroke="white" stroke-width="4" stroke-linecap="round"/>
+<line x1="266" y1="430.828" x2="205.828" y2="491" stroke="#BAE7FF" stroke-width="4" stroke-linecap="round"/>
+<circle cx="358.5" cy="462.5" r="5.5" fill="#FA541C"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="288" y="437" width="33" height="33">
+<circle cx="304.5" cy="453.5" r="16" transform="rotate(-90 304.5 453.5)" fill="#C4C4C4" stroke="#FFC069"/>
+</mask>
+<g mask="url(#mask0)">
+<line x1="275.027" y1="450.608" x2="328.334" y2="503.916" stroke="#FFC069"/>
+<line x1="275.027" y1="443.627" x2="328.334" y2="496.935" stroke="#FFC069"/>
+<line x1="275.027" y1="436.646" x2="328.334" y2="489.954" stroke="#FFC069"/>
+<line x1="275.027" y1="429.666" x2="328.334" y2="482.973" stroke="#FFC069"/>
+<line y1="-0.5" x2="75.3885" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 274.673 423.038)" stroke="#FFC069"/>
+<line y1="-0.5" x2="75.3885" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 274.673 416.058)" stroke="#FFC069"/>
+<line y1="-0.5" x2="75.3885" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 274.673 409.077)" stroke="#FFC069"/>
+<line y1="-0.5" x2="75.3885" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 274.673 402.096)" stroke="#FFC069"/>
+<line y1="-0.5" x2="75.3885" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 274.673 395.115)" stroke="#FFC069"/>
+</g>
+<circle cx="199" cy="424" r="33" fill="white"/>
+<circle cx="114.268" cy="413.268" r="10.268" fill="#69C0FF"/>
+<circle cx="258" cy="411" r="6" stroke="#FA541C" stroke-width="4"/>
+<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="146" y="379" width="43" height="43">
+<ellipse cx="167.245" cy="400.245" rx="17.3467" ry="17.3467" transform="rotate(-75 167.245 400.245)" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask1)">
+<line x1="138.08" y1="389.302" x2="177.708" y2="457.94" stroke="#FA541C"/>
+<line x1="139.979" y1="382.213" x2="179.608" y2="450.851" stroke="#FA541C"/>
+<line x1="141.879" y1="375.124" x2="181.507" y2="443.762" stroke="#FA541C"/>
+<line x1="143.778" y1="368.035" x2="183.407" y2="436.673" stroke="#FA541C"/>
+<line x1="145.678" y1="360.946" x2="185.306" y2="429.584" stroke="#FA541C"/>
+<line x1="147.577" y1="353.857" x2="187.206" y2="422.495" stroke="#FA541C"/>
+<line x1="149.477" y1="346.768" x2="189.105" y2="415.407" stroke="#FA541C"/>
+<line x1="151.376" y1="339.679" x2="191.005" y2="408.318" stroke="#FA541C"/>
+<line x1="153.276" y1="332.59" x2="192.904" y2="401.229" stroke="#FA541C"/>
+</g>
+<circle cx="333" cy="409" r="12" fill="#5CDBD3"/>
+<circle cx="53" cy="424" r="9" fill="#FFC069"/>
+<circle cx="11" cy="4" r="33" fill="#F0F0F0"/>
+<circle cx="156.5" cy="457.5" r="10.5" fill="#F0F0F0"/>
+</g>
+<defs>
+<clipPath id="clip0">
+<rect width="375" height="477" fill="white"/>
+</clipPath>
+</defs>
+</svg>

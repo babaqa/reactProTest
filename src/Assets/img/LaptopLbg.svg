@@ -1,0 +1,150 @@
+<svg width="1024" height="1440" viewBox="0 0 1024 1440" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0)">
+<rect width="1024" height="1440" fill="white"/>
+<g filter="url(#filter0_d)">
+<rect width="1024" height="1440" fill="#FAFAFA"/>
+</g>
+<circle cx="475" cy="178" r="93" fill="white"/>
+<ellipse cx="985.5" cy="1363" rx="116.5" ry="117" fill="#E6F7FF"/>
+<circle cx="79" cy="1189" r="37" fill="#E6F7FF"/>
+<circle cx="526.5" cy="1310.5" r="40.5" fill="#E6F7FF"/>
+<circle cx="422.5" cy="78.5" r="107.5" fill="#E6FFFB"/>
+<circle cx="878.5" cy="247.5" r="85.5" fill="white"/>
+<circle cx="76" cy="72" r="49" fill="white"/>
+<circle cx="698.5" cy="1234.5" r="85.5" fill="white"/>
+<circle cx="71.5" cy="1359.5" r="23.5" fill="#F0F0F0"/>
+<circle cx="592" cy="10" r="33" fill="#F0F0F0"/>
+<circle cx="196" cy="132" r="24" fill="#F0F0F0"/>
+<circle cx="829.5" cy="182.5" r="41.5" fill="#E6F7FF"/>
+<ellipse cx="591" cy="159.5" rx="26" ry="25.5" fill="#BAE7FF"/>
+<ellipse cx="102.5" cy="156" rx="22.5" ry="22" fill="#BAE7FF"/>
+<circle cx="60" cy="985" r="20" fill="#BAE7FF"/>
+<path d="M510 200C510 203.201 507.206 206 503.5 206C499.794 206 497 203.201 497 200C497 196.799 499.794 194 503.5 194C507.206 194 510 196.799 510 200Z" stroke="#FA541C" stroke-width="4"/>
+<circle cx="964" cy="496" r="6" stroke="#FA541C" stroke-width="4"/>
+<circle cx="957" cy="1121" r="6" stroke="#FA541C" stroke-width="4"/>
+<circle cx="503" cy="72" r="16" fill="#5CDBD3"/>
+<circle cx="883.5" cy="1198.5" r="30.5" fill="#B5F5EC"/>
+<circle cx="143" cy="1290" r="20" fill="#B5F5EC"/>
+<circle cx="522.268" cy="1200.27" r="10.268" fill="#69C0FF"/>
+<circle cx="52.268" cy="1078.27" r="10.268" fill="#36CFC9"/>
+<line x1="553" y1="1275.07" x2="359.071" y2="1469" stroke="#BAE7FF" stroke-width="10" stroke-linecap="round"/>
+<line x1="368" y1="1275.07" x2="174.071" y2="1469" stroke="#BAE7FF" stroke-width="10" stroke-linecap="round"/>
+<line x1="861" y1="1389.28" x2="785.284" y2="1465" stroke="#5CDBD3" stroke-width="40" stroke-linecap="round"/>
+<line x1="712" y1="1240.14" x2="456.142" y2="1496" stroke="#91D5FF" stroke-width="20" stroke-linecap="round"/>
+<line x1="875" y1="-14.7868" x2="821.213" y2="39" stroke="#91D5FF" stroke-width="30" stroke-linecap="round"/>
+<line x1="309" y1="-14.7868" x2="255.213" y2="39" stroke="#91D5FF" stroke-width="30" stroke-linecap="round"/>
+<line x1="957" y1="-8.85786" x2="828.142" y2="120" stroke="#FFC069" stroke-width="20" stroke-linecap="round"/>
+<line x1="391" y1="-8.85786" x2="262.142" y2="120" stroke="#FFC069" stroke-width="20" stroke-linecap="round"/>
+<line x1="1063" y1="76.2843" x2="940.284" y2="199" stroke="#BAE7FF" stroke-width="40" stroke-linecap="round"/>
+<line x1="799" y1="1304.14" x2="612.142" y2="1491" stroke="#FFC069" stroke-width="20" stroke-linecap="round"/>
+<line x1="252" y1="1304.14" x2="65.1421" y2="1491" stroke="#FFC069" stroke-width="20" stroke-linecap="round"/>
+<circle cx="975" cy="577" r="13.5" fill="#FA8C16" stroke="#FFD591"/>
+<circle cx="51" cy="178" r="13.5" fill="#FA8C16" stroke="#FFD591"/>
+<circle cx="92.5" cy="1329.5" r="5.5" fill="#FA541C"/>
+<circle cx="935.5" cy="311.5" r="5.5" fill="#FA541C"/>
+<circle cx="148.5" cy="121.5" r="5.5" fill="#FA541C"/>
+<circle cx="363" cy="231" r="10" fill="#FFA940"/>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="936" y="1235" width="52" height="52">
+<circle cx="962" cy="1261" r="26" transform="rotate(-90 962 1261)" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask0)">
+<line x1="915.354" y1="1256.65" x2="999.354" y2="1340.65" stroke="#FA541C"/>
+<line x1="915.354" y1="1245.65" x2="999.354" y2="1329.65" stroke="#FA541C"/>
+<line x1="915.354" y1="1234.65" x2="999.354" y2="1318.65" stroke="#FA541C"/>
+<line x1="915.354" y1="1223.65" x2="999.354" y2="1307.65" stroke="#FA541C"/>
+<line x1="915.354" y1="1212.65" x2="999.354" y2="1296.65" stroke="#FA541C"/>
+<line x1="915.354" y1="1201.65" x2="999.354" y2="1285.65" stroke="#FA541C"/>
+<line x1="915.354" y1="1190.65" x2="999.354" y2="1274.65" stroke="#FA541C"/>
+<line x1="915.354" y1="1179.65" x2="999.354" y2="1263.65" stroke="#FA541C"/>
+<line x1="915.354" y1="1168.65" x2="999.354" y2="1252.65" stroke="#FA541C"/>
+</g>
+<mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="407" y="1235" width="23" height="23">
+<circle cx="418.5" cy="1246.5" r="11" transform="rotate(-90 418.5 1246.5)" fill="#C4C4C4" stroke="#FFC069"/>
+</mask>
+<g mask="url(#mask1)">
+<line x1="398.065" y1="1244.38" x2="435.219" y2="1281.53" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707107 0.707106 -0.707107 0.707106 397.712 1239.87)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707108 -0.707106 0.707108 397.712 1235)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707107 0.707106 -0.707107 0.707106 397.712 1230.13)" stroke="#FFC069"/>
+<line x1="398.065" y1="1224.92" x2="435.219" y2="1262.07" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707107 0.707106 -0.707107 0.707106 397.712 1220.4)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707108 -0.707106 0.707108 397.712 1215.54)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707107 0.707106 -0.707107 0.707106 397.712 1210.67)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707108 -0.707106 0.707108 397.712 1205.81)" stroke="#FFC069"/>
+</g>
+<mask id="mask2" mask-type="alpha" maskUnits="userSpaceOnUse" x="972" y="376" width="23" height="23">
+<circle cx="983.5" cy="387.5" r="11" transform="rotate(-90 983.5 387.5)" fill="#C4C4C4" stroke="#FFC069"/>
+</mask>
+<g mask="url(#mask2)">
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 385.731)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 380.865)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 376)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 371.135)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 366.269)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 361.404)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 356.538)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 351.673)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 962.712 346.808)" stroke="#FFC069"/>
+</g>
+<mask id="mask3" mask-type="alpha" maskUnits="userSpaceOnUse" x="203" y="78" width="23" height="23">
+<circle cx="214.5" cy="89.5" r="11" transform="rotate(-90 214.5 89.5)" fill="#C4C4C4" stroke="#FFC069"/>
+</mask>
+<g mask="url(#mask3)">
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 87.7307)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 82.8655)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 78)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 73.1345)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 68.2693)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 63.4038)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 58.5383)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 53.6731)" stroke="#FFC069"/>
+<line y1="-0.5" x2="52.5435" y2="-0.5" transform="matrix(0.707106 0.707107 -0.707106 0.707107 193.712 48.8076)" stroke="#FFC069"/>
+</g>
+<mask id="mask4" mask-type="alpha" maskUnits="userSpaceOnUse" x="255" y="172" width="36" height="36">
+<ellipse cx="273.245" cy="190.245" rx="17.3467" ry="17.3467" transform="rotate(-75 273.245 190.245)" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask4)">
+<line x1="244.08" y1="179.302" x2="283.708" y2="247.94" stroke="#FA541C"/>
+<line y1="-0.5" x2="79.2569" y2="-0.5" transform="matrix(0.5 0.866026 -0.866025 0.5 245.547 172.463)" stroke="#FA541C"/>
+<line x1="247.879" y1="165.124" x2="287.507" y2="233.762" stroke="#FA541C"/>
+<line x1="249.778" y1="158.035" x2="289.407" y2="226.673" stroke="#FA541C"/>
+<line x1="251.678" y1="150.946" x2="291.306" y2="219.584" stroke="#FA541C"/>
+<line y1="-0.5" x2="79.2569" y2="-0.5" transform="matrix(0.5 0.866025 -0.866026 0.5 253.144 144.107)" stroke="#FA541C"/>
+<line y1="-0.5" x2="79.2569" y2="-0.5" transform="matrix(0.5 0.866025 -0.866026 0.5 255.044 137.018)" stroke="#FA541C"/>
+<line y1="-0.5" x2="79.2569" y2="-0.5" transform="matrix(0.5 0.866025 -0.866026 0.5 256.943 129.929)" stroke="#FA541C"/>
+<line y1="-0.5" x2="79.2569" y2="-0.5" transform="matrix(0.5 0.866025 -0.866026 0.5 258.843 122.84)" stroke="#FA541C"/>
+</g>
+<line x1="812" y1="-31.7157" x2="721.284" y2="59" stroke="#B5F5EC" stroke-width="40" stroke-linecap="round"/>
+<line x1="246" y1="-31.7157" x2="155.284" y2="59" stroke="#B5F5EC" stroke-width="40" stroke-linecap="round"/>
+<line x1="671" y1="1377.83" x2="579.828" y2="1469" stroke="#FA541C" stroke-width="4" stroke-linecap="round"/>
+<line x1="337" y1="1377.83" x2="245.828" y2="1469" stroke="#FA541C" stroke-width="4" stroke-linecap="round"/>
+<line x1="790" y1="1396.07" x2="732.071" y2="1454" stroke="#40A9FF" stroke-width="10" stroke-linecap="round"/>
+<line x1="744" y1="-53.1716" x2="597.828" y2="93" stroke="#FA541C" stroke-width="4" stroke-linecap="round"/>
+<line x1="178" y1="-53.1716" x2="31.8284" y2="93" stroke="#FA541C" stroke-width="4" stroke-linecap="round"/>
+<line x1="707" y1="-53.1716" x2="560.828" y2="93" stroke="white" stroke-width="4" stroke-linecap="round"/>
+<line x1="525" y1="-53.1716" x2="378.828" y2="93" stroke="white" stroke-width="4" stroke-linecap="round"/>
+<line x1="1047" y1="-52.1716" x2="820.828" y2="174" stroke="white" stroke-width="4" stroke-linecap="round"/>
+<line x1="879" y1="-47.9289" x2="597.071" y2="234" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+<line x1="658" y1="1346.07" x2="572.071" y2="1432" stroke="white" stroke-width="10" stroke-linecap="round"/>
+<line x1="420" y1="1343.07" x2="326.071" y2="1437" stroke="white" stroke-width="10" stroke-linecap="round"/>
+<line x1="978" y1="1390.07" x2="927.071" y2="1441" stroke="white" stroke-width="10" stroke-linecap="round"/>
+<line x1="1075" y1="-49.9289" x2="933.071" y2="92" stroke="#5CDBD3" stroke-width="10" stroke-linecap="round"/>
+<line x1="854" y1="1296.83" x2="701.828" y2="1449" stroke="white" stroke-width="4" stroke-linecap="round"/>
+<line x1="527" y1="1361.83" x2="452.828" y2="1436" stroke="white" stroke-width="4" stroke-linecap="round"/>
+<line x1="95" y1="1398.07" x2="37.0711" y2="1456" stroke="#40A9FF" stroke-width="10" stroke-linecap="round"/>
+</g>
+<defs>
+<filter id="filter0_d" x="-2" y="0" width="1028" height="1444" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"/>
+<feOffset dy="2"/>
+<feGaussianBlur stdDeviation="1"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.1 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow" result="shape"/>
+</filter>
+<clipPath id="clip0">
+<rect width="1024" height="1440" fill="white"/>
+</clipPath>
+</defs>
+</svg>

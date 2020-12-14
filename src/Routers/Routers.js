@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import { getItemlocalStorage } from '../Handlers/LocalStorageHandler';
+import { getParseItemLocalStorage, pushItemLocalStorage, setStringifyItemLocalStorage } from '../Handlers';
 import { urlMapping } from '../Mappings/Mappings'
 
 //#region 以下內容供參考用，請依照實際專案調整路由
@@ -11,35 +11,89 @@ import { urlMapping } from '../Mappings/Mappings'
    @Param : data ； 參數值 : 後端傳回之路由資料。
    @return : mapRoutersArr ； 回傳值 : 處理完之路由陣列
 */
+// const mapRouterss = (data) => {
+//     //console.log("f")
+//     let mapRoutersArr = [];
+//     data.forEach((item, index) => {
+//         if (item.path !== "-") {
+//             mapRoutersArr.push(
+//                 <Route key={item.name}
+//                     path={item.path}
+//                     render={({ location }) => {
+//                         return (localStorage.getItem("Auth") !== null) ? (
+//                             urlMapping[item.path]
+//                         ) : (
+//                                 <Redirect
+//                                     to={{
+//                                         pathname: "/Login",
+//                                     }}
+//                                 />
+//                             );
+//                     }}>
+//                 </Route>)
+//         }
+//         //遍歷子層
+//         item.children.forEach((item, index) => {
+//             mapRoutersArr.push(
+//                 <Route path={item.path}
+//                     key={item.name}
+//                     render={({ location }) => {
+//                         return (localStorage.getItem("Auth") !== null) ? (
+//                             urlMapping[item.path]
+//                         ) : (
+//                                 <Redirect
+//                                     to={{
+//                                         pathname: "/Login",
+//                                     }}
+//                                 />
+//                             );
+//                     }}>
+//                 </Route>
+//             )
+//         })
+//     });
+//     mapRoutersArr.push(
+//         <Route key={"個人中心"} path={"/System/My"}
+//             render={({ location }) => {
+//                 return (getParseItemLocalStorage("Auth") !== null) ? (
+//                     urlMapping["/System/My"]
+//                 ) : (
+//                         <Redirect
+//                             to={{
+//                                 pathname: "/Login",
+//                             }}
+//                         />
+//                     );
+//             }
+//             }>
+//         </Route>
+//     )
+//     return mapRoutersArr;
+// }
+//#endregion
+
 const mapRouters = (data) => {
-    //console.log("f")
     let mapRoutersArr = [];
-    data.forEach((item, index) => {
-        if (item.path !== "-") {
-            mapRoutersArr.push(
-                <Route key={item.name}
-                    path={item.path}
-                    render={({ location }) => {
-                        return (localStorage.getItem("Auth") !== null) ? (
-                            urlMapping[item.path]
-                        ) : (
-                                <Redirect
-                                    to={{
-                                        pathname: "/Login",
-                                    }}
-                                />
-                            );
-                    }}>
-                </Route>)
+
+    if (data instanceof Array) {
+        for (var item of data) {
+            let peritem = mapRouters(item);
+            for (var item1 of peritem) {
+                mapRoutersArr.push(item1);
+            }
         }
-        //遍歷子層
-        item.children.forEach((item, index) => {
+    } else {
+        if (data.item.url.trim() !== "/") {
+            // 路由非為 "/" ，代表具真實路由
             mapRoutersArr.push(
-                <Route path={item.path}
-                    key={item.name}
+                <Route
+                    key={data.item.name}
+                    exact
+                    path={data.item.url}
                     render={({ location }) => {
+                        //console.log(location.pathname, data.item.url, urlMapping[data.item.url])
                         return (localStorage.getItem("Auth") !== null) ? (
-                            urlMapping[item.path]
+                            urlMapping[data.item.url]
                         ) : (
                                 <Redirect
                                     to={{
@@ -50,28 +104,58 @@ const mapRouters = (data) => {
                     }}>
                 </Route>
             )
-        })
-    });
-    mapRoutersArr.push(
-        <Route key={"個人中心"} path={"/System/My"}
-            render={({ location }) => {
-                return (getItemlocalStorage("Auth") !== null) ? (
-                    urlMapping["/System/My"]
-                ) : (
-                        <Redirect
-                            to={{
-                                pathname: "/Login",
-                            }}
-                        />
-                    );
+
+            //這邊處理 elements (權限)，(另外 必須手動設定 urlMapping)
+            if (data.item.elements.length > 0) {
+                (data.item.elements ?? []).forEach(func => { // 功能 如新增、編輯、刪除
+                    // 因為例如 "刪除" 功能 不需要路由，
+                    // 所以不會被寫在 urlMapping 裡面，也就是說不在 urlMapping 就不添加路由
+                    // 即是 你要開放甚麼功能頁面 就要在 urlMapping 寫 "路由":<對應路由頁面組件 />
+                    if (urlMapping[`${data.item.url}/${func.domId}`]) {
+                        mapRoutersArr.push(
+                            <Route
+                                key={`${data.item.name}/${func.name}`}
+                                exact
+                                path={`${data.item.url}/${func.domId}`}
+                                render={({ location }) => {
+                                    //console.log(location.pathname, data.item.url, urlMapping[data.item.url])
+                                    return (localStorage.getItem("Auth") !== null) ? (
+                                        urlMapping[`${data.item.url}/${func.domId}`]
+                                    ) : (
+                                            <Redirect
+                                                to={{
+                                                    pathname: "/Login",
+                                                }}
+                                            />
+                                        );
+                                }}>
+                            </Route>
+                        )
+                    }
+
+                    //另外將可使用的功能加到 LocalStorage 裡面
+                    if (!getParseItemLocalStorage("Functions")) {
+                        setStringifyItemLocalStorage("Functions", [])
+                    }
+                    if (!(getParseItemLocalStorage("Functions") ?? []).includes(`${data.item.url}/${func.domId}`)) {
+                        pushItemLocalStorage("Functions", `${data.item.url}/${func.domId}`)
+                    }
+                });
             }
-            }>
-        </Route>
-    )
+        }
+
+        if (data.children.length > 0) {
+            let peritem = mapRouters(data.children);
+            for (var item2 of peritem) {
+                mapRoutersArr.push(item2);
+            }
+        }
+    }
+
     return mapRoutersArr;
 }
 
-
+//#region 路由組件
 export const Routers = (props) => {
 
     return (
@@ -85,7 +169,7 @@ export const Routers = (props) => {
                 */}
                 <Route exact path={"/"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/"]
                         ) : (
                                 <Redirect
@@ -102,10 +186,10 @@ export const Routers = (props) => {
                    Author : Arhua Ho
                    Content: 寫死的路由
                 */}
-                <Route exact path={"/Administrators"}
+                <Route exact path={"/Case/Case"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
-                            urlMapping["/Administrators"]
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
+                            urlMapping["/Case/Case"]
                         ) : (
                                 <Redirect
                                     to={{
@@ -118,7 +202,7 @@ export const Routers = (props) => {
                 </Route>
                 <Route exact path={"/Locations"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/Locations"]
                         ) : (
                                 <Redirect
@@ -132,7 +216,7 @@ export const Routers = (props) => {
                 </Route>
                 <Route exact path={"/Experts"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/Experts"]
                         ) : (
                                 <Redirect
@@ -146,7 +230,7 @@ export const Routers = (props) => {
                 </Route>
                 <Route exact path={"/Customers"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/Customers"]
                         ) : (
                                 <Redirect
@@ -160,7 +244,7 @@ export const Routers = (props) => {
                 </Route>
                 <Route exact path={"/Dispatch"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/Dispatch"]
                         ) : (
                                 <Redirect
@@ -174,7 +258,7 @@ export const Routers = (props) => {
                 </Route>
                 <Route exact path={"/DispatchBoard"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/DispatchBoard"]
                         ) : (
                                 <Redirect
@@ -188,7 +272,7 @@ export const Routers = (props) => {
                 </Route>
                 <Route exact path={"/ReservationList"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/ReservationList"]
                         ) : (
                                 <Redirect
@@ -202,7 +286,7 @@ export const Routers = (props) => {
                 </Route>
                 <Route exact path={"/Percentage"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/Percentage"]
                         ) : (
                                 <Redirect
@@ -219,9 +303,9 @@ export const Routers = (props) => {
                    Author : Arhua Ho
                    Content: 測試組件頁面
                 */}
-                <Route exact path={"/Test"}
+                {/* <Route exact path={"/Test"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/Test"]
                         ) : (
                                 <Redirect
@@ -232,7 +316,7 @@ export const Routers = (props) => {
                             );
                     }
                     }>
-                </Route>
+                </Route> */}
                 {/* 
                    Date   : 2020-07-08 19:00:47
                    Author : Arhua Ho
@@ -240,7 +324,7 @@ export const Routers = (props) => {
                 */}
                 <Route path={"/Login"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") === null) ? (
+                        return (getParseItemLocalStorage("Auth") === null) ? (
                             urlMapping["/Login"]
                         ) : (
                                 <Redirect
@@ -259,7 +343,7 @@ export const Routers = (props) => {
                 */}
                 <Route path={"/404"}
                     render={({ location }) => {
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             urlMapping["/404"]
                         ) : (
                                 <Redirect
@@ -277,7 +361,7 @@ export const Routers = (props) => {
                    Author : Arhua Ho
                    Content: 中間遍歷段
                 */}
-                {/* {JSON.parse(getItemlocalStorage("LeftSideData")) && mapRouters(JSON.parse(getItemlocalStorage("LeftSideData")))} */}
+                {getParseItemLocalStorage("ModulesTree") && mapRouters(getParseItemLocalStorage("ModulesTree"))}
 
                 {/* 
                    Date   : 2020-06-17 16:52:02
@@ -287,7 +371,7 @@ export const Routers = (props) => {
                 <Route path="*"
                     component={({ location }) => {
                         //console.log("sad")
-                        return (getItemlocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("Auth") !== null) ? (
                             <Redirect
                                 to={{
                                     pathname: "/404",
