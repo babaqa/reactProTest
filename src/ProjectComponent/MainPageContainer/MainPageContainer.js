@@ -3,6 +3,11 @@ import styled from 'styled-components';
 import { Context } from '../../Store/Store'
 import { BasicContainer, ScrollBar } from '../../Components';
 import { iterateTheme } from '../../Handlers/ThemeHandler';
+import { ReactComponent as LaptopLCopyright } from '../../Assets/img/LaptopLCopyright.svg'
+import { ReactComponent as LaptopCopyright } from '../../Assets/img/LaptopCopyright.svg'
+import { ReactComponent as TabletCopyright } from '../../Assets/img/TabletCopyright.svg'
+import { ReactComponent as MobileMCopyright } from '../../Assets/img/MobileMCopyright.svg'
+
 //#region 擴充基本樣式區
 import DefaultTheme from './Theme/DefaultTheme'
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
@@ -43,8 +48,57 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
 
     return (
         <>
-            {/* 大於1024的畫面 (laptop)*/}
-            {Width >= 1024 &&
+            {/* 大於1440的畫面 (laptop)*/}
+            {Width >= 1440 &&
+                <>
+                    {/* 外部傳入頂部組件容器 (laptopL) */}
+                    <BasicContainer
+                        ref={OutsideOutContainerRef}
+                        {...props.laptopLOutsideOutContainerEvent}
+                        className={`laptopLOutsideOutContainer`}
+                        baseDefaultTheme={"DefaultTheme"}
+                        theme={{ ...iterateTheme({ ...props, collapse: Collapse, outSideTopComponent: props?.outSideTopComponent }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopLOutsideOutContainer") }}
+                    >
+                        {props.outSideTopComponent}
+                    </BasicContainer>
+
+                    {/* 容器 (laptopL) */}
+                    <BasicContainer
+                        {...props.laptopLOutContainerEvent}
+                        className={`laptopLOutContainer`}
+                        baseDefaultTheme={"DefaultTheme"}
+                        theme={{ ...iterateTheme({ ...props, collapse: Collapse, outSideTopComponentHeight: OutSideTopComponentHeight }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopLOutContainer") }}
+                    >
+                        {/* 容器內滾動條 (laptopL)*/}
+                        <ScrollBar
+                            ref={scrollBarRef}
+                            autoHide={props.autoHide}
+                            className={`laptopLScrollBar`}
+                            basedefaulttheme={"DefaultTheme"}
+                            theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopLScrollBar") }}
+                        >
+                            {/* 容器內 ScrollBar 下容器 (laptopL)*/}
+                            <BasicContainer
+                                {...props.laptopLContentContainerEvent}
+                                className={`laptopLContentContainer`}
+                                baseDefaultTheme={"DefaultTheme"}
+                                theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopLContentContainer") }} //吃theme
+                            >
+                                {props.children}
+                                <LaptopLCopyright style={{
+                                    width: "100%",
+                                    position: "absolute",
+                                    left: "0px",
+                                    bottom: "0px"
+                                }} />
+                            </BasicContainer>
+                        </ScrollBar>
+                    </BasicContainer>
+                </>
+            }
+
+            {/* 大於1024 與 小於1440的畫面 (laptop)*/}
+            {(Width >= 1024 && Width < 1440) &&
                 <>
                     {/* 外部傳入頂部組件容器 (laptop) */}
                     <BasicContainer
@@ -80,14 +134,69 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                 theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopContentContainer") }} //吃theme
                             >
                                 {props.children}
+                                <LaptopCopyright style={{
+                                    width: "100%",
+                                    position: "absolute",
+                                    left: "0px",
+                                    bottom: "0px"
+                                }} />
                             </BasicContainer>
                         </ScrollBar>
                     </BasicContainer>
                 </>
             }
 
-            {/* 小於等於1024的畫面 (basic) */}
-            {Width < 1024 &&
+            {/* 大於768 與 小於1024的畫面 (Tablet)*/}
+            {(Width >= 768 && Width < 1024) &&
+                <>
+                    {/* 外部傳入頂部組件容器 (tablet) */}
+                    <BasicContainer
+                        ref={OutsideOutContainerRef}
+                        {...props.tabletOutsideOutContainerEvent}
+                        className={`tabletOutsideOutContainer`}
+                        baseDefaultTheme={"DefaultTheme"}
+                        theme={{ ...iterateTheme({ ...props, collapse: Collapse, outSideTopComponent: props?.outSideTopComponent }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletOutsideOutContainer") }}
+                    >
+                        {props.outSideTopComponent}
+                    </BasicContainer>
+
+                    {/* 容器 (tablet) */}
+                    <BasicContainer
+                        {...props.tabletOutContainerEvent}
+                        className={`tabletOutContainer`}
+                        baseDefaultTheme={"DefaultTheme"}
+                        theme={{ ...iterateTheme({ ...props, collapse: Collapse, outSideTopComponentHeight: OutSideTopComponentHeight }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletOutContainer") }}
+                    >
+                        {/* 容器內滾動條 (tablet)*/}
+                        <ScrollBar
+                            ref={scrollBarRef}
+                            autoHide={props.autoHide}
+                            className={`tabletScrollBar`}
+                            basedefaulttheme={"DefaultTheme"}
+                            theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletScrollBar") }}
+                        >
+                            {/* 容器內 ScrollBar 下容器 (tablet)*/}
+                            <BasicContainer
+                                {...props.tabletContentContainerEvent}
+                                className={`tabletContentContainer`}
+                                baseDefaultTheme={"DefaultTheme"}
+                                theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletContentContainer") }} //吃theme
+                            >
+                                {props.children}
+                                <TabletCopyright style={{
+                                    width: "100%",
+                                    position: "absolute",
+                                    left: "0px",
+                                    bottom: "0px"
+                                }} />
+                            </BasicContainer>
+                        </ScrollBar>
+                    </BasicContainer>
+                </>
+            }
+
+            {/* 小於等於768的畫面 (basic) */}
+            { Width < 768 &&
                 <>
                     {/* 外部傳入頂部組件容器 (laptop) */}
                     <BasicContainer
@@ -121,6 +230,12 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                 theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "basicContentContainer") }} //吃theme
                             >
                                 {props.children}
+                                <MobileMCopyright style={{
+                                    width: "100%",
+                                    position: "absolute",
+                                    left: "0px",
+                                    bottom: "0px"
+                                }} />
                             </BasicContainer>
                         </ScrollBar>
                     </BasicContainer>

@@ -12,207 +12,24 @@ import { ReactComponent as DriverAndCarSvg } from '../Assets/img/BackstageLeftSi
 import { ReactComponent as OrderSvg } from '../Assets/img/BackstageLeftSideMenuBar/Order.svg'
 import { ReactComponent as RouteAndStopSvg } from '../Assets/img/BackstageLeftSideMenuBar/RouteAndStop.svg'
 
-import { FareSubsidyParam } from '../Pages/Base/FareSubsidyParam/FareSubsidyParam';
-import { CarAndDriverSetting } from '../Pages/Base/CarAndDriverSetting/CarAndDriverSetting';
-import { OperatingUnitSetting } from '../Pages/Base/OperatingUnitSetting/OperatingUnitSetting';
-import { MedicalOrgManager } from '../Pages/Base/MedicalOrgManager/MedicalOrgManager';
-import { RoleManager } from '../Pages/Base/RoleManager/RoleManager';
-import { UserManager } from '../Pages/Base/UserManager/UserManager';
-import { OrgManager } from '../Pages/Base/OrgManager/OrgManager';
-//#region 派車調度
-import { WhiteConsole } from '../Pages/Dispatch/WhiteConsole/WhiteConsole';
-import { BusConsole } from '../Pages/Dispatch/BusConsole/BusConsole';
-//#endregion
-//#region 報表管理
-import { PickUpData } from '../Pages/Report/PickUpData/PickUpData';
-import { Revenue } from '../Pages/Report/Revenue/Revenue';
-import { CarUsed } from '../Pages/Report/CarUsed/CarUsed';
-import { CarAreaRate } from '../Pages/Report/CarAreaRate/CarAreaRate';
-import { ServiceMonthlyReport } from '../Pages/Report/ServiceMonthlyReport/ServiceMonthlyReport';
-import { ProblemSheet } from '../Pages/Report/ProblemSheet/ProblemSheet';
-import { ExportReport } from '../Pages/Report/ExportReport/ExportReport';
-//#endregion
-//#region 預約訂單
-import { WhiteOrder } from '../Pages/Order/WhiteOrder/WhiteOrder';
-import { WhiteOrderView } from '../Pages/Order/WhiteOrder/WhiteOrderView/WhiteOrderView';
-import { BusOrder } from '../Pages/Order/BusOrder/BusOrder';
-import { BusOrderView } from '../Pages/Order/BusOrder/BusOrderView/BusOrderView';
-import { CaseOrder } from '../Pages/Order/CaseOrder/CaseOrder';
-import { CaseOrderView } from '../Pages/Order/CaseOrder/CaseOrderView/CaseOrderView';
-import { DayCareOrder } from '../Pages/Order/DayCareOrder/DayCareOrder';
-import { DayCareOrderView } from '../Pages/Order/DayCareOrder/DayCareOrderView/DayCareOrderView';
-import { RuralOrder } from '../Pages/Order/RuralOrder/RuralOrder';
-import { RuralOrderView } from '../Pages/Order/RuralOrder/RuralOrderView/RuralOrderView';
-//#endregion
-//#region 常見問題
+import { News } from '../Pages/News/News';
+import { CallCar } from '../Pages/CallCar/CallCar';
+import { FastCallCar } from '../Pages/FastCallCar/FastCallCar';
+import { Record } from '../Pages/Record/Record';
+import { UserInfo } from '../Pages/UserInfo/UserInfo';
+import { Contact } from '../Pages/Contact/Contact';
 import { QAndA } from '../Pages/QAndA/QAndA';
-//#endregion
-//#region 個案資料
-import { Case } from '../Pages/Case/Case';
-import { CaseAdd } from '../Pages/Case/CaseAdd/CaseAdd';
-import { CaseEdit } from '../Pages/Case/CaseEdit/CaseEdit';
-import { CaseInformation } from '../Pages/Case/CaseInformation/CaseInformation';
-import { CaseCallCar } from '../Pages/Case/CaseCallCar/CaseCallCar';
-//#region 巴士身份
-import { BusAdd } from '../Pages/Case/BusAdd/BusAdd';
-import { BusEdit } from '../Pages/Case/BusEdit/BusEdit';
-import { BusInformation } from '../Pages/Case/BusInformation/BusInformation';
-import { BusCallCar } from '../Pages/Case/BusCallCar/BusCallCar';
-//#endregion
-//#region 偏鄉身份
-import { RuralAdd } from '../Pages/Case/RuralAdd/RuralAdd';
-import { RuralEdit } from '../Pages/Case/RuralEdit/RuralEdit';
-import { RuralInformation } from '../Pages/Case/RuralInformation/RuralInformation';
-import { RuralCallCar } from '../Pages/Case/RuralCallCar/RuralCallCar';
-//#endregion
-//#region 白牌身份
-import { WhiteAdd } from '../Pages/Case/WhiteAdd/WhiteAdd';
-import { WhiteEdit } from '../Pages/Case/WhiteEdit/WhiteEdit';
-import { WhiteInformation } from '../Pages/Case/WhiteInformation/WhiteInformation';
-import { WhiteCallCar } from '../Pages/Case/WhiteCallCar/WhiteCallCar';
-//#endregion
-//#region 日照身份
-import { DayCareAdd } from '../Pages/Case/DayCareAdd/DayCareAdd';
-import { DayCareEdit } from '../Pages/Case/DayCareEdit/DayCareEdit';
-import { DayCareInformation } from '../Pages/Case/DayCareInformation/DayCareInformation';
-//#endregion
-//#endregion
-//#region 路線及站牌管理
-import { BusRoute } from '../Pages/BusRouteAndStop/BusRoute/BusRoute'
-import { BusRouteAdd } from '../Pages/BusRouteAndStop/BusRoute/BusRouteAdd/BusRouteAdd'
-import { BusRouteEdit } from '../Pages/BusRouteAndStop/BusRoute/BusRouteEdit/BusRouteEdit'
-
-import { BusStop } from '../Pages/BusRouteAndStop/BusStop/BusStop'
-import { BusStopAdd } from '../Pages/BusRouteAndStop/BusStop/BusStopAdd/BusStopAdd'
-import { BusStopEdit } from '../Pages/BusRouteAndStop/BusStop/BusStopEdit/BusStopEdit'
-//#endregion
-//#region 司機車輛管理
-import { Drivers } from '../Pages/DriverAndCar/Drivers/Drivers'
-import { DriversAdd } from '../Pages/DriverAndCar/Drivers/DriversAdd/DriversAdd'
-import { DriversEdit } from '../Pages/DriverAndCar/Drivers/DriversEdit/DriversEdit'
-import { DriversInformation } from '../Pages/DriverAndCar/Drivers/DriversInformation/DriversInformation';
-//#endregion
-//#region 司機車輛管理
-import { Cars } from '../Pages/DriverAndCar/Cars/Cars'
-import { CarsAdd } from '../Pages/DriverAndCar/Cars/CarsAdd/CarsAdd'
-import { CarsEdit } from '../Pages/DriverAndCar/Cars/CarsEdit/CarsEdit'
-import { CarsInformation } from '../Pages/DriverAndCar/Cars/CarsInformation/CarsInformation';
-//#endregion
-//#region 車輛保養紀錄
-import { CarFixedRecord } from '../Pages/DriverAndCar/CarFixedRecord/CarFixedRecord';
-//#endregion
 
 //#region 
 export const urlMapping = {
-   //#region 系統資料管理
-   "/Base/FareSubsidyParam": <FareSubsidyParam />,// 系統資料管理/補助車資參數
-   "/Base/CarAndDriverSetting": <CarAndDriverSetting />,// 系統資料管理/司機車輛設定
-   "/Base/OperatingUnitSetting": <OperatingUnitSetting />,// 系統資料管理/營運單位設定
-   "/Base/MedicalOrgManager": <MedicalOrgManager />,// 系統資料管理/醫療院所管理
-   "/Base/RoleManager": <RoleManager />,// 權限管理  (Base/RoleManager)
-   "/Base/UserManager": <UserManager />,// 系統管理員設定  (Base/UserManager)
-   "/Base/OrgManager": <OrgManager />,// 單位管理   (Base/OrgManager)
-   //#endregion
 
-   //#region 派車調度
-   "/Dispatch/OrderSearch": "調度單搜尋",// 派車調度/調度單搜尋
-   "/Dispatch/DragConsole": "拖拉式調度台",// 派車調度/拖拉式調度台
-   "/Dispatch/TableConsole": "表格式調度台",// 派車調度/表格式調度台
-   "/Dispatch/WhiteConsole": <WhiteConsole />,// 派車調度/白牌車調度台
-   "/Dispatch/BusConsole": <BusConsole />,// 派車調度/幸福巴士調度台
-   //#endregion
-
-   //#region 報表管理
-   "/Report/PickUpData": <PickUpData />,// 報表管理/接送數據
-   "/Report/Revenue": <Revenue />,// 報表管理/營收報表
-   "/Report/CarUsed": <CarUsed />,// 報表管理/車輛使用狀況
-   "/Report/CarAreaRate": <CarAreaRate />,// 報表管理/車輛使用區域比例
-   "/Report/ServiceMonthlyReport": <ServiceMonthlyReport />,// 報表管理/服務使用區域月報表
-   "/Report/ProblemSheet": <ProblemSheet />,// 報表管理/系統操作問題單
-   "/Report/ExportReport": <ExportReport />,// 報表管理/匯出報表
-   //#endregion
-
-   //#region 常見問題
+   "/News": <News />,// 最新消息
+   "/CallCar": <CallCar />,// 預約訂車
+   "/FastCallCar": <FastCallCar />,// 快速叫車
+   "/Record": <Record />,// 搭乘紀錄
+   "/UserInfo": <UserInfo />,// 用戶資料
+   "/Contact": <Contact />,// 聯繫客服
    "/QAndA": <QAndA />,// 常見問題
-   //#endregion
-
-   //#region 預約訂單
-   //#region 白牌
-   "/Order/WhiteOrder": <WhiteOrder />,// 預約訂單/白牌車訂單
-   "/Order/WhiteOrder/WhiteOrderView": <WhiteOrderView />,
-   //#endregion
-   //#region 幸福巴士
-   "/Order/BusOrder": <BusOrder />,// 預約訂單/幸福巴士訂單
-   "/Order/BusOrder/BusOrderView": <BusOrderView />,
-   //#endregion
-   //#region 長照
-   "/Order/CaseOrder": <CaseOrder />,// 預約訂單/長照訂單
-   "/Order/CaseOrder/CaseOrderView": <CaseOrderView />,
-   //#endregion
-   //#region 日照
-   "/Order/DayCareOrder": <DayCareOrder />,// 預約訂單/日照訂單
-   "/Order/DayCareOrder/DayCareOrderView": <DayCareOrderView />,
-   //#endregion
-   //#region 偏鄉運能不足
-   "/Order/RuralOrder": <RuralOrder />,// 預約訂單/偏鄉運能不足訂單
-   "/Order/RuralOrder/RuralOrderView": <RuralOrderView />,
-   //#endregion
-   //#endregion
-
-   //#region 個案資料
-   "/Case": <Case />,//個案資料
-   "/Case/Edit": <CaseEdit />, // 編輯長照個案資料
-   "/Case/Add": <CaseAdd />, // 新增長照個案資料
-   "/Case/Information": <CaseInformation />, // 檢視長照個案資料
-   "/Case/CallCar": <CaseCallCar />, // 長照叫車
-   //#region 巴士身份
-   "/Case/BusEdit": <BusEdit />, // 編輯巴士身份資料
-   "/Case/BusAdd": <BusAdd />, // 新增巴士身份資料
-   "/Case/BusInformation": <BusInformation />, // 檢視巴士身份資料
-   "/Case/BusCallCar": <BusCallCar />, // 巴士叫車
-   //#endregion
-   //#region 偏鄉身份
-   "/Case/RuralEdit": <RuralEdit />, // 編輯偏鄉身份資料
-   "/Case/RuralAdd": <RuralAdd />, // 新增偏鄉身份資料
-   "/Case/RuralInformation": <RuralInformation />, // 檢視偏鄉身份資料
-   "/Case/RuralCallCar": <RuralCallCar />, // 巴士叫車
-   //#endregion
-   //#region 白牌身份
-   "/Case/WhiteEdit": <WhiteEdit />, // 編輯白牌身份資料
-   "/Case/WhiteAdd": <WhiteAdd />, // 新增白牌身份資料
-   "/Case/WhiteInformation": <WhiteInformation />, // 檢視白牌身份資料
-   "/Case/WhiteCallCar": <WhiteCallCar />, // 巴士叫車
-   //#endregion
-   //#region 日照身份
-   "/Case/DayCareEdit": <DayCareEdit />, // 編輯日照身份資料
-   "/Case/DayCareAdd": <DayCareAdd />, // 新增日照身份資料
-   "/Case/DayCareInformation": <DayCareInformation />, // 檢視日照身份資料
-   //#endregion
-   //#endregion
-
-   //#region  路線及站牌管理
-   "/BusRouteAndStop/BusRoute": <BusRoute />, // 路線管理
-   "/BusRouteAndStop/BusRoute/Add": <BusRouteAdd />,
-   "/BusRouteAndStop/BusRoute/Edit": <BusRouteEdit />,
-   "/BusRouteAndStop/BusStop": <BusStop />, // 站牌管理
-   "/BusRouteAndStop/BusStop/Add": <BusStopAdd />,
-   "/BusRouteAndStop/BusStop/Edit": <BusStopEdit />,
-   //#endregion
-
-   "/DriverAndCar/Drivers": <Drivers />, // 司機車輛管理/司機資料
-   "/DriverAndCar/Drivers/Add": <DriversAdd />,
-   "/DriverAndCar/Drivers/Edit": <DriversEdit />,
-   "/DriverAndCar/Drivers/Information": <DriversInformation />,
-   "/DriverAndCar/Cars": <Cars />,// 司機車輛管理/車輛資料
-   "/DriverAndCar/Cars/Add": <CarsAdd />,
-   "/DriverAndCar/Cars/Edit": <CarsEdit />,
-   "/DriverAndCar/Cars/Information": <CarsInformation />,
-   "/DriverAndCar/CarFixedRecord": <CarFixedRecord />,
-
-
-   // "/RoleManager/Index": <RoleManager />,// 角色管理  (Base/RoleManager)
-   // "/UserManager/Index": <UserManager />,// 用戶管理  (Base/UserManager)
-   // "/OrgManager/Index": <OrgManager />,// 部門管理   (Base/OrgManager)
 
    "/Login": < Login />,// 登入畫面
    "/404": <Error404 />,// 404錯誤畫面

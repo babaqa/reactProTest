@@ -20,7 +20,7 @@ import { urlMapping } from '../Mappings/Mappings'
 //                 <Route key={item.name}
 //                     path={item.path}
 //                     render={({ location }) => {
-//                         return (localStorage.getItem("Auth") !== null) ? (
+//                         return (localStorage.getItem("CAuth") !== null) ? (
 //                             urlMapping[item.path]
 //                         ) : (
 //                                 <Redirect
@@ -38,7 +38,7 @@ import { urlMapping } from '../Mappings/Mappings'
 //                 <Route path={item.path}
 //                     key={item.name}
 //                     render={({ location }) => {
-//                         return (localStorage.getItem("Auth") !== null) ? (
+//                         return (localStorage.getItem("CAuth") !== null) ? (
 //                             urlMapping[item.path]
 //                         ) : (
 //                                 <Redirect
@@ -55,7 +55,7 @@ import { urlMapping } from '../Mappings/Mappings'
 //     mapRoutersArr.push(
 //         <Route key={"個人中心"} path={"/System/My"}
 //             render={({ location }) => {
-//                 return (getParseItemLocalStorage("Auth") !== null) ? (
+//                 return (getParseItemLocalStorage("CAuth") !== null) ? (
 //                     urlMapping["/System/My"]
 //                 ) : (
 //                         <Redirect
@@ -92,7 +92,7 @@ const mapRouters = (data) => {
                     path={data.item.url}
                     render={({ location }) => {
                         //console.log(location.pathname, data.item.url, urlMapping[data.item.url])
-                        return (localStorage.getItem("Auth") !== null) ? (
+                        return (localStorage.getItem("CAuth") !== null) ? (
                             urlMapping[data.item.url]
                         ) : (
                                 <Redirect
@@ -119,7 +119,7 @@ const mapRouters = (data) => {
                                 path={`${data.item.url}/${func.domId}`}
                                 render={({ location }) => {
                                     //console.log(location.pathname, data.item.url, urlMapping[data.item.url])
-                                    return (localStorage.getItem("Auth") !== null) ? (
+                                    return (localStorage.getItem("CAuth") !== null) ? (
                                         urlMapping[`${data.item.url}/${func.domId}`]
                                     ) : (
                                             <Redirect
@@ -169,7 +169,7 @@ export const Routers = (props) => {
                 */}
                 <Route exact path={"/"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
                             urlMapping["/"]
                         ) : (
                                 <Redirect
@@ -186,10 +186,10 @@ export const Routers = (props) => {
                    Author : Arhua Ho
                    Content: 寫死的路由
                 */}
-                <Route exact path={"/Case/Case"}
+                <Route exact path={"/News"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
-                            urlMapping["/Case/Case"]
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/News"]
                         ) : (
                                 <Redirect
                                     to={{
@@ -200,10 +200,10 @@ export const Routers = (props) => {
                     }
                     }>
                 </Route>
-                <Route exact path={"/Locations"}
+                <Route exact path={"/CallCar"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
-                            urlMapping["/Locations"]
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/CallCar"]
                         ) : (
                                 <Redirect
                                     to={{
@@ -214,10 +214,10 @@ export const Routers = (props) => {
                     }
                     }>
                 </Route>
-                <Route exact path={"/Experts"}
+                <Route exact path={"/FastCallCar"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
-                            urlMapping["/Experts"]
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/FastCallCar"]
                         ) : (
                                 <Redirect
                                     to={{
@@ -228,10 +228,10 @@ export const Routers = (props) => {
                     }
                     }>
                 </Route>
-                <Route exact path={"/Customers"}
+                <Route exact path={"/Record"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
-                            urlMapping["/Customers"]
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/Record"]
                         ) : (
                                 <Redirect
                                     to={{
@@ -242,10 +242,10 @@ export const Routers = (props) => {
                     }
                     }>
                 </Route>
-                <Route exact path={"/Dispatch"}
+                <Route exact path={"/UserInfo"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
-                            urlMapping["/Dispatch"]
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/UserInfo"]
                         ) : (
                                 <Redirect
                                     to={{
@@ -256,10 +256,10 @@ export const Routers = (props) => {
                     }
                     }>
                 </Route>
-                <Route exact path={"/DispatchBoard"}
+                <Route exact path={"/Contact"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
-                            urlMapping["/DispatchBoard"]
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/Contact"]
                         ) : (
                                 <Redirect
                                     to={{
@@ -270,24 +270,10 @@ export const Routers = (props) => {
                     }
                     }>
                 </Route>
-                <Route exact path={"/ReservationList"}
+                <Route exact path={"/QAndA"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
-                            urlMapping["/ReservationList"]
-                        ) : (
-                                <Redirect
-                                    to={{
-                                        pathname: "/Login",
-                                    }}
-                                />
-                            );
-                    }
-                    }>
-                </Route>
-                <Route exact path={"/Percentage"}
-                    render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
-                            urlMapping["/Percentage"]
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/QAndA"]
                         ) : (
                                 <Redirect
                                     to={{
@@ -305,7 +291,7 @@ export const Routers = (props) => {
                 */}
                 {/* <Route exact path={"/Test"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
                             urlMapping["/Test"]
                         ) : (
                                 <Redirect
@@ -324,7 +310,7 @@ export const Routers = (props) => {
                 */}
                 <Route path={"/Login"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") === null) ? (
+                        return (getParseItemLocalStorage("CAuth") === null) ? (
                             urlMapping["/Login"]
                         ) : (
                                 <Redirect
@@ -343,7 +329,7 @@ export const Routers = (props) => {
                 */}
                 <Route path={"/404"}
                     render={({ location }) => {
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
                             urlMapping["/404"]
                         ) : (
                                 <Redirect
@@ -371,7 +357,7 @@ export const Routers = (props) => {
                 <Route path="*"
                     component={({ location }) => {
                         //console.log("sad")
-                        return (getParseItemLocalStorage("Auth") !== null) ? (
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
                             <Redirect
                                 to={{
                                     pathname: "/404",

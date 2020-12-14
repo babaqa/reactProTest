@@ -71,7 +71,7 @@ export const BusStopEdit = (props) => {
             fetch(`${APIUrl}busStationss/get?id=${urlParams.get("stationId")}`, // busStationss/get?id=6725794473963986945
                 {
                     headers: {
-                        "X-Token": getParseItemLocalStorage("Auth"),
+                        "X-Token": getParseItemLocalStorage("CAuth"),
                         "content-type": "application/json; charset=utf-8",
                     },
                     method: "GET"
@@ -132,7 +132,7 @@ export const BusStopEdit = (props) => {
         fetch(`${APIUrl}busStationss/update`,
             {
                 headers: {
-                    "X-Token": getParseItemLocalStorage("Auth"),
+                    "X-Token": getParseItemLocalStorage("CAuth"),
                     "content-type": "application/json; charset=utf-8",
                 },
                 method: "POST",

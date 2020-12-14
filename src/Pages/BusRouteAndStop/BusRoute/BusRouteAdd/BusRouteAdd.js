@@ -84,7 +84,7 @@ export const BusRouteAdd = (props) => {
             fetch(`${APIUrl}busStationss/load?page=1&limit=99999`, //busStationss/load?page=1&limit=999
                 {
                     headers: {
-                        "X-Token": getParseItemLocalStorage("Auth"),
+                        "X-Token": getParseItemLocalStorage("CAuth"),
                         "content-type": "application/json; charset=utf-8",
                     },
                     method: "GET"
@@ -158,7 +158,7 @@ export const BusRouteAdd = (props) => {
         fetch(`${APIUrl}busStationLiness/add`,
             {
                 headers: {
-                    "X-Token": getParseItemLocalStorage("Auth"),
+                    "X-Token": getParseItemLocalStorage("CAuth"),
                     "content-type": "application/json; charset=utf-8",
                 },
                 method: "POST",

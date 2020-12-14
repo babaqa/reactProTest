@@ -236,7 +236,7 @@ export const Login = (props) => {
                 if (PreResult.code === 200) {
                     setItemLocalStorage("Orgs", JSON.stringify(PreResult.result));
                     setStringifyItemLocalStorage("UseOrg", { id: PreResult.result?.[0]?.id, name: PreResult.result?.[0]?.name });
-                    setItemLocalStorage("Auth", JSON.stringify(token));
+                    setItemLocalStorage("CAuth", JSON.stringify(token));
                 } else {
                     throw PreResult.message;
                 }

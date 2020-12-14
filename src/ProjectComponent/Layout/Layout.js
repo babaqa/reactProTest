@@ -1,12 +1,25 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { Context, Tooltip, BackstageLeftSideMenuBar, BackstagePageTabBar, BackstageTopMenuBar, ScrollBar, BasicContainer, LeftSideDrawer, SubContainer, Text, BasicButton, DropDown, modalsService, globalContextService } from '../../Components'
-import MenuOpenIcon from '@material-ui/icons/MenuOpen';
+import { Context, Tooltip, BackstageLeftSideMenuBar, BackstagePageTabBar, BackstageTopMenuBar, ScrollBar, BasicContainer, LeftSideDrawer, SubContainer, Text, BasicButton, DropDown, modalsService, globalContextService, Container } from '../../Components'
 import { useWindowSize } from '../../SelfHooks/useWindowSize'
-import { ReactComponent as Logo } from '../../Assets/img/Logo.svg'
 import { ReactComponent as ArrowUp } from '../../Assets/img/BackstageLeftSideMenuBar/ArrowUp.svg'
 import { ReactComponent as WhiteBlock } from '../../Assets/img/BackstageLeftSideMenuBar/WhiteBlock.svg'
-import { ReactComponent as Org } from '../../Assets/img/BackstageLeftSideMenuBar/Org.svg'
-import { ReactComponent as Check } from '../../Assets/img/BackstageLeftSideMenuBar/Check.svg'
+
+import { ReactComponent as LaptopLLogo } from '../../Assets/img/LaptopLLogo.svg'
+import { ReactComponent as LaptopLogo } from '../../Assets/img/LaptopLogo.svg'
+import { ReactComponent as TabletLogo } from '../../Assets/img/TabletLogo.svg'
+import { ReactComponent as MobileMLogo } from '../../Assets/img/MobileMLogo.svg'
+import { ReactComponent as MobileMMenu } from '../../Assets/img/MobileMMenu.svg'
+
+import { ReactComponent as NewsTab } from '../../Assets/img/NewsTab.svg'
+import { ReactComponent as CallCarTab } from '../../Assets/img/CallCarTab.svg'
+import { ReactComponent as FastCallCarTab } from '../../Assets/img/FastCallCarTab.svg'
+import { ReactComponent as RecordTab } from '../../Assets/img/RecordTab.svg'
+import { ReactComponent as UserInfoTab } from '../../Assets/img/UserInfoTab.svg'
+import { ReactComponent as ContactTab } from '../../Assets/img/ContactTab.svg'
+import { ReactComponent as QAndATab } from '../../Assets/img/QAndATab.svg'
+import { ReactComponent as LogoutLaptop } from '../../Assets/img/LogoutLaptop.svg'
+
+
 import { getParseItemLocalStorage, setStringifyItemSession, pushAndNotExsistItemSession, getParseItemSession, removeByKeyItemSession, clearLocalStorage, clearSession, setStringifyItemLocalStorage } from '../../Handlers';
 import { iconMap, pageTabBarUrlMapping, pageTextUrlMapping } from '../../Mappings/Mappings'
 import { useHistory, useLocation } from 'react-router-dom';
@@ -27,30 +40,30 @@ export const Layout = (props) => {
 
     useEffect(() => {
         //#region 設定剛登入時，開啟歡迎頁
-        // console.log(getParseItemSession("tab"))
-        if (isNil(getParseItemSession("tab")) || (getParseItemSession("tab") ?? []).length === 0) {
-            setStringifyItemSession("tab", [{ title: "首頁", path: "/" }])
+        // console.log(getParseItemSession("Ctab"))
+        if (isNil(getParseItemSession("Ctab")) || (getParseItemSession("Ctab") ?? []).length === 0) {
+            setStringifyItemSession("Ctab", [{ title: "首頁", path: "/" }])
         }
         //#endregion
     })
 
     useEffect(() => {
-        // setStringifyItemSession("tab", [{ title: "某某某頁面", path: "/xxx/yyy" }, { title: "某某某頁面", path: "/aaa/bbb" }, { title: "某某某頁面c", path: "/aaa/ccc" },
+        // setStringifyItemSession("Ctab", [{ title: "某某某頁面", path: "/xxx/yyy" }, { title: "某某某頁面", path: "/aaa/bbb" }, { title: "某某某頁面c", path: "/aaa/ccc" },
         // { title: "某某某頁面", path: "/aaa/111" }, { title: "某某某頁面", path: "/aaa/333" }, { title: "某某某頁面c", path: "/aaa/555" },
         // { title: "某某某頁面", path: "/aaa/222" }, { title: "某某某頁面", path: "/aaa/444" }, { title: "某某某頁面c", path: "/aaa/666" }])
 
         //#region 設定剛登入時，開啟歡迎頁
-        // console.log(getParseItemSession("tab"))
-        // if (isNil(getParseItemSession("tab")) || (getParseItemSession("tab") ?? []).length === 0) {
-        //     setStringifyItemSession("tab", [{ title: "首頁", path: "/" }])
+        // console.log(getParseItemSession("Ctab"))
+        // if (isNil(getParseItemSession("Ctab")) || (getParseItemSession("Ctab") ?? []).length === 0) {
+        //     setStringifyItemSession("Ctab", [{ title: "首頁", path: "/" }])
         // }
         //#endregion
 
         //#region 處理當直接從瀏覽器網址列輸入 路由 ，一樣要新增分頁的情況
         // !! 注意 只處理包含在 pageTabBarUrlMapping 物件中的路由 
-        let historyOpenTab = (getParseItemSession("tab") ?? []).map((item => item.path))
+        let historyOpenTab = (getParseItemSession("Ctab") ?? []).map((item => item.path))
         if ((!historyOpenTab.includes(location.pathname) && pageTabBarUrlMapping[location.pathname])) {
-            pushAndNotExsistItemSession("tab", "path", location.pathname, { title: pageTabBarUrlMapping[location.pathname], path: location.pathname })
+            pushAndNotExsistItemSession("Ctab", "path", location.pathname, { title: pageTabBarUrlMapping[location.pathname], path: location.pathname })
         }
         //#endregion
 
@@ -59,14 +72,6 @@ export const Layout = (props) => {
         let menuNameAndSubUrl = getParseItemLocalStorage("MenuNameAndSubUrl")
         let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl")) ?? []
         let res = [];
-
-        // keys.forEach(
-        //     (item) => {
-        //         if (menuNameAndSubUrl[item].includes(location.pathname)) {
-        //             res = [...res, item]
-        //         }
-        //     }
-        // )
 
         //#region 處理進入子頁面如新增、修改等，標記於父層路由標籤 Functions
         if (canUseFunctions.includes(location.pathname)) {
@@ -101,595 +106,399 @@ export const Layout = (props) => {
 
     }, [Collapse]) // 除了初始設置外，由窄版 切換至 寬版 亦需要重新設定展開 應該展開的 父層
 
-    useEffect(() => {
-        // if (width >= 1440) {
-        //     setCollapse(false); // 切換到 laptop畫面，左側欄要放大成寬版
-        // }
-        if (width >= 1024 && width < 1440) {
-            if (!Collapse) {
-                setCollapse(true); // 切換到 laptop畫面，左側欄要縮小成窄版
-            }
-        }
-
-    }, [width])
-
-
-    if (localStorage.getItem("Auth") === null) {
+    if (localStorage.getItem("CAuth") === null) {
         return null
     }
+
+    const TabMapping = (key) => {
+        // 最新消息  News
+        // 預約訂車  CallCar
+        // 快速叫車  FastCallCar
+        // 搭乘紀錄  Record
+        // 用戶資料  UserInfo
+        // 聯繫客服  Contact
+        // 常見問題  QAndA
+        switch (key) {
+            case "allTabNameLaptopL":
+                return [
+                    { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconLaptopL} /> },
+                    { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptopL} /> },
+                    { path: "/FastCallCar", name: "快速叫車", icon: <FastCallCarTab style={layout.titleBarTabIconLaptopL} /> },
+                    { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconLaptopL} /> },
+                    { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconLaptopL} /> },
+                    { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconLaptopL} /> },
+                    { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconLaptopL} /> },
+                ]
+            case "allTabNameLaptop":
+                return [
+                    { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/FastCallCar", name: "快速叫車", icon: <FastCallCarTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconLaptop} /> },
+                ]
+            case "allTabNameTablet":
+                return [
+                    { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/FastCallCar", name: "快速叫車", icon: <FastCallCarTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconTablet} /> },
+                ]
+            case "allTabNameMobileMLeftSide":
+                return [
+                    { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconMobileM} /> },
+                ]
+            case "allTabNameMobileMFixBottom":
+                return [
+                    { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/FastCallCar", name: "快速叫車", icon: <FastCallCarTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconMobileM} /> },
+                ]
+            default:
+                break;
+        }
+    }
+
 
     return (
         <>
             {/* 大於1440的畫面 (laptop)*/}
             {width >= 1440 &&
                 <>
-                    <BackstageLeftSideMenuBar baseDefaultTheme={"DefaultTheme"} collapse={Collapse}
-                        logo={<Logo style={layout.laptopBackstageLeftSideMenuBarLogo(Collapse)} />}
-                        logoText={
-                            <Text
-                                baseDefaultTheme={"TextDefaultTheme"}
-                                theme={layout.laptopBackstageLeftSideMenuBarLogoText}
-                            >
-                                屏東派車管理系統
-                            </Text>
-                        }
-                        menuItem={
-                            Collapse ?
-                                generateThinMenu(getParseItemLocalStorage("ModulesTree"), history, location, ExpandMenuName, setExpandMenuName, IsHoverMenuName, setIsHoverMenuName)
-                                :
-                                generateMenu(getParseItemLocalStorage("ModulesTree"), history, location, ExpandMenuName, setExpandMenuName, setDrawerCollapse)
-                        }
-                    />
-                    <BackstageTopMenuBar baseDefaultTheme={"DefaultTheme"} theme={layout.laptopBackstageTopMenuBar(Collapse)}>
-                        <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}>
-                            <BasicButton
-                                baseDefaultTheme={"BasicButtonDefaultTheme"}
-                                theme={layout.laptopBasicButton}
-                                icon={<MenuOpenIcon style={layout.laptopBasicButtonIcon} />}
-                                text={""}
-                                onClick={() => { setCollapse(c => !c) }}
-                            />
-                            <Text baseDefaultTheme={"TextDefaultTheme"} theme={layout.laptopPageText}>
-                                {/* 預設頁面/預設功能 */}
-                                {pageTextUrlMapping[location.pathname]}
-                            </Text>
+                    {/* 標題列容器 LaptopL */}
+                    <Container
+                        theme={layout.titleBarContainerLaptopL}
+                    >
+                        {/* Logo容器 LaptopL */}
+                        <SubContainer
+                            theme={layout.titleBarLogoContainerLaptopL}
+                        >
+                            {/* Logo ICON LaptopL */}
+                            <LaptopLLogo style={layout.titleBarLogoIconLaptopL} />
                         </SubContainer>
-                        {/* <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}> */}
-                        {/* 無 Logo */}
-                        {/* </SubContainer> */}
 
-
-                        <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}>
-
-                            {/* 選擇可訪問組織 DropDown */}
-                            <DropDown
-                                placement={"bottomRight"}
-                                dropDownItem={
-                                    <>
-                                        {/* 選擇可訪問組織 DropDown 容器 */}
-                                        <BasicContainer
-                                            baseDefaultTheme={"BasicContainerDefaultTheme"}
-                                            height={(getParseItemLocalStorage("Orgs") ?? []).length}
-                                            theme={layout.laptopUseOrgDropDownContainer}
-                                        >
-                                            <ScrollBar
-                                                basedefaulttheme={"DefaultTheme"}
-                                                className={`collapseMenuAreaScrollBar`}
-                                                autoHide={true}
-                                                theme={layout.laptopUseOrgScrollBar}
-                                            >
-                                                {/* DropDown 項目容器 */}
-                                                <BasicContainer
-                                                    baseDefaultTheme={"DefaultTheme"}
-                                                    theme={layout.laptopDropDownItemContainer}>
-                                                    {/* DropDown 子項目 */}
-                                                    {(getParseItemLocalStorage("Orgs") ?? []).map((item, index) => {
-                                                        return (
-                                                            <React.Fragment key={index}>
-                                                                <Text
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    theme={layout.laptopDropDownSubItemContainer}
-                                                                    onClick={() => {
-                                                                        setStringifyItemLocalStorage("UseOrg", { id: item?.id, name: item?.name })
-                                                                        Switch();
-                                                                    }}
-                                                                >
-                                                                    {item?.name}
-                                                                    {getParseItemLocalStorage("UseOrg")?.name === item?.name &&
-                                                                        <Check style={{
-                                                                            position: "relative",
-                                                                            left: "8px"
-                                                                        }} />
-                                                                    }
-                                                                </Text>
-                                                            </React.Fragment>
-                                                        )
-                                                    })}
-                                                </BasicContainer>
-                                            </ScrollBar>
-                                        </BasicContainer>
-                                    </>
-                                }
+                        {/* Tab 容器 LaptopL */}
+                        <SubContainer
+                            theme={layout.titleBarTabContainerLaptopL}
+                        >
+                            {/* Tab 次容器 LaptopL */}
+                            <Container
+                                theme={layout.titleBarTabSubContainerLaptopL}
                             >
-                                <Org style={{ position: "relative", right: "32px", cursor: "pointer" }} />
-                            </DropDown>
-
-                            <DropDown
-                                dropDownItem={
-                                    <>
-                                        {/* DropDown 項目容器 */}
-                                        <BasicContainer
-                                            baseDefaultTheme={"DefaultTheme"}
-                                            theme={layout.laptopDropDownItemContainer}>
-                                            {/* DropDown 子項目 */}
-                                            <Text
-                                                baseDefaultTheme={"DefaultTheme"}
-                                                theme={layout.laptopDropDownSubItemContainer}
-                                                onClick={() => {
-                                                    modalsService.infoModal.warn({
-                                                        iconRightText: "是否要登出?",
-                                                        yes: true,
-                                                        yesText: "確認",
-                                                        no: true,
-                                                        noText: "取消",
-                                                        // autoClose: true,
-                                                        backgroundClose: false,
-                                                        yesOnClick: (e, close) => {
-                                                            clearLocalStorage();
-                                                            clearSession();
-                                                            globalContextService.clear();
-                                                            Switch();
-                                                            close();
-                                                        }
-                                                    })
-                                                }}
+                                {TabMapping("allTabNameLaptopL").map((item => {
+                                    return (
+                                        <React.Fragment key={item.path}>
+                                            {/* Tab項目容器 */}
+                                            <BasicContainer
+                                                active={location.pathname === item.path}
+                                                theme={layout.titleBarTabItemContainerLaptopL}
+                                                onClick={() => { history.push(item.path) }}
                                             >
-                                                登出
-                                            </Text>
-                                        </BasicContainer>
-                                    </>
-                                }>
+                                                {item.icon}
+                                                <Text
+                                                    theme={layout.titleBarTabTextLaptopL}
+                                                >
+                                                    {item.name}
+                                                </Text>
 
-                                <Text baseDefaultTheme={"TextDefaultTheme"} theme={layout.laptopUserNameText}>
-                                    {/* 管理員 */}
-                                    {getParseItemLocalStorage("UserName")}
+                                            </BasicContainer>
+                                        </React.Fragment>
+                                    )
+                                }))}
+
+                            </Container>
+                        </SubContainer>
+
+                        {/* 使用者名稱、登出容器 */}
+                        <SubContainer
+                            theme={layout.titleBarUserAndLogoutLaptopL}
+                        >
+                            {/* 使用者名稱、登出次容器 */}
+                            <BasicContainer
+                                theme={layout.titleBarUserAndLogoutSubLaptopL}
+                            >
+                                {/* 使用者名稱 */}
+                                <Text
+                                    theme={layout.titleBarUserLaptopL}
+                                >
+                                    Hi! 王曉明名
                                 </Text>
-                            </DropDown>
+                                {/* 使用者名稱 分隔 */}
+                                <Text
+                                    theme={layout.titleBarUserStepLaptopL}
+                                >
+                                    |
+                                </Text>
 
+                                {/* 登出 */}
+                                <Text
+                                    theme={layout.titleBarLogoutLaptopL}
+                                >
+                                    <LogoutLaptop style={layout.titleBarLogoutIconLaptopL} />
+                                    登出
+                                </Text>
+
+                            </BasicContainer>
                         </SubContainer>
-                    </BackstageTopMenuBar>
-                    <BackstagePageTabBar
-                        openHistory={getParseItemSession("tab")}
-                        urlMapping={pageTabBarUrlMapping}
-                        // urlMapping={{
-                        //     "/xxx/yyy": "某x", "/aaa/bbb": "某a", "/aaa/ccc": "某c",
-                        //     "/aaa/111": "某1", "/aaa/222": "某2", "/aaa/333": "某3",
-                        //     "/aaa/444": "某4", "/aaa/555": "某5", "/aaa/666": "某6"
-                        // }}
-                        tabOnClose={(item, index, arr, pathname, toNewPathName) => {
-                            removeByKeyItemSession("tab", "path", item.path);
-                            // console.log(toNewPathName)
-                            setExpandMenuName(e => {
-                                //#region 處理當前應被標記與開啟的父層
-                                let menuNameAndSubUrl = getParseItemLocalStorage("MenuNameAndSubUrl")
-                                let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl")) ?? []
-                                let res = [];
 
-                                keys.forEach(
-                                    (item) => {
-                                        if (menuNameAndSubUrl[item].containAll(toNewPathName)) {
-                                            res = [...res, item]
-                                        }
-                                    }
-                                )
-
-                                return [...res]
-                                //#endregion
-                            })
-                        }}
-                        tabOnClick={(url) => {
-                            setExpandMenuName(e => {
-                                //#region 處理當前應被標記與開啟的父層
-                                let menuNameAndSubUrl = getParseItemLocalStorage("MenuNameAndSubUrl")
-                                let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl")) ?? []
-                                let res = [];
-
-                                keys.forEach(
-                                    (item) => {
-                                        if (menuNameAndSubUrl[item].containAll(url)) {
-                                            res = [...res, item]
-                                        }
-                                    }
-                                )
-
-                                return [...res]
-                                //#endregion
-                            })
-                        }}
-                        theme={layout.laptopBackstageTopMenuBar(Collapse)}
-                    />
+                    </Container>
                 </>
             }
 
             {/* 大於1024 與 小於1440的畫面 (laptop)*/}
             {(width >= 1024 && width < 1440) &&
                 <>
-                    <BackstageLeftSideMenuBar baseDefaultTheme={"DefaultTheme"} collapse={true}  // Collapse
-                        logo={<Logo style={layout.laptopBackstageLeftSideMenuBarLogo(true)} />}  // Collapse
-                        logoText={
-                            <Text
-                                baseDefaultTheme={"TextDefaultTheme"}
-                                theme={layout.laptopBackstageLeftSideMenuBarLogoText}
-                            >
-                                屏東派車管理系統
-                        </Text>
-                        }
-                        menuItem={
-                            // Collapse
-                            // true ?
-                            generateThinMenu(getParseItemLocalStorage("ModulesTree"), history, location, ExpandMenuName, setExpandMenuName, IsHoverMenuName, setIsHoverMenuName)
-                            // :
-                            // generateMenu(getParseItemLocalStorage("ModulesTree"), history, location, ExpandMenuName, setExpandMenuName, setDrawerCollapse)
-                        }
-                    />
-                    <BackstageTopMenuBar baseDefaultTheme={"DefaultTheme"} theme={layout.laptopBackstageTopMenuBar(true)}> {/* Collapse */}
-                        <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}>
-                            <BasicButton
-                                baseDefaultTheme={"BasicButtonDefaultTheme"}
-                                theme={layout.laptopBasicButton}
-                                icon={<MenuOpenIcon style={layout.laptopBasicButtonIcon} />}
-                                text={""}
-                            onClick={() => { setDrawerCollapse(false) /* setCollapse(c => !c) */ }}  // Collapse
-                            />
-                            <Text baseDefaultTheme={"TextDefaultTheme"} theme={layout.laptopPageText}>
-                                {/* 預設頁面/預設功能 */}
-                                {pageTextUrlMapping[location.pathname]}
-                            </Text>
-                        </SubContainer>
-                        {/* <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}> */}
-                        {/* 無 Logo */}
-                        {/* </SubContainer> */}
-
-
-                        <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}>
-
-                            {/* 選擇可訪問組織 DropDown */}
-                            <DropDown
-                                placement={"bottomRight"}
-                                dropDownItem={
-                                    <>
-                                        {/* 選擇可訪問組織 DropDown 容器 */}
-                                        <BasicContainer
-                                            baseDefaultTheme={"BasicContainerDefaultTheme"}
-                                            height={(getParseItemLocalStorage("Orgs") ?? []).length}
-                                            theme={layout.laptopUseOrgDropDownContainer}
-                                        >
-                                            <ScrollBar
-                                                basedefaulttheme={"DefaultTheme"}
-                                                className={`collapseMenuAreaScrollBar`}
-                                                autoHide={true}
-                                                theme={layout.laptopUseOrgScrollBar}
-                                            >
-                                                {/* DropDown 項目容器 */}
-                                                <BasicContainer
-                                                    baseDefaultTheme={"DefaultTheme"}
-                                                    theme={layout.laptopDropDownItemContainer}>
-                                                    {/* DropDown 子項目 */}
-                                                    {(getParseItemLocalStorage("Orgs") ?? []).map((item, index) => {
-                                                        return (
-                                                            <React.Fragment key={index}>
-                                                                <Text
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    theme={layout.laptopDropDownSubItemContainer}
-                                                                    onClick={() => {
-                                                                        setStringifyItemLocalStorage("UseOrg", { id: item?.id, name: item?.name })
-                                                                        Switch();
-                                                                    }}
-                                                                >
-                                                                    {item?.name}
-                                                                    {getParseItemLocalStorage("UseOrg")?.name === item?.name &&
-                                                                        <Check style={{
-                                                                            position: "relative",
-                                                                            left: "8px"
-                                                                        }} />
-                                                                    }
-                                                                </Text>
-                                                            </React.Fragment>
-                                                        )
-                                                    })}
-                                                </BasicContainer>
-                                            </ScrollBar>
-                                        </BasicContainer>
-                                    </>
-                                }
-                            >
-                                <Org style={{ position: "relative", right: "32px", cursor: "pointer" }} />
-                            </DropDown>
-
-                            <DropDown
-                                dropDownItem={
-                                    <>
-                                        {/* DropDown 項目容器 */}
-                                        <BasicContainer
-                                            baseDefaultTheme={"DefaultTheme"}
-                                            theme={layout.laptopDropDownItemContainer}>
-                                            {/* DropDown 子項目 */}
-                                            <Text
-                                                baseDefaultTheme={"DefaultTheme"}
-                                                theme={layout.laptopDropDownSubItemContainer}
-                                                onClick={() => {
-                                                    modalsService.infoModal.warn({
-                                                        iconRightText: "是否要登出?",
-                                                        yes: true,
-                                                        yesText: "確認",
-                                                        no: true,
-                                                        noText: "取消",
-                                                        // autoClose: true,
-                                                        backgroundClose: false,
-                                                        yesOnClick: (e, close) => {
-                                                            clearLocalStorage();
-                                                            clearSession();
-                                                            globalContextService.clear();
-                                                            Switch();
-                                                            close();
-                                                        }
-                                                    })
-                                                }}
-                                            >
-                                                登出
-                                        </Text>
-                                        </BasicContainer>
-                                    </>
-                                }>
-
-                                <Text baseDefaultTheme={"TextDefaultTheme"} theme={layout.laptopUserNameText}>
-                                    {/* 管理員 */}
-                                    {getParseItemLocalStorage("UserName")}
-                                </Text>
-                            </DropDown>
-
-                        </SubContainer>
-                    </BackstageTopMenuBar>
-
-                    <LeftSideDrawer
-                        baseDefaultTheme={"DefaultTheme"}
-                        collapse={DrawerCollapse}
-                        containerEvent={{ onClick: () => { setDrawerCollapse(true) } }}
+                    {/* 標題列容器 Laptop */}
+                    <Container
+                        theme={layout.titleBarContainerLaptop}
                     >
-                        {/* logo 區 */}
-                        <BasicContainer baseDefaultTheme={"BasicContainerDefaultTheme"} theme={layout.basicLogoArea} >
-                            <Logo style={layout.basicLogo} />
-                            <Text baseDefaultTheme={"TextDefaultTheme"} theme={layout.basicLogiText} >
-                                屏東派車管理系統
-                            </Text>
-                        </BasicContainer>
-                        {/* Menu區 */}
-                        <ScrollBar
-                            basedefaulttheme={"DefaultTheme"}
-                            className={`collapseMenuAreaScrollBar`}
-                            autoHide={true}
-                            theme={layout.menuAreaScrollBar}
+                        {/* Logo容器 Laptop */}
+                        <SubContainer
+                            theme={layout.titleBarLogoContainerLaptop}
                         >
-                            <BasicContainer
-                                {...props.logoAreaEvent}
-                                className={`collapseMenuArea`}
-                                baseDefaultTheme={"BasicContainerDefaultTheme"}
-                                theme={layout.menuArea}
+                            {/* Logo ICON Laptop */}
+                            <LaptopLogo style={layout.titleBarLogoIconLaptop} />
+                        </SubContainer>
+
+                        {/* Tab 容器 Laptop */}
+                        <SubContainer
+                            theme={layout.titleBarTabContainerLaptop}
+                        >
+                            {/* Tab 次容器 Laptop */}
+                            <Container
+                                theme={layout.titleBarTabSubContainerLaptop}
                             >
-                                {/* 在這裡遍歷MenuItem */}
-                                {generateMenu(getParseItemLocalStorage("ModulesTree"), history, location, ExpandMenuName, setExpandMenuName, setDrawerCollapse, true)}
+                                {TabMapping("allTabNameLaptop").map((item => {
+                                    return (
+                                        <React.Fragment key={item.path}>
+                                            {/* Tab項目容器 */}
+                                            <BasicContainer
+                                                active={location.pathname === item.path}
+                                                theme={layout.titleBarTabItemContainerLaptop}
+                                                onClick={() => { history.push(item.path) }}
+                                            >
+                                                {item.icon}
+                                                <Text
+                                                    theme={layout.titleBarTabTextLaptop}
+                                                >
+                                                    {item.name}
+                                                </Text>
+
+                                            </BasicContainer>
+                                        </React.Fragment>
+                                    )
+                                }))}
+
+                            </Container>
+                        </SubContainer>
+
+                        {/* 使用者名稱、登出容器 */}
+                        <SubContainer
+                            theme={layout.titleBarUserAndLogoutLaptop}
+                        >
+                            {/* 使用者名稱、登出次容器 */}
+                            <BasicContainer
+                                theme={layout.titleBarUserAndLogoutSubLaptop}
+                            >
+                                {/* 使用者名稱 */}
+                                <Text
+                                    theme={layout.titleBarUserLaptop}
+                                >
+                                    Hi! 王曉明名
+                                </Text>
+                                {/* 使用者名稱 分隔 */}
+                                <Text
+                                    theme={layout.titleBarUserStepLaptop}
+                                >
+                                    |
+                                </Text>
+
+                                {/* 登出 */}
+                                <Text
+                                    theme={layout.titleBarLogoutLaptop}
+                                >
+                                    登出
+                                </Text>
+
                             </BasicContainer>
-                        </ScrollBar>
-                    </LeftSideDrawer>
-
-                    <BackstagePageTabBar
-                        openHistory={getParseItemSession("tab")}
-                        urlMapping={pageTabBarUrlMapping}
-                        // urlMapping={{
-                        //     "/xxx/yyy": "某x", "/aaa/bbb": "某a", "/aaa/ccc": "某c",
-                        //     "/aaa/111": "某1", "/aaa/222": "某2", "/aaa/333": "某3",
-                        //     "/aaa/444": "某4", "/aaa/555": "某5", "/aaa/666": "某6"
-                        // }}
-                        tabOnClose={(item, index, arr, pathname, toNewPathName) => {
-                            removeByKeyItemSession("tab", "path", item.path);
-                            // console.log(toNewPathName)
-                            setExpandMenuName(e => {
-                                //#region 處理當前應被標記與開啟的父層
-                                let menuNameAndSubUrl = getParseItemLocalStorage("MenuNameAndSubUrl")
-                                let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl")) ?? []
-                                let res = [];
-
-                                keys.forEach(
-                                    (item) => {
-                                        if (menuNameAndSubUrl[item].containAll(toNewPathName)) {
-                                            res = [...res, item]
-                                        }
-                                    }
-                                )
-
-                                return [...res]
-                                //#endregion
-                            })
-                        }}
-                        tabOnClick={(url) => {
-                            setExpandMenuName(e => {
-                                //#region 處理當前應被標記與開啟的父層
-                                let menuNameAndSubUrl = getParseItemLocalStorage("MenuNameAndSubUrl")
-                                let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl")) ?? []
-                                let res = [];
-
-                                keys.forEach(
-                                    (item) => {
-                                        if (menuNameAndSubUrl[item].containAll(url)) {
-                                            res = [...res, item]
-                                        }
-                                    }
-                                )
-
-                                return [...res]
-                                //#endregion
-                            })
-                        }}
-                        theme={layout.laptopBackstageTopMenuBar(true)} // Collapse
-                    />
+                        </SubContainer>
+                    </Container>
                 </>
-
             }
 
-
-            {/* 小於等於1024的畫面 (basic) */}
-            {
-                width < 1024 &&
+            {/* 大於768 與 小於1024的畫面 (Tablet)*/}
+            {(width >= 768 && width < 1024) &&
                 <>
-                    <BackstageTopMenuBar baseDefaultTheme={"DefaultTheme"} >
-                        <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}>
-                            <BasicButton
-                                baseDefaultTheme={"BasicButtonDefaultTheme"}
-                                theme={layout.basicBasicButton}
-                                icon={<MenuOpenIcon style={layout.basicBasicButtonIcon} />}
-                                text={""}
-                                onClick={() => { setDrawerCollapse(c => !c) }} />
-                            <Text baseDefaultTheme={"TextDefaultTheme"} theme={layout.basicPageText}>
-                                {/* 預設頁面/預設功能 */}
-                                {pageTextUrlMapping[location.pathname]}
+                    {/* 標題列容器 Tablet */}
+                    <Container
+                        theme={layout.titleBarContainerTablet}
+                    >
+                        {/* Logo容器 Tablet */}
+                        <SubContainer
+                            theme={layout.titleBarLogoContainerTablet}
+                        >
+                            {/* Logo ICON Tablet */}
+                            <TabletLogo style={layout.titleBarLogoIconTablet} />
+                        </SubContainer>
+
+                        {/* Tab 容器 Tablet */}
+                        <SubContainer
+                            theme={layout.titleBarTabContainerTablet}
+                        >
+                            {/* Tab 次容器 Tablet */}
+                            <Container
+                                theme={layout.titleBarTabSubContainerTablet}
+                            >
+                                {TabMapping("allTabNameTablet").map((item => {
+                                    return (
+                                        <React.Fragment key={item.path}>
+                                            {/* Tab項目容器 */}
+                                            <BasicContainer
+                                                active={location.pathname === item.path}
+                                                theme={layout.titleBarTabItemContainerTablet}
+                                                onClick={() => { history.push(item.path) }}
+                                            >
+                                                {item.icon}
+                                                <Text
+                                                    theme={layout.titleBarTabTextTablet}
+                                                >
+                                                    {item.name}
+                                                </Text>
+
+                                            </BasicContainer>
+                                        </React.Fragment>
+                                    )
+                                }))}
+
+                            </Container>
+                        </SubContainer>
+
+                        {/* 使用者名稱、登出容器 */}
+                        <SubContainer
+                            theme={layout.titleBarUserAndLogoutTablet}
+                        >
+                            {/* 使用者名稱、登出次容器 */}
+                            <BasicContainer
+                                theme={layout.titleBarUserAndLogoutSubTablet}
+                            >
+                                {/* 使用者名稱 */}
+                                <Text
+                                    theme={layout.titleBarUserTablet}
+                                >
+                                    Hi! 王曉明名
+                                </Text>
+                                {/* 使用者名稱 分隔 */}
+                                <Text
+                                    theme={layout.titleBarUserStepTablet}
+                                >
+                                    |
+                                </Text>
+
+                                {/* 登出 */}
+                                <Text
+                                    theme={layout.titleBarLogoutTablet}
+                                >
+                                    <LogoutLaptop style={layout.titleBarLogoutIconTablet} />
+                                    登出
+                                </Text>
+
+                            </BasicContainer>
+                        </SubContainer>
+                    </Container>
+                </>
+            }
+
+            {/* 小於等於1024的畫面 (MobileM) */}
+            { width < 768 &&
+                <>
+                    {/* 標題列容器 MobileM */}
+                    <Container
+                        theme={layout.titleBarContainerMobileM}
+                    >
+                        {/* 側邊欄按鈕容器 */}
+                        <SubContainer
+                            theme={layout.titleBarLeftSIdeBtnContainerMobileM}
+                        >
+                            <MobileMMenu onClick={() => { setDrawerCollapse(false) }} />
+                        </SubContainer>
+
+                        {/* Logo容器 */}
+                        <SubContainer
+                            theme={layout.titleBarLogoContainerMobileM}
+                        >
+                            <MobileMLogo />
+                        </SubContainer>
+
+                        {/* 登入容器 */}
+                        <SubContainer
+                            theme={layout.titleBarLoginContainerMobileM}
+                        >
+                            {/* 登入 */}
+                            <Text
+                                theme={layout.titleBarLoginMobileM}
+                            >
+                                <LogoutLaptop style={layout.titleBarLoginIconMobileM} />
+                                    登入
                             </Text>
                         </SubContainer>
-                        <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}>
-                            {/* Logo 不做在中間了，如果要在打開註解*/}
-                            {/* <Logo style={{ margin: `0.25rem 0.5rem 0 0rem`, height: "100%", width: "1.5rem" }} />
-                            {width >= 520 &&
-                                <Text baseDefaultTheme={"TextDefaultTheme"}
-                                    theme={{
-                                        basic: (style) => ({
-                                            ...style,
-                                            fontSize: "1rem",
-                                            fontWeight: "bold",
-                                            top: "-.4rem",
-                                            display: "inline-block",
-                                            color: "#fff"
-                                        })
-                                    }}
-                                >1966照護網 靈糧堂
-                                </Text>
-                            } */}
-                        </SubContainer>
-                        <SubContainer baseDefaultTheme={"SubContainerDefaultTheme"}>
+                    </Container>
 
-                            {/* 選擇可訪問組織 DropDown */}
-                            <DropDown
-                                placement={"bottomRight"}
-                                dropDownItem={
-                                    <>
-                                        {/* 選擇可訪問組織 DropDown 容器 */}
-                                        <BasicContainer
-                                            baseDefaultTheme={"BasicContainerDefaultTheme"}
-                                            height={(getParseItemLocalStorage("Orgs") ?? []).length}
-                                            theme={layout.basicUseOrgDropDownContainer}
-                                        >
-                                            <ScrollBar
-                                                basedefaulttheme={"DefaultTheme"}
-                                                className={`collapseMenuAreaScrollBar`}
-                                                autoHide={true}
-                                                theme={layout.basicUseOrgScrollBar}
-                                            >
-                                                {/* DropDown 項目容器 */}
-                                                <BasicContainer
-                                                    baseDefaultTheme={"DefaultTheme"}
-                                                    theme={layout.laptopDropDownItemContainer}>
-                                                    {/* DropDown 子項目 */}
-                                                    {(getParseItemLocalStorage("Orgs") ?? []).map((item, index) => {
-                                                        return (
-                                                            <React.Fragment key={index}>
-                                                                <Text
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    theme={layout.laptopDropDownSubItemContainer}
-                                                                    onClick={() => {
-                                                                        setStringifyItemLocalStorage("UseOrg", { id: item?.id, name: item?.name })
-                                                                        Switch();
-                                                                    }}
-                                                                >
-                                                                    {item?.name}
-                                                                    {getParseItemLocalStorage("UseOrg")?.name === item?.name &&
-                                                                        <Check style={{
-                                                                            position: "relative",
-                                                                            left: "8px"
-                                                                        }} />
-                                                                    }
-                                                                </Text>
-                                                            </React.Fragment>
-                                                        )
-                                                    })}
-                                                </BasicContainer>
-                                            </ScrollBar>
-                                        </BasicContainer>
-                                    </>
-                                }
-                            >
-                                <Org style={{ position: "relative", right: "32px", cursor: "pointer" }} />
-                            </DropDown>
-
-                            <DropDown
-                                dropDownItem={
-                                    <>
-                                        {/* DropDown 項目容器 */}
-                                        <BasicContainer
-                                            baseDefaultTheme={"DefaultTheme"}
-                                            theme={layout.dropDownItemContainer}>
-                                            {/* DropDown 子項目 */}
-                                            <Text
-                                                baseDefaultTheme={"DefaultTheme"}
-                                                theme={layout.dropDownSubItemContainer}
-                                                onClick={() => {
-                                                    modalsService.infoModal.warn({
-                                                        iconRightText: "是否要登出?",
-                                                        yes: true,
-                                                        yesText: "確認",
-                                                        no: true,
-                                                        noText: "取消",
-                                                        // autoClose: true,
-                                                        backgroundClose: false,
-                                                        yesOnClick: (e, close) => {
-                                                            clearLocalStorage();
-                                                            clearSession();
-                                                            globalContextService.clear();
-                                                            Switch();
-                                                            close();
-                                                        }
-                                                    })
-                                                }}
-                                            >
-                                                登出
-                                            </Text>
-                                        </BasicContainer>
-                                    </>
-                                }>
-
-                                <Text baseDefaultTheme={"TextDefaultTheme"} theme={layout.basicUserNameText}>
-                                    {/* 管理員 */}
-                                    {getParseItemLocalStorage("UserName")}
-                                </Text>
-                            </DropDown>
-
-                        </SubContainer>
-                    </BackstageTopMenuBar>
+                    {/* LeftSideDrawer 樣式 MobileM */}
                     <LeftSideDrawer
                         baseDefaultTheme={"DefaultTheme"}
                         collapse={DrawerCollapse}
                         containerEvent={{ onClick: () => { setDrawerCollapse(true) } }}
+                        theme={layout.leftSideDrawerMobileM}
                     >
-                        {/* logo 區 */}
-                        <BasicContainer baseDefaultTheme={"BasicContainerDefaultTheme"} theme={layout.basicLogoArea} >
-                            <Logo style={layout.basicLogo} />
-                            <Text baseDefaultTheme={"TextDefaultTheme"} theme={layout.basicLogiText} >
-                                屏東派車管理系統
+                        {/* 若已登入，則秀登出按鈕 */}
+                        <BasicContainer
+                            theme={{
+                                basic: (style, props) => ({
+                                    ...style,
+                                    position: "absolute",
+                                    bottom: "10px",
+                                    textAlign: "center",
+                                    width: "100%"
+                                })
+                            }}
+                        >
+                            <Text
+                                theme={{
+                                    basic: (style, props) => ({
+                                        ...style,
+                                        fontSize: "16px",
+                                        lineHeight: "24px",
+                                        textAlign: "center",
+                                        color: "#4DB8BE"
+                                    })
+                                }}
+                            >
+                                Hi! 王曉明名
+                            </Text>
+
+                            {/* 登出 */}
+                            <Text
+                                theme={layout.titleBarLogoutMobileM}
+                            >
+                                <LogoutLaptop style={layout.titleBarLogoutIconMobileM} />
+                                登出
                             </Text>
                         </BasicContainer>
-                        {/* Menu區 */}
+
+                        {/* Menu區 MobileM */}
                         <ScrollBar
                             basedefaulttheme={"DefaultTheme"}
                             className={`collapseMenuAreaScrollBar`}
                             autoHide={true}
-                            theme={layout.menuAreaScrollBar}
+                            theme={layout.menuAreaScrollBarMobileM}
                         >
                             <BasicContainer
                                 {...props.logoAreaEvent}
@@ -698,60 +507,61 @@ export const Layout = (props) => {
                                 theme={layout.menuArea}
                             >
                                 {/* 在這裡遍歷MenuItem */}
-                                {generateMenu(getParseItemLocalStorage("ModulesTree"), history, location, ExpandMenuName, setExpandMenuName, setDrawerCollapse, true)}
+                                {generateMenu([
+                                    {
+                                        children: [],
+                                        item: {
+                                            id: "79124b7c-12ca-4ce6-802e-15ee192aac5b",
+                                            name: "聯繫客服",
+                                            parentId: null,
+                                            parentName: "根節點",
+                                            sortNo: 3,
+                                            status: 0,
+                                            url: "/Contact",
+                                        }
+                                    },
+                                    {
+                                        children: [],
+                                        item: {
+                                            id: "77777777-33ca-6cc6-802e-16ee172aaaaa",
+                                            name: "常見問題",
+                                            parentId: null,
+                                            parentName: "根節點",
+                                            sortNo: 3,
+                                            status: 0,
+                                            url: "/QAndA",
+                                        }
+                                    },
+                                ], history, location, ExpandMenuName, setExpandMenuName, setDrawerCollapse, true)}
                             </BasicContainer>
                         </ScrollBar>
                     </LeftSideDrawer>
-                    <BackstagePageTabBar
-                        openHistory={getParseItemSession("tab")}
-                        urlMapping={pageTabBarUrlMapping}
-                        // urlMapping={{
-                        //     "/xxx/yyy": "某x", "/aaa/bbb": "某a", "/aaa/ccc": "某c",
-                        //     "/aaa/111": "某1", "/aaa/222": "某2", "/aaa/333": "某3",
-                        //     "/aaa/444": "某4", "/aaa/555": "某5", "/aaa/666": "某6"
-                        // }}
-                        tabOnClose={(item, index, arr, pathname, toNewPathName) => {
-                            removeByKeyItemSession("tab", "path", item.path);
-                            // console.log(toNewPathName)
-                            setExpandMenuName(e => {
-                                //#region 處理當前應被標記與開啟的父層
-                                let menuNameAndSubUrl = getParseItemLocalStorage("MenuNameAndSubUrl")
-                                let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl")) ?? []
-                                let res = [];
 
-                                keys.forEach(
-                                    (item) => {
-                                        if (menuNameAndSubUrl[item].containAll(toNewPathName)) {
-                                            res = [...res, item]
-                                        }
-                                    }
-                                )
+                    {/* 固定底部容器 */}
+                    <Container
+                        theme={layout.titleBarFixedBottomMobileM}
+                    >
+                        {TabMapping("allTabNameMobileMFixBottom").map((item => {
+                            return (
+                                <React.Fragment key={item.path}>
+                                    {/* Tab項目容器 */}
+                                    <BasicContainer
+                                        active={location.pathname === item.path}
+                                        theme={layout.titleBarTabItemContainerMobileM}
+                                        onClick={() => { history.push(item.path) }}
+                                    >
+                                        {item.icon}
+                                        <Text
+                                            theme={layout.titleBarTabTextMobileM}
+                                        >
+                                            {item.name}
+                                        </Text>
 
-                                return [...res]
-                                //#endregion
-                            })
-                        }}
-                        tabOnClick={(url) => {
-                            setExpandMenuName(e => {
-                                //#region 處理當前應被標記與開啟的父層
-                                let menuNameAndSubUrl = getParseItemLocalStorage("MenuNameAndSubUrl")
-                                let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl")) ?? []
-                                let res = [];
-
-                                keys.forEach(
-                                    (item) => {
-                                        if (menuNameAndSubUrl[item].containAll(url)) {
-                                            res = [...res, item]
-                                        }
-                                    }
-                                )
-
-                                return [...res]
-                                //#endregion
-                            })
-                        }}
-                        theme={layout.basicBackstagePageTabBar(Collapse)}
-                    />
+                                    </BasicContainer>
+                                </React.Fragment >
+                            )
+                        }))}
+                    </Container>
                 </>
             }
         </>
@@ -868,7 +678,7 @@ const generateMenu = (menuData, history, location, ExpandMenuName, setExpandMenu
                         if (menuData.item.url.trim() !== "/") {
                             // 若是次層目錄，則跳轉路由 
                             if (location.pathname !== menuData.item.url.trim()) {//(路由不變不跳轉)
-                                pushAndNotExsistItemSession("tab", "path", menuData.item.url, { title: menuData.item.name, path: menuData.item.url })
+                                pushAndNotExsistItemSession("Ctab", "path", menuData.item.url, { title: menuData.item.name, path: menuData.item.url })
                                 // console.log(widthLessThan1024)
                                 widthLessThan1024 && setDrawerCollapse(true);
                                 history.push(menuData.item.url.trim())
@@ -1170,7 +980,7 @@ const generateThinMenu = (menuData, history, location, ExpandMenuName, setExpand
                                 if (menuData.item.url.trim() !== "/") {
                                     // 若是次層目錄，則跳轉路由
                                     if (location.pathname !== menuData.item.url.trim()) {//(路由不變不跳轉)
-                                        pushAndNotExsistItemSession("tab", "path", menuData.item.url, { title: menuData.item.name, path: menuData.item.url })
+                                        pushAndNotExsistItemSession("Ctab", "path", menuData.item.url, { title: menuData.item.name, path: menuData.item.url })
                                         history.push(menuData.item.url.trim())
                                     }
                                 } else {
@@ -1204,7 +1014,7 @@ const generateThinMenu = (menuData, history, location, ExpandMenuName, setExpand
                                 // setIsHoverMenuName(true);
                                 // if (menuData.item.url.trim() !== "/") {
                                 //     // 若是次層目錄，則跳轉路由
-                                //     pushAndNotExsistItemSession("tab", "path", menuData.item.url, { title: menuData.item.name, path: menuData.item.url })
+                                //     pushAndNotExsistItemSession("Ctab", "path", menuData.item.url, { title: menuData.item.name, path: menuData.item.url })
                                 //     history.push(menuData.item.url.trim())
                                 // } else 
 
@@ -1364,7 +1174,7 @@ const generateThinMenu = (menuData, history, location, ExpandMenuName, setExpand
                             if (menuData.item.url.trim() !== "/") {
                                 // 若是次層目錄，則跳轉路由
                                 if (location.pathname !== menuData.item.url.trim()) {//(路由不變不跳轉)
-                                    pushAndNotExsistItemSession("tab", "path", menuData.item.url, { title: menuData.item.name, path: menuData.item.url })
+                                    pushAndNotExsistItemSession("Ctab", "path", menuData.item.url, { title: menuData.item.name, path: menuData.item.url })
                                     history.push(menuData.item.url.trim())
                                 }
                                 setIsHoverMenuName([])// 點擊具路由分頁後關閉分頁框

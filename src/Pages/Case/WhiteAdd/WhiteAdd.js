@@ -137,7 +137,7 @@ export const WhiteAdd = (props) => {
             fetch(`${APIUrl}users/getclient?id=${urlParams.get("userId")}`, // users/getclient?id=6717458081668177920
                 {
                     headers: {
-                        "X-Token": getParseItemLocalStorage("Auth"),
+                        "X-Token": getParseItemLocalStorage("CAuth"),
                         "content-type": "application/json; charset=utf-8",
                     },
                     method: "GET"
@@ -211,7 +211,7 @@ export const WhiteAdd = (props) => {
         fetch(`${APIUrl}selfpayusers/add`,
             {
                 headers: {
-                    "X-Token": getParseItemLocalStorage("Auth"),
+                    "X-Token": getParseItemLocalStorage("CAuth"),
                     "content-type": "application/json; charset=utf-8",
                 },
                 method: "POST",
