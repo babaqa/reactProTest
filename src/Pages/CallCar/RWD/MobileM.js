@@ -1,16 +1,83 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Context } from '../../../Store/Store'
+import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { MainPageContainer } from '../../../ProjectComponent';
+import { Context } from '../../../Store/Store'
+import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
+import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
+import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
+import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
+import { useHistory } from 'react-router-dom';
+
+import { CaseCallCarComponent } from '../CaseCallCarComponent/CaseCallCarComponent'
+import { BusCallCarComponent } from '../BusCallCarComponent/BusCallCarComponent'
+import { WhiteCallCarComponent } from '../WhiteCallCarComponent/WhiteCallCarComponent'
 
 const MobileMBase = (props) => {
+
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { login: { rwd: { mobileM } } } } = Theme;
+    const { pages: { callCar: { rwd: { mobileM } } } } = Theme;
+    let history = useHistory()
+
+    //#region 分頁映射
+    const tabMap = (key) => {
+        switch (key) {
+            case "tabUseComponent":
+                return (
+                    {
+                        "長照": <CaseCallCarComponent />,
+                        "共享車隊": <BusCallCarComponent />,
+                        "巴士": <WhiteCallCarComponent />
+                    }
+                )
+            case "tabArray":
+            default:
+                return ["長照", "共享車隊", "巴士"]
+        }
+
+    }
+    //#endregion
 
     return (
         <>
-            <MainPageContainer>
-                目前尚無設計稿
+            <MainPageContainer
+                theme={mobileM.mainPageContainer}
+                outSideTopComponent={
+                    <>
+                        {/* 標題列 */}
+                        <MainPageTitleBar
+                            bascDefaultTheme={"DefaultTheme"}
+                            titleText={"預約訂車"}
+                            theme={mobileM.titleBar}
+                            // onSubmit={(e)=>console.log(e)}
+                            centerContent={
+                                <>
+                                    <BasicContainer>
+                                        {tabMap().map((item, index) => {
+                                            return (
+                                                <React.Fragment key={index}>
+                                                    <Text
+                                                        onClick={() => { props.setNowTab(item) }}
+                                                        isActive={props.nowTab === item}
+                                                        theme={mobileM.titleBarCallCarTab}
+                                                    >
+                                                        {item}
+                                                    </Text>
+                                                </React.Fragment>
+                                            )
+                                        })}
+                                    </BasicContainer>
+                                </>
+                            }
+                        >
+                            {/* 按鈕容器 */}
+                            <SubContainer baseDefaultTheme={"DefaultTheme"}>
+                            </SubContainer>
+                        </MainPageTitleBar>
+                    </>
+                }
+            >
+                {/* 切換使用的組件 */}
+                {tabMap("tabUseComponent")?.[props.nowTab]}
+
             </MainPageContainer>
         </>
     )

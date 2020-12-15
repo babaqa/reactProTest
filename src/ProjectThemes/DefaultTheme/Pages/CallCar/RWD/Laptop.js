@@ -1,20 +1,148 @@
 export default {
+    //#region MainPageContainer 背景色調節
+    mainPageContainer: {
+        laptopLOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "24px 150px" // 標題列的padding
+                }
+            }
+        },
+        laptopLOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        laptopLContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 0 188px" //188 是授權圖高度
+                }
+            }
+        },
+
+
+        laptopOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "24px 150px" // 標題列的padding
+                }
+            }
+        },
+        laptopOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        laptopContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 0 188px" //188 是授權圖高度
+                }
+            }
+        },
+
+        tabletOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "24px 150px" // 標題列的padding
+                }
+            }
+        },
+        tabletOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        tabletContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 0 188px" //188 是授權圖高度
+                }
+            }
+        },
+        basicOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        basicOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        basicContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+    },
+    //#endregion
+
     //#region 標題列
     titleBar: {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "96px"
+                width: "120px"
             })
         },
         rightContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "640px"
+                width: "200px"
             })
         }
     },
     //#endregion
+
+    //#region 標題列 預約訂車分頁
+    titleBarCallCarTab: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            margin: "0 16px",
+            lineHeight: "32px",
+            height: "46px",
+            fontSize: "14px",
+            cursor: "pointer",
+            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
+            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
+        }),
+    },
+    //#endregion
+
+
 
     //#region 標題新增按鈕
     titleAddButton: {
@@ -53,8 +181,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "912px",
-                height: "700px"
+                width: "1152px",
+                height: "823px"
             }),
             tablet: (style, props) => ({
             }),
@@ -73,8 +201,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "864px",
-                height: "544px"
+                width: "1104px",
+                height: "667px"
             }),
             tablet: (style, props) => ({
             }),
@@ -121,8 +249,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "912px",
-                height: "700px"
+                width: "1152px",
+                height: "823px"
             }),
             tablet: (style, props) => ({
             }),
@@ -141,8 +269,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "864px",
-                height: "544px"
+                width: "1104px",
+                height: "667px"
             }),
             tablet: (style, props) => ({
             }),
@@ -152,4 +280,5 @@ export default {
         })
     },
     //#endregion
+
 }
