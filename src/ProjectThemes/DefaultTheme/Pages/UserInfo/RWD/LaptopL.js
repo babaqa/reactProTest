@@ -74,7 +74,7 @@ export default {
             return {
                 ...style,
                 padding: "24px 12px",
-                margin: "0 0 24px 0",
+                margin: "16px 0 24px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
                 height: "174px",
@@ -131,6 +131,231 @@ export default {
         focus: (style, props) => ({})
     },
     //#endregion
+    //#region 新增修改密碼彈窗
+    //#region Modal 樣式
+    editPwdModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "420px",
+                height: "460px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+    //#region 修改密碼彈窗容器
+    editPwdFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "372px",
+                height: "304px",
+                // padding: "24px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: (style, props) => ({
+            ...style,
+        })
+    },
+    //#endregion
+    //#region 修改密碼提示文字
+    editPwdTip: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
+    },
+    //#endregion
+    //#region 舊密碼 OldPwd
+    oldPwd: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(12),
+                margin: "24px 0 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#region 新密碼 NewPwd 
+    newPwd: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#region 確認新密碼 ConfirmPwd
+    confirmPwd: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: 0
+                // minHeight: "24px",
+                // height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#region 密碼 左方圖標
+    pwdLeftIcon: {
+        position: "absolute",
+        height: "100%",
+        left: "12px",
+        cursor: "pointer",
+        top: 0,
+    },
+    //#endregion
+    //#region 密碼 右方圖標
+    pwdRightIcon: {
+        position: "absolute",
+        height: "100%",
+        right: "12px",
+        cursor: "pointer",
+        top: 0,
+    },
+    //#endregion
+
     //#region 修改手機按鈕
     editPhoneButton: {
         basic: (style) => ({
@@ -152,6 +377,266 @@ export default {
             backgroundColor: "rgba(24, 144, 255 ,0.05)"
         }),
         focus: (style, props) => ({})
+    },
+    //#endregion
+    //#region 新增修改手機彈窗 發送驗證碼
+    //#region Modal 樣式
+    sendVerificationCodeModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "420px",
+                height: "218px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+    //#region 修改手機彈窗容器
+    sendVerificationCodeFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "372px",
+                height: "62px",
+                // padding: "24px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: (style, props) => ({
+            ...style,
+        })
+    },
+    //#endregion
+    //#region 手機號碼 ModalEditCellPhone
+    modalEditCellPhone: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: 0
+                // minHeight: "24px",
+                // height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 新增修改手機彈窗 提交驗證碼
+    //#region Modal 樣式
+    confirmVerificationCodeModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "420px",
+                height: "342px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+    //#region 修改手機彈窗容器
+    confirmVerificationCodeFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "372px",
+                height: "186px",
+                // padding: "24px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: (style, props) => ({
+            ...style,
+        })
+    },
+    //#endregion
+    //#region 提交驗證碼提示文字
+    confirmVerificationCodeTip: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "#1890FF",
+            margin: "0 0 16px"
+        })
+    },
+    //#endregion
+    //#region 重送驗證碼按鈕 (等待倒數中)
+    resendVerificationCodeWaitButton: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                position: "absolute",
+                width: "151px",
+                background: "#f5f5f5",
+                boxShadow: null,//"0px 2px 0px rgba(0, 0, 0, 0.043)",
+                border: "1px solid #d9d9d9",
+                borderRadius: "2px",
+                height: "28px",
+                padding: "0 8px",
+                right: 0
+            }),
+            hover: (style, props) => ({
+                ...style,
+                backgroundColor: "#f5f5f5"
+            })
+        },
+        text: {
+            basic: (style, props) => ({
+                ...style,
+                fontSize: "14px",
+                lineHeight: "28px",
+                top: "-5px"
+            }),
+        }
+    },
+    //#endregion
+    //#region 重送驗證碼按鈕 
+    resendVerificationCodeButton: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                position: "absolute",
+                width: "102px",
+                background: "#FFFFFF",
+                boxShadow: null,//"0px 2px 0px rgba(0, 0, 0, 0.043)",
+                border: "1px solid #d9d9d9",
+                borderRadius: "2px",
+                height: "28px",
+                padding: "0 8px",
+                right: 0
+            }),
+            hover: (style, props) => ({
+                ...style,
+                backgroundColor: "#FFFFFF",
+                borderColor: "#1890FF"
+            })
+        },
+        text: {
+            basic: (style, props) => ({
+                ...style,
+                fontSize: "14px",
+                lineHeight: "28px",
+                top: "-5px",
+                color: "rgba(0,0,0,0.65)"
+            }),
+            hover: (style, props) => ({
+                ...style,
+                color: "#1890FF",
+            })
+        }
+    },
+    //#endregion
+    //#region 驗證碼 ModalVerificationCode 
+    modalVerificationCode: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(12),
+                margin: "24px 0 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: 0
+                // minHeight: "24px",
+                // height: "auto"
+            })
+        }
     },
     //#endregion
 
@@ -529,7 +1014,7 @@ export default {
             return {
                 ...style,
                 padding: "24px 12px",
-                margin: "0 12px 48px 0",
+                // margin: "0 12px 48px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
                 height: "604px",
@@ -586,6 +1071,115 @@ export default {
             backgroundColor: "rgba(24, 144, 255 ,0.05)"
         }),
         focus: (style, props) => ({})
+    },
+    //#endregion
+    //#region 新增額度狀況彈窗
+    //#region Modal 樣式
+    quotaStatusModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "420px",
+                height: "210px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+    //#region 額度狀況彈窗容器
+    quotaStatusFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "372px",
+                height: "54px",
+                // padding: "24px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: (style, props) => ({
+            ...style,
+        })
+    },
+    //#endregion
+    //#region 總額度 標題 
+    totalAmountTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "113px",
+            color: "rgba(0, 0, 0, 0.85)",
+            margin: "0 16px 0 0"
+        })
+    },
+    //#endregion
+    //#region 總額度 內文 
+    totalAmountText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "18px",
+            lineHeight: "24px",
+            color: "#FF7A45",
+        })
+    },
+    //#endregion
+    //#region 使用額度 標題 
+    useQuotaTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "113px",
+            color: "rgba(0, 0, 0, 0.85)",
+            margin: "0 16px 0 0"
+        })
+    },
+    //#endregion
+    //#region 使用額度 內文 
+    useQuotaText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "18px",
+            lineHeight: "24px",
+            color: "#FF7A45",
+        })
+    },
+    //#endregion
+    //#region 剩餘額度 標題 
+    remainingAmountTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "114px",
+            color: "rgba(0, 0, 0, 0.85)",
+        })
+    },
+    //#endregion
+    //#region 剩餘額度 內文 
+    remainingAmountText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "18px",
+            lineHeight: "24px",
+            color: "#FF7A45",
+        })
     },
     //#endregion
 
