@@ -28,6 +28,11 @@ import busStop from './Pages/BusRouteAndStop/BusStop/BusStop'
 import whiteConsole from './Pages/Dispatch/WhiteConsole/WhiteConsole'
 import busConsole from './Pages/Dispatch/BusConsole/BusConsole'
 
+import callCar from './Pages/CallCar/CallCar'
+import caseCallCarComponent from './Pages/CallCar/CaseCallCarComponent/CaseCallCarComponent'
+import busCallCarComponent from './Pages/CallCar/BusCallCarComponent/BusCallCarComponent'
+import whiteCallCarComponent from './Pages/CallCar/WhiteCallCarComponent/WhiteCallCarComponent'
+
 export default {
     layout,
     pages: {
@@ -79,5 +84,13 @@ export default {
         busConsole, // 幸福巴士調度台
         //#endregion
 
+        callCar: {
+            ...callCar,
+            component: {
+                caseCallCarComponent,
+                busCallCarComponent,
+                whiteCallCarComponent,
+            }
+        },
     }
 }

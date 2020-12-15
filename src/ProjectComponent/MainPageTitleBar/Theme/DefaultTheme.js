@@ -28,7 +28,8 @@ export default {
                 //#endregion
                 //#region 覆寫樣式
                 justifyContent: "space-between",
-                zIndex: 1
+                zIndex: 1,
+                borderBottom: "1px solid #fff",
                 //#endregion
             }
         }
@@ -83,7 +84,7 @@ export default {
             letterSpacing: 'normal',
             //#endregion
             //#region 覆寫樣式
-            color: "rgba(0, 0, 0, 0.85)",
+            color: "rgba(0, 0, 0, 0.65)",
             fontSize: "20px",
             lineHeight: "28px",
             padding: "2px 0",
@@ -95,6 +96,132 @@ export default {
         }
     },
     //#endregion
+
+    //#region 
+    titleTextIcon: {
+        basic: {
+            //#region 基本設置
+            boxSizing: "border-box",
+            // display: 需要用就傳
+            // flex: 需要用就傳
+            //#endregion
+            //#region 定位
+            position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            //#endregion
+            //#region 寬高
+            // width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            // height: "auto",
+            lineHeight: "normal",
+            //#endregion
+            //#region 背景
+            backgroundColor: "#FFA940",
+            backgroundImage: "none",
+            backgroundPosition: "0% 0%",
+            backgroundRepeat: "repeat",
+            backgroundSize: "auto auto",
+            //#endregion
+            //#region 游標
+            cursor: "auto",
+            //#endregion
+            //#region 字體
+            whiteSpace: "normal",
+            textAlign: 'initial',
+            fontSize: "medium",
+            color: '#000',
+            //#endregion
+            borderRadius: "4px",
+            width: "16px",
+            height: "16px",
+            display: "inline-block",
+            margin: "0 4px 0 0",
+        },
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
+
+    //#region 
+    titleTextIcon2: {
+        basic: {
+            //#region 基本設置
+            boxSizing: "border-box",
+            // display: 需要用就傳
+            // flex: 需要用就傳
+            //#endregion
+            //#region 定位
+            position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            //#endregion
+            //#region 寬高
+            // width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            // height: "auto",
+            lineHeight: "normal",
+            //#endregion
+            //#region 背景
+            backgroundColor: "#FFA940",
+            backgroundImage: "none",
+            backgroundPosition: "0% 0%",
+            backgroundRepeat: "repeat",
+            backgroundSize: "auto auto",
+            //#endregion
+            //#region 游標
+            cursor: "auto",
+            //#endregion
+            //#region 字體
+            whiteSpace: "normal",
+            textAlign: 'initial',
+            fontSize: "medium",
+            color: '#000',
+            //#endregion
+            borderRadius: "4px",
+            width: "16px",
+            height: "16px",
+            display: "inline-block",
+            margin: "0 0 0 4px",
+        },
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
+
+    //#region 右側內容容器
+    centerContainer: {
+        basic: (style, props) => ({
+            //#region 基本設置
+            flexGrow: "0",
+            maxWidth: "none",
+            flexBasis: "auto",
+            boxSizing: "border-box",
+            occupy: (c) => ({ maxWidth: c * 100 / 12 + '%', flexBasis: c * 100 / 12 + '%' }),//調用時請使用如 ...(style.occupy(10))
+            position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            //width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            height: "auto",
+            lineHeight: "normal",
+            backgroundColor: "transparent",
+            backgroundImage: "none",
+            backgroundPosition: "0% 0%",
+            backgroundRepeat: "repeat",
+            backgroundSize: "auto auto",
+            cursor: "auto",
+            whiteSpace: "normal",
+            textAlign: 'initial',
+            fontSize: "medium",
+            color: '#000',
+            //#endregion
+            //#region 覆寫樣式
+            width: "請計算內容總寬度"
+            //#endregion
+        }),
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
+
     //#region 右側內容容器
     rightContainer: {
         basic: (style, props) => ({

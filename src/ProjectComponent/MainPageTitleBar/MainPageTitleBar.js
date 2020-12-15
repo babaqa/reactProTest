@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Text, SubContainer, FormContainer, FormRow } from '../../Components';
+import { Container, Text, SubContainer, FormContainer, FormRow, BasicContainer } from '../../Components';
 import { iterateTheme } from '../../Handlers/ThemeHandler';
 //#region 擴充基本樣式區
 import DefaultTheme from './Theme/DefaultTheme'
@@ -50,9 +50,37 @@ export const MainPageTitleBar = (props) => {
                         baseDefaultTheme={"DefaultTheme"}
                         theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "titleText") }}
                     >
+                        {/* 標題圖標 */}
+                        <BasicContainer
+                            {...props.titleTextIconEvent}
+                            className={`titleTextIcon`}
+                            baseDefaultTheme={"DefaultTheme"}
+                            theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "titleTextIcon") }}
+                        />
+
                         {props.titleText ?? "標題文字"}
+
+                        {/* 標題圖標2 */}
+                        <BasicContainer
+                            {...props.titleTextIcon2Event}
+                            className={`titleTextIcon2`}
+                            baseDefaultTheme={"DefaultTheme"}
+                            theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "titleTextIcon2") }}
+                        />
+
                     </Text>
                 </SubContainer>
+
+                {/* 標題中央內容容器 */}
+                <SubContainer
+                    {...props.centerContainerEvent}
+                    className={`centerContainer`}
+                    baseDefaultTheme={"DefaultTheme"}
+                    theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "centerContainer") }}
+                >
+                    {props.centerContent}
+                </SubContainer>
+
                 {/* 右側內容容器 */}
                 <SubContainer
                     {...props.rightContainerEvent}
