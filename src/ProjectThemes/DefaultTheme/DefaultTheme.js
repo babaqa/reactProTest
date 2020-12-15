@@ -37,6 +37,8 @@ import busStop from './Pages/BusRouteAndStop/BusStop/BusStop'
 import whiteConsole from './Pages/Dispatch/WhiteConsole/WhiteConsole'
 import busConsole from './Pages/Dispatch/BusConsole/BusConsole'
 
+import userInfo from './Pages/UserInfo/UserInfo'
+
 export default {
     layout,
     pages: {
@@ -111,5 +113,8 @@ export default {
         busConsole, // 幸福巴士調度台
         //#endregion
 
+        //#region 用戶資料
+        userInfo,
+        //#endregion
     }
 }
