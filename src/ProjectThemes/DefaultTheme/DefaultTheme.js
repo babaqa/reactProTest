@@ -16,6 +16,7 @@ import busCallCarComponent from './Pages/CallCar/BusCallCarComponent/BusCallCarC
 import whiteCallCarComponent from './Pages/CallCar/WhiteCallCarComponent/WhiteCallCarComponent'
 
 import record from './Pages/Record/Record'
+import userInfo from './Pages/UserInfo/UserInfo'
 import contact from './Pages/Contact/Contact'
 import qAndA from './Pages/QAndA/QAndA'
 import order from './Pages/Order/Order'
@@ -36,8 +37,6 @@ import busStop from './Pages/BusRouteAndStop/BusStop/BusStop'
 
 import whiteConsole from './Pages/Dispatch/WhiteConsole/WhiteConsole'
 import busConsole from './Pages/Dispatch/BusConsole/BusConsole'
-
-import userInfo from './Pages/UserInfo/UserInfo'
 
 export default {
     layout,
@@ -72,6 +71,10 @@ export default {
 
         //#region 搭乘紀錄
         record,
+        //#endregion
+
+        //#region 用戶資料
+        userInfo,
         //#endregion
 
         //#region 聯繫客服
@@ -113,8 +116,5 @@ export default {
         busConsole, // 幸福巴士調度台
         //#endregion
 
-        //#region 用戶資料
-        userInfo,
-        //#endregion
     }
 }

@@ -27,8 +27,8 @@ const LaptopLBase = (props) => {
                         "共享車隊": <BusCallCarComponent />,
                         "巴士": <WhiteCallCarComponent />
                     }
-                )
-            case "tabArray":
+                );
+
             default:
                 return ["長照", "共享車隊", "巴士"]
         }

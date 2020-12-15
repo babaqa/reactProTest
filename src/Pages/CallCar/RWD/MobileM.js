@@ -43,35 +43,23 @@ const MobileMBase = (props) => {
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}
-                        <MainPageTitleBar
-                            bascDefaultTheme={"DefaultTheme"}
-                            titleText={"預約訂車"}
+                        <BasicContainer
                             theme={mobileM.titleBar}
-                            // onSubmit={(e)=>console.log(e)}
-                            centerContent={
-                                <>
-                                    <BasicContainer>
-                                        {tabMap().map((item, index) => {
-                                            return (
-                                                <React.Fragment key={index}>
-                                                    <Text
-                                                        onClick={() => { props.setNowTab(item) }}
-                                                        isActive={props.nowTab === item}
-                                                        theme={mobileM.titleBarCallCarTab}
-                                                    >
-                                                        {item}
-                                                    </Text>
-                                                </React.Fragment>
-                                            )
-                                        })}
-                                    </BasicContainer>
-                                </>
-                            }
                         >
-                            {/* 按鈕容器 */}
-                            <SubContainer baseDefaultTheme={"DefaultTheme"}>
-                            </SubContainer>
-                        </MainPageTitleBar>
+                            {tabMap().map((item, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        <Text
+                                            onClick={() => { props.setNowTab(item) }}
+                                            isActive={props.nowTab === item}
+                                            theme={mobileM.titleBarCallCarTab}
+                                        >
+                                            {item}
+                                        </Text>
+                                    </React.Fragment>
+                                )
+                            })}
+                        </BasicContainer>
                     </>
                 }
             >

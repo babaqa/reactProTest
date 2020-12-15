@@ -86,8 +86,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    // padding: "24px 150px" // 標題列的padding
+                    backgroundColor: "#fff",
+                    padding: "0px 0px" // 標題列的padding
                 }
             }
         },
@@ -96,7 +96,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    height: "calc( 100vh - 56px - 95px - 48px )",
+                    height: "calc( 100vh - 56px - 46px - 48px )",
                 }
             }
         },
@@ -105,7 +105,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px", //188 是授權圖高度
+                    padding: "0 0 204px", //188 是授權圖高度
                 }
             }
         },
@@ -114,18 +114,10 @@ export default {
 
     //#region 標題列
     titleBar: {
-        titleText: {
-            basic: (style, props) => ({
-                ...style,
-                width: "120px"
-            })
-        },
-        rightContainer: {
-            basic: (style, props) => ({
-                ...style,
-                width: "200px"
-            })
-        }
+        basic: (style, props) => ({
+            ...style,
+            textAlign: "center"
+        })
     },
     //#endregion
 

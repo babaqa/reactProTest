@@ -3,7 +3,7 @@ export default {
     mapContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 114px )"
+            height: "calc( 100vh - 150px )"
         })
     },
     //#endregion
@@ -28,7 +28,7 @@ export default {
             display: "block",
             background: "#fff",
             position: "absolute",
-            bottom: "282px",
+            bottom: "204px",
             textAlign: "center",
             zIndex: 2
         })
