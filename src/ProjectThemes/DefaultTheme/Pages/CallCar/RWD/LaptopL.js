@@ -23,7 +23,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "0 150px 188px" //188 是授權圖高度
+                    padding: "0 0 188px" //188 是授權圖高度
                 }
             }
         },
@@ -33,7 +33,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#E5E4DB",
+                    padding: "24px 150px" // 標題列的padding
                 }
             }
         },
@@ -49,7 +50,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 0 188px" //188 是授權圖高度
                 }
             }
         },
@@ -58,7 +60,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#E5E4DB",
+                    padding: "24px 150px" // 標題列的padding
                 }
             }
         },
@@ -74,7 +77,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 0 188px" //188 是授權圖高度
                 }
             }
         },
@@ -276,4 +280,5 @@ export default {
         })
     },
     //#endregion
+
 }

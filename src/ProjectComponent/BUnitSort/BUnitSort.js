@@ -126,15 +126,15 @@ export const BUnitSortBase = (props) => {
                                         fontWeight: "400",
                                         lineHeight: "22px",
                                         padding: 0,
-                                        color: "#fff",
-                                        backgroundColor: "#ff7a45",
-                                        borderColor: "#ff7a45",
+                                        color: "#1890FF",
+                                        backgroundColor: "#fff",
+                                        borderColor: "#1890FF",
                                         borderRadius: "2px",
                                         margin: "0 0 0 16px"
                                     }),
                                     hover: (style, props) => ({
                                         ...style,
-                                        backgroundColor: "rgba(255, 122, 69, 0.85)"
+                                        backgroundColor: "rgba(24, 144, 255, 0.05)"
                                     }),
                                     focus: (style, props) => ({})
                                 }}
