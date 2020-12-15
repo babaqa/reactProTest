@@ -10,7 +10,7 @@ import { useHistory } from 'react-router-dom';
 const LaptopBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { qAndA: { rwd: { laptop } } } } = Theme;
+    const { pages: { callCar: { rwd: { laptop } } } } = Theme;
     let history = useHistory()
 
     return (

@@ -8,6 +8,10 @@ import carAndDriverSetting from './Pages/Base/CarAndDriverSetting/CarAndDriverSe
 import fareSubsidyParam from './Pages/Base/FareSubsidyParam/FareSubsidyParam'
 import medicalOrgManager from './Pages/Base/MedicalOrgManager/MedicalOrgManager'
 import operatingUnitSetting from './Pages/Base/OperatingUnitSetting/OperatingUnitSetting'
+import news from './Pages/News/News'
+import callCar from './Pages/CallCar/CallCar'
+import record from './Pages/Record/Record'
+import contact from './Pages/Contact/Contact'
 import qAndA from './Pages/QAndA/QAndA'
 import order from './Pages/Order/Order'
 import busRoute from './Pages/BusRouteAndStop/BusRoute/BusRoute'
@@ -43,6 +47,18 @@ export default {
         medicalOrgManager,
         operatingUnitSetting,
         //#endregion
+
+        //#region 最新消息
+        news,
+
+        //#region 預約訂車
+        callCar,
+
+        //#region 搭乘紀錄
+        record,
+
+        //#region 聯繫客服
+        contact,
 
         //#region 常見問題
         qAndA,
