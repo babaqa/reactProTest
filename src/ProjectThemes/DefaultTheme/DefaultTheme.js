@@ -8,6 +8,15 @@ import carAndDriverSetting from './Pages/Base/CarAndDriverSetting/CarAndDriverSe
 import fareSubsidyParam from './Pages/Base/FareSubsidyParam/FareSubsidyParam'
 import medicalOrgManager from './Pages/Base/MedicalOrgManager/MedicalOrgManager'
 import operatingUnitSetting from './Pages/Base/OperatingUnitSetting/OperatingUnitSetting'
+import news from './Pages/News/News'
+
+import callCar from './Pages/CallCar/CallCar'
+import caseCallCarComponent from './Pages/CallCar/CaseCallCarComponent/CaseCallCarComponent'
+import busCallCarComponent from './Pages/CallCar/BusCallCarComponent/BusCallCarComponent'
+import whiteCallCarComponent from './Pages/CallCar/WhiteCallCarComponent/WhiteCallCarComponent'
+
+import record from './Pages/Record/Record'
+import contact from './Pages/Contact/Contact'
 import qAndA from './Pages/QAndA/QAndA'
 import order from './Pages/Order/Order'
 import busRoute from './Pages/BusRouteAndStop/BusRoute/BusRoute'
@@ -28,11 +37,6 @@ import busStop from './Pages/BusRouteAndStop/BusStop/BusStop'
 import whiteConsole from './Pages/Dispatch/WhiteConsole/WhiteConsole'
 import busConsole from './Pages/Dispatch/BusConsole/BusConsole'
 
-import callCar from './Pages/CallCar/CallCar'
-import caseCallCarComponent from './Pages/CallCar/CaseCallCarComponent/CaseCallCarComponent'
-import busCallCarComponent from './Pages/CallCar/BusCallCarComponent/BusCallCarComponent'
-import whiteCallCarComponent from './Pages/CallCar/WhiteCallCarComponent/WhiteCallCarComponent'
-
 export default {
     layout,
     pages: {
@@ -47,6 +51,29 @@ export default {
         fareSubsidyParam,
         medicalOrgManager,
         operatingUnitSetting,
+        //#endregion
+
+        //#region 最新消息
+        news,
+        //#endregion
+
+        //#region 預約訂車
+        callCar: {
+            ...callCar,
+            component: {
+                caseCallCarComponent,
+                busCallCarComponent,
+                whiteCallCarComponent,
+            }
+        },
+        //#endregion
+
+        //#region 搭乘紀錄
+        record,
+        //#endregion
+
+        //#region 聯繫客服
+        contact,
         //#endregion
 
         //#region 常見問題
@@ -84,13 +111,5 @@ export default {
         busConsole, // 幸福巴士調度台
         //#endregion
 
-        callCar: {
-            ...callCar,
-            component: {
-                caseCallCarComponent,
-                busCallCarComponent,
-                whiteCallCarComponent,
-            }
-        },
     }
 }
