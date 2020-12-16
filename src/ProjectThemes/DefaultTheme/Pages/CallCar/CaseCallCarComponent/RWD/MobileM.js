@@ -115,7 +115,7 @@ export default {
                 height: "calc( 100% - 160px - 22px )",
                 boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
                 backgroundColor: "#fff",
-                padding: "24px 12px 24px 12px"
+                padding: "24px 0"
             })
         }
     },
@@ -713,7 +713,9 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
-            padding: "0 0 0 14px"
+            padding: "12px 12px 0 14px",
+            margin: "12px",
+            background: "rgba(250, 250, 250, 1)"
         })
     },
     //#endregion
@@ -726,7 +728,7 @@ export default {
             color: "rgba(0, 0, 0, 0.85)",
             fontSize: "14px",
             lineHeight: "22px",
-            margin: "0 0 12px 0"
+            margin: "0 0 12px 0",
         })
     },
     //#endregion
@@ -735,7 +737,7 @@ export default {
     todayToDoStartContainer: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(6)
+            ...style.occupy(12)
         })
     },
     //#endregion
@@ -783,7 +785,7 @@ export default {
     todayToDoEndContainer: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(6)
+            ...style.occupy(12)
         })
     },
     //#endregion
@@ -835,6 +837,67 @@ export default {
     },
     //#endregion
 
+    //#region 去程容器
+    goContainer: {
+        basic: (style, props) => ({
+            ...style,
+            background: "#fff",
+            padding: "12px",
+            margin: "0 0 12px 0",
+            boxShadow: "0px 0px 2px 1px rgba(217, 217, 217, 1) inset",
+        })
+    },
+    //#endregion
+    //#region 去程內容容器
+    goContentContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(3)
+        })
+    },
+    //#endregion
+
+    //#region 回程容器
+    returnContainer: {
+        basic: (style, props) => ({
+            ...style,
+            background: "#fff",
+            padding: "12px",
+            margin: "0 0 12px 0",
+            boxShadow: "0px 0px 2px 1px rgba(217, 217, 217, 1) inset",
+        })
+    },
+    //#endregion
+    //#region 回程內容容器
+    returnContentContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(3)
+        })
+    },
+    //#endregion
+
+    //#region 去回程文字
+    contentRightText: {
+        basic: (style, props) => ({
+            ...style,
+            position: "absolute",
+            right: 0,
+            color: "rgba(24, 144, 255, 1)",
+        })
+    },
+    //#endregion
+
+    //#region 去回程通用小標題
+    contentTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            marginBottom: "8px",
+            color: "rgba(0, 0, 0, 0.45)",
+        })
+    },
+    //#endregion
 
     //#region 行程表格
     tableContainer: {
@@ -867,7 +930,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(4),
+                ...style.occupy(12),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -891,7 +954,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(4),
+                ...style.occupy(12),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -933,7 +996,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(8),
+                ...style.occupy(12),
             })
         },
         container: {
@@ -941,7 +1004,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(8),
+                ...style.occupy(12),
             })
         },
         topLabel: {
@@ -979,7 +1042,7 @@ export default {
     returnEnableDateOccupy: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(8),
+            ...style.occupy(12),
         })
     },
     //#endregion
@@ -991,7 +1054,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(3),
+                ...style.occupy(6),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -1015,7 +1078,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(3),
+                ...style.occupy(6),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -1057,7 +1120,7 @@ export default {
                 ...style,
                 padding: "0 8px 0 12px",
                 display: "inline-block",
-                ...style.occupy(4),
+                ...style.occupy(6),
             })
         },
         topLabel: {
@@ -1094,7 +1157,7 @@ export default {
                 ...style,
                 padding: "0 12px 0 8px",
                 display: "inline-block",
-                ...style.occupy(5),
+                ...style.occupy(6),
             })
         },
         topLabel: {
@@ -1131,7 +1194,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(6),
+                ...style.occupy(12),
             })
         },
         topLabel: {
@@ -1149,7 +1212,7 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: 0
+                height: "48px",
                 minHeight: "24px",
                 // height: "auto",
                 // fontSize: "12px",
@@ -1179,7 +1242,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(6),
+                ...style.occupy(12),
             })
         },
         viewTypeTopLabel: {
@@ -1201,7 +1264,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(6),
+                ...style.occupy(12),
             })
         },
         topLabel: {
@@ -1269,7 +1332,7 @@ export default {
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            // top: "2px",
+            top: "2px",
             padding: 0,
             color: "#1890ff",
             backgroundColor: "#fff",
@@ -1293,7 +1356,7 @@ export default {
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            // top: "2px",
+            top: "2px",
             padding: 0,
             color: "#1890FF",
             backgroundColor: "#fff",
@@ -1317,7 +1380,7 @@ export default {
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            // top: "2px",
+            top: "2px",
             padding: 0,
             color: "#fff",
             backgroundColor: "#1890ff",

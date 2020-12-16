@@ -51,8 +51,8 @@ const TabletBase = (props) => {
             {/* 地圖上層的表單容器 */}
             <Resizable
                 width={"100%"}
-                height={"684px"}
-                maxHeight={"900px"}
+                height={"480px"}
+                maxHeight={"70vh"}
                 minHeight={"280px"}
                 enable={{ top: true, right: false, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: false }}
                 theme={tablet.resizableContainer}

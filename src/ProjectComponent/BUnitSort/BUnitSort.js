@@ -120,7 +120,7 @@ export const BUnitSortBase = (props) => {
                                 theme={{
                                     basic: (style) => ({
                                         ...style,
-                                        width: "88px",
+                                        width: "80px",
                                         height: "24px",
                                         fontSize: "14px",
                                         fontWeight: "400",

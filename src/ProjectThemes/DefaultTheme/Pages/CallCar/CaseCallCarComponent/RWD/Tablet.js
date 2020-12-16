@@ -3,7 +3,7 @@ export default {
     mapContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 114px )"
+            height: "calc( 100vh - 175px )"
         })
     },
     //#endregion
@@ -28,7 +28,7 @@ export default {
             display: "block",
             background: "#fff",
             position: "absolute",
-            bottom: 0,
+            bottom: "188px",
             textAlign: "center",
             zIndex: 2
         })
@@ -1269,7 +1269,7 @@ export default {
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            // top: "2px",
+            top: "2px",
             padding: 0,
             color: "#1890ff",
             backgroundColor: "#fff",
@@ -1293,7 +1293,7 @@ export default {
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            // top: "2px",
+            top: "2px",
             padding: 0,
             color: "#1890FF",
             backgroundColor: "#fff",
@@ -1317,7 +1317,7 @@ export default {
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            // top: "2px",
+            top: "2px",
             padding: 0,
             color: "#fff",
             backgroundColor: "#1890ff",
