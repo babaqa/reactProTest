@@ -3,9 +3,13 @@ import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
-import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
-import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
+import { ReactComponent as Search } from '../../../Assets/img/CasePage/Search.svg'
 import { useHistory } from 'react-router-dom';
+
+import { CaseContactComponent } from '../CaseContactComponent/CaseContactComponent'
+import { BusContactComponent } from '../BusContactComponent/BusContactComponent'
+import { FleetContactComponent } from '../FleetContactComponent/FleetContactComponent'
+
 
 const LaptopBase = (props) => {
 
@@ -13,179 +17,87 @@ const LaptopBase = (props) => {
     const { pages: { contact: { rwd: { laptop } } } } = Theme;
     let history = useHistory()
 
+    //#region 分頁映射
+    const tabMap = (key) => {
+        switch (key) {
+            case "tabUseComponent":
+                return (
+                    {
+                        "長照": <CaseContactComponent />,
+                        "共享車隊": <FleetContactComponent />,
+                        "巴士": <BusContactComponent />
+                    }
+                );
+
+            default:
+                return ["長照", "共享車隊", "巴士"]
+        }
+
+    }
+    //#endregion
+
     return (
         <>
             <MainPageContainer
+                theme={laptop.mainPageContainer}
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}
                         <MainPageTitleBar
                             bascDefaultTheme={"DefaultTheme"}
-                            titleText={"常見問題"}
+                            titleText={"聯繫客服"}
                             theme={laptop.titleBar}
-                        // onSubmit={(e)=>console.log(e)}
+                            // onSubmit={(e)=>console.log(e)}
+                            centerContent={
+                                <>
+                                    <BasicContainer>
+                                        {tabMap().map((item, index) => {
+                                            return (
+                                                <React.Fragment key={index}>
+                                                    <Text
+                                                        onClick={() => { props.setNowTab(item) }}
+                                                        isActive={props.nowTab === item}
+                                                        theme={laptop.titleBarContactTab}
+                                                    >
+                                                        {item}
+                                                    </Text>
+                                                </React.Fragment>
+                                            )
+                                        })}
+                                    </BasicContainer>
+                                </>
+                            }
                         >
                             {/* 按鈕容器 */}
                             <SubContainer baseDefaultTheme={"DefaultTheme"}>
-                                {/* 新增按鈕 */}
-                                <NativeLineButton
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    disable={false}
-                                    type="button" // 防止提交
-                                    theme={laptop.titleAddButton}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-
-                                        let rowData = {};
-
-                                        //#region 打開新增 Modal
-                                        modalsService.titleModal.normal({
-                                            //id: "top1",
-                                            title: "新增",
-                                            yes: true,
-                                            yesText: "確認",
-                                            no: true,
-                                            noText: "取消",
-                                            // autoClose: true,
-                                            backgroundClose: false,
-                                            noOnClick: (e) => {
-                                                // props.controllGCS("addClientModalClose")
-                                            },
-                                            yesOnClick: (e, close) => {
-                                                //#region 表單驗證
-                                                let validMsg = "";
-
-                                                //#endregion
-
-                                                //#region 表單驗證後動作
-                                                if (validMsg !== "") {
-                                                    // console.log(validMsg, globalContextService.get("OperatingUnitSettingPage"))
-                                                    modalsService.infoModal.error({
-                                                        id: "top1", //注意 這裡要加上固定id
-                                                        iconRightText: validMsg,
-                                                        yes: true,
-                                                        yesText: "確認",
-                                                        // no: true,
-                                                        // autoClose: true,
-                                                        backgroundClose: false,
-                                                        yesOnClick: (e, close) => {
-                                                            close();
-                                                        }
-                                                    })
-                                                }
-                                                else {
-                                                    close();
-                                                }
-                                                //#endregion
-                                            },
-                                            closeIconOnClick: (e) => {
-                                                // props.controllGCS("addClientModalClose")
-                                            },
-                                            content: (
-                                                <FormContainer
-                                                    baseDefaultTheme={"DefaultTheme"}
-                                                    onSubmit={(e) => {
-                                                        e.preventDefault();
-                                                    }}
-                                                    theme={laptop.addFormContainer}
-                                                >
-                                                    <FormRow baseDefaultTheme={"DefaultTheme"}>
-
-                                                    </FormRow>
-                                                </FormContainer>
-                                            ),
-                                            theme: laptop.addModal
-                                        })
-                                        //#endregion
-                                    }}
-                                >
-                                    {/* 新增司機按鈕 圖標 */}
-                                    <Plus style={laptop.titleAddButtonIcon} />
-                                新增
-                            </NativeLineButton>
-
-                                {/* 編輯按鈕 */}
-                                <NativeLineButton
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    disable={false}
-                                    type="button" // 防止提交
-                                    theme={laptop.titleEditButton}
-                                    onClick={(e) => {
-                                        e.preventDefault();
-
-                                        let rowData = {};
-
-                                        //#region 打開新增 Modal
-                                        modalsService.titleModal.normal({
-                                            //id: "top1",
-                                            title: "編輯",
-                                            yes: true,
-                                            yesText: "確認",
-                                            no: true,
-                                            noText: "取消",
-                                            // autoClose: true,
-                                            backgroundClose: false,
-                                            noOnClick: (e) => {
-                                                // props.controllGCS("addClientModalClose")
-                                            },
-                                            yesOnClick: (e, close) => {
-                                                //#region 表單驗證
-                                                let validMsg = "";
-
-                                                //#endregion
-
-                                                //#region 表單驗證後動作
-                                                if (validMsg !== "") {
-                                                    // console.log(validMsg, globalContextService.get("OperatingUnitSettingPage"))
-                                                    modalsService.infoModal.error({
-                                                        id: "top1", //注意 這裡要加上固定id
-                                                        iconRightText: validMsg,
-                                                        yes: true,
-                                                        yesText: "確認",
-                                                        // no: true,
-                                                        // autoClose: true,
-                                                        backgroundClose: false,
-                                                        yesOnClick: (e, close) => {
-                                                            close();
-                                                        }
-                                                    })
-                                                }
-                                                else {
-                                                    close();
-                                                }
-                                                //#endregion
-                                            },
-                                            closeIconOnClick: (e) => {
-                                                // props.controllGCS("addClientModalClose")
-                                            },
-                                            content: (
-                                                <FormContainer
-                                                    baseDefaultTheme={"DefaultTheme"}
-                                                    onSubmit={(e) => {
-                                                        e.preventDefault();
-                                                    }}
-                                                    theme={laptop.editFormContainer}
-                                                >
-                                                    <FormRow baseDefaultTheme={"DefaultTheme"}>
-
-                                                    </FormRow>
-                                                </FormContainer>
-                                            ),
-                                            theme: laptop.editModal
-                                        })
-                                        //#endregion
-                                    }}
-                                >
-                                    {/* 編輯按鈕 圖標 */}
-                                    <Edit style={laptop.titleEditButtonIcon} />
-                                編輯
-                            </NativeLineButton>
-
                             </SubContainer>
+                            {/* 一般輸入框 請輸入車行名稱  */}
+                            <TextInput
+                                bascDefaultTheme={"DefaultTheme"}
+                                theme={laptop.keyword}
+                                type="text"
+                                placeholder={"請輸入車行名稱"}
+                                rightIcon={
+                                    <Search
+                                        style={laptop.keywordRightIcon}
+                                        onClick={(e) => {
+                                            console.log("目前不支援搜尋功能")
+                                            // props.GetSubOrgsExecute(true, "");
+                                        }
+                                        }
+                                    />
+                                }
+                                value={globalContextService.get("ContactPage", "Keyword") ?? ""}
+                                onChange={(e, value, onInitial) => {
+                                    globalContextService.set("ContactPage", "Keyword", value);
+                                }}
+                            />
                         </MainPageTitleBar>
                     </>
                 }
             >
+                {/* 切換使用的組件 */}
+                {tabMap("tabUseComponent")?.[props.nowTab]}
 
             </MainPageContainer>
         </>
