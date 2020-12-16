@@ -1,252 +1,169 @@
 export default {
-    //#region 最外層容器
-    outContainer: {
-        basic: (style, props) => ({
-            ...style,
-            height: "100vh"
-        })
-    },
-    //#endregion
-    //#region 最外層容器 ScrollBar
-    outContainerScrollBar: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            maxWidth: "100%",
-            height: "100%",
-            maxHeight: "100%",
-            boxSizing: "border-box",
-        })
-    },
-    //#endregion
-    //#region 上半部容器 
-    aboveContainer: {
-        basic: (style, props) => ({
-            ...style,
-            height: "477px"
-        })
-    },
-    //#endregion
-    //#region 上半部背景-上半段 
-    aboveBgImage: (mobileMbg) => ({
-        basic: (style, props) => ({
-            ...style,
-            backgroundImage: `url(${mobileMbg})`,
-            height: "200px",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover"
-        })
-    }),
-    //#endregion
-    //#region 上半部背景-上半段 
-    belowBgImage: (mobileMbg) => ({
-        basic: (style, props) => ({
-            ...style,
-            backgroundImage: `url(${mobileMbg})`,
-            height: "277px",
-            backgroundPosition: "0% 100%",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover"
-        })
-    }),
-    //#endregion
-    //#region 登入框容器
-    loginContainer: {
-        basic: (style, props) => ({
-            ...style,
-            position: "absolute",
-            //height: "100%",
-            top: 0,
-            justifyContent: "center",
-            padding: "0 24px"
-        })
-    },
-    //#endregion
-    //#region 屏東市政府標題容器
-    bigTitleContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(12),
-            padding: "17px 0 0 24px",
-            userSelect: "none",
-        })
-    },
-    //#endregion
-    //#region 屏東市政府標題文字
-    bigTitleText: {
-        basic: (style, props) => ({
-            ...style,
-            color: "#2f54eb",
-            fontSize: "30px",
-            fontWeight: "bold",
-            display: "inline-block",
-            height: "100%",
-            lineHeight: "60px",
-            userSelect: "none",
-            cursor: "default"
-        })
-    },
-    //#endregion
-    //#region 屏東市政府標題Logo
-    bigTitleLogo: {
-        position: "absolute",
-        cursor: "default",
-        userSelect: "none"
-    },
-    //#endregion
-    //#region 屏東市政府次標題容器
-    subTitleContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(12),
-            padding: "0 0 12px 24px",
-            userSelect: "none",
-        })
-    },
-    //#endregion
-    //#region 屏東市政府次標題文字
-    subTitleText: {
-        basic: (style, props) => ({
-            ...style,
-            color: "#2f54eb",
-            fontSize: "14px",
-            fontWeight: "bold",
-            display: "inline-block",
-            height: "22px",
-            userSelect: "none",
-            cursor: "default"
-        })
-    },
-    //#endregion
-
-    //#region 登入表單 相關樣式
-    //#region 登入表單容器
-    loginFormContainer: {
-        basic: (style, props) => ({
-            ...style,
-            display: "block",
-            width: "100%",
-            height: "318px",
-            backgroundColor: "#ffffff",
-            boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
-            borderRadius: "2px"
-        })
-    },
-    //#endregion
-    //#region 登入表單標題
-    loginFormTitle: {
-        basic: (style, props) => ({
-            ...style,
-            color: "#1890ff",
-            fontSize: "20px",
-            fontWeight: "bold",
-            display: "block",
-            userSelect: "none",
-            lineHeight: "28px",
-            padding: "24px 24px 0",
-            cursor: "default"
-        })
-    },
-    //#endregion
-    //#region 登入表單次標題
-    loginFormSubTitle: {
-        basic: (style, props) => ({
-            ...style,
-            color: "rgba(0, 0, 0, 0.65)",
-            fontSize: "14px",
-            fontWeight: "normal",
-            display: "block",
-            userSelect: "none",
-            lineHeight: "22px",
-            padding: "8px 24px 1rem",
-            cursor: "default"
-        })
-    },
-    //#endregion
-    //#region 登入表單組件
-    loginFormFormContainer: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                height: "fit-content",//"214px",
-                padding: "0 24px"
-            })
-        }
-    },
-    //#endregion
-    //#region 帳號 Account 左方Icon
-    loginFormAccountLeftIcon: {
-        position: "absolute",
-        height: "100%",
-        left: "12px",
-        cursor: "default",
-        pointerEvents: "none",
-        top: 0,
-    },
-    //#endregion
-    //#region 帳號 Account
-    loginFormAccount: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                ...style.occupy(12),
-                padding: "0 0 12px 0"
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-            })
-        },
-        textInputContainer: {
+    //#region MainPageContainer 背景色調節
+    mainPageContainer: {
+        basicOutsideOutContainer: {
             basic: (style, props) => {
-                //console.log(props)
                 return {
                     ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                    backgroundColor: "#E5E4DB"
                 }
             }
         },
-        textInput: {
+        basicOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    height: "calc( 100vh - 56px - 48px )",
+                }
+            }
+        },
+        basicContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 0 236px"
+                }
+            }
+        },
+    },
+    //#endregion
+
+    //#region 基本資料表單區容器
+    basicInformationContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                // padding: "24px 12px",
+                background: "#fff",
+                height: "260px",
+                width: "100%",
+
+            }
+        }
+    },
+    //#endregion
+    //#region  基本資料 子標題列
+    basicInfBaseSubTitleBar: {
+        container: {
             basic: (style, props) => ({
                 ...style,
-                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                ...(
-                    props.openEye && {
-                        border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                    }
-                ),
-                //#endregion
+                width: "100%",
+                padding: "9px 16px",
+                background: "#E5E4DB",
+                border: 0,
+                margin: 0,
                 height: "40px"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "48px",
+                fontWeight: 400,
+                fontSize: "12px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.65)",
+                padding: 0,
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "152px",
+                height: "32px"
             })
         }
     },
     //#endregion
-    //#region 密碼 Password 左方Icon
-    loginFormPasswordLeftIcon: {
-        position: "absolute",
-        height: "100%",
-        left: "12px",
-        cursor: "default",
-        pointerEvents: "none",
-        top: 0,
+    //#region 修改密碼按鈕
+    editPwdButton: {
+        basic: (style) => ({
+            ...style,
+            width: "72px",
+            height: "24px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            // top: "2px",
+            padding: 0,
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            margin: "0 8px 0 0"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+        }),
+        focus: (style, props) => ({})
     },
     //#endregion
-    //#region 密碼 Password
-    loginFormPassword: {
+    //#region 新增修改密碼彈窗
+    //#region Modal 樣式
+    editPwdModal: {
         container: {
             basic: (style, props) => ({
                 ...style,
+                width: "343px",
+                height: "374px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+    //#region 修改密碼彈窗容器
+    editPwdFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "295px",
+                height: "326px",
+                // padding: "24px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: (style, props) => ({
+            ...style,
+        })
+    },
+    //#endregion
+    //#region 修改密碼提示文字
+    editPwdTip: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
+    },
+    //#endregion
+    //#region 舊密碼 OldPwd
+    oldPwd: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
                 ...style.occupy(12),
-                padding: "0 0 12px 0"
+                margin: "24px 0 0"
             })
         },
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
+                //height: "0px"
             })
         },
         textInputContainer: {
@@ -271,165 +188,39 @@ export default {
                         }
                     ),
                     //#endregion
-                    height: "40px"
+                    height: "28px"
                 }
             }
-        }
-    },
-    //#endregion
-    //#region 登入按鈕容器
-    loginFormLoginButtonContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(12),
-            padding: "0 2px 8px"
-        })
-    },
-    //#endregion
-    //#region 登入按鈕
-    loginFormLoginButton: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "100%",
-                background: "#1890ff",
-                boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
-                borderRadius: "2px",
-                height: "32px"
-            }),
-            hover: (style, props) => ({
-                ...style,
-                backgroundColor: "#40a9ff"
-            })
         },
-        text: {
+        bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                fontSize: "14px",
-                lineHeight: "32px",
-                top: "-3px"
-            }),
-        }
-    },
-    //#endregion
-    //#region 忘記密碼連結容器
-    loginFormForgetPassContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(12),
-            padding: "0 2px 24px"
-        })
-    },
-    //#endregion
-    //#region 忘記密碼連結次容器
-    loginFormForgetPassSubContainer: {
-        basic: (style, props) => ({
-            ...style,
-            display: "block",
-            textAlign: "right",
-            fontSize: "14px",
-            color: "#1890ff",
-            userSelect: "none"
-        })
-    },
-    //#endregion
-    //#region 忘記密碼連結文字
-    loginFormForgetPassText: {
-        basic: (style, props) => ({
-            ...style,
-            display: "inline-block",
-            textAlign: "right",
-            fontSize: "14px",
-            color: "#1890ff",
-            cursor: "pointer",
-            lineHeight: "22px",
-            userSelect: "none"
-        })
-    },
-    //#endregion
-    //#endregion
-
-    //#region 忘記密碼表單 相關樣式
-    //#region 忘記密碼表單容器
-    forgetPassFormContainer: {
-        basic: (style, props) => ({
-            ...style,
-            display: "block",
-            width: "100%",
-            height: "352px",
-            backgroundColor: "#ffffff",
-            boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
-            borderRadius: "2px"
-        })
-    },
-    //#endregion
-    //#region 忘記密碼表單標題
-    forgetPassFormTitle: {
-        basic: (style, props) => ({
-            ...style,
-            color: "#1890ff",
-            fontSize: "20px",
-            fontWeight: "bold",
-            display: "block",
-            userSelect: "none",
-            lineHeight: "28px",
-            padding: "24px 24px 0",
-        })
-    },
-    //#endregion
-    //#region 忘記密碼表單次標題
-    forgetPassFormSubTitle: {
-        basic: (style, props) => ({
-            ...style,
-            color: "rgba(0, 0, 0, 0.65)",
-            fontSize: "14px",
-            fontWeight: "normal",
-            display: "block",
-            userSelect: "none",
-            lineHeight: "22px",
-            padding: "8px 24px 1rem",
-        })
-    },
-    //#endregion
-    //#region 忘記密碼表單組件
-    forgetPassFormFormContainer: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                height: "fit-content",//"214px",
-                padding: "0 24px"
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         }
     },
     //#endregion
-    //#region 手機號碼 Phone 左方Icon
-    forgetPassFormPhoneLeftIcon: {
-        position: "absolute",
-        height: "100%",
-        left: "12px",
-        cursor: "default",
-        pointerEvents: "none",
-        top: 0,
-    },
-    //#endregion
-    //#region 手機號碼 Phone
-    forgetPassFormPhone: {
+    //#region 新密碼 NewPwd 
+    newPwd: {
         container: {
             basic: (style, props) => ({
                 ...style,
+                padding: 0,
+                display: "inline-block",
                 ...style.occupy(12),
-                padding: "0 0 12px 0"
             })
         },
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
+                //height: "0px"
             })
         },
         textInputContainer: {
             basic: (style, props) => {
-                //console.log(props)
+
                 return {
                     ...style,
                     color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
@@ -437,41 +228,282 @@ export default {
             }
         },
         textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                ...(
-                    props.openEye && {
-                        border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                    }
-                ),
-                //#endregion
-                height: "40px"
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         }
     },
     //#endregion
-    //#region 傳送認證碼按鈕容器
-    forgetPassFormSendAuthCodeButtonContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(12),
-            padding: "0 2px 8px"
-        })
-    },
-    //#endregion
-    //#region 傳送認證碼按鈕 (等待倒數中)
-    forgetPassFormWaitSecToZeroButton: {
+    //#region 確認新密碼 ConfirmPwd
+    confirmPwd: {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "100%",
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: 0
+                // minHeight: "24px",
+                // height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#region 密碼 左方圖標
+    pwdLeftIcon: {
+        position: "absolute",
+        height: "100%",
+        left: "12px",
+        cursor: "pointer",
+        top: 0,
+    },
+    //#endregion
+    //#region 密碼 右方圖標
+    pwdRightIcon: {
+        position: "absolute",
+        height: "100%",
+        right: "12px",
+        cursor: "pointer",
+        top: 0,
+    },
+    //#endregion
+
+    //#region 修改手機按鈕
+    editPhoneButton: {
+        basic: (style) => ({
+            ...style,
+            width: "72px",
+            height: "24px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            // top: "2px",
+            padding: 0,
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            // margin: "0 16px 0 0"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion
+    //#region 新增修改手機彈窗 發送驗證碼
+    //#region Modal 樣式
+    sendVerificationCodeModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "343px",
+                height: "218px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+    //#region 修改手機彈窗容器
+    sendVerificationCodeFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "295px",
+                height: "62px",
+                // padding: "24px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: (style, props) => ({
+            ...style,
+        })
+    },
+    //#endregion
+    //#region 手機號碼 ModalEditCellPhone
+    modalEditCellPhone: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: 0
+                // minHeight: "24px",
+                // height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 新增修改手機彈窗 提交驗證碼
+    //#region Modal 樣式
+    confirmVerificationCodeModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "343px",
+                height: "390px",
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+    //#region 修改手機彈窗容器
+    confirmVerificationCodeFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "295px",
+                height: "234px",
+                // padding: "24px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: (style, props) => ({
+            ...style,
+        })
+    },
+    //#endregion
+    //#region 提交驗證碼提示文字
+    confirmVerificationCodeTip: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "#1890FF",
+            margin: "0 0 16px"
+        })
+    },
+    //#endregion
+    //#region 重送驗證碼按鈕 (等待倒數中)
+    resendVerificationCodeWaitButton: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                position: "absolute",
+                width: "151px",
                 background: "#f5f5f5",
                 boxShadow: null,//"0px 2px 0px rgba(0, 0, 0, 0.043)",
                 border: "1px solid #d9d9d9",
                 borderRadius: "2px",
-                height: "32px"
+                height: "28px",
+                padding: "0 8px",
+                right: 0,
+                bottom: "-40px"
             }),
             hover: (style, props) => ({
                 ...style,
@@ -482,328 +514,64 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 fontSize: "14px",
-                lineHeight: "32px",
-                top: "-3px"
+                lineHeight: "28px",
+                top: "-5px"
             }),
         }
     },
     //#endregion
-    //#region 傳送認證碼按鈕
-    forgetPassFormSendAuthCodeButton: {
+    //#region 重送驗證碼按鈕 
+    resendVerificationCodeButton: {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "100%",
-                background: "#ff7a45",
-                boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
-                borderRadius: "2px",
-                height: "32px"
-            }),
-            hover: (style, props) => ({
-                ...style,
-                backgroundColor: "rgba(255, 122, 69, 0.8)"
-            })
-        },
-        text: {
-            basic: (style, props) => ({
-                ...style,
-                fontSize: "14px",
-                lineHeight: "32px",
-                top: "-3px"
-            }),
-        }
-    },
-    //#endregion
-    //#region 驗證碼 AuthCode 左方Icon
-    forgetPassFormAuthCodeLeftIcon: {
-        position: "absolute",
-        height: "100%",
-        left: "12px",
-        cursor: "default",
-        pointerEvents: "none",
-        top: 0,
-    },
-    //#endregion
-    //#region 驗證碼 AuthCode
-    forgetPassFormAuthCode: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                ...style.occupy(12),
-                padding: "0 0 12px 0"
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-            })
-        },
-        textInputContainer: {
-            basic: (style, props) => {
-
-                return {
-                    ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
-                }
-            }
-        },
-        textInput: {
-            basic: (style, props) => {
-                //console.log(style, props)
-                return {
-                    ...style,
-                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                    ...(
-                        props.openEye && {
-                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                        }
-                    ),
-                    //#endregion
-                    height: "40px"
-                }
-            }
-        }
-    },
-    //#endregion
-    //#region 取消、下一步 表單列容器
-    forgetPassFormCancelAndNextButtonFormRow: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                justifyContent: "space-between"
-            })
-        }
-    },
-    //#endregion
-    //#region 取消按鈕容器
-    forgetPassFormCancelButtonContainer: {
-        basic: (style, props) => ({
-            ...style,
-            maxWidth: "46.6%",
-            flexBasis: "46.6%",
-            padding: "0 2px 16px"
-        })
-    },
-    //#endregion
-    //#region 取消按鈕
-    forgetPassFormCancelButton: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "100%",
-                background: "#ffffff",
+                position: "absolute",
+                width: "102px",
+                background: "#FFFFFF",
+                boxShadow: null,//"0px 2px 0px rgba(0, 0, 0, 0.043)",
                 border: "1px solid #d9d9d9",
                 borderRadius: "2px",
-                height: "32px",
-                color: "rgba(0, 0, 0, 0.65)",
+                height: "28px",
+                padding: "0 8px",
+                right: 0,
+                bottom: "-40px"
             }),
             hover: (style, props) => ({
                 ...style,
-                backgroundColor: "rgba(255, 255, 255, 0.85)",
-                border: "1px solid #1890ff",
-                color: "#1890ff",
-            })
-        },
-        text: {
-            basic: (style, props) => ({
-                ...style,
-                color: "inherit",
-                fontSize: "14px",
-                lineHeight: "32px",
-                top: "-3px"
-            }),
-        }
-    },
-    //#endregion
-    //#region 下一步按鈕容器
-    forgetPassFormNextButtonContainer: {
-        basic: (style, props) => ({
-            ...style,
-            maxWidth: "46.6%",
-            flexBasis: "46.6%",
-            padding: "0 2px 16px"
-        })
-    },
-    //#endregion
-    //#region 下一步按鈕
-    forgetPassFormNextButton: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "100%",
-                background: "#1890ff",
-                boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
-                borderRadius: "2px",
-                height: "32px"
-            }),
-            hover: (style, props) => ({
-                ...style,
-                backgroundColor: "#40a9ff"
+                backgroundColor: "#FFFFFF",
+                borderColor: "#1890FF"
             })
         },
         text: {
             basic: (style, props) => ({
                 ...style,
                 fontSize: "14px",
-                lineHeight: "32px",
-                top: "-3px"
+                lineHeight: "28px",
+                top: "-5px",
+                color: "rgba(0,0,0,0.65)"
             }),
-        }
-    },
-    //#endregion
-    //#region 忘記密碼連結容器
-    forgetPassFormForgetPassContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(12),
-            padding: "0 2px 24px",
-            userSelect: "none"
-        })
-    },
-    //#endregion
-    //#region 忘記密碼連結文字
-    forgetPassFormForgetPassText: {
-        basic: (style, props) => ({
-            ...style,
-            display: "inline-block",
-            fontSize: "14px",
-            color: "rgba(0, 0, 0, 0.65)",
-            cursor: "default",
-            lineHeight: "22px",
-            userSelect: "none"
-        })
-    },
-    //#endregion
-    //#endregion
-
-    //#region 設定登入密碼表單 相關樣式
-    //#region 設定登入密碼表單容器
-    resetPassFormContainer: {
-        basic: (style, props) => ({
-            ...style,
-            display: "block",
-            width: "100%",
-            height: "288px",
-            backgroundColor: "#ffffff",
-            boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
-            borderRadius: "2px"
-        })
-    },
-    //#endregion
-    //#region 設定登入密碼表單標題
-    resetPassFormTitle: {
-        basic: (style, props) => ({
-            ...style,
-            color: "#1890ff",
-            fontSize: "20px",
-            fontWeight: "bold",
-            display: "block",
-            userSelect: "none",
-            lineHeight: "28px",
-            padding: "24px 24px 0",
-        })
-    },
-    //#endregion
-    //#region 設定登入密碼表單次標題
-    resetPassFormSubTitle: {
-        basic: (style, props) => ({
-            ...style,
-            color: "rgba(0, 0, 0, 0.65)",
-            fontSize: "14px",
-            fontWeight: "normal",
-            display: "block",
-            userSelect: "none",
-            lineHeight: "22px",
-            padding: "8px 24px 1rem",
-        })
-    },
-    //#endregion
-    //#region 設定登入密碼表單組件
-    resetPassFormFormContainer: {
-        container: {
-            basic: (style, props) => ({
+            hover: (style, props) => ({
                 ...style,
-                height: "fit-content",//"214px",
-                padding: "0 24px"
+                color: "#1890FF",
             })
         }
     },
     //#endregion
-    //#region 新密碼 NewPassword 左方Icon
-    resetPassFormNewPasswordLeftIcon: {
-        position: "absolute",
-        height: "100%",
-        left: "12px",
-        cursor: "default",
-        pointerEvents: "none",
-        top: 0,
-    },
-    //#endregion
-    //#region 新密碼 NewPassword
-    resetPassFormNewPassword: {
+    //#region 驗證碼 ModalVerificationCode 
+    modalVerificationCode: {
         container: {
             basic: (style, props) => ({
                 ...style,
+                padding: 0,
+                display: "inline-block",
                 ...style.occupy(12),
-                padding: "0 0 12px 0"
+                margin: "24px 0 0"
             })
         },
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
-            })
-        },
-        textInputContainer: {
-            basic: (style, props) => {
-                //console.log(props)
-                return {
-                    ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
-                }
-            }
-        },
-        textInput: {
-            basic: (style, props) => ({
-                ...style,
-                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                ...(
-                    props.openEye && {
-                        border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                    }
-                ),
-                //#endregion
-                height: "40px"
-            })
-        }
-    },
-    //#endregion
-    //#region 確認新密碼 ConfirmPassword 左方Icon
-    resetPassFormConfirmPasswordLeftIcon: {
-        position: "absolute",
-        height: "100%",
-        left: "12px",
-        cursor: "default",
-        pointerEvents: "none",
-        top: 0,
-    },
-    //#endregion
-    //#region 確認新密碼 ConfirmPassword
-    resetPassFormConfirmPassword: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                ...style.occupy(12),
-                padding: "0 0 12px 0"
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
+                height: "28px"
             })
         },
         textInputContainer: {
@@ -828,47 +596,879 @@ export default {
                         }
                     ),
                     //#endregion
-                    height: "40px"
+                    height: "28px"
                 }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: 0
+                // minHeight: "24px",
+                // height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#region 新增修改手機彈窗 驗證成功
+    //#region Modal 樣式
+    successModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "343px",
+                height: "126px",
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                // padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+
+    //#region 通用容器
+    universalContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                padding: "11px 16px",
+                boxShadow: "inset 0 -1px #D9D9D9",
             }
         }
     },
     //#endregion
-    //#region 完成按鈕容器
-    resetPassFormDoneButtonContainer: {
+
+    //#region 姓名 標題 
+    nameTitle: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(12),
-            padding: "0 2px 8px"
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
         })
     },
     //#endregion
-    //#region 完成按鈕
-    resetPassFormDoneButton: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "100%",
-                background: "#1890ff",
-                boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
-                borderRadius: "2px",
-                height: "32px"
-            }),
-            hover: (style, props) => ({
-                ...style,
-                backgroundColor: "#40a9ff"
-            })
-        },
-        text: {
-            basic: (style, props) => ({
-                ...style,
-                fontSize: "14px",
-                lineHeight: "32px",
-                top: "-3px"
-            }),
-        }
+    //#region 姓名 內文 
+    nameText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 生日 標題 
+    birthTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 生日 內文 
+    birthText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 性別 標題 
+    sexTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 性別 內文 
+    sexText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 身分證字號 標題 
+    uidTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 身分證字號 內文 
+    uidText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 手機 標題 
+    cellphoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 手機 內文 
+    cellphoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
     },
     //#endregion
     //#endregion
 
+    //#region 長照資料表單區容器
+    caseInformationContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                // padding: "24px 12px",
+                background: "#fff",
+                height: "304px",
+                width: "100%",
+
+            }
+        }
+    },
+    //#endregion
+    //#region  長照資料 子標題列
+    caseInfBaseSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                padding: "9px 16px",
+                background: "#E5E4DB",
+                border: 0,
+                margin: 0,
+                height: "40px"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "48px",
+                fontWeight: 400,
+                fontSize: "12px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.65)",
+                padding: 0,
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "72px",
+                height: "32px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 額度狀況按鈕
+    quotaStatusButton: {
+        basic: (style) => ({
+            ...style,
+            width: "72px",
+            height: "24px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            // top: "2px",
+            padding: 0,
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            // margin: "0 16px 0 0"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion
+    //#region 新增額度狀況彈窗
+    //#region Modal 樣式
+    quotaStatusModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "343px",
+                height: "366px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+    //#region 額度狀況彈窗容器
+    quotaStatusFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "295px",
+                height: "210px",
+                // padding: "24px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: (style, props) => ({
+            ...style,
+        })
+    },
+    //#endregion
+    //#region 總額度 標題 
+    totalAmountTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "100%",
+            color: "rgba(0, 0, 0, 0.85)",
+            margin: "0 0 24px"
+        })
+    },
+    //#endregion
+    //#region 總額度 內文 
+    totalAmountText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "18px",
+            lineHeight: "24px",
+            color: "#FF7A45",
+        })
+    },
+    //#endregion
+    //#region 使用額度 標題 
+    useQuotaTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "100%",
+            color: "rgba(0, 0, 0, 0.85)",
+            margin: "0 0 24px"
+        })
+    },
+    //#endregion
+    //#region 使用額度 內文 
+    useQuotaText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "18px",
+            lineHeight: "24px",
+            color: "#FF7A45",
+        })
+    },
+    //#endregion
+    //#region 剩餘額度 標題 
+    remainingAmountTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "100%",
+            color: "rgba(0, 0, 0, 0.85)",
+            margin: "0 0 24px"
+        })
+    },
+    //#endregion
+    //#region 剩餘額度 內文 
+    remainingAmountText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "18px",
+            lineHeight: "24px",
+            color: "#FF7A45",
+        })
+    },
+    //#endregion
+
+    //#region 案號 標題 
+    caseNumberTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 案號 內文 
+    caseNumberText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 長照居住地址 標題 
+    caseResidentialAddressTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "30%"
+        })
+    },
+    //#endregion
+    //#region 長照居住地址 內文 
+    caseResidentialAddressText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "70%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 長照緊急聯絡人姓名 標題 
+    caseEmergencyNameTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 長照緊急聯絡人姓名 內文 
+    caseEmergencyNameText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 長照緊急聯絡人手機 標題 
+    caseEmergencyCellPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 長照緊急聯絡人手機 內文 
+    caseEmergencyCellPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 長照緊急聯絡人市話 標題 
+    caseEmergencyPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 長照緊急聯絡人市話 內文 
+    caseEmergencyPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 長照服務車隊 標題 
+    caseServiceFleetTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 長照服務車隊 內文 
+    caseServiceFleetText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+    //#endregion
+
+    //#region 共享車隊資料表單區容器
+    fleetInformationContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                // padding: "24px 12px",
+                background: "#fff",
+                height: "260px",
+                width: "100%",
+
+            }
+        }
+    },
+    //#endregion
+    //#region  共享車隊資料 子標題列
+    fleetInfBaseSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                padding: "9px 16px",
+                background: "#E5E4DB",
+                border: 0,
+                margin: 0,
+                height: "40px"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "48px",
+                fontWeight: 400,
+                fontSize: "12px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.65)",
+                padding: 0,
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "72px",
+                height: "32px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 共享車隊居住地址 標題 
+    fleetResidentialAddressTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "30%"
+        })
+    },
+    //#endregion
+    //#region 共享車隊居住地址 內文 
+    fleetResidentialAddressText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "70%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 共享車隊緊急聯絡人姓名 標題 
+    fleetEmergencyNameTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 共享車隊緊急聯絡人姓名 內文 
+    fleetEmergencyNameText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 共享車隊緊急聯絡人手機 標題 
+    fleetEmergencyCellPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 共享車隊緊急聯絡人手機 內文 
+    fleetEmergencyCellPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 共享車隊緊急聯絡人市話 標題 
+    fleetEmergencyPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 共享車隊緊急聯絡人市話 內文 
+    fleetEmergencyPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 共享車隊服務車隊 標題 
+    fleetServiceFleetTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 共享車隊服務車隊 內文 
+    fleetServiceFleetText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+    //#endregion
+
+    //#region 巴士資料表單區容器
+    busInformationContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                // padding: "24px 12px",
+                background: "#fff",
+                height: "260px",
+                width: "100%",
+
+            }
+        }
+    },
+    //#endregion
+    //#region  巴士資料 子標題列
+    busInfBaseSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                padding: "9px 16px",
+                background: "#E5E4DB",
+                border: 0,
+                margin: 0,
+                height: "40px"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "48px",
+                fontWeight: 400,
+                fontSize: "12px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.65)",
+                padding: 0,
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "72px",
+                height: "32px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 巴士居住地址 標題 
+    busResidentialAddressTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "30%"
+        })
+    },
+    //#endregion
+    //#region 巴士居住地址 內文 
+    busResidentialAddressText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "70%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 巴士緊急聯絡人姓名 標題 
+    busEmergencyNameTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 巴士緊急聯絡人姓名 內文 
+    busEmergencyNameText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 巴士緊急聯絡人手機 標題 
+    busEmergencyCellPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 巴士緊急聯絡人手機 內文 
+    busEmergencyCellPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 巴士緊急聯絡人市話 標題 
+    busEmergencyPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 巴士緊急聯絡人市話 內文 
+    busEmergencyPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 巴士服務車隊 標題 
+    busServiceFleetTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 巴士服務車隊 內文 
+    busServiceFleetText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+    //#endregion
 }
