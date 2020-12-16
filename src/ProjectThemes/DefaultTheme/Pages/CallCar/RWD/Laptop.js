@@ -6,7 +6,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
+                    padding: "60px 24px 16px 150px" // 標題列的padding
                 }
             }
         },
@@ -34,7 +34,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
+                    padding: "44px 24px 16px 48px" // 標題列的padding
                 }
             }
         },

@@ -142,7 +142,10 @@ const MobileMBase = (props) => {
                                             null
                                     }
                                     onChange={(value, momentObj) => {
-                                        globalContextService.set("CaseCallCarComponentPage", "TravelTime", value);
+                                        if (value !== globalContextService.get("CaseCallCarComponentPage", "TravelTime")) {
+                                            globalContextService.set("CaseCallCarComponentPage", "TravelTime", value);
+                                            setForceUpdate(f => !f)
+                                        }
                                     }}
                                     theme={mobileM.travelTime}
                                 />
@@ -540,15 +543,16 @@ const MobileMBase = (props) => {
                                             (起點)
                                         </Text>
 
-                                    <Arrow
+                                    {/* <Arrow
                                         style={mobileM.startToEndSvg}
-                                    />
+                                    /> */}
 
                                     {/* 起點地址 */}
                                     <Text
                                         theme={mobileM.todayToDoStartAddr}
                                     >
-                                        {globalContextService.get("CaseCallCarComponentPage", "StartPos")}
+                                        {/* {globalContextService.get("CaseCallCarComponentPage", "StartPos")} */}
+                                        test
                                     </Text>
 
                                 </SubContainer>
@@ -568,13 +572,113 @@ const MobileMBase = (props) => {
                                     <Text
                                         theme={mobileM.todayToDoEndAddr}
                                     >
-                                        {globalContextService.get("CaseCallCarComponentPage", "EndPos")}
+                                        {/* {globalContextService.get("CaseCallCarComponentPage", "EndPos")} */}
+                                        test
                                     </Text>
 
                                 </SubContainer>
 
                             </Container>
 
+                            {/* 去程容器 */}
+                            <Container theme={mobileM.goContainer}>
+                                <SubContainer theme={mobileM.goContentContainer}>
+                                    {/* 預估距離 */}
+                                    <Text theme={mobileM.contentTitle}>預估距離</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.goContentContainer}>
+                                    {/* 預估時間 */}
+                                    <Text theme={mobileM.contentTitle}>預估時間</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.goContentContainer}>
+                                    {/* 車資總額 */}
+                                    <Text theme={mobileM.contentTitle}>車資總額</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.goContentContainer}>
+                                    {/* 去程 */}
+                                    <Text theme={mobileM.contentRightText}>去程</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.goContentContainer}>
+                                    {/* 政府補助 */}
+                                    <Text theme={mobileM.contentTitle}>政府補助</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.goContentContainer}>
+                                    {/* 自負額 */}
+                                    <Text theme={mobileM.contentTitle}>自負額</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.goContentContainer}>
+                                    {/* 陪同人數 */}
+                                    <Text theme={mobileM.contentTitle}>陪同人數</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.goContentContainer}>
+                                    {/* 個案負擔 */}
+                                    <Text theme={mobileM.contentTitle}>個案負擔</Text>
+                                    <Text style={{ color: "rgba(255, 122, 69, 1)" }}>test</Text>
+                                </SubContainer>
+                            </Container>
+
+                            {/* 回程容器 */}
+                            <Container theme={mobileM.returnContainer}>
+                                <SubContainer theme={mobileM.returnContentContainer}>
+                                    {/* 預估距離 */}
+                                    <Text theme={mobileM.contentTitle}>預估距離</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.returnContentContainer}>
+                                    {/* 預估時間 */}
+                                    <Text theme={mobileM.contentTitle}>預估時間</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.returnContentContainer}>
+                                    {/* 車資總額 */}
+                                    <Text theme={mobileM.contentTitle}>車資總額</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.returnContentContainer}>
+                                    {/* 回程 */}
+                                    <Text theme={mobileM.contentRightText}>回程</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.returnContentContainer}>
+                                    {/* 政府補助 */}
+                                    <Text theme={mobileM.contentTitle}>政府補助</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.returnContentContainer}>
+                                    {/* 自負額 */}
+                                    <Text theme={mobileM.contentTitle}>自負額</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.returnContentContainer}>
+                                    {/* 陪同人數 */}
+                                    <Text theme={mobileM.contentTitle}>陪同人數</Text>
+                                    <Text>test</Text>
+                                </SubContainer>
+
+                                <SubContainer theme={mobileM.returnContentContainer}>
+                                    {/* 個案負擔 */}
+                                    <Text theme={mobileM.contentTitle}>個案負擔</Text>
+                                    <Text style={{ color: "rgba(255, 122, 69, 1)" }}>test</Text>
+                                </SubContainer>
+                            </Container>
                         </BasicContainer>
 
 
