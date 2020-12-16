@@ -115,7 +115,7 @@ export default {
                 height: "calc( 100% - 160px - 22px )",
                 boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
                 backgroundColor: "#fff",
-                padding: "24px 0"
+                padding: "24px 12px"
             })
         }
     },

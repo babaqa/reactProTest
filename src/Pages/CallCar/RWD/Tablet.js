@@ -24,8 +24,8 @@ const TabletBase = (props) => {
                 return (
                     {
                         "長照": <CaseCallCarComponent />,
-                        "共享車隊": <BusCallCarComponent />,
-                        "巴士": <WhiteCallCarComponent />
+                        "共享車隊": <WhiteCallCarComponent />,
+                        "巴士": <BusCallCarComponent />
                     }
                 )
             case "tabArray":

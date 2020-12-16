@@ -120,7 +120,7 @@ export const BUnitSortBase = (props) => {
                                 theme={{
                                     basic: (style) => ({
                                         ...style,
-                                        width: "80px",
+                                        width: "70px",
                                         height: "24px",
                                         fontSize: "14px",
                                         fontWeight: "400",
@@ -130,7 +130,7 @@ export const BUnitSortBase = (props) => {
                                         backgroundColor: "#fff",
                                         borderColor: "#1890FF",
                                         borderRadius: "2px",
-                                        margin: "0 0 0 16px"
+                                        margin: "0 0 0 2px"
                                     }),
                                     hover: (style, props) => ({
                                         ...style,
