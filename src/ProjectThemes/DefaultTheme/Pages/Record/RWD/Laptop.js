@@ -1,155 +1,170 @@
 export default {
+    //#region MainPageContainer 背景色調節
+    mainPageContainer: {
+        laptopOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "44px 48px 8px" // 標題列的padding
+                }
+            }
+        },
+        laptopOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        laptopContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 48px 220px",//188 是授權圖高度,
+                    minHeight: "calc( 100vh - 179px)"
+                }
+            }
+        },
+
+        tabletOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "24px 150px" // 標題列的padding
+                }
+            }
+        },
+        tabletOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        tabletContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 0 188px" //188 是授權圖高度
+                }
+            }
+        },
+        basicOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        basicOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        basicContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+    },
+    //#endregion
+
     //#region 標題列
     titleBar: {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "96px"
+                width: "120px",
             })
         },
         rightContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "640px"
+                width: "260px"
             })
         }
     },
     //#endregion
 
-    //#region 標題新增按鈕
-    titleAddButton: {
-        basic: (style) => ({
+    //#region 標題列 搭乘紀錄分頁
+    titleBarRecordTab: {
+        basic: (style, props) => ({
             ...style,
-            width: "82px",
-            height: "28px",
+            display: "inline-block",
+            margin: "0 16px",
+            lineHeight: "32px",
+            height: "46px",
             fontSize: "14px",
-            lineHeight: "22px",
-            // top: "2px",
-            color: "#389e0d",
-            borderColor: "#389e0d",
-            borderRadius: "2px",
-            margin: "0 16px 0 0",
-            padding: 0
+            cursor: "pointer",
+            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
+            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
         }),
-        hover: (style, props) => ({
-            ...style,
-            backgroundColor: "rgba(56, 158, 13, 0.05)"
-        }),
-        focus: (style, props) => ({})
-    },
-    //#endregion
-    //#region 標題新增按鈕 圖標
-    titleAddButtonIcon: {
-        position: "relative",
-        // height: "100%",
-        // right: "12px",
-        cursor: "pointer",
-        top: "2px",
-    },
-    //#endregion
-    //#region 新增彈窗
-    //#region Modal 樣式
-    addModal: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "912px",
-                height: "700px"
-            }),
-            tablet: (style, props) => ({
-            }),
-        },
-        contentContainer: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "24px",
-                zIndex: 100
-            }),
-        }
-    },
-    //#endregion
-    //#region addFormContainer
-    addFormContainer: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "864px",
-                height: "544px"
-            }),
-            tablet: (style, props) => ({
-            }),
-        },
-        contentContainer: (style, props) => ({
-            ...style,
-        })
     },
     //#endregion
 
-    //#region 標題編輯按鈕
-    titleEditButton: {
-        basic: (style) => ({
-            ...style,
-            width: "82px",
-            height: "28px",
-            fontSize: "14px",
-            lineHeight: "22px",
-            // top: "2px",
-            padding: 0,
-            color: "#1890FF",
-            borderColor: "#1890FF",
-            borderRadius: "2px",
-        }),
-        hover: (style, props) => ({
-            ...style,
-            backgroundColor: "rgba(24, 144, 255, 0.05)"
-        }),
-        focus: (style, props) => ({})
-    },
-    //#endregion
-    //#region 標題編輯按鈕 圖標
-    titleEditButtonIcon: {
-        position: "relative",
-        // height: "100%",
-        // right: "12px",
-        cursor: "pointer",
-        top: "2px",
-    },
-    //#endregion
-    //#region 編輯彈窗
-    //#region Modal 樣式
-    editModal: {
+    //#region 查詢日期區間 DateTimeRange
+    dateTimeRange: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                // padding: "0 12px",
+                display: "inline-block",
+                // ...style.occupy(3),
+            })
+        },
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "912px",
-                height: "700px"
-            }),
-            tablet: (style, props) => ({
-            }),
+                display: "inline-block",
+                padding: 0,
+                width: "250px"
+                // ...style.occupy(3),
+            })
         },
-        contentContainer: {
+        topLabel: {
             basic: (style, props) => ({
                 ...style,
-                padding: "24px",
-                zIndex: 100
-            }),
+                height: "0px"
+            })
+        },
+        dateTimePickerContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    width: "244px",
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        dateTimePickerSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                // height: "auto"
+                height: "0px"
+            })
         }
     },
     //#endregion
-    //#region editFormContainer
-    editFormContainer: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "864px",
-                height: "544px"
-            }),
-            tablet: (style, props) => ({
-            }),
-        },
-        contentContainer: (style, props) => ({
-            ...style,
-        })
-    },
     //#endregion
 }
