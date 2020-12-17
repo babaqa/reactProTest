@@ -1,20 +1,198 @@
 export default {
+    //#region MainPageContainer 背景色調節
+    mainPageContainer: {
+        laptopLOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "48px 150px 16px 150px" // 標題列的padding
+                }
+            }
+        },
+        laptopLOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        laptopLContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 150px 236px 150px"
+                }
+            }
+        },
+        laptopOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "32px 48px 16px 48px" // 標題列的padding
+                }
+            }
+        },
+        laptopOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        laptopContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 48px 204px 48px" //188 是授權圖高度
+                }
+            }
+        },
+
+        tabletOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "32px 24px 16px 24px" // 標題列的padding
+                }
+            }
+        },
+        tabletOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        tabletContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB",
+                    padding: "0 24px 204px 24px" //188 是授權圖高度
+                }
+            }
+        },
+        basicOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        basicOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+        basicContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#E5E4DB"
+                }
+            }
+        },
+    },
+    //#endregion
+
     //#region 標題列
     titleBar: {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "96px"
+                width: "120px"
             })
         },
         rightContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "610px"
+                width: "250px"
             })
         }
     },
     //#endregion
+
+
+    //#region 選擇日期區間 DateTimeRange 
+    dateTimeRange: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                // ...style.occupy(3),
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                padding: 0
+                // ...style.occupy(3),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        dateTimePickerContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    width: "244px",
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        dateTimePickerSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                // height: "auto"
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 標題列 預約訂車分頁
+    titleBarCallCarTab: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            margin: "0 16px",
+            lineHeight: "32px",
+            height: "46px",
+            fontSize: "14px",
+            cursor: "pointer",
+            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
+            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
+        }),
+    },
+    //#endregion
+
+
 
     //#region 標題新增按鈕
     titleAddButton: {
@@ -53,8 +231,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "720px",
-                height: "900px"
+                width: "1152px",
+                height: "823px"
             }),
             tablet: (style, props) => ({
             }),
@@ -73,8 +251,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "672px",
-                height: "744px"
+                width: "1104px",
+                height: "667px"
             }),
             tablet: (style, props) => ({
             }),
@@ -121,8 +299,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "720px",
-                height: "900px"
+                width: "1152px",
+                height: "823px"
             }),
             tablet: (style, props) => ({
             }),
@@ -141,8 +319,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "672px",
-                height: "744px"
+                width: "1104px",
+                height: "667px"
             }),
             tablet: (style, props) => ({
             }),
@@ -152,4 +330,5 @@ export default {
         })
     },
     //#endregion
+
 }
