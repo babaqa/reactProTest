@@ -14,7 +14,7 @@ export const News = (props) => {
     const [WhichForm, setWhichForm] = useState("Login"); // 切換 登入、忘記密碼、設定登入密碼 表單
     const [SendedAuthCode, setSendedAuthCode] = useState(false); // 紀錄是否已經發送過驗證碼 (要不要顯示重新發送驗證碼)
     const [WaitSecToZero, setWaitSecToZero] = useState(true); // 控制驗證碼倒數
-    const [NowTab, setNowTab] = useState("車行公告"); // 目前公告頁面
+    const [NowTab, setNowTab] = useState("系統公告"); // 目前公告頁面
     const [Width, Height] = useWindowSize();
 
     return (
