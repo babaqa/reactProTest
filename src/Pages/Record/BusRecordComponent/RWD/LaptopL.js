@@ -5,10 +5,12 @@ import { ReactComponent as NoData } from '../../../../Assets/img/RecordPage/NoDa
 import { ReactComponent as Share } from '../../../../Assets/img/RecordPage/Share.svg'
 import { ReactComponent as Start } from '../../../../Assets/img/RecordPage/Start.svg'
 import { ReactComponent as End } from '../../../../Assets/img/RecordPage/End.svg'
+import { ReactComponent as Case } from '../../../../Assets/img/RecordPage/Case.svg'
+import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/Fleet.svg'
 import { ReactComponent as Bus } from '../../../../Assets/img/RecordPage/Bus.svg'
 import { useHistory } from 'react-router-dom';
-import { DispatchTable } from '../../../../ProjectComponent';
-import { DateTimePicker, BasicContainer, Tag, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadiorowData, modalsService, Container, OldTable } from '../../../../Components';
+import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+
 
 
 const LaptopLBase = (props) => {
@@ -18,15 +20,19 @@ const LaptopLBase = (props) => {
     let history = useHistory()
 
     let data = [
-        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { case: "巴士", passenger: ["123", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { case: "共享車隊", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { case: "巴士", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { case: "巴士", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { case: "共享車隊", passenger: ["王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { case: "共享車隊", userName: "王大明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位...", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "巴士", passenger: ["123", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "共享車隊", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "巴士", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "巴士", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "共享車隊", passenger: ["王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "共享車隊", userName: "王大明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "巴士", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "共享車隊", passenger: ["王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+        { case: "共享車隊", userName: "王大明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
     ]
 
     return (
@@ -44,7 +50,6 @@ const LaptopLBase = (props) => {
                 </>
                 :
                 <>
-
                     <Container>
                         <OldTable
                             dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
@@ -63,7 +68,6 @@ const LaptopLBase = (props) => {
                                     globalContextService.set("RocordPage", "CheckedRowKeys", checkedRowKeys);
                                     globalContextService.set("RocordPage", "CheckedRowsData", checkedRows);
                                     //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
-                                    globalContextService.set("RocordPage", "TableCheckedClearKey", globalContextService.get("RocordPage", "orgId"));
                                     //#endregion
                                 }
                             }
@@ -86,7 +90,7 @@ const LaptopLBase = (props) => {
                                         // fixed: 'left',
                                         render: (rowData) => {
                                             return (
-                                                <React.Fragment key={rowData}>
+                                                <>
                                                     {/* 卡片資料表單區容器 */}
                                                     < BasicContainer
                                                         baseDefaultTheme={"DefaultTheme"}
@@ -106,12 +110,23 @@ const LaptopLBase = (props) => {
                                                                 >
                                                                     {rowData?.userName}
 
-                                                                    {/* 案號 CaseNumber*/}
-                                                                    <Text
-                                                                        theme={laptopL.caseNumber}
-                                                                    >
-                                                                        {"案號 " + rowData?.caseNumber}
-                                                                    </Text>
+                                                                    {rowData?.case === "長照"
+                                                                        &&
+                                                                        <>
+                                                                            {/* 案號 標題*/}
+                                                                            < Text
+                                                                                theme={laptopL.caseNumberTitle}
+                                                                            >
+                                                                                案號
+                                                                         {/* 案號 內文*/}
+                                                                                <Text
+                                                                                    theme={laptopL.caseNumberText}
+                                                                                >
+                                                                                    {rowData?.caseNumber}
+                                                                                </Text>
+                                                                            </Text>
+                                                                        </>
+                                                                    }
                                                                 </Text>
 
                                                                 <Tag
@@ -120,7 +135,7 @@ const LaptopLBase = (props) => {
                                                                     text={"服務單位取消"}
                                                                 />
 
-                                                                {rowData?.share
+                                                                {rowData?.case !== "巴士"
                                                                     &&
                                                                     <>
                                                                         {/* 已共乘  ShareText*/}
@@ -130,8 +145,8 @@ const LaptopLBase = (props) => {
                                                                             <Share
                                                                                 style={laptopL.shareSvg}
                                                                             />
-                                                                已共乘
-                                                            </Text>
+                                                                    已共乘
+                                                                </Text>
                                                                     </>
                                                                 }
 
@@ -148,7 +163,7 @@ const LaptopLBase = (props) => {
                                                                 >
                                                                     訂單編號
 
-                                                                    {/* 訂單編號 內文 */}
+                                                                        {/* 訂單編號 內文 */}
                                                                     <Text
                                                                         theme={laptopL.orderNumberText}
                                                                     >
@@ -162,7 +177,7 @@ const LaptopLBase = (props) => {
                                                                 >
                                                                     預約搭乘時間
 
-                                                    {/* 預約搭乘時間 內文 */}
+                                                                    {/* 預約搭乘時間 內文 */}
                                                                     <Text
                                                                         theme={laptopL.bookRideText}
                                                                     >
@@ -170,18 +185,24 @@ const LaptopLBase = (props) => {
                                                                     </Text>
                                                                 </Text>
 
+
+
                                                                 {/* 服務單位 標題 */}
                                                                 <Text
                                                                     theme={laptopL.serviceUnitTitle}
                                                                 >
                                                                     服務單位
 
-                                                    {/* 服務單位 內文 */}
-                                                                    <Text
-                                                                        theme={laptopL.serviceUnitText}
-                                                                    >
-                                                                        {rowData?.serviceUnit}
-                                                                    </Text>
+                                                                    {/* 服務單位 內文 */}
+                                                                    <Tooltip placement="top" title={rowData?.serviceUnit}>
+
+                                                                        <Text
+                                                                            theme={laptopL.serviceUnitText}
+                                                                        >
+                                                                            {rowData?.serviceUnit}
+                                                                        </Text>
+                                                                    </Tooltip>
+
                                                                 </Text>
 
                                                                 {/* 司機 標題 */}
@@ -190,7 +211,7 @@ const LaptopLBase = (props) => {
                                                                 >
                                                                     司機
 
-                                                    {/* 司機 內文 */}
+                                                                    {/* 司機 內文 */}
                                                                     <Text
                                                                         theme={laptopL.driverText}
                                                                     >
@@ -204,7 +225,7 @@ const LaptopLBase = (props) => {
                                                                 >
                                                                     車牌
 
-                                                    {/* 車牌 內文 */}
+                                                                    {/* 車牌 內文 */}
                                                                     <Text
                                                                         theme={laptopL.licensePlateText}
                                                                     >
@@ -235,7 +256,7 @@ const LaptopLBase = (props) => {
                                                                     }}
                                                                 >
                                                                     司機未執行
-                                                 </NativeLineButton>
+                                                                </NativeLineButton>
 
                                                             </SubContainer>
 
@@ -253,7 +274,7 @@ const LaptopLBase = (props) => {
                                                                         >
                                                                             車資總額
 
-                                                                            {/* 車資總額 內文 */}
+                                                                                {/* 車資總額 內文 */}
                                                                             <Text
                                                                                 theme={laptopL.totalFareText}
                                                                             >
@@ -267,7 +288,7 @@ const LaptopLBase = (props) => {
                                                                         >
                                                                             政府補助
 
-                                                        {/* 政府補助 內文 */}
+                                                                            {/* 政府補助 內文 */}
                                                                             <Text
                                                                                 theme={laptopL.govSubsidyText}
                                                                             >
@@ -281,7 +302,7 @@ const LaptopLBase = (props) => {
                                                                         >
                                                                             陪同金額
 
-                                                         {/* 陪同金額 內文 */}
+                                                                            {/* 陪同金額 內文 */}
                                                                             <Text
                                                                                 theme={laptopL.accompanyingAmountText}
                                                                             >
@@ -303,7 +324,7 @@ const LaptopLBase = (props) => {
                                                                             >
                                                                                 是否共乘
 
-                                                                {/* 是否共乘 內文 */}
+                                                                                {/* 是否共乘 內文 */}
                                                                                 <Text
                                                                                     theme={laptopL.canShareText}
                                                                                 >
@@ -319,7 +340,7 @@ const LaptopLBase = (props) => {
                                                                     >
                                                                         人數
 
-                                                        {/* 人數 內文 */}
+                                                                        {/* 人數 內文 */}
                                                                         <Text
                                                                             theme={laptopL.numberOfPeopleText}
                                                                         >
@@ -336,7 +357,7 @@ const LaptopLBase = (props) => {
                                                                             >
                                                                                 車資總額
 
-                                                                {/* 車資總額 內文 */}
+                                                                                {/* 車資總額 內文 */}
                                                                                 <Text
                                                                                     theme={laptopL.totalFareText}
                                                                                 >
@@ -358,7 +379,7 @@ const LaptopLBase = (props) => {
                                                                             乘客
 
 
-                                                                        </Text>
+                                                                            </Text>
 
                                                                         {/* 乘客 內文 容器*/}
                                                                         <Text
@@ -366,9 +387,9 @@ const LaptopLBase = (props) => {
                                                                         >
                                                                             <Container>
                                                                                 {
-                                                                                    (rowData?.passenger ?? []).map(passenger => {
+                                                                                    (rowData?.passenger ?? []).map((passenger, index) => {
                                                                                         return (
-                                                                                            <>
+                                                                                            <React.Fragment key={index}>
                                                                                                 {/* 乘客 內文 */}
                                                                                                 <Text
                                                                                                     theme={laptopL.passengerText}
@@ -376,7 +397,7 @@ const LaptopLBase = (props) => {
                                                                                                     {passenger}
 
                                                                                                 </Text>
-                                                                                            </>
+                                                                                            </React.Fragment>
                                                                                         )
                                                                                     })
                                                                                 }
@@ -395,9 +416,9 @@ const LaptopLBase = (props) => {
                                                                     >
 
                                                                         <Start style={laptopL.startPointSvg} />
-                                                                        起點
+                                                                            起點
 
-                                                                        {/* 起點 內文 */}
+                                                                            {/* 起點 內文 */}
                                                                         <Text
                                                                             theme={laptopL.startPointText}
                                                                         >
@@ -412,9 +433,9 @@ const LaptopLBase = (props) => {
                                                                     >
 
                                                                         <End style={laptopL.endPointSvg} />
-                                                                        迄點
+                                                                            迄點
 
-                                                                        {/* 迄點 內文 */}
+                                                                            {/* 迄點 內文 */}
                                                                         <Text
                                                                             theme={laptopL.endPointText}
                                                                         >
@@ -437,7 +458,7 @@ const LaptopLBase = (props) => {
                                                                     theme={laptopL.caseBurdenTitle}
                                                                 >
                                                                     個案負擔
-                                                                </Text>
+                                                                    </Text>
 
                                                                 {/* 個案負擔 內文 */}
                                                                 <Text
@@ -461,7 +482,7 @@ const LaptopLBase = (props) => {
                                                                             }}
                                                                         >
                                                                             再叫一次
-                                                                        </NativeLineButton>
+                                                                            </NativeLineButton>
                                                                     </>
                                                                 }
 
@@ -477,7 +498,7 @@ const LaptopLBase = (props) => {
                                                                     }}
                                                                 >
                                                                     乘車明細
-                                                                </NativeLineButton>
+                                                                    </NativeLineButton>
 
                                                                 {/* 填寫問卷按鈕 */}
                                                                 <NativeLineButton
@@ -491,14 +512,13 @@ const LaptopLBase = (props) => {
                                                                     }}
                                                                 >
                                                                     填寫問卷
-                                                                    </NativeLineButton>
+                                                                        </NativeLineButton>
 
                                                             </SubContainer>
 
                                                         </Container>
                                                     </BasicContainer>
-
-                                                </React.Fragment>
+                                                </>
                                             )
                                         }
                                     },

@@ -57,7 +57,7 @@ export default {
     caseSvg: {
         position: "absolute",
         top: "-5px",
-        left: "-7px",
+        left: "-24px",
     },
     //#endregion
 
@@ -77,16 +77,31 @@ export default {
     },
     //#endregion
 
-    //#region 案號 CaseNumber
-    caseNumber: {
+    //#region 案號 標題
+    caseNumberTitle: {
         basic: (style, props) => ({
             ...style,
             height: "22px",
             fontWeight: 500,
             fontSize: "14px",
             lineHeight: "22px",
-            color: "rgba(0, 0, 0, 0.85)",
-            margin: "8px 0 0"
+            color: "rgba(0,0,0,0.45)",
+            margin: "8px 0 12px"
+        })
+    },
+    //#endregion
+
+    //#region 案號 內文 
+    caseNumberText: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            height: "22px",
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0,0,0,0.85)",
+            margin: "0 0 0 8px"
         })
     },
     //#endregion
@@ -218,7 +233,7 @@ export default {
             color: "rgba(0,0,0,0.45)",
             margin: "0 0 12px",
             display: "flex",
-            alignItems: "baseline"
+            alignItems: "end"
         })
     },
     //#endregion
@@ -228,14 +243,17 @@ export default {
         basic: (style, props) => ({
             ...style,
             display: "inline-block",
+            textOverflow: "ellipsis",
             // height: "22px",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
             fontWeight: 400,
             fontSize: "14px",
             lineHeight: "22px",
             color: "rgba(0,0,0,0.85)",
             margin: "0 0 0 8px",
-            width: "80%"
-        })
+            maxWidth: "80%"
+        }),
     },
     //#endregion
 
