@@ -1,93 +1,12 @@
 export default {
     //#region MainPageContainer 背景色調節
     mainPageContainer: {
-        laptopLOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "60px 150px 8px" // 標題列的padding
-                }
-            }
-        },
-        laptopLOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        laptopLContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 138px 224px", //188 是授權圖高度
-                    minHeight: "calc( 100vh - 215px)"
-                }
-            }
-        },
-
-
-        laptopOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
-                }
-            }
-        },
-        laptopOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        laptopContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
-                }
-            }
-        },
-
-        tabletOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
-                }
-            }
-        },
-        tabletOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        tabletContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
-                }
-            }
-        },
         basicOutsideOutContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#FFFFFF",
+                    padding: 0
                 }
             }
         },
@@ -95,7 +14,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#E5E4DB",
+                    height: "calc( 100vh - 197px)",
                 }
             }
         },
@@ -103,43 +23,12 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#E5E4DB",
+                    padding: "4px 0 236px",
+                    minHeight: "calc( 100vh - 197px)"
                 }
             }
         },
-    },
-    //#endregion
-
-    //#region 標題列
-    titleBar: {
-        titleText: {
-            basic: (style, props) => ({
-                ...style,
-                width: "120px",
-            })
-        },
-        rightContainer: {
-            basic: (style, props) => ({
-                ...style,
-                width: "260px"
-            })
-        }
-    },
-    //#endregion
-
-    //#region 標題列 搭乘紀錄分頁
-    titleBarRecordTab: {
-        basic: (style, props) => ({
-            ...style,
-            display: "inline-block",
-            margin: "0 16px",
-            lineHeight: "32px",
-            height: "46px",
-            fontSize: "14px",
-            cursor: "pointer",
-            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
-            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
-        }),
     },
     //#endregion
 
@@ -157,8 +46,8 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 display: "inline-block",
-                padding: 0,
-                width: "250px"
+                padding: "8px 16px",
+                width: "100%"
                 // ...style.occupy(3),
             })
         },
@@ -172,7 +61,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    width: "244px",
+                    width: "100%",
                     color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
                 }
             }
@@ -194,5 +83,23 @@ export default {
         }
     },
     //#endregion
+
+    //#region 標題列 聯繫客服分頁
+    titleBarRecordTab: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            margin: "0 16px",
+            lineHeight: "46px",
+            height: "46px",
+            fontSize: "14px",
+            cursor: "pointer",
+            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
+            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset"),
+            width: "calc( 25% - 32px )",
+            textAlign: "center"
+        }),
+    },
     //#endregion
+
 }

@@ -6,8 +6,6 @@ import { ReactComponent as Share } from '../../../../Assets/img/RecordPage/Share
 import { ReactComponent as Start } from '../../../../Assets/img/RecordPage/Start.svg'
 import { ReactComponent as End } from '../../../../Assets/img/RecordPage/End.svg'
 import { ReactComponent as Case } from '../../../../Assets/img/RecordPage/Case.svg'
-import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/Fleet.svg'
-import { ReactComponent as Bus } from '../../../../Assets/img/RecordPage/Bus.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 
