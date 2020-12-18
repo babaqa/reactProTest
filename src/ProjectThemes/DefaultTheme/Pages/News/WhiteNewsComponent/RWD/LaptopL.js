@@ -4,7 +4,7 @@ export default {
     tableContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 211px - 188px - 48px)",
+            height: "calc( 100vh - 211px - 48px)",
             width: "100%",
             boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
             borderRadius: "16px"
