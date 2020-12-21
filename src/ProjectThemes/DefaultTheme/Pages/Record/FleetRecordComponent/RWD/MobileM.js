@@ -61,7 +61,7 @@ export default {
         left: "-8px",
         width: "100%",
         maxWidth: "235px",
-        minHight: "210px"
+        minWidth: "160px"
     },
     //#endregion
 

@@ -25,7 +25,7 @@ export default {
             return {
                 ...style,
                 // display: "inline-block",
-                padding: "24px 24px 0",
+                padding: "24px 16px 0 24px",
                 margin: "8px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
@@ -42,12 +42,12 @@ export default {
         basic: (style, props) => {
             return {
                 ...style,
-                ...style.occupy(3),
+                ...style.occupy(2.5),
                 position: "relative",
                 display: "inline-block",
                 // boxShadow: "inset 0 0 0 1px #D9D9D9",
                 height: "158px",
-                padding: "0 12px 0 0"
+                padding: "0 8px 0 0"
             }
         }
     },
@@ -56,8 +56,11 @@ export default {
     //#region 案件類別 圖標
     caseSvg: {
         position: "absolute",
-        top: "-5px",
-        left: "-7px",
+        top: 0,
+        left: "-24px",
+        width: "100%",
+        minWidth: "190px",
+        maxWidth: "235px",
     },
     //#endregion
 
@@ -77,16 +80,31 @@ export default {
     },
     //#endregion
 
-    //#region 案號 CaseNumber
-    caseNumber: {
+    //#region 案號 標題
+    caseNumberTitle: {
         basic: (style, props) => ({
             ...style,
             height: "22px",
             fontWeight: 500,
             fontSize: "14px",
             lineHeight: "22px",
-            color: "rgba(0, 0, 0, 0.85)",
-            margin: "8px 0 0"
+            color: "rgba(0,0,0,0.45)",
+            margin: "8px 0 12px"
+        })
+    },
+    //#endregion
+
+    //#region 案號 內文 
+    caseNumberText: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            height: "22px",
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0,0,0,0.85)",
+            margin: "0 0 0 8px"
         })
     },
     //#endregion
@@ -140,10 +158,10 @@ export default {
         basic: (style, props) => {
             return {
                 ...style,
-                ...style.occupy(4),
+                ...style.occupy(3.8),
                 // display: "inline-block",
                 // boxShadow: "inset 0 0 0 1px #D9D9D9",
-                padding: "0 8px 0 12px",
+                padding: "0 8px",
                 height: "158px"
             }
         }
@@ -211,14 +229,14 @@ export default {
     serviceUnitTitle: {
         basic: (style, props) => ({
             ...style,
-            height: "22px",
+            // height: "22px",
             fontWeight: 500,
             fontSize: "14px",
             lineHeight: "22px",
             color: "rgba(0,0,0,0.45)",
             margin: "0 0 12px",
             display: "flex",
-            alignItems: "baseline"
+            alignItems: "end"
         })
     },
     //#endregion
@@ -228,14 +246,17 @@ export default {
         basic: (style, props) => ({
             ...style,
             display: "inline-block",
-            height: "22px",
+            textOverflow: "ellipsis",
+            // height: "22px",
+            overflow: "hidden",
+            whiteSpace: "nowrap",
             fontWeight: 400,
             fontSize: "14px",
             lineHeight: "22px",
             color: "rgba(0,0,0,0.85)",
             margin: "0 0 0 8px",
-            width: "80%"
-        })
+            maxWidth: "73%"
+        }),
     },
     //#endregion
 
@@ -334,10 +355,10 @@ export default {
         basic: (style, props) => {
             return {
                 ...style,
-                ...style.occupy(4),
+                ...style.occupy(4.5),
                 display: "inline-block",
                 // boxShadow: "inset 0 0 0 1px #D9D9D9",
-                padding: "0 12px 0 8px",
+                padding: "0 8px",
                 height: "158px"
             }
         }
@@ -440,7 +461,7 @@ export default {
             fontSize: "14px",
             lineHeight: "22px",
             color: "rgba(0,0,0,0.45)",
-            margin: "0 0 12px"
+            margin: "0 16px 12px 0"
         })
     },
     //#endregion
@@ -469,7 +490,7 @@ export default {
             fontSize: "14px",
             lineHeight: "22px",
             color: "rgba(0,0,0,0.45)",
-            margin: "0 0 12px 16px"
+            margin: "0 16px 12px 0"
         })
     },
     //#endregion
@@ -489,12 +510,59 @@ export default {
     },
     //#endregion
 
+    //#region 乘客 標題 
+    passengerTitle: {
+        basic: (style, props) => ({
+            ...style,
+            // height: "60px",
+            // display: "inline-block",
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0,0,0,0.45)",
+            margin: "0 0 12px 0",
+            width: "28px"
+        })
+    },
+    //#endregion
+
+    //#region 乘客 內文  容器
+    passengerContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            height: "60px",
+            color: "rgba(0,0,0,0.65)",
+            margin: "0 0 12px 8px",
+            backgroundColor: "#F5F5F5",
+            width: "88%",
+            padding: "4px"
+        })
+    },
+    //#endregion
+
+    //#region 乘客 內文 
+    passengerText: {
+        basic: (style, props) => ({
+            ...style,
+            // height: "22px",
+            // display: "inline-block",
+            fontWeight: 500,
+            fontSize: "12px",
+            lineHeight: "18px",
+            color: "rgba(0,0,0,0.65)",
+            margin: "4px",
+            width: "36px"
+        })
+    },
+    //#endregion
+
     //#region 起訖點 容器
     startToEndContainer: {
         basic: (style, props) => ({
             ...style,
             position: "absolute",
-            bottom: 0,
+            bottom: "-24px",
             width: "calc( 100% - 20px )",
             // margin: "0 12px",
             // boxShadow: "inset 0 0 0 1px #D9D9D9"
@@ -506,14 +574,15 @@ export default {
     startPointTitle: {
         basic: (style, props) => ({
             ...style,
-            height: "44px",
+            // height: "22px",
             fontWeight: 700,
             fontSize: "14px",
             lineHeight: "22px",
             color: "#FF7A45",
             padding: "0 0 0 24px",
             alignItems: "baseline",
-            display: "flex"
+            display: "flex",
+            width: "100%"
         })
     },
     //#endregion
@@ -531,13 +600,13 @@ export default {
         basic: (style, props) => ({
             ...style,
             display: "inline-block",
-            height: "44px",
+            // height: "22px",
             fontWeight: 600,
             fontSize: "14px",
             lineHeight: "22px",
             color: "rgba(0,0,0,0.85)",
             padding: "0 0 0 8px",
-            width: "calc( 100% - 28px )"
+            width: "calc( 100% - 28px )",
         })
     },
     //#endregion
@@ -546,14 +615,15 @@ export default {
     endPointTitle: {
         basic: (style, props) => ({
             ...style,
-            height: "44px",
+            // height: "22px",
             fontWeight: 700,
             fontSize: "14px",
             lineHeight: "22px",
             color: "#FF7A45",
             padding: "0 0 0 24px",
             alignItems: "baseline",
-            display: "flex"
+            display: "flex",
+            width: "100%"
         })
     },
     //#endregion
@@ -577,7 +647,7 @@ export default {
             lineHeight: "22px",
             color: "rgba(0,0,0,0.85)",
             padding: "0 0 0 8px",
-            width: "calc( 100% - 28px )"
+            width: "calc( 100% - 28px )",
         })
     },
     //#endregion
@@ -589,10 +659,10 @@ export default {
         basic: (style, props) => {
             return {
                 ...style,
-                ...style.occupy(1),
+                ...style.occupy(1.2),
                 display: "inline-block",
                 // boxShadow: "inset 0 0 0 1px #D9D9D9",
-                padding: "0 0 0 12px",
+                padding: "0 0 0 8px",
                 height: "158px",
                 textAlign: "center"
             }
@@ -662,7 +732,10 @@ export default {
     rideDetailsButton: {
         basic: (style) => ({
             ...style,
-            width: "100%",
+            position: "absolute",
+            bottom: "32px",
+            left: "12px",
+            width: "calc( 100% - 12px )",
             height: "24px",
             fontSize: "14px",
             lineHeight: "22px",
@@ -672,7 +745,7 @@ export default {
             backgroundColor: "#1890FF",
             borderColor: "#1890FF",
             borderRadius: "2px",
-            margin: "0 0 8px 0",
+            // margin: "0 0 8px 0",
             // position: "absolute",
             fontWeight: "400",
             // left: "116px",
@@ -690,7 +763,10 @@ export default {
     questionnaireButton: {
         basic: (style) => ({
             ...style,
-            width: "100%",
+            position: "absolute",
+            bottom: 0,
+            left: "12px",
+            width: "calc( 100% - 12px )",
             height: "24px",
             fontSize: "14px",
             lineHeight: "22px",
