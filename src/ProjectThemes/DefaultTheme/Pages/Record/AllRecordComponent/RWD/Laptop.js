@@ -58,9 +58,6 @@ export default {
         position: "absolute",
         top: 0,
         left: "-24px",
-        width: "100%",
-        minWidth: "190px",
-        maxWidth: "235px",
     },
     //#endregion
 
