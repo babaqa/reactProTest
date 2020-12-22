@@ -690,7 +690,7 @@ export default {
                 ...style.occupy(12),
                 display: "inline-block",
                 // boxShadow: "inset 0 0 0 1px #D9D9D9",
-                padding: "0 0 0 8px",
+                padding: "0 0 8px 8px",
                 // height: "24px",
             }
         }
