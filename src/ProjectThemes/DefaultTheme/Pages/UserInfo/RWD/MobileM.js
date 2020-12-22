@@ -126,7 +126,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "295px",
+                width: "100%",
                 height: "326px",
                 // padding: "24px"
             }),
@@ -365,7 +365,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "295px",
+                width: "100%",
                 height: "62px",
                 // padding: "24px"
             }),
@@ -436,8 +436,9 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "343px",
+                width: "100%",
                 height: "390px",
+                maxWidth: "343px"
             }),
             tablet: (style, props) => ({
             }),
@@ -456,7 +457,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "295px",
+                width: "100%",
                 height: "234px",
                 // padding: "24px"
             }),
@@ -480,72 +481,13 @@ export default {
         })
     },
     //#endregion
-    //#region 重送驗證碼按鈕 (等待倒數中)
-    resendVerificationCodeWaitButton: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                position: "absolute",
-                width: "151px",
-                background: "#f5f5f5",
-                boxShadow: null,//"0px 2px 0px rgba(0, 0, 0, 0.043)",
-                border: "1px solid #d9d9d9",
-                borderRadius: "2px",
-                height: "28px",
-                padding: "0 8px",
-                right: 0,
-                bottom: "-40px"
-            }),
-            hover: (style, props) => ({
-                ...style,
-                backgroundColor: "#f5f5f5"
-            })
-        },
-        text: {
-            basic: (style, props) => ({
-                ...style,
-                fontSize: "14px",
-                lineHeight: "28px",
-                top: "-5px"
-            }),
-        }
-    },
-    //#endregion
-    //#region 重送驗證碼按鈕 
-    resendVerificationCodeButton: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                position: "absolute",
-                width: "102px",
-                background: "#FFFFFF",
-                boxShadow: null,//"0px 2px 0px rgba(0, 0, 0, 0.043)",
-                border: "1px solid #d9d9d9",
-                borderRadius: "2px",
-                height: "28px",
-                padding: "0 8px",
-                right: 0,
-                bottom: "-40px"
-            }),
-            hover: (style, props) => ({
-                ...style,
-                backgroundColor: "#FFFFFF",
-                borderColor: "#1890FF"
-            })
-        },
-        text: {
-            basic: (style, props) => ({
-                ...style,
-                fontSize: "14px",
-                lineHeight: "28px",
-                top: "-5px",
-                color: "rgba(0,0,0,0.65)"
-            }),
-            hover: (style, props) => ({
-                ...style,
-                color: "#1890FF",
-            })
-        }
+    //#region 重送驗證碼按鈕 容器
+    timeCounterContainer: {
+        basic: (style, props) => ({
+            ...style,
+            height: "28px",
+            margin: "19px 0 0"
+        })
     },
     //#endregion
     //#region 驗證碼 ModalVerificationCode 
@@ -863,7 +805,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "295px",
+                width: "100%",
                 height: "210px",
                 // padding: "24px"
             }),

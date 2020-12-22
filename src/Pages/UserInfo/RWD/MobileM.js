@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
-import { MainPageContainer, MainPageTitleBar, MainPageSubTitleBar } from '../../../ProjectComponent';
+import { MainPageContainer, MainPageTitleBar, MainPageSubTitleBar, TimeCounterButton } from '../../../ProjectComponent';
 import { Container, BasicContainer, BasicButton, TreeSelector, Tooltip, DateTimePicker, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Lock } from '../../../Assets/img/UserInfoPage/Lock.svg'
 import { isNil } from 'lodash';
@@ -11,32 +11,6 @@ import { useHistory } from 'react-router-dom';
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { userInfo: { rwd: { mobileM } } } } = Theme;
-
-    //#region 倒數10秒
-    const TimeCounter = (props) => {
-
-        const [Sec, setSec] = useState(10);
-
-        useEffect(() => {
-            let counter = setInterval(() => {
-                setSec(s => s - 1);
-                if (Sec === 1) {
-                    props.onCountToZero && props.onCountToZero();
-                }
-            }, 1000)
-
-            return () => {
-                clearInterval(counter)
-            }
-        }, [Sec])
-
-        return (
-            <>
-                {Sec}
-            </>
-        )
-    }
-    //#endregion
 
     return (
         <>
@@ -347,33 +321,15 @@ const MobileMBase = (props) => {
                                                                         theme={mobileM.modalVerificationCode}
                                                                     />
 
-                                                                    {props.WaitSecToZero
-                                                                        ?
-                                                                        < BasicButton
-                                                                            baseDefaultTheme={"DefaultTheme"}
-                                                                            disable
-                                                                            theme={mobileM.resendVerificationCodeWaitButton}
-                                                                            text={
-                                                                                <>
-                                                                                    重送驗證碼(
-                                                                                            <TimeCounter
-                                                                                        onCountToZero={() => {
-                                                                                            props.setWaitSecToZero(false);
-                                                                                            console.log("End")
-                                                                                        }}
-                                                                                    />
-                                                                                            秒)
-                                                                                        </>
-                                                                            }
+                                                                    <Container
+                                                                        theme={mobileM.timeCounterContainer}
+                                                                    >
+                                                                        <TimeCounterButton
+                                                                            getPresetWaitSecToZero={true}
+                                                                            getPresetCounter={10}
                                                                         />
-                                                                        :
-                                                                        <BasicButton
-                                                                            baseDefaultTheme={"PrimaryTheme"}
-                                                                            text={"重送驗證碼"}
-                                                                            theme={mobileM.resendVerificationCodeButton}
-                                                                            onClick={() => { props.setWaitSecToZero(true); console.log("Start") }}
-                                                                        />
-                                                                    }
+                                                                    </Container>
+
                                                                 </FormRow>
                                                             </FormContainer>
                                                         </>

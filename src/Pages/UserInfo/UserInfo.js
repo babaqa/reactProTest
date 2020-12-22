@@ -22,14 +22,8 @@ export const UserInfo = (props) => {
             {
                 1440 <= Width &&
                 <LaptopL
-                    WhichForm={WhichForm}
-                    setWhichForm={setWhichForm}
-                    SendedAuthCode={SendedAuthCode}
-                    setSendedAuthCode={setSendedAuthCode}
-                    WaitSecToZero={WaitSecToZero}
-                    setWaitSecToZero={setWaitSecToZero}
-                    nowTab={NowTab}
-                    setNowTab={setNowTab}
+                    // WaitSecToZero={WaitSecToZero}
+                    // setWaitSecToZero={setWaitSecToZero}
                 />
             }
             {

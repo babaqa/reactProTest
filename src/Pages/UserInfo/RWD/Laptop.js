@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
-import { MainPageContainer, MainPageTitleBar, MainPageSubTitleBar } from '../../../ProjectComponent';
+import { MainPageContainer, MainPageTitleBar, TimeCounterButton, MainPageSubTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, BasicButton, TreeSelector, Tooltip, DateTimePicker, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Lock } from '../../../Assets/img/UserInfoPage/Lock.svg'
 import { isNil } from 'lodash';
@@ -13,32 +13,6 @@ const LaptopBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { userInfo: { rwd: { laptop } } } } = Theme;
     let history = useHistory()
-
-    //#region 倒數10秒
-    const TimeCounter = (props) => {
-
-        const [Sec, setSec] = useState(10);
-
-        useEffect(() => {
-            let counter = setInterval(() => {
-                setSec(s => s - 1);
-                if (Sec === 1) {
-                    props.onCountToZero && props.onCountToZero();
-                }
-            }, 1000)
-
-            return () => {
-                clearInterval(counter)
-            }
-        }, [Sec])
-
-        return (
-            <>
-                {Sec}
-            </>
-        )
-    }
-    //#endregion
 
     return (
         <>
@@ -354,33 +328,10 @@ const LaptopBase = (props) => {
                                                                         topLabel={
                                                                             <>
                                                                                 驗證碼
-                                                                                {props.WaitSecToZero
-                                                                                    ?
-                                                                                    < BasicButton
-                                                                                        baseDefaultTheme={"DefaultTheme"}
-                                                                                        disable
-                                                                                        theme={laptop.resendVerificationCodeWaitButton}
-                                                                                        text={
-                                                                                            <>
-                                                                                                重送驗證碼(
-                                                                                            <TimeCounter
-                                                                                                    onCountToZero={() => {
-                                                                                                        props.setWaitSecToZero(false);
-                                                                                                        console.log("End")
-                                                                                                    }}
-                                                                                                />
-                                                                                            秒)
-                                                                                        </>
-                                                                                        }
-                                                                                    />
-                                                                                    :
-                                                                                    <BasicButton
-                                                                                        baseDefaultTheme={"PrimaryTheme"}
-                                                                                        text={"重送驗證碼"}
-                                                                                        theme={laptop.resendVerificationCodeButton}
-                                                                                        onClick={() => { props.setWaitSecToZero(true); console.log("Start") }}
-                                                                                    />
-                                                                                }
+                                                                                <TimeCounterButton
+                                                                                    getPresetWaitSecToZero={true}
+                                                                                    getPresetCounter={10}
+                                                                                />
 
                                                                             </>
                                                                         }
