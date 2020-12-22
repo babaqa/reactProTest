@@ -9,38 +9,37 @@ import { isNil } from 'lodash';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
 
+//#region 倒數10秒
+const TimeCounter = (props) => {
+
+    const [Sec, setSec] = useState(10);
+
+    useEffect(() => {
+        let counter = setInterval(() => {
+            setSec(s => s - 1);
+            if (Sec === 1) {
+                props.onCountToZero && props.onCountToZero();
+            }
+        }, 1000)
+
+        return () => {
+            clearInterval(counter)
+        }
+    }, [Sec])
+
+    return (
+        <>
+            {Sec}
+        </>
+    )
+}
+//#endregion
+
 const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { userInfo: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
-    const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
-
-    //#region 倒數10秒
-    const TimeCounter = (props) => {
-
-        const [Sec, setSec] = useState(10);
-
-        useEffect(() => {
-            let counter = setInterval(() => {
-                setSec(s => s - 1);
-                if (Sec === 1) {
-                    props.onCountToZero && props.onCountToZero();
-                }
-            }, 1000)
-
-            return () => {
-                clearInterval(counter)
-            }
-        }, [Sec])
-
-        return (
-            <>
-                {Sec}
-            </>
-        )
-    }
-    //#endregion
 
     return (
         <>
@@ -148,18 +147,14 @@ const LaptopLBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>舊密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入舊密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={laptopL.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={laptopL.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "OldPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "OldPwd", value);
@@ -171,18 +166,14 @@ const LaptopLBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>新密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入新密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={laptopL.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={laptopL.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "NewPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "NewPwd", value);
@@ -194,18 +185,14 @@ const LaptopLBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>確認新密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入新密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={laptopL.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={laptopL.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "ConfirmPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "ConfirmPwd", value);
@@ -376,7 +363,7 @@ const LaptopLBase = (props) => {
                                                                                         text={
                                                                                             <>
                                                                                                 重送驗證碼(
-                                                                                            <TimeCounter
+                                                                                                <TimeCounter
                                                                                                     onCountToZero={() => {
                                                                                                         props.setWaitSecToZero(false);
                                                                                                         console.log("End")

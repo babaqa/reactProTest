@@ -315,15 +315,6 @@ export default {
         top: 0,
     },
     //#endregion
-    //#region 密碼 右方圖標
-    pwdRightIcon: {
-        position: "absolute",
-        height: "100%",
-        right: "12px",
-        cursor: "pointer",
-        top: 0,
-    },
-    //#endregion
 
     //#region 修改手機按鈕
     editPhoneButton: {

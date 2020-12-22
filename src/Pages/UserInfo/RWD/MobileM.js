@@ -4,7 +4,6 @@ import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar, MainPageSubTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, BasicButton, TreeSelector, Tooltip, DateTimePicker, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Lock } from '../../../Assets/img/UserInfoPage/Lock.svg'
-import { ReactComponent as Eye } from '../../../Assets/img/UserInfoPage/Eye.svg'
 import { isNil } from 'lodash';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
@@ -132,18 +131,14 @@ const MobileMBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>舊密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入舊密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={mobileM.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={mobileM.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "OldPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "OldPwd", value);
@@ -155,18 +150,14 @@ const MobileMBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>新密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入新密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={mobileM.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={mobileM.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "NewPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "NewPwd", value);
@@ -178,18 +169,14 @@ const MobileMBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>確認新密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入新密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={mobileM.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={mobileM.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "ConfirmPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "ConfirmPwd", value);
