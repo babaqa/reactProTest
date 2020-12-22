@@ -435,7 +435,15 @@ export const disabilityLevelSelectOption = [
 ]
 //#endregion
 
-
+//#region 起迄點備註 的下拉選項
+export const posRemarksSelectOption = [
+   { value: "醫院診所", label: "醫院診所" },
+   { value: "洗腎中心", label: "洗腎中心" },
+   { value: "復健診所", label: "復健診所" },
+   { value: "住家", label: "住家" },
+   { value: "其他", label: "其他" },
+]
+//#endregion
 
 //#endregion
 

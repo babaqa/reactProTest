@@ -16,7 +16,7 @@ export default {
             ...style,
             ...style.occupy(6),
             height: "100%",
-            padding: "0 12px 0 0"
+            padding: "0 0 0 0"
         })
     },
     //#endregion
@@ -37,7 +37,7 @@ export default {
     todayToDoCotainer: {
         basic: (style, props) => ({
             ...style,
-            width: "43%",
+            width: "46%",
             minWidth: "510px",
             height: props.open ? "340px" : "230px",
             boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
@@ -202,7 +202,7 @@ export default {
             ...style,
             ...style.occupy(6),
             height: "100%",
-            padding: "0 0 0 12px",
+            padding: "0 0 0 0",
         })
     },
     //#endregion
@@ -259,6 +259,19 @@ export default {
         focus: (style, props) => ({})
     },
     //#endregion
+
+    //#region 可用補助餘額查詢 Modal 文字
+    balanceInquiryMTodalText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
+    },
+    //#endregion
+
     //#region 可用補助餘額查詢按鈕 左方圖標
     balanceInquiryButtonIcon: {
         position: "absolute",
@@ -449,7 +462,7 @@ export default {
     },
     //#endregion
 
-    //#region 起點
+    //#region 起點 StartPos
     startPos: {
         viewTypeContainer: {
             basic: (style, props) => ({
@@ -477,7 +490,7 @@ export default {
                 // height: "0px"
             })
         },
-        map8InputContainer: {
+        gmapInputContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
@@ -485,7 +498,7 @@ export default {
                 }
             }
         },
-        map8InputSubContainer: {
+        gmapInputSubContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
@@ -558,7 +571,7 @@ export default {
     },
     //#endregion
 
-    //#region 迄點
+    //#region 迄點 EndPos
     endPos: {
         viewTypeContainer: {
             basic: (style, props) => ({
@@ -586,7 +599,7 @@ export default {
                 // height: "0px"
             })
         },
-        map8InputContainer: {
+        gmapInputContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
@@ -594,7 +607,7 @@ export default {
                 }
             }
         },
-        map8InputSubContainer: {
+        gmapInputSubContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
@@ -948,6 +961,15 @@ export default {
                 height: "auto"
             })
         }
+    },
+    //#endregion
+
+    //#region 維持排版佔位
+    companyEnableOccupy: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(8),
+        })
     },
     //#endregion
 

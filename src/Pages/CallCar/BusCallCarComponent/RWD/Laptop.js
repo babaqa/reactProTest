@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, Map8Canvas, map8Controll, Map8Input } from '../../../../ProjectComponent';
+import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle } from '../../../../ProjectComponent';
 import { ReactComponent as Search } from '../../../../Assets/img/BusCallCarComponentPage/Search.svg'
 import { ReactComponent as Convert } from '../../../../Assets/img/BusCallCarComponentPage/Convert.svg'
 import { ReactComponent as StartToEnd } from '../../../../Assets/img/BusCallCarComponentPage/StartToEnd.svg'
@@ -13,9 +13,7 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { BasicButton, CheckboxGroup, NumberInput, Checkbox, CheckboxItem, DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, OldList, NewSelector, SubContainer, Text, Textarea, TextInput, Upload, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { isEqual, isNil, isUndefined } from 'lodash';
-import { boonTypeSelectOption, cityAndCountiesLite, Counties, disabilityLevelSelectOption, notDistributableReasonSelectOption } from '../../../../Mappings/Mappings';
-import { valid } from '../../../../Handlers';
-import { fmt } from '../../../../Handlers/DateHandler';
+import { getParseItemLocalStorage, valid } from '../../../../Handlers';
 
 const LaptopBase = (props) => {
 
@@ -41,17 +39,17 @@ const LaptopBase = (props) => {
                 <SubContainer
                     theme={laptop.mapContainer}
                 >
-                    <Map8Canvas
+                    <MapGoogle
                         mapId={"test1"}
                         mapAttr={{
-                            maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
-                            center: [121.474708, 25.012930], // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
+                            //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
+                            center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
                             zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
-                            minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
-                            maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
-                            pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
-                            bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
-                            attributionControl: false,
+                            //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
+                            //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
+                            //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
+                            //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
+                            //   attributionControl: false,
                         }}
 
                         theme={laptop.map}
@@ -624,7 +622,7 @@ const LaptopBase = (props) => {
                                         fromStationId: globalContextService.get("BusCallCarComponentPage", "StartPos").value, // 起點站牌id
                                         fromStationName: globalContextService.get("BusCallCarComponentPage", "StartPos").label, // 起點站牌名字
                                         id: "",// 幸福巴士預約訂單 id	新增無須上送
-                                        orgId: "",	// 畫面無此欄位	代空字串就好 ""
+                                        orgId: getParseItemLocalStorage("UseOrg")?.id,	// 畫面無此欄位	
                                         passengerNum: globalContextService.get("BusCallCarComponentPage", "AccTotalCounts").value, // 搭車人數
                                         reserveDate: globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
                                         stationLineId: globalContextService.get("BusCallCarComponentPage", "Route").value, // 路線id

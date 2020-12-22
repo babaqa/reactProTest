@@ -8,6 +8,7 @@ import { Tablet } from './RWD/Tablet';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { useHistory, useLocation } from 'react-router-dom';
 import { isUndefined } from 'lodash';
+import { mapGoogleControll } from '../../../ProjectComponent';
 import { clearLocalStorage, clearSession, getParseItemLocalStorage } from '../../../Handlers';
 import { useAsync } from '../../../SelfHooks/useAsync';
 
@@ -216,6 +217,78 @@ export const WhiteCallCarComponent = (props) => {
     const [AddOrderOfSelfPayUsersExecute, AddOrderOfSelfPayUsersPending] = useAsync(addOrderOfSelfPayUsers, false);
     //#endregion 
 
+
+    //#region 取得 Polyline 加密路線字串 API
+    const getPolylineRoute = useCallback(async (addrData) => {
+
+        // console.log(updateRowdata)
+        //#region 取得 Polyline 加密路線字串 API
+        fetch(`${APIUrl}Maps/Route`,
+            {
+                headers: {
+                    "X-Token": getParseItemLocalStorage("Auth"),
+                    "content-type": "application/json; charset=utf-8",
+                },
+                method: "POST",
+                body: JSON.stringify({ ...addrData })
+            })
+            .then(Result => {
+                const ResultJson = Result.clone().json();//Respone.clone()
+                return ResultJson;
+            })
+            .then((PreResult) => {
+
+                if (PreResult.code === 200) {
+                    // 取得 Polyline 加密路線字串 API
+                    // console.log(PreResult.data)
+                    // controllGCS("UpdateWealType", "API");
+                    mapGoogleControll.addPolylineRoute(addrData?.mapId, PreResult?.result?.polyLine, addrData?.routeAttr)
+                }
+                else {
+                    throw PreResult;
+                }
+            })
+            .catch((Error) => {
+                modalsService.infoModal.warn({
+                    iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                    yes: true,
+                    yesText: "確認",
+                    // no: true,
+                    // autoClose: true,
+                    backgroundClose: false,
+                    yesOnClick: (e, close) => {
+                        if (Error.code === 401) {
+                            clearSession();
+                            clearLocalStorage();
+                            globalContextService.clear();
+                            Switch();
+                        }
+                        close();
+                    }
+                    // theme: {
+                    //     yesButton: {
+                    //         text: {
+                    //             basic: (style, props) => {
+                    //                 console.log(style)
+                    //                 return {
+                    //                     ...style,
+                    //                     color: "red"
+                    //                 }
+                    //             },
+                    //         }
+                    //     }
+                    // }
+                })
+                throw Error.message;
+            })
+            .finally(() => {
+            });
+        //#endregion
+    }, [APIUrl, Switch])
+
+    const [GetPolylineRouteExecute, GetPolylineRoutePending] = useAsync(getPolylineRoute, false);
+    //#endregion 
+
     return (
         <>
             {
@@ -230,8 +303,9 @@ export const WhiteCallCarComponent = (props) => {
                     setTodayToDoOpen={setTodayToDoOpen}
                     AddOrderOfSelfPayUsersPending={AddOrderOfSelfPayUsersPending}
                     AddOrderOfSelfPayUsersExecute={AddOrderOfSelfPayUsersExecute}
-
+                    GetPolylineRouteExecute={GetPolylineRouteExecute}
                     controllGCS={controllGCS}
+
                 />
             }
             {
@@ -246,8 +320,9 @@ export const WhiteCallCarComponent = (props) => {
                     setTodayToDoOpen={setTodayToDoOpen}
                     AddOrderOfSelfPayUsersPending={AddOrderOfSelfPayUsersPending}
                     AddOrderOfSelfPayUsersExecute={AddOrderOfSelfPayUsersExecute}
-
+                    GetPolylineRouteExecute={GetPolylineRouteExecute}
                     controllGCS={controllGCS}
+
                 />
             }
             {
@@ -262,6 +337,7 @@ export const WhiteCallCarComponent = (props) => {
                     setTodayToDoOpen={setTodayToDoOpen}
                     AddOrderOfSelfPayUsersPending={AddOrderOfSelfPayUsersPending}
                     AddOrderOfSelfPayUsersExecute={AddOrderOfSelfPayUsersExecute}
+                    GetPolylineRouteExecute={GetPolylineRouteExecute}
 
                     controllGCS={controllGCS}
                 />
@@ -278,6 +354,7 @@ export const WhiteCallCarComponent = (props) => {
                     setTodayToDoOpen={setTodayToDoOpen}
                     AddOrderOfSelfPayUsersPending={AddOrderOfSelfPayUsersPending}
                     AddOrderOfSelfPayUsersExecute={AddOrderOfSelfPayUsersExecute}
+                    GetPolylineRouteExecute={GetPolylineRouteExecute}
 
                     controllGCS={controllGCS}
                 />

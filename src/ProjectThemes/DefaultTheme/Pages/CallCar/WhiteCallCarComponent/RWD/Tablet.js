@@ -813,7 +813,7 @@ export default {
     //#endregion
 
     //#region 維持排版佔位
-    returnEnableDateOccupy: {
+    companyEnableOccupy: {
         basic: (style, props) => ({
             ...style,
             ...style.occupy(8.2),

@@ -16,7 +16,7 @@ export default {
             ...style,
             ...style.occupy(6),
             height: "100%",
-            padding: "0 12px 0 0"
+            padding: "0 0 0 0"
         })
     },
     //#endregion
@@ -37,7 +37,7 @@ export default {
     todayToDoCotainer: {
         basic: (style, props) => ({
             ...style,
-            width: "43%",
+            width: "46%",
             minWidth: "300px",
             height: props.open ? "340px" : "230px",
             boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
@@ -202,7 +202,7 @@ export default {
             ...style,
             ...style.occupy(6),
             height: "100%",
-            padding: "0 0 0 12px",
+            padding: "0 0 0 0",
         })
     },
     //#endregion

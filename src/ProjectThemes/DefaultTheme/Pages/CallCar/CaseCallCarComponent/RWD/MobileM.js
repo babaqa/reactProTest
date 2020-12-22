@@ -106,6 +106,47 @@ export default {
     },
     //#endregion
 
+    //#region Modal 樣式
+    editModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "343px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 文字容器
+    balanceInquiryMTodalTextContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "80px"
+        })
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 文字
+    balanceInquiryMTodalText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
+    },
+    //#endregion
+
     //#region 叫車表單容器
     callCarFormContainer: {
         container: {
@@ -321,7 +362,7 @@ export default {
     },
     //#endregion
 
-    //#region 起點
+    //#region 起點 StartPos
     startPos: {
         viewTypeContainer: {
             basic: (style, props) => ({
@@ -349,7 +390,7 @@ export default {
                 // height: "0px"
             })
         },
-        map8InputContainer: {
+        gmapInputContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
@@ -357,7 +398,7 @@ export default {
                 }
             }
         },
-        map8InputSubContainer: {
+        gmapInputSubContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
@@ -543,7 +584,7 @@ export default {
     },
     //#endregion
 
-    //#region 迄點
+    //#region 迄點 EndPos
     endPos: {
         viewTypeContainer: {
             basic: (style, props) => ({
@@ -571,7 +612,7 @@ export default {
                 // height: "0px"
             })
         },
-        map8InputContainer: {
+        gmapInputContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
@@ -579,7 +620,7 @@ export default {
                 }
             }
         },
-        map8InputSubContainer: {
+        gmapInputSubContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
@@ -852,7 +893,8 @@ export default {
     goContentContainer: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(3)
+            ...style.occupy(3),
+            minHeight: "52px"
         })
     },
     //#endregion
@@ -872,7 +914,8 @@ export default {
     returnContentContainer: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(3)
+            ...style.occupy(3),
+            minHeight: "52px"
         })
     },
     //#endregion
@@ -1118,7 +1161,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 8px 0 12px",
+                padding: "0 12px",
                 display: "inline-block",
                 ...style.occupy(6),
             })
@@ -1155,9 +1198,9 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 8px",
+                padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(6),
+                ...style.occupy(12),
             })
         },
         topLabel: {

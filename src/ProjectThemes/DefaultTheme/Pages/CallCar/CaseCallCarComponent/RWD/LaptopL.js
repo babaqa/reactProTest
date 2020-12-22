@@ -16,7 +16,7 @@ export default {
             ...style,
             ...style.occupy(6),
             height: "100%",
-            padding: "0 12px 0 0"
+            padding: "0 0 0 0"
         })
     },
     //#endregion
@@ -37,7 +37,7 @@ export default {
     todayToDoCotainer: {
         basic: (style, props) => ({
             ...style,
-            width: "43%",
+            width: "46%",
             minWidth: "510px",
             height: props.open ? "400px" : "230px",
             boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
@@ -202,7 +202,7 @@ export default {
             ...style,
             ...style.occupy(6),
             height: "100%",
-            padding: "0 0 0 12px",
+            padding: "0 0 0 0",
         })
     },
     //#endregion
@@ -259,6 +259,7 @@ export default {
         focus: (style, props) => ({})
     },
     //#endregion
+
     //#region 可用補助餘額查詢按鈕 左方圖標
     balanceInquiryButtonIcon: {
         position: "absolute",
@@ -268,6 +269,27 @@ export default {
         color: "#1890FF",
         fillOpacity: "unset",
         top: "0px"
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 文字容器
+    balanceInquiryMTodalTextContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "80px"
+        })
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 文字
+    balanceInquiryMTodalText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
     },
     //#endregion
 
@@ -383,6 +405,14 @@ export default {
         }
     },
     //#endregion
+    //#region 維持排版佔位
+    travelTimeOccupy: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(4),
+        })
+    },
+    //#endregion
 
     //#region 優先搭乘車行排序
     bUnitSort: {
@@ -485,14 +515,14 @@ export default {
     },
     //#endregion
 
-    //#region 起點
+    //#region 起點 StartPos
     startPos: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
                 //left:"-8px",
-                padding: "0 4px 0 12px",
-                ...style.occupy(9),
+                padding: "0 12px",
+                ...style.occupy(8),
                 // maxWidth: "calc( 33.33% - 4px )",
                 // flexBasis: "calc( 33.33% - 4px )",
             })
@@ -501,8 +531,8 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 //left:"-8px",
-                padding: "0 4px 0 12px",
-                ...style.occupy(9),
+                padding: "0 12px",
+                ...style.occupy(8),
                 // maxWidth: "calc( 33.33% - 4px )",
                 // flexBasis: "calc( 33.33% - 4px )",
             })
@@ -513,7 +543,7 @@ export default {
                 // height: "0px"
             })
         },
-        map8InputContainer: {
+        gmapInputContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
@@ -521,7 +551,7 @@ export default {
                 }
             }
         },
-        map8InputSubContainer: {
+        gmapInputSubContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
@@ -558,6 +588,7 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
+            padding: "0 0 16px 0",
             textAlign: "center",
         })
     },
@@ -599,9 +630,9 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 4px",
+                padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(3),
+                ...style.occupy(4),
             })
         },
         topLabel: {
@@ -704,14 +735,14 @@ export default {
     },
     //#endregion
 
-    //#region 迄點
+    //#region 迄點 EndPos
     endPos: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
                 //left:"-8px",
                 padding: "0 12px",
-                ...style.occupy(9),
+                ...style.occupy(8),
                 // maxWidth: "calc( 33.33% - 4px )",
                 // flexBasis: "calc( 33.33% - 4px )",
             })
@@ -721,7 +752,7 @@ export default {
                 ...style,
                 //left:"-8px",
                 padding: "0 12px",
-                ...style.occupy(9),
+                ...style.occupy(8),
                 // maxWidth: "calc( 33.33% - 4px )",
                 // flexBasis: "calc( 33.33% - 4px )",
             })
@@ -732,7 +763,7 @@ export default {
                 // height: "0px"
             })
         },
-        map8InputContainer: {
+        gmapInputContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
@@ -740,7 +771,7 @@ export default {
                 }
             }
         },
-        map8InputSubContainer: {
+        gmapInputSubContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
@@ -761,9 +792,9 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 4px",
+                padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(3),
+                ...style.occupy(4),
             })
         },
         topLabel: {
@@ -874,7 +905,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(5),
+                ...style.occupy(4),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -898,7 +929,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(5),
+                ...style.occupy(4),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -939,7 +970,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(7),
+                ...style.occupy(8),
             })
         },
         container: {
@@ -947,7 +978,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(7),
+                ...style.occupy(8),
             })
         },
         topLabel: {
@@ -984,7 +1015,7 @@ export default {
     returnEnableDateOccupy: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(7),
+            ...style.occupy(8),
         })
     },
     //#endregion
@@ -996,7 +1027,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(3.5),
+                ...style.occupy(4),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -1020,7 +1051,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(3.5),
+                ...style.occupy(4),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -1097,7 +1128,7 @@ export default {
                 ...style,
                 padding: "0 12px 0 8px",
                 display: "inline-block",
-                ...style.occupy(4.5),
+                ...style.occupy(4),
             })
         },
         topLabel: {
@@ -1133,7 +1164,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(6),
+                ...style.occupy(4),
             })
         },
         topLabel: {
@@ -1181,7 +1212,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(6),
+                ...style.occupy(4),
             })
         },
         viewTypeTopLabel: {
@@ -1203,7 +1234,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(6),
+                ...style.occupy(4),
             })
         },
         topLabel: {
