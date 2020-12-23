@@ -14,9 +14,9 @@ export default {
     mapContainer: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(4.8),
+            ...style.occupy(6),
             height: "100%",
-            padding: "0 7px 0 0"
+            padding: "0 0 0 0"
         })
     },
     //#endregion
@@ -37,7 +37,7 @@ export default {
     todayToDoCotainer: {
         basic: (style, props) => ({
             ...style,
-            width: "33%",
+            width: "46%",
             minWidth: "300px",
             height: props.open ? "400px" : "230px",
             boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
@@ -189,10 +189,7 @@ export default {
         })
     },
     //#endregion
-
-
     //#endregion
-
 
     //#region 叫車表單區域樣式
 
@@ -200,9 +197,9 @@ export default {
     formContainer: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(7.2),
+            ...style.occupy(6),
             height: "100%",
-            padding: "0 0 0 7px",
+            padding: "0 0 0 0",
         })
     },
     //#endregion
@@ -268,6 +265,27 @@ export default {
         color: "#1890ff",
         fillOpacity: "unset",
         top: "0px"
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 文字容器
+    balanceInquiryMTodalTextContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "80px"
+        })
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 文字
+    balanceInquiryMTodalText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
     },
     //#endregion
 
@@ -485,14 +503,14 @@ export default {
     },
     //#endregion
 
-    //#region 起點
+    //#region 起點 StartPos
     startPos: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
                 //left:"-8px",
-                padding: "0 4px 0 12px",
-                ...style.occupy(9),
+                padding: "0 12px",
+                ...style.occupy(12),
                 // maxWidth: "calc( 33.33% - 4px )",
                 // flexBasis: "calc( 33.33% - 4px )",
             })
@@ -501,8 +519,8 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 //left:"-8px",
-                padding: "0 4px 0 12px",
-                ...style.occupy(9),
+                padding: "0 12px",
+                ...style.occupy(12),
                 // maxWidth: "calc( 33.33% - 4px )",
                 // flexBasis: "calc( 33.33% - 4px )",
             })
@@ -513,7 +531,7 @@ export default {
                 // height: "0px"
             })
         },
-        map8InputContainer: {
+        gmapInputContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
@@ -521,7 +539,7 @@ export default {
                 }
             }
         },
-        map8InputSubContainer: {
+        gmapInputSubContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
@@ -600,9 +618,9 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 4px",
+                padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(3),
+                ...style.occupy(6),
             })
         },
         topLabel: {
@@ -638,7 +656,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(6),
             })
         },
         viewTypeTopLabel: {
@@ -660,7 +678,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(6),
             })
         },
         topLabel: {
@@ -712,7 +730,7 @@ export default {
                 ...style,
                 //left:"-8px",
                 padding: "0 12px",
-                ...style.occupy(9),
+                ...style.occupy(12),
                 // maxWidth: "calc( 33.33% - 4px )",
                 // flexBasis: "calc( 33.33% - 4px )",
             })
@@ -722,7 +740,7 @@ export default {
                 ...style,
                 //left:"-8px",
                 padding: "0 12px",
-                ...style.occupy(9),
+                ...style.occupy(12),
                 // maxWidth: "calc( 33.33% - 4px )",
                 // flexBasis: "calc( 33.33% - 4px )",
             })
@@ -762,9 +780,9 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 4px",
+                padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(3),
+                ...style.occupy(6),
             })
         },
         topLabel: {
@@ -782,9 +800,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: 0
-                // minHeight: "24px",
-                // height: "auto",
+                // height: 0
+                minHeight: "24px",
+                height: "auto",
                 // fontSize: "12px",
                 // lineHeight: "18px",
                 // color: "#ff4d4f",
@@ -801,7 +819,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(6),
             })
         },
         viewTypeTopLabel: {
@@ -823,7 +841,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(6),
             })
         },
         topLabel: {
@@ -875,7 +893,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(5),
+                ...style.occupy(6),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -899,7 +917,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(5),
+                ...style.occupy(6),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -940,7 +958,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(7),
+                ...style.occupy(6),
             })
         },
         container: {
@@ -948,7 +966,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(7),
+                ...style.occupy(6),
             })
         },
         topLabel: {
@@ -985,7 +1003,7 @@ export default {
     returnEnableDateOccupy: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(7),
+            ...style.occupy(6),
         })
     },
     //#endregion
@@ -997,7 +1015,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(3.5),
+                ...style.occupy(6),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -1021,7 +1039,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 //display: "inline-block",
-                ...style.occupy(3.5),
+                ...style.occupy(6),
                 // maxWidth: "calc( 25% - 6px )",
                 // flexBasis: "calc( 25% - 6px )",
             })
@@ -1060,9 +1078,9 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 8px 0 12px",
+                padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(4),
+                ...style.occupy(6),
             })
         },
         topLabel: {
@@ -1096,9 +1114,9 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 8px",
+                padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(4.5),
+                ...style.occupy(6),
             })
         },
         topLabel: {

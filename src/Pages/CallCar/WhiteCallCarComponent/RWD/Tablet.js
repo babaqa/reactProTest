@@ -536,20 +536,6 @@ const TabletBase = (props) => {
                             theme={tablet.carType}
                         />
 
-                        {/* 簡訊號碼 SmsNumber */}
-                        <TextInput
-
-                            topLabel={<>簡訊號碼</>}
-                            baseDefaultTheme={"DefaultTheme"}
-                            type="text"
-                            placeholder={"請輸入接收簡訊號碼"}
-                            value={globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? null}
-                            onChange={(e, value, onInitial) => {
-                                globalContextService.set("WhiteCallCarComponentPage", "SmsNumber", value);
-                            }}
-                            theme={tablet.smsNumber}
-                        />
-
                         {/* 搭車人數 AccompanyCounts */}
                         <NewSelector
                             bascDefaultTheme={"DefaultTheme"}
@@ -590,8 +576,22 @@ const TabletBase = (props) => {
                             theme={tablet.accompanyCounts}
                         />
 
+                        {/* 簡訊號碼 SmsNumber */}
+                        <TextInput
+
+                            topLabel={<>簡訊號碼</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={"請輸入接收簡訊號碼"}
+                            value={globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? null}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("WhiteCallCarComponentPage", "SmsNumber", value);
+                            }}
+                            theme={tablet.smsNumber}
+                        />
+
                         {/*維持排版佔位*/}
-                        <SubContainer theme={tablet.returnEnableDateOccupy} />
+                        <SubContainer theme={tablet.companyEnableOccupy} />
 
                         {!isNil(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts"))
                             &&

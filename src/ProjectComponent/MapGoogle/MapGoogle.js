@@ -1,16 +1,17 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { BasicContainer, ScrollBar, Checkbox, Container, Text, TitleModal, globalContextService, OldTable, Tag, FormContainer, FormRow, TextInput, SubContainer, CheckboxItem } from '../../Components';
+import { BasicContainer, ScrollBar, Checkbox, Container, Text, TitleModal, globalContextService, OldTable, Tag, FormContainer, FormRow, TextInput, SubContainer, CheckboxItem, modalsService } from '../../Components';
 import { iterateTheme } from '../../Handlers/ThemeHandler';
 import { ReactComponent as Search } from './Assets/img/Search.svg'
 import { AutoComplete as AutoCompleteExtend } from 'antd';
+import { Context } from '../../Store/Store'
 //#region 擴充基本樣式區
 import DefaultTheme from './Theme/DefaultTheme'
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
 import { isNil, isUndefined, debounce, throttle } from 'lodash';
 import cloneDeep from 'lodash/cloneDeep';
 import { cssifyObject } from 'css-in-js-utils';
-import { valid } from '../../Handlers';
+import { clearLocalStorage, clearSession, getParseItemLocalStorage, valid } from '../../Handlers';
 import { useAsync } from '../../SelfHooks/useAsync';
 import { useCallback } from 'react';
 // import PrimaryTheme from './Theme/PrimaryTheme'
@@ -52,12 +53,27 @@ const MapGoogleBase = (props) => {
             const map = new window.google.maps.Map(document.getElementById(props?.mapId ?? "gmap"), {
                 center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 {lat, lng}  // 25.012930, 121.474708
                 zoom: 16, // 初始 ZOOM LEVEL; 
+                maxZoom: 20,
+                minZoom: 3,
+                zoomControl: false,
+                mapTypeControl: false,
+                scaleControl: false,
+                streetViewControl: false,
+                rotateControl: false,
+                fullscreenControl: false,
+                // roadmap 顯示默認道路地圖視圖。
+                // satellite 顯示 Google 地球衛星圖像。
+                // hybrid 顯示正常和衛星視圖的混合。
+                // terrain 顯示基於地形信息的物理地圖。
+                mapTypeId: "roadmap",
                 ...props?.mapAttr,
             });
 
             globalContextService.set("GMapObj", props?.mapId ?? "gmap", map); // 將地圖物件放入 GCS
             globalContextService.set("GMapObj", `${props?.mapId ?? "gmap"}_markers`, []); // 將地圖 標記 物件放入 GCS
             globalContextService.set("GMapObj", `${props?.mapId ?? "gmap"}_Routes`, []); // 將地圖 路線 物件放入 GCS
+            globalContextService.set("GMapObj", `${props?.mapId ?? "gmap"}_polylineRoutes`, []); // 將地圖 polyline 路線 物件放入 GCS
+
 
         }
 
@@ -119,6 +135,40 @@ const addMarker = (mapId, location) => {
 
         let markers = globalContextService.get("GMapObj", `${mapId ?? "gmap"}_markers`)
         markers.push(marker);
+        globalContextService.set("GMapObj", `${mapId ?? "gmap"}_markers`, markers);
+
+        return { markers, marker }; // 返回新增後所有標記、與當次標記
+
+    }
+    else {
+        return null;
+    }
+
+}
+//#endregion
+
+//#region 新增地圖標記至 array 內指定 index (若 index-1 大於 array長度， 則尾部增加一個標記)
+const addMarkerWithIndex = (mapId, location, markersIndex) => {
+
+    if (window.google) {
+        const marker = new window.google.maps.Marker({
+            position: location,
+            // animation: window.google.maps.Animation.DROP,
+            map: getBasicMap(mapId),
+        });
+
+        let markers = globalContextService.get("GMapObj", `${mapId ?? "gmap"}_markers`)
+
+        //#region 若 index-1 大於 array長度， 則尾部增加一個標記
+        if (markers[markersIndex]) {
+            markers[markersIndex].setMap(null);
+            markers[markersIndex] = marker;
+        }
+        else {
+            markers.push(marker);
+        }
+        //#endregion
+
         globalContextService.set("GMapObj", `${mapId ?? "gmap"}_markers`, markers);
 
         return { markers, marker }; // 返回新增後所有標記、與當次標記
@@ -327,11 +377,92 @@ const getRoutes = (mapId) => {
 }
 //#endregion
 
+//#region 透過 Polyline 新增一條路線 (移除原有所有標記，by decodePath)
+const addPolylineRoute = (mapId, decodePath = "加密路徑字串", routeAttr) => {
+    if (window.google) {
+        let path = window.google.maps.geometry.encoding.decodePath(decodePath); // 解密 加密路徑字串
+        // console.log(mapId, decodePath, routeAttr, path)
+        //#region 為了將地圖視窗縮放到合適大小
+        let bounds = new window.google.maps.LatLngBounds();
+
+        (path ?? []).forEach((item) => { bounds.extend(item?.toJSON()); })
+
+        //#endregion
+        // console.log("bounds Af", bounds)
+        let polyline = new window.google.maps.Polyline({
+            path: path.map(item => item?.toJSON()),
+            strokeColor: "rgb(115, 185, 255)",
+            strokeOpacity: 0.8,
+            strokeWeight: 5,
+            fillColor: "rgb(115, 185, 255)",
+            fillOpacity: 0.35,
+            // map: getBasicMap(mapId),
+        });
+
+        polyline.setMap(getBasicMap(mapId));
+        // console.log("polyline", polyline)
+        getBasicMap(mapId).fitBounds(bounds);
+
+        deleteMarkers(mapId); //移除原有所有標記
+
+        //#region 添加標記  順序上 起點是陣列第一個、迄點是第二個、接著才是中途點
+        routeAttr?.origin && createMarker(mapId, routeAttr.origin, "start");
+        routeAttr?.destination && createMarker(mapId, routeAttr.destination, "end");
+        (routeAttr?.waypoints ?? []).forEach((item, index) => {
+            createMarker(mapId, item.location, "waypoint");
+        });
+        //#endregion
+
+
+        let polylineRoutes = globalContextService.get("GMapObj", `${mapId ?? "gmap"}_polylineRoutes`);
+        polylineRoutes.push(polyline);
+        globalContextService.set("GMapObj", `${mapId ?? "gmap"}_polylineRoutes`, polylineRoutes); // 將地圖 polyline 路線 物件放入 GCS
+
+        return routeAttr; // 返回路線設置屬性
+    }
+    else {
+        return null;
+    }
+}
+//#endregion
+
+//#region 刪除一條透過 Polyline 新增的一條路線(移除原有所有標記，by decodePath)
+const deletePolylineRoute = (mapId, routeNo = 0) => {
+    if (window.google) {
+
+        let route = globalContextService.get("GMapObj", `${mapId ?? "gmap"}_polylineRoutes`)?.[routeNo];
+
+        route && route.setMap(null);
+
+        route && deleteMarkers(mapId); //移除原有所有標記
+
+        let routes = globalContextService.get("GMapObj", `${mapId ?? "gmap"}_polylineRoutes`);
+        routes.splice(routeNo, 1);
+        globalContextService.set("GMapObj", `${mapId ?? "gmap"}_polylineRoutes`, routes); // 將地圖 路線 物件放入 GCS
+    }
+    else {
+        return null;
+    }
+}
+//#endregion
+
+//#region 取得目前所有透過 Polyline 新增的路線 (by decodePath)
+const getPolylineRoutes = (mapId) => {
+    if (window.google) {
+        return globalContextService.get("GMapObj", `${mapId ?? "gmap"}_polylineRoutes`);
+    }
+    else {
+        return null;
+    }
+}
+//#endregion
+
 //#region 方法承載物件 (不能在地圖渲染完成前使用)
 const mapGoogleControll = {
     getBasicMap, // 取得基礎地圖物件
     transLatLng, // 轉換經緯度維Google經緯度物件 ，latlng = { lat: 25.012930, lng: 121.974708 }
     addMarker, // 新增地圖標記
+    addMarkerWithIndex, // 新增地圖標記至 array 內指定 index
     hideMarkers, // 隱藏所有地圖標記
     showMarkers, // 顯示所有地圖標記
     deleteMarkers, // 刪除所有地圖標記
@@ -340,6 +471,9 @@ const mapGoogleControll = {
     addRoute, // 新增一條路線 (移除原有所有標記)
     deleteRoute, // 刪除一條路線 (移除原有所有標記)
     getRoutes, // 取得目前所有路線
+    addPolylineRoute, // 透過 Polyline 新增一條路線 (移除原有所有標記，by decodePath)
+    deletePolylineRoute, // 刪除一條透過 Polyline 新增的一條路線(移除原有所有標記，by decodePath)
+    getPolylineRoutes, // 取得目前所有透過 Polyline 新增的路線 (by decodePath)
 }
 //#endregion
 
@@ -389,12 +523,18 @@ const AutoCompleteExtendStyle = styled(AutoCompleteExtend).attrs((props) => ({})
 //#region 搜尋地圖資訊組件
 export const MapGoogleInputBase = (props) => {
 
+    const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
+
     const [Value, setValue] = useState("");
     const [ViewTypeValue, setViewTypeValue] = useState("");
     const [options, setOptions] = useState([]);
     const [OnInitial, setOnInitial] = useState(true); // 用於 onChange 中 初始渲染與 後續選染動作不同時
     const [Focus, setFocus] = useState(false); // 本組件不使用
     const [Hover, setHover] = useState(false); // 本組件不使用
+
+    const [SessionToken, setSessionToken] = useState(new window.google.maps.places.AutocompleteSessionToken()); // AutocompleteSessionToken
+    const [AutocompleteService, setAutocompleteService] = useState(new window.google.maps.places.AutocompleteService()); // AutocompleteService
+    const [PlaceDetailService, setPlaceDetailService] = useState(new window.google.maps.places.PlacesService(document.createElement('div'))); // PlacesService (without map)
 
     useEffect(() => {
         setValue(props.value)
@@ -409,6 +549,7 @@ export const MapGoogleInputBase = (props) => {
             props.onChange && props.onChange(null, props.value, OnInitial);
             setOnInitial(false);
         }
+
     }, [props.value, props.onChange])
 
     // const delayedHandleSearch = debounce(eventData => GetSearchPosExecute(eventData), 1000);
@@ -417,36 +558,25 @@ export const MapGoogleInputBase = (props) => {
     const getSearchPos = useCallback(async (searchText) => {
         if (!valid(searchText, ["[^\u3100-\u312F]+$"], ["含有注音"])[1]) { // 若有注音則，vaild有值不發API
 
-            const autocomplete = new window.google.maps.places.Autocomplete(searchText);
+            AutocompleteService.getPlacePredictions(
+                {
+                    input: searchText, // searchText
+                    sessionToken: SessionToken,
+                },
+                //#region 處理接收資料
+                (predictions, status) => {
+                    // console.log(predictions, status);
+                    if (status === window.google.maps.places.PlacesServiceStatus.OK) {
+                        let a = predictions.map((item) => { return { label: item.description, value: item.place_id } })
+                        setOptions(!searchText ? [] : a)
+                    }
+                    else {
+                        setOptions(!searchText ? [] : [{ label: "查無資料", value: "查無資料", disabled: true }])
+                    }
 
-            console.log("autocomplete", autocomplete)
-
-            // const key = "AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM";
-
-            // fetch(`https://api.gmap.zone/v2/place/autocomplete?key=${key}&input=${encodeURIComponent(searchText)}&location=25.06102,121.58790&radius=50.000`,
-            //     {})
-            //     .then(Result => {
-            //         const ResultJson = Result.clone().json();//Respone.clone()
-            //         return ResultJson;
-            //     })
-            //     .then((PreResult) => {
-            //         // console.log(PreResult)
-
-            //         if (PreResult.status === "OK") {
-            //             let a = PreResult.predictions.map((item) => { return { label: item.name, value: item.id } })
-            //             setOptions(!searchText ? [] : a)
-            //         }
-            //         else if (PreResult.status === "ZERO_RESULTS") {
-            //             setOptions(!searchText ? [] : [{ label: "查無資料", value: "查無資料", disabled: true }])
-            //         }
-            //         else {
-            //             throw PreResult;
-            //         }
-            //     })
-            //     .catch((Error) => {
-            //     })
-            //     .finally(() => {
-            //     });
+                }
+                //#endregion
+            );
         }
 
     }, [])
@@ -546,33 +676,88 @@ export const MapGoogleInputBase = (props) => {
                                 options={options}
                                 onSelect={(value, option) => {
                                     // console.log('onSelect', value, option);
-                                    // "https://api.gmap.zone/v2/place/details/json?key=<您的 key>&placeid=NzYqAQYARhkCVltTRRxiJBIYMDIIZgVSLyMdf25eBDIIPQ1VHWEwEg==&postcode=true"
-                                    const key = "AIzaSyA1h_cyazZLo1DExB0h0B2JBuOfv-yFtsM";
+                                    // const PlaceDetailService = new google.maps.places.PlacesService(vm.map);
 
-                                    fetch(`https://api.gmap.zone/v2/place/details/json?key=${key}&placeid=${encodeURIComponent(value)}&postcode=true`,
-                                        // https://api.gmap.zone/v2/place/geocode/json?key=<您的 key>&address=台北市內湖區新湖三路189號
-                                        // fetch(`https://api.gmap.zone/v2/place/geocode/json?key=${key}&address=${encodeURIComponent(option.label)}`,
-                                        {})
-                                        .then(Result => {
-                                            const ResultJson = Result.clone().json();//Respone.clone()
-                                            return ResultJson;
-                                        })
-                                        .then((PreResult) => {
-                                            // console.log(PreResult)
-                                            // console.log(PreResult.results[0])
+                                    const promise = new Promise((resolve, reject) => {//Promise構造函數接受一個函數作為參數，該函數的兩個參數固定分別是resolve和reject。
+                                        // ... some code
+                                        // console.log("立即執行");//輸出 : 立即執行 ，一旦新建它就會 "立即執行"
+                                        PlaceDetailService.getDetails(
+                                            {
+                                                placeId: encodeURIComponent(value),
+                                                fields: ["name", "formatted_address", "place_id", "geometry"],
+                                                sessionToken: SessionToken, SessionToken, setSessionToken
+                                            },
+                                            (place, status) => {
+                                                if (status === "OK") {
+                                                    // console.log(place, status);
+                                                    setSessionToken(new window.google.maps.places.AutocompleteSessionToken());
+                                                    resolve(place);//將Promise物件的狀態從“未完成”變為“成功”（即從pending變為resolved）
+                                                } else {
+                                                    reject("透過reject拋出此錯誤訊息");//將Promise物件的狀態從“未完成”變為“失敗”（即從pending變為rejected）
+                                                }
+                                            }
+                                        );
+                                    })
+                                        .then((value) => {
+                                            // console.log(value.geometry.location.toJSON());
 
-                                            if (PreResult.status === "OK") {
-                                                props.onSelect && props.onSelect(null, option, OnInitial, PreResult.result);
-                                                // props.onSelect && props.onSelect(null, option, OnInitial, PreResult.results[0]);
-                                            }
-                                            else {
-                                                throw PreResult;
-                                            }
-                                        })
-                                        .catch((Error) => {
-                                            // console.log(Error)
-                                        })
-                                        .finally(() => {
+                                            //#region 新增或更新社會福利身分
+                                            // fetch(`${APIUrl}/api/Maps/PlaceDetail`,
+                                            fetch(`${props.placeDetailUrl ?? "http://openauth.react.dev.1966.org.tw:20025/api/Maps/PlaceDetail"}`,
+                                                {
+                                                    headers: {
+                                                        "X-Token": getParseItemLocalStorage("Auth"),
+                                                        "content-type": "application/json; charset=utf-8",
+                                                    },
+                                                    method: "POST",
+                                                    body: JSON.stringify({
+                                                        placeId: value?.place_id,
+                                                        addrFormat: value?.formatted_address,
+                                                        addrName: value?.name,
+                                                        lon: value.geometry.location.toJSON()?.lng,
+                                                        lat: value.geometry.location.toJSON()?.lat,
+                                                    })
+                                                })
+                                                .then(Result => {
+                                                    const ResultJson = Result.clone().json();//Respone.clone()
+                                                    return ResultJson;
+                                                })
+                                                .then((PreResult) => {
+
+                                                    if (PreResult.code === 200) {
+                                                        // console.log(PreResult)
+                                                        props.onSelect && props.onSelect(null, option, OnInitial, PreResult?.result);
+
+                                                    }
+                                                    else {
+                                                        throw PreResult;
+                                                    }
+                                                })
+                                                .catch((Error) => {
+                                                    modalsService.infoModal.warn({
+                                                        iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                                                        yes: true,
+                                                        yesText: "確認",
+                                                        // no: true,
+                                                        // autoClose: true,
+                                                        backgroundClose: false,
+                                                        yesOnClick: (e, close) => {
+                                                            if (Error.code === 401) {
+                                                                clearSession();
+                                                                clearLocalStorage();
+                                                                globalContextService.clear();
+                                                                Switch();
+                                                            }
+                                                            close();
+                                                        }
+                                                    })
+                                                    throw Error.message;
+                                                })
+                                                .finally(() => {
+                                                });
+                                            //#endregion
+
+
                                         });
                                 }}
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, Map8Canvas, map8Controll, Map8Input } from '../../../../ProjectComponent';
+import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle } from '../../../../ProjectComponent';
 import { ReactComponent as Search } from '../../../../Assets/img/BusCallCarComponentPage/Search.svg'
 import { ReactComponent as Convert } from '../../../../Assets/img/BusCallCarComponentPage/Convert.svg'
 import { ReactComponent as StartToEnd } from '../../../../Assets/img/BusCallCarComponentPage/StartToEnd.svg'
@@ -13,9 +13,7 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { BasicButton, CheckboxGroup, NumberInput, Checkbox, CheckboxItem, DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, OldList, NewSelector, SubContainer, Text, Textarea, TextInput, Upload, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { isEqual, isNil, isUndefined } from 'lodash';
-import { boonTypeSelectOption, cityAndCountiesLite, Counties, disabilityLevelSelectOption, notDistributableReasonSelectOption } from '../../../../Mappings/Mappings';
-import { valid } from '../../../../Handlers';
-import { fmt } from '../../../../Handlers/DateHandler';
+import { getParseItemLocalStorage, valid } from '../../../../Handlers';
 
 const LaptopLBase = (props) => {
 
@@ -28,12 +26,6 @@ const LaptopLBase = (props) => {
 
     return (
         <>
-            {/* <MainPageContainer
-                outSideTopComponent={
-                    <></>
-                }
-                theme={laptopL.mainPageContainer}
-            > */}
             {/* 叫車頁面外層容器 */}
             <Container
                 theme={laptopL.callCarOutContainer}
@@ -41,17 +33,17 @@ const LaptopLBase = (props) => {
                 <SubContainer
                     theme={laptopL.mapContainer}
                 >
-                    <Map8Canvas
+                    <MapGoogle
                         mapId={"test1"}
                         mapAttr={{
-                            maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
-                            center: [121.474708, 25.012930], // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
+                            //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
+                            center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
                             zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
-                            minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
-                            maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
-                            pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
-                            bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
-                            attributionControl: false,
+                            //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
+                            //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
+                            //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
+                            //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
+                            //   attributionControl: false,
                         }}
 
                         theme={laptopL.map}
@@ -315,9 +307,9 @@ const LaptopLBase = (props) => {
                                 baseDefaultTheme={"DefaultTheme"}
                                 type="text"
                                 // placeholder={""}
-                                value={globalContextService.get("WhiteCallCarComponentPage", "CarDealership") ?? ""}
+                                value={globalContextService.get("BusCallCarComponentPage", "CarDealership") ?? ""}
                                 onChange={(e, value, onInitial) => {
-                                    globalContextService.set("WhiteCallCarComponentPage", "CarDealership", value);
+                                    globalContextService.set("BusCallCarComponentPage", "CarDealership", value);
                                 }}
                                 theme={laptopL.carDealership}
                             />
@@ -356,57 +348,7 @@ const LaptopLBase = (props) => {
                                 isSearchable
                                 // viewType
                                 disabled={isNil(globalContextService.get("BusCallCarComponentPage", "Route"))}
-                                topLabel={
-                                    <>
-                                        起點站牌
-                                        {/* < Text theme={laptopL.convertContainer}
-                                            onClick={() => {
-                                                // let end = map8Controll.getMarkerPoints("test1")?.[1]?.[0] // 迄點緯度
-                                                // let start = map8Controll.getMarkerPoints("test1")?.[0]?.[0] // 起點緯度                                                    
-                                                let validMsg = "";
-                                                if (valid(globalContextService.get("BusCallCarComponentPage", "StartPos").value ?? "", ["^.{1,}$"], ["請選擇起點與迄點"])[1]) {
-                                                    validMsg = valid(globalContextService.get("BusCallCarComponentPage", "StartPos").value ?? "", ["^.{1,}$"], ["請選擇起點與迄點"])[1]
-                                                }
-                                                else if (valid(globalContextService.get("BusCallCarComponentPage", "EndPos").value ?? "", ["^.{1,}$"], ["請選擇起點與迄點"])[1]) {
-                                                    validMsg = valid(globalContextService.get("BusCallCarComponentPage", "EndPos").value ?? "", ["^.{1,}$"], ["請選擇起點與迄點"])[1]
-                                                }
-                                                if (validMsg !== "") {
-                                                    modalsService.infoModal.error({
-                                                        id: "top1", //注意 這裡要加上固定id
-                                                        iconRightText: validMsg,
-                                                        yes: true,
-                                                        yesText: "確認",
-                                                        // no: true,
-                                                        // autoClose: true,
-                                                        backgroundClose: false,
-                                                        yesOnClick: (e, close) => {
-                                                            close();
-                                                        }
-                                                    })
-                                                }
-                                                else {
-                                                    // 如果起迄點都已經輸入
-
-                                                    let startAddr = globalContextService.get("BusCallCarComponentPage", "StartPos");
-                                                    let endAddr = globalContextService.get("BusCallCarComponentPage", "EndPos");
-                                                    globalContextService.set("BusCallCarComponentPage", "EndPos", { value: startAddr?.value, label: startAddr?.label });
-                                                    globalContextService.set("BusCallCarComponentPage", "StartPos", { value: endAddr?.value, label: endAddr?.label });
-
-                                                    // map8Controll.addOrUpdateMarkerPoints("test1", [
-                                                    //     ...([map8Controll.getMarkerPoints("test1")?.[1]]),
-                                                    //     ...([map8Controll.getMarkerPoints("test1")?.[0]]),
-                                                    // ])
-
-                                                    // map8Controll.removeOneRoute("test1"); // 移除路線
-                                                }
-                                                setForceUpdate(f => !f)
-                                            }}
-                                        >
-                                            <Convert style={laptopL.convertContainerIcon} />
-                                                起訖點互換 */}
-                                        {/* </Text> */}
-                                    </>
-                                }
+                                topLabel={"起點站牌"}
                                 baseDefaultTheme={"DefaultTheme"}
                                 value={globalContextService.get("BusCallCarComponentPage", "StartPos") ?? []}
                                 onChange={(e, value, onInitial) => {
@@ -427,8 +369,6 @@ const LaptopLBase = (props) => {
                             <BasicContainer theme={laptopL.convertButtonContainer}>
                                 <NativeLineButton theme={laptopL.convertButton}
                                     onClick={() => {
-                                        // let end = map8Controll.getMarkerPoints("test1")?.[1]?.[0] // 迄點緯度
-                                        // let start = map8Controll.getMarkerPoints("test1")?.[0]?.[0] // 起點緯度                                                    
                                         let validMsg = "";
                                         if (valid(globalContextService.get("BusCallCarComponentPage", "StartPos").value ?? "", ["^.{1,}$"], ["請選擇起點與迄點"])[1]) {
                                             validMsg = valid(globalContextService.get("BusCallCarComponentPage", "StartPos").value ?? "", ["^.{1,}$"], ["請選擇起點與迄點"])[1]
@@ -457,13 +397,6 @@ const LaptopLBase = (props) => {
                                             let endAddr = globalContextService.get("BusCallCarComponentPage", "EndPos");
                                             globalContextService.set("BusCallCarComponentPage", "EndPos", { value: startAddr?.value, label: startAddr?.label });
                                             globalContextService.set("BusCallCarComponentPage", "StartPos", { value: endAddr?.value, label: endAddr?.label });
-
-                                            // map8Controll.addOrUpdateMarkerPoints("test1", [
-                                            //     ...([map8Controll.getMarkerPoints("test1")?.[1]]),
-                                            //     ...([map8Controll.getMarkerPoints("test1")?.[0]]),
-                                            // ])
-
-                                            // map8Controll.removeOneRoute("test1"); // 移除路線
                                         }
                                         setForceUpdate(f => !f)
                                     }}
@@ -532,9 +465,9 @@ const LaptopLBase = (props) => {
                                 baseDefaultTheme={"DefaultTheme"}
                                 type="text"
                                 placeholder={"請輸入接收簡訊號碼"}
-                                value={globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
+                                value={globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
                                 onChange={(e, value, onInitial) => {
-                                    globalContextService.set("WhiteCallCarComponentPage", "SmsNumber", value);
+                                    globalContextService.set("BusCallCarComponentPage", "SmsNumber", value);
                                 }}
                                 theme={laptopL.smsNumber}
                             />
@@ -569,6 +502,7 @@ const LaptopLBase = (props) => {
                             onClick={() => {
                                 //#region 表單驗證
                                 let validMsg = "";
+                                console.log(["props ======= " + props])
                                 if (valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
                                     validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
                                 }
@@ -586,6 +520,9 @@ const LaptopLBase = (props) => {
                                 }
                                 else if (valid(globalContextService.get("BusCallCarComponentPage", "EndPos")?.value ?? "", ["^.{1,}$"], ["請選擇訖點"])[1]) {
                                     validMsg = valid(globalContextService.get("BusCallCarComponentPage", "EndPos")?.value ?? "", ["^.{1,}$"], ["請選擇訖點"])[1]
+                                }
+                                else if (valid(globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+                                    validMsg = valid(globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
                                 }
 
                                 //#region 表單驗證後動作
@@ -624,7 +561,7 @@ const LaptopLBase = (props) => {
                                         fromStationId: globalContextService.get("BusCallCarComponentPage", "StartPos").value, // 起點站牌id
                                         fromStationName: globalContextService.get("BusCallCarComponentPage", "StartPos").label, // 起點站牌名字
                                         id: "",// 幸福巴士預約訂單 id	新增無須上送
-                                        orgId: "",	// 畫面無此欄位	代空字串就好 ""
+                                        orgId: getParseItemLocalStorage("UseOrg")?.id,	// 畫面無此欄位	
                                         passengerNum: globalContextService.get("BusCallCarComponentPage", "AccTotalCounts").value, // 搭車人數
                                         reserveDate: globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
                                         stationLineId: globalContextService.get("BusCallCarComponentPage", "Route").value, // 路線id
@@ -644,7 +581,6 @@ const LaptopLBase = (props) => {
 
                 </SubContainer>
             </Container>
-            {/* </MainPageContainer> */}
         </>
     )
 }

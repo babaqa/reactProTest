@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { BUnitSort, MainPageContainer, Map8Canvas, map8Controll, Map8Input } from '../../../../ProjectComponent';
+import { BUnitSort, MainPageContainer, MapGoogle, mapGoogleControll, MapGoogleInput } from '../../../../ProjectComponent';
 import { ReactComponent as Search } from '../../../../Assets/img/CaseCallCarComponentPage/Search.svg'
 import { ReactComponent as Convert } from '../../../../Assets/img/CaseCallCarComponentPage/Convert.svg'
 import { ReactComponent as StartToEnd } from '../../../../Assets/img/CaseCallCarComponentPage/StartToEnd.svg'
@@ -12,6 +12,7 @@ import { ReactComponent as Start } from '../../../../Assets/img/CaseCallCarCompo
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable, Resizable } from '../../../../Components';
+import { posRemarksSelectOption } from '../../../../Mappings/Mappings';
 import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../Handlers';
 
@@ -21,8 +22,126 @@ const MobileMBase = (props) => {
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
-
     let history = useHistory()
+
+    //#region 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
+    const getCaseOrderAmtAPI = useCallback(() => {
+        let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+        let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
+
+        let validMsg = "";
+        if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+        }
+        else if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
+            validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
+        }
+        else if (valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
+            validMsg = valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]
+        }
+
+        if (validMsg === "") {
+            // 如果起迄點、搭車日期、搭車時間有值、陪同人數 皆已有有值
+            props.GetCaseOrderAmtExecute({
+                CaseUserId: props.CaseUserId,
+                FromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"),
+                // FromAddrId:, // 不用丟
+                ToAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"),
+                FamilyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value,
+                // ToAddrId:, // 不用丟
+                ReservationDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
+            })
+        }
+
+    }, [])
+    //#endregion
+
+    //#region 新增下個地點、立即預約 送出前欄位檢核
+    const formValid = useCallback(() => {
+        //#region 表單驗證
+        let validMsg = "";
+
+        if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.[0]?.id ?? "", ["^.{1,}$"], ["請選擇優先搭乘車行排序，或需先新增B單位"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.[0]?.id ?? "", ["^.{1,}$"], ["請選擇優先搭乘車行排序，或需先新增B單位"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value ?? "", ["^.{1,}$"], ["請選擇訂車人身分"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value ?? "", ["^.{1,}$"], ["請選擇訂車人身分"])[1]
+        }
+        // 其實 應該要連實際經緯度標記坐標一起檢核，目前尚未防堵 選擇自動完成選項後，又改動輸入框地址內容，然後送出的情況  
+        // PS.可以分成 目前輸入框內容 與 onSelect的值，onChange時清掉onSelect的值，然後送出時一律檢核onSelect的值
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "StartPos") ?? "", ["^.{1,}$"], ["請輸入起點地址"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "StartPos") ?? "", ["^.{1,}$"], ["請輸入起點地址"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇起點備註"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇起點備註"])[1]
+        }
+        else if (
+            (globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label === "其他")
+            &&
+            valid(globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks") ?? "", ["^.{1,}$"], ["請輸入起點備註 - 其他"])[1]
+        ) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks") ?? "", ["^.{1,}$"], ["請輸入起點備註 - 其他"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇迄點備註"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇迄點備註"])[1]
+        }
+        else if (
+            (globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他")
+            &&
+            valid(globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks") ?? "", ["^.{1,}$"], ["請輸入迄點備註 - 其他"])[1]
+        ) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks") ?? "", ["^.{1,}$"], ["請輸入迄點備註 - 其他"])[1]
+        }
+        // else if (map8Controll.getMarkerPoints("test1").length !== 2) {
+        //     validMsg = "請重新輸入起訖地址"
+        // }
+        else if (
+            (globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1)
+            &&
+            valid(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
+        ) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
+        }
+        else if (
+            (globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1)
+            &&
+            !moment(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), "HH:mm").isAfter(moment(globalContextService.get("CaseCallCarComponentPage", "TravelTime"), "HH:mm"))
+        ) {  // !(去程時間 > 回程時間)
+            validMsg = "回程乘車時間不可早於或等於去程時間"
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]
+        }
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
+        }
+        //#endregion
+
+        return validMsg;
+
+    }, [])
+    //#endregion
 
     return (
         <>
@@ -31,17 +150,17 @@ const MobileMBase = (props) => {
             <BasicContainer
                 theme={mobileM.mapContainer}
             >
-                <Map8Canvas
+                <MapGoogle
                     mapId={"test1"}
                     mapAttr={{
-                        maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
-                        center: [121.474708, 25.012930], // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
+                        //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
+                        center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
                         zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
-                        minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
-                        maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
-                        pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
-                        bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
-                        attributionControl: false,
+                        //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
+                        //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
+                        //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
+                        //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
+                        //   attributionControl: false,
                     }}
 
                     theme={mobileM.map}
@@ -51,7 +170,7 @@ const MobileMBase = (props) => {
             {/* 地圖上層的表單容器 */}
             <Resizable
                 width={"100%"}
-                height={"280px"}
+                height={"380px"}
                 maxHeight={"70vh"}
                 minHeight={"280px"}
                 enable={{ top: true, right: false, bottom: false, left: false, topRight: false, bottomRight: false, bottomLeft: false, topLeft: false }}
@@ -77,9 +196,69 @@ const MobileMBase = (props) => {
                         disable={false}
                         type="button" // 防止提交
                         theme={mobileM.balanceInquiryButton}
-                    // onClick={() => {
-                    //     history.push(`/BusRouteAndStop/BusStop/Edit?stationId=${rowData.id}`)
-                    // }}
+                        onClick={() => {
+                            //#region 打開可用補助餘額查詢 Modal
+                            modalsService.titleModal.normal({
+                                //id: "top1",
+                                title: `${props.UserName?.split(" ")?.[0]} 的補助餘額`,
+                                yes: true,
+                                yesText: "確認",
+                                no: false,
+                                noText: "取消",
+                                // autoClose: true,
+                                backgroundClose: false,
+                                noOnClick: (e) => {
+                                },
+                                yesOnClick: (e, close) => {
+                                    close();
+                                },
+                                closeIconOnClick: (e) => {
+                                },
+                                content: (
+                                    <Container>
+                                        <BasicContainer theme={mobileM.balanceInquiryMTodalTextContainer}>
+                                            <Text
+                                                theme={mobileM.balanceInquiryMTodalText}
+                                            >
+                                                總額度
+                                            </Text>
+                                            <Text
+                                                theme={mobileM.balanceInquiryMTodalText}
+                                            >
+                                                ${`${props?.CaseDiscount?.totalAmt ?? 0}`}
+                                            </Text>
+                                        </BasicContainer>
+                                        <BasicContainer theme={mobileM.balanceInquiryMTodalTextContainer}>
+                                            <Text
+                                                theme={mobileM.balanceInquiryMTodalText}
+                                            >
+                                                使用額度
+                                        </Text>
+                                            <Text
+                                                theme={mobileM.balanceInquiryMTodalText}
+                                            >
+                                                ${`${props?.CaseDiscount?.discountAmt ?? 0}`}
+                                            </Text>
+                                        </BasicContainer>
+                                        <BasicContainer theme={mobileM.balanceInquiryMTodalTextContainer}>
+                                            <Text
+                                                theme={mobileM.balanceInquiryMTodalText}
+                                            >
+                                                剩餘額度
+                                        </Text>
+                                            <Text
+                                                theme={mobileM.balanceInquiryMTodalText}
+                                            >
+                                                ${`${props?.CaseDiscount?.lastDiscountAmt ?? 0}`}
+                                            </Text>
+                                        </BasicContainer>
+                                    </Container>
+                                ),
+                                theme: mobileM.editModal
+                            })
+                            //#endregion
+
+                        }}
                     >
                         <Search
                             style={mobileM.balanceInquiryButtonIcon}
@@ -114,6 +293,7 @@ const MobileMBase = (props) => {
                             onChange={(value, momentObj) => {
                                 if (value !== globalContextService.get("CaseCallCarComponentPage", "TravelDate")) {
                                     globalContextService.set("CaseCallCarComponentPage", "TravelDate", value);
+                                    getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
                                     setForceUpdate(f => !f)
                                 }
                             }}
@@ -122,34 +302,38 @@ const MobileMBase = (props) => {
 
                         {/*  乘車日期檢核 */}
                         {
-                            // !isNil(globalContextService.get("CaseCallCarComponentPage", "TravelDate"))
-                            // &&
-                            <>
-                                {/* 乘車時間 TravelTime */}
-                                <DateTimePicker
-                                    topLabel={<>乘車時間</>}
-                                    // type={"time"} time、date、week、month、quarter、year
-                                    type={"time"}
-                                    format={"HH:mm"}
-                                    bascDefaultTheme={"DefaultTheme"}
-                                    // viewType
-                                    isSearchable
-                                    placeholder={""}
-                                    value={
-                                        (globalContextService.get("CaseCallCarComponentPage", "TravelTime")) ?
-                                            moment(globalContextService.get("CaseCallCarComponentPage", "TravelTime"), "HH:mm")
-                                            :
-                                            null
-                                    }
-                                    onChange={(value, momentObj) => {
-                                        if (value !== globalContextService.get("CaseCallCarComponentPage", "TravelTime")) {
-                                            globalContextService.set("CaseCallCarComponentPage", "TravelTime", value);
-                                            setForceUpdate(f => !f)
+                            !isNil(globalContextService.get("CaseCallCarComponentPage", "TravelDate"))
+                                ?
+                                <>
+                                    {/* 乘車時間 TravelTime */}
+                                    <DateTimePicker
+                                        topLabel={<>乘車時間</>}
+                                        // type={"time"} time、date、week、month、quarter、year
+                                        type={"time"}
+                                        format={"HH:mm"}
+                                        bascDefaultTheme={"DefaultTheme"}
+                                        // viewType
+                                        isSearchable
+                                        placeholder={""}
+                                        value={
+                                            (globalContextService.get("CaseCallCarComponentPage", "TravelTime")) ?
+                                                moment(globalContextService.get("CaseCallCarComponentPage", "TravelTime"), "HH:mm")
+                                                :
+                                                null
                                         }
-                                    }}
-                                    theme={mobileM.travelTime}
-                                />
-                            </>
+                                        onChange={(value, momentObj) => {
+                                            if (value !== globalContextService.get("CaseCallCarComponentPage", "TravelTime")) {
+                                                globalContextService.set("CaseCallCarComponentPage", "TravelTime", value);
+                                                getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
+                                                setForceUpdate(f => !f)
+                                            }
+                                        }}
+                                        theme={mobileM.travelTime}
+                                    />
+                                </>
+                                :
+                                // 維持排版佔位
+                                <SubContainer theme={mobileM.travelTimeOccupy} />
                         }
 
                         {/* 訂車人身分 Orderer */}
@@ -162,27 +346,18 @@ const MobileMBase = (props) => {
                             placeholder={"請選擇訂車人身分"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={
-                                { value: 'hint', label: "請選擇訂車人身分", isDisabled: true }
-                            }
+                            value={globalContextService.get("CaseCallCarComponentPage", "Orderer") ?? null}
                             onChange={(e, value, onInitial) => {
-                                // globalContextService.set("CaseEditPage", "County", value);
-                                // console.log("請選擇居住縣市", value, globalContextService.get("CaseEditPage", "County"))
-
+                                globalContextService.set("CaseCallCarComponentPage", "Orderer", value);
                             }}
 
                             options={[
                                 { value: 'hint', label: "請選擇訂車人身分", isDisabled: true },
-                                { value: '0', label: "1" },
-                                { value: '1', label: "1" },
-                                { value: '2', label: "1" },
-                                { value: '3', label: "1" },
-                                { value: '4', label: "1" },
-                                { value: '5', label: "1" },
-                                { value: '6', label: "1" },
-                                { value: '7', label: "1" },
-                                { value: '8', label: "1" },
-                                { value: '9', label: "1" }
+                                { value: '本人', label: "本人" },
+                                { value: '家屬', label: "家屬" },
+                                { value: 'A單位', label: "A單位" },
+                                { value: 'B單位', label: "B單位" },
+                                // ...Counties
                             ]}
                             // menuPosition={true}
                             theme={mobileM.orderer}
@@ -191,99 +366,54 @@ const MobileMBase = (props) => {
                         {/* 優先搭乘車行排序 */}
                         <BUnitSort
                             topLabel={<>優先搭乘車行排序 <Text theme={mobileM.bUnitSortNote}>(請依序點擊完成排序)</Text></>}
-                            bUnit={[
-                                { id: "0", name: "0XXXX車行" },
-                                { id: "1", name: "1XXXX車行" },
-                                { id: "2", name: "2XXXX車行" },
-                                { id: "3", name: "3XXXX車行" },
-                            ]}
+                            bUnit={props?.CaseUsers?.bUnitForCaseUser}
+                            // bUnit={[
+                            //     { id: "0", name: "0XXXX車行" },
+                            //     { id: "1", name: "1XXXX車行" },
+                            //     { id: "2", name: "2XXXX車行" },
+                            //     { id: "3", name: "3XXXX車行" },
+                            // ]}
                             value={globalContextService.get("CaseCallCarComponentPage", `BUnitSort`)}
                             onChange={(e, value, onInitial) => {
-                                // console.log(value)
+                                console.log(value)
                                 globalContextService.set("CaseCallCarComponentPage", `BUnitSort`, value);
                             }}
                             theme={mobileM.bUnitSort}
                         />
 
                         {/* 起點 StartPos*/}
-                        <Map8Input
+                        <MapGoogleInput
                             placeholder={"請輸入搭車地點(XX市XX區XX路XX號)"}
-
+                            placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
                             // viewType
                             // disable
-                            topLabel={
-                                <>
-                                    起點
-                                        {/* < Text theme={mobileM.convertContainer}
-                                        onClick={() => {
-                                            let end = map8Controll.getMarkerPoints("test1")?.[1]?.[0] // 迄點緯度
-                                            let start = map8Controll.getMarkerPoints("test1")?.[0]?.[0] // 起點緯度
-
-                                            let validMsg = "";
-                                            if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
-                                                validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
-                                            }
-                                            else if (valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
-                                                validMsg = valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
-                                            }
-
-                                            if (validMsg !== "") {
-                                                modalsService.infoModal.error({
-                                                    id: "top1", //注意 這裡要加上固定id
-                                                    iconRightText: validMsg,
-                                                    yes: true,
-                                                    yesText: "確認",
-                                                    // no: true,
-                                                    // autoClose: true,
-                                                    backgroundClose: false,
-                                                    yesOnClick: (e, close) => {
-                                                        close();
-                                                    }
-                                                })
-                                            }
-                                            else {
-                                                // 如果起迄點都已經輸入
-                                                let startAddr = globalContextService.get("CaseCallCarComponentPage", "StartPos");
-                                                let endAddr = globalContextService.get("CaseCallCarComponentPage", "EndPos");
-
-                                                globalContextService.set("CaseCallCarComponentPage", "EndPos", startAddr);
-                                                globalContextService.set("CaseCallCarComponentPage", "StartPos", endAddr);
-
-                                                map8Controll.addOrUpdateMarkerPoints("test1", [
-                                                    ...([map8Controll.getMarkerPoints("test1")?.[1]]),
-                                                    ...([map8Controll.getMarkerPoints("test1")?.[0]]),
-                                                ])
-
-                                                map8Controll.removeOneRoute("test1"); // 移除路線
-                                            }
-                                            setForceUpdate(f => !f)
-                                        }} */}
-                                    {/* > */}
-                                    {/* <Convert style={mobileM.convertContainerIcon} />
-                                                起訖點互換
-                                         </Text> */}
-                                </>
-                            }
+                            topLabel={"起點"}
                             baseDefaultTheme={"DefaultTheme"}
                             value={globalContextService.get("CaseCallCarComponentPage", "StartPos") ?? ""}
                             onChange={(e, value, onInitial) => {
                                 globalContextService.set("CaseCallCarComponentPage", "StartPos", value);
                             }}
                             onSelect={(e, option, onInitial, posInfo) => {
-                                map8Controll.addOrUpdateMarkerPoints("test1", [
-                                    [posInfo?.geometry?.location?.lng, posInfo?.geometry?.location?.lat],
-                                    ...(map8Controll.getMarkerPoints("test1")?.[1] ? [map8Controll.getMarkerPoints("test1")[1]] : []),
-                                ]) // 更新選中起點
+                                if (mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
+                                    let endMarker = mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
+                                    mapGoogleControll.deletePolylineRoute("test1"); // 移除路線  
+                                    mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
+                                    mapGoogleControll.addMarkerWithIndex("test1", endMarker, 1) // 更新選中起點
+                                }
 
-                                map8Controll.setCenter("test1", [posInfo?.geometry?.location?.lng, posInfo?.geometry?.location?.lat]); // 移動中心點
-                                map8Controll.removeOneRoute("test1"); // 移除路線
+                                mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
+                                mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
 
                                 globalContextService.set("CaseCallCarComponentPage", "StartPos", option.label);
+
+                                getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
+
                                 setForceUpdate(f => !f)
                             }}
 
                             theme={mobileM.startPos}
                         />
+
                         {/* 起點備註 StartPosRemarks */}
                         <NewSelector
                             bascDefaultTheme={"DefaultTheme"}
@@ -294,7 +424,7 @@ const MobileMBase = (props) => {
                             placeholder={"請選擇備註"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks") ?? { value: 'hint', label: "請選擇備註", isDisabled: true }}
+                            value={globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks") ?? null}
                             onChange={(e, value, onInitial) => {
                                 if (value?.label === '其他') {
                                     if (value?.label !== globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label) {
@@ -310,9 +440,7 @@ const MobileMBase = (props) => {
 
                             options={[
                                 { value: 'hint', label: "請選擇備註", isDisabled: true },
-                                { value: '0', label: "其他" },
-                                { value: '1', label: "test1" },
-                                { value: '2', label: "test2" }
+                                ...posRemarksSelectOption
                                 // ...Counties
                             ]}
                             // menuPosition={true}
@@ -329,8 +457,8 @@ const MobileMBase = (props) => {
                                     topLabel={<>起點備註 - 其他</>}
                                     baseDefaultTheme={"DefaultTheme"}
                                     type="text"
-                                    placeholder={"請輸入起點備註"}
-                                    value={globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks") ?? props.CaseUsers?.enableDate}
+                                    placeholder={"請輸入起點備註 - 其他"}
+                                    value={globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks") ?? null}
                                     onChange={(e, value, onInitial) => {
                                         globalContextService.set("CaseCallCarComponentPage", "OtherStartPosRemarks", value);
                                     }}
@@ -338,11 +466,15 @@ const MobileMBase = (props) => {
                                 />
                             </>
                         }
+
+
+                        {/* 起訖點互換按鈕容器 */}
                         <BasicContainer theme={mobileM.convertButtonContainer}>
+                            {/* 起訖點互換按鈕 */}
                             <NativeLineButton theme={mobileM.convertButton}
                                 onClick={() => {
-                                    let end = map8Controll.getMarkerPoints("test1")?.[1]?.[0] // 迄點緯度
-                                    let start = map8Controll.getMarkerPoints("test1")?.[0]?.[0] // 起點緯度
+                                    let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+                                    let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
 
                                     let validMsg = "";
                                     if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
@@ -374,12 +506,14 @@ const MobileMBase = (props) => {
                                         globalContextService.set("CaseCallCarComponentPage", "EndPos", startAddr);
                                         globalContextService.set("CaseCallCarComponentPage", "StartPos", endAddr);
 
-                                        map8Controll.addOrUpdateMarkerPoints("test1", [
-                                            ...([map8Controll.getMarkerPoints("test1")?.[1]]),
-                                            ...([map8Controll.getMarkerPoints("test1")?.[0]]),
-                                        ])
+                                        let startMarker = mapGoogleControll.getMarkers("test1")?.[0]?.position  // 起點經緯度
+                                        let endMarker = mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
 
-                                        map8Controll.removeOneRoute("test1"); // 移除路線
+                                        // mapGoogleControll.deleteRoute("test1"); // 移除路線 由前端Call Google畫路線的方法
+                                        mapGoogleControll.deletePolylineRoute("test1"); // 移除路線 透過後端回傳 加密路徑字串 (decodePath) 並透過 polyline 畫路線的方法      
+
+                                        mapGoogleControll.addMarker("test1", endMarker); // 替換起迄點
+                                        mapGoogleControll.addMarker("test1", startMarker); // 替換起迄點
                                     }
                                     setForceUpdate(f => !f)
                                 }}
@@ -388,75 +522,115 @@ const MobileMBase = (props) => {
                                                 起訖點互換
                         </NativeLineButton>
                         </BasicContainer>
-                        {/* 迄點 EndPos*/}
-                        <Map8Input
-                            placeholder={"請輸入下車地點(XX市XX區XX路XX號)"}
 
+                        {/* 迄點 EndPos*/}
+                        <MapGoogleInput
+                            placeholder={"請輸入下車地點(XX市XX區XX路XX號)"}
+                            placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
                             // viewType
                             // disable
-                            topLabel={<>
-                                迄點
-                                        <Text theme={mobileM.convertContainer}
-                                    onClick={() => {
+                            topLabel={
+                                <>
+                                    迄點
+                                            <Text theme={mobileM.convertContainer}
+                                        onClick={() => {
+                                            let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+                                            let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
 
-                                        let end = map8Controll.getMarkerPoints("test1")?.[1]?.[0] // 迄點緯度
-                                        let start = map8Controll.getMarkerPoints("test1")?.[0]?.[0] // 起點緯度
+                                            let validMsg = "";
+                                            if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
+                                                validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
+                                            }
+                                            else if (valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
+                                                validMsg = valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
+                                            }
 
-                                        let validMsg = "";
-                                        if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
-                                            validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
-                                        }
-                                        else if (valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
-                                            validMsg = valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
-                                        }
+                                            if (validMsg !== "") {
+                                                modalsService.infoModal.error({
+                                                    id: "top1", //注意 這裡要加上固定id
+                                                    iconRightText: validMsg,
+                                                    yes: true,
+                                                    yesText: "確認",
+                                                    // no: true,
+                                                    // autoClose: true,
+                                                    backgroundClose: false,
+                                                    yesOnClick: (e, close) => {
+                                                        close();
+                                                    }
+                                                })
+                                            }
+                                            else {
+                                                // 如果起迄點都已經輸入
 
-                                        if (validMsg !== "") {
-                                            modalsService.infoModal.error({
-                                                id: "top1", //注意 這裡要加上固定id
-                                                iconRightText: validMsg,
-                                                yes: true,
-                                                yesText: "確認",
-                                                // no: true,
-                                                // autoClose: true,
-                                                backgroundClose: false,
-                                                yesOnClick: (e, close) => {
-                                                    close();
-                                                }
-                                            })
-                                        }
-                                        else {
-                                            // 如果起迄點都已經輸入
-                                            let routeInfo = map8Controll.addOneRoute("test1", {
-                                                origin: map8Controll.getMarkerPoints("test1")[0].filter(i => i !== "hide"), //[121.474708, 25.012930] or [121.474708, 25.012930, "hide"], // 公司
-                                                destination: map8Controll.getMarkerPoints("test1")[1].filter(i => i !== "hide")// [121.570260, 25.032806] or [121.474708, 25.012930, "hide"], // 象山
-                                                // waypoints: [
-                                                //     [121.49993, 25.03678], // 龍山寺
-                                                //     [121.517498, 25.046273] // 台北摻站
-                                                // ],
-                                            })
-                                            // routeInfo?.getOrigin && console.log(routeInfo.getOrigin())
-                                            map8Controll.hideAllMarkerPoints("test1")
-                                            // setForceUpdate(f => !f)
-                                        }
-                                    }}
-                                >
-                                    路線預覽
-                                         </Text>
-                            </>}
+                                                //#region 由前端Call Google畫路線的方法
+                                                // mapGoogleControll.addRoute("test1",
+                                                //     {
+                                                //         // origin: new window.google.maps.LatLng(25.012930,121.994708),
+                                                //         origin: mapGoogleControll.getMarkers("test1")[0].position,
+                                                //         destination: mapGoogleControll.getMarkers("test1")[1].position,// new window.google.maps.LatLng(25.012930,121.974708),
+                                                //         waypoints: [
+                                                //             // {
+                                                //             //     location: { lat: 25.012930, lng: 121.984708 },// new window.google.maps.LatLng(25.012930,121.984708), // 或是地址
+                                                //             //     stopover: true,
+                                                //             // },
+                                                //         ]
+                                                //     }
+                                                // )
+                                                //#endregion
+
+                                                //#region 透過後端回傳 加密路徑字串 (decodePath) 並透過 polyline 畫路線的方法
+
+                                                props.GetPolylineRouteExecute(
+                                                    {
+                                                        fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"),
+                                                        toAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"),
+                                                        mapId: "test1",
+                                                        routeAttr: {
+                                                            // origin: new window.google.maps.LatLng(25.012930,121.994708),
+                                                            origin: mapGoogleControll.getMarkers("test1")[0].position,
+                                                            destination: mapGoogleControll.getMarkers("test1")[1].position,// new window.google.maps.LatLng(25.012930,121.974708),
+                                                            waypoints: [
+                                                                // {
+                                                                //     location: { lat: 25.012930, lng: 121.984708 },// new window.google.maps.LatLng(25.012930,121.984708), // 或是地址
+                                                                //     stopover: true,
+                                                                // },
+                                                            ]
+                                                        }
+                                                    }
+                                                )
+                                                //#endregion
+
+                                                // setForceUpdate(f => !f)
+                                            }
+                                        }}
+                                    >
+                                        路線預覽
+                                            </Text>
+                                </>
+                            }
                             baseDefaultTheme={"DefaultTheme"}
                             value={globalContextService.get("CaseCallCarComponentPage", "EndPos") ?? ""}
                             onChange={(e, value, onInitial) => {
                                 globalContextService.set("CaseCallCarComponentPage", "EndPos", value);
                             }}
                             onSelect={(e, option, onInitial, posInfo) => {
-                                map8Controll.addOrUpdateMarkerPoints("test1", [
-                                    ...(map8Controll.getMarkerPoints("test1")?.[0] ? [map8Controll.getMarkerPoints("test1")[0]] : []),
-                                    [posInfo?.geometry?.location?.lng, posInfo?.geometry?.location?.lat],
-                                ]) // 更新選中起點
+                                if (mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
+                                    let startMarker = mapGoogleControll.getMarkers("test1")?.[0]?.position // 起點經緯度
+                                    mapGoogleControll.deletePolylineRoute("test1"); // 移除路線  
+                                    mapGoogleControll.addMarkerWithIndex("test1", startMarker, 0) // 更新選中起點
+                                }
+
+                                //#region 如果沒有先打起點
+                                if (!mapGoogleControll.getMarkers("test1")?.[0]) {
+                                    mapGoogleControll.addMarkerWithIndex("test1", {}, 0) // 更新 一個卡位給 起點
+                                }
+                                //#endregion
+                                mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 1) // 更新選中起點
+                                mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
 
                                 globalContextService.set("CaseCallCarComponentPage", "EndPos", option.label);
-                                map8Controll.setCenter("test1", [posInfo?.geometry?.location?.lng, posInfo?.geometry?.location?.lat]); // 移動中心點
-                                map8Controll.removeOneRoute("test1"); // 移除路線
+
+                                getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
 
                                 setForceUpdate(f => !f)
                             }}
@@ -474,7 +648,7 @@ const MobileMBase = (props) => {
                             placeholder={"請選擇備註"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks") ?? { value: 'hint', label: "請選擇備註", isDisabled: true }}
+                            value={globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks") ?? null}
                             onChange={(e, value, onInitial) => {
                                 if (value?.label === '其他') {
                                     if (value?.label !== globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label) {
@@ -490,9 +664,7 @@ const MobileMBase = (props) => {
 
                             options={[
                                 { value: 'hint', label: "請選擇備註", isDisabled: true },
-                                { value: '0', label: "其他" },
-                                { value: '1', label: "test1" },
-                                { value: '2', label: "test2" }
+                                ...posRemarksSelectOption
                                 // ...Counties
                             ]}
                             // menuPosition={true}
@@ -510,9 +682,9 @@ const MobileMBase = (props) => {
                                     baseDefaultTheme={"DefaultTheme"}
                                     type="text"
                                     placeholder={"請輸入迄點備註"}
-                                    value={globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks") ?? props.CaseUsers?.enableDate}
+                                    value={globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks") ?? null}
                                     onChange={(e, value, onInitial) => {
-                                        globalContextService.set("CaseCallCarComponentPage", "OtherStartPosRemarks", value);
+                                        globalContextService.set("CaseCallCarComponentPage", "OtherEndPosRemarks", value);
                                     }}
                                     theme={mobileM.otherEndPosRemarks}
                                 />
@@ -551,8 +723,7 @@ const MobileMBase = (props) => {
                                     <Text
                                         theme={mobileM.todayToDoStartAddr}
                                     >
-                                        {/* {globalContextService.get("CaseCallCarComponentPage", "StartPos")} */}
-                                        test
+                                        {globalContextService.get("CaseCallCarComponentPage", "StartPos")}
                                     </Text>
 
                                 </SubContainer>
@@ -572,8 +743,7 @@ const MobileMBase = (props) => {
                                     <Text
                                         theme={mobileM.todayToDoEndAddr}
                                     >
-                                        {/* {globalContextService.get("CaseCallCarComponentPage", "EndPos")} */}
-                                        test
+                                        {globalContextService.get("CaseCallCarComponentPage", "EndPos")}
                                     </Text>
 
                                 </SubContainer>
@@ -582,224 +752,108 @@ const MobileMBase = (props) => {
 
                             {/* 去程容器 */}
                             <Container theme={mobileM.goContainer}>
+                                {/* 預估距離 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 預估距離 */}
                                     <Text theme={mobileM.contentTitle}>預估距離</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[0]?.distance) ? `${(props.CaseOrderAmt[0]?.distance / 1000)?.toFixed(2)}公里` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 預估時間 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 預估時間 */}
                                     <Text theme={mobileM.contentTitle}>預估時間</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[0]?.duration) ? `${(props.CaseOrderAmt[0]?.duration / 60)?.toFixed(0)}分鐘` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 車資總額 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 車資總額 */}
                                     <Text theme={mobileM.contentTitle}>車資總額</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[0]?.totalAmt) ? `$${props.CaseOrderAmt[0]?.totalAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 去程 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 去程 */}
                                     <Text theme={mobileM.contentRightText}>去程</Text>
                                 </SubContainer>
 
+                                {/* 政府補助 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 政府補助 */}
                                     <Text theme={mobileM.contentTitle}>政府補助</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[0]?.subsidyAmt) ? `$${props.CaseOrderAmt[0]?.subsidyAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 自負額 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 自負額 */}
                                     <Text theme={mobileM.contentTitle}>自負額</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[0]?.selfPayAmt) ? `$${props.CaseOrderAmt[0]?.selfPayAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 陪同人數 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 陪同人數 */}
-                                    <Text theme={mobileM.contentTitle}>陪同人數</Text>
-                                    <Text>test</Text>
+                                    <Text theme={mobileM.contentTitle}>陪同總額</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[0]?.withAmt) ? `$${props.CaseOrderAmt[0]?.withAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 個案負擔 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 個案負擔 */}
                                     <Text theme={mobileM.contentTitle}>個案負擔</Text>
-                                    <Text style={{ color: "rgba(255, 122, 69, 1)" }}>test</Text>
+                                    <Text style={{ color: "rgba(255, 122, 69, 1)" }}>{!isNil(props.CaseOrderAmt[0]?.withAmt) ? `$${props.CaseOrderAmt[0]?.withAmt + props.CaseOrderAmt[0]?.selfPayAmt}` : ""}</Text>
                                 </SubContainer>
                             </Container>
 
                             {/* 回程容器 */}
                             <Container theme={mobileM.returnContainer}>
+                                {/* 預估距離 */}
                                 <SubContainer theme={mobileM.returnContentContainer}>
-                                    {/* 預估距離 */}
                                     <Text theme={mobileM.contentTitle}>預估距離</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[1]?.distance) ? `${(props.CaseOrderAmt[1]?.distance / 1000)?.toFixed(2)}公里` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 預估時間 */}
                                 <SubContainer theme={mobileM.returnContentContainer}>
-                                    {/* 預估時間 */}
                                     <Text theme={mobileM.contentTitle}>預估時間</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[1]?.duration) ? `${(props.CaseOrderAmt[1]?.duration / 60)?.toFixed(0)}分鐘` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 車資總額 */}
                                 <SubContainer theme={mobileM.returnContentContainer}>
-                                    {/* 車資總額 */}
                                     <Text theme={mobileM.contentTitle}>車資總額</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[1]?.totalAmt) ? `$${props.CaseOrderAmt[1]?.totalAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 回程 */}
                                 <SubContainer theme={mobileM.returnContentContainer}>
-                                    {/* 回程 */}
                                     <Text theme={mobileM.contentRightText}>回程</Text>
                                 </SubContainer>
 
+                                {/* 政府補助 */}
                                 <SubContainer theme={mobileM.returnContentContainer}>
-                                    {/* 政府補助 */}
                                     <Text theme={mobileM.contentTitle}>政府補助</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[1]?.subsidyAmt) ? `$${props.CaseOrderAmt[1]?.subsidyAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 自負額 */}
                                 <SubContainer theme={mobileM.returnContentContainer}>
-                                    {/* 自負額 */}
                                     <Text theme={mobileM.contentTitle}>自負額</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[1]?.selfPayAmt) ? `$${props.CaseOrderAmt[1]?.selfPayAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 陪同人數 */}
                                 <SubContainer theme={mobileM.returnContentContainer}>
-                                    {/* 陪同人數 */}
-                                    <Text theme={mobileM.contentTitle}>陪同人數</Text>
-                                    <Text>test</Text>
+                                    <Text theme={mobileM.contentTitle}>陪同總額</Text>
+                                    <Text>{!isNil(props.CaseOrderAmt[1]?.withAmt) ? `$${props.CaseOrderAmt[1]?.withAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 個案負擔 */}
                                 <SubContainer theme={mobileM.returnContentContainer}>
-                                    {/* 個案負擔 */}
                                     <Text theme={mobileM.contentTitle}>個案負擔</Text>
-                                    <Text style={{ color: "rgba(255, 122, 69, 1)" }}>test</Text>
+                                    <Text style={{ color: "rgba(255, 122, 69, 1)" }}>{!isNil(props.CaseOrderAmt[1]?.withAmt) ? `$${props.CaseOrderAmt[1]?.withAmt + props.CaseOrderAmt[1]?.selfPayAmt}` : ""}</Text>
                                 </SubContainer>
                             </Container>
                         </BasicContainer>
 
-
-                        {/* Table 容器 */}
-                        <BasicContainer
-                            bascDefaultTheme={"DefaultTheme"}
-                            open={props.TodayToDoOpen}
-                            theme={mobileM.tableContainer}
-                        >
-                            <OldTable
-                                pagination={false}
-                                checkbox={false}
-                                // checked={["08f41bf6-4388-4b1e-bd3e-2ff538b44b1b"]}
-                                checkedRowKeyName={"id"}
-                                checkboxOnChecked={
-                                    (checkedRowKeys, checkedRows) => {
-                                        // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                        globalContextService.set("CaseCallCarComponentPage", "CheckedRowKeys", checkedRowKeys);
-                                        globalContextService.set("CaseCallCarComponentPage", "CheckedRowsData", checkedRows);
-                                    }
-                                }
-                                setPerCheckBoxDisabled={(record) => {
-                                    return {
-                                        // ...record, // 對應CheckBox當列資料
-                                        // disabled: record.name === 'Edrward 11',
-                                    }
-                                }}
-                                //scrollAreaWidth={"calc( 1900px - 300px )"} // 不用傳 會自適應寬度
-                                //scrollAreaHeight={"calc( 100% - 55px )"}
-                                columnsAttr={
-                                    //#region 資料欄設定
-                                    [
-                                        {
-                                            title: '行程',
-                                            width: "60px",
-                                            dataIndex: 'type',
-                                            sorter: (a, b) => a.carNo.length - b.carNo.length,
-                                            fixed: 'left',
-                                            render: (rowData) => {
-                                                return <>
-                                                    <Text theme={mobileM.type}>
-                                                        {rowData}
-                                                    </Text>
-                                                </>
-                                            },
-                                        },
-                                        {
-                                            title: '預估距離',
-                                            width: "100px",
-                                            dataIndex: 'carCategoryName',
-                                            // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
-                                            // fixed: 'left',
-                                        },
-                                        {
-                                            title: '預估時間',
-                                            width: "100px",
-                                            dataIndex: 'carCategoryName',
-                                            // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
-                                            // fixed: 'left',
-                                        },
-                                        {
-                                            title: '車資總額',
-                                            width: "100px",
-                                            dataIndex: 'seatNum',
-                                            // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
-                                            // fixed: 'left',
-                                        },
-                                        {
-                                            title: '政府補助',
-                                            width: "100px",
-                                            dataIndex: 'seatNum',
-                                            // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
-                                            // fixed: 'left',
-                                        },
-                                        {
-                                            title: '自負額',
-                                            width: "100px",
-                                            dataIndex: 'seatNum',
-                                            // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
-                                            // fixed: 'left',
-                                        },
-                                        {
-                                            title: '陪同總額',
-                                            width: "100px",
-                                            dataIndex: 'seatNum',
-                                            // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
-                                            // fixed: 'left',
-                                        },
-                                        {
-                                            title: '個案負擔',
-                                            width: "100px",
-                                            dataIndex: 'seatNum',
-                                            // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
-                                            fixed: 'right',
-                                        },
-                                        {
-                                            title: '',
-                                            width: "0px",
-                                            dataIndex: 'rightOccupy',
-                                            fixed: 'right',
-                                            sorter: false
-                                        },
-                                    ]
-                                    //#endregion
-                                }
-                                //sort
-                                //showHeader={false}
-                                data={[
-                                    { id: "1", type: "去程" },
-                                    { id: "2", type: "回程" },
-                                ]}
-                                // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
-                                // data={props.AllCars.data}
-                                clickPage={(currentPage, pageSize) => {
-                                }}
-                            />
-                        </BasicContainer>
-
                         {/* 預約回程檢核 */}
                         {
-                            (!isNil(globalContextService.get("CaseCallCarComponentPage", "TravelDate")) && !isNil(globalContextService.get("CaseCallCarComponentPage", "TravelTime")))
+                            !isNil(globalContextService.get("CaseCallCarComponentPage", "TravelTime"))
                             &&
                             <>
                                 {/* 我要預約回程(回居住地址) ScheduleReturnReview */}
@@ -835,14 +889,14 @@ const MobileMBase = (props) => {
                                                 topLabel={<>回程乘車時間</>}
                                                 // type={"time"} time、date、week、month、quarter、year
                                                 type={"time"}
-                                                format={"mm:ss"}
+                                                format={"HH:mm"}
                                                 bascDefaultTheme={"DefaultTheme"}
                                                 // viewType
                                                 isSearchable
                                                 placeholder={""}
                                                 value={
-                                                    (props.CaseUsers?.birthday) ?
-                                                        moment(props.CaseUsers.reviewDate, "mm:ss")
+                                                    (globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate")) ?
+                                                        moment(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), "HH:mm")
                                                         :
                                                         null
                                                 }
@@ -864,7 +918,7 @@ const MobileMBase = (props) => {
                             // viewType
                             // disable
                             topLabel={"願意共乘"}
-                            value={1}
+                            value={globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview") ?? 1}
                             onChange={(e, value, onInitial) => {
                                 // console.log(value)
                                 globalContextService.set("CaseCallCarComponentPage", "RideTogetherReview", value);
@@ -887,7 +941,7 @@ const MobileMBase = (props) => {
                             placeholder={"請選擇車種類型"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "CarType") ?? { value: 'hint', label: "請選擇車種類型", isDisabled: true }}
+                            value={globalContextService.get("CaseCallCarComponentPage", "CarType") ?? null}
                             onChange={(e, value, onInitial) => {
                                 // console.log(value?.label)
                                 // console.log(globalContextService.get("CaseCallCarComponentPage", "CarType"))
@@ -900,8 +954,7 @@ const MobileMBase = (props) => {
 
                             options={[
                                 { value: 'hint', label: "請選擇車種類型", isDisabled: true },
-                                { value: '0', label: '三輪車' },
-                                { value: '1', label: '麵包車' }
+                                ...props?.CarType
                                 // ...Counties
                             ]}
                             // menuPosition={true}
@@ -918,33 +971,39 @@ const MobileMBase = (props) => {
                             placeholder={"請選擇輪椅"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "Wheelchair") ?? { value: 'hint', label: "請選擇輪椅", isDisabled: true }}
+                            value={globalContextService.get("CaseCallCarComponentPage", "Wheelchair") ?? null}
                             onChange={(e, value, onInitial) => {
                                 globalContextService.set("CaseCallCarComponentPage", "Wheelchair", value);
                                 // console.log("請選擇居住縣市", value, globalContextService.get("CaseEditPage", "County"))
                             }}
                             options={
-                                (
-                                    globalContextService.get("CaseCallCarComponentPage", "CarType")?.label === "三輪車"
-                                    &&
-                                    [
-                                        { value: 'hint', label: "請選擇輪椅", isDisabled: true },
-                                        { value: '0', label: "輔助輪" },
-                                    ]
-                                )
-                                ||
-                                (
-                                    globalContextService.get("CaseCallCarComponentPage", "CarType")?.label === "麵包車"
-                                    &&
-                                    [
-                                        { value: 'hint', label: "請選擇輪椅", isDisabled: true },
-                                        { value: '0', label: "腳踏車" },
-                                        { value: '1', label: "輪椅" },
-                                    ]
-                                )
-                                ||
-                                [{ value: 'hint', label: "請選擇輪椅", isDisabled: true },]
-                                // ...Counties
+                                [
+                                    { value: 'hint', label: "請選擇輪椅", isDisabled: true },
+                                    ...(
+                                        (
+                                            globalContextService.get("CaseCallCarComponentPage", "CarType")?.label === "一般車"
+                                                ?
+                                                [
+                                                    { value: '無', label: "無" },
+                                                    { value: '普通輪椅(可收折)', label: "普通輪椅(可收折)" },
+                                                ]
+                                                :
+                                                (
+                                                    globalContextService.get("CaseCallCarComponentPage", "CarType")?.label === "福祉車"
+                                                        ?
+                                                        [
+                                                            { value: '無', label: "無" },
+                                                            { value: '普通輪椅(可收折)', label: "普通輪椅(可收折)" },
+                                                            { value: '高背輪椅', label: "高背輪椅" },
+                                                            { value: '電動輪椅', label: "電動輪椅" },
+                                                            { value: '電動高背輪椅', label: "電動高背輪椅" },
+                                                        ]
+                                                        :
+                                                        []
+                                                )
+                                        )
+                                    )
+                                ]
                             }
                             // menuPosition={true}
                             theme={mobileM.wheelchair}
@@ -957,21 +1016,29 @@ const MobileMBase = (props) => {
                             bottomLabel={<><Text theme={mobileM.accompanyCountsRequired}>第一人免費、第二人自費加價50元、第三人(含)及以上每位自費加價200元</Text></>}
                             //viewType
                             isSearchable
-                            placeholder={"0人"}
+                            placeholder={"請選擇陪同人數"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={
-                                { value: 'hint', label: "0人", isDisabled: true }
-                            }
+                            value={globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts") ?? null}
                             onChange={(e, value, onInitial) => {
-                                // globalContextService.set("CaseEditPage", "County", value);
-                                // console.log("請選擇居住縣市", value, globalContextService.get("CaseEditPage", "County"))
 
-                            }}
+                                if ((!isEqual(value?.value, globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value))) {
+                                    globalContextService.set("CaseCallCarComponentPage", "AccompanyCounts", value);
+                                    getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
+                                }
+                            }
+                            }
 
                             options={[
-                                { value: 'hint', label: "0人", isDisabled: true },
-                                // ...Counties
+                                { value: 'hint', label: "請選擇陪同人數", isDisabled: true },
+                                { value: 0, label: "0人" },
+                                { value: 1, label: "1人" },
+                                { value: 2, label: "2人" },
+                                { value: 3, label: "3人" },
+                                { value: 4, label: "4人" },
+                                { value: 5, label: "5人" },
+                                { value: 6, label: "6人" },
+                                { value: 7, label: "7人" },
                             ]}
                             // menuPosition={true}
                             theme={mobileM.accompanyCounts}
@@ -979,7 +1046,6 @@ const MobileMBase = (props) => {
 
                         {/* 簡訊號碼 SmsNumber */}
                         <TextInput
-
                             topLabel={<>簡訊號碼</>}
                             baseDefaultTheme={"DefaultTheme"}
                             type="text"
@@ -1024,8 +1090,56 @@ const MobileMBase = (props) => {
                                 type="button" // 防止提交
                                 theme={mobileM.addNextLocation}
                                 onClick={() => {
-                                    // props.controllGCS("return");
-                                    // history.push("/DriverAndCar/Cars")
+                                    let validMsg = formValid();
+                                    //#region 表單驗證後動作
+                                    if (validMsg !== "") {
+                                        modalsService.infoModal.error({
+                                            id: "top1", //注意 這裡要加上固定id
+                                            iconRightText: validMsg,
+                                            yes: true,
+                                            yesText: "確認",
+                                            // no: true,
+                                            // autoClose: true,
+                                            backgroundClose: false,
+                                            yesOnClick: (e, close) => {
+                                                close();
+                                            }
+                                        })
+                                    }
+                                    else {
+                                        props.AddOrderOfCaseUsersExecute({
+                                            // id: "", // 訂單id，新增無須上送
+                                            userId: props.UserId, // 用戶id
+                                            caseUserId: props.CaseUserId, // 長照身份id
+                                            orgId: "", // 送空字串
+                                            reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
+                                            transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
+                                            createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
+                                            fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"), // 起點
+                                            fromAddrRemark: (
+                                                globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label === "其他" ?
+                                                    globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks")
+                                                    :
+                                                    globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.value
+                                            ), // 起點備註 (含備註 - 其他)
+                                            toAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"), // 迄點
+                                            toAddrRemark: (
+                                                globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他" ?
+                                                    globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks")
+                                                    :
+                                                    globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value
+                                            ), // 迄點備註 (含備註 - 其他)
+                                            remark: "", // 無此欄位
+                                            isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
+                                            canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview") === 1 ? true : false, // 願意共乘
+                                            carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
+                                            carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
+                                            wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
+                                            familyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value, // 陪同人數
+                                            noticePhone: globalContextService.get("CaseCallCarComponentPage", "SmsNumber"), // 簡訊號碼
+                                            haveNextOrderFlag: true, // 新增下個地點 按鈕發送
+                                        })
+                                    }
                                 }}
                             >
                                 新增下個地點
@@ -1040,8 +1154,88 @@ const MobileMBase = (props) => {
                         type="button" // 防止提交
                         theme={mobileM.reservationNow}
                         onClick={() => {
-                            // props.controllGCS("return");
-                            // history.push("/DriverAndCar/Cars")
+                            let validMsg = formValid();
+                            //#region 表單驗證後動作
+                            if (validMsg !== "") {
+                                modalsService.infoModal.error({
+                                    id: "top1", //注意 這裡要加上固定id
+                                    iconRightText: validMsg,
+                                    yes: true,
+                                    yesText: "確認",
+                                    // no: true,
+                                    // autoClose: true,
+                                    backgroundClose: false,
+                                    yesOnClick: (e, close) => {
+                                        close();
+                                    }
+                                })
+                            }
+                            else {
+                                // 去程
+                                props.AddOrderOfCaseUsersExecute({
+                                    // id: "", // 訂單id，新增無須上送
+                                    userId: props.UserId, // 用戶id
+                                    caseUserId: props.CaseUserId, // 長照身份id
+                                    orgId: "", // 送空字串
+                                    reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
+                                    transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
+                                    createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
+                                    fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"), // 起點
+                                    fromAddrRemark: (
+                                        globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label === "其他" ?
+                                            globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks")
+                                            :
+                                            globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.value
+                                    ), // 起點備註 (含備註 - 其他)
+                                    toAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"), // 迄點
+                                    toAddrRemark: (
+                                        globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他" ?
+                                            globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks")
+                                            :
+                                            globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value
+                                    ), // 迄點備註 (含備註 - 其他)
+                                    remark: "", // 無此欄位
+                                    isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
+                                    canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview") === 1 ? true : false, // 願意共乘
+                                    carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
+                                    carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
+                                    wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
+                                    familyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value, // 陪同人數
+                                    noticePhone: globalContextService.get("CaseCallCarComponentPage", "SmsNumber"), // 簡訊號碼
+                                    haveNextOrderFlag: false, // 立即預約 按鈕發送
+                                    isBackOrder: false, // 立即預約 按鈕發送 (去程)
+                                })
+
+                                //回程
+                                props.AddOrderOfCaseUsersExecute({
+                                    // id: "", // 訂單id，新增無須上送
+                                    userId: props.UserId, // 用戶id
+                                    caseUserId: props.CaseUserId, // 長照身份id
+                                    orgId: "", // 送空字串
+                                    reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), // 預約日期+預約回程時間	如: "2020-11-25 17:45",
+                                    transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
+                                    createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
+                                    fromAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"), // 起點
+                                    fromAddrRemark: (
+                                        globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他" ?
+                                            globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks")
+                                            :
+                                            globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value
+                                    ), // 起點備註 (含備註 - 其他)
+                                    toAddr: `${props?.CaseUsers?.county}${props?.CaseUsers?.district}${props?.CaseUsers?.addr}`,
+                                    toAddrRemark: "住家",
+                                    remark: "", // 無此欄位
+                                    isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
+                                    canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview") === 1 ? true : false, // 願意共乘
+                                    carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
+                                    carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
+                                    wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
+                                    familyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value, // 陪同人數
+                                    noticePhone: globalContextService.get("CaseCallCarComponentPage", "SmsNumber"), // 簡訊號碼
+                                    haveNextOrderFlag: false, // 立即預約 按鈕發送
+                                    isBackOrder: true, // 立即預約 按鈕發送 (回程)
+                                })
+                            }
                         }}
                     >
                         立即預約
