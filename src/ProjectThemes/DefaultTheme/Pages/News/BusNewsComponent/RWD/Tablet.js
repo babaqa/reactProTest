@@ -90,7 +90,31 @@ export default {
             }
         },
         //#endregion      
+        //#endregion
     },
+    //#endregion
+
+    //#region 公告內容容器
+    newsContentContainer: {
+        basic: (style, props) => ({
+            ...style,
+            height: "20px",
+            overflow: "hidden"
+        })
+    },
+    //#endregion
+
+    //#region 公告內容文字
+    newsContentText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
+    },
+    //#endregion
 
     //#region Modal 樣式
     newsModal: {
@@ -109,6 +133,18 @@ export default {
                 zIndex: 100
             }),
         }
+    },
+    //#endregion
+
+    //#region Modal 文字
+    newsContentModalText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
     },
     //#endregion
 }

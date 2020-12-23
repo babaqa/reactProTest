@@ -107,35 +107,39 @@ const TabletBase = (props) => {
                                 render: (rowData, allRowData) => {
                                     return (
                                         <>
-                                            <Text
-                                                baseDefaultTheme={"DefaultTheme"}
-                                                onClick={() => {
-                                                    modalsService.titleModal.normal({
-                                                        //id: "top1",
-                                                        title: "公告",
-                                                        yes: true,
-                                                        yesText: "確認",
-                                                        no: false,
-                                                        noText: "取消",
-                                                        // autoClose: true,
-                                                        backgroundClose: false,
-                                                        noOnClick: (e) => {
-                                                        },
-                                                        yesOnClick: (e, close) => {
-                                                            close();
-                                                        },
-                                                        closeIconOnClick: (e) => {
-                                                        },
-                                                        content: (
-                                                            rowData
-                                                        ),
-                                                        theme: tablet.newsModal
-                                                    })
-                                                }}
-                                                style={{ fontSize: "14px", color: "rgba(0,0,0,0.65)" }}
-                                            >
-                                                {rowData}
-                                            </Text>
+                                            <BasicContainer theme={tablet.newsContentContainer}>
+                                                <Text
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    onClick={() => {
+                                                        modalsService.titleModal.normal({
+                                                            //id: "top1",
+                                                            title: "公告",
+                                                            yes: true,
+                                                            yesText: "確認",
+                                                            no: false,
+                                                            noText: "取消",
+                                                            // autoClose: true,
+                                                            backgroundClose: false,
+                                                            noOnClick: (e) => {
+                                                            },
+                                                            yesOnClick: (e, close) => {
+                                                                close();
+                                                            },
+                                                            closeIconOnClick: (e) => {
+                                                            },
+                                                            content: (
+                                                                <Text theme={tablet.newsContentModalText}>
+                                                                    {rowData ?? "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序順序順序順序順序順序順序順序順序順序順序順..."}
+                                                                </Text>
+                                                            ),
+                                                            theme: tablet.newsModal
+                                                        })
+                                                    }}
+                                                    theme={tablet.newsContentText}
+                                                >
+                                                    {rowData}
+                                                </Text>
+                                            </BasicContainer>
                                         </>
                                     )
                                 }

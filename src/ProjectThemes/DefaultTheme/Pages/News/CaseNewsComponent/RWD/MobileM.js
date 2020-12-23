@@ -1,18 +1,62 @@
 export default {
-    //#region Table區域
-    //#region Table容器
-    tableContainer: {
+    //#region 公告外層容器
+    newsContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 219px - 4px )",
+            height: "calc( 100vh - 56px - 94px - 48px)",
             width: "100%",
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
-            borderRadius: "16px"
+            // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
+            // borderRadius: "16px"
         })
     },
     //#endregion
-
-    //#region 公告 身份 Tag 區域
+    //#region 公告容器
+    newsCardContainer: {
+        basic: (style, props) => ({
+            ...style,
+            height: "102px",
+            width: "100%",
+            // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
+            // borderRadius: "16px",
+            margin: "8px 0",
+            backgroundColor: "#FFF"
+        })
+    },
+    //#endregion
+    //#region 公告內容容器
+    newsCardContentContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(12),
+            height: "64px",
+            padding: "16px 16px 4px 16px",
+            overflow: "hidden"
+            // width: "100%",
+        })
+    },
+    //#endregion
+    //#region 公告內容文字
+    newsCardContentText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            lineHeight: "22px",
+            fontWeight: "400",
+            color: "rgba(0, 0, 0, 0.65)"
+        })
+    },
+    //#endregion
+    //#region 公告Tag容器
+    newsCardTagContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(6),
+            height: "auto",
+            padding: "0 16px"
+        })
+    },
+    //#endregion
+    //#region 公告Tag
     newsIdentityTag: {
         //#region Tag樣式
         //#region 長照
@@ -21,7 +65,7 @@ export default {
                 basic: (style, props) => ({
                     ...style,
                     margin: "0 0 0 0",
-                    // top: "3px",
+                    top: "-5px",
                     padding: "0px 7px",
                     fontSize: "12px",
                     lineHeight: "20px",
@@ -39,7 +83,7 @@ export default {
                 basic: (style, props) => ({
                     ...style,
                     margin: "0 0 0 0",
-                    // top: "3px",
+                    top: "-5px",
                     padding: "0px 7px",
                     fontSize: "12px",
                     lineHeight: "20px",
@@ -58,7 +102,7 @@ export default {
                 basic: (style, props) => ({
                     ...style,
                     margin: "0 0 0 0",
-                    // top: "3px",
+                    top: "-5px",
                     padding: "0px 7px",
                     fontSize: "12px",
                     lineHeight: "20px",
@@ -77,7 +121,7 @@ export default {
                 basic: (style, props) => ({
                     ...style,
                     margin: "0 0 0 0",
-                    // top: "3px",
+                    top: "-5px",
                     padding: "0px 7px",
                     fontSize: "12px",
                     lineHeight: "20px",
@@ -91,4 +135,62 @@ export default {
         },
         //#endregion      
     },
+    //#endregion
+    //#endregion
+    //#region 公告日期容器
+    newsCardDateContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(6),
+            height: "auto",
+            padding: "0 16px"
+        })
+    },
+    //#endregion
+    //#region 公告日期文字
+    newsCardDateText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "12px",
+            top: "-2px",
+            right: "20px",
+            lineHeight: "18px",
+            fontWeight: "400",
+            color: "rgba(0, 0, 0, 0.45)",
+            textAlign: "right",
+        })
+    },
+    //#endregion
+
+    //#region Modal 樣式
+    newsModal: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "343px"
+            }),
+            tablet: (style, props) => ({
+            }),
+        },
+        contentContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "24px",
+                zIndex: 100
+            }),
+        }
+    },
+    //#endregion
+
+    //#region Modal 文字
+    newsCardContentModalText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
+    },
+    //#endregion
 }

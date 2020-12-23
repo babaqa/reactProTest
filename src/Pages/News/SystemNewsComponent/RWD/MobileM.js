@@ -16,125 +16,205 @@ const MobileMBase = (props) => {
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
+    const statusMapping = (status, getTheme = false) => {
+        switch (toString(status)) {
+            case "1":
+                return (getTheme ? mobileM.newsIdentityTag.caseNews : "長照");
+            case "2":
+                return (getTheme ? mobileM.newsIdentityTag.whiteNews : "共享車隊");
+            case "3":
+                return (getTheme ? mobileM.newsIdentityTag.busNews : "巴士");
+            default:
+                return (getTheme ? mobileM.newsIdentityTag.unknownNews : "無此身份");
+        }
+    }
+
     let history = useHistory()
 
     return (
         <>
-            {/* Table 容器 */}
+            {/* 公告外層 容器 */}
             <BasicContainer
                 bascDefaultTheme={"DefaultTheme"}
-                theme={mobileM.tableContainer}
+                theme={mobileM.newsContainer}
             >
-                <OldTable
-                    dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
-                    dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                        globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                        globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
-                    }}
-                    checkbox={false}
-                    // checked={["08f41bf6-4388-4b1e-bd3e-2ff538b44b1b"]}
-                    checkedRowKeyName={"id"}
-                    checkboxOnChecked={
-                        (checkedRowKeys, checkedRows) => {
-                            // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                            globalContextService.set("SystemNewsComponentPage", "CheckedRowKeys", checkedRowKeys);
-                            globalContextService.set("SystemNewsComponentPage", "CheckedRowsData", checkedRows);
-                        }
-                    }
-                    setPerCheckBoxDisabled={(record) => {
-                        return {
-                            // ...record, // 對應CheckBox當列資料
-                            // disabled: record.name === 'Edrward 11',
-                        }
-                    }}
-                    //scrollAreaWidth={"calc( 1900px - 300px )"} // 不用傳 會自適應寬度
-                    //scrollAreaHeight={"calc( 100% - 55px )"}
-                    columnsAttr={
-                        //#region 資料欄設定
-                        [
+                {/* 公告容器 */}
+                <Container theme={mobileM.newsCardContainer}>
 
-                            {
-                                title: '',
-                                width: "0px",
-                                dataIndex: 'leftOccupy',
-                                fixed: 'left',
-                                sorter: false
-                            },
-                            {
-                                title: '身份',
-                                width: "96px",
-                                dataIndex: 'identity',
-                                // sorter: (a, b) => a.brandModel.length - b.brandModel.length,
-                                // fixed: 'left',
-                                render: (rowData, allRowData) => {
-                                    const statusMapping = (status, getTheme = false) => {
-                                        switch (toString(status)) {
-                                            case "1":
-                                                return (getTheme ? mobileM.newsIdentityTag.caseNews : "長照");
-                                            case "2":
-                                                return (getTheme ? mobileM.newsIdentityTag.whiteNews : "共享車隊");
-                                            case "3":
-                                                return (getTheme ? mobileM.newsIdentityTag.busNews : "巴士");
-                                            default:
-                                                return (getTheme ?  mobileM.newsIdentityTag.unknownNews : "無此身份");
-                                        }
-                                    }
+                    {/* 公告內容容器 */}
+                    <SubContainer theme={mobileM.newsCardContentContainer}>
+                        {/* 公告內容文字 */}
+                        <Text
+                            theme={mobileM.newsCardContentText}
+                            onClick={() => {
+                                modalsService.titleModal.normal({
+                                    //id: "top1",
+                                    title: "公告",
+                                    yes: true,
+                                    yesText: "確認",
+                                    no: false,
+                                    noText: "取消",
+                                    // autoClose: true,
+                                    backgroundClose: false,
+                                    noOnClick: (e) => {
+                                    },
+                                    yesOnClick: (e, close) => {
+                                        close();
+                                    },
+                                    closeIconOnClick: (e) => {
+                                    },
+                                    content: (
+                                        <Text theme={mobileM.newsCardContentModalText}>
+                                            {props?.content ?? "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序順序順序順序順序順序順序順序順序順序順序順..."}
+                                        </Text>
+                                    ),
+                                    theme: mobileM.newsModal
+                                })
+                            }}
+                        >
+                            武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序順序順序順序順序順序順序順序順序順序順序順...
+                        </Text>
+                    </SubContainer>
 
-                                    return (
-                                        <>
-                                            <Tag
-                                                baseDefaultTheme={"DefaultTheme"}
-                                                theme={statusMapping(rowData, true)}
-                                                text={statusMapping(rowData)}
-                                            />
-                                        </>
-                                    )
-                                }
-                            },
-                            {
-                                title: '日期',
-                                width: "111px",
-                                dataIndex: 'date',
-                                // sorter: (a, b) => a.brandModel.length - b.brandModel.length,
-                                // fixed: 'left',
-                            },
-                            {
-                                title: '公告',
-                                width: "933px",
-                                dataIndex: 'announce',
-                                // sorter: (a, b) => a.brandModel.length - b.brandModel.length,
-                                // fixed: 'left',
-                            },
-                            {
-                                title: '',
-                                width: "0px",
-                                dataIndex: 'rightOccupy',
-                                fixed: 'right',
-                                sorter: false
-                            },
-                        ]
-                        //#endregion
-                    }
-                    //sort
-                    //showHeader={false}
-                    data={[
-                        { id: "1", identity: "1", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "2", identity: "2", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "3", identity: "3", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "4", identity: "2", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "5", identity: "2", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "6", identity: "3", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "7", identity: "1", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "8", identity: "2", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "9", identity: "1", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "10", identity: "1", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                        { id: "11", identity: "2", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-                    ]}
-                    // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
-                    // data={props.AllClient.data}
-                    clickPage={(currentPage, pageSize) => {
-                    }}
-                />
+
+                    {/* 公告Tag容器 */}
+                    <SubContainer theme={mobileM.newsCardTagContainer}>
+                        {/* 公告Tag */}
+                        <Tag
+                            baseDefaultTheme={"DefaultTheme"}
+                            theme={statusMapping(props?.tag ?? "1", true)}
+                            text={statusMapping(props?.tag ?? "1")}
+                        />
+                    </SubContainer >
+
+                    {/* 公告日期容器 */}
+                    <SubContainer theme={mobileM.newsCardDateContainer}>
+                        {/* 公告日期文字 */}
+                        <Text theme={mobileM.newsCardDateText}>
+                            {props?.date ?? "2020-12-31"}
+                        </Text>
+                    </SubContainer>
+
+                </Container>
+
+                {/* 公告容器 */}
+                <Container theme={mobileM.newsCardContainer}>
+
+                    {/* 公告內容容器 */}
+                    <SubContainer theme={mobileM.newsCardContentContainer}>
+                        {/* 公告內容文字 */}
+                        <Text
+                            theme={mobileM.newsCardContentText}
+                            onClick={() => {
+                                modalsService.titleModal.normal({
+                                    //id: "top1",
+                                    title: "公告",
+                                    yes: true,
+                                    yesText: "確認",
+                                    no: false,
+                                    noText: "取消",
+                                    // autoClose: true,
+                                    backgroundClose: false,
+                                    noOnClick: (e) => {
+                                    },
+                                    yesOnClick: (e, close) => {
+                                        close();
+                                    },
+                                    closeIconOnClick: (e) => {
+                                    },
+                                    content: (
+                                        <Text theme={mobileM.newsCardContentModalText}>
+                                            {props?.content ?? "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序順序順序順序順序順序順序順序順序順序順序順..."}
+                                        </Text>
+                                    ),
+                                    theme: mobileM.newsModal
+                                })
+                            }}
+                        >
+                            武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序順序順序順序順序順序順序順序順序順序順序順...
+                        </Text>
+                    </SubContainer>
+
+
+                    {/* 公告Tag容器 */}
+                    <SubContainer theme={mobileM.newsCardTagContainer}>
+                        {/* 公告Tag */}
+                        <Tag
+                            baseDefaultTheme={"DefaultTheme"}
+                            theme={statusMapping(props?.tag ?? "3", true)}
+                            text={statusMapping(props?.tag ?? "3")}
+                        />
+                    </SubContainer >
+
+                    {/* 公告日期容器 */}
+                    <SubContainer theme={mobileM.newsCardDateContainer}>
+                        {/* 公告日期文字 */}
+                        <Text theme={mobileM.newsCardDateText}>
+                            {props?.date ?? "2020-12-31"}
+                        </Text>
+                    </SubContainer>
+
+                </Container>
+
+                {/* 公告容器 */}
+                <Container theme={mobileM.newsCardContainer}>
+
+                    {/* 公告內容容器 */}
+                    <SubContainer theme={mobileM.newsCardContentContainer}>
+                        {/* 公告內容文字 */}
+                        <Text
+                            theme={mobileM.newsCardContentText}
+                            onClick={() => {
+                                modalsService.titleModal.normal({
+                                    //id: "top1",
+                                    title: "公告",
+                                    yes: true,
+                                    yesText: "確認",
+                                    no: false,
+                                    noText: "取消",
+                                    // autoClose: true,
+                                    backgroundClose: false,
+                                    noOnClick: (e) => {
+                                    },
+                                    yesOnClick: (e, close) => {
+                                        close();
+                                    },
+                                    closeIconOnClick: (e) => {
+                                    },
+                                    content: (
+                                        <Text theme={mobileM.newsCardContentModalText}>
+                                            {props?.content ?? "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序順序順序順序順序順序順序順序順序順序順序順..."}
+                                        </Text>
+                                    ),
+                                    theme: mobileM.newsModal
+                                })
+                            }}
+                        >
+                            武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序順序順序順序順序順序順序順序順序順序順序順...
+                        </Text>
+                    </SubContainer>
+
+
+                    {/* 公告Tag容器 */}
+                    <SubContainer theme={mobileM.newsCardTagContainer}>
+                        {/* 公告Tag */}
+                        <Tag
+                            baseDefaultTheme={"DefaultTheme"}
+                            theme={statusMapping(props?.tag ?? "2", true)}
+                            text={statusMapping(props?.tag ?? "2")}
+                        />
+                    </SubContainer >
+
+                    {/* 公告日期容器 */}
+                    <SubContainer theme={mobileM.newsCardDateContainer}>
+                        {/* 公告日期文字 */}
+                        <Text theme={mobileM.newsCardDateText}>
+                            {props?.date ?? "2020-12-31"}
+                        </Text>
+                    </SubContainer>
+
+                </Container>
+
             </BasicContainer>
 
         </>
