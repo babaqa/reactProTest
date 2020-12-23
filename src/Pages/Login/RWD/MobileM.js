@@ -2,8 +2,8 @@ import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../../Store/Store'
 import styled from 'styled-components';
 //import { ReactComponent as MobileMbg } from '../../../Assets/img/MobileMbg.svg'
-import MobileMbg from '../../../Assets/img/MobileMbg.svg'
-import { ReactComponent as MobileMCar } from '../../../Assets/img/MobileMCar.svg'
+import { ReactComponent as MobileMbg } from '../../../Assets/img/MobileMbg.svg'
+import { ReactComponent as LoginLogoMobileM } from '../../../Assets/img/LoginLogoMobileM.svg'
 import { ReactComponent as Admin } from '../../../Assets/img/Admin.svg'
 import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
 import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
@@ -61,44 +61,13 @@ const MobileMBase = (props) => {
                         theme={mobileM.aboveContainer}
                     >
                         {/* 背景自適應 */}
-                        <BasicContainer
-                            baseDefaultTheme={"DefaultTheme"}
-                            theme={mobileM.aboveBgImage(MobileMbg)}
-                        />
-                        <BasicContainer
-                            baseDefaultTheme={"DefaultTheme"}
-                            theme={mobileM.belowBgImage(MobileMbg)}
-                        />
+                        <MobileMbg style={mobileM.bgImage} />
+
                         {/* 登入框容器 */}
                         <Container
                             baseDefaultTheme={"DefaultTheme"}
                             theme={mobileM.loginContainer}
                         >
-                            {/* 屏東市政府標題 */}
-                            <SubContainer
-                                baseDefaultTheme={"DefaultTheme"}
-                                theme={mobileM.bigTitleContainer}
-                            >
-                                <Text
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    theme={mobileM.bigTitleText}
-                                >
-                                    屏東市政府
-                                </Text>
-                                <MobileMCar style={mobileM.bigTitleLogo} />
-                            </SubContainer>
-                            {/* 次標題 */}
-                            <SubContainer
-                                baseDefaultTheme={"DefaultTheme"}
-                                theme={mobileM.subTitleContainer}
-                            >
-                                <Text
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    theme={mobileM.subTitleText}
-                                >
-                                    長照交通接送統一預約服務及管理系統
-                                </Text>
-                            </SubContainer>
 
                             {/* 從這裡替換成其他表單 : 登入、忘記密碼、設定登入密碼 */}
 
@@ -474,33 +443,12 @@ const MobileMBase = (props) => {
                                 </>
                             }
 
+                            {/* 登入頁Logo */}
+                            <LoginLogoMobileM style={mobileM.logo} />
+
                         </Container>
                     </BasicContainer>
 
-                    {/* 公告區 */}
-                    <MobileMPlacard
-                        TitleText={"公告"}
-                        tabsName={[
-                            "車行公告",
-                            //  "車行公告A", "車行公告B", "車行公告C", "車行公告D", "車行公告EE",
-                            "1", "test"]}
-                        nowTab={props.nowTab}
-                        mainContent={{
-                            "車行公告": <div style={{ color: "red", height: "100rem" }}>"車行公告"</div>,
-                            // "車行公告A": <div style={{ color: "red" }}>"車行公告A"</div>,
-                            // "車行公告B": <div style={{ color: "red" }}>"車行公告B"</div>,
-                            // "車行公告C": <div style={{ color: "red" }}>"車行公告C"</div>,
-                            // "車行公告D": <div style={{ color: "red" }}>"車行公告D"</div>,
-                            // "車行公告EE": <div style={{ color: "red" }}>"車行公告EE"</div>,
-                            "1": <div style={{ color: "red" }}>"1"</div>,
-                            "test": <div style={{ color: "red" }}>"test"</div>
-                        }}
-                        tabEvent={{
-                            onClick: (tab) => {
-                                props.setNowTab(tab)
-                            }
-                        }}
-                    />
                 </ScrollBar>
             </BasicContainer>
         </>

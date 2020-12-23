@@ -2,12 +2,13 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
 import { BasicContainer, ScrollBar, Container, SubContainer, Text, FormContainer, FormRow, TextInput, BasicButton, modalsService, globalContextService } from '../../../Components';
-import { ReactComponent as MobileMCar } from '../../../Assets/img/MobileMCar.svg'
+import { ReactComponent as LoginLogo } from '../../../Assets/img/LoginLogo.svg'
 import { ReactComponent as Admin } from '../../../Assets/img/Admin.svg'
 import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
 import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
 import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
-import LaptopLbg from '../../../Assets/img/LaptopLbg.svg'
+import { ReactComponent as LaptopLbg } from '../../../Assets/img/LaptopLbg.svg'
+// import LaptopLbg from '../../../Assets/img/LaptopLbg.svg'
 import { LaptopPlacard } from '../../../ProjectComponent';
 
 //#region 倒數10秒
@@ -59,93 +60,21 @@ const LaptopLBase = (props) => {
                         theme={laptopL.place}
                     />
 
-                    {/* 左半邊公告容器 */}
-                    <BasicContainer
-                        baseDefaultTheme={"DefaultTheme"}
-                        theme={laptopL.leftContainer}
-                    >
-                        <LaptopPlacard
-                            TitleText={"公告"}
-                            tabsName={["車行公告", "車行公告A",
-                                "車行公告B", "車行公告C", "車行公告D", "車行公告EE", "1", "test",
-                                "車行公告F", "車行公告G", "車行公告H",
-                                "車行公告I", "車行公告J", "車行公告K",
-                                "0", "車行公告M", "車行公告N",
-                            ]}
-                            nowTab={props.nowTab}
-                            mainContent={{
-                                "車行公告": <div style={{ color: "red", height: "100rem" }}>"車行公告"</div>,
-                                "車行公告A": <div style={{ color: "red" }}>"車行公告A"</div>,
-                                "車行公告B": <div style={{ color: "red" }}>"車行公告B"</div>,
-                                "車行公告C": <div style={{ color: "red" }}>"車行公告C"</div>,
-                                "車行公告D": <div style={{ color: "red" }}>"車行公告D"</div>,
-                                "車行公告EE": <div style={{ color: "red" }}>"車行公告EE"</div>,
-                                "1": <div style={{ color: "red" }}>"1"</div>,
-                                "test": <div style={{ color: "red" }}>"test"</div>,
-                                "車行公告F": <div style={{ color: "red" }}>"車行公告A"</div>,
-                                "車行公告G": <div style={{ color: "red" }}>"車行公告B"</div>,
-                                "車行公告H": <div style={{ color: "red" }}>"車行公告C"</div>,
-                                "車行公告I": <div style={{ color: "red" }}>"車行公告D"</div>,
-                                "車行公告J": <div style={{ color: "red" }}>"車行公告A"</div>,
-                                "車行公告K": <div style={{ color: "red" }}>"車行公告B"</div>,
-                                "車行公告L": <div style={{ color: "red" }}>"車行公告C"</div>,
-                                "車行公告M": <div style={{ color: "red" }}>"車行公告D"</div>,
-                                "車行公告N": <div style={{ color: "red" }}>"車行公告D"</div>,
-
-                            }}
-                            tabEvent={{
-                                onClick: (tab) => {
-                                    props.setNowTab(tab)
-                                }
-                            }}
-                        />
-                    </BasicContainer>
-
                     {/* 右半邊登入容器 */}
                     <BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
                         theme={laptopL.rightContainer}
                     >
                         {/* 背景自適應 */}
-                        <BasicContainer
-                            baseDefaultTheme={"DefaultTheme"}
-                            theme={laptopL.aboveBgImage(LaptopLbg)}
-                        />
-                        <BasicContainer
-                            baseDefaultTheme={"DefaultTheme"}
-                            theme={laptopL.belowBgImage(LaptopLbg)}
-                        />
+                        <LaptopLbg style={laptopL.bgImage} />
 
                         {/* 登入框容器 */}
                         <Container
                             baseDefaultTheme={"DefaultTheme"}
                             theme={laptopL.loginContainer}
                         >
-                            {/* 屏東市政府標題 */}
-                            <SubContainer
-                                baseDefaultTheme={"DefaultTheme"}
-                                theme={laptopL.bigTitleContainer}
-                            >
-                                <Text
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    theme={laptopL.bigTitleText}
-                                >
-                                    屏東市政府
-                            </Text>
-                                <MobileMCar style={laptopL.bigTitleLogo} />
-                            </SubContainer>
-                            {/* 次標題 */}
-                            <SubContainer
-                                baseDefaultTheme={"DefaultTheme"}
-                                theme={laptopL.subTitleContainer}
-                            >
-                                <Text
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    theme={laptopL.subTitleText}
-                                >
-                                    長照交通接送統一預約服務及管理系統
-                            </Text>
-                            </SubContainer>
+                            {/* 登入頁Logo */}
+                            <LoginLogo />
 
                             {/* 從這裡替換成其他表單 : 登入、忘記密碼、設定登入密碼 */}
 
@@ -162,7 +91,7 @@ const LaptopLBase = (props) => {
                                             baseDefaultTheme={"DefaultTheme"}
                                             theme={laptopL.loginFormTitle}
                                         >
-                                            管理者Login
+                                            登入
                                         </Text>
                                         {/* 登入表單次標題 */}
                                         <Text

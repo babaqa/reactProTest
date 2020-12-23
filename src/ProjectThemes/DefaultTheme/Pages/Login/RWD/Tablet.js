@@ -3,7 +3,8 @@ export default {
     outContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "100vh"
+            height: "calc( 100vh - 80px )",
+            top: "80px",
         })
     },
     //#endregion
@@ -23,36 +24,31 @@ export default {
     aboveContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "473px"
+            // height: "473px"
+            minHeight: "820px",
+            height: "calc( 100vh - 80px )",
         })
     },
     //#endregion
-    //#region 上半部背景-上半段 
-    aboveBgImage: (tabletbg) => ({
+    //#region 佔位容器 
+    place: {
         basic: (style, props) => ({
             ...style,
-            backgroundImage: `url(${tabletbg})`,
-            height: "473px",
-            width: "50%",
-            display: "inline-block",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover"
+            display: "block",
+            width: "100%",
+            minHeight: "820px",
+            height: "calc( 100vh - 80px )",
+            top: "0",
+            background: "#d4d4d4",
         })
-    }),
+    },
     //#endregion
-    //#region 上半部背景-上半段 
-    belowBgImage: (tabletbg) => ({
-        basic: (style, props) => ({
-            ...style,
-            backgroundImage: `url(${tabletbg})`,
-            height: "473px",
-            width: "50%",
-            display: "inline-block",
-            backgroundPosition: "100% 0%",
-            backgroundRepeat: "no-repeat",
-            backgroundSize: "cover"
-        })
-    }),
+
+    //#region 背景
+    bgImage: {
+        width: "100%",
+        height: "100%"
+    },
     //#endregion
     //#region 登入框容器
     loginContainer: {
@@ -62,68 +58,7 @@ export default {
             //height: "100%",
             top: 0,
             justifyContent: "center",
-            padding: "0 18%"
-        })
-    },
-    //#endregion
-    //#region 屏東市政府標題容器
-    bigTitleContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(12),
-            padding: "48px 0 0 48px",
-            maxWidth: "490px",
-            userSelect: "none",
-        })
-    },
-    //#endregion
-    //#region 屏東市政府標題文字
-    bigTitleText: {
-        basic: (style, props) => ({
-            ...style,
-            color: "#2f54eb",
-            fontSize: "30px",
-            fontWeight: "bold",
-            display: "inline-block",
-            height: "100%",
-            lineHeight: "40px",
-            userSelect: "none",
-            cursor: "default"
-        })
-    },
-    //#endregion
-    //#region 屏東市政府標題Logo
-    bigTitleLogo: {
-        position: "absolute",
-        cursor: "default",
-        userSelect: "none",
-        height: "80px",
-        width: "80px",
-        top: "14px"
-    },
-    //#endregion
-    //#region 屏東市政府次標題容器
-    subTitleContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(12),
-            padding: "5px 0 16px 48px",
-            maxWidth: "490px",
-            userSelect: "none",
-        })
-    },
-    //#endregion
-    //#region 屏東市政府次標題文字
-    subTitleText: {
-        basic: (style, props) => ({
-            ...style,
-            color: "#2f54eb",
-            fontSize: "20px",
-            fontWeight: "bold",
-            display: "inline-block",
-            height: "28px",
-            userSelect: "none",
-            cursor: "default"
+            padding: "64px 18% 0"
         })
     },
     //#endregion
@@ -139,7 +74,7 @@ export default {
             height: "312px",
             backgroundColor: "#ffffff",
             boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
-            borderRadius: "2px"
+            borderRadius: "16px"
         })
     },
     //#endregion
@@ -147,7 +82,7 @@ export default {
     loginFormTitle: {
         basic: (style, props) => ({
             ...style,
-            color: "#1890ff",
+            color: "#FF7A45",
             fontSize: "20px",
             fontWeight: "bold",
             display: "block",
@@ -162,7 +97,7 @@ export default {
     loginFormSubTitle: {
         basic: (style, props) => ({
             ...style,
-            color: "rgba(0, 0, 0, 0.65)",
+            color: "#FF7A45",
             fontSize: "14px",
             fontWeight: "normal",
             display: "block",
@@ -214,7 +149,7 @@ export default {
                 //console.log(props)
                 return {
                     ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
                 }
             }
         },
@@ -224,13 +159,22 @@ export default {
                 //#region 當有開啟 openEye 並且 hover 或 focus 時變色
                 ...(
                     props.openEye && {
-                        border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
                     }
                 ),
                 //#endregion
                 height: "40px"
-            })
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
         }
     },
     //#endregion
@@ -261,28 +205,34 @@ export default {
         },
         textInputContainer: {
             basic: (style, props) => {
-
+                //console.log(props)
                 return {
                     ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
                 }
             }
         },
         textInput: {
-            basic: (style, props) => {
-                //console.log(style, props)
-                return {
-                    ...style,
-                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                    ...(
-                        props.openEye && {
-                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                        }
-                    ),
-                    //#endregion
-                    height: "40px"
-                }
+            basic: (style, props) => ({
+                ...style,
+                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                ...(
+                    props.openEye && {
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
+                    }
+                ),
+                //#endregion
+                height: "40px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
             }
         }
     },
@@ -302,14 +252,14 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                background: "#1890ff",
+                background: "#FF7A45",
                 boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
                 borderRadius: "2px",
                 height: "32px"
             }),
             hover: (style, props) => ({
                 ...style,
-                backgroundColor: "#40a9ff"
+                backgroundColor: "rgba(255, 122, 69, 0.8)"
             })
         },
         text: {
@@ -338,7 +288,7 @@ export default {
             display: "block",
             textAlign: "right",
             fontSize: "14px",
-            color: "#1890ff",
+            color: "#ff7a45",
             userSelect: "none"
         })
     },
@@ -350,7 +300,7 @@ export default {
             display: "inline-block",
             textAlign: "right",
             fontSize: "14px",
-            color: "#1890ff",
+            color: "#ff7a45",
             cursor: "pointer",
             lineHeight: "22px",
             userSelect: "none"
@@ -370,7 +320,7 @@ export default {
             height: "320px",
             backgroundColor: "#ffffff",
             boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
-            borderRadius: "2px"
+            borderRadius: "16px"
         })
     },
     //#endregion
@@ -378,7 +328,7 @@ export default {
     forgetPassFormTitle: {
         basic: (style, props) => ({
             ...style,
-            color: "#1890ff",
+            color: "#FF7A45",
             fontSize: "20px",
             fontWeight: "bold",
             display: "block",
@@ -392,7 +342,7 @@ export default {
     forgetPassFormSubTitle: {
         basic: (style, props) => ({
             ...style,
-            color: "rgba(0, 0, 0, 0.65)",
+            color: "#FF7A45",
             fontSize: "14px",
             fontWeight: "normal",
             display: "block",
@@ -445,7 +395,7 @@ export default {
                 //console.log(props)
                 return {
                     ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
                 }
             }
         },
@@ -455,13 +405,22 @@ export default {
                 //#region 當有開啟 openEye 並且 hover 或 focus 時變色
                 ...(
                     props.openEye && {
-                        border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
                     }
                 ),
                 //#endregion
                 height: "40px"
-            })
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
         }
     },
     //#endregion
@@ -558,28 +517,34 @@ export default {
         },
         textInputContainer: {
             basic: (style, props) => {
-
+                //console.log(props)
                 return {
                     ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
                 }
             }
         },
         textInput: {
-            basic: (style, props) => {
-                //console.log(style, props)
-                return {
-                    ...style,
-                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                    ...(
-                        props.openEye && {
-                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                        }
-                    ),
-                    //#endregion
-                    height: "40px"
-                }
+            basic: (style, props) => ({
+                ...style,
+                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                ...(
+                    props.openEye && {
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
+                    }
+                ),
+                //#endregion
+                height: "40px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
             }
         }
     },
@@ -619,8 +584,8 @@ export default {
             hover: (style, props) => ({
                 ...style,
                 backgroundColor: "rgba(255, 255, 255, 0.85)",
-                border: "1px solid #1890ff",
-                color: "#1890ff",
+                border: "1px solid #ff7a45",
+                color: "#ff7a45",
             })
         },
         text: {
@@ -650,14 +615,14 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                background: "#1890ff",
+                background: "#ff7a45",
                 boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
                 borderRadius: "2px",
                 height: "32px"
             }),
             hover: (style, props) => ({
                 ...style,
-                backgroundColor: "#40a9ff"
+                backgroundColor: "rgba(255, 122, 69, 0.8)"
             })
         },
         text: {
@@ -706,7 +671,7 @@ export default {
             height: "282px",
             backgroundColor: "#ffffff",
             boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
-            borderRadius: "2px"
+            borderRadius: "16px"
         })
     },
     //#endregion
@@ -714,7 +679,7 @@ export default {
     resetPassFormTitle: {
         basic: (style, props) => ({
             ...style,
-            color: "#1890ff",
+            color: "#FF7A45",
             fontSize: "20px",
             fontWeight: "bold",
             display: "block",
@@ -728,7 +693,7 @@ export default {
     resetPassFormSubTitle: {
         basic: (style, props) => ({
             ...style,
-            color: "rgba(0, 0, 0, 0.65)",
+            color: "#FF7A45",
             fontSize: "14px",
             fontWeight: "normal",
             display: "block",
@@ -779,7 +744,7 @@ export default {
                 //console.log(props)
                 return {
                     ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
                 }
             }
         },
@@ -789,13 +754,22 @@ export default {
                 //#region 當有開啟 openEye 並且 hover 或 focus 時變色
                 ...(
                     props.openEye && {
-                        border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
                     }
                 ),
                 //#endregion
                 height: "40px"
-            })
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
         }
     },
     //#endregion
@@ -826,28 +800,34 @@ export default {
         },
         textInputContainer: {
             basic: (style, props) => {
-
+                //console.log(props)
                 return {
                     ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
                 }
             }
         },
         textInput: {
-            basic: (style, props) => {
-                //console.log(style, props)
-                return {
-                    ...style,
-                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                    ...(
-                        props.openEye && {
-                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                        }
-                    ),
-                    //#endregion
-                    height: "40px"
-                }
+            basic: (style, props) => ({
+                ...style,
+                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                ...(
+                    props.openEye && {
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
+                    }
+                ),
+                //#endregion
+                height: "40px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
             }
         }
     },
@@ -867,14 +847,14 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                background: "#1890ff",
+                background: "#ff7a45",
                 boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
                 borderRadius: "2px",
                 height: "32px"
             }),
             hover: (style, props) => ({
                 ...style,
-                backgroundColor: "#40a9ff"
+                backgroundColor: "rgba(255, 122, 69, 0.8)"
             })
         },
         text: {

@@ -2,12 +2,12 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
 import { BasicContainer, ScrollBar, Container, SubContainer, Text, FormContainer, FormRow, TextInput, BasicButton, modalsService, globalContextService } from '../../../Components';
-import { ReactComponent as MobileMCar } from '../../../Assets/img/MobileMCar.svg'
+import { ReactComponent as LoginLogoTablet } from '../../../Assets/img/LoginLogoTablet.svg'
 import { ReactComponent as Admin } from '../../../Assets/img/Admin.svg'
 import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
 import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
 import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
-import Tabletbg from '../../../Assets/img/Tabletbg.svg'
+import { ReactComponent as Tabletbg } from '../../../Assets/img/Tabletbg.svg'
 import { TabletPlacard } from '../../../ProjectComponent';
 
 //#region 倒數10秒
@@ -58,44 +58,13 @@ const TabletBase = (props) => {
                         theme={tablet.aboveContainer}
                     >
                         {/* 背景自適應 */}
-                        <BasicContainer
-                            baseDefaultTheme={"DefaultTheme"}
-                            theme={tablet.aboveBgImage(Tabletbg)}
-                        />
-                        <BasicContainer
-                            baseDefaultTheme={"DefaultTheme"}
-                            theme={tablet.belowBgImage(Tabletbg)}
-                        />
+                        <Tabletbg style={tablet.bgImage} />
+
                         {/* 登入框容器 */}
                         <Container
                             baseDefaultTheme={"DefaultTheme"}
                             theme={tablet.loginContainer}
                         >
-                            {/* 屏東市政府標題 */}
-                            <SubContainer
-                                baseDefaultTheme={"DefaultTheme"}
-                                theme={tablet.bigTitleContainer}
-                            >
-                                <Text
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    theme={tablet.bigTitleText}
-                                >
-                                    屏東市政府
-                                </Text>
-                                <MobileMCar style={tablet.bigTitleLogo} />
-                            </SubContainer>
-                            {/* 次標題 */}
-                            <SubContainer
-                                baseDefaultTheme={"DefaultTheme"}
-                                theme={tablet.subTitleContainer}
-                            >
-                                <Text
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    theme={tablet.subTitleText}
-                                >
-                                    長照交通接送統一預約服務及管理系統
-                                </Text>
-                            </SubContainer>
 
                             {/* 從這裡替換成其他表單 : 登入、忘記密碼、設定登入密碼 */}
 
@@ -468,45 +437,13 @@ const TabletBase = (props) => {
                                     </BasicContainer>
                                 </>
                             }
+
+                            {/* 登入頁Logo */}
+                            <LoginLogoTablet />
+
                         </Container>
                     </BasicContainer>
 
-                    {/* 公告區 */}
-                    <TabletPlacard
-                        TitleText={"公告"}
-                        tabsName={["車行公告", "車行公告A",
-                            "車行公告B", "車行公告C", "車行公告D", "車行公告EE", "1", "test",
-                            "車行公告F", "車行公告G", "車行公告H",
-                            "車行公告I", "車行公告J", "車行公告K",
-                            "0", "車行公告M", "車行公告N",
-                        ]}
-                        nowTab={props.nowTab}
-                        mainContent={{
-                            "車行公告": <div style={{ color: "red", height: "100rem" }}>"車行公告"</div>,
-                            "車行公告A": <div style={{ color: "red" }}>"車行公告A"</div>,
-                            "車行公告B": <div style={{ color: "red" }}>"車行公告B"</div>,
-                            "車行公告C": <div style={{ color: "red" }}>"車行公告C"</div>,
-                            "車行公告D": <div style={{ color: "red" }}>"車行公告D"</div>,
-                            "車行公告EE": <div style={{ color: "red" }}>"車行公告EE"</div>,
-                            "1": <div style={{ color: "red" }}>"1"</div>,
-                            "test": <div style={{ color: "red" }}>"test"</div>,
-                            "車行公告F": <div style={{ color: "red" }}>"車行公告A"</div>,
-                            "車行公告G": <div style={{ color: "red" }}>"車行公告B"</div>,
-                            "車行公告H": <div style={{ color: "red" }}>"車行公告C"</div>,
-                            "車行公告I": <div style={{ color: "red" }}>"車行公告D"</div>,
-                            "車行公告J": <div style={{ color: "red" }}>"車行公告A"</div>,
-                            "車行公告K": <div style={{ color: "red" }}>"車行公告B"</div>,
-                            "車行公告L": <div style={{ color: "red" }}>"車行公告C"</div>,
-                            "車行公告M": <div style={{ color: "red" }}>"車行公告D"</div>,
-                            "車行公告N": <div style={{ color: "red" }}>"車行公告D"</div>,
-
-                        }}
-                        tabEvent={{
-                            onClick: (tab) => {
-                                props.setNowTab(tab)
-                            }
-                        }}
-                    />
                 </ScrollBar>
             </BasicContainer>
         </>

@@ -107,7 +107,7 @@ export const Layout = (props) => {
     }, [Collapse]) // 除了初始設置外，由窄版 切換至 寬版 亦需要重新設定展開 應該展開的 父層
 
     if (localStorage.getItem("CAuth") === null) {
-        return null
+        // return null
     }
 
     const TabMapping = (key) => {
