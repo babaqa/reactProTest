@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
-import { MainPageContainer, MainPageTitleBar, MainPageSubTitleBar } from '../../../ProjectComponent';
+import { MainPageContainer, MainPageTitleBar, TimeCounterButton, MainPageSubTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, BasicButton, TreeSelector, Tooltip, DateTimePicker, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Lock } from '../../../Assets/img/UserInfoPage/Lock.svg'
-import { ReactComponent as Eye } from '../../../Assets/img/UserInfoPage/Eye.svg'
 import { isNil } from 'lodash';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
@@ -14,32 +13,6 @@ const LaptopBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { userInfo: { rwd: { laptop } } } } = Theme;
     let history = useHistory()
-
-    //#region 倒數10秒
-    const TimeCounter = (props) => {
-
-        const [Sec, setSec] = useState(10);
-
-        useEffect(() => {
-            let counter = setInterval(() => {
-                setSec(s => s - 1);
-                if (Sec === 1) {
-                    props.onCountToZero && props.onCountToZero();
-                }
-            }, 1000)
-
-            return () => {
-                clearInterval(counter)
-            }
-        }, [Sec])
-
-        return (
-            <>
-                {Sec}
-            </>
-        )
-    }
-    //#endregion
 
     return (
         <>
@@ -148,18 +121,14 @@ const LaptopBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>舊密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入舊密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={laptop.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={laptop.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "OldPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "OldPwd", value);
@@ -171,18 +140,14 @@ const LaptopBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>新密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入新密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={laptop.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={laptop.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "NewPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "NewPwd", value);
@@ -194,18 +159,14 @@ const LaptopBase = (props) => {
                                                     <TextInput
                                                         topLabel={<>確認新密碼</>}
                                                         baseDefaultTheme={"DefaultTheme"}
-                                                        type="text"
+                                                        type="password"
                                                         placeholder={"請輸入新密碼"}
                                                         leftIcon={
                                                             <Lock
                                                                 style={laptop.pwdLeftIcon}
                                                             />
                                                         }
-                                                        rightIcon={
-                                                            <Eye
-                                                                style={laptop.pwdRightIcon}
-                                                            />
-                                                        }
+                                                        openEye
                                                         value={globalContextService.get("UserInfoPage", "ConfirmPwd") ?? props.Client?.name}
                                                         onChange={(e, value, onInitial) => {
                                                             globalContextService.set("UserInfoPage", "ConfirmPwd", value);
@@ -367,33 +328,10 @@ const LaptopBase = (props) => {
                                                                         topLabel={
                                                                             <>
                                                                                 驗證碼
-                                                                                {props.WaitSecToZero
-                                                                                    ?
-                                                                                    < BasicButton
-                                                                                        baseDefaultTheme={"DefaultTheme"}
-                                                                                        disable
-                                                                                        theme={laptop.resendVerificationCodeWaitButton}
-                                                                                        text={
-                                                                                            <>
-                                                                                                重送驗證碼(
-                                                                                            <TimeCounter
-                                                                                                    onCountToZero={() => {
-                                                                                                        props.setWaitSecToZero(false);
-                                                                                                        console.log("End")
-                                                                                                    }}
-                                                                                                />
-                                                                                            秒)
-                                                                                        </>
-                                                                                        }
-                                                                                    />
-                                                                                    :
-                                                                                    <BasicButton
-                                                                                        baseDefaultTheme={"PrimaryTheme"}
-                                                                                        text={"重送驗證碼"}
-                                                                                        theme={laptop.resendVerificationCodeButton}
-                                                                                        onClick={() => { props.setWaitSecToZero(true); console.log("Start") }}
-                                                                                    />
-                                                                                }
+                                                                                <TimeCounterButton
+                                                                                    getPresetWaitSecToZero={true}
+                                                                                    getPresetCounter={10}
+                                                                                />
 
                                                                             </>
                                                                         }

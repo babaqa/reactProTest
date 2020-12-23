@@ -346,15 +346,6 @@ export default {
         top: 0,
     },
     //#endregion
-    //#region 密碼 右方圖標
-    pwdRightIcon: {
-        position: "absolute",
-        height: "100%",
-        right: "12px",
-        cursor: "pointer",
-        top: 0,
-    },
-    //#endregion
 
     //#region 修改手機按鈕
     editPhoneButton: {
@@ -519,72 +510,6 @@ export default {
             color: "#1890FF",
             margin: "0 0 16px"
         })
-    },
-    //#endregion
-    //#region 重送驗證碼按鈕 (等待倒數中)
-    resendVerificationCodeWaitButton: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                position: "absolute",
-                width: "151px",
-                background: "#f5f5f5",
-                boxShadow: null,//"0px 2px 0px rgba(0, 0, 0, 0.043)",
-                border: "1px solid #d9d9d9",
-                borderRadius: "2px",
-                height: "28px",
-                padding: "0 8px",
-                right: 0
-            }),
-            hover: (style, props) => ({
-                ...style,
-                backgroundColor: "#f5f5f5"
-            })
-        },
-        text: {
-            basic: (style, props) => ({
-                ...style,
-                fontSize: "14px",
-                lineHeight: "28px",
-                top: "-5px"
-            }),
-        }
-    },
-    //#endregion
-    //#region 重送驗證碼按鈕 
-    resendVerificationCodeButton: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                position: "absolute",
-                width: "102px",
-                background: "#FFFFFF",
-                boxShadow: null,//"0px 2px 0px rgba(0, 0, 0, 0.043)",
-                border: "1px solid #d9d9d9",
-                borderRadius: "2px",
-                height: "28px",
-                padding: "0 8px",
-                right: 0
-            }),
-            hover: (style, props) => ({
-                ...style,
-                backgroundColor: "#FFFFFF",
-                borderColor: "#1890FF"
-            })
-        },
-        text: {
-            basic: (style, props) => ({
-                ...style,
-                fontSize: "14px",
-                lineHeight: "28px",
-                top: "-5px",
-                color: "rgba(0,0,0,0.65)"
-            }),
-            hover: (style, props) => ({
-                ...style,
-                color: "#1890FF",
-            })
-        }
     },
     //#endregion
     //#region 驗證碼 ModalVerificationCode 
