@@ -5,7 +5,7 @@ import { ReactComponent as NoData } from '../../../../Assets/img/RecordPage/NoDa
 import { ReactComponent as Share } from '../../../../Assets/img/RecordPage/Share.svg'
 import { ReactComponent as Start } from '../../../../Assets/img/RecordPage/Start.svg'
 import { ReactComponent as End } from '../../../../Assets/img/RecordPage/End.svg'
-import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/Fleet.svg'
+import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/FleetMobileM.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 
@@ -319,7 +319,7 @@ const MobileMBase = (props) => {
                                                                     <Text
                                                                         theme={mobileM.caseBurdenTitle}
                                                                     >
-                                                                        個案負擔
+                                                                        用戶負擔
 
                                                                                 {/* 個案負擔 內文 */}
                                                                         <Text

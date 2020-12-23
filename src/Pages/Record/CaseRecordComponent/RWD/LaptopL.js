@@ -5,7 +5,7 @@ import { ReactComponent as NoData } from '../../../../Assets/img/RecordPage/NoDa
 import { ReactComponent as Share } from '../../../../Assets/img/RecordPage/Share.svg'
 import { ReactComponent as Start } from '../../../../Assets/img/RecordPage/Start.svg'
 import { ReactComponent as End } from '../../../../Assets/img/RecordPage/End.svg'
-import { ReactComponent as Case } from '../../../../Assets/img/RecordPage/Case.svg'
+import { ReactComponent as Case } from '../../../../Assets/img/RecordPage/CaseLaptopL.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 
@@ -13,8 +13,6 @@ const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { caseRecordComponent: { rwd: { laptopL } } } } } = Theme;
-
-    const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     let history = useHistory()
 

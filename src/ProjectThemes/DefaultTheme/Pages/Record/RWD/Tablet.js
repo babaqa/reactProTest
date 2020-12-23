@@ -24,7 +24,7 @@ export default {
                     ...style,
                     backgroundColor: "#E5E4DB",
                     padding: "0 24px 220px",//188 是授權圖高度,
-                    minHeight: "calc( 100vh - 179px)"
+                    minHeight: "calc( 100vh - 187px)"
                 }
             }
         },
