@@ -10,7 +10,7 @@ import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/Fleet
 import { ReactComponent as Bus } from '../../../../Assets/img/RecordPage/BusLaptopL.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
-
+import { CardTable } from '../../../../ProjectComponent'
 
 
 const LaptopLBase = (props) => {
@@ -78,7 +78,7 @@ const LaptopLBase = (props) => {
                 :
                 <>
                     <Container>
-                        <OldTable
+                        <CardTable
                             dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
                             dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
                                 if (globalContextService.get("RocordPage", "orgId") !== globalContextService.get("RocordPage", "TableCheckedClearKey")) {
@@ -561,7 +561,7 @@ const LaptopLBase = (props) => {
                                 //#endregion
                             }
                             //sort
-                            //showHeader={false}
+                            showHeader={false}
                             data={data}
                             clickPage={(currentPage, pageSize) => {
                             }}
