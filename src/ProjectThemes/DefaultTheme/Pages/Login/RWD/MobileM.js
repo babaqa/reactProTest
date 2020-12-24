@@ -3,7 +3,7 @@ export default {
     outContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 56px )",
+            height: "calc( 100vh - 56px - 48px )",
             top: "56px",
         })
     },
@@ -26,7 +26,7 @@ export default {
             ...style,
             // height: "477px"
             minHeight: "630px",
-            height: "calc( 100vh - 56px )",
+            height: "calc( 100vh - 56px - 48px )",
         })
     },
     //#endregion
@@ -38,7 +38,7 @@ export default {
             display: "block",
             width: "100%",
             minHeight: "630px",
-            height: "calc( 100vh - 56px )",
+            height: "calc( 100vh - 56px - 48px )",
             top: "0",
             background: "#d4d4d4",
         })

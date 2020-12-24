@@ -18,7 +18,7 @@ import { ReactComponent as UserInfoTab } from '../../Assets/img/UserInfoTab.svg'
 import { ReactComponent as ContactTab } from '../../Assets/img/ContactTab.svg'
 import { ReactComponent as QAndATab } from '../../Assets/img/QAndATab.svg'
 import { ReactComponent as LogoutLaptop } from '../../Assets/img/LogoutLaptop.svg'
-
+import { ReactComponent as LoginLaptop } from '../../Assets/img/LoginLaptop.svg'
 
 import { getParseItemLocalStorage, setStringifyItemSession, pushAndNotExsistItemSession, getParseItemSession, removeByKeyItemSession, clearLocalStorage, clearSession, setStringifyItemLocalStorage } from '../../Handlers';
 import { iconMap, pageTabBarUrlMapping, pageTextUrlMapping } from '../../Mappings/Mappings'
@@ -37,6 +37,14 @@ export const Layout = (props) => {
 
     const [ExpandMenuName, setExpandMenuName] = useState([]); // 當前開啟的分頁
     const [IsHoverMenuName, setIsHoverMenuName] = useState([]); // 當前開啟的分頁
+
+    if (!getParseItemLocalStorage("MenuNameAndSubUrl")) {
+        setStringifyItemLocalStorage("MenuNameAndSubUrl",
+            {
+                "聯繫客服": ["/Contact"],
+                "常見問題": ["/QAndA"]
+            })
+    }
 
     useEffect(() => {
         //#region 設定剛登入時，開啟歡迎頁
@@ -229,7 +237,7 @@ export const Layout = (props) => {
                                 <Text
                                     theme={layout.titleBarUserLaptopL}
                                 >
-                                    Hi! 王曉明名
+                                    Hi! {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
                                 </Text>
                                 {/* 使用者名稱 分隔 */}
                                 <Text
@@ -238,13 +246,47 @@ export const Layout = (props) => {
                                     |
                                 </Text>
 
-                                {/* 登出 */}
-                                <Text
-                                    theme={layout.titleBarLogoutLaptopL}
-                                >
-                                    <LogoutLaptop style={layout.titleBarLogoutIconLaptopL} />
-                                    登出
-                                </Text>
+                                {getParseItemLocalStorage("CAuth")
+                                    ?
+                                    <>
+                                        {/* 登出 */}
+                                        <Text
+                                            theme={layout.titleBarLogoutLaptopL}
+                                            onClick={() => {
+                                                modalsService.infoModal.warn({
+                                                    iconRightText: "是否要登出?",
+                                                    yes: true,
+                                                    yesText: "確認",
+                                                    no: true,
+                                                    noText: "取消",
+                                                    // autoClose: true,
+                                                    backgroundClose: false,
+                                                    yesOnClick: (e, close) => {
+                                                        clearLocalStorage();
+                                                        clearSession();
+                                                        globalContextService.clear();
+                                                        Switch();
+                                                        close();
+                                                    }
+                                                })
+                                            }}
+                                        >
+                                            <LogoutLaptop style={layout.titleBarLogoutIconLaptopL} />
+                                            登出
+                                        </Text>
+                                    </>
+                                    :
+                                    <>
+                                        {/* 登入 */}
+                                        <Text
+                                            theme={layout.titleBarLogoutLaptopL}
+                                            onClick={() => { history.push("/Login") }}
+                                        >
+                                            <LoginLaptop style={layout.titleBarLogoutIconLaptopL} />
+                                            登入
+                                    </Text>
+                                    </>
+                                }
 
                             </BasicContainer>
                         </SubContainer>
@@ -312,7 +354,7 @@ export const Layout = (props) => {
                                 <Text
                                     theme={layout.titleBarUserLaptop}
                                 >
-                                    Hi! 王曉明名
+                                    Hi! {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
                                 </Text>
                                 {/* 使用者名稱 分隔 */}
                                 <Text
@@ -321,12 +363,47 @@ export const Layout = (props) => {
                                     |
                                 </Text>
 
-                                {/* 登出 */}
-                                <Text
-                                    theme={layout.titleBarLogoutLaptop}
-                                >
-                                    登出
-                                </Text>
+                                {getParseItemLocalStorage("CAuth")
+                                    ?
+                                    <>
+                                        {/* 登出 */}
+                                        <Text
+                                            theme={layout.titleBarLogoutLaptop}
+                                            onClick={() => {
+                                                modalsService.infoModal.warn({
+                                                    iconRightText: "是否要登出?",
+                                                    yes: true,
+                                                    yesText: "確認",
+                                                    no: true,
+                                                    noText: "取消",
+                                                    // autoClose: true,
+                                                    backgroundClose: false,
+                                                    yesOnClick: (e, close) => {
+                                                        clearLocalStorage();
+                                                        clearSession();
+                                                        globalContextService.clear();
+                                                        Switch();
+                                                        close();
+                                                    }
+                                                })
+                                            }}
+                                        >
+                                            <LogoutLaptop style={layout.titleBarLogoutIconLaptop} />
+                                            登出
+                                        </Text>
+                                    </>
+                                    :
+                                    <>
+                                        {/* 登入 */}
+                                        <Text
+                                            theme={layout.titleBarLogoutLaptop}
+                                            onClick={() => { history.push("/Login") }}
+                                        >
+                                            <LoginLaptop style={layout.titleBarLogoutIconLaptop} />
+                                            登入
+                                    </Text>
+                                    </>
+                                }
 
                             </BasicContainer>
                         </SubContainer>
@@ -393,7 +470,7 @@ export const Layout = (props) => {
                                 <Text
                                     theme={layout.titleBarUserTablet}
                                 >
-                                    Hi! 王曉明名
+                                    Hi! {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
                                 </Text>
                                 {/* 使用者名稱 分隔 */}
                                 <Text
@@ -402,13 +479,47 @@ export const Layout = (props) => {
                                     |
                                 </Text>
 
-                                {/* 登出 */}
-                                <Text
-                                    theme={layout.titleBarLogoutTablet}
-                                >
-                                    <LogoutLaptop style={layout.titleBarLogoutIconTablet} />
-                                    登出
-                                </Text>
+                                {getParseItemLocalStorage("CAuth")
+                                    ?
+                                    <>
+                                        {/* 登出 */}
+                                        <Text
+                                            theme={layout.titleBarLogoutTablet}
+                                            onClick={() => {
+                                                modalsService.infoModal.warn({
+                                                    iconRightText: "是否要登出?",
+                                                    yes: true,
+                                                    yesText: "確認",
+                                                    no: true,
+                                                    noText: "取消",
+                                                    // autoClose: true,
+                                                    backgroundClose: false,
+                                                    yesOnClick: (e, close) => {
+                                                        clearLocalStorage();
+                                                        clearSession();
+                                                        globalContextService.clear();
+                                                        Switch();
+                                                        close();
+                                                    }
+                                                })
+                                            }}
+                                        >
+                                            <LogoutLaptop style={layout.titleBarLogoutIconTablet} />
+                                            登出
+                                        </Text>
+                                    </>
+                                    :
+                                    <>
+                                        {/* 登入 */}
+                                        <Text
+                                            theme={layout.titleBarLogoutTablet}
+                                            onClick={() => { history.push("/Login") }}
+                                        >
+                                            <LoginLaptop style={layout.titleBarLogoutIconTablet} />
+                                            登入
+                                        </Text>
+                                    </>
+                                }
 
                             </BasicContainer>
                         </SubContainer>
@@ -441,13 +552,19 @@ export const Layout = (props) => {
                         <SubContainer
                             theme={layout.titleBarLoginContainerMobileM}
                         >
-                            {/* 登入 */}
-                            <Text
-                                theme={layout.titleBarLoginMobileM}
-                            >
-                                <LogoutLaptop style={layout.titleBarLoginIconMobileM} />
-                                    登入
-                            </Text>
+                            {!getParseItemLocalStorage("CAuth")
+                                &&
+                                <>
+                                    {/* 登入 */}
+                                    <Text
+                                        theme={layout.titleBarLoginMobileM}
+                                        onClick={() => { history.push("/Login") }}
+                                    >
+                                        <LogoutLaptop style={layout.titleBarLoginIconMobileM} />
+                                        登入
+                                    </Text>
+                                </>
+                            }
                         </SubContainer>
                     </Container>
 
@@ -481,16 +598,52 @@ export const Layout = (props) => {
                                     })
                                 }}
                             >
-                                Hi! 王曉明名
+                                Hi!  {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
                             </Text>
 
-                            {/* 登出 */}
-                            <Text
-                                theme={layout.titleBarLogoutMobileM}
-                            >
-                                <LogoutLaptop style={layout.titleBarLogoutIconMobileM} />
-                                登出
-                            </Text>
+                            {getParseItemLocalStorage("CAuth")
+                                ?
+                                <>
+                                    {/* 登出 */}
+                                    <Text
+                                        theme={layout.titleBarLogoutMobileM}
+                                        onClick={() => {
+                                            modalsService.infoModal.warn({
+                                                iconRightText: "是否要登出?",
+                                                yes: true,
+                                                yesText: "確認",
+                                                no: true,
+                                                noText: "取消",
+                                                // autoClose: true,
+                                                backgroundClose: false,
+                                                yesOnClick: (e, close) => {
+                                                    clearLocalStorage();
+                                                    clearSession();
+                                                    globalContextService.clear();
+                                                    Switch();
+                                                    setDrawerCollapse(true);
+                                                    close();
+                                                }
+                                            })
+                                        }}
+                                    >
+                                        <LogoutLaptop style={layout.titleBarLogoutIconMobileM} />
+                                            登出
+                                        </Text>
+                                </>
+                                :
+                                <>
+                                    {/* 登入 */}
+                                    <Text
+                                        theme={layout.titleBarLogoutMobileM}
+                                        onClick={() => { history.push("/Login") }}
+                                    >
+                                        <LoginLaptop style={layout.titleBarLogoutIconMobileM} />
+                                            登入
+                                        </Text>
+                                </>
+                            }
+
                         </BasicContainer>
 
                         {/* Menu區 MobileM */}

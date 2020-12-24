@@ -119,11 +119,11 @@ export default {
             fontSize: "18px",
             fontWeight: 600,
             lineHeight: "21px",
-            textAlign: "left",
-            padding: "16px 0 0 24px",
+            textAlign: "center",
+            padding: "16px 0 0 0px",
             cursor: "default",
             color: "#fff",
-            userSelect: "none"
+            userSelect: "none",
         })
     },
     //#endregion
@@ -295,8 +295,8 @@ export default {
             fontSize: "18px",
             fontWeight: 600,
             lineHeight: "21px",
-            textAlign: "left",
-            padding: "16px 0 0 24px",
+            textAlign: "center",
+            padding: "16px 0 0 0px",
             cursor: "default",
             color: "#fff",
             userSelect: "none"
@@ -470,8 +470,8 @@ export default {
             fontSize: "14px",
             fontWeight: 600,
             lineHeight: "21px",
-            textAlign: "left",
-            padding: "16px 0 0 24px",
+            textAlign: "center",
+            padding: "16px 0 0 0px",
             cursor: "default",
             color: "#fff",
             userSelect: "none"

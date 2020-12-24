@@ -323,7 +323,7 @@ export const Routers = (props) => {
                         ) : (
                                 <Redirect
                                     to={{
-                                        pathname: "/News",
+                                        pathname: "/UserInfo",
                                     }}
                                 />
                             );

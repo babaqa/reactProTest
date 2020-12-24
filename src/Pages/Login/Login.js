@@ -13,6 +13,7 @@ import { MobileM } from './RWD/MobileM';
 import { Tablet } from './RWD/Tablet';
 import { isNil } from 'lodash';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
+import { useHistory } from 'react-router-dom';
 
 export const Login = (props) => {
 
@@ -23,6 +24,8 @@ export const Login = (props) => {
     const [WaitSecToZero, setWaitSecToZero] = useState(true); // 控制驗證碼倒數
     const [NowTab, setNowTab] = useState("車行公告"); // 目前公告頁面
     const [Width, Height] = useWindowSize();
+
+    let history = useHistory();
 
     //#region 登入 API
     const login = useCallback(async (account, password) => {
@@ -141,7 +144,7 @@ export const Login = (props) => {
         //#endregion
 
         //#region 取得使用者名稱
-        await fetch(`${APIUrl}check/getusername`,
+        await fetch(`${APIUrl}check/GetUserProfile`, //Check/GetUserProfile
             {
                 headers: {
                     "X-Token": token,
@@ -155,87 +158,7 @@ export const Login = (props) => {
             .then((PreResult) => {
                 if (PreResult.code === 200) {
                     //成功取得使用者名稱
-                    setItemLocalStorage("UserName", JSON.stringify(PreResult.result));
-                } else {
-                    throw PreResult.message;
-                }
-            })
-            .catch((Error) => {
-                modalsService.infoModal.warn({
-                    iconRightText: Error,
-                    yes: true,
-                    yesText: "確認",
-                    // no: true,
-                    // autoClose: true,
-                    backgroundClose: true,
-                    yesOnClick: (e, close) => {
-                        close();
-                    }
-                })
-                throw Error;
-            })
-            .finally(() => {
-            });
-        //#endregion
-
-        //#region 取得左側欄資料 
-        await fetch(`${APIUrl}Check/GetModulesTree`,
-            {
-                headers: {
-                    "X-Token": token,
-                    "content-type": "application/json; charset=utf-8",
-                }
-            })
-            .then(Result => {
-                const ResultJson = Result.clone().json();//Respone.clone()
-                return ResultJson;
-            })
-            .then((PreResult) => {
-                if (PreResult.code === 200) {
-                    //成功取得左側欄資料
-                    setItemLocalStorage("ModulesTree", JSON.stringify(PreResult.result));
-                    // 所有左側欄父層 name 對應 子層 url
-                    setStringifyItemLocalStorage("MenuNameAndSubUrl", AddChildsToFather(mapMenuNameAndSubUrl(PreResult.result)))
-                } else {
-                    throw PreResult.message;
-                }
-            })
-            .catch((Error) => {
-
-                console.log(Error)
-                modalsService.infoModal.warn({
-                    iconRightText: Error,
-                    yes: true,
-                    yesText: "確認",
-                    // no: true,
-                    // autoClose: true,
-                    backgroundClose: true,
-                    yesOnClick: (e, close) => {
-                        close();
-                    }
-                })
-                throw Error;
-            })
-            .finally(() => {
-            });
-        //#endregion
-
-        //#region 取得組織資料
-        await fetch(`${APIUrl}Check/getorgs`,
-            {
-                headers: {
-                    "X-Token": token,
-                    "content-type": "application/json; charset=utf-8",
-                }
-            })
-            .then(Result => {
-                const ResultJson = Result.clone().json();//Respone.clone()
-                return ResultJson;
-            })
-            .then((PreResult) => {
-                if (PreResult.code === 200) {
-                    setItemLocalStorage("Orgs", JSON.stringify(PreResult.result));
-                    setStringifyItemLocalStorage("UseOrg", { id: PreResult.result?.[0]?.id, name: PreResult.result?.[0]?.name });
+                    setItemLocalStorage("UserName", JSON.stringify(PreResult.result?.name));
                     setItemLocalStorage("CAuth", JSON.stringify(token));
                 } else {
                     throw PreResult.message;
@@ -256,8 +179,91 @@ export const Login = (props) => {
                 throw Error;
             })
             .finally(() => {
+                // history.push("/UserInfo")
                 Switch();
             });
+        //#endregion
+
+        //#region 取得左側欄資料 
+        // await fetch(`${APIUrl}Check/GetModulesTree`,
+        //     {
+        //         headers: {
+        //             "X-Token": token,
+        //             "content-type": "application/json; charset=utf-8",
+        //         }
+        //     })
+        //     .then(Result => {
+        //         const ResultJson = Result.clone().json();//Respone.clone()
+        //         return ResultJson;
+        //     })
+        //     .then((PreResult) => {
+        //         if (PreResult.code === 200) {
+        //             //成功取得左側欄資料
+        //             setItemLocalStorage("ModulesTree", JSON.stringify(PreResult.result));
+        //             // 所有左側欄父層 name 對應 子層 url
+        //             setStringifyItemLocalStorage("MenuNameAndSubUrl", AddChildsToFather(mapMenuNameAndSubUrl(PreResult.result)))
+        //         } else {
+        //             throw PreResult.message;
+        //         }
+        //     })
+        //     .catch((Error) => {
+
+        //         console.log(Error)
+        //         modalsService.infoModal.warn({
+        //             iconRightText: Error,
+        //             yes: true,
+        //             yesText: "確認",
+        //             // no: true,
+        //             // autoClose: true,
+        //             backgroundClose: true,
+        //             yesOnClick: (e, close) => {
+        //                 close();
+        //             }
+        //         })
+        //         throw Error;
+        //     })
+        //     .finally(() => {
+        //     });
+        //#endregion
+
+        //#region 取得組織資料
+        // await fetch(`${APIUrl}Check/getorgs`,
+        //     {
+        //         headers: {
+        //             "X-Token": token,
+        //             "content-type": "application/json; charset=utf-8",
+        //         }
+        //     })
+        //     .then(Result => {
+        //         const ResultJson = Result.clone().json();//Respone.clone()
+        //         return ResultJson;
+        //     })
+        //     .then((PreResult) => {
+        //         if (PreResult.code === 200) {
+        //             setItemLocalStorage("Orgs", JSON.stringify(PreResult.result));
+        //             setStringifyItemLocalStorage("UseOrg", { id: PreResult.result?.[0]?.id, name: PreResult.result?.[0]?.name });
+        //             setItemLocalStorage("CAuth", JSON.stringify(token));
+        //         } else {
+        //             throw PreResult.message;
+        //         }
+        //     })
+        //     .catch((Error) => {
+        //         modalsService.infoModal.warn({
+        //             iconRightText: Error,
+        //             yes: true,
+        //             yesText: "確認",
+        //             // no: true,
+        //             // autoClose: true,
+        //             backgroundClose: true,
+        //             yesOnClick: (e, close) => {
+        //                 close();
+        //             }
+        //         })
+        //         throw Error;
+        //     })
+        //     .finally(() => {
+        //         Switch();
+        //     });
         //#endregion
 
     }, [APIUrl, APIAppKey, Switch])

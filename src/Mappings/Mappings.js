@@ -11,6 +11,7 @@ import { ReactComponent as CaseSvg } from '../Assets/img/BackstageLeftSideMenuBa
 import { ReactComponent as DriverAndCarSvg } from '../Assets/img/BackstageLeftSideMenuBar/DriverAndCar.svg'
 import { ReactComponent as OrderSvg } from '../Assets/img/BackstageLeftSideMenuBar/Order.svg'
 import { ReactComponent as RouteAndStopSvg } from '../Assets/img/BackstageLeftSideMenuBar/RouteAndStop.svg'
+import { ReactComponent as ContactSvg } from '../Assets/img/BackstageLeftSideMenuBar/Contact.svg'
 
 import { News } from '../Pages/News/News';
 import { CallCar } from '../Pages/CallCar/CallCar';
@@ -310,6 +311,7 @@ export const iconMap = {
    "司機車輛管理": (style, props) => <DriverAndCarSvg style={style} {...props} />,
    "預約訂單": (style, props) => <OrderSvg style={style} {...props} />,
    "路線及站牌管理": (style, props) => <RouteAndStopSvg style={style} {...props} />,
+   "聯繫客服": (style, props) => <ContactSvg style={style} {...props} />,
 }
 //#endregion
 
