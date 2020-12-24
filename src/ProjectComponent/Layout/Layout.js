@@ -70,7 +70,7 @@ export const Layout = (props) => {
         //#region 處理當前應被標記與開啟的父層
         let canUseFunctions = getParseItemLocalStorage("Functions") ?? []
         let menuNameAndSubUrl = getParseItemLocalStorage("MenuNameAndSubUrl")
-        let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl")) ?? []
+        let keys = Object.keys(getParseItemLocalStorage("MenuNameAndSubUrl") ?? []) ?? []
         let res = [];
 
         //#region 處理進入子頁面如新增、修改等，標記於父層路由標籤 Functions
@@ -650,7 +650,7 @@ const generateMenu = (menuData, history, location, ExpandMenuName, setExpandMenu
                                         //進入子頁面路由
                                         (
                                             (
-                                                getParseItemLocalStorage("MenuNameAndSubUrl")[menuData.item.name] ?? []
+                                                getParseItemLocalStorage("MenuNameAndSubUrl")?.[menuData.item.name] ?? []
                                             ).includes(removeTailUrl(location.pathname)) && menuData.item.url.trim() === "/") &&
                                         {
                                             color: " #1890ff"
@@ -659,7 +659,7 @@ const generateMenu = (menuData, history, location, ExpandMenuName, setExpandMenu
                                         //進入一般分頁
                                         (
                                             (
-                                                getParseItemLocalStorage("MenuNameAndSubUrl")[menuData.item.name] ?? []
+                                                getParseItemLocalStorage("MenuNameAndSubUrl")?.[menuData.item.name] ?? []
                                             ).includes(location.pathname) && menuData.item.url.trim() === "/") &&
                                         {
                                             color: " #1890ff"
