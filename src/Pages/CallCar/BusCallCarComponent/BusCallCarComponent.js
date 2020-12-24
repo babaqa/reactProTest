@@ -35,7 +35,6 @@ export const BusCallCarComponent = (props) => {
 
     //#region 當頁 GlobalContextService (GCS) 值 控制
     const controllGCS = (type, payload) => {
-        console.log(type);
         switch (type) {
             case "return":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
