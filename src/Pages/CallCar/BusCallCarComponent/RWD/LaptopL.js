@@ -219,21 +219,6 @@ const LaptopLBase = (props) => {
                             {props?.CaseName}
                         </Text>
 
-                        {/* 可用補助餘額查詢按鈕 */}
-                        <NativeLineButton
-                            baseDefaultTheme={"DefaultTheme"}
-                            disable={false}
-                            type="button" // 防止提交
-                            theme={laptopL.balanceInquiryButton}
-                        // onClick={() => {
-                        //     history.push(`/BusRouteAndStop/BusStop/Edit?stationId=${rowData.id}`)
-                        // }}
-                        >
-                            <Search
-                                style={laptopL.balanceInquiryButtonIcon}
-                            />
-                                可用補助餘額查詢
-                            </NativeLineButton>
                     </BasicContainer>
 
                     {/* 叫車表單容器 */}

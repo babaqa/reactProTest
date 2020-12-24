@@ -26,8 +26,16 @@ export const BusCallCarComponent = (props) => {
     let urlParams = new URLSearchParams(useLocation().search);//取得參數
     // let userId = urlParams.get("userId"); //會是最新的值
 
+    const [BusOrderAmt, setBusOrderAmt] = useState(
+        [
+            { id: "1", type: "去程" },
+        ]
+    ); // 訂單金額資訊
+
+
     //#region 當頁 GlobalContextService (GCS) 值 控制
     const controllGCS = (type, payload) => {
+        console.log(type);
         switch (type) {
             case "return":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
@@ -366,7 +374,7 @@ export const BusCallCarComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     CaseName={urlParams.get("caseName")}
                     Client={Client} // 客戶端用戶的基本資料
-
+                    BusOrderAmt={BusOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
                     setTodayToDoOpen={setTodayToDoOpen}
                     AllRoute={AllRoute}
@@ -384,7 +392,7 @@ export const BusCallCarComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     CaseName={urlParams.get("caseName")}
                     Client={Client} // 客戶端用戶的基本資料
-
+                    BusOrderAmt={BusOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
                     setTodayToDoOpen={setTodayToDoOpen}
                     AllRoute={AllRoute}
@@ -402,9 +410,10 @@ export const BusCallCarComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     CaseName={urlParams.get("caseName")}
                     Client={Client} // 客戶端用戶的基本資料
-                    AllRoute={AllRoute}
+                    BusOrderAmt={BusOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
                     setTodayToDoOpen={setTodayToDoOpen}
+                    AllRoute={AllRoute}
                     AllStation={AllStation}
                     StationOnRoute={StationOnRoute}
                     getStationOnRoute={getStationOnRoute}
@@ -419,9 +428,10 @@ export const BusCallCarComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     CaseName={urlParams.get("caseName")}
                     Client={Client} // 客戶端用戶的基本資料
-                    AllRoute={AllRoute}
+                    BusOrderAmt={BusOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
                     setTodayToDoOpen={setTodayToDoOpen}
+                    AllRoute={AllRoute}
                     AllStation={AllStation}
                     StationOnRoute={StationOnRoute}
                     getStationOnRoute={getStationOnRoute}

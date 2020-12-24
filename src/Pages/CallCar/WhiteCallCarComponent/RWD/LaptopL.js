@@ -104,12 +104,6 @@ const LaptopLBase = (props) => {
 
     return (
         <>
-            {/* <MainPageContainer
-                outSideTopComponent={
-                    <></>
-                }
-                theme={laptopL.mainPageContainer}
-            > */}
             {/* 叫車頁面外層容器 */}
             <Container
                 theme={laptopL.callCarOutContainer}
@@ -346,7 +340,7 @@ const LaptopLBase = (props) => {
                             {props?.UserName}
                         </Text>
                         {/* 可用補助餘額查詢按鈕 */}
-                        <NativeLineButton
+                        {/* <NativeLineButton
                             baseDefaultTheme={"DefaultTheme"}
                             disable={false}
                             type="button" // 防止提交
@@ -398,7 +392,7 @@ const LaptopLBase = (props) => {
                                 style={laptopL.balanceInquiryButtonIcon}
                             />
                                 可用補助餘額查詢
-                            </NativeLineButton>
+                            </NativeLineButton> */}
                     </BasicContainer>
 
                     {/* 叫車表單容器 */}
@@ -467,7 +461,7 @@ const LaptopLBase = (props) => {
                             }
 
                             {/* 優先搭乘車行排序 */}
-                            <BUnitSort
+                            {/* <BUnitSort
                                 topLabel={<>優先搭乘車行排序 <Text theme={laptopL.bUnitSortNote}>(請依序點擊完成排序)</Text></>}
                                 // bUnit={props?.CaseUsers?.bUnitForCaseUser}
                                 bUnit={[
@@ -482,7 +476,7 @@ const LaptopLBase = (props) => {
                                     globalContextService.set("WhiteCallCarComponentPage", `BUnitSort`, value);
                                 }}
                                 theme={laptopL.bUnitSort}
-                            />
+                            /> */}
 
                             {/* 起點 StartPos*/}
                             <MapGoogleInput
@@ -884,11 +878,11 @@ const LaptopLBase = (props) => {
                                 else if (valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
                                     validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
                                 }
-                                else if (valid(globalContextService.get("WhiteCallCarComponentPage", "Phone") ?? "", ["^.{1,}$"], ["請輸入聯絡電話"])[1]) {
-                                    validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "Phone") ?? "", ["^.{1,}$"], ["請輸入聯絡電話"])[1]
-                                }
                                 else if (valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
                                     validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
+                                }
+                                else if (valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+                                    validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
                                 }
                                 else if (
                                     !(
@@ -940,7 +934,7 @@ const LaptopLBase = (props) => {
                                         fromLat: mapGoogleControll.getMarkerPoints("test1")?.[0]?.[1] ?? 0, //起點緯度
                                         fromLon: mapGoogleControll.getMarkerPoints("test1")?.[0]?.[0] ?? 0,//起點經度
                                         // id: ""	白牌預約訂單 id
-                                        noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
+                                        noticePhone: globalContextService.get("WhiteCallCarComponentPage", "SmsNumber"),	//畫面無此欄位
                                         orgId: "",//	畫面無此欄位
                                         passengerNum: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value,	//搭乘人數
                                         remark: JSON.stringify((Array(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value)).fill(0).map((item, index) => {
@@ -967,7 +961,6 @@ const LaptopLBase = (props) => {
 
                 </SubContainer>
             </Container>
-            {/* </MainPageContainer> */}
         </>
     )
 }

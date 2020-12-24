@@ -3,7 +3,7 @@ export default {
     callCarOutContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 114px - 48px - 61px)",
+            height: "calc( 100vh - 100px - 111px)",
         })
     },
     //#endregion

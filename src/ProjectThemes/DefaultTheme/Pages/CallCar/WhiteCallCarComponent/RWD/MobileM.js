@@ -588,7 +588,8 @@ export default {
     goContentContainer: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(3)
+            ...style.occupy(3),
+            minHeight: "52px"
         })
     },
     //#endregion

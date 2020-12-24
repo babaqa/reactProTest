@@ -32,20 +32,20 @@ const TabletBase = (props) => {
                 theme={tablet.mapContainer}
             >
                 <MapGoogle
-                        mapId={"test1"}
-                        mapAttr={{
-                            //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
-                            center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
-                            zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
-                            //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
-                            //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
-                            //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
-                            //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
-                            //   attributionControl: false,
-                        }}
+                    mapId={"test1"}
+                    mapAttr={{
+                        //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
+                        center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
+                        zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
+                        //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
+                        //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
+                        //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
+                        //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
+                        //   attributionControl: false,
+                    }}
 
-                        theme={tablet.map}
-                    />
+                    theme={tablet.map}
+                />
             </BasicContainer>
 
             {/* 地圖上層的表單容器 */}
@@ -71,21 +71,7 @@ const TabletBase = (props) => {
                     >
                         {props?.UserName}
                     </Text>
-                    {/* 可用補助餘額查詢按鈕 */}
-                    <NativeLineButton
-                        baseDefaultTheme={"DefaultTheme"}
-                        disable={false}
-                        type="button" // 防止提交
-                        theme={tablet.balanceInquiryButton}
-                    // onClick={() => {
-                    //     history.push(`/BusRouteAndStop/BusStop/Edit?stationId=${rowData.id}`)
-                    // }}
-                    >
-                        <Search
-                            style={tablet.balanceInquiryButtonIcon}
-                        />
-                                可用補助餘額查詢
-                            </NativeLineButton>
+
                 </BasicContainer>
 
                 {/* 叫車表單容器 */}

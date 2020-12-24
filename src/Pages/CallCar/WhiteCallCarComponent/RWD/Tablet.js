@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, Map8Canvas, map8Controll, Map8Input } from '../../../../ProjectComponent';
+import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle, mapGoogleControll, MapGoogleInput } from '../../../../ProjectComponent';
 import { ReactComponent as Resize } from '../../../../Assets/img/WhiteCallCarComponentPage/Resize.svg'
 import { ReactComponent as Search } from '../../../../Assets/img/WhiteCallCarComponentPage/Search.svg'
 import { ReactComponent as Convert } from '../../../../Assets/img/WhiteCallCarComponentPage/Convert.svg'
@@ -24,30 +24,104 @@ const TabletBase = (props) => {
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     let history = useHistory();
+
+
+    //#region 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
+    const getCaseOrderAmtAPI = useCallback(() => {
+        let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+        let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
+
+        let validMsg = "";
+        if (valid(globalContextService.get("WhiteCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
+        }
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+        }
+        else if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
+            validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
+        }
+        else if (valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
+            validMsg = valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
+        }
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
+        }
+
+        if (validMsg === "") {
+            // 如果起迄點、搭車日期、搭車時間有值、搭車人數 皆已有有值
+            props.GetCaseOrderAmtExecute({
+                CaseUserId: props.CaseUserId,
+                FromAddr: globalContextService.get("WhiteCallCarComponentPage", "StartPos"),
+                // FromAddrId:, // 不用丟
+                ToAddr: globalContextService.get("WhiteCallCarComponentPage", "EndPos"),
+                FamilyWith: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value,
+                // ToAddrId:, // 不用丟
+                ReservationDate: globalContextService.get("WhiteCallCarComponentPage", "TravelDate") + " " + globalContextService.get("WhiteCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
+            })
+        }
+
+    }, [])
+    //#endregion
+
+    //#region 新增下個地點、立即預約 送出前欄位檢核
+    const formValid = useCallback(() => {
+        //#region 表單驗證
+        let validMsg = "";
+
+        if (valid(globalContextService.get("WhiteCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
+        }
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+        }
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "BUnitSort")?.[0]?.id ?? "", ["^.{1,}$"], ["請選擇優先搭乘車行排序，或需先新增B單位"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "BUnitSort")?.[0]?.id ?? "", ["^.{1,}$"], ["請選擇優先搭乘車行排序，或需先新增B單位"])[1]
+        }
+        // 其實 應該要連實際經緯度標記坐標一起檢核，目前尚未防堵 選擇自動完成選項後，又改動輸入框地址內容，然後送出的情況  
+        // PS.可以分成 目前輸入框內容 與 onSelect的值，onChange時清掉onSelect的值，然後送出時一律檢核onSelect的值
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "StartPos") ?? "", ["^.{1,}$"], ["請輸入起點地址"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "StartPos") ?? "", ["^.{1,}$"], ["請輸入起點地址"])[1]
+        }
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]
+        }
+        // else if (map8Controll.getMarkerPoints("test1").length !== 2) {
+        //     validMsg = "請重新輸入起訖地址"
+        // }        
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
+        }
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
+        }
+        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
+        }
+        //#endregion
+
+        return validMsg;
+
+    }, [])
+    //#endregion
+
     return (
         <>
-            {/* <MainPageContainer
-                theme={tablet.mainPageContainer}
-                outSideTopComponent={
-                    <></>
-                }
-            > */}
-
             {/* 底層的地圖容器 */}
             <BasicContainer
                 theme={tablet.mapContainer}
             >
-                <Map8Canvas
+                <MapGoogle
                     mapId={"test1"}
                     mapAttr={{
-                        maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
-                        center: [121.474708, 25.012930], // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
+                        //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
+                        center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
                         zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
-                        minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
-                        maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
-                        pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
-                        bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
-                        attributionControl: false,
+                        //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
+                        //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
+                        //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
+                        //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
+                        //   attributionControl: false,
                     }}
 
                     theme={tablet.map}
@@ -77,21 +151,6 @@ const TabletBase = (props) => {
                     >
                         {props?.UserName}
                     </Text>
-
-                    <NativeLineButton
-                        baseDefaultTheme={"DefaultTheme"}
-                        disable={false}
-                        type="button" // 防止提交
-                        theme={tablet.balanceInquiryButton}
-                    // onClick={() => {
-                    //     history.push(`/BusRouteAndStop/BusStop/Edit?stationId=${rowData.id}`)
-                    // }}
-                    >
-                        <Search
-                            style={tablet.balanceInquiryButtonIcon}
-                        />
-                                可用補助餘額查詢
-                            </NativeLineButton>
                 </BasicContainer>
 
                 {/* 叫車表單容器 */}
@@ -146,7 +205,7 @@ const TabletBase = (props) => {
                         />
 
                         {/* 優先搭乘車行排序 */}
-                        <BUnitSort
+                        {/* <BUnitSort
                             topLabel={<>優先搭乘車行排序 <Text theme={tablet.bUnitSortNote}>(請依序點擊完成排序)</Text></>}
                             bUnit={[
                                 { id: "0", name: "0XXXX車行" },
@@ -162,39 +221,50 @@ const TabletBase = (props) => {
                                 globalContextService.set("WhiteCallCarComponentPage", `BUnitSort`, value);
                             }}
                             theme={tablet.bUnitSort}
-                        />
+                        /> */}
                         {/* 起點 StartPos*/}
-                        <Map8Input
+                        <MapGoogleInput
                             placeholder={"請輸入搭車地點(XX市XX區XX路XX號)"}
-
+                            placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
                             // viewType
                             // disable
-                            topLabel={"起點"}
+                            topLabel={
+                                <>
+                                    起點
+                                        </>
+                            }
                             baseDefaultTheme={"DefaultTheme"}
                             value={globalContextService.get("WhiteCallCarComponentPage", "StartPos") ?? ""}
                             onChange={(e, value, onInitial) => {
                                 globalContextService.set("WhiteCallCarComponentPage", "StartPos", value);
                             }}
                             onSelect={(e, option, onInitial, posInfo) => {
-                                map8Controll.addOrUpdateMarkerPoints("test1", [
-                                    [posInfo?.geometry?.location?.lng, posInfo?.geometry?.location?.lat],
-                                    ...(map8Controll.getMarkerPoints("test1")?.[1] ? [map8Controll.getMarkerPoints("test1")[1]] : []),
-                                ]) // 更新選中起點
+                                if (mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
+                                    let endMarker = mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
+                                    mapGoogleControll.deletePolylineRoute("test1"); // 移除路線  
+                                    mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
+                                    mapGoogleControll.addMarkerWithIndex("test1", endMarker, 1) // 更新選中起點
+                                }
 
-                                map8Controll.setCenter("test1", [posInfo?.geometry?.location?.lng, posInfo?.geometry?.location?.lat]); // 移動中心點
-                                map8Controll.removeOneRoute("test1"); // 移除路線
+                                mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
+                                mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
 
                                 globalContextService.set("WhiteCallCarComponentPage", "StartPos", option.label);
+
+                                getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
+
                                 setForceUpdate(f => !f)
                             }}
 
                             theme={tablet.startPos}
                         />
+
+                        {/* 起訖點互換按鈕容器 */}
                         <BasicContainer theme={tablet.convertButtonContainer}>
                             <NativeLineButton theme={tablet.convertButton}
                                 onClick={() => {
-                                    let end = map8Controll.getMarkerPoints("test1")?.[1]?.[0] // 迄點緯度
-                                    let start = map8Controll.getMarkerPoints("test1")?.[0]?.[0] // 起點緯度
+                                    let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+                                    let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
 
                                     let validMsg = "";
                                     if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
@@ -226,12 +296,14 @@ const TabletBase = (props) => {
                                         globalContextService.set("WhiteCallCarComponentPage", "EndPos", startAddr);
                                         globalContextService.set("WhiteCallCarComponentPage", "StartPos", endAddr);
 
-                                        map8Controll.addOrUpdateMarkerPoints("test1", [
-                                            ...([map8Controll.getMarkerPoints("test1")?.[1]]),
-                                            ...([map8Controll.getMarkerPoints("test1")?.[0]]),
-                                        ])
+                                        let startMarker = mapGoogleControll.getMarkers("test1")?.[0]?.position  // 起點經緯度
+                                        let endMarker = mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
 
-                                        map8Controll.removeOneRoute("test1"); // 移除路線
+                                        // mapGoogleControll.deleteRoute("test1"); // 移除路線 由前端Call Google畫路線的方法
+                                        mapGoogleControll.deletePolylineRoute("test1"); // 移除路線 透過後端回傳 加密路徑字串 (decodePath) 並透過 polyline 畫路線的方法      
+
+                                        mapGoogleControll.addMarker("test1", endMarker); // 替換起迄點
+                                        mapGoogleControll.addMarker("test1", startMarker); // 替換起迄點
                                     }
                                     setForceUpdate(f => !f)
                                 }}
@@ -239,77 +311,118 @@ const TabletBase = (props) => {
                                 <Convert style={tablet.convertContainerIcon} />
                                                 起訖點互換
                         </NativeLineButton>
+
                         </BasicContainer>
 
-                        {/* 迄點 EndPos*/}
-                        <Map8Input
-                            placeholder={"請輸入下車地點(XX市XX區XX路XX號)"}
 
+                        {/* 迄點 EndPos*/}
+                        <MapGoogleInput
+                            placeholder={"請輸入下車地點(XX市XX區XX路XX號)"}
+                            placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
                             // viewType
                             // disable
-                            topLabel={<>
-                                迄點
-                                        <Text theme={tablet.convertContainer}
-                                    onClick={() => {
+                            topLabel={
+                                <>
+                                    迄點
+                                            <Text theme={tablet.convertContainer}
+                                        onClick={() => {
+                                            let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+                                            let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
 
-                                        let end = map8Controll.getMarkerPoints("test1")?.[1]?.[0] // 迄點緯度
-                                        let start = map8Controll.getMarkerPoints("test1")?.[0]?.[0] // 起點緯度
+                                            let validMsg = "";
+                                            if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
+                                                validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
+                                            }
+                                            else if (valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
+                                                validMsg = valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
+                                            }
 
-                                        let validMsg = "";
-                                        if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
-                                            validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
-                                        }
-                                        else if (valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
-                                            validMsg = valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
-                                        }
+                                            if (validMsg !== "") {
+                                                modalsService.infoModal.error({
+                                                    id: "top1", //注意 這裡要加上固定id
+                                                    iconRightText: validMsg,
+                                                    yes: true,
+                                                    yesText: "確認",
+                                                    // no: true,
+                                                    // autoClose: true,
+                                                    backgroundClose: false,
+                                                    yesOnClick: (e, close) => {
+                                                        close();
+                                                    }
+                                                })
+                                            }
+                                            else {
+                                                // 如果起迄點都已經輸入
 
-                                        if (validMsg !== "") {
-                                            modalsService.infoModal.error({
-                                                id: "top1", //注意 這裡要加上固定id
-                                                iconRightText: validMsg,
-                                                yes: true,
-                                                yesText: "確認",
-                                                // no: true,
-                                                // autoClose: true,
-                                                backgroundClose: false,
-                                                yesOnClick: (e, close) => {
-                                                    close();
-                                                }
-                                            })
-                                        }
-                                        else {
-                                            // 如果起迄點都已經輸入
-                                            let routeInfo = map8Controll.addOneRoute("test1", {
-                                                origin: map8Controll.getMarkerPoints("test1")[0].filter(i => i !== "hide"), //[121.474708, 25.012930] or [121.474708, 25.012930, "hide"], // 公司
-                                                destination: map8Controll.getMarkerPoints("test1")[1].filter(i => i !== "hide")// [121.570260, 25.032806] or [121.474708, 25.012930, "hide"], // 象山
-                                                // waypoints: [
-                                                //     [121.49993, 25.03678], // 龍山寺
-                                                //     [121.517498, 25.046273] // 台北摻站
-                                                // ],
-                                            })
-                                            // routeInfo?.getOrigin && console.log(routeInfo.getOrigin())
-                                            map8Controll.hideAllMarkerPoints("test1")
-                                            // setForceUpdate(f => !f)
-                                        }
-                                    }}
-                                >
-                                    路線預覽
-                                         </Text>
-                            </>}
+                                                //#region 由前端Call Google畫路線的方法
+                                                // mapGoogleControll.addRoute("test1",
+                                                //     {
+                                                //         // origin: new window.google.maps.LatLng(25.012930,121.994708),
+                                                //         origin: mapGoogleControll.getMarkers("test1")[0].position,
+                                                //         destination: mapGoogleControll.getMarkers("test1")[1].position,// new window.google.maps.LatLng(25.012930,121.974708),
+                                                //         waypoints: [
+                                                //             // {
+                                                //             //     location: { lat: 25.012930, lng: 121.984708 },// new window.google.maps.LatLng(25.012930,121.984708), // 或是地址
+                                                //             //     stopover: true,
+                                                //             // },
+                                                //         ]
+                                                //     }
+                                                // )
+                                                //#endregion
+
+                                                //#region 透過後端回傳 加密路徑字串 (decodePath) 並透過 polyline 畫路線的方法
+
+                                                props.GetPolylineRouteExecute(
+                                                    {
+                                                        fromAddr: globalContextService.get("WhiteCallCarComponentPage", "StartPos"),
+                                                        toAddr: globalContextService.get("WhiteCallCarComponentPage", "EndPos"),
+                                                        mapId: "test1",
+                                                        routeAttr: {
+                                                            // origin: new window.google.maps.LatLng(25.012930,121.994708),
+                                                            origin: mapGoogleControll.getMarkers("test1")[0].position,
+                                                            destination: mapGoogleControll.getMarkers("test1")[1].position,// new window.google.maps.LatLng(25.012930,121.974708),
+                                                            waypoints: [
+                                                                // {
+                                                                //     location: { lat: 25.012930, lng: 121.984708 },// new window.google.maps.LatLng(25.012930,121.984708), // 或是地址
+                                                                //     stopover: true,
+                                                                // },
+                                                            ]
+                                                        }
+                                                    }
+                                                )
+                                                //#endregion
+
+                                                // setForceUpdate(f => !f)
+                                            }
+                                        }}
+                                    >
+                                        路線預覽
+                                            </Text>
+                                </>
+                            }
                             baseDefaultTheme={"DefaultTheme"}
                             value={globalContextService.get("WhiteCallCarComponentPage", "EndPos") ?? ""}
                             onChange={(e, value, onInitial) => {
                                 globalContextService.set("WhiteCallCarComponentPage", "EndPos", value);
                             }}
                             onSelect={(e, option, onInitial, posInfo) => {
-                                map8Controll.addOrUpdateMarkerPoints("test1", [
-                                    ...(map8Controll.getMarkerPoints("test1")?.[0] ? [map8Controll.getMarkerPoints("test1")[0]] : []),
-                                    [posInfo?.geometry?.location?.lng, posInfo?.geometry?.location?.lat],
-                                ]) // 更新選中起點
+                                if (mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
+                                    let startMarker = mapGoogleControll.getMarkers("test1")?.[0]?.position // 起點經緯度
+                                    mapGoogleControll.deletePolylineRoute("test1"); // 移除路線  
+                                    mapGoogleControll.addMarkerWithIndex("test1", startMarker, 0) // 更新選中起點
+                                }
+
+                                //#region 如果沒有先打起點
+                                if (!mapGoogleControll.getMarkers("test1")?.[0]) {
+                                    mapGoogleControll.addMarkerWithIndex("test1", {}, 0) // 更新 一個卡位給 起點
+                                }
+                                //#endregion
+                                mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 1) // 更新選中起點
+                                mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
 
                                 globalContextService.set("WhiteCallCarComponentPage", "EndPos", option.label);
-                                map8Controll.setCenter("test1", [posInfo?.geometry?.location?.lng, posInfo?.geometry?.location?.lat]); // 移動中心點
-                                map8Controll.removeOneRoute("test1"); // 移除路線
+
+                                getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
 
                                 setForceUpdate(f => !f)
                             }}
@@ -425,51 +538,72 @@ const TabletBase = (props) => {
                                         {
                                             title: '預估距離',
                                             width: "100px",
-                                            dataIndex: 'carCategoryName',
+                                            dataIndex: 'distance',
                                             // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
                                             // fixed: 'left',
+                                            render: (rowData) => {
+                                                return !isNil(rowData) ? `${(rowData / 1000)?.toFixed(2)}公里` : ""
+                                            }
                                         },
                                         {
                                             title: '預估時間',
                                             width: "100px",
-                                            dataIndex: 'carCategoryName',
+                                            dataIndex: 'duration',
                                             // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
                                             // fixed: 'left',
+                                            render: (rowData) => {
+                                                return !isNil(rowData) ? `${(rowData / 60)?.toFixed(0)}分鐘` : ""
+                                            }
                                         },
                                         {
                                             title: '車資總額',
                                             width: "100px",
-                                            dataIndex: 'seatNum',
+                                            dataIndex: 'totalAmt',
                                             // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                             // fixed: 'left',
+                                            render: (rowData) => {
+                                                return !isNil(rowData) ? `$${rowData}` : ""
+                                            }
                                         },
                                         {
                                             title: '政府補助',
                                             width: "100px",
-                                            dataIndex: 'seatNum',
+                                            dataIndex: 'subsidyAmt',
                                             // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                             // fixed: 'left',
+                                            render: (rowData) => {
+                                                return !isNil(rowData) ? `$${rowData}` : ""
+                                            }
                                         },
                                         {
                                             title: '自負額',
                                             width: "100px",
-                                            dataIndex: 'seatNum',
+                                            dataIndex: 'selfPayAmt',
                                             // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                             // fixed: 'left',
+                                            render: (rowData) => {
+                                                return !isNil(rowData) ? `$${rowData}` : ""
+                                            }
                                         },
                                         {
                                             title: '陪同總額',
                                             width: "100px",
-                                            dataIndex: 'seatNum',
+                                            dataIndex: 'withAmt',
                                             // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                             // fixed: 'left',
+                                            render: (rowData) => {
+                                                return !isNil(rowData) ? `$${rowData}` : ""
+                                            }
                                         },
                                         {
                                             title: '個案負擔',
                                             width: "100px",
-                                            dataIndex: 'seatNum',
+                                            // dataIndex: 'seatNum',
                                             // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                             fixed: 'right',
+                                            render: (rowData) => {
+                                                return !isNil(rowData?.withAmt) ? `$${rowData?.withAmt + rowData?.selfPayAmt}` : ""
+                                            }
                                         },
                                         {
                                             title: '',
@@ -686,11 +820,11 @@ const TabletBase = (props) => {
                             else if (valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
                                 validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
                             }
-                            else if (valid(globalContextService.get("WhiteCallCarComponentPage", "Phone") ?? "", ["^.{1,}$"], ["請輸入聯絡電話"])[1]) {
-                                validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "Phone") ?? "", ["^.{1,}$"], ["請輸入聯絡電話"])[1]
-                            }
                             else if (valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
                                 validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
+                            }
+                            else if (valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+                                validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
                             }
                             else if (
                                 !(
@@ -739,10 +873,10 @@ const TabletBase = (props) => {
                                     carCategoryId: globalContextService.get("WhiteCallCarComponentPage", "CarType").value,	//車種 的 value
                                     date: globalContextService.get("WhiteCallCarComponentPage", "TravelDate"), //預約日期
                                     fromAddr: globalContextService.get("WhiteCallCarComponentPage", "StartPos"), //	起點
-                                    fromLat: map8Controll.getMarkerPoints("test1")?.[0]?.[1] ?? 0, //起點緯度
-                                    fromLon: map8Controll.getMarkerPoints("test1")?.[0]?.[0] ?? 0,//起點經度
+                                    fromLat: mapGoogleControll.getMarkerPoints("test1")?.[0]?.[1] ?? 0, //起點緯度
+                                    fromLon: mapGoogleControll.getMarkerPoints("test1")?.[0]?.[0] ?? 0,//起點經度
                                     // id: ""	白牌預約訂單 id
-                                    noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
+                                    noticePhone: globalContextService.get("WhiteCallCarComponentPage", "SmsNumber"),	//畫面無此欄位
                                     orgId: "",//	畫面無此欄位
                                     passengerNum: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value,	//搭乘人數
                                     remark: JSON.stringify((Array(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value)).fill(0).map((item, index) => {
@@ -756,8 +890,8 @@ const TabletBase = (props) => {
                                     status: 1,	//畫面無此欄位
                                     time: globalContextService.get("WhiteCallCarComponentPage", "TravelTime"), //預約時間
                                     toAddr: globalContextService.get("WhiteCallCarComponentPage", "EndPos"), //	迄點
-                                    toLat: map8Controll.getMarkerPoints("test1")?.[1]?.[0] ?? 0,//	迄點緯度
-                                    toLon: map8Controll.getMarkerPoints("test1")?.[1]?.[1] ?? 0,//	迄點經度
+                                    toLat: mapGoogleControll.getMarkerPoints("test1")?.[1]?.[0] ?? 0,//	迄點緯度
+                                    toLon: mapGoogleControll.getMarkerPoints("test1")?.[1]?.[1] ?? 0,//	迄點經度
                                     userId: props.UserId
                                 })
                             }
@@ -768,8 +902,6 @@ const TabletBase = (props) => {
                 </BasicContainer>
 
             </Resizable>
-
-            {/* </MainPageContainer> */}
         </>
     )
 }

@@ -25,6 +25,11 @@ export const WhiteCallCarComponent = (props) => {
     let urlParams = new URLSearchParams(useLocation().search);//取得參數
     // let userId = urlParams.get("userId"); //會是最新的值
 
+    const [WhiteOrderAmt, setWhiteOrderAmt] = useState(
+        [
+            { id: "1", type: "去程" },
+        ]
+    ); // 訂單金額資訊
     //#region 當頁 GlobalContextService (GCS) 值 控制
     const controllGCS = (type, payload) => {
         switch (type) {
@@ -298,7 +303,7 @@ export const WhiteCallCarComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     UserName={urlParams.get("caseName")}
                     AllCarType={AllCarType} // 車種
-
+                    WhiteOrderAmt={WhiteOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
                     setTodayToDoOpen={setTodayToDoOpen}
                     AddOrderOfSelfPayUsersPending={AddOrderOfSelfPayUsersPending}
@@ -315,7 +320,7 @@ export const WhiteCallCarComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     UserName={urlParams.get("caseName")}
                     AllCarType={AllCarType} // 車種
-
+                    WhiteOrderAmt={WhiteOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
                     setTodayToDoOpen={setTodayToDoOpen}
                     AddOrderOfSelfPayUsersPending={AddOrderOfSelfPayUsersPending}
@@ -332,7 +337,7 @@ export const WhiteCallCarComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     UserName={urlParams.get("caseName")}
                     AllCarType={AllCarType} // 車種
-
+                    WhiteOrderAmt={WhiteOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
                     setTodayToDoOpen={setTodayToDoOpen}
                     AddOrderOfSelfPayUsersPending={AddOrderOfSelfPayUsersPending}
@@ -349,7 +354,7 @@ export const WhiteCallCarComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     UserName={urlParams.get("caseName")}
                     AllCarType={AllCarType} // 車種
-
+                    WhiteOrderAmt={WhiteOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
                     setTodayToDoOpen={setTodayToDoOpen}
                     AddOrderOfSelfPayUsersPending={AddOrderOfSelfPayUsersPending}

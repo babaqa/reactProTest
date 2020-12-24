@@ -32,20 +32,20 @@ const MobileMBase = (props) => {
                 theme={mobileM.mapContainer}
             >
                 <MapGoogle
-                        mapId={"test1"}
-                        mapAttr={{
-                            //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
-                            center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
-                            zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
-                            //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
-                            //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
-                            //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
-                            //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
-                            //   attributionControl: false,
-                        }}
+                    mapId={"test1"}
+                    mapAttr={{
+                        //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
+                        center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
+                        zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
+                        //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
+                        //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
+                        //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
+                        //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
+                        //   attributionControl: false,
+                    }}
 
-                        theme={mobileM.map}
-                    />
+                    theme={mobileM.map}
+                />
             </BasicContainer>
 
             {/* 地圖上層的表單容器 */}
@@ -71,21 +71,7 @@ const MobileMBase = (props) => {
                     >
                         {props?.UserName}
                     </Text>
-                    {/* 可用補助餘額查詢按鈕 */}
-                    <NativeLineButton
-                        baseDefaultTheme={"DefaultTheme"}
-                        disable={false}
-                        type="button" // 防止提交
-                        theme={mobileM.balanceInquiryButton}
-                    // onClick={() => {
-                    //     history.push(`/BusRouteAndStop/BusStop/Edit?stationId=${rowData.id}`)
-                    // }}
-                    >
-                        <Search
-                            style={mobileM.balanceInquiryButtonIcon}
-                        />
-                                可用補助餘額查詢
-                            </NativeLineButton>
+
                 </BasicContainer>
 
                 {/* 叫車表單容器 */}
@@ -403,54 +389,54 @@ const MobileMBase = (props) => {
 
                             {/* 去程容器 */}
                             <Container theme={mobileM.goContainer}>
+                                {/* 預估距離 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 預估距離 */}
                                     <Text theme={mobileM.contentTitle}>預估距離</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.BusOrderAmt[0]?.distance) ? `${(props.BusOrderAmt[0]?.distance / 1000)?.toFixed(2)}公里` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 預估時間 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 預估時間 */}
                                     <Text theme={mobileM.contentTitle}>預估時間</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.BusOrderAmt[0]?.duration) ? `${(props.BusOrderAmt[0]?.duration / 60)?.toFixed(0)}分鐘` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 車資總額 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 車資總額 */}
                                     <Text theme={mobileM.contentTitle}>車資總額</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.BusOrderAmt[0]?.totalAmt) ? `$${props.BusOrderAmt[0]?.totalAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 去程 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 去程 */}
                                     <Text theme={mobileM.contentRightText}>去程</Text>
                                 </SubContainer>
 
+                                {/* 政府補助 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 政府補助 */}
                                     <Text theme={mobileM.contentTitle}>政府補助</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.BusOrderAmt[0]?.subsidyAmt) ? `$${props.BusOrderAmt[0]?.subsidyAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 自負額 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 自負額 */}
                                     <Text theme={mobileM.contentTitle}>自負額</Text>
-                                    <Text>test</Text>
+                                    <Text>{!isNil(props.BusOrderAmt[0]?.selfPayAmt) ? `$${props.BusOrderAmt[0]?.selfPayAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 陪同人數 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 陪同人數 */}
-                                    <Text theme={mobileM.contentTitle}>陪同人數</Text>
-                                    <Text>test</Text>
+                                    <Text theme={mobileM.contentTitle}>陪同總額</Text>
+                                    <Text>{!isNil(props.BusOrderAmt[0]?.withAmt) ? `$${props.BusOrderAmt[0]?.withAmt}` : ""}</Text>
                                 </SubContainer>
 
+                                {/* 個案負擔 */}
                                 <SubContainer theme={mobileM.goContentContainer}>
-                                    {/* 個案負擔 */}
                                     <Text theme={mobileM.contentTitle}>個案負擔</Text>
-                                    <Text style={{ color: "rgba(255, 122, 69, 1)" }}>test</Text>
+                                    <Text style={{ color: "rgba(255, 122, 69, 1)" }}>{!isNil(props.BusOrderAmt[0]?.withAmt) ? `$${props.BusOrderAmt[0]?.withAmt + props.BusOrderAmt[0]?.selfPayAmt}` : ""}</Text>
                                 </SubContainer>
                             </Container>
-
+                        
                         </BasicContainer>
 
                         {/* 搭車人數 AccTotalCounts */}

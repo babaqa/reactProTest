@@ -232,51 +232,72 @@ const LaptopBase = (props) => {
                                     {
                                         title: '預估距離',
                                         width: "100px",
-                                        dataIndex: 'carCategoryName',
+                                        dataIndex: 'distance',
                                         // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
                                         // fixed: 'left',
+                                        render: (rowData) => {
+                                            return !isNil(rowData) ? `${(rowData / 1000)?.toFixed(2)}公里` : ""
+                                        }
                                     },
                                     {
                                         title: '預估時間',
                                         width: "100px",
-                                        dataIndex: 'carCategoryName',
+                                        dataIndex: 'duration',
                                         // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
                                         // fixed: 'left',
+                                        render: (rowData) => {
+                                            return !isNil(rowData) ? `${(rowData / 60)?.toFixed(0)}分鐘` : ""
+                                        }
                                     },
                                     {
                                         title: '車資總額',
                                         width: "100px",
-                                        dataIndex: 'seatNum',
+                                        dataIndex: 'totalAmt',
                                         // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                         // fixed: 'left',
+                                        render: (rowData) => {
+                                            return !isNil(rowData) ? `$${rowData}` : ""
+                                        }
                                     },
                                     {
                                         title: '政府補助',
                                         width: "100px",
-                                        dataIndex: 'seatNum',
+                                        dataIndex: 'subsidyAmt',
                                         // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                         // fixed: 'left',
+                                        render: (rowData) => {
+                                            return !isNil(rowData) ? `$${rowData}` : ""
+                                        }
                                     },
                                     {
                                         title: '自負額',
                                         width: "100px",
-                                        dataIndex: 'seatNum',
+                                        dataIndex: 'selfPayAmt',
                                         // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                         // fixed: 'left',
+                                        render: (rowData) => {
+                                            return !isNil(rowData) ? `$${rowData}` : ""
+                                        }
                                     },
                                     {
                                         title: '陪同總額',
                                         width: "100px",
-                                        dataIndex: 'seatNum',
+                                        dataIndex: 'withAmt',
                                         // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                         // fixed: 'left',
+                                        render: (rowData) => {
+                                            return !isNil(rowData) ? `$${rowData}` : ""
+                                        }
                                     },
                                     {
                                         title: '個案負擔',
                                         width: "100px",
-                                        dataIndex: 'seatNum',
+                                        // dataIndex: 'seatNum',
                                         // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
                                         fixed: 'right',
+                                        render: (rowData) => {
+                                            return !isNil(rowData?.withAmt) ? `$${rowData?.withAmt + rowData?.selfPayAmt}` : ""
+                                        }
                                     },
                                     {
                                         title: '',
@@ -319,21 +340,7 @@ const LaptopBase = (props) => {
                         >
                             {props?.UserName}
                         </Text>
-                        {/* 可用補助餘額查詢按鈕 */}
-                        <NativeLineButton
-                            baseDefaultTheme={"DefaultTheme"}
-                            disable={false}
-                            type="button" // 防止提交
-                            theme={laptop.balanceInquiryButton}
-                        // onClick={() => {
-                        //     history.push(`/BusRouteAndStop/BusStop/Edit?stationId=${rowData.id}`)
-                        // }}
-                        >
-                            <Search
-                                style={laptop.balanceInquiryButtonIcon}
-                            />
-                                可用補助餘額查詢
-                            </NativeLineButton>
+
                     </BasicContainer>
 
                     {/* 叫車表單容器 */}
@@ -401,7 +408,7 @@ const LaptopBase = (props) => {
                             }
 
                             {/* 優先搭乘車行排序 */}
-                            <BUnitSort
+                            {/* <BUnitSort
                                 topLabel={<>優先搭乘車行排序 <Text theme={laptop.bUnitSortNote}>(請依序點擊完成排序)</Text></>}
                                 bUnit={[
                                     { id: "0", name: "0XXXX車行" },
@@ -417,7 +424,7 @@ const LaptopBase = (props) => {
                                     globalContextService.set("WhiteCallCarComponentPage", `BUnitSort`, value);
                                 }}
                                 theme={laptop.bUnitSort}
-                            />
+                            /> */}
 
                             {/* 起點 StartPos*/}
                             <MapGoogleInput
@@ -510,6 +517,7 @@ const LaptopBase = (props) => {
                         </NativeLineButton>
 
                             </BasicContainer>
+
                             {/* 迄點 EndPos*/}
                             <MapGoogleInput
                                 placeholder={"請輸入下車地點(XX市XX區XX路XX號)"}
@@ -816,11 +824,11 @@ const LaptopBase = (props) => {
                                 else if (valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
                                     validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
                                 }
-                                else if (valid(globalContextService.get("WhiteCallCarComponentPage", "Phone") ?? "", ["^.{1,}$"], ["請輸入聯絡電話"])[1]) {
-                                    validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "Phone") ?? "", ["^.{1,}$"], ["請輸入聯絡電話"])[1]
-                                }
                                 else if (valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
                                     validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
+                                }
+                                else if (valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+                                    validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
                                 }
                                 else if (
                                     !(
@@ -872,7 +880,7 @@ const LaptopBase = (props) => {
                                         fromLat: mapGoogleControll.getMarkerPoints("test1")?.[0]?.[1] ?? 0, //起點緯度
                                         fromLon: mapGoogleControll.getMarkerPoints("test1")?.[0]?.[0] ?? 0,//起點經度
                                         // id: ""	白牌預約訂單 id
-                                        noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
+                                        noticePhone: globalContextService.get("WhiteCallCarComponentPage", "SmsNumber"),	//畫面無此欄位
                                         orgId: "",//	畫面無此欄位
                                         passengerNum: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value,	//搭乘人數
                                         remark: JSON.stringify((Array(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value)).fill(0).map((item, index) => {

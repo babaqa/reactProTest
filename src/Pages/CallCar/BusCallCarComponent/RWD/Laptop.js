@@ -26,12 +26,6 @@ const LaptopBase = (props) => {
 
     return (
         <>
-            {/* <MainPageContainer
-                outSideTopComponent={
-                    <></>
-                }
-                theme={laptop.mainPageContainer}
-            > */}
             {/* 叫車頁面外層容器 */}
             <Container
                 theme={laptop.callCarOutContainer}
@@ -225,21 +219,6 @@ const LaptopBase = (props) => {
                             {props?.CaseName}
                         </Text>
 
-                        {/* 可用補助餘額查詢按鈕 */}
-                        <NativeLineButton
-                            baseDefaultTheme={"DefaultTheme"}
-                            disable={false}
-                            type="button" // 防止提交
-                            theme={laptop.balanceInquiryButton}
-                        // onClick={() => {
-                        //     history.push(`/BusRouteAndStop/BusStop/Edit?stationId=${rowData.id}`)
-                        // }}
-                        >
-                            <Search
-                                style={laptop.balanceInquiryButtonIcon}
-                            />
-                                可用補助餘額查詢
-                            </NativeLineButton>
                     </BasicContainer>
 
                     {/* 叫車表單容器 */}
@@ -642,7 +621,6 @@ const LaptopBase = (props) => {
 
                 </SubContainer>
             </Container>
-            {/* </MainPageContainer> */}
         </>
     )
 }
