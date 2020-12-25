@@ -57,15 +57,19 @@ const MobileMBase = (props) => {
                                                 {item?.companyName}
                                             </Text>
 
-                                            {/* 公司電話 */}
-                                            <Text
-                                                theme={mobileM.companyPhone}
-                                            >
-                                                <Phone
-                                                    style={mobileM.phoneSvg}
-                                                />
-                                                {item?.companyPhone}
-                                            </Text>
+                                            {/* <a href="tel:+886-2-3278918"> */}
+                                            {/* <a href="tel:+886-918837233">*/}
+                                            <a href={`tel:+886-${item?.companyPhone}` ?? "#"}>
+                                                {/* 公司電話 */}
+                                                <Text
+                                                    theme={mobileM.companyPhone}
+                                                >
+                                                    <Phone
+                                                        style={mobileM.phoneSvg}
+                                                    />
+                                                    {item?.companyPhone}
+                                                </Text>
+                                            </a>
 
                                         </Container>
 
