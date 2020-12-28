@@ -5,10 +5,10 @@ export default {
             return {
                 ...style,
                 // padding: "24px 12px",
-                margin: "8px 0 0",
+                // margin: "8px 0 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "calc( 100vh - 451px)",
+                height: "calc( 100vh - 459px)",
                 width: "100%",
                 borderRadius: "16px",
                 display: "flex",

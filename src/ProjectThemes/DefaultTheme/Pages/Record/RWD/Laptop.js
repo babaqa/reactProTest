@@ -23,7 +23,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "0 48px 220px",//188 是授權圖高度,
+                    padding: "8px 48px 220px",//188 是授權圖高度,
                     minHeight: "calc( 100vh - 179px)"
                 }
             }
