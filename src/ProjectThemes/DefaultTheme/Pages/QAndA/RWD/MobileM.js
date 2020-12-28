@@ -12,10 +12,11 @@ export default {
         },
         basicOutContainer: {
             basic: (style, props) => {
+                console.log(props)
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    height: "calc( 100vh - 152px)",
+                    height: `calc( ${props.vh}px - 152px)`,
                 }
             }
         },
@@ -51,7 +52,7 @@ export default {
         basic: (style, props) => ({
             ...style,
             padding: "0 0px 24px",
-            minHeight: "calc( 100vh - 152px )"
+            minHeight: `calc( ${props.vh}px - 152px)`,
         })
     }
     //#endregion
