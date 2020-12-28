@@ -677,7 +677,8 @@ export default {
             position: "fixed",
             justifyContent: "space-between",
             bottom: "0px",
-            backgroundColor: "#fff"
+            backgroundColor: "#fff",
+            zIndex: 1000
         })
     },
     //#endregion

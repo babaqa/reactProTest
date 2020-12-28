@@ -23,3 +23,4 @@ export { BusOrderEditTitleModal } from './BusOrderEditTitleModal/BusOrderEditTit
 export { WhiteOrderEditTitleModal } from './WhiteOrderEditTitleModal/WhiteOrderEditTitleModal'
 export { TimeCounterButton } from './TimeCounterButton/TimeCounterButton'
 export { CardTable } from './CardTable/CardTable'
+export { QA } from './QA/QA'
