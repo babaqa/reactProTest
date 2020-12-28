@@ -3,8 +3,8 @@ export default {
     newsContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 56px - 94px - 48px)",
-            width: "100%",
+            minHeight: "calc( 100vh - 56px - 94px - 48px)",
+            height: "auto",
             // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
             // borderRadius: "16px"
         })
@@ -23,6 +23,27 @@ export default {
         })
     },
     //#endregion
+
+    //#region 無資料表單區容器
+    noDataContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                // padding: "24px 12px",
+                margin: "8px 0 0",
+                background: "rgba(0,0,0,0)",
+                // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                height: "calc( 100vh - 451px)",
+                width: "100%",
+                borderRadius: "16px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center"
+            }
+        }
+    },
+    //#endregion
+
     //#region 公告內容容器
     newsCardContentContainer: {
         basic: (style, props) => ({
@@ -190,6 +211,20 @@ export default {
             fontWeight: 400,
             lineHeight: "22px",
             color: "rgba(0, 0, 0, 0.65)",
+        })
+    },
+    //#endregion
+
+    //#region 沒有更多搭乘紀錄 提醒 
+    noDataTip: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "#1890FF",
+            // margin: "12px 0 0",
+            width: "100%",
+            textAlign: "center"
         })
     },
     //#endregion
