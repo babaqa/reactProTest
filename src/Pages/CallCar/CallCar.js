@@ -19,7 +19,7 @@ export const CallCar = (props) => {
         <>
             {/* 共用theme */}
             {
-                375 < Width &&
+                768 <= Width &&
                 <LaptopL
                     nowTab={NowTab}
                     setNowTab={setNowTab}
@@ -40,7 +40,7 @@ export const CallCar = (props) => {
                 />
             } */}
             {
-                Width <= 375 &&
+                Width < 768 &&
                 <MobileM
                     nowTab={NowTab}
                     setNowTab={setNowTab}

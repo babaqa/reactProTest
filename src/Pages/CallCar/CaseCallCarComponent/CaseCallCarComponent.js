@@ -670,8 +670,9 @@ export const CaseCallCarComponent = (props) => {
 
     return (
         <>
+            {/* 共用theme */}
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     UserId={urlParams.get("userId")}
                     CaseUserId={urlParams.get("caseUserId")}
@@ -691,7 +692,7 @@ export const CaseCallCarComponent = (props) => {
                     controllGCS={controllGCS}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     UserId={urlParams.get("userId")}
@@ -732,7 +733,7 @@ export const CaseCallCarComponent = (props) => {
 
                     controllGCS={controllGCS}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM
