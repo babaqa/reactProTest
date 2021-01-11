@@ -1150,7 +1150,7 @@ export default {
             fontWeight: 500,
             fontSize: "14px",
             lineHeight: "22px",
-            width: "225px",
+            width: "230px",
             margin: "0 0 0 8px"
         })
     },
@@ -1163,7 +1163,7 @@ export default {
                 ...style,
                 padding: "0 8px",
                 display: "inline-block",
-                margin: "0 8px 0 0"
+                // margin: "0 8px 0 0"
                 // ...style.occupy(4),
             })
         },
