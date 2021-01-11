@@ -16,7 +16,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "200px",
+                width: "100px",
                 color: "rgba(0,0,0,0.85)"
             })
         },
