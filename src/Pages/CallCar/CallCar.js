@@ -11,20 +11,21 @@ export const CallCar = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
-    
+
     const [NowTab, setNowTab] = useState("長照"); // 目前預約訂車頁面
     const [Width, Height] = useWindowSize();
 
     return (
         <>
+            {/* 共用theme */}
             {
-                1440 <= Width &&
+                375 < Width &&
                 <LaptopL
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     nowTab={NowTab}
@@ -37,9 +38,9 @@ export const CallCar = (props) => {
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
-            }
+            } */}
             {
-                Width < 768 &&
+                Width <= 375 &&
                 <MobileM
                     nowTab={NowTab}
                     setNowTab={setNowTab}

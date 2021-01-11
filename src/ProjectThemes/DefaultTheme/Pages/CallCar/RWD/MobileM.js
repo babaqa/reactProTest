@@ -1,87 +1,6 @@
 export default {
     //#region MainPageContainer 背景色調節
     mainPageContainer: {
-        laptopLOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
-                }
-            }
-        },
-        laptopLOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        laptopLContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
-                }
-            }
-        },
-
-
-        laptopOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
-                }
-            }
-        },
-        laptopOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        laptopContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
-                }
-            }
-        },
-
-        tabletOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
-                }
-            }
-        },
-        tabletOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        tabletContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
-                }
-            }
-        },
         basicOutsideOutContainer: {
             basic: (style, props) => {
                 return {
@@ -125,14 +44,17 @@ export default {
     titleBarCallCarTab: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
-            margin: "0 16px",
+            display: "inline-grid",
+            // margin: "0 16px",
             lineHeight: "32px",
             height: "46px",
             fontSize: "14px",
             cursor: "pointer",
+            width: "33%",
             color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
-            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
+            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset"),
+            textAlign: "center",
+            alignItems: "center"
         }),
     },
     //#endregion

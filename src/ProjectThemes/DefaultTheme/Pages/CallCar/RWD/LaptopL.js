@@ -6,7 +6,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "48px 24px 16px 150px" // 標題列的padding
+                    padding: "12px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -22,19 +22,17 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
+                    backgroundColor: "#DBE4E8",
+                    padding: "24px 24px 212px" //188 是授權圖高度
                 }
             }
         },
-
-
         laptopOutsideOutContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
+                    padding: "12px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -50,18 +48,17 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
+                    backgroundColor: "#DBE4E8",
+                    padding: "24px 24px 212px" //188 是授權圖高度
                 }
             }
         },
-
         tabletOutsideOutContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
+                    padding: "12px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -77,32 +74,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
-                }
-            }
-        },
-        basicOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        basicOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        basicContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8",
+                    padding: "24px 24px 212px" //188 是授權圖高度
                 }
             }
         },
@@ -126,18 +99,45 @@ export default {
     },
     //#endregion
 
+    //#region 分頁底色
+    whiteContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "72px",
+            backgroundColor: "#FFFFFF"
+        }),
+    },
+    //#endregion
+
+    //#region 分頁容器
+    tabsContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "56px",
+            backgroundColor: "#6A7987"
+        }),
+    },
+    //#endregion
+
     //#region 標題列 預約訂車分頁
     titleBarCallCarTab: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
-            margin: "0 16px",
+            display: "inline-grid",
+            margin: (props.isActive ? 0 : "0 1px 0 0"),
             lineHeight: "32px",
-            height: "46px",
+            height: (props.isActive ? "56px" : "100%"),
             fontSize: "14px",
             cursor: "pointer",
-            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
-            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
+            width: "160px",
+            color: (props.isActive ? "rgba(0, 0, 0, 0.85)" : "#FFFFFF"),
+            boxShadow: (props.isActive ? "inset 0px 8px 0px #1890FF" : ""),
+            // borderTop: (props.isActive ? "solid 8px #1890FF" : "unset"),
+            backgroundColor: (props.isActive ? "#FFFFFF" : "#9DADBE"),
+            textAlign: "center",
+            alignItems: "center"
         }),
     },
     //#endregion
