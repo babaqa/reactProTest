@@ -17,6 +17,7 @@ const LaptopLBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { news: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
+    const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     //#region 分頁映射
     const tabMap = (key) => {
@@ -86,11 +87,15 @@ const LaptopLBase = (props) => {
                                         (globalContextService.get("NewsPage", "DateTimeRange") ?
                                             [moment(globalContextService.get("NewsPage", "DateTimeRange")[0]), moment(globalContextService.get("NewsPage", "DateTimeRange")[1])]
                                             :
-                                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2015-06-06', "YYYY-MM-DD")]
+                                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
                                         )
                                     }
                                     onChange={(value, momentObj) => {
-                                        globalContextService.set("NewsPage", "DateTimeRange", value);
+                                        if (value !== globalContextService.get("NewsPage", "DateTimeRange")) {
+                                            globalContextService.set("NewsPage", "DateTimeRange", value);
+                                            // console.log("change")
+                                            // setForceUpdate(f => !f)
+                                        }
                                     }}
                                     theme={laptopL.dateTimeRange}
                                 />

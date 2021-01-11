@@ -3,7 +3,9 @@ export default {
     callCarOutContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 80px - 95px)",
+            // height: "calc( 100vh - 80px - 95px)",
+            height: "100vh",
+            minHeight: "1190px"
         })
     },
     //#endregion
@@ -78,7 +80,8 @@ export default {
             ...style,
             boxShadow: "inset 0px -1px 0px #F0F0F0",
             padding: "8px 0 0px 24px",
-            height: "176px",
+            minHeight: "176px",
+            height: "auto"
 
         })
     },

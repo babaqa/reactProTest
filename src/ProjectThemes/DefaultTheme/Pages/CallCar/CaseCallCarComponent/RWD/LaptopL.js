@@ -3,7 +3,9 @@ export default {
     callCarOutContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 100px - 111px)",
+            // height: "calc( 100vh - 100px - 111px - 188px)",
+            height: "100vh",
+            minHeight: "890px"
         })
     },
     //#endregion
@@ -1090,7 +1092,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 8px 0 12px",
+                padding: "0 12px",
                 display: "inline-block",
                 ...style.occupy(4),
             })
@@ -1126,7 +1128,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 8px",
+                padding: "0 12px",
                 display: "inline-block",
                 ...style.occupy(4),
             })
