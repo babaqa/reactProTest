@@ -173,14 +173,36 @@ export default {
 
     //#region 行程表格
     tableContainer: {
-        basic: (style, props) => ({
-            ...style,
-            height: "auto",
-            width: "50%",
-            // display: props.open ? "block" : "none",
-            padding: "16px",
-            minHeight: "142px"
-        })
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto",
+                width: "50%",
+                // display: props.open ? "block" : "none",
+                padding: "16px",
+                minHeight: "142px"
+            })
+        },
+        laptop: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto",
+                width: "100%",
+                // display: props.open ? "block" : "none",
+                padding: "16px",
+                minHeight: "142px"
+            })
+        },
+        tablet: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto",
+                width: "100%",
+                // display: props.open ? "block" : "none",
+                padding: "16px",
+                minHeight: "142px"
+            })
+        },
     },
     //#endregion
 
@@ -313,7 +335,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2),
+                // ...style.occupy(2),
             })
         },
         container: {
@@ -321,7 +343,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2),
+                // ...style.occupy(2),
             })
         },
         topLabel: {
@@ -334,7 +356,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)"),
+                    width: "200px"
                 }
             }
         },
@@ -362,7 +385,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2),
+                // ...style.occupy(2),
             })
         },
         container: {
@@ -370,7 +393,7 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2),
+                // ...style.occupy(2),
             })
         },
         topLabel: {
@@ -383,7 +406,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)"),
+                    width: "200px"
                 }
             }
         },
@@ -859,15 +883,39 @@ export default {
 
     //#region 搭車人數及簡訊容器
     numberContainer: {
-        basic: (style, props) => ({
-            ...style,
-            width: "50%",
-            height: "auto",
-            // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
-            backgroundColor: "transparent",
-            // margin: "12px",
-            padding: "16px"
-        })
+        laptopL:{
+            basic: (style, props) => ({
+                ...style,
+                width: "50%",
+                height: "auto",
+                // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
+                backgroundColor: "transparent",
+                // margin: "12px",
+                padding: "16px"
+            })
+        },
+        laptop:{
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                height: "auto",
+                // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
+                backgroundColor: "transparent",
+                // margin: "12px",
+                padding: "16px"
+            })
+        },
+        tablet:{
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                height: "auto",
+                // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
+                backgroundColor: "transparent",
+                // margin: "12px",
+                padding: "16px"
+            })
+        },
     },
     //#endregion
 

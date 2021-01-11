@@ -367,7 +367,7 @@ export const BusCallCarComponent = (props) => {
     return (
         <>
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     UserId={urlParams.get("userId")}
                     CaseUserId={urlParams.get("caseUserId")}
@@ -384,7 +384,7 @@ export const BusCallCarComponent = (props) => {
                     controllGCS={controllGCS}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     UserId={urlParams.get("userId")}
@@ -419,7 +419,7 @@ export const BusCallCarComponent = (props) => {
                     AddBusCallCarExecute={AddBusCallCarExecute}
                     controllGCS={controllGCS}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM
