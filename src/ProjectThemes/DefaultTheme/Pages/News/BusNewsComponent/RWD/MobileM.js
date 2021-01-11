@@ -18,7 +18,7 @@ export default {
             width: "100%",
             // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
             // borderRadius: "16px",
-            margin: "8px 0",
+            margin: "8px 0 0 0",
             backgroundColor: "#FFF"
         })
     },
@@ -223,6 +223,7 @@ export default {
             lineHeight: "22px",
             color: "#1890FF",
             // margin: "12px 0 0",
+            padding: "8px 0 0 0",
             width: "100%",
             textAlign: "center"
         })
