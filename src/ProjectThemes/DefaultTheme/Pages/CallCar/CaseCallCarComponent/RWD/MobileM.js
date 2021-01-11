@@ -886,7 +886,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 padding: "0 0 0 0",
-                display: "inline-block",
+                // display: "inline-block",
                 ...style.occupy(12),
             })
         },
@@ -927,7 +927,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 padding: "0 0 0 0",
-                display: "inline-block",
+                // display: "inline-block",
                 ...style.occupy(12),
             })
         },
@@ -1105,11 +1105,11 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                // padding: "0 8px",
+                padding: 0,
                 margin: "0 16px 0 0",
                 display: "inline-block",
-                // ...style.occupy(4),
-                width: "90px"
+                ...style.occupy(3),
+                // width: "90px"
             })
         },
         topLabel: {
@@ -1121,7 +1121,7 @@ export default {
         selectorContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "100px"
+                // width: "100px"
             })
         },
         bottomLabel: {
@@ -1146,8 +1146,8 @@ export default {
                 padding: 0,
                 display: "inline-block",
                 margin: "0 16px 0 0",
-                width: "150px"
-                // ...style.occupy(4),
+                // width: "150px"
+                ...style.occupy(4),
             })
         },
         topLabel: {
@@ -1183,8 +1183,8 @@ export default {
                 ...style,
                 padding: 0,
                 display: "inline-block",
-                // ...style.occupy(4),
-                width: "71px"
+                ...style.occupy(3),
+                // width: "71px"
             })
         },
         topLabel: {
@@ -1213,7 +1213,7 @@ export default {
     accompanyCountsRequired: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
+            display: "block",
             color: "#000",
             fontSize: "14px",
             lineHeight: "22px"
@@ -1221,7 +1221,7 @@ export default {
         red: {
             basic: (style, props) => ({
                 ...style,
-                display: "inline-block",
+                display: "block",
                 fontSize: "14px",
                 lineHeight: "22px",
                 color: "#ff4d4f",

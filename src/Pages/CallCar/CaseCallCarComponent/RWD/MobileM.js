@@ -907,19 +907,19 @@ const MobileMBase = (props) => {
                                         // menuPosition={true}
                                         theme={mobileM.accompanyCounts}
                                     />
-
-                                    <Text
-                                        theme={mobileM.accompanyCountsRequired}
-                                    >
-                                        註：陪同人數
-                                    </Text>
-                                    <Text
-                                        theme={mobileM.accompanyCountsRequired.red}
-                                    >
-                                        第一人免費、第二人自費加價50元、第三人(含)及以上每位自費加價200元。
-                                    </Text>
-
                                 </Container>
+
+                                <Text
+                                    theme={mobileM.accompanyCountsRequired}
+                                >
+                                    註：陪同人數
+                                    </Text>
+                                <Text
+                                    theme={mobileM.accompanyCountsRequired.red}
+                                >
+                                    第一人免費、第二人自費加價50元、第三人(含)及以上每位自費加價200元。
+                                </Text>
+
 
                             </SubContainer>
 
