@@ -902,14 +902,15 @@ export default {
     },
     //#endregion
 
-    //#region 選項 Equipment  
-    Equipment: {
+    //#region 願意共乘 CanShareEquipment  
+    canShareEquipment: {
         container: {
             basic: (style, props) => ({
                 ...style,
                 padding: "0 0 0 0",
-                //display: "inline-block",
-                // ...style.occupy(6),
+                display: "inline-block",
+                // ...style.occupy(12),
+                width: "119px"
             })
         },
         topLabel: {
@@ -928,6 +929,49 @@ export default {
             basic: (style, props) => ({
                 //調高度
                 ...style,
+                margin: 0
+                // height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "16px",
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 預約回程 ReturnTipEquipment  
+    returnTipEquipment: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 0 0",
+                display: "inline-block",
+                // ...style.occupy(12),
+                width: "186px"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        checkboxContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        checkboxGroup: {
+            basic: (style, props) => ({
+                //調高度
+                ...style,
+                margin: 0
                 // height: "28px",
             })
         },
