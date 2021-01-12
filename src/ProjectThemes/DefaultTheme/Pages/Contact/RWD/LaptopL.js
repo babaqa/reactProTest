@@ -6,7 +6,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "60px 150px 4px" // 標題列的padding
+                    padding: "12px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -22,20 +22,18 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 138px 224px", //188 是授權圖高度
-                    minHeight: "calc( 100vh - 211px)"
+                    backgroundColor: "#DBE4E8",
+                    padding: "56px 24px 212px", //188 是授權圖高度
+                    minHeight: "calc( 100vh - 184px)"
                 }
             }
         },
-
-
         laptopOutsideOutContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
+                    padding: "12px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -51,18 +49,18 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
+                    backgroundColor: "#DBE4E8",
+                    padding: "56px 24px 212px",//188 是授權圖高度
+                    minHeight: "calc( 100vh - 164px)"
                 }
             }
         },
-
         tabletOutsideOutContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
+                    padding: "12px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -78,32 +76,9 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
-                }
-            }
-        },
-        basicOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        basicOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        basicContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8",
+                    padding: "56px 24px 212px", //188 是授權圖高度
+                    minHeight: "calc( 100vh - 164px)"
                 }
             }
         },
@@ -127,73 +102,46 @@ export default {
     },
     //#endregion
 
-    //#region 標題列 聯繫客服分頁
-    titleBarContactTab: {
+    //#region 分頁底色
+    whiteContainer: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
-            margin: "0 16px",
-            lineHeight: "32px",
-            height: "46px",
-            fontSize: "14px",
-            cursor: "pointer",
-            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
-            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
+            width: "100%",
+            height: "72px",
+            backgroundColor: "#FFFFFF"
         }),
     },
     //#endregion
 
-    //#region 關鍵字 Keyword
-    keyword: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 16px 0 0",
-                display: "inline-block"
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-            })
-        },
-        textInputContainer: {
-            basic: (style, props) => {
+    //#region 分頁容器
+    tabsContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "56px",
+            backgroundColor: "#6A7987"
+        }),
+    },
 
-                return {
-                    ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
-                }
-            }
-        },
-        textInput: {
-            basic: (style, props) => {
-                //console.log(style, props)
-                return {
-                    ...style,
-                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                    ...(
-                        props.openEye && {
-                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                        }
-                    ),
-                    //#endregion
-                    height: "28px",
-                    width: "200px"
-                }
-            }
-        }
+    //#region 標題列 聯繫客服分頁
+    titleBarContactTab: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-grid",
+            margin: (props.isActive ? 0 : "0 1px 0 0"),
+            lineHeight: "32px",
+            height: (props.isActive ? "56px" : "100%"),
+            fontSize: "14px",
+            cursor: "pointer",
+            width: "160px",
+            color: (props.isActive ? "rgba(0, 0, 0, 0.85)" : "#FFFFFF"),
+            boxShadow: (props.isActive ? "inset 0px 8px 0px #1890FF" : ""),
+            // borderTop: (props.isActive ? "solid 8px #1890FF" : "unset"),
+            backgroundColor: (props.isActive ? "#FFFFFF" : "#9DADBE"),
+            textAlign: "center",
+            alignItems: "center"
+        }),
     },
     //#endregion
-    //#region 關鍵字 右方圖標
-    keywordRightIcon: {
-        position: "absolute",
-        height: "100%",
-        right: 0,
-        cursor: "pointer",
-        top: 0,
-    },
-    //#endregion
+
 }

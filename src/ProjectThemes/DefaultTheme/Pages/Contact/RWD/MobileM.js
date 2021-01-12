@@ -14,7 +14,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
+                    backgroundColor: "#DBE4E8",
                     height: "calc( 100vh - 245px)",
                 }
             }
@@ -23,7 +23,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
+                    backgroundColor: "#DBE4E8",
                     padding: "4px 0 236px",
                     minHeight: "calc( 100vh - 246px)"
                 }
@@ -32,7 +32,7 @@ export default {
     },
     //#endregion
 
-    //#region 關鍵字 Keyword
+    //#region 標題 TitleText
     titleText: {
         basic: (style, props) => ({
             ...style,
@@ -41,7 +41,8 @@ export default {
             fontSize: "16px",
             fontWeight: 500,
             lineHeight: "48px",
-            textAlign: "center"
+            textAlign: "center",
+            boxShadow: "inset 0px -1px 0px #F0F0F0"
         })
     },
     //#endregion
@@ -106,14 +107,14 @@ export default {
         basic: (style, props) => ({
             ...style,
             display: "inline-block",
-            margin: "0 16px",
+            // margin: "0 16px",
             lineHeight: "46px",
             height: "46px",
             fontSize: "14px",
             cursor: "pointer",
             color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
             borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset"),
-            width: "calc( 33% - 32px )",
+            width: "33%",
             textAlign: "center"
         }),
     },

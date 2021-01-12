@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
-import { ReactComponent as Search } from '../../../Assets/img/CasePage/Search.svg'
 import { useHistory } from 'react-router-dom';
 
 import { CaseContactComponent } from '../CaseContactComponent/CaseContactComponent'
@@ -42,56 +41,27 @@ const LaptopLBase = (props) => {
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}
-                        <MainPageTitleBar
-                            bascDefaultTheme={"DefaultTheme"}
-                            titleText={"聯繫客服"}
-                            theme={laptopL.titleBar}
-                            // onSubmit={(e)=>console.log(e)}
-                            centerContent={
-                                <>
-                                    <BasicContainer>
-                                        {tabMap().map((item, index) => {
-                                            return (
-                                                <React.Fragment key={index}>
-                                                    <Text
-                                                        onClick={() => { props.setNowTab(item) }}
-                                                        isActive={props.nowTab === item}
-                                                        theme={laptopL.titleBarContactTab}
-                                                    >
-                                                        {item}
-                                                    </Text>
-                                                </React.Fragment>
-                                            )
-                                        })}
-                                    </BasicContainer>
-                                </>
-                            }
+                        <BasicContainer
+                            theme={laptopL.whiteContainer}
                         >
-                            {/* 按鈕容器 */}
-                            <SubContainer baseDefaultTheme={"DefaultTheme"}>
-                            </SubContainer>
-                            {/* 一般輸入框 請輸入車行名稱  */}
-                            <TextInput
-                                bascDefaultTheme={"DefaultTheme"}
-                                theme={laptopL.keyword}
-                                type="text"
-                                placeholder={"請輸入車行名稱"}
-                                rightIcon={
-                                    <Search
-                                        style={laptopL.keywordRightIcon}
-                                        onClick={(e) => {
-                                            console.log("目前不支援搜尋功能")
-                                            // props.GetSubOrgsExecute(true, "");
-                                        }
-                                        }
-                                    />
-                                }
-                                value={globalContextService.get("ContactPage", "Keyword") ?? ""}
-                                onChange={(e, value, onInitial) => {
-                                    globalContextService.set("ContactPage", "Keyword", value);
-                                }}
-                            />
-                        </MainPageTitleBar>
+                            <BasicContainer
+                                theme={laptopL.tabsContainer}
+                            >
+                                {tabMap().map((item, index) => {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            <Text
+                                                onClick={() => { props.setNowTab(item) }}
+                                                isActive={props.nowTab === item}
+                                                theme={laptopL.titleBarContactTab}
+                                            >
+                                                {item}
+                                            </Text>
+                                        </React.Fragment>
+                                    )
+                                })}
+                            </BasicContainer>
+                        </BasicContainer>
                     </>
                 }
             >
@@ -99,6 +69,7 @@ const LaptopLBase = (props) => {
                 {tabMap("tabUseComponent")?.[props.nowTab]}
 
             </MainPageContainer>
+
         </>
     )
 }
