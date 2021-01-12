@@ -27,6 +27,31 @@ export const Login = (props) => {
 
     let history = useHistory();
 
+    //#region 當頁 GlobalContextService (GCS) 值 控制
+    const controllGCS = (type, payload) => {
+        switch (type) {
+            case "Login":
+                //#region 當 按下登入按紐時，要清除的資料
+                if (payload === "API") {
+                    globalContextService.remove("LoginPage", "Account");
+                    globalContextService.remove("LoginPage", "Password");
+                }
+                //#endregion
+                break;
+            case "SignUp":
+                //#region 當 按下註冊按紐時，要清除的資料
+                if (payload === "API") {
+                    globalContextService.remove("LoginPage", "CheckedRowKeys");
+                    globalContextService.remove("LoginPage", "CheckedRowsData");
+                }
+                //#endregion
+                break;
+            default:
+                break;
+        }
+    }
+    //#endregion
+
     //#region 登入 API
     const login = useCallback(async (account, password) => {
         let token = "";
@@ -143,7 +168,7 @@ export const Login = (props) => {
             });
         //#endregion
 
-        //#region 取得使用者名稱
+        //#region 取得使用者名稱 與 ID
         await fetch(`${APIUrl}check/GetUserProfile`, //Check/GetUserProfile
             {
                 headers: {
@@ -157,9 +182,11 @@ export const Login = (props) => {
             })
             .then((PreResult) => {
                 if (PreResult.code === 200) {
-                    //成功取得使用者名稱
+                    //成功取得使用者名稱 與 ID
                     setItemLocalStorage("UserName", JSON.stringify(PreResult.result?.name));
                     setItemLocalStorage("CAuth", JSON.stringify(token));
+                    setItemLocalStorage("UserID", JSON.stringify(PreResult.result?.id));
+                    controllGCS("Login");
                 } else {
                     throw PreResult.message;
                 }
@@ -269,6 +296,116 @@ export const Login = (props) => {
     }, [APIUrl, APIAppKey, Switch])
 
     const [LoginExecute, LoginPending] = useAsync(login, false);
+    //#endregion 
+
+    //#region 註冊 API
+    const singUp = useCallback(async (account, password) => {
+        let token = "";
+
+        //#region 取得token
+        await fetch(`${APIUrl}check/login`,
+            {
+                headers: {
+                    "content-type": "application/json; charset=utf-8",
+                },
+                method: "POST",
+                body: JSON.stringify({
+                    // account: account,
+                    // password: password,
+                    Account: globalContextService.get("LoginPage", "Account"),// "System",
+                    Password: globalContextService.get("LoginPage", "Password"), //"123456",
+                    AppKey: APIAppKey
+                })
+            })
+            .then(Result => {
+                const ResultJson = Result.clone().json();//Respone.clone()
+                return ResultJson;
+            })
+            .then((PreResult) => {
+
+                if (PreResult.code === 200) {
+                    // 成功取得token
+                    token = PreResult.token;
+                } else {
+                    throw PreResult.message;
+                }
+            })
+            .catch((Error) => {
+                modalsService.infoModal.warn({
+                    iconRightText: Error,
+                    yes: true,
+                    yesText: "確認",
+                    // no: true,
+                    // autoClose: true,
+                    backgroundClose: true,
+                    // theme: {
+                    yesOnClick: (e, close) => {
+                        close();
+                    }
+                    //     yesButton: {
+                    //         text: {
+                    //             basic: (style, props) => {
+                    //                 console.log(style)
+                    //                 return {
+                    //                     ...style,
+                    //                     color: "red"
+                    //                 }
+                    //             },
+                    //         }
+                    //     }
+                    // }
+                })
+                throw Error;
+            })
+            .finally(() => {
+            });
+        //#endregion
+
+        //#region 取得使用者名稱 與 ID
+        await fetch(`${APIUrl}check/GetUserProfile`, //Check/GetUserProfile
+            {
+                headers: {
+                    "X-Token": token,
+                }
+            })
+            .then(Result => {
+                //portalService.clear();
+                const ResultJson = Result.clone().json();//Respone.clone()
+                return ResultJson;
+            })
+            .then((PreResult) => {
+                if (PreResult.code === 200) {
+                    //成功取得使用者名稱 與 ID
+                    setItemLocalStorage("UserName", JSON.stringify(PreResult.result?.name));
+                    setItemLocalStorage("CAuth", JSON.stringify(token));
+                    setItemLocalStorage("UserID", JSON.stringify(PreResult.result?.id));
+                } else {
+                    throw PreResult.message;
+                }
+            })
+            .catch((Error) => {
+                modalsService.infoModal.warn({
+                    iconRightText: Error,
+                    yes: true,
+                    yesText: "確認",
+                    // no: true,
+                    // autoClose: true,
+                    backgroundClose: true,
+                    yesOnClick: (e, close) => {
+                        close();
+                    }
+                })
+                throw Error;
+            })
+            .finally(() => {
+                // history.push("/UserInfo")
+                Switch();
+            });
+        //#endregion
+
+    }, [APIUrl, APIAppKey, Switch])
+
+    const [singUpExecute, singUpPending] = useAsync(singUp, false);
     //#endregion 
 
     return (
