@@ -55,8 +55,9 @@ export const CaseContactComponent = (props) => {
 
     return (
         <>
+            {/* laptopL、laptop、tablet 共用theme */}
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     UserId={urlParams.get("userId")}
                     UserName={urlParams.get("caseName")}
@@ -68,7 +69,7 @@ export const CaseContactComponent = (props) => {
                     controllGCS={controllGCS}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     UserId={urlParams.get("userId")}
@@ -93,7 +94,7 @@ export const CaseContactComponent = (props) => {
 
                     controllGCS={controllGCS}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM

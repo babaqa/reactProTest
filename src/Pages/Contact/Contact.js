@@ -16,27 +16,28 @@ export const Contact = (props) => {
 
     return (
         <>
+            {/* laptopL、laptop、tablet 共用theme */}
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
-            }
-            {
+            } */}
+            {/* {
                 (768 <= Width && Width < 1024) &&
                 <Tablet
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM

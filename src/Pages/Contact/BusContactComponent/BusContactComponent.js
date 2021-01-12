@@ -16,12 +16,13 @@ export const BusContactComponent = (props) => {
 
     return (
         <>
+            {/* laptopL、laptop、tablet 共用theme */}
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                 />
@@ -30,7 +31,7 @@ export const BusContactComponent = (props) => {
                 (768 <= Width && Width < 1024) &&
                 <Tablet
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM
