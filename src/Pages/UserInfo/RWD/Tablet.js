@@ -1048,7 +1048,7 @@ const TabletBase = (props) => {
                     {/* 偏鄉資料 子標題列 */}
                     <MainPageSubTitleBar
                         bascDefaultTheme={"DefaultTheme"}
-                        titleText={"偏鄉"}
+                        titleText={"偏鄉運能不足"}
                         theme={tablet.ruralInfBaseSubTitleBar}
                     >
 

@@ -2929,7 +2929,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "80px",
+                width: "120px",
                 color: "#558B2F"
             })
         },

@@ -1652,7 +1652,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "48px",
+                width: "75px",
                 fontWeight: 400,
                 fontSize: "12px",
                 lineHeight: "22px",
