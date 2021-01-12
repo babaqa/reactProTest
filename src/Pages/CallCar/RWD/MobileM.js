@@ -46,6 +46,38 @@ const MobileMBase = (props) => {
                         <BasicContainer
                             theme={mobileM.titleBar}
                         >
+                            {/* 預約訂車按鈕 */}
+                            <NativeLineButton
+                                baseDefaultTheme={"DefaultTheme"}
+                                disable={false}
+                                type="button" // 防止提交
+                                theme={mobileM.preOrderButton}
+                                onClick={() => {
+
+                                }}
+                            >
+                                預約訂車
+                            </NativeLineButton>
+
+                            {/* 快速叫車按鈕 */}
+                            <NativeLineButton
+                                baseDefaultTheme={"DefaultTheme"}
+                                disable={false}
+                                type="button" // 防止提交
+                                theme={mobileM.fastOrderButton}
+                                onClick={() => {
+                                    history.push('/FastCallCar')
+                                }}
+                            >
+                                快速叫車
+                            </NativeLineButton>
+
+                        </BasicContainer>
+
+                        {/* 分頁 */}
+                        <BasicContainer
+                            theme={mobileM.titleBar}
+                        >
                             {tabMap().map((item, index) => {
                                 return (
                                     <React.Fragment key={index}>

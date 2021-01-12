@@ -706,22 +706,39 @@ const LaptopLBase = (props) => {
                                 >
 
                                     <Container>
-                                        {/* 選項 Equipment */}
+
+                                        {/* 願意共乘 CanShareEquipment */}
                                         <Checkbox
                                             // viewType
-                                            checked={globalContextService.get("CaseCallCarComponentPage", "Equipment")}
+                                            checked={globalContextService.get("CaseCallCarComponentPage", "CanShareEquipment")}
                                             // disable
                                             topLabel={""}
                                             onChange={(e, value, onInitial) => {
                                                 // console.log(value)
-                                                globalContextService.set("CaseCallCarComponentPage", "Equipment", value);
+                                                globalContextService.set("CaseCallCarComponentPage", "CanShareEquipment", value);
                                             }}
-                                            theme={laptopL.Equipment}
+                                            theme={laptopL.canShareEquipment}
                                         >
-                                            {/* 車輛設備 CarEquipment  選項 */}
+                                            {/* 願意共乘 CarEquipment  選項 */}
                                             <CheckboxItem value={"canShare"} >願意共乘</CheckboxItem>
+                                        </Checkbox>
+
+                                        {/* 預約回程 ReturnTipEquipment */}
+                                        <Checkbox
+                                            // viewType
+                                            checked={globalContextService.get("CaseCallCarComponentPage", "ReturnTipEquipment")}
+                                            // disable
+                                            topLabel={""}
+                                            onChange={(e, value, onInitial) => {
+                                                // console.log(value)
+                                                globalContextService.set("CaseCallCarComponentPage", "ReturnTipEquipment", value);
+                                            }}
+                                            theme={laptopL.returnTipEquipment}
+                                        >
+                                            {/* 預約回程 CarEquipment  選項 */}
                                             <CheckboxItem value={"returnTip"} >預約回程(回居住地址)</CheckboxItem>
                                         </Checkbox>
+
 
                                         {/* 回程乘車時間 標題 */}
                                         <Text

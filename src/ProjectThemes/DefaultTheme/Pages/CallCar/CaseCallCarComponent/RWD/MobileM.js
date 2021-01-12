@@ -1237,6 +1237,7 @@ export default {
             ...style.occupy(12),
             padding: 0,
             display: "inline-block",
+            height: "187px"
         }),
     },
     //#endregion

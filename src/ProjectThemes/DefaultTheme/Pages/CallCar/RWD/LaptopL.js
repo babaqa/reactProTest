@@ -6,7 +6,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "12px 0px 0px" // 標題列的padding
+                    padding: "16px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -32,7 +32,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "12px 0px 0px" // 標題列的padding
+                    padding: "16px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -58,7 +58,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "12px 0px 0px" // 標題列的padding
+                    padding: "16px 0px 0px" // 標題列的padding
                 }
             }
         },
@@ -84,20 +84,29 @@ export default {
 
     //#region 標題列
     titleBar: {
-        titleText: {
-            basic: (style, props) => ({
-                ...style,
-                width: "120px"
-            })
-        },
-        rightContainer: {
-            basic: (style, props) => ({
-                ...style,
-                width: "200px"
-            })
-        }
+        basic: (style, props) => ({
+            ...style,
+            width: "236px",
+            height: "40px",
+            backgroundColor: "#FFF",
+            margin: "0 24px 16px"
+        })
     },
     //#endregion
+
+    titleText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "24px",
+            lineHeight: "32px",
+            color: "#00628F",
+            width: "100%",
+            textAlign: "center",
+            boxShadow: "inset 8px 0px #4DB8BE",
+            top: "4px"
+        })
+    },
 
     //#region 分頁底色
     whiteContainer: {
