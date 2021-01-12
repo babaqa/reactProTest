@@ -44,6 +44,17 @@ const LaptopLBase = (props) => {
                     <>
                         {/* 標題列 */}
                         <BasicContainer
+                            theme={laptopL.titleBar}
+                        >
+                            <Text
+                                theme={laptopL.titleText}
+                            >
+                                預約訂車
+                            </Text>
+                        </BasicContainer>
+
+                        {/* 分頁 */}
+                        <BasicContainer
                             theme={laptopL.whiteContainer}
                         >
                             <BasicContainer
