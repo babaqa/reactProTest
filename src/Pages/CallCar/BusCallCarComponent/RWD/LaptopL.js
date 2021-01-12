@@ -236,7 +236,6 @@ const LaptopLBase = (props) => {
                                         onChange={(e, value, onInitial) => {
                                             globalContextService.set("BusCallCarComponentPage", "StartPos", value);
                                             setForceUpdate(f => !f)
-                                            console.log("1440 change value === " + props.AllRoute)
                                         }}
                                         options={[
                                             ...(props?.StationOnRoute?.assignLineStations ?? []).map((item, index) => {

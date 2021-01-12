@@ -240,10 +240,10 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
-            height: "80px",
+            height: "64px",
             boxShadow: "0px 1px 8px rgba(0, 0, 0, 0.15)",
             backgroundColor: "#FFBB96",
-            padding: "24px"
+            padding: "16px 24px"
         })
     },
     //#endregion
@@ -679,7 +679,7 @@ export default {
         basic: (style) => ({
             ...style,
             width: "106px",
-            height: "28px",
+            height: "24px",
             fontSize: "14px",
             lineHeight: "22px",
             // top: "2px",
@@ -1051,11 +1051,11 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
-            height: "80px",
+            height: "64px",
             // boxShadow: "0px -2px 8px rgba(0, 0, 0, 0.15)",
             backgroundColor: "#D9D9D9",
             textAlign: "right",
-            padding: "24px",
+            padding: "16px 24px",
             margin: "0 12px"
         }),
     },
@@ -1069,7 +1069,7 @@ export default {
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            top: "2px",
+            // top: "2px",
             padding: 0,
             color: "#1890ff",
             backgroundColor: "#fff",
