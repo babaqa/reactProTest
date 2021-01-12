@@ -25,7 +25,7 @@ export default {
         basic: (style, props) => ({
             ...style,
             // height: "477px"
-            minHeight: "630px",
+            minHeight: props?.bigHeight ? "866px" : "630px",
             height: "calc( 100vh - 56px - 48px )",
         })
     },
@@ -59,7 +59,9 @@ export default {
             //height: "100%",
             top: 0,
             justifyContent: "center",
-            padding: "24px 24px 0"
+            alignItems: "center",
+            padding: "24px 24px 0",
+            height: `calc( ${props.height}px - 104px )`
         })
     },
     //#endregion
@@ -70,8 +72,11 @@ export default {
         basic: (style, props) => ({
             ...style,
             display: "block",
+            // maxWidth: "490px",
             width: "100%",
-            height: "318px",
+            // height: "312px",
+            height: "auto",
+            minHeight: "460px",
             backgroundColor: "#ffffff",
             boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
             borderRadius: "16px"
@@ -303,7 +308,35 @@ export default {
             color: "#ff7a45",
             cursor: "pointer",
             lineHeight: "22px",
-            userSelect: "none"
+            userSelect: "none",
+            margin: "0 0 0 8px"
+        })
+    },
+    //#endregion
+    //#region 注意事項文字
+    loginFormNoteText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+            padding: "0 0 0 16px",
+            userSelect: "none",
+        })
+    },
+    //#endregion
+    //#region 注意事項藍標
+    loginFormBlueIcon: {
+        basic: (style, props) => ({
+            ...style,
+            width: "8px",
+            height: "8px",
+            background: "#1890FF",
+            display: "inline-block",
+            position: "absolute",
+            left: 0,
+            top: "8px"
         })
     },
     //#endregion
@@ -316,7 +349,9 @@ export default {
             ...style,
             display: "block",
             width: "100%",
-            height: "352px",
+            // height: "352px",
+            height: "auto",
+            minHeight: "460px",
             backgroundColor: "#ffffff",
             boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
             borderRadius: "16px"
@@ -660,7 +695,9 @@ export default {
             ...style,
             display: "block",
             width: "100%",
-            height: "288px",
+            // height: "288px",
+            height: "auto",
+            minHeight: "460px",
             backgroundColor: "#ffffff",
             boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
             borderRadius: "16px"
@@ -867,6 +904,603 @@ export default {
         top: "10px",
         left: "24px"
     },
+    //#endregion
+
+    //#region 註冊表單 相關樣式
+    //#region 註冊表單容器
+    singUpFormContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "block",
+            // width: "490px",
+            // height: "282px",
+            width: "100%",
+            height: "auto",
+            // height: "312px",
+            minHeight: "460px",
+            backgroundColor: "#ffffff",
+            boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
+            borderRadius: "16px"
+        })
+    },
+    //#endregion
+    //#region 註冊表單標題
+    singUpFormTitle: {
+        basic: (style, props) => ({
+            ...style,
+            color: "#FF7A45",
+            fontSize: "20px",
+            fontWeight: "bold",
+            display: "block",
+            userSelect: "none",
+            lineHeight: "28px",
+            padding: "32px 48px 0",
+        })
+    },
+    //#endregion
+    //#region 註冊表單次標題
+    singUpFormSubTitle: {
+        basic: (style, props) => ({
+            ...style,
+            color: "#FF7A45",
+            fontSize: "14px",
+            fontWeight: "normal",
+            display: "block",
+            userSelect: "none",
+            lineHeight: "22px",
+            padding: "8px 48px 1rem",
+        })
+    },
+    //#endregion
+    //#region 註冊表單組件
+    singUpFormFormContainer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                height: "fit-content",//"214px",
+                padding: "0 48px"
+            })
+        }
+    },
+    //#endregion
+    //#region 姓名 UserName
+    singUpFormUserName: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+                //console.log(props)
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => ({
+                ...style,
+                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                ...(
+                    props.openEye && {
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
+                    }
+                ),
+                //#endregion
+                height: "32px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
+        }
+    },
+    //#endregion
+    //#region 姓名 UserName 上標題 (必填)文字樣式
+    singUpFormUserNameRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            color: "#ff4d4f",
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+    //#region 電話 UserPhone
+    singUpFormUserPhone: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+                //console.log(props)
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => ({
+                ...style,
+                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                ...(
+                    props.openEye && {
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
+                    }
+                ),
+                //#endregion
+                height: "32px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
+        }
+    },
+    //#endregion
+    //#region 電話 UserPhone 上標題 (必填)文字樣式
+    singUpFormUserPhoneRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            color: "#ff4d4f",
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+    //#region 生日 UserBirthday
+    singUpFormUserBirthday: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //left:"-8px",
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                //left:"-8px",
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        dateTimePickerContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        dateTimePickerSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "32px",
+                color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+    //#region 生日 UserBirthday 上標題 (必填)文字樣式
+    singUpFormUserBirthdayRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            color: "#ff4d4f",
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+    //#region 性別 UserSex
+    singUpFormUserSex: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        radioContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        radioGroup: {
+            basic: (style, props) => ({
+                //調高度
+                ...style,
+                height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+    //#region 性別 UserSex 上標題 (必填)文字樣式
+    singUpFormUserSexRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            color: "#ff4d4f",
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+    //#region 身分證字號 UserUid
+    singUpFormUserUid: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+                //console.log(props)
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => ({
+                ...style,
+                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                ...(
+                    props.openEye && {
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
+                    }
+                ),
+                //#endregion
+                height: "32px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
+        }
+    },
+    //#endregion
+    //#region 身分證字號 UserUid 上標題 (必填)文字樣式
+    singUpFormUserUidRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            color: "#ff4d4f",
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+    //#region 悠遊卡/一卡通卡號 UserCardNo
+    singUpFormUserCardNo: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+                //console.log(props)
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => ({
+                ...style,
+                //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                ...(
+                    props.openEye && {
+                        border: `1px solid ${(props.focus || props.hover) ? "#FF7A45" : "#d9d9d9"}`,
+                        boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(255, 122, 69, 0.2)" : null
+                    }
+                ),
+                //#endregion
+                height: "32px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
+        }
+    },
+    //#endregion
+    //#region 悠遊卡/一卡通卡號 UserCardNo 上標題 (必填)文字樣式
+    singUpFormUserCardNoRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            color: "#ff4d4f",
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+    //#region 通訊地址 UserAddr
+    singUpFormUserAddr: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: "0 0 12px 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        gmapInputContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        gmapInputSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "32px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#region 通訊地址 UserAddr 上標題 (必填)文字樣式
+    singUpFormUserAddrRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            color: "#ff4d4f",
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+    //#region 完成按鈕容器
+    singUpFormDoneButtonContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(12),
+            padding: "0 2px 8px"
+        })
+    },
+    //#endregion
+    //#region 完成按鈕
+    singUpFormDoneButton: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                background: "#ff7a45",
+                boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)",
+                borderRadius: "2px",
+                height: "32px"
+            }),
+            hover: (style, props) => ({
+                ...style,
+                backgroundColor: "rgba(255, 122, 69, 0.8)"
+            })
+        },
+        text: {
+            basic: (style, props) => ({
+                ...style,
+                fontSize: "14px",
+                lineHeight: "32px",
+                top: "-3px"
+            }),
+        }
+    },
+    //#endregion
+    //#region 忘記密碼連結容器
+    loginFormHaveAccountContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(12),
+            padding: "0 2px 32px"
+        })
+    },
+    //#endregion
+    //#region 忘記密碼連結次容器
+    loginFormHaveAccountSubContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "block",
+            textAlign: "right",
+            fontSize: "14px",
+            color: "#ff7a45",
+            userSelect: "none"
+        })
+    },
+    //#endregion
+    //#region 已有帳號？文字
+    loginFormForgetHaveAccount: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            textAlign: "right",
+            fontSize: "14px",
+            color: "rgba(0,0,0,0.65)",
+            cursor: "default",
+            lineHeight: "22px",
+            userSelect: "none",
+            margin: "0 8px 0 0"
+        })
+    },
+    //#endregion
+    //#region 登入連結文字
+    loginFormToLoginText: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            textAlign: "right",
+            fontSize: "14px",
+            color: "#ff7a45",
+            cursor: "pointer",
+            lineHeight: "22px",
+            userSelect: "none",
+            margin: "0 0 0 0"
+        })
+    },
+    //#endregion
     //#endregion
 
 }

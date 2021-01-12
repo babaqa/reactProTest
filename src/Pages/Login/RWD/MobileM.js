@@ -8,8 +8,10 @@ import { ReactComponent as Admin } from '../../../Assets/img/Admin.svg'
 import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
 import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
 import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
-import { BasicContainer, Container, ScrollBar, SubContainer, Text, FormContainer, FormRow, TextInput, BasicButton, modalsService, InfoModal, globalContextService } from '../../../Components';
-import { MobileMPlacard } from '../../../ProjectComponent';
+import { BasicContainer, Container, ScrollBar, Radio, SubContainer, Text, FormContainer, FormRow, TextInput, BasicButton, modalsService, InfoModal, globalContextService, DateTimePicker, RadioItem } from '../../../Components';
+import { MapGoogleInput, MobileMPlacard } from '../../../ProjectComponent';
+import moment from 'moment';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 //#region 倒數10秒
 const TimeCounter = (props) => {
@@ -43,6 +45,7 @@ const MobileMBase = (props) => {
     //const [WhichForm, setWhichForm] = useState("Login"); // 切換 登入、忘記密碼、設定登入密碼 表單
     //const [SendedAuthCode, setSendedAuthCode] = useState(false);
     //const [WaitSecToZero, setWaitSecToZero] = useState(true);
+    const [Width, Height] = useWindowSize();
 
     //console.log(mobileM)
     return (
@@ -58,6 +61,7 @@ const MobileMBase = (props) => {
                     {/* 上半部 */}
                     <BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        bigHeight={props.WhichForm === "SingUp"}
                         theme={mobileM.aboveContainer}
                     >
                         {/* 背景自適應 */}
@@ -66,6 +70,7 @@ const MobileMBase = (props) => {
                         {/* 登入框容器 */}
                         <Container
                             baseDefaultTheme={"DefaultTheme"}
+                            height={Height}
                             theme={mobileM.loginContainer}
                         >
 
@@ -203,10 +208,33 @@ const MobileMBase = (props) => {
                                                         <Text
                                                             baseDefaultTheme={"DefaultTheme"}
                                                             theme={mobileM.loginFormForgetPassText}
+                                                            onClick={() => { props.setWhichForm("SingUp") }}
+                                                        >
+                                                            註冊
+                                                        </Text>
+
+                                                        <Text
+                                                            baseDefaultTheme={"DefaultTheme"}
+                                                            theme={mobileM.loginFormForgetPassText}
                                                             onClick={() => { props.setWhichForm("ForgetPass") }}
                                                         >
                                                             忘記密碼？
                                                         </Text>
+
+                                                        <Text
+                                                            theme={mobileM.loginFormNoteText}
+                                                        >
+                                                            <BasicContainer theme={mobileM.loginFormBlueIcon} />
+                                                            此註冊頁僅提供預約共享車隊叫車服務，如需預約長照相關業務，請撥打 1966 服務專線，將會有專員提供服務。
+                                                        </Text>
+
+                                                        <Text
+                                                            theme={mobileM.loginFormNoteText}
+                                                        >
+                                                            <BasicContainer theme={mobileM.loginFormBlueIcon} />
+                                                            若已有長照資格，需預約共享車隊服務，請在登入後選擇用戶專區進行服務開通。
+                                                        </Text>
+
                                                     </BasicContainer>
                                                 </SubContainer>
                                             </FormRow>
@@ -443,8 +471,205 @@ const MobileMBase = (props) => {
                                 </>
                             }
 
+                            {/* 註冊表單 SingUp */}
+                            {props.WhichForm === "SingUp" &&
+                                <>
+                                    {/* 註冊表單容器  */}
+                                    <BasicContainer
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        theme={mobileM.singUpFormContainer}
+                                    >
+                                        {/* 註冊表單標題 */}
+                                        <Text
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            theme={mobileM.singUpFormTitle}
+                                        >
+                                            註冊
+                                        </Text>
+                                        {/* 註冊表單次標題 */}
+                                        <Text
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            theme={mobileM.singUpFormSubTitle}
+                                        >
+                                            填寫通訊地址或(與)悠遊卡/一卡通卡號，可註冊共享車隊或(與)巴士叫車服務。
+                                        </Text>
+                                        {/* 註冊表單組件 */}
+                                        <FormContainer
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            onSubmit={(e) => {
+                                                e.preventDefault();
+                                            }}
+                                            theme={mobileM.singUpFormFormContainer}
+                                        >
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 姓名 UserName */}
+                                                <TextInput
+                                                    topLabel={<>姓名<Text theme={mobileM.singUpFormUserNameRequired}>*</Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    // type="password"
+                                                    // openEye
+                                                    placeholder={"請輸入姓名"}
+                                                    theme={mobileM.singUpFormUserName}
+                                                    value={globalContextService.get("LoginPage", "UserName") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserName", value);
+                                                    }}
+                                                />
+
+                                                {/* 電話 UserPhone */}
+                                                <TextInput
+                                                    topLabel={<>電話<Text theme={mobileM.singUpFormUserPhoneRequired}>*</Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    // type="password"
+                                                    // openEye
+                                                    placeholder={"請輸入電話"}
+                                                    theme={mobileM.singUpFormUserPhone}
+                                                    value={globalContextService.get("LoginPage", "UserPhone") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserPhone", value);
+                                                    }}
+                                                />
+
+                                                {/* 生日 UserBirthday */}
+                                                <DateTimePicker
+                                                    topLabel={<>生日<Text theme={mobileM.singUpFormUserBirthdayRequired}>*</Text></>}
+                                                    // type={"time"} time、date、week、month、quarter、year
+                                                    type={"date"}
+                                                    format={"YYYY-MM-DD"}
+                                                    bascDefaultTheme={"DefaultTheme"}
+                                                    // viewType
+                                                    isSearchable
+                                                    placeholder={"請輸入生日"}
+                                                    value={
+                                                        (globalContextService.get("LoginPage", `UserBirthday`) ?
+                                                            moment(globalContextService.get("LoginPage", `UserBirthday`), "YYYY-MM-DD")
+                                                            :
+                                                            null
+                                                        )
+                                                    }
+                                                    onChange={(value, momentObj) => {
+                                                        globalContextService.set("LoginPage", `Birthday`, value);
+                                                    }}
+                                                    theme={mobileM.singUpFormUserBirthday}
+                                                />
+
+                                                {/* 性別 UserSex */}
+                                                <Radio
+                                                    // viewType
+                                                    // disable
+                                                    topLabel={<>性別<Text theme={mobileM.singUpFormUserSexRequired}>*</Text></>}
+                                                    value={globalContextService.get("LoginPage", "UserSex") ?? 1}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserSex", value);
+                                                    }}
+                                                    theme={mobileM.singUpFormUserSex}
+                                                >
+                                                    {/* 性別 UserSex  選項 */}
+                                                    <RadioItem value={1} >男</RadioItem>
+                                                    <RadioItem value={0} >女</RadioItem>
+                                                </Radio>
+
+                                                {/* 身分證字號 UserUid */}
+                                                <TextInput
+                                                    topLabel={<>身分證字號<Text theme={mobileM.singUpFormUserUidRequired}>*</Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    // type="password"
+                                                    // openEye
+                                                    placeholder={"請輸入身分證字號"}
+                                                    theme={mobileM.singUpFormUserUid}
+                                                    value={globalContextService.get("LoginPage", "UserUid") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserUid", value);
+                                                    }}
+                                                />
+
+                                                {/* 悠遊卡/一卡通卡號 UserCardNo */}
+                                                <TextInput
+                                                    topLabel={<>悠遊卡/一卡通卡號<Text theme={mobileM.singUpFormUserCardNoRequired}></Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    // type="password"
+                                                    // openEye
+                                                    placeholder={"請輸入悠遊卡/一卡通卡號"}
+                                                    theme={mobileM.singUpFormUserCardNo}
+                                                    value={globalContextService.get("LoginPage", "UserCardNo") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserCardNo", value);
+                                                    }}
+                                                />
+
+                                            </FormRow>
+
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 通訊地址 UserAddr */}
+                                                <MapGoogleInput
+                                                    placeholder={"請輸入通訊地址(XX市XX區XX路XX號)"}
+                                                    placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
+                                                    // viewType 
+                                                    // disable
+                                                    topLabel={<>通訊地址<Text theme={mobileM.singUpFormUserAddrRequired}></Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    value={globalContextService.get("LoginPage", "UserAddr") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserAddr", value);
+                                                        globalContextService.remove("LoginPage", "UserAddrLatLng");
+                                                    }}
+                                                    onSelect={(e, option, onInitial, posInfo) => {
+                                                        globalContextService.set("LoginPage", "UserAddr", option.label);
+                                                        globalContextService.set("LoginPage", "UserAddrLatLng", { lat: posInfo?.lat, lng: posInfo?.lon });
+                                                    }}
+
+                                                    theme={mobileM.singUpFormUserAddr}
+                                                />
+                                            </FormRow>
+
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 完成按鈕 */}
+                                                <SubContainer
+                                                    theme={mobileM.singUpFormDoneButtonContainer}
+                                                >
+                                                    <BasicButton
+                                                        baseDefaultTheme={"PrimaryTheme"}
+                                                        text={"完成"}
+                                                        theme={mobileM.singUpFormDoneButton}
+                                                        onClick={() => { props.setWhichForm("Login") }}
+                                                    />
+                                                </SubContainer>
+                                            </FormRow>
+
+                                            {/* 已有帳號？登入連結 */}
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                <SubContainer
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    theme={mobileM.loginFormHaveAccountContainer}
+                                                >
+                                                    <BasicContainer
+                                                        baseDefaultTheme={"DefaultTheme"}
+                                                        theme={mobileM.loginFormHaveAccountSubContainer}
+                                                    >
+                                                        <Text
+                                                            baseDefaultTheme={"DefaultTheme"}
+                                                            theme={mobileM.loginFormForgetHaveAccount}
+                                                        >
+                                                            已有帳號？
+                                                        </Text>
+
+                                                        <Text
+                                                            baseDefaultTheme={"DefaultTheme"}
+                                                            theme={mobileM.loginFormToLoginText}
+                                                            onClick={() => { props.setWhichForm("Login") }}
+                                                        >
+                                                            登入
+                                                        </Text>
+                                                    </BasicContainer>
+                                                </SubContainer>
+                                            </FormRow>
+
+                                        </FormContainer>
+                                    </BasicContainer>
+                                </>
+                            }
                             {/* 登入頁Logo */}
-                            <LoginLogoMobileM style={mobileM.logo} />
+                            {/* <LoginLogoMobileM style={mobileM.logo} /> */}
 
                         </Container>
                     </BasicContainer>

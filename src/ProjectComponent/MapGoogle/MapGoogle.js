@@ -498,6 +498,13 @@ const AutoCompleteExtendStyle = styled(AutoCompleteExtend).attrs((props) => ({})
     height: 100%;
 }
 
+&.ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "gmapInputSubContainer")['focus']))}   
+}
+&.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "gmapInputSubContainer")['hover']))}   
+}
+
 // && .ant-select-selection-search-input{
 //     //權重不夠高
 //     ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "gmapInput")['basic']))}  

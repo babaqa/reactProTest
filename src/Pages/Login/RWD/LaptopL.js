@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
-import { BasicContainer, ScrollBar, Container, SubContainer, Text, FormContainer, FormRow, TextInput, BasicButton, modalsService, globalContextService } from '../../../Components';
+import { BasicContainer, ScrollBar, Container, SubContainer, Text, Radio, FormContainer, FormRow, TextInput, BasicButton, modalsService, globalContextService, DateTimePicker, RadioItem } from '../../../Components';
 import { ReactComponent as LoginLogo } from '../../../Assets/img/LoginLogo.svg'
 import { ReactComponent as Admin } from '../../../Assets/img/Admin.svg'
 import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
@@ -9,7 +9,8 @@ import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
 import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
 import { ReactComponent as LaptopLbg } from '../../../Assets/img/LaptopLbg.svg'
 // import LaptopLbg from '../../../Assets/img/LaptopLbg.svg'
-import { LaptopPlacard } from '../../../ProjectComponent';
+import { LaptopPlacard, mapGoogleControll, MapGoogleInput } from '../../../ProjectComponent';
+import moment from 'moment';
 
 //#region 倒數10秒
 const TimeCounter = (props) => {
@@ -73,9 +74,17 @@ const LaptopLBase = (props) => {
                             baseDefaultTheme={"DefaultTheme"}
                             theme={laptopL.loginContainer}
                         >
-                            {/* 登入頁Logo */}
-                            <LoginLogo />
+                            <BasicContainer>
+                                {/* 登入頁Logo */}
+                                <LoginLogo style={laptopL.loginFormLogo} />
 
+                                {/* Logo單位名稱 */}
+                                <Text theme={laptopL.loginFormLogoName}>屏東市政府</Text>
+
+                                {/* Logo單位說明文字 */}
+                                <Text theme={laptopL.loginFormLogoNOteText}> 長照交通接送預約服務管理系統</Text>
+
+                            </BasicContainer>
                             {/* 從這裡替換成其他表單 : 登入、忘記密碼、設定登入密碼 */}
 
                             {/* 登入表單 Login */}
@@ -197,7 +206,7 @@ const LaptopLBase = (props) => {
                                                     />
                                                 </SubContainer>
                                             </FormRow>
-                                            {/* 忘記密碼連結 */}
+                                            {/* 註冊、忘記密碼連結 */}
                                             <FormRow baseDefaultTheme={"DefaultTheme"}>
                                                 <SubContainer
                                                     baseDefaultTheme={"DefaultTheme"}
@@ -210,11 +219,34 @@ const LaptopLBase = (props) => {
                                                         <Text
                                                             baseDefaultTheme={"DefaultTheme"}
                                                             theme={laptopL.loginFormForgetPassText}
+                                                            onClick={() => { props.setWhichForm("SingUp") }}
+                                                        >
+                                                            註冊
+                                                        </Text>
+
+                                                        <Text
+                                                            baseDefaultTheme={"DefaultTheme"}
+                                                            theme={laptopL.loginFormForgetPassText}
                                                             onClick={() => { props.setWhichForm("ForgetPass") }}
                                                         >
                                                             忘記密碼？
                                                         </Text>
                                                     </BasicContainer>
+
+                                                    <Text
+                                                        theme={laptopL.loginFormNoteText}
+                                                    >
+                                                        <BasicContainer theme={laptopL.loginFormBlueIcon} />
+                                                        此註冊頁僅提供預約共享車隊叫車服務，如需預約長照相關業務，請撥打 1966 服務專線，將會有專員提供服務。
+                                                    </Text>
+
+                                                    <Text
+                                                        theme={laptopL.loginFormNoteText}
+                                                    >
+                                                        <BasicContainer theme={laptopL.loginFormBlueIcon} />
+                                                        若已有長照資格，需預約共享車隊服務，請在登入後選擇用戶專區進行服務開通。
+                                                    </Text>
+
                                                 </SubContainer>
                                             </FormRow>
                                         </FormContainer>
@@ -443,6 +475,210 @@ const LaptopLBase = (props) => {
                                                     />
                                                 </SubContainer>
                                             </FormRow>
+                                        </FormContainer>
+                                    </BasicContainer>
+                                </>
+                            }
+
+                            {/* 註冊表單 SingUp */}
+                            {props.WhichForm === "SingUp" &&
+                                <>
+                                    {/* 註冊表單容器  */}
+                                    <BasicContainer
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        theme={laptopL.singUpFormContainer}
+                                    >
+                                        {/* 註冊表單標題 */}
+                                        <Text
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            theme={laptopL.singUpFormTitle}
+                                        >
+                                            註冊
+                                        </Text>
+                                        {/* 註冊表單次標題 */}
+                                        <Text
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            theme={laptopL.singUpFormSubTitle}
+                                        >
+                                            填寫通訊地址或(與)悠遊卡/一卡通卡號，可註冊共享車隊或(與)巴士叫車服務。
+                                        </Text>
+                                        {/* 註冊表單組件 */}
+                                        <FormContainer
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            onSubmit={(e) => {
+                                                e.preventDefault();
+                                            }}
+                                            theme={laptopL.singUpFormFormContainer}
+                                        >
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 姓名 UserName */}
+                                                <TextInput
+                                                    topLabel={<>姓名<Text theme={laptopL.singUpFormUserNameRequired}>*</Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    // type="password"
+                                                    // openEye
+                                                    placeholder={"請輸入姓名"}
+                                                    theme={laptopL.singUpFormUserName}
+                                                    value={globalContextService.get("LoginPage", "UserName") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserName", value);
+                                                    }}
+                                                />
+
+                                                {/* 電話 UserPhone */}
+                                                <TextInput
+                                                    topLabel={<>電話<Text theme={laptopL.singUpFormUserPhoneRequired}>*</Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    // type="password"
+                                                    // openEye
+                                                    placeholder={"請輸入電話"}
+                                                    theme={laptopL.singUpFormUserPhone}
+                                                    value={globalContextService.get("LoginPage", "UserPhone") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserPhone", value);
+                                                    }}
+                                                />
+
+                                            </FormRow>
+
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 生日 UserBirthday */}
+                                                <DateTimePicker
+                                                    topLabel={<>生日<Text theme={laptopL.singUpFormUserBirthdayRequired}>*</Text></>}
+                                                    // type={"time"} time、date、week、month、quarter、year
+                                                    type={"date"}
+                                                    format={"YYYY-MM-DD"}
+                                                    bascDefaultTheme={"DefaultTheme"}
+                                                    // viewType
+                                                    isSearchable
+                                                    placeholder={"請輸入生日"}
+                                                    value={
+                                                        (globalContextService.get("LoginPage", `UserBirthday`) ?
+                                                            moment(globalContextService.get("LoginPage", `UserBirthday`), "YYYY-MM-DD")
+                                                            :
+                                                            null
+                                                        )
+                                                    }
+                                                    onChange={(value, momentObj) => {
+                                                        globalContextService.set("LoginPage", `Birthday`, value);
+                                                    }}
+                                                    theme={laptopL.singUpFormUserBirthday}
+                                                />
+
+                                                {/* 性別 UserSex */}
+                                                <Radio
+                                                    // viewType
+                                                    // disable
+                                                    topLabel={<>性別<Text theme={laptopL.singUpFormUserSexRequired}>*</Text></>}
+                                                    value={globalContextService.get("LoginPage", "UserSex") ?? 1}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserSex", value);
+                                                    }}
+                                                    theme={laptopL.singUpFormUserSex}
+                                                >
+                                                    {/* 性別 UserSex  選項 */}
+                                                    <RadioItem value={1} >男</RadioItem>
+                                                    <RadioItem value={0} >女</RadioItem>
+                                                </Radio>
+
+                                            </FormRow>
+
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 身分證字號 UserUid */}
+                                                <TextInput
+                                                    topLabel={<>身分證字號<Text theme={laptopL.singUpFormUserUidRequired}>*</Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    // type="password"
+                                                    // openEye
+                                                    placeholder={"請輸入身分證字號"}
+                                                    theme={laptopL.singUpFormUserUid}
+                                                    value={globalContextService.get("LoginPage", "UserUid") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserUid", value);
+                                                    }}
+                                                />
+
+                                                {/* 悠遊卡/一卡通卡號 UserCardNo */}
+                                                <TextInput
+                                                    topLabel={<>悠遊卡/一卡通卡號<Text theme={laptopL.singUpFormUserCardNoRequired}></Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    // type="password"
+                                                    // openEye
+                                                    placeholder={"請輸入悠遊卡/一卡通卡號"}
+                                                    theme={laptopL.singUpFormUserCardNo}
+                                                    value={globalContextService.get("LoginPage", "UserCardNo") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserCardNo", value);
+                                                    }}
+                                                />
+
+                                            </FormRow>
+
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 通訊地址 UserAddr */}
+                                                <MapGoogleInput
+                                                    placeholder={"請輸入通訊地址(XX市XX區XX路XX號)"}
+                                                    placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
+                                                    // viewType 
+                                                    // disable
+                                                    topLabel={<>通訊地址<Text theme={laptopL.singUpFormUserAddrRequired}></Text></>}
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    value={globalContextService.get("LoginPage", "UserAddr") ?? ""}
+                                                    onChange={(e, value, onInitial) => {
+                                                        globalContextService.set("LoginPage", "UserAddr", value);
+                                                        globalContextService.remove("LoginPage", "UserAddrLatLng");
+                                                    }}
+                                                    onSelect={(e, option, onInitial, posInfo) => {
+                                                        globalContextService.set("LoginPage", "UserAddr", option.label);
+                                                        globalContextService.set("LoginPage", "UserAddrLatLng", { lat: posInfo?.lat, lng: posInfo?.lon });
+                                                    }}
+
+                                                    theme={laptopL.singUpFormUserAddr}
+                                                />
+                                            </FormRow>
+
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 完成按鈕 */}
+                                                <SubContainer
+                                                    theme={laptopL.singUpFormDoneButtonContainer}
+                                                >
+                                                    <BasicButton
+                                                        baseDefaultTheme={"PrimaryTheme"}
+                                                        text={"完成"}
+                                                        theme={laptopL.singUpFormDoneButton}
+                                                        onClick={() => { props.setWhichForm("Login") }}
+                                                    />
+                                                </SubContainer>
+                                            </FormRow>
+
+                                            {/* 已有帳號？登入連結 */}
+                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                <SubContainer
+                                                    baseDefaultTheme={"DefaultTheme"}
+                                                    theme={laptopL.loginFormHaveAccountContainer}
+                                                >
+                                                    <BasicContainer
+                                                        baseDefaultTheme={"DefaultTheme"}
+                                                        theme={laptopL.loginFormHaveAccountSubContainer}
+                                                    >
+                                                        <Text
+                                                            baseDefaultTheme={"DefaultTheme"}
+                                                            theme={laptopL.loginFormForgetHaveAccount}
+                                                        >
+                                                            已有帳號？
+                                                        </Text>
+
+                                                        <Text
+                                                            baseDefaultTheme={"DefaultTheme"}
+                                                            theme={laptopL.loginFormToLoginText}
+                                                            onClick={() => { props.setWhichForm("Login") }}
+                                                        >
+                                                            登入
+                                                        </Text>
+                                                    </BasicContainer>
+                                                </SubContainer>
+                                            </FormRow>
+
                                         </FormContainer>
                                     </BasicContainer>
                                 </>
