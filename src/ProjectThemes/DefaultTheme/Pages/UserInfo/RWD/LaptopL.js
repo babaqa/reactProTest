@@ -5,16 +5,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "60px 150px 0"
-                }
-            }
-        },
-        basicOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8",
+                    padding: "12px 150px",
                 }
             }
         },
@@ -22,7 +14,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8"
                 }
             }
         },
@@ -30,25 +22,34 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0px 150px 188px"
+                    backgroundColor: "#DBE4E8",
+                    padding: "0px 138px 188px"
                 }
             }
         },
-        basicOutContainer: {
+        laptopOutsideOutContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8",
+                    padding: "12px 150px",
                 }
             }
         },
-        basicContentContainer: {
+        laptopOutContainer: {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0px 12px 24px"
+                    backgroundColor: "#DBE4E8"
+                }
+            }
+        },
+        laptopContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#DBE4E8",
+                    padding: "0px 36px 188px"
                 }
             }
         },
@@ -68,17 +69,18 @@ export default {
     //#endregion
     //#endregion
 
+    //#region 基本資料表單區
     //#region 基本資料表單區容器
     basicInformationContainer: {
         basic: (style, props) => {
             return {
                 ...style,
                 padding: "24px 12px",
-                margin: "16px 0 24px 0",
+                margin: "0 12px 24px",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
                 height: "174px",
-                width: "100%",
+                width: "calc( 100% - 24px )",
                 borderRadius: "16px"
             }
         }
@@ -102,10 +104,56 @@ export default {
         rightContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "200px",
+                width: "392px",
                 height: "32px"
             })
         }
+    },
+    //#endregion
+    //#region 註冊共享車隊按鈕
+    registeredFleetButton: {
+        basic: (style) => ({
+            ...style,
+            width: "100px",
+            height: "28px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            top: "2px",
+            padding: 0,
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            margin: "0 8px 0 0"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion 
+    //#region 註冊巴士按鈕
+    registeredBusButton: {
+        basic: (style) => ({
+            ...style,
+            width: "88px",
+            height: "28px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            top: "2px",
+            padding: 0,
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            margin: "0 8px 0 0"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+        }),
+        focus: (style, props) => ({})
     },
     //#endregion
     //#region 修改密碼按鈕
@@ -346,6 +394,7 @@ export default {
         top: 0,
     },
     //#endregion
+    //#endregion
 
     //#region 修改手機按鈕
     editPhoneButton: {
@@ -460,6 +509,7 @@ export default {
         }
     },
     //#endregion
+    //#endregion
 
     //#region 新增修改手機彈窗 提交驗證碼
     //#region Modal 樣式
@@ -564,6 +614,7 @@ export default {
         }
     },
     //#endregion
+    //#endregion
 
     //#region 姓名 Name
     name: {
@@ -584,9 +635,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         },
         container: {
@@ -632,9 +683,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         }
     },
@@ -659,9 +710,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         },
         container: {
@@ -695,9 +746,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         }
     },
@@ -722,9 +773,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         },
         container: {
@@ -750,9 +801,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         }
     },
@@ -777,9 +828,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         },
         container: {
@@ -825,9 +876,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         }
     },
@@ -852,9 +903,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         },
         container: {
@@ -900,35 +951,23 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         }
     },
     //#endregion
     //#endregion
 
-    //#region 基本資料容器
-    bottomFormContainer: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                // display: "inline-block",
-                height: "604px",
-                width: "100%"
-            })
-        }
-    },
-    //#endregion
-
+    //#region 下方左側資料
     //#region 下方左側資料 容器
     leftBottomContainer: {
         basic: (style, props) => ({
             ...style,
             ...style.occupy(4),
-            padding: "0 12px 0 0",
-            margin: "0 0 48px 0"
+            padding: "0 12px",
+            margin: "0 0 24px"
         })
     },
     //#endregion
@@ -949,7 +988,7 @@ export default {
         }
     },
     //#endregion
-    //#region  長照資料 子標題列
+    //#region 長照資料 子標題列
     caseInfBaseSubTitleBar: {
         container: {
             basic: (style, props) => ({
@@ -962,7 +1001,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "200px",
+                width: "60px",
                 color: "#EF6C00",
             })
         },
@@ -1106,6 +1145,7 @@ export default {
             color: "#FF7A45",
         })
     },
+    //#endregion
     //#endregion
 
     //#region 案號 CaseNumber
@@ -1502,9 +1542,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         },
         container: {
@@ -1550,22 +1590,23 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         }
     },
     //#endregion
     //#endregion
 
+    //#region 下方中間資料
     //#region 下方中間資料 容器
     centerBottomContainer: {
         basic: (style, props) => ({
             ...style,
             ...style.occupy(4),
             padding: "0 12px",
-            margin: "0 0 48px 0"
+            margin: "0 0 24px"
         })
     },
     //#endregion
@@ -1989,13 +2030,14 @@ export default {
     //#endregion
     //#endregion
 
+    //#region 下方右側資料
     //#region 下方右側資料 容器
     rightBottomContainer: {
         basic: (style, props) => ({
             ...style,
             ...style.occupy(4),
-            padding: "0 0 0 12px",
-            margin: "0 0 48px 0"
+            padding: "0 12px",
+            margin: "0 0 24px"
         })
     },
     //#endregion
@@ -2346,6 +2388,943 @@ export default {
 
     //#region 巴士服務車隊 BusServiceFleet 
     busServiceFleet: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#endregion
+
+    //#region 下方左側第二行資料
+    //#region 下方左側第二行資料 容器
+    leftSecBottomContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(4),
+            padding: "0 12px",
+            margin: "0 0 24px"
+        })
+    },
+    //#endregion
+
+    //#region 日照資料表單區容器
+    dayCareInformationContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                padding: "24px 12px",
+                // margin: "0 12px 48px 0",
+                background: "#fff",
+                boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                height: "604px",
+                width: "100%",
+                borderRadius: "16px"
+            }
+        }
+    },
+    //#endregion
+    //#region 日照資料 子標題列
+    dayCareInfBaseSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "calc( 100% - 24px )",
+                margin: "0 12px 24px",
+                borderColor: "#FFA726"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "60px",
+                color: "#EF6C00",
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100px",
+                height: "32px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 案號 dayCareNumber
+    dayCareNumber: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 日照居住地址 DayCareResidentialAddress
+    dayCareResidentialAddress: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 日照緊急聯絡人姓名 DayCareEmergencyName
+    dayCareEmergencyName: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 日照緊急聯絡人手機 DayCareEmergencyCellPhone 
+    dayCareEmergencyCellPhone: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 日照緊急聯絡人市話 DayCareEmergencyPhone
+    dayCareEmergencyPhone: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 日照服務車隊 DayCareServiceFleet 
+    dayCareServiceFleet: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#endregion
+
+    //#region 下方中間第二行資料
+    //#region 下方中間第二行資料 容器
+    centerSecBottomContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(4),
+            padding: "0 12px",
+            margin: "0 0 24px"
+        })
+    },
+    //#endregion
+
+    //#region 偏鄉資料表單區容器
+    ruralInformationContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                padding: "24px 12px",
+                // margin: "0 12px 48px",
+                background: "#fff",
+                boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                height: "604px",
+                width: "100%",
+                borderRadius: "16px"
+            }
+        }
+    },
+    //#endregion
+    //#region  偏鄉資料 子標題列
+    ruralInfBaseSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "calc( 100% - 24px )",
+                margin: "0 12px 24px",
+                borderColor: "#9CCC65"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "200px",
+                color: "#558B2F"
+            })
+        },
+        // rightContainer: {
+        //     basic: (style, props) => ({
+        //         ...style,
+        //         width: "200px",
+        //         height: "32px"
+        //     })
+        // }
+    },
+    //#endregion
+
+    //#region 偏鄉居住地址 RuralResidentialAddress
+    ruralResidentialAddress: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 偏鄉緊急聯絡人姓名 RuralEmergencyName
+    ruralEmergencyName: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 偏鄉緊急聯絡人手機 RuralEmergencyCellPhone 
+    ruralEmergencyCellPhone: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 偏鄉緊急聯絡人市話 RuralEmergencyPhone
+    ruralEmergencyPhone: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 偏鄉服務車隊 RuralServiceFleet 
+    ruralServiceFleet: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,

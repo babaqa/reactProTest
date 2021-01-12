@@ -18,19 +18,19 @@ const TabletBase = (props) => {
         <>
             <MainPageContainer
                 theme={tablet.mainPageContainer}
-                outSideTopComponent={
-                    <>
-                        {/* 標題列 */}
-                        <MainPageTitleBar
-                            bascDefaultTheme={"DefaultTheme"}
-                            titleText={"用戶資料"}
-                            theme={tablet.titleBar}
-                        // onSubmit={(e)=>console.log(e)}
-                        >
+            // outSideTopComponent={
+            //     <>
+            //         {/* 標題列 */}
+            //         <MainPageTitleBar
+            //             bascDefaultTheme={"DefaultTheme"}
+            //             titleText={"用戶資料"}
+            //             theme={tablet.titleBar}
+            //         // onSubmit={(e)=>console.log(e)}
+            //         >
 
-                        </MainPageTitleBar>
-                    </>
-                }
+            //         </MainPageTitleBar>
+            //     </>
+            // }
             >
 
                 {/* 基本資料表單區容器 */}
@@ -44,6 +44,49 @@ const TabletBase = (props) => {
                         titleText={"基本資料"}
                         theme={tablet.basicInfBaseSubTitleBar}
                     >
+                        {/* 待接api，若無共享車隊身分則可以註冊 */}
+                        {true
+                            &&
+                            <>
+                                {/*  註冊共享車隊按鈕 (標題列右方) 容器 */}
+                                <SubContainer baseDefaultTheme={"DefaultTheme"}>
+                                    {/* 註冊共享車隊按鈕 */}
+                                    <NativeLineButton
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        disable={false}
+                                        type="button" // 防止提交
+                                        theme={tablet.registeredFleetButton}
+                                        onClick={(e) => {
+
+                                        }}
+                                    >
+                                        註冊共享車隊
+                                    </NativeLineButton>
+                                </SubContainer>
+                            </>
+                        }
+
+                        {/* 待接api，若無巴士身分則可以註冊 */}
+                        {true
+                            &&
+                            <>
+                                {/*  註冊巴士按鈕 (標題列右方) 容器 */}
+                                <SubContainer baseDefaultTheme={"DefaultTheme"}>
+                                    {/* 註冊巴士按鈕 */}
+                                    <NativeLineButton
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        disable={false}
+                                        type="button" // 防止提交
+                                        theme={tablet.registeredBusButton}
+                                        onClick={(e) => {
+
+                                        }}
+                                    >
+                                        註冊巴士
+                                    </NativeLineButton>
+                                </SubContainer>
+                            </>
+                        }
                         {/*  修改密碼按鈕 (標題列右方) 容器 */}
                         <SubContainer baseDefaultTheme={"DefaultTheme"}>
                             {/* 修改密碼按鈕 */}
@@ -397,112 +440,107 @@ const TabletBase = (props) => {
                         </SubContainer>
                     </MainPageSubTitleBar>
 
-                    {/* 基本資料容器 */}
-                    <FormContainer
-                        bascDefaultTheme={"DefaultTheme"}
-                    >
-                        <FormRow>
+                    <Container>
 
-                            {/* 姓名 Name */}
-                            <TextInput
-                                viewType
-                                topLabel={<>姓名</>}
-                                baseDefaultTheme={"DefaultTheme"}
-                                type="text"
-                                placeholder={""}
-                                value={globalContextService.get("UserInfoPage", "Name") ?? props.Client?.name}
-                                onChange={(e, value, onInitial) => {
-                                    globalContextService.set("UserInfoPage", "Name", value);
-                                }}
-                                theme={tablet.name}
-                            />
+                        {/* 姓名 Name */}
+                        <TextInput
+                            viewType
+                            topLabel={<>姓名</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "Name") ?? props.Client?.name}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "Name", value);
+                            }}
+                            theme={tablet.name}
+                        />
 
-                            {/* 生日 Birthday */}
-                            <DateTimePicker
-                                topLabel={<>生日</>}
-                                // type={"time"} // time、date、week、month、quarter、year
-                                type={"date"}
-                                format={"YYYY-MM-DD"}
-                                bascDefaultTheme={"DefaultTheme"}
-                                viewType
-                                isSearchable
-                                placeholder={""}
-                                value={
-                                    // (globalContextService.get("UserInfoPage", `Birthday`) ?
-                                    //     moment(globalContextService.get("UserInfoPage", `Birthday`), "YYYY-MM-DD")
-                                    //     :
-                                    (props.Client?.birthday) ?
-                                        moment(props.Client.birthday, "YYYY-MM-DD HH:mm:ss")
-                                        :
-                                        null
-                                    // )
-                                }
-                                onChange={(value, momentObj) => {
-                                    globalContextService.set("UserInfoPage", `Birthday`, value);
-                                }}
-                                theme={tablet.birthday}
-                            />
+                        {/* 生日 Birthday */}
+                        <DateTimePicker
+                            topLabel={<>生日</>}
+                            // type={"time"} // time、date、week、month、quarter、year
+                            type={"date"}
+                            format={"YYYY-MM-DD"}
+                            bascDefaultTheme={"DefaultTheme"}
+                            viewType
+                            isSearchable
+                            placeholder={""}
+                            value={
+                                // (globalContextService.get("UserInfoPage", `Birthday`) ?
+                                //     moment(globalContextService.get("UserInfoPage", `Birthday`), "YYYY-MM-DD")
+                                //     :
+                                (props.Client?.birthday) ?
+                                    moment(props.Client.birthday, "YYYY-MM-DD HH:mm:ss")
+                                    :
+                                    null
+                                // )
+                            }
+                            onChange={(value, momentObj) => {
+                                globalContextService.set("UserInfoPage", `Birthday`, value);
+                            }}
+                            theme={tablet.birthday}
+                        />
 
-                            {/* 性別 Sex */}
-                            <Selector
-                                bascDefaultTheme={"DefaultTheme"}
-                                topLabel={<>性別</>}
-                                viewType
-                                isSearchable
-                                placeholder={""}
-                                // isMulti
-                                // hideSelectedOptions={false}
-                                value={
-                                    // globalContextService.get("UserInfoPage", "Sex") ?? { value: props.Client.sex, label: props.Client.sex === 1 ? '男' : '女' }
-                                    (!isNil(props.Client?.sex)) ?
-                                        { value: props.Client.sex, label: props.Client.sex === 1 ? '男' : '女' }
-                                        :
-                                        null
-                                }
-                                onChange={(e, value, onInitial) => {
-                                    // console.log("value", value)
-                                    globalContextService.set("UserInfoPage", "Sex", value);
-                                }}
+                        {/* 性別 Sex */}
+                        <Selector
+                            bascDefaultTheme={"DefaultTheme"}
+                            topLabel={<>性別</>}
+                            viewType
+                            isSearchable
+                            placeholder={""}
+                            // isMulti
+                            // hideSelectedOptions={false}
+                            value={
+                                // globalContextService.get("UserInfoPage", "Sex") ?? { value: props.Client.sex, label: props.Client.sex === 1 ? '男' : '女' }
+                                (!isNil(props.Client?.sex)) ?
+                                    { value: props.Client.sex, label: props.Client.sex === 1 ? '男' : '女' }
+                                    :
+                                    null
+                            }
+                            onChange={(e, value, onInitial) => {
+                                // console.log("value", value)
+                                globalContextService.set("UserInfoPage", "Sex", value);
+                            }}
 
-                                options={[
-                                    { value: 'hint', label: "請選擇性別", isDisabled: true },
-                                    { value: 1, label: '男' },
-                                    { value: 0, label: '女' }
-                                ]}
-                                // menuPosition={true}
-                                theme={tablet.sex}
-                            />
+                            options={[
+                                { value: 'hint', label: "請選擇性別", isDisabled: true },
+                                { value: 1, label: '男' },
+                                { value: 0, label: '女' }
+                            ]}
+                            // menuPosition={true}
+                            theme={tablet.sex}
+                        />
 
-                            {/* 身分證字號 Uid */}
-                            <TextInput
-                                viewType
-                                topLabel={<>身分證字號</>}
-                                baseDefaultTheme={"DefaultTheme"}
-                                type="text"
-                                placeholder={""}
-                                value={globalContextService.get("UserInfoPage", "Uid") ?? props.Client?.uid}
-                                onChange={(e, value, onInitial) => {
-                                    globalContextService.set("UserInfoPage", "Uid", value);
-                                }}
-                                theme={tablet.uid}
-                            />
+                        {/* 身分證字號 Uid */}
+                        <TextInput
+                            viewType
+                            topLabel={<>身分證字號</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "Uid") ?? props.Client?.uid}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "Uid", value);
+                            }}
+                            theme={tablet.uid}
+                        />
 
-                            {/* 手機 Cellphone */}
-                            <TextInput
-                                viewType
-                                topLabel={<>手機</>}
-                                baseDefaultTheme={"DefaultTheme"}
-                                type="text"
-                                placeholder={""}
-                                value={globalContextService.get("UserInfoPage", "Cellphone") ?? props.Client?.phone}
-                                onChange={(e, value, onInitial) => {
-                                    globalContextService.set("UserInfoPage", "Cellphone", value);
-                                }}
-                                theme={tablet.cellPhone}
-                            />
+                        {/* 手機 Cellphone */}
+                        <TextInput
+                            viewType
+                            topLabel={<>手機</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "Cellphone") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "Cellphone", value);
+                            }}
+                            theme={tablet.cellPhone}
+                        />
 
-                        </FormRow>
-                    </FormContainer>
+                    </Container>
                 </BasicContainer>
 
 
@@ -901,6 +939,195 @@ const TabletBase = (props) => {
 
                 </BasicContainer>
 
+                {/* 日照資料表單區容器 */}
+                <BasicContainer
+                    baseDefaultTheme={"DefaultTheme"}
+                    theme={tablet.dayCareInformationContainer}
+                >
+                    {/* 日照資料 子標題列 */}
+                    <MainPageSubTitleBar
+                        bascDefaultTheme={"DefaultTheme"}
+                        titleText={"日照"}
+                        theme={tablet.dayCareInfBaseSubTitleBar}
+                    >
+                    </MainPageSubTitleBar>
+
+                    <Container>
+                        {/* 案號 DayCareNumber */}
+                        <TextInput
+                            viewType
+                            topLabel={<>案號</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "DayCareNumber") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "DayCareNumber", value);
+                            }}
+                            theme={tablet.dayCareNumber}
+                        />
+
+                        {/* 日照居住地址 DayCareResidentialAddress */}
+                        <TextInput
+                            viewType
+                            topLabel={<>居住地址</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "DayCareResidentialAddress") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "DayCareResidentialAddress", value);
+                            }}
+                            theme={tablet.dayCareResidentialAddress}
+                        />
+
+                        {/* 日照緊急聯絡人姓名 DayCareEmergencyName */}
+                        <TextInput
+                            viewType
+                            topLabel={<>緊急聯絡人姓名</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "DayCareEmergencyName") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "DayCareEmergencyName", value);
+                            }}
+                            theme={tablet.dayCareEmergencyName}
+                        />
+
+                        {/* 日照緊急聯絡人手機 DayCareEmergencyCellPhone */}
+                        <TextInput
+                            viewType
+                            topLabel={<>緊急聯絡人手機</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "DayCareEmergencyCellPhone") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "DayCareEmergencyCellPhone", value);
+                            }}
+                            theme={tablet.dayCareEmergencyCellPhone}
+                        />
+
+                        {/* 日照緊急聯絡人市話 DayCareEmergencyPhone */}
+                        <TextInput
+                            viewType
+                            topLabel={<>緊急聯絡人市話</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "DayCareEmergencyPhone") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "DayCareEmergencyPhone", value);
+                            }}
+                            theme={tablet.dayCareEmergencyPhone}
+                        />
+
+                        {/* 日照服務車隊 DayCareServiceFleet */}
+                        <TextInput
+                            viewType
+                            topLabel={<>服務車隊</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "DayCareServiceFleet") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "DayCareServiceFleet", value);
+                            }}
+                            theme={tablet.dayCareServiceFleet}
+                        />
+                    </Container>
+
+                </BasicContainer>
+
+                {/* 偏鄉資料表單區容器 */}
+                <BasicContainer
+                    baseDefaultTheme={"DefaultTheme"}
+                    theme={tablet.ruralInformationContainer}
+                >
+                    {/* 偏鄉資料 子標題列 */}
+                    <MainPageSubTitleBar
+                        bascDefaultTheme={"DefaultTheme"}
+                        titleText={"偏鄉"}
+                        theme={tablet.ruralInfBaseSubTitleBar}
+                    >
+
+                    </MainPageSubTitleBar>
+
+                    <Container>
+
+                        {/* 偏鄉居住地址 RuralResidentialAddress */}
+                        <TextInput
+                            viewType
+                            topLabel={<>居住地址</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "RuralResidentialAddress") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "RuralResidentialAddress", value);
+                            }}
+                            theme={tablet.ruralResidentialAddress}
+                        />
+
+                        {/* 偏鄉緊急聯絡人姓名 RuralEmergencyName */}
+                        <TextInput
+                            viewType
+                            topLabel={<>緊急聯絡人姓名</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "RuralEmergencyName") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "RuralEmergencyName", value);
+                            }}
+                            theme={tablet.ruralEmergencyName}
+                        />
+
+                        {/* 偏鄉緊急聯絡人手機 RuralEmergencyCellPhone */}
+                        <TextInput
+                            viewType
+                            topLabel={<>緊急聯絡人手機</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "RuralEmergencyCellPhone") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "RuralEmergencyCellPhone", value);
+                            }}
+                            theme={tablet.ruralEmergencyCellPhone}
+                        />
+
+                        {/* 偏鄉緊急聯絡人市話 RuralEmergencyPhone */}
+                        <TextInput
+                            viewType
+                            topLabel={<>緊急聯絡人市話</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "RuralEmergencyPhone") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "RuralEmergencyPhone", value);
+                            }}
+                            theme={tablet.ruralEmergencyPhone}
+                        />
+
+                        {/* 偏鄉服務車隊 RuralServiceFleet */}
+                        <TextInput
+                            viewType
+                            topLabel={<>服務車隊</>}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
+                            placeholder={""}
+                            value={globalContextService.get("UserInfoPage", "RuralServiceFleet") ?? props.Client?.phone}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("UserInfoPage", "RuralServiceFleet", value);
+                            }}
+                            theme={tablet.ruralServiceFleet}
+                        />
+                    </Container>
+
+                </BasicContainer>
 
             </MainPageContainer>
         </>

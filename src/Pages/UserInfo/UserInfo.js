@@ -19,14 +19,15 @@ export const UserInfo = (props) => {
 
     return (
         <>
+            {/* laptopL、laptop 共用theme */}
             {
-                1440 <= Width &&
+                1024 <= Width &&
                 <LaptopL
-                    // WaitSecToZero={WaitSecToZero}
-                    // setWaitSecToZero={setWaitSecToZero}
+                // WaitSecToZero={WaitSecToZero}
+                // setWaitSecToZero={setWaitSecToZero}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     WhichForm={WhichForm}
@@ -38,7 +39,7 @@ export const UserInfo = (props) => {
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
-            }
+            } */}
             {
                 (768 <= Width && Width < 1024) &&
                 <Tablet
