@@ -3,7 +3,7 @@ export default {
     outContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 56px - 48px )",
+            height: `calc( ${props.height}px - 56px - 48px )`,
             top: "56px",
         })
     },
@@ -25,24 +25,24 @@ export default {
         basic: (style, props) => ({
             ...style,
             // height: "477px"
-            minHeight: props?.bigHeight ? "866px" : "630px",
-            height: "calc( 100vh - 56px - 48px )",
+            minHeight: props?.bigHeight ? "940px" : "630px",
+            height: `calc( ${props.height}px - 56px - 48px )`,
         })
     },
     //#endregion
 
     //#region 佔位容器 
-    place: {
-        basic: (style, props) => ({
-            ...style,
-            display: "block",
-            width: "100%",
-            minHeight: "630px",
-            height: "calc( 100vh - 56px - 48px )",
-            top: "0",
-            background: "#d4d4d4",
-        })
-    },
+    // place: {
+    //     basic: (style, props) => ({
+    //         ...style,
+    //         display: "block",
+    //         width: "100%",
+    //         minHeight: "630px",
+    //         height: "calc( 100vh - 56px - 48px )",
+    //         top: "0",
+    //         background: "#d4d4d4",
+    //     })
+    // },
     //#endregion
 
     //#region 背景
@@ -1303,6 +1303,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "0px"
+                overflow: "hidden"
             })
         },
         textInputContainer: {
@@ -1348,6 +1349,168 @@ export default {
             fontSize: "14px",
             lineHeight: "22px"
         })
+    },
+    //#endregion
+    //#region 無卡註冊 UserNoCardNO
+    userNoCardNO: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 0 0",
+                display: "inline-block",
+                // ...style.occupy(6),
+                position: "absolute",
+                right: "-8px",
+                top: "-4px"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        checkboxContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        checkboxGroup: {
+            basic: (style, props) => ({
+                //調高度
+                ...style,
+                // height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+                // minHeight: "16px",
+                // height: "auto"
+            })
+        }
+    },
+    //#endregion
+    //#region 居住地(縣市) County
+    userCounty: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(6),
+                padding: "0 6px 12px 0"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        selectorSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "32px",
+                paddingTop: "2px",
+                color: (props.focus || props.hover) ? "#FF7A45" : "rgba(0, 0, 0, 0.65)"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            },
+            icon: (style, props) => {
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#FF7A45 !important" : "rgb(217, 217, 217) !important"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+    //#region 居住地(縣市) County 上標題 (必填)文字樣式
+    userCountyRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            color: "#ff4d4f",
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+    //#region 居住地(區域) District
+    userDistrict: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(6),
+                padding: "0 0 12px 6px"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        selectorSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "32px",
+                paddingTop: "2px"
+            }),
+            hover: {
+                //#region 覆寫樣式
+                border: "1px solid #FF7A45",
+                //#endregion
+            },
+            focus: {
+                border: "1px solid #FF7A45",
+                boxShadow: "0px 0px 0px 2px rgba(255, 122, 69, 0.2)"
+            },
+            icon: (style, props) => {
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#FF7A45 !important" : "rgb(217, 217, 217) !important"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                height: "0px"
+            })
+        }
     },
     //#endregion
     //#region 通訊地址 UserAddr

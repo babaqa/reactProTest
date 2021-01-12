@@ -8,10 +8,12 @@ import { ReactComponent as Admin } from '../../../Assets/img/Admin.svg'
 import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
 import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
 import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
-import { BasicContainer, Container, ScrollBar, Radio, SubContainer, Text, FormContainer, FormRow, TextInput, BasicButton, modalsService, InfoModal, globalContextService, DateTimePicker, RadioItem } from '../../../Components';
+import { BasicContainer, Container, ScrollBar, Radio, SubContainer, Text, FormContainer, FormRow, NewSelector, TextInput, BasicButton, Checkbox, CheckboxItem, modalsService, InfoModal, globalContextService, DateTimePicker, RadioItem } from '../../../Components';
 import { MapGoogleInput, MobileMPlacard } from '../../../ProjectComponent';
 import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
+import { cityAndCountiesLite, Counties } from '../../../Mappings/Mappings';
+import { isEqual, isNil } from 'lodash';
 
 //#region 倒數10秒
 const TimeCounter = (props) => {
@@ -47,12 +49,15 @@ const MobileMBase = (props) => {
     //const [WaitSecToZero, setWaitSecToZero] = useState(true);
     const [Width, Height] = useWindowSize();
 
+    const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
+
     //console.log(mobileM)
     return (
         <>
             {/* 最外層容器 */}
             <BasicContainer
                 baseDefaultTheme={"DefaultTheme"}
+                height={Height}
                 theme={mobileM.outContainer} >
                 {/* 最外層容器 ScrollBar */}
                 <ScrollBar
@@ -61,6 +66,7 @@ const MobileMBase = (props) => {
                     {/* 上半部 */}
                     <BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        height={Height}
                         bigHeight={props.WhichForm === "SingUp"}
                         theme={mobileM.aboveContainer}
                     >
@@ -89,7 +95,7 @@ const MobileMBase = (props) => {
                                             baseDefaultTheme={"DefaultTheme"}
                                             theme={mobileM.loginFormTitle}
                                         >
-                                            管理者Login
+                                            登入
                                         </Text>
                                         {/* 登入表單次標題 */}
                                         <Text
@@ -585,7 +591,28 @@ const MobileMBase = (props) => {
 
                                                 {/* 悠遊卡/一卡通卡號 UserCardNo */}
                                                 <TextInput
-                                                    topLabel={<>悠遊卡/一卡通卡號<Text theme={mobileM.singUpFormUserCardNoRequired}></Text></>}
+                                                    topLabel={
+                                                        <>
+                                                            悠遊卡/一卡通卡號
+                                                            <Text theme={mobileM.singUpFormUserCardNoRequired}>
+                                                            </Text>
+                                                            {/* 無卡註冊 UserNoCardNO */}
+                                                            <Checkbox
+                                                                // viewType
+                                                                checked={globalContextService.get("LoginPage", "UserNoCardNO")}
+                                                                // disable
+                                                                topLabel={""}
+                                                                onChange={(e, value, onInitial) => {
+                                                                    // console.log(value)
+                                                                    globalContextService.set("LoginPage", "UserNoCardNO", value);
+                                                                }}
+                                                                theme={mobileM.userNoCardNO}
+                                                            >
+                                                                {/* 無卡註冊 UserNoCardNO  選項 */}
+                                                                <CheckboxItem value={"NoCardNO"} >無卡註冊</CheckboxItem>
+                                                            </Checkbox>
+                                                        </>
+                                                    }
                                                     baseDefaultTheme={"DefaultTheme"}
                                                     // type="password"
                                                     // openEye
@@ -597,12 +624,66 @@ const MobileMBase = (props) => {
                                                     }}
                                                 />
 
-                                            </FormRow>
+                                                {/* 居住地(縣市) County */}
+                                                <NewSelector
+                                                    bascDefaultTheme={"DefaultTheme"}
+                                                    topLabel={<>通訊地址<Text theme={mobileM.userCountyRequired}></Text></>}
+                                                    // bottomLabel={"為避免無法成功預約訂車，門牌號碼及巷弄請使用半形數字，且勿填寫樓層及備註"}
+                                                    //viewType
+                                                    isSearchable
+                                                    placeholder={"選擇縣市"}
+                                                    // isMulti
+                                                    // hideSelectedOptions={false}
+                                                    value={globalContextService.get("LoginPage", "UserCounty") ?? null}
+                                                    onChange={(e, value, onInitial) => {
+                                                        // console.log(value)
+                                                        if (!isEqual(value, globalContextService.get("LoginPage", "UserCounty"))) {
+                                                            globalContextService.set("LoginPage", "UserCounty", value);
+                                                            globalContextService.set("LoginPage", "UserDistrict", { value: 'hint', label: "選擇區域", isDisabled: true });
+                                                            setForceUpdate(f => !f);
+                                                        }
 
-                                            <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                    }}
+
+                                                    options={[
+                                                        { value: 'hint', label: "選擇縣市", isDisabled: true },
+                                                        ...Counties
+                                                    ]}
+                                                    // menuPosition={true}
+                                                    theme={mobileM.userCounty}
+                                                />
+
+                                                {/* 居住地(區域) District */}
+                                                <NewSelector
+                                                    bascDefaultTheme={"DefaultTheme"}
+                                                    topLabel={""}
+                                                    //viewType
+                                                    isSearchable
+                                                    placeholder={"選擇區域"}
+                                                    // isMulti
+                                                    // hideSelectedOptions={false}
+                                                    value={globalContextService.get("LoginPage", "UserDistrict") ?? null}
+                                                    onChange={(e, value, onInitial) => {
+                                                        // console.log(value)
+                                                        globalContextService.set("LoginPage", "UserDistrict", value);
+                                                    }}
+
+                                                    options={[
+                                                        { value: 'hint', label: "選擇區域", isDisabled: true },
+                                                        ...(
+                                                            !isNil(globalContextService.get("LoginPage", "UserCounty")) ?
+                                                                cityAndCountiesLite[globalContextService.get("LoginPage", "UserCounty")?.value]
+                                                                :
+                                                                []
+                                                        )
+                                                    ]}
+                                                    // menuPosition={true}
+                                                    theme={mobileM.userDistrict}
+                                                />
+
                                                 {/* 通訊地址 UserAddr */}
                                                 <MapGoogleInput
-                                                    placeholder={"請輸入通訊地址(XX市XX區XX路XX號)"}
+                                                    placeholder={"請輸入通訊地址(XX路XX號)"}
                                                     placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
                                                     // viewType 
                                                     // disable

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
-import { BasicContainer, ScrollBar, Container, SubContainer, Text, Radio, FormContainer, FormRow, TextInput, BasicButton, modalsService, globalContextService, DateTimePicker, RadioItem } from '../../../Components';
+import { BasicContainer, ScrollBar, Container, SubContainer, Checkbox, Text, Radio, FormContainer, FormRow, TextInput, BasicButton, modalsService, globalContextService, DateTimePicker, RadioItem, Selector, NewSelector, CheckboxItem } from '../../../Components';
 import { ReactComponent as LoginLogo } from '../../../Assets/img/LoginLogo.svg'
 import { ReactComponent as Admin } from '../../../Assets/img/Admin.svg'
 import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
@@ -11,6 +11,8 @@ import { ReactComponent as LaptopLbg } from '../../../Assets/img/LaptopLbg.svg'
 // import LaptopLbg from '../../../Assets/img/LaptopLbg.svg'
 import { LaptopPlacard, mapGoogleControll, MapGoogleInput } from '../../../ProjectComponent';
 import moment from 'moment';
+import { isEqual, isNil } from 'lodash';
+import { cityAndCountiesLite, Counties } from '../../../Mappings/Mappings';
 
 //#region 倒數10秒
 const TimeCounter = (props) => {
@@ -42,6 +44,8 @@ const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { login: { rwd: { laptopL } } } } = Theme;
+
+    const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     return (
         <>
@@ -600,7 +604,28 @@ const LaptopLBase = (props) => {
 
                                                 {/* 悠遊卡/一卡通卡號 UserCardNo */}
                                                 <TextInput
-                                                    topLabel={<>悠遊卡/一卡通卡號<Text theme={laptopL.singUpFormUserCardNoRequired}></Text></>}
+                                                    topLabel={
+                                                        <>
+                                                            悠遊卡/一卡通卡號
+                                                            <Text theme={laptopL.singUpFormUserCardNoRequired}>
+                                                            </Text>
+                                                            {/* 無卡註冊 UserNoCardNO */}
+                                                            <Checkbox
+                                                                // viewType
+                                                                checked={globalContextService.get("LoginPage", "UserNoCardNO")}
+                                                                // disable
+                                                                topLabel={""}
+                                                                onChange={(e, value, onInitial) => {
+                                                                    // console.log(value)
+                                                                    globalContextService.set("LoginPage", "UserNoCardNO", value);
+                                                                }}
+                                                                theme={laptopL.userNoCardNO}
+                                                            >
+                                                                {/* 無卡註冊 UserNoCardNO  選項 */}
+                                                                <CheckboxItem value={"NoCardNO"} >無卡註冊</CheckboxItem>
+                                                            </Checkbox>
+                                                        </>
+                                                    }
                                                     baseDefaultTheme={"DefaultTheme"}
                                                     // type="password"
                                                     // openEye
@@ -615,13 +640,71 @@ const LaptopLBase = (props) => {
                                             </FormRow>
 
                                             <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 居住地(縣市) County */}
+                                                <NewSelector
+                                                    bascDefaultTheme={"DefaultTheme"}
+                                                    topLabel={<>通訊地址<Text theme={laptopL.userCountyRequired}></Text></>}
+                                                    // bottomLabel={"為避免無法成功預約訂車，門牌號碼及巷弄請使用半形數字，且勿填寫樓層及備註"}
+                                                    //viewType
+                                                    isSearchable
+                                                    placeholder={"選擇縣市"}
+                                                    // isMulti
+                                                    // hideSelectedOptions={false}
+                                                    value={globalContextService.get("LoginPage", "UserCounty") ?? null}
+                                                    onChange={(e, value, onInitial) => {
+                                                        // console.log(value)
+                                                        if (!isEqual(value, globalContextService.get("LoginPage", "UserCounty"))) {
+                                                            globalContextService.set("LoginPage", "UserCounty", value);
+                                                            globalContextService.set("LoginPage", "UserDistrict", { value: 'hint', label: "選擇區域", isDisabled: true });
+                                                            setForceUpdate(f => !f);
+                                                        }
+
+                                                    }}
+
+                                                    options={[
+                                                        { value: 'hint', label: "選擇縣市", isDisabled: true },
+                                                        ...Counties
+                                                    ]}
+                                                    // menuPosition={true}
+                                                    theme={laptopL.userCounty}
+                                                />
+
+                                                {/* 居住地(區域) District */}
+                                                <NewSelector
+                                                    bascDefaultTheme={"DefaultTheme"}
+                                                    topLabel={""}
+                                                    //viewType
+                                                    isSearchable
+                                                    placeholder={"選擇區域"}
+                                                    // isMulti
+                                                    // hideSelectedOptions={false}
+                                                    value={globalContextService.get("LoginPage", "UserDistrict") ?? null}
+                                                    onChange={(e, value, onInitial) => {
+                                                        // console.log(value)
+                                                        globalContextService.set("LoginPage", "UserDistrict", value);
+                                                    }}
+
+                                                    options={[
+                                                        { value: 'hint', label: "選擇區域", isDisabled: true },
+                                                        ...(
+                                                            !isNil(globalContextService.get("LoginPage", "UserCounty")) ?
+                                                                cityAndCountiesLite[globalContextService.get("LoginPage", "UserCounty")?.value]
+                                                                :
+                                                                []
+                                                        )
+                                                    ]}
+                                                    // menuPosition={true}
+                                                    theme={laptopL.userDistrict}
+                                                />
+
                                                 {/* 通訊地址 UserAddr */}
                                                 <MapGoogleInput
-                                                    placeholder={"請輸入通訊地址(XX市XX區XX路XX號)"}
+                                                    placeholder={"請輸入通訊地址(XX路XX號)"}
                                                     placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
                                                     // viewType 
                                                     // disable
-                                                    topLabel={<>通訊地址<Text theme={laptopL.singUpFormUserAddrRequired}></Text></>}
+                                                    // topLabel={<>通訊地址<Text theme={laptopL.singUpFormUserAddrRequired}></Text></>}
+                                                    // bottomLabel={"為避免無法成功預約訂車，門牌號碼及巷弄請使用半形數字，且勿填寫樓層及備註"}
                                                     baseDefaultTheme={"DefaultTheme"}
                                                     value={globalContextService.get("LoginPage", "UserAddr") ?? ""}
                                                     onChange={(e, value, onInitial) => {

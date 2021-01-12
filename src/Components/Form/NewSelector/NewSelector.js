@@ -96,6 +96,14 @@ const SelectExtendStyle = styled(SelectExtend).attrs((props) => ({}))`
     ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "selectorSubContainer")['basic']))}  
 }
 
+&.ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+    ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "selectorSubContainer")['hover']))}    
+}
+
+&.ant-select-focused:not(.ant-select-disabled).ant-select-single:not(.ant-select-customize-input) .ant-select-selector {
+    ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "selectorSubContainer")['focus']))}    
+}
+
 && span.ant-select-selection-search {
     input {
         ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "selectorPickerInput")['basic']))};  
@@ -134,6 +142,10 @@ const SelectExtendStyle = styled(SelectExtend).attrs((props) => ({}))`
 
 && span.ant-select-arrow {
     // color: inherit;
+}
+
+&& span.ant-select-arrow svg {
+    ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "selectorSubContainer")['icon']))}    
 }
 
 `
@@ -326,8 +338,8 @@ export const NewSelectorBase = (props) => {
                                 onBlur={(e) => { setFocus(false); props.onBlur && props.onBlur(e); }}
                                 onMouseEnter={(e) => { setHover(true); props.onMouseover && props.onMouseover(e); }}
                                 onMouseLeave={(e) => { setHover(false); props.onMouseout && props.onMouseout(e); }}
-                                // focus={Focus}
-                                // hover={Hover}
+                                focus={Focus ? 1 : 0}
+                                hover={Hover ? 1 : 0}
                                 theme={props.theme}
                             />
 

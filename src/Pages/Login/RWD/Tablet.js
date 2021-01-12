@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
-import { BasicContainer, ScrollBar, Container, SubContainer, Text, FormContainer, Radio, FormRow, TextInput, BasicButton, modalsService, globalContextService, DateTimePicker, RadioItem } from '../../../Components';
+import { BasicContainer, ScrollBar, Container, SubContainer, Text, FormContainer, Radio, FormRow, Checkbox, NewSelector, CheckboxItem, TextInput, BasicButton, modalsService, globalContextService, DateTimePicker, RadioItem } from '../../../Components';
 import { ReactComponent as LoginLogoTablet } from '../../../Assets/img/LoginLogoTablet.svg'
 import { ReactComponent as Admin } from '../../../Assets/img/Admin.svg'
 import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
@@ -10,6 +10,9 @@ import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
 import { ReactComponent as Tabletbg } from '../../../Assets/img/Tabletbg.svg'
 import { MapGoogleInput, TabletPlacard } from '../../../ProjectComponent';
 import moment from 'moment';
+import { cityAndCountiesLite, Counties } from '../../../Mappings/Mappings';
+import { isEqual, isNil } from 'lodash';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 //#region 倒數10秒
 const TimeCounter = (props) => {
@@ -42,11 +45,15 @@ const TabletBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { login: { rwd: { tablet } } } } = Theme;
 
+    const [Width, Height] = useWindowSize();
+    const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
+
     return (
         <>
             {/* 最外層容器 */}
             <BasicContainer
                 baseDefaultTheme={"DefaultTheme"}
+                height={Height}
                 theme={tablet.outContainer} >
                 {/* 最外層容器 ScrollBar */}
                 <ScrollBar
@@ -56,6 +63,7 @@ const TabletBase = (props) => {
                     {/* 上半部 */}
                     <BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        height={Height}
                         theme={tablet.aboveContainer}
                     >
                         {/* 背景自適應 */}
@@ -582,7 +590,28 @@ const TabletBase = (props) => {
 
                                                 {/* 悠遊卡/一卡通卡號 UserCardNo */}
                                                 <TextInput
-                                                    topLabel={<>悠遊卡/一卡通卡號<Text theme={tablet.singUpFormUserCardNoRequired}></Text></>}
+                                                    topLabel={
+                                                        <>
+                                                            悠遊卡/一卡通卡號
+                                                            <Text theme={tablet.singUpFormUserCardNoRequired}>
+                                                            </Text>
+                                                            {/* 無卡註冊 UserNoCardNO */}
+                                                            <Checkbox
+                                                                // viewType
+                                                                checked={globalContextService.get("LoginPage", "UserNoCardNO")}
+                                                                // disable
+                                                                topLabel={""}
+                                                                onChange={(e, value, onInitial) => {
+                                                                    // console.log(value)
+                                                                    globalContextService.set("LoginPage", "UserNoCardNO", value);
+                                                                }}
+                                                                theme={tablet.userNoCardNO}
+                                                            >
+                                                                {/* 無卡註冊 UserNoCardNO  選項 */}
+                                                                <CheckboxItem value={"NoCardNO"} >無卡註冊</CheckboxItem>
+                                                            </Checkbox>
+                                                        </>
+                                                    }
                                                     baseDefaultTheme={"DefaultTheme"}
                                                     // type="password"
                                                     // openEye
@@ -597,13 +626,71 @@ const TabletBase = (props) => {
                                             </FormRow>
 
                                             <FormRow baseDefaultTheme={"DefaultTheme"}>
+                                                {/* 居住地(縣市) County */}
+                                                <NewSelector
+                                                    bascDefaultTheme={"DefaultTheme"}
+                                                    topLabel={<>通訊地址<Text theme={tablet.userCountyRequired}></Text></>}
+                                                    // bottomLabel={"為避免無法成功預約訂車，門牌號碼及巷弄請使用半形數字，且勿填寫樓層及備註"}
+                                                    //viewType
+                                                    isSearchable
+                                                    placeholder={"選擇縣市"}
+                                                    // isMulti
+                                                    // hideSelectedOptions={false}
+                                                    value={globalContextService.get("LoginPage", "UserCounty") ?? null}
+                                                    onChange={(e, value, onInitial) => {
+                                                        // console.log(value)
+                                                        if (!isEqual(value, globalContextService.get("LoginPage", "UserCounty"))) {
+                                                            globalContextService.set("LoginPage", "UserCounty", value);
+                                                            globalContextService.set("LoginPage", "UserDistrict", { value: 'hint', label: "選擇區域", isDisabled: true });
+                                                            setForceUpdate(f => !f);
+                                                        }
+
+                                                    }}
+
+                                                    options={[
+                                                        { value: 'hint', label: "選擇縣市", isDisabled: true },
+                                                        ...Counties
+                                                    ]}
+                                                    // menuPosition={true}
+                                                    theme={tablet.userCounty}
+                                                />
+
+                                                {/* 居住地(區域) District */}
+                                                <NewSelector
+                                                    bascDefaultTheme={"DefaultTheme"}
+                                                    topLabel={""}
+                                                    //viewType
+                                                    isSearchable
+                                                    placeholder={"選擇區域"}
+                                                    // isMulti
+                                                    // hideSelectedOptions={false}
+                                                    value={globalContextService.get("LoginPage", "UserDistrict") ?? null}
+                                                    onChange={(e, value, onInitial) => {
+                                                        // console.log(value)
+                                                        globalContextService.set("LoginPage", "UserDistrict", value);
+                                                    }}
+
+                                                    options={[
+                                                        { value: 'hint', label: "選擇區域", isDisabled: true },
+                                                        ...(
+                                                            !isNil(globalContextService.get("LoginPage", "UserCounty")) ?
+                                                                cityAndCountiesLite[globalContextService.get("LoginPage", "UserCounty")?.value]
+                                                                :
+                                                                []
+                                                        )
+                                                    ]}
+                                                    // menuPosition={true}
+                                                    theme={tablet.userDistrict}
+                                                />
+
                                                 {/* 通訊地址 UserAddr */}
                                                 <MapGoogleInput
-                                                    placeholder={"請輸入通訊地址(XX市XX區XX路XX號)"}
+                                                    placeholder={"請輸入通訊地址(XX路XX號)"}
                                                     placeDetailUrl={`${APIUrl}Maps/PlaceDetail`} // 接後端的API
                                                     // viewType 
                                                     // disable
-                                                    topLabel={<>通訊地址<Text theme={tablet.singUpFormUserAddrRequired}></Text></>}
+                                                    // topLabel={<>通訊地址<Text theme={tablet.singUpFormUserAddrRequired}></Text></>}
+                                                    // bottomLabel={"為避免無法成功預約訂車，門牌號碼及巷弄請使用半形數字，且勿填寫樓層及備註"}
                                                     baseDefaultTheme={"DefaultTheme"}
                                                     value={globalContextService.get("LoginPage", "UserAddr") ?? ""}
                                                     onChange={(e, value, onInitial) => {

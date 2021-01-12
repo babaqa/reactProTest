@@ -5,7 +5,7 @@ import { FormRow } from '../../Components/Form/FormRow/FormRow';
 import { SubContainer, globalContextService, Text, modalsService } from '../../Components';
 import { TextInput } from '../../Components/Form/TextInput/TextInput';
 import { ReactComponent as Eye } from '../../Components/Form/TextInput/Assets/img/Eye.svg'
-import { setItemLocalStorage, setStringifyItemLocalStorage } from '../../Handlers/'
+import { clearLocalStorage, clearSession, setItemLocalStorage, setStringifyItemLocalStorage } from '../../Handlers/'
 import { useAsync } from '../../SelfHooks/useAsync'
 import { LaptopL } from './RWD/LaptopL';
 import { Laptop } from './RWD/Laptop';
@@ -298,7 +298,7 @@ export const Login = (props) => {
     const [LoginExecute, LoginPending] = useAsync(login, false);
     //#endregion 
 
-    //#region 註冊 API
+    //#region 註冊 API (待調整)
     const singUp = useCallback(async (account, password) => {
         let token = "";
 
