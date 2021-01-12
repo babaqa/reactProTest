@@ -5,7 +5,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8"
                 }
             }
         },
@@ -13,7 +13,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
+                    backgroundColor: "#DBE4E8",
                     height: "calc( 100vh - 56px - 48px )",
                 }
             }
@@ -22,14 +22,15 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 236px"
+                    backgroundColor: "#DBE4E8",
+                    padding: "0 0 220px"
                 }
             }
         },
     },
     //#endregion
 
+    //#region 基本資料表單區
     //#region 基本資料表單區容器
     basicInformationContainer: {
         basic: (style, props) => {
@@ -51,7 +52,7 @@ export default {
                 ...style,
                 width: "100%",
                 padding: "9px 16px",
-                background: "#E5E4DB",
+                background: "#DBE4E8",
                 border: 0,
                 margin: 0,
                 height: "40px"
@@ -315,6 +316,7 @@ export default {
         top: 0,
     },
     //#endregion
+    //#endregion
 
     //#region 修改手機按鈕
     editPhoneButton: {
@@ -428,6 +430,7 @@ export default {
             })
         }
     },
+    //#endregion
     //#endregion
 
     //#region 新增修改手機彈窗 提交驗證碼
@@ -543,6 +546,8 @@ export default {
         }
     },
     //#endregion
+    //#endregion
+
     //#region 新增修改手機彈窗 驗證成功
     //#region Modal 樣式
     successModal: {
@@ -563,6 +568,7 @@ export default {
             }),
         }
     },
+    //#endregion
     //#endregion
 
     //#region 通用容器
@@ -708,6 +714,7 @@ export default {
     //#endregion
     //#endregion
 
+    //#region 長照資料表單區
     //#region 長照資料表單區容器
     caseInformationContainer: {
         basic: (style, props) => {
@@ -729,7 +736,7 @@ export default {
                 ...style,
                 width: "100%",
                 padding: "9px 16px",
-                background: "#E5E4DB",
+                background: "#DBE4E8",
                 border: 0,
                 margin: 0,
                 height: "40px"
@@ -889,6 +896,7 @@ export default {
         })
     },
     //#endregion
+    //#endregion
 
     //#region 案號 標題 
     caseNumberTitle: {
@@ -1047,6 +1055,7 @@ export default {
     //#endregion
     //#endregion
 
+    //#region 共享車隊資料表單區
     //#region 共享車隊資料表單區容器
     fleetInformationContainer: {
         basic: (style, props) => {
@@ -1068,7 +1077,7 @@ export default {
                 ...style,
                 width: "100%",
                 padding: "9px 16px",
-                background: "#E5E4DB",
+                background: "#DBE4E8",
                 border: 0,
                 margin: 0,
                 height: "40px"
@@ -1226,6 +1235,7 @@ export default {
     //#endregion
     //#endregion
 
+    //#region 巴士資料表單區
     //#region 巴士資料表單區容器
     busInformationContainer: {
         basic: (style, props) => {
@@ -1247,7 +1257,7 @@ export default {
                 ...style,
                 width: "100%",
                 padding: "9px 16px",
-                background: "#E5E4DB",
+                background: "#DBE4E8",
                 border: 0,
                 margin: 0,
                 height: "40px"
@@ -1404,4 +1414,452 @@ export default {
     },
     //#endregion
     //#endregion
+
+    //#region 日照資料表單區
+    //#region 日照資料表單區容器
+    dayCareInformationContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                // padding: "24px 12px",
+                background: "#fff",
+                height: "304px",
+                width: "100%",
+
+            }
+        }
+    },
+    //#endregion
+    //#region  日照資料 子標題列
+    dayCareInfBaseSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                padding: "9px 16px",
+                background: "#DBE4E8",
+                border: 0,
+                margin: 0,
+                height: "40px"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "48px",
+                fontWeight: 400,
+                fontSize: "12px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.65)",
+                padding: 0,
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "72px",
+                height: "32px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 案號 標題 
+    dayCareNumberTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 案號 內文 
+    dayCareNumberText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 日照居住地址 標題 
+    dayCareResidentialAddressTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "30%"
+        })
+    },
+    //#endregion
+    //#region 日照居住地址 內文 
+    dayCareResidentialAddressText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "70%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 日照緊急聯絡人姓名 標題 
+    dayCareEmergencyNameTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 日照緊急聯絡人姓名 內文 
+    dayCareEmergencyNameText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 日照緊急聯絡人手機 標題 
+    dayCareEmergencyCellPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 日照緊急聯絡人手機 內文 
+    dayCareEmergencyCellPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 日照緊急聯絡人市話 標題 
+    dayCareEmergencyPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 日照緊急聯絡人市話 內文 
+    dayCareEmergencyPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 日照服務車隊 標題 
+    dayCareServiceFleetTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 日照服務車隊 內文 
+    dayCareServiceFleetText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+    //#endregion
+
+    //#region 偏鄉資料表單區
+    //#region 偏鄉資料表單區容器
+    ruralInformationContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                // padding: "24px 12px",
+                background: "#fff",
+                height: "260px",
+                width: "100%",
+
+            }
+        }
+    },
+    //#endregion
+    //#region  偏鄉資料 子標題列
+    ruralInfBaseSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                padding: "9px 16px",
+                background: "#DBE4E8",
+                border: 0,
+                margin: 0,
+                height: "40px"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "48px",
+                fontWeight: 400,
+                fontSize: "12px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.65)",
+                padding: 0,
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "72px",
+                height: "32px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 偏鄉居住地址 標題 
+    ruralResidentialAddressTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "30%"
+        })
+    },
+    //#endregion
+    //#region 偏鄉居住地址 內文 
+    ruralResidentialAddressText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "70%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 偏鄉緊急聯絡人姓名 標題 
+    ruralEmergencyNameTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 偏鄉緊急聯絡人姓名 內文 
+    ruralEmergencyNameText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 偏鄉緊急聯絡人手機 標題 
+    ruralEmergencyCellPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 偏鄉緊急聯絡人手機 內文 
+    ruralEmergencyCellPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 偏鄉緊急聯絡人市話 標題 
+    ruralEmergencyPhoneTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 偏鄉緊急聯絡人市話 內文 
+    ruralEmergencyPhoneText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 偏鄉服務車隊 標題 
+    ruralServiceFleetTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 偏鄉服務車隊 內文 
+    ruralServiceFleetText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+    //#endregion
+
+    //#region 下方按鈕表單表單區容器
+    bottomContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                display: "inline-block",
+                padding: "9px 16px",
+                background: "transparent",
+                width: "100%",
+                textAlign: "right"
+            }
+        }
+    },
+    //#endregion
+    //#region 註冊共享車隊按鈕
+    registeredFleetButton: {
+        basic: (style) => ({
+            ...style,
+            width: "100px",
+            height: "28px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            top: "2px",
+            padding: 0,
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            margin: "0 8px 0 0"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion 
+    //#region 註冊巴士按鈕
+    registeredBusButton: {
+        basic: (style) => ({
+            ...style,
+            width: "88px",
+            height: "28px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            top: "2px",
+            padding: 0,
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            margin: 0
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion
+
 }

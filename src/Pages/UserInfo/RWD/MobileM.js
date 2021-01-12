@@ -989,7 +989,305 @@ const MobileMBase = (props) => {
 
                 </BasicContainer>
 
+                {/* 日照資料表單區容器 */}
+                <BasicContainer
+                    baseDefaultTheme={"DefaultTheme"}
+                    theme={mobileM.dayCareInformationContainer}
+                >
+                    {/* 日照資料 子標題列 */}
+                    <MainPageSubTitleBar
+                        bascDefaultTheme={"DefaultTheme"}
+                        titleText={"日照"}
+                        theme={mobileM.dayCareInfBaseSubTitleBar}
+                    >
+                    </MainPageSubTitleBar>
 
+                    <Container>
+
+                        {/* 案號 DayCareNumber */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 案號 標題 */}
+                            <Text
+                                theme={mobileM.dayCareNumberTitle}
+                            >
+                                案號
+                                </Text>
+
+                            {/* 案號 內文 */}
+                            <Text
+                                theme={mobileM.dayCareNumberText}
+                            >
+                                AAAAAAAA
+                                </Text>
+
+                        </Container>
+
+                        {/* 日照居住地址 DayCareResidentialAddress */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 日照居住地址 標題 */}
+                            <Text
+                                theme={mobileM.dayCareResidentialAddressTitle}
+                            >
+                                居住地址
+                                </Text>
+
+                            {/* 日照居住地址 內文 */}
+                            <Text
+                                theme={mobileM.dayCareResidentialAddressText}
+                            >
+                                台北市大安區信義路三段143號
+                                </Text>
+
+                        </Container>
+
+                        {/* 日照緊急聯絡人姓名 DayCareEmergencyName */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 日照緊急聯絡人姓名 標題 */}
+                            <Text
+                                theme={mobileM.dayCareEmergencyNameTitle}
+                            >
+                                緊急聯絡人姓名
+                                </Text>
+
+                            {/* 日照緊急聯絡人姓名 內文 */}
+                            <Text
+                                theme={mobileM.dayCareEmergencyNameText}
+                            >
+                                王小明
+                                </Text>
+
+                        </Container>
+
+                        {/* 日照緊急聯絡人手機 DayCareEmergencyCellPhone */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 日照緊急聯絡人手機 標題 */}
+                            <Text
+                                theme={mobileM.dayCareEmergencyCellPhoneTitle}
+                            >
+                                緊急聯絡人手機
+                                </Text>
+
+                            {/* 日照緊急聯絡人手機 內文 */}
+                            <Text
+                                theme={mobileM.dayCareEmergencyCellPhoneText}
+                            >
+                                0987654321
+                                </Text>
+
+                        </Container>
+
+                        {/* 日照緊急聯絡人市話 DayCareEmergencyPhone */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 日照緊急聯絡人市話 標題 */}
+                            <Text
+                                theme={mobileM.dayCareEmergencyPhoneTitle}
+                            >
+                                緊急聯絡人市話
+                                </Text>
+
+                            {/* 日照緊急聯絡人市話 內文 */}
+                            <Text
+                                theme={mobileM.dayCareEmergencyPhoneText}
+                            >
+                                0412345678
+                                </Text>
+
+                        </Container>
+
+                        {/* 日照服務車隊 DayCareServiceFleet */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 日照服務車隊 標題 */}
+                            <Text
+                                theme={mobileM.dayCareServiceFleetTitle}
+                            >
+                                服務車隊
+                                </Text>
+
+                            {/* 日照服務車隊 內文 */}
+                            <Text
+                                theme={mobileM.dayCareServiceFleetText}
+                            >
+                                某車隊
+                                </Text>
+
+                        </Container>
+
+                    </Container>
+
+                </BasicContainer>
+
+                {/* 偏鄉資料表單區容器 */}
+                <BasicContainer
+                    baseDefaultTheme={"DefaultTheme"}
+                    theme={mobileM.ruralInformationContainer}
+                >
+                    {/* 偏鄉資料 子標題列 */}
+                    <MainPageSubTitleBar
+                        bascDefaultTheme={"DefaultTheme"}
+                        titleText={"偏鄉"}
+                        theme={mobileM.ruralInfBaseSubTitleBar}
+                    >
+                    </MainPageSubTitleBar>
+
+                    <Container>
+
+                        {/* 偏鄉居住地址 RuralResidentialAddress */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 偏鄉居住地址 標題 */}
+                            <Text
+                                theme={mobileM.ruralResidentialAddressTitle}
+                            >
+                                居住地址
+                                </Text>
+
+                            {/* 偏鄉居住地址 內文 */}
+                            <Text
+                                theme={mobileM.ruralResidentialAddressText}
+                            >
+                                台北市大安區信義路三段143號
+                                </Text>
+
+                        </Container>
+
+                        {/* 偏鄉緊急聯絡人姓名 RuralEmergencyName */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 偏鄉緊急聯絡人姓名 標題 */}
+                            <Text
+                                theme={mobileM.ruralEmergencyNameTitle}
+                            >
+                                緊急聯絡人姓名
+                                </Text>
+
+                            {/* 偏鄉緊急聯絡人姓名 內文 */}
+                            <Text
+                                theme={mobileM.ruralEmergencyNameText}
+                            >
+                                王小明
+                                </Text>
+
+                        </Container>
+
+                        {/* 偏鄉緊急聯絡人手機 RuralEmergencyCellPhone */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 偏鄉緊急聯絡人手機 標題 */}
+                            <Text
+                                theme={mobileM.ruralEmergencyCellPhoneTitle}
+                            >
+                                緊急聯絡人手機
+                                </Text>
+
+                            {/* 偏鄉緊急聯絡人手機 內文 */}
+                            <Text
+                                theme={mobileM.ruralEmergencyCellPhoneText}
+                            >
+                                0987654321
+                                </Text>
+
+                        </Container>
+
+                        {/* 偏鄉緊急聯絡人市話 RuralEmergencyPhone */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 偏鄉緊急聯絡人市話 標題 */}
+                            <Text
+                                theme={mobileM.ruralEmergencyPhoneTitle}
+                            >
+                                緊急聯絡人市話
+                                </Text>
+
+                            {/* 偏鄉緊急聯絡人市話 內文 */}
+                            <Text
+                                theme={mobileM.ruralEmergencyPhoneText}
+                            >
+                                0412345678
+                                </Text>
+
+                        </Container>
+
+                        {/* 偏鄉服務車隊 RuralServiceFleet */}
+                        <Container
+                            theme={mobileM.universalContainer}
+                        >
+                            {/* 偏鄉服務車隊 標題 */}
+                            <Text
+                                theme={mobileM.ruralServiceFleetTitle}
+                            >
+                                服務車隊
+                                </Text>
+
+                            {/* 偏鄉服務車隊 內文 */}
+                            <Text
+                                theme={mobileM.ruralServiceFleetText}
+                            >
+                                某車隊
+                                </Text>
+
+                        </Container>
+
+                    </Container>
+
+                </BasicContainer>
+
+                <Container
+                    theme={mobileM.bottomContainer}
+                >
+                    {/* 待接api，若無共享車隊身分則可以註冊 */}
+                    {true
+                        &&
+                        <>
+                            {/* 註冊共享車隊按鈕 */}
+                            <NativeLineButton
+                                baseDefaultTheme={"DefaultTheme"}
+                                disable={false}
+                                type="button" // 防止提交
+                                theme={mobileM.registeredFleetButton}
+                                onClick={(e) => {
+
+                                }}
+                            >
+                                註冊共享車隊
+                            </NativeLineButton>
+                        </>
+                    }
+
+                    {/* 待接api，若無巴士身分則可以註冊 */}
+                    {true
+                        &&
+                        <>
+                            {/* 註冊巴士按鈕 */}
+                            <NativeLineButton
+                                baseDefaultTheme={"DefaultTheme"}
+                                disable={false}
+                                type="button" // 防止提交
+                                theme={mobileM.registeredBusButton}
+                                onClick={(e) => {
+
+                                }}
+                            >
+                                註冊巴士
+                            </NativeLineButton>
+                        </>
+                    }
+                </Container>
             </MainPageContainer>
         </>
     )
