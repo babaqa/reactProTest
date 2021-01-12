@@ -1,20 +1,4 @@
 export default {
-<<<<<<< HEAD
-    //#region 叫車表單容器
-    callCarOutContainer: {
-        basic: (style, props) => ({
-            ...style,
-            // height: "calc( 100vh - 100px - 111px - 188px)",
-            height: "100vh",
-            minHeight: "890px"
-        })
-    },
-    //#endregion
-
-    //#region 地圖區域樣式
-=======
->>>>>>> origin/CaseCallCar_210111
-
     //#region  叫車表單 子標題列
     callCarSubTitleBar: {
         container: {
@@ -1127,11 +1111,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-<<<<<<< HEAD
-                padding: "0 12px",
-=======
                 padding: "0 8px",
->>>>>>> origin/CaseCallCar_210111
                 display: "inline-block",
                 // ...style.occupy(4),
             })
@@ -1180,11 +1160,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-<<<<<<< HEAD
-                padding: "0 12px",
-=======
                 padding: "0 8px",
->>>>>>> origin/CaseCallCar_210111
                 display: "inline-block",
                 // margin: "0 8px 0 0"
                 // ...style.occupy(4),
