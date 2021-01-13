@@ -12,6 +12,7 @@ import { ReactComponent as End2 } from '../../../../Assets/img/WhiteCallCarCompo
 import { ReactComponent as Start2 } from '../../../../Assets/img/WhiteCallCarComponentPage/Start2.svg'
 import { ReactComponent as Minus } from '../../../../Assets/img/WhiteCallCarComponentPage/Minus.svg'
 import { ReactComponent as Vector } from '../../../../Assets/img/WhiteCallCarComponentPage/Vector.svg'
+import { ReactComponent as Delete } from '../../../../Assets/img/WhiteCallCarComponentPage/Delete.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Checkbox, CheckboxItem, modalsService, Container, OldTable } from '../../../../Components';
@@ -112,67 +113,6 @@ const LaptopLBase = (props) => {
             <Container
                 theme={laptopL.callCarOutContainer}
             >
-
-
-                {/* 本日行程一覽容器 */}
-                <BasicContainer
-                    open={props.TodayToDoOpen}
-                    theme={laptopL.todayToDoCotainer}
-                >
-                    {/* 本日行程一覽標題 */}
-                    <Text
-                        theme={laptopL.todayToDoTitle}
-                        onClick={(e) => { props.setTodayToDoOpen(t => !t) }}
-                    >
-                        本日行程一覽
-
-                            <UpCircle style={laptopL.todayToDoTitleIcon} />
-                    </Text>
-
-                    {/* 起迄點容器 */}
-                    <BasicContainer
-                        theme={laptopL.startToEndContainer}
-                    >
-                        <StartToEnd
-                            style={laptopL.startToEndSvg}
-                        />
-
-                        {/* 起點 */}
-                        <Text
-                            theme={laptopL.todayToDoStart}
-                        >
-                            <Start style={laptopL.todayToDoStartSvg} />
-                                (起點)
-                            </Text>
-
-                        {/* 起點地址 */}
-                        <Text
-                            theme={laptopL.todayToDoStartAddr}
-                        >
-                            {globalContextService.get("WhiteCallCarComponentPage", "StartPos")}
-                        </Text>
-
-
-                        {/* 迄點 */}
-                        <Text
-                            theme={laptopL.todayToDoEnd}
-                        >
-                            <End style={laptopL.todayToDoEndSvg} />
-                                (迄點)
-                            </Text>
-
-                        {/* 迄點地址 */}
-                        <Text
-                            theme={laptopL.todayToDoEndAddr}
-                        >
-                            {globalContextService.get("WhiteCallCarComponentPage", "EndPos")}
-                        </Text>
-                    </BasicContainer>
-
-
-
-                </BasicContainer>
-
 
                 {/* 叫車表單區域容器 */}
                 <SubContainer
@@ -310,73 +250,6 @@ const LaptopLBase = (props) => {
                                 </>
                             }
 
-                            {/* 我要預約回程(回居住地址) */}
-                            <Checkbox
-                                // viewType
-                                // disable
-                                // topLabel={"我要預約回程(回居住地址)"}
-                                checked={globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview") ?? [0]}
-                                onChange={(e, value, onInitial) => {
-                                    if (value?.[0] === 1) {
-                                        if (value !== globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")) {
-                                            setForceUpdate(f => !f); // 剛選擇 預約回程 是 時，重新渲染
-                                        }
-                                    }
-                                    else if (globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1) {
-                                        setForceUpdate(f => !f); // 剛選擇 預約回程 是，重新渲染
-                                    }
-                                    else {
-                                        //選擇 否時清空回程相關資料避免誤送
-                                        globalContextService.remove("WhiteCallCarComponentPage", "ReturnTravelTime");
-                                        let preNum = globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value;
-                                        Array(preNum).fill(0).forEach((it, ind) => {
-                                            globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerName_${ind + 1}`)
-                                            globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerBirthday_${ind + 1}`)
-                                            globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerPhone_${ind + 1}`)
-                                        });
-                                        globalContextService.remove("WhiteCallCarComponentPage", "ReturnAccompanyCounts");
-                                    }
-                                    globalContextService.set("WhiteCallCarComponentPage", "ScheduleReturnReview", value);
-                                }}
-                                theme={laptopL.scheduleReturnReview}
-                            >
-                                {/* 我要預約回程(回居住地址) ScheduleReturnReview  選項 */}
-                                <CheckboxItem value={1} >我要預約回程</CheckboxItem>
-                            </Checkbox>
-
-                            {
-                                globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1
-                                &&
-                                <>
-                                    {/* 回程乘車時間 ReturnTravelTime */}
-                                    <DateTimePicker
-                                        topLabel={<>回程乘車時間</>}
-                                        // type={"time"} time、date、week、month、quarter、year
-                                        type={"time"}
-                                        format={"HH:mm"}
-                                        bascDefaultTheme={"DefaultTheme"}
-                                        // viewType
-                                        isSearchable
-                                        placeholder={""}
-                                        value={
-                                            (globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime")) ?
-                                                moment(globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime"), "HH:mm")
-                                                :
-                                                null
-                                        }
-                                        onChange={(value, momentObj) => {
-                                            if (value !== globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime")) {
-                                                globalContextService.set("WhiteCallCarComponentPage", `ReturnTravelTime`, value);
-                                                setForceUpdate(f => !f); // 剛選擇 預約回程 是 時，重新渲染
-                                            }
-                                        }}
-                                        theme={laptopL.returnTravelTime}
-                                    />
-                                </>
-                                // :
-                                // 維持排版佔位
-                                // <SubContainer theme={laptopL.returnEnableDateOccupy} />
-                            }
                             {/* 優先搭乘車行排序 */}
                             {/* <BUnitSort
                                 topLabel={<>優先搭乘車行排序 <Text theme={laptopL.bUnitSortNote}>(請依序點擊完成排序)</Text></>}
@@ -447,7 +320,7 @@ const LaptopLBase = (props) => {
                                         // disable
                                         topLabel={
                                             <>
-                                                起點
+                                                地址
                                         </>
                                         }
                                         baseDefaultTheme={"DefaultTheme"}
@@ -630,7 +503,7 @@ const LaptopLBase = (props) => {
                                         // disable
                                         topLabel={
                                             <>
-                                                迄點
+                                                地址
                                             </>
                                         }
                                         baseDefaultTheme={"DefaultTheme"}
@@ -727,81 +600,74 @@ const LaptopLBase = (props) => {
                                     <Container
                                         style={{ width: "auto" }}
                                     >
-                                        {/* 搭車人數 AccompanyCounts */}
-                                        <Text theme={laptopL.formSubTitleText}>搭車人數</Text>
-                                        <NewSelector
-                                            bascDefaultTheme={"DefaultTheme"}
-                                            topLabel={<>搭車人數</>}
-                                            bottomLabel={""}
-                                            //viewType
-                                            isSearchable
-                                            placeholder={""}
-                                            // isMulti
-                                            // hideSelectedOptions={false}
-                                            value={globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts") ?? null}
+                                        {/* 我要預約回程(回居住地址) */}
+                                        <Checkbox
+                                            // viewType
+                                            // disable
+                                            // topLabel={"我要預約回程(回居住地址)"}
+                                            checked={globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview") ?? [0]}
                                             onChange={(e, value, onInitial) => {
-                                                if (!isEqual(value, globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts"))) {
-                                                    // 清空重新選擇前的值
-                                                    let preNum = globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value;
-                                                    Array(preNum).fill(0).forEach((it, ind) => {
-                                                        if (value.value < ind + 1) {
-                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerName_${ind + 1}`)
-                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerBirthday_${ind + 1}`)
-                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerPhone_${ind + 1}`)
-                                                        }
-                                                    });
-
-                                                    globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", value)
-                                                    setForceUpdate(f => !f);
-                                                }
-                                            }}
-
-                                            options={[
-                                                // { value: 'hint', label: "請選擇搭乘人數", isDisabled: true },
-                                                { value: 1, label: "1人" },
-                                                { value: 2, label: "2人" },
-                                                { value: 3, label: "3人" },
-                                                { value: 4, label: "4人" },
-                                                { value: 5, label: "5人" },
-                                                { value: 6, label: "6人" },
-                                                { value: 7, label: "7人" },
-                                                { value: 8, label: "8人" },
-                                                // ...Counties
-                                            ]}
-                                            // menuPosition={true}
-                                            theme={laptopL.accompanyCounts}
-                                        />
-
-                                        {/* 代入回程按鈕 */}
-                                        <SubContainer theme={laptopL.importButtonContainer}>
-                                            <NativeLineButton
-                                                onClick={() => {
-                                                    if (!isNil(globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts"))) {
-                                                        let orgNum = globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value;
-                                                        //先清空原值
-                                                        Array(orgNum).fill(0).forEach((it, ind) => {
-                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerName_${ind + 1}`)
-                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerBirthday_${ind + 1}`)
-                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerPhone_${ind + 1}`)
-                                                        });
-
-                                                        let preNum = globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value;
-                                                        //放入新的值
-                                                        Array(preNum).fill(0).forEach((it, ind) => {
-                                                            globalContextService.set("WhiteCallCarComponentPage", `TakerName_${ind + 1}`, globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerName_${ind + 1}`));
-                                                            globalContextService.set("WhiteCallCarComponentPage", `TakerBirthday_${ind + 1}`, globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerBirthday_${ind + 1}`));
-                                                            globalContextService.set("WhiteCallCarComponentPage", `TakerPhone_${ind + 1}`, globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerPhone_${ind + 1}`));
-                                                        });
-                                                        globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value, label: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").label });
-                                                        setForceUpdate(f => !f);
+                                                if (value?.[0] === 1) {
+                                                    if (value !== globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")) {
+                                                        setForceUpdate(f => !f); // 剛選擇 預約回程 是 時，重新渲染
                                                     }
-                                                }}
-                                                theme={laptopL.importButton}
-                                            >
-                                                代入回程資料
-                                    </NativeLineButton>
+                                                }
+                                                else if (globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1) {
+                                                    setForceUpdate(f => !f); // 剛選擇 預約回程 是，重新渲染
+                                                }
+                                                else {
+                                                    //選擇 否時清空回程相關資料避免誤送
+                                                    globalContextService.remove("WhiteCallCarComponentPage", "ReturnTravelTime");
+                                                    let preNum = globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value;
+                                                    Array(preNum).fill(0).forEach((it, ind) => {
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerName_${ind + 1}`)
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerBirthday_${ind + 1}`)
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerPhone_${ind + 1}`)
+                                                    });
+                                                    globalContextService.remove("WhiteCallCarComponentPage", "ReturnAccompanyCounts");
+                                                }
+                                                globalContextService.set("WhiteCallCarComponentPage", "ScheduleReturnReview", value);
+                                            }}
+                                            theme={laptopL.scheduleReturnReview}
+                                        >
+                                            {/* 我要預約回程(回居住地址) ScheduleReturnReview  選項 */}
+                                            <CheckboxItem value={1} >我要預約回程</CheckboxItem>
+                                        </Checkbox>
 
-                                        </SubContainer>
+                                        {
+                                            globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1
+                                                ?
+                                                <>
+                                                    {/* 回程乘車時間 ReturnTravelTime */}
+                                                    <Text theme={laptopL.formSubTitleText}>回程乘車時間</Text>
+                                                    <DateTimePicker
+                                                        topLabel={<>回程乘車時間</>}
+                                                        // type={"time"} time、date、week、month、quarter、year
+                                                        type={"time"}
+                                                        format={"HH:mm"}
+                                                        bascDefaultTheme={"DefaultTheme"}
+                                                        // viewType
+                                                        isSearchable
+                                                        placeholder={""}
+                                                        value={
+                                                            (globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime")) ?
+                                                                moment(globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime"), "HH:mm")
+                                                                :
+                                                                null
+                                                        }
+                                                        onChange={(value, momentObj) => {
+                                                            if (value !== globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime")) {
+                                                                globalContextService.set("WhiteCallCarComponentPage", `ReturnTravelTime`, value);
+                                                                setForceUpdate(f => !f); // 剛選擇 預約回程 是 時，重新渲染
+                                                            }
+                                                        }}
+                                                        theme={laptopL.returnTravelTime}
+                                                    />
+                                                </>
+                                                :
+                                                // 維持排版佔位
+                                                <SubContainer style={{ width: "308px" }} />
+                                        }
                                     </Container>
                                 </Container>
                                 {/* 維持排版佔位 */}
@@ -932,17 +798,98 @@ const LaptopLBase = (props) => {
                                         }
                                         //sort
                                         //showHeader={false}
-                                        data={[
-                                            { id: "1", type: "去程" },
-                                            // { id: "2", type: "回程" },
-                                        ]}
+                                        // data={[
+                                        //     { id: "1", type: "去程" },
+                                        //     { id: "2", type: "回程" },
+                                        // ]}
                                         // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
-                                        // data={props.AllCars.data}
+                                        data={props.WhiteOrderAmt}
                                         clickPage={(currentPage, pageSize) => {
                                         }}
                                     />
                                 </Container>
 
+
+                                {/* 去程搭車人數容器外容器 */}
+                                <Container
+                                    theme={laptopL.takerCountsContainer}
+                                >
+                                    {/* 搭車人數 AccompanyCounts */}
+                                    <Text theme={laptopL.formSubTitleText}>去程搭車人數</Text>
+                                    <NewSelector
+                                        bascDefaultTheme={"DefaultTheme"}
+                                        topLabel={<>搭車人數</>}
+                                        bottomLabel={""}
+                                        //viewType
+                                        isSearchable
+                                        placeholder={""}
+                                        // isMulti
+                                        // hideSelectedOptions={false}
+                                        value={globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts") ?? null}
+                                        onChange={(e, value, onInitial) => {
+                                            if (!isEqual(value, globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts"))) {
+                                                // 清空重新選擇前的值
+                                                let preNum = globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value;
+                                                Array(preNum).fill(0).forEach((it, ind) => {
+                                                    if (value.value < ind + 1) {
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerName_${ind + 1}`)
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerBirthday_${ind + 1}`)
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerPhone_${ind + 1}`)
+                                                    }
+                                                });
+
+                                                globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", value)
+                                                setForceUpdate(f => !f);
+                                            }
+                                        }}
+
+                                        options={[
+                                            // { value: 'hint', label: "請選擇搭乘人數", isDisabled: true },
+                                            { value: 1, label: "1人" },
+                                            { value: 2, label: "2人" },
+                                            { value: 3, label: "3人" },
+                                            { value: 4, label: "4人" },
+                                            { value: 5, label: "5人" },
+                                            { value: 6, label: "6人" },
+                                            { value: 7, label: "7人" },
+                                            { value: 8, label: "8人" },
+                                            // ...Counties
+                                        ]}
+                                        // menuPosition={true}
+                                        theme={laptopL.accompanyCounts}
+                                    />
+
+                                    {/* 代入回程按鈕 */}
+                                    <SubContainer theme={laptopL.importButtonContainer}>
+                                        <NativeLineButton
+                                            onClick={() => {
+                                                if (!isNil(globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts"))) {
+                                                    let orgNum = globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value;
+                                                    //先清空原值
+                                                    Array(orgNum).fill(0).forEach((it, ind) => {
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerName_${ind + 1}`)
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerBirthday_${ind + 1}`)
+                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerPhone_${ind + 1}`)
+                                                    });
+
+                                                    let preNum = globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value;
+                                                    //放入新的值
+                                                    Array(preNum).fill(0).forEach((it, ind) => {
+                                                        globalContextService.set("WhiteCallCarComponentPage", `TakerName_${ind + 1}`, globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerName_${ind + 1}`));
+                                                        globalContextService.set("WhiteCallCarComponentPage", `TakerBirthday_${ind + 1}`, globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerBirthday_${ind + 1}`));
+                                                        globalContextService.set("WhiteCallCarComponentPage", `TakerPhone_${ind + 1}`, globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerPhone_${ind + 1}`));
+                                                    });
+                                                    globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value, label: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").label });
+                                                    setForceUpdate(f => !f);
+                                                }
+                                            }}
+                                            theme={laptopL.importButton}
+                                        >
+                                            代入回程資料
+                                    </NativeLineButton>
+
+                                    </SubContainer>
+                                </Container>
                                 {/* 搭乘者資訊外容器 */}
                                 <Container
                                     theme={laptopL.takerInfoOutContainer}
@@ -993,7 +940,40 @@ const LaptopLBase = (props) => {
 
                                                         {/* 搭車電話 TakerPhone */}
                                                         <TextInput
-                                                            topLabel={`聯絡電話${index + 1}`}
+                                                            topLabel={
+                                                                <Text
+                                                                    style={{ fontSize: "14px", fontWeight: "normal" }}
+                                                                    onClick={() => {
+                                                                        let preNum = globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value;
+                                                                        for (let i = index + 1; i < preNum; i++) {
+                                                                            // 將後面資料向前放
+                                                                            if (i >= index + 1) {
+                                                                                console.log("i===" + i)
+                                                                                globalContextService.set("WhiteCallCarComponentPage", `TakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
+                                                                                globalContextService.set("WhiteCallCarComponentPage", `TakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
+                                                                                globalContextService.set("WhiteCallCarComponentPage", `TakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
+                                                                            } else {
+                                                                                continue
+                                                                            }
+                                                                        }
+                                                                        // 移除最後一筆資料
+                                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerName_${preNum}`);
+                                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerBirthday_${preNum}`);
+                                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerPhone_${preNum}`);
+                                                                        // setDeleteRowIndex(index + 1);
+                                                                        if (preNum === 1) {
+                                                                            globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", null)
+                                                                        } else {
+                                                                            globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value - 1, label: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value - 1 + "人" });
+                                                                        }
+                                                                        setForceUpdate(f => !f);
+                                                                    }}
+                                                                    theme={laptopL.deleteButton}
+                                                                >
+                                                                    <Delete style={laptopL.deleteSvg}></Delete>
+                                                                聯絡電話{index + 1}
+                                                                </Text>
+                                                            }
                                                             baseDefaultTheme={"DefaultTheme"}
                                                             type="text"
                                                             placeholder={``}
@@ -1003,38 +983,6 @@ const LaptopLBase = (props) => {
                                                             }}
                                                             theme={laptopL.takerPhone}
                                                         />
-
-                                                        {/* 刪除按鈕 */}
-                                                        <Text
-                                                            onClick={() => {
-                                                                let preNum = globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value;
-                                                                for (let i = index + 1; i < preNum; i++) {
-                                                                    // 將後面資料向前放
-                                                                    if (i >= index + 1) {
-                                                                        console.log("i===" + i)
-                                                                        globalContextService.set("WhiteCallCarComponentPage", `TakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
-                                                                        globalContextService.set("WhiteCallCarComponentPage", `TakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
-                                                                        globalContextService.set("WhiteCallCarComponentPage", `TakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
-                                                                    } else {
-                                                                        continue
-                                                                    }
-                                                                }
-                                                                // 移除最後一筆資料
-                                                                globalContextService.remove("WhiteCallCarComponentPage", `TakerName_${preNum}`);
-                                                                globalContextService.remove("WhiteCallCarComponentPage", `TakerBirthday_${preNum}`);
-                                                                globalContextService.remove("WhiteCallCarComponentPage", `TakerPhone_${preNum}`);
-                                                                // setDeleteRowIndex(index + 1);
-                                                                if (preNum === 1) {
-                                                                    globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", null)
-                                                                } else {
-                                                                    globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value - 1, label: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value - 1 + "人" });
-                                                                }
-                                                                setForceUpdate(f => !f);
-                                                            }}
-                                                            theme={laptopL.deleteButton}
-                                                        >
-                                                            -
-                                                        </Text>
                                                     </Container>
                                                 </React.Fragment>
                                             )
@@ -1176,7 +1124,39 @@ const LaptopLBase = (props) => {
 
                                                                 {/* 搭車電話 TakerPhone */}
                                                                 <TextInput
-                                                                    topLabel={`聯絡電話${index + 1}`}
+                                                                    topLabel={
+                                                                        <Text
+                                                                            onClick={() => {
+                                                                                let preNum = globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value;
+                                                                                for (let i = index + 1; i < preNum; i++) {
+                                                                                    // 將後面資料向前放
+                                                                                    if (i >= index + 1) {
+                                                                                        console.log("i===" + i)
+                                                                                        globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
+                                                                                        globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
+                                                                                        globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
+                                                                                    } else {
+                                                                                        continue
+                                                                                    }
+                                                                                }
+                                                                                // 移除最後一筆資料
+                                                                                globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerName_${preNum}`);
+                                                                                globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerBirthday_${preNum}`);
+                                                                                globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerPhone_${preNum}`);
+                                                                                // setDeleteRowIndex(index + 1);
+                                                                                if (preNum === 1) {
+                                                                                    globalContextService.set("WhiteCallCarComponentPage", "ReturnAccompanyCounts", null)
+                                                                                } else {
+                                                                                    globalContextService.set("WhiteCallCarComponentPage", "ReturnAccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value - 1, label: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value - 1 + "人" });
+                                                                                }
+                                                                                setForceUpdate(f => !f);
+                                                                            }}
+                                                                            theme={laptopL.deleteButton}
+                                                                        >
+                                                                            <Delete style={laptopL.deleteSvg}></Delete>
+                                                                        聯絡電話{index + 1}
+                                                                        </Text>
+                                                                    }
                                                                     baseDefaultTheme={"DefaultTheme"}
                                                                     type="text"
                                                                     placeholder={``}
@@ -1186,38 +1166,6 @@ const LaptopLBase = (props) => {
                                                                     }}
                                                                     theme={laptopL.takerPhone}
                                                                 />
-
-                                                                {/* 刪除按鈕 */}
-                                                                <Text
-                                                                    onClick={() => {
-                                                                        let preNum = globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value;
-                                                                        for (let i = index + 1; i < preNum; i++) {
-                                                                            // 將後面資料向前放
-                                                                            if (i >= index + 1) {
-                                                                                console.log("i===" + i)
-                                                                                globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
-                                                                                globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
-                                                                                globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
-                                                                            } else {
-                                                                                continue
-                                                                            }
-                                                                        }
-                                                                        // 移除最後一筆資料
-                                                                        globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerName_${preNum}`);
-                                                                        globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerBirthday_${preNum}`);
-                                                                        globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerPhone_${preNum}`);
-                                                                        // setDeleteRowIndex(index + 1);
-                                                                        if (preNum === 1) {
-                                                                            globalContextService.set("WhiteCallCarComponentPage", "ReturnAccompanyCounts", null)
-                                                                        } else {
-                                                                            globalContextService.set("WhiteCallCarComponentPage", "ReturnAccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value - 1, label: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value - 1 + "人" });
-                                                                        }
-                                                                        setForceUpdate(f => !f);
-                                                                    }}
-                                                                    theme={laptopL.deleteButton}
-                                                                >
-                                                                    -
-                                                        </Text>
                                                             </Container>
                                                         </React.Fragment>
                                                     )
@@ -1268,17 +1216,17 @@ const LaptopLBase = (props) => {
                                         else if (valid(globalContextService.get("WhiteCallCarComponentPage", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]
                                         }
-                                        else if (globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview") === 1 && valid(globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]) {
+                                        else if (globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1 && valid(globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
                                         }
-                                        else if (globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview") === 1 && valid(globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇回程搭車人數"])[1]) {
+                                        else if (globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1 && valid(globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇回程搭車人數"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇回程搭車人數"])[1]
                                         }
                                         else if (valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
                                         }
-                                        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "Phone") ?? "", ["^.{1,}$"], ["請輸入聯絡電話"])[1]) {
-                                            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "Phone") ?? "", ["^.{1,}$"], ["請輸入聯絡電話"])[1]
+                                        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+                                            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
                                         }
                                         else if (valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
@@ -1289,9 +1237,9 @@ const LaptopLBase = (props) => {
                                                     .map((item, index) => {
                                                         // 必須保留多種檢核的可能，不能只有寫死檢核必輸
                                                         return [
-                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `TakerName_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入搭車姓名${index + 1}`])[1],
-                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入搭車生日${index + 1}`])[1],
-                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${index + 1}`) ?? "", ["^.{1,}$", "^0[0-9]{7,}$"], [`請輸入手機${index + 1}`, `請輸入正確的手機${index + 1}`])[1]
+                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `TakerName_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入姓名${index + 1}`])[1],
+                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入生日${index + 1}`])[1],
+                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${index + 1}`) ?? "", ["^.{1,}$", "^0[0-9]{7,}$"], [`請輸入聯絡電話${index + 1}`, `請輸入正確的聯絡電話${index + 1}`])[1]
                                                         ]
                                                     }).flat().every(V => (V === null))
                                             )
@@ -1300,9 +1248,9 @@ const LaptopLBase = (props) => {
                                             validMsg = (Array(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value)).fill(0)
                                                 .map((item, index) => {
                                                     return [
-                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `TakerName_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入搭車姓名${index + 1}`])[1],
-                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入搭車生日${index + 1}`])[1],
-                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${index + 1}`) ?? "", ["^.{1,}$", "^0[0-9]{7,}$"], [`請輸入手機${index + 1}`, `請輸入正確的手機${index + 1}`])[1]
+                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `TakerName_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入姓名${index + 1}`])[1],
+                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入生日${index + 1}`])[1],
+                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${index + 1}`) ?? "", ["^.{1,}$", "^0[0-9]{7,}$"], [`請輸入聯絡電話${index + 1}`, `請輸入正確的聯絡電話${index + 1}`])[1]
                                                     ]
                                                 }).flat().filter(v => v !== null)[0]; // 拿第一個檢核不通過的錯誤訊息
                                         }
@@ -1313,9 +1261,9 @@ const LaptopLBase = (props) => {
                                                     .map((item, index) => {
                                                         // 必須保留多種檢核的可能，不能只有寫死檢核必輸
                                                         return [
-                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerName_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入回程搭車姓名${index + 1}`])[1],
-                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerBirthday_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入回程搭車生日${index + 1}`])[1],
-                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerPhone_${index + 1}`) ?? "", ["^.{1,}$", "^0[0-9]{7,}$"], [`請輸入回程手機${index + 1}`, `請輸入正確的回程手機${index + 1}`])[1]
+                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerName_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入回程姓名${index + 1}`])[1],
+                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerBirthday_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入回程生日${index + 1}`])[1],
+                                                            valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerPhone_${index + 1}`) ?? "", ["^.{1,}$", "^0[0-9]{7,}$"], [`請輸入回程聯絡電話${index + 1}`, `請輸入正確的回程聯絡電話${index + 1}`])[1]
                                                         ]
                                                     }).flat().every(V => (V === null))
                                             )
@@ -1324,9 +1272,9 @@ const LaptopLBase = (props) => {
                                             validMsg = (Array(globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value)).fill(0)
                                                 .map((item, index) => {
                                                     return [
-                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerName_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入回程搭車姓名${index + 1}`])[1],
-                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerBirthday_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入回程搭車生日${index + 1}`])[1],
-                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerPhone_${index + 1}`) ?? "", ["^.{1,}$", "^0[0-9]{7,}$"], [`請輸入回程手機${index + 1}`, `請輸入正確的回程手機${index + 1}`])[1]
+                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerName_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入回程姓名${index + 1}`])[1],
+                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerBirthday_${index + 1}`) ?? "", ["^.{1,}$"], [`請輸入回程生日${index + 1}`])[1],
+                                                        valid(globalContextService.get("WhiteCallCarComponentPage", `ReturnTakerPhone_${index + 1}`) ?? "", ["^.{1,}$", "^0[0-9]{7,}$"], [`請輸入回程聯絡電話${index + 1}`, `請輸入正確的回程聯絡電話${index + 1}`])[1]
                                                     ]
                                                 }).flat().filter(v => v !== null)[0]; // 拿第一個檢核不通過的錯誤訊息
                                         }

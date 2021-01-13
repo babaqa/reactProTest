@@ -179,8 +179,8 @@ export default {
                 height: "auto",
                 width: "50%",
                 // display: props.open ? "block" : "none",
-                padding: "16px",
-                minHeight: "142px"
+                padding: "12px 16px",
+                // minHeight: "142px"
             })
         },
         laptop: {
@@ -189,8 +189,8 @@ export default {
                 height: "auto",
                 width: "100%",
                 // display: props.open ? "block" : "none",
-                padding: "16px",
-                minHeight: "142px"
+                padding: "12px 16px",
+                // minHeight: "142px"
             })
         },
         tablet: {
@@ -199,8 +199,8 @@ export default {
                 height: "auto",
                 width: "100%",
                 // display: props.open ? "block" : "none",
-                padding: "16px",
-                minHeight: "142px"
+                padding: "12px 16px",
+                // minHeight: "142px"
             })
         },
     },
@@ -383,7 +383,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px 0 12px",
                 display: "inline-block",
                 // ...style.occupy(6),
             })
@@ -391,7 +391,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px 0 12px",
                 display: "inline-block",
                 // ...style.occupy(6),
             })
@@ -433,7 +433,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 12px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(6),
             })
@@ -441,7 +441,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 12px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(6),
             })
@@ -483,7 +483,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px 0 0",
                 //display: "inline-block",
                 // ...style.occupy(6),
             })
@@ -491,7 +491,7 @@ export default {
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "0px"
+                height: "0px"
             })
         },
         checkboxContainer: {
@@ -504,11 +504,11 @@ export default {
             basic: (style, props) => ({
                 //調高度
                 ...style,
-                // display: "inlineFlex",
-                // fontSize: "14px",
-                // lineHeight: "22px",
-                // color: "rgba(0,0,0,0.85)",
-                // fontWeight: 500,
+                display: "inlineFlex",
+                fontSize: "14px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.85)",
+                fontWeight: 500,
                 // height: "28px",
             })
         },
@@ -516,8 +516,8 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "16px",
-                height: "auto"
+                // minHeight: "18px",
+                height: "0px"
             })
         }
     },
@@ -528,7 +528,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 12px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(6),
             })
@@ -536,7 +536,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 12px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(6),
             })
@@ -544,7 +544,7 @@ export default {
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "0px"
+                height: "0px"
             })
         },
         dateTimePickerContainer: {
@@ -566,8 +566,8 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         }
     },
@@ -647,7 +647,7 @@ export default {
             // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
             backgroundColor: "transparent",
             // margin: "12px",
-            padding: "36px 16px 16px"
+            padding: "36px 12px 12px"
         })
     },
     //#endregion
@@ -799,7 +799,7 @@ export default {
             // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
             backgroundColor: "transparent",
             // margin: "12px",
-            padding: "36px 16px 16px"
+            padding: "36px 12px 12px"
         })
     },
     //#endregion
@@ -814,20 +814,6 @@ export default {
                 ...style.occupy(12),
                 marginTop: "12px",
                 backgroundColor: "#FFF",
-            })
-        },
-        viewTypeTopLabel: {
-            basic: (style, props) => ({
-                ...style,
-                //height: "0px"
-            })
-        },
-        viewTypeBottomLabel: {
-            basic: (style, props) => ({
-                ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
             })
         },
         container: {
@@ -846,18 +832,25 @@ export default {
                 // height: "0px"
             })
         },
-        selectorContainer: {
+        gmapInputContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        gmapInputSubContainer: {
             basic: (style, props) => ({
                 ...style,
-                //width: "200px"
+                height: "28px",
             })
         },
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
+                height: "24px",
                 minHeight: "24px",
-                height: "auto"
             })
         }
     },
@@ -873,7 +866,7 @@ export default {
                 // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
                 backgroundColor: "transparent",
                 // margin: "12px",
-                padding: "16px"
+                padding: "12px 16px"
             })
         },
         laptop: {
@@ -884,7 +877,7 @@ export default {
                 // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
                 backgroundColor: "transparent",
                 // margin: "12px",
-                padding: "16px"
+                padding: "12px 16px"
             })
         },
         tablet: {
@@ -895,7 +888,7 @@ export default {
                 // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
                 backgroundColor: "transparent",
                 // margin: "12px",
-                padding: "16px"
+                padding: "12px 16px"
             })
         },
     },
@@ -939,7 +932,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "16px",
+                minHeight: "18px",
                 height: "auto"
             })
         }
@@ -965,7 +958,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 8px",
+                padding: "0 16px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(4),
             })
@@ -996,6 +989,20 @@ export default {
     },
     //#endregion
 
+    //#region 去程搭車人數容器
+    takerCountsContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "auto",
+            // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
+            backgroundColor: "transparent",
+            // margin: "12px",
+            padding: "12px 16px"
+        })
+    },
+    //#endregion
+
     //#region 搭車人數 AccompanyCounts
     accompanyCounts: {
         container: {
@@ -1021,8 +1028,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                minHeight: "26px",
-                height: "26px",
+                // minHeight: "26px",
+                // height: "26px",
+                height: "0px",
                 // fontSize: "12px",
                 // lineHeight: "18px",
                 // color: "#ff4d4f",
@@ -1057,7 +1065,7 @@ export default {
                 // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
                 backgroundColor: "#FFD8BF",
                 // margin: "12px",
-                padding: "16px 0"
+                padding: "16px 8px"
             })
         },
         laptop: {
@@ -1090,7 +1098,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px",
                 display: "inline-block",
                 ...style.occupy(4),
             })
@@ -1105,14 +1113,14 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         },
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px",
                 display: "inline-block",
                 ...style.occupy(4),
             })
@@ -1154,11 +1162,11 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto",
-                fontSize: "12px",
-                lineHeight: "18px",
-                color: "#ff4d4f"
+                // minHeight: "24px",
+                height: "0px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f"
             })
         }
     },
@@ -1169,7 +1177,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px",
                 display: "inline-block",
                 ...style.occupy(4),
             })
@@ -1177,7 +1185,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px",
                 display: "inline-block",
                 ...style.occupy(4),
             })
@@ -1206,8 +1214,8 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         }
     },
@@ -1218,7 +1226,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px",
                 display: "inline-block",
                 ...style.occupy(4),
             })
@@ -1233,14 +1241,14 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         },
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px",
                 display: "inline-block",
                 ...style.occupy(4),
             })
@@ -1282,22 +1290,29 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto",
-                fontSize: "12px",
-                lineHeight: "18px",
-                color: "#ff4d4f"
+                // minHeight: "24px",
+                height: "0px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f"
             })
         }
     },
     //#endregion
+
+    //#region 搭車電話刪除icon 
+    deleteSvg: {
+        position: "absolute",
+        right: "0px",
+        color: "#FF4D4F"
+    },
 
     //#region 簡訊號碼 SmsNumber
     smsNumber: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 8px",
+                padding: "0 16px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(4),
             })
@@ -1319,7 +1334,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px 0 8px",
+                padding: "0 16px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(4),
             })
@@ -1377,7 +1392,7 @@ export default {
             // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
             backgroundColor: "transparent",
             // margin: "12px",
-            padding: "36px 16px 16px"
+            padding: "12px 16px"
         })
     },
     //#endregion

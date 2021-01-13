@@ -311,7 +311,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px 0 16px",
                 display: "inline-block",
                 ...style.occupy(6),
             })
@@ -319,7 +319,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px 0 16px",
                 display: "inline-block",
                 ...style.occupy(6),
             })
@@ -360,7 +360,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 16px 0 8px",
                 display: "inline-block",
                 ...style.occupy(6),
             })
@@ -368,7 +368,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 16px 0 8px",
                 display: "inline-block",
                 ...style.occupy(6),
             })

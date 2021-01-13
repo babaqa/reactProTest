@@ -333,7 +333,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px 0 12px",
                 display: "inline-block",
                 // ...style.occupy(2),
             })
@@ -341,7 +341,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 8px 0 12px",
                 display: "inline-block",
                 // ...style.occupy(2),
             })
@@ -383,7 +383,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 12px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(2),
             })
@@ -391,7 +391,7 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: "0 12px 0 8px",
                 display: "inline-block",
                 // ...style.occupy(2),
             })
@@ -883,7 +883,7 @@ export default {
 
     //#region 搭車人數及簡訊容器
     numberContainer: {
-        laptopL:{
+        laptopL: {
             basic: (style, props) => ({
                 ...style,
                 width: "50%",
@@ -894,7 +894,7 @@ export default {
                 padding: "16px"
             })
         },
-        laptop:{
+        laptop: {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
@@ -905,7 +905,7 @@ export default {
                 padding: "16px"
             })
         },
-        tablet:{
+        tablet: {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",

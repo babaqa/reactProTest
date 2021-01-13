@@ -28,6 +28,7 @@ export const WhiteCallCarComponent = (props) => {
     const [WhiteOrderAmt, setWhiteOrderAmt] = useState(
         [
             { id: "1", type: "去程" },
+            { id: "2", type: "回程" },
         ]
     ); // 訂單金額資訊
     //#region 當頁 GlobalContextService (GCS) 值 控制
