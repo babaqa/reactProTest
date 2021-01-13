@@ -943,34 +943,35 @@ const LaptopLBase = (props) => {
                                                             topLabel={
                                                                 <Text
                                                                     style={{ fontSize: "14px", fontWeight: "normal" }}
-                                                                    onClick={() => {
-                                                                        let preNum = globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value;
-                                                                        for (let i = index + 1; i < preNum; i++) {
-                                                                            // 將後面資料向前放
-                                                                            if (i >= index + 1) {
-                                                                                console.log("i===" + i)
-                                                                                globalContextService.set("WhiteCallCarComponentPage", `TakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
-                                                                                globalContextService.set("WhiteCallCarComponentPage", `TakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
-                                                                                globalContextService.set("WhiteCallCarComponentPage", `TakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
-                                                                            } else {
-                                                                                continue
-                                                                            }
-                                                                        }
-                                                                        // 移除最後一筆資料
-                                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerName_${preNum}`);
-                                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerBirthday_${preNum}`);
-                                                                        globalContextService.remove("WhiteCallCarComponentPage", `TakerPhone_${preNum}`);
-                                                                        // setDeleteRowIndex(index + 1);
-                                                                        if (preNum === 1) {
-                                                                            globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", null)
-                                                                        } else {
-                                                                            globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value - 1, label: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value - 1 + "人" });
-                                                                        }
-                                                                        setForceUpdate(f => !f);
-                                                                    }}
-                                                                    theme={laptopL.deleteButton}
                                                                 >
-                                                                    <Delete style={laptopL.deleteSvg}></Delete>
+                                                                    <Delete
+                                                                        style={laptopL.deleteSvg}
+                                                                        onClick={() => {
+                                                                            let preNum = globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value;
+                                                                            for (let i = index + 1; i < preNum; i++) {
+                                                                                // 將後面資料向前放
+                                                                                if (i >= index + 1) {
+                                                                                    console.log("i===" + i)
+                                                                                    globalContextService.set("WhiteCallCarComponentPage", `TakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
+                                                                                    globalContextService.set("WhiteCallCarComponentPage", `TakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
+                                                                                    globalContextService.set("WhiteCallCarComponentPage", `TakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
+                                                                                } else {
+                                                                                    continue
+                                                                                }
+                                                                            }
+                                                                            // 移除最後一筆資料
+                                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerName_${preNum}`);
+                                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerBirthday_${preNum}`);
+                                                                            globalContextService.remove("WhiteCallCarComponentPage", `TakerPhone_${preNum}`);
+                                                                            // setDeleteRowIndex(index + 1);
+                                                                            if (preNum === 1) {
+                                                                                globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", null)
+                                                                            } else {
+                                                                                globalContextService.set("WhiteCallCarComponentPage", "AccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value - 1, label: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value - 1 + "人" });
+                                                                            }
+                                                                            setForceUpdate(f => !f);
+                                                                        }}
+                                                                    ></Delete>
                                                                 聯絡電話{index + 1}
                                                                 </Text>
                                                             }
@@ -1126,34 +1127,36 @@ const LaptopLBase = (props) => {
                                                                 <TextInput
                                                                     topLabel={
                                                                         <Text
-                                                                            onClick={() => {
-                                                                                let preNum = globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value;
-                                                                                for (let i = index + 1; i < preNum; i++) {
-                                                                                    // 將後面資料向前放
-                                                                                    if (i >= index + 1) {
-                                                                                        console.log("i===" + i)
-                                                                                        globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
-                                                                                        globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
-                                                                                        globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
-                                                                                    } else {
-                                                                                        continue
-                                                                                    }
-                                                                                }
-                                                                                // 移除最後一筆資料
-                                                                                globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerName_${preNum}`);
-                                                                                globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerBirthday_${preNum}`);
-                                                                                globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerPhone_${preNum}`);
-                                                                                // setDeleteRowIndex(index + 1);
-                                                                                if (preNum === 1) {
-                                                                                    globalContextService.set("WhiteCallCarComponentPage", "ReturnAccompanyCounts", null)
-                                                                                } else {
-                                                                                    globalContextService.set("WhiteCallCarComponentPage", "ReturnAccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value - 1, label: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value - 1 + "人" });
-                                                                                }
-                                                                                setForceUpdate(f => !f);
-                                                                            }}
-                                                                            theme={laptopL.deleteButton}
+                                                                            style={{ fontSize: "14px", fontWeight: "normal" }}
                                                                         >
-                                                                            <Delete style={laptopL.deleteSvg}></Delete>
+                                                                            <Delete
+                                                                                style={laptopL.deleteSvg}
+                                                                                onClick={() => {
+                                                                                    let preNum = globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value;
+                                                                                    for (let i = index + 1; i < preNum; i++) {
+                                                                                        // 將後面資料向前放
+                                                                                        if (i >= index + 1) {
+                                                                                            console.log("i===" + i)
+                                                                                            globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
+                                                                                            globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
+                                                                                            globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
+                                                                                        } else {
+                                                                                            continue
+                                                                                        }
+                                                                                    }
+                                                                                    // 移除最後一筆資料
+                                                                                    globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerName_${preNum}`);
+                                                                                    globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerBirthday_${preNum}`);
+                                                                                    globalContextService.remove("WhiteCallCarComponentPage", `ReturnTakerPhone_${preNum}`);
+                                                                                    // setDeleteRowIndex(index + 1);
+                                                                                    if (preNum === 1) {
+                                                                                        globalContextService.set("WhiteCallCarComponentPage", "ReturnAccompanyCounts", null)
+                                                                                    } else {
+                                                                                        globalContextService.set("WhiteCallCarComponentPage", "ReturnAccompanyCounts", { value: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value - 1, label: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value - 1 + "人" });
+                                                                                    }
+                                                                                    setForceUpdate(f => !f);
+                                                                                }}
+                                                                            ></Delete>
                                                                         聯絡電話{index + 1}
                                                                         </Text>
                                                                     }
