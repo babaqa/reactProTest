@@ -53,15 +53,18 @@ export default {
 
     //#region Tab項目容器
     titleBarTabItemContainerLaptopL: {
-        basic: (style, props) => ({
-            ...style,
-            backgroundColor: "#4DB8BE",
-            height: "100px",
-            width: "128px",
-            borderBottom: props?.active ? "3px solid" : "unset",
-            color: props?.active ? "#FFE977" : "#fff",
-            cursor: "pointer"
-        }),
+        basic: (style, props) => {
+            return {
+                ...style,
+                backgroundColor: "#4DB8BE",
+                height: "100px",
+                width: "128px",
+                borderBottom: props?.active ? "3px solid" : "unset",
+                color: props?.active ? "#FFE977" : "#fff",
+                cursor: "pointer",
+                ...(props.needHover && { color: "#FFE977" })
+            }
+        },
         hover: (style, props) => ({
             color: "#FFE977",
             borderBottom: "3px solid",
@@ -231,7 +234,8 @@ export default {
             width: "70px",
             borderBottom: props?.active ? "3px solid" : "unset",
             color: props?.active ? "#FFE977" : "#fff",
-            cursor: "pointer"
+            cursor: "pointer",
+            ...(props.needHover && { color: "#FFE977" })
         }),
         hover: (style, props) => ({
             color: "#FFE977",

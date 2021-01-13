@@ -12,7 +12,7 @@ import { ReactComponent as MobileMMenu } from '../../Assets/img/MobileMMenu.svg'
 
 import { ReactComponent as NewsTab } from '../../Assets/img/NewsTab.svg'
 import { ReactComponent as CallCarTab } from '../../Assets/img/CallCarTab.svg'
-import { ReactComponent as FastCallCarTab } from '../../Assets/img/FastCallCarTab.svg'
+import { ReactComponent as BusRouteTab } from '../../Assets/img/BusRouteTab.svg'
 import { ReactComponent as RecordTab } from '../../Assets/img/RecordTab.svg'
 import { ReactComponent as UserInfoTab } from '../../Assets/img/UserInfoTab.svg'
 import { ReactComponent as ContactTab } from '../../Assets/img/ContactTab.svg'
@@ -28,6 +28,7 @@ import { isNil } from 'lodash';
 export const Layout = (props) => {
     //const [Collapse, setCollapse] = useState(false);
     const [DrawerCollapse, setDrawerCollapse] = useState(true);
+    const [NeedHover, setNeedHover] = useState(false); // DropDown 開啟時需要hover
     const [width] = useWindowSize();
 
     const { Collapse, setCollapse, Theme, Switch } = useContext(Context);
@@ -130,8 +131,14 @@ export const Layout = (props) => {
             case "allTabNameLaptopL":
                 return [
                     { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconLaptopL} /> },
-                    { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptopL} /> },
-                    { path: "/FastCallCar", name: "快速叫車", icon: <FastCallCarTab style={layout.titleBarTabIconLaptopL} /> },
+                    {
+                        path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptopL} />,
+                        dropDown: [
+                            { path: "/CallCar", name: "預約訂車" },
+                            { path: "/FastCallCar", name: "快速叫車" },
+                        ]
+                    },
+                    { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconLaptopL} /> },
                     { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconLaptopL} /> },
                     { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconLaptopL} /> },
                     { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconLaptopL} /> },
@@ -140,8 +147,14 @@ export const Layout = (props) => {
             case "allTabNameLaptop":
                 return [
                     { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/FastCallCar", name: "快速叫車", icon: <FastCallCarTab style={layout.titleBarTabIconLaptop} /> },
+                    {
+                        path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptop} />,
+                        dropDown: [
+                            { path: "/CallCar", name: "預約訂車" },
+                            { path: "/FastCallCar", name: "快速叫車" },
+                        ]
+                    },
+                    { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconLaptop} /> },
                     { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconLaptop} /> },
                     { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconLaptop} /> },
                     { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconLaptop} /> },
@@ -150,8 +163,14 @@ export const Layout = (props) => {
             case "allTabNameTablet":
                 return [
                     { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/FastCallCar", name: "快速叫車", icon: <FastCallCarTab style={layout.titleBarTabIconTablet} /> },
+                    {
+                        path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconTablet} />,
+                        dropDown: [
+                            { path: "/CallCar", name: "預約訂車" },
+                            { path: "/FastCallCar", name: "快速叫車" },
+                        ]
+                    },
+                    { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconTablet} /> },
@@ -166,7 +185,7 @@ export const Layout = (props) => {
                 return [
                     { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconMobileM} /> },
                     { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/FastCallCar", name: "快速叫車", icon: <FastCallCarTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconMobileM} /> },
                     { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconMobileM} /> },
                     { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconMobileM} /> },
                 ]
@@ -204,20 +223,71 @@ export const Layout = (props) => {
                                 {TabMapping("allTabNameLaptopL").map((item => {
                                     return (
                                         <React.Fragment key={item.path}>
-                                            {/* Tab項目容器 */}
-                                            <BasicContainer
-                                                active={location.pathname === item.path}
-                                                theme={layout.titleBarTabItemContainerLaptopL}
-                                                onClick={() => { history.push(item.path) }}
-                                            >
-                                                {item.icon}
-                                                <Text
-                                                    theme={layout.titleBarTabTextLaptopL}
-                                                >
-                                                    {item.name}
-                                                </Text>
+                                            {
+                                                (item.path !== "/CallCar") ?
+                                                    <>
+                                                        {/* Tab項目容器 */}
+                                                        < BasicContainer
+                                                            active={location.pathname === item.path}
+                                                            theme={layout.titleBarTabItemContainerLaptopL}
+                                                            onClick={() => { history.push(item.path) }}
+                                                        >
+                                                            {item.icon}
+                                                            <Text
+                                                                theme={layout.titleBarTabTextLaptopL}
+                                                            >
+                                                                {item.name}
+                                                            </Text>
 
-                                            </BasicContainer>
+                                                        </BasicContainer>
+                                                    </>
+                                                    :
+                                                    <DropDown
+                                                        placement={"bottomRight"}
+                                                        dropDownItem={
+                                                            <>
+                                                                {/* DropDown 項目容器 */}
+                                                                <BasicContainer
+                                                                    baseDefaultTheme={"DefaultTheme"}
+                                                                    theme={layout.laptopDropDownItemContainer}
+                                                                >
+                                                                    {/* DropDown 子項目 */}
+                                                                    {item.dropDown.map((it) => {
+                                                                        return (
+                                                                            <Text
+                                                                                onMouseOver={(e) => { setNeedHover(true); props.onMouseover && props.onMouseover(e); }}
+                                                                                onMouseOut={(e) => { setNeedHover(false); props.onMouseout && props.onMouseout(e); }}
+                                                                                key={it.path}
+                                                                                baseDefaultTheme={"DefaultTheme"}
+                                                                                theme={layout.laptopDropDownSubItemContainer}
+                                                                                onClick={() => { history.push(it.path) }}
+                                                                            >
+                                                                                {it.name}
+                                                                            </Text>
+                                                                        )
+                                                                    })
+                                                                    }
+                                                                </BasicContainer>
+                                                            </>
+                                                        }
+                                                    >
+                                                        {/* Tab項目容器 */}
+                                                        < BasicContainer
+                                                            active={location.pathname === item.path}
+                                                            needHover={NeedHover}
+                                                            theme={layout.titleBarTabItemContainerLaptopL}
+                                                        // onClick={() => { history.push(item.path) }}
+                                                        >
+                                                            {item.icon}
+                                                            <Text
+                                                                theme={layout.titleBarTabTextLaptopL}
+                                                            >
+                                                                {item.name}
+                                                            </Text>
+
+                                                        </BasicContainer>
+                                                    </DropDown>
+                                            }
                                         </React.Fragment>
                                     )
                                 }))}
@@ -296,7 +366,8 @@ export const Layout = (props) => {
             }
 
             {/* 大於1024 與 小於1440的畫面 (laptop)*/}
-            {(width >= 1024 && width < 1440) &&
+            {
+                (width >= 1024 && width < 1440) &&
                 <>
                     {/* 標題列容器 Laptop */}
                     <Container
@@ -321,20 +392,72 @@ export const Layout = (props) => {
                                 {TabMapping("allTabNameLaptop").map((item => {
                                     return (
                                         <React.Fragment key={item.path}>
-                                            {/* Tab項目容器 */}
-                                            <BasicContainer
-                                                active={location.pathname === item.path}
-                                                theme={layout.titleBarTabItemContainerLaptop}
-                                                onClick={() => { history.push(item.path) }}
-                                            >
-                                                {item.icon}
-                                                <Text
-                                                    theme={layout.titleBarTabTextLaptop}
-                                                >
-                                                    {item.name}
-                                                </Text>
+                                            {
+                                                (item.path !== "/CallCar") ?
+                                                    <>
+                                                        {/* Tab項目容器 */}
+                                                        < BasicContainer
+                                                            active={location.pathname === item.path}
+                                                            theme={layout.titleBarTabItemContainerLaptop}
+                                                            onClick={() => { history.push(item.path) }}
+                                                        >
+                                                            {item.icon}
+                                                            <Text
+                                                                theme={layout.titleBarTabTextLaptop}
+                                                            >
+                                                                {item.name}
+                                                            </Text>
 
-                                            </BasicContainer>
+                                                        </BasicContainer>
+                                                    </>
+                                                    :
+                                                    <DropDown
+                                                        placement={"bottomCenter"}
+                                                        dropDownItem={
+                                                            <>
+                                                                {/* DropDown 項目容器 */}
+                                                                <BasicContainer
+                                                                    baseDefaultTheme={"DefaultTheme"}
+                                                                    theme={layout.laptopDropDownItemContainer}
+                                                                >
+                                                                    {/* DropDown 子項目 */}
+                                                                    {item.dropDown.map((it) => {
+                                                                        return (
+                                                                            <Text
+                                                                                onMouseOver={(e) => { setNeedHover(true); props.onMouseover && props.onMouseover(e); }}
+                                                                                onMouseOut={(e) => { setNeedHover(false); props.onMouseout && props.onMouseout(e); }}
+                                                                                key={it.path}
+                                                                                baseDefaultTheme={"DefaultTheme"}
+                                                                                theme={layout.laptopDropDownSubItemContainer}
+                                                                                onClick={() => { history.push(it.path) }}
+                                                                            >
+                                                                                {it.name}
+                                                                            </Text>
+                                                                        )
+                                                                    })
+                                                                    }
+                                                                </BasicContainer>
+                                                            </>
+                                                        }
+                                                    >
+
+                                                        {/* Tab項目容器 */}
+                                                        < BasicContainer
+                                                            active={location.pathname === item.path}
+                                                            needHover={NeedHover}
+                                                            theme={layout.titleBarTabItemContainerLaptop}
+                                                        // onClick={() => { history.push(item.path) }}
+                                                        >
+                                                            {item.icon}
+                                                            <Text
+                                                                theme={layout.titleBarTabTextLaptop}
+                                                            >
+                                                                {item.name}
+                                                            </Text>
+
+                                                        </BasicContainer>
+                                                    </DropDown>
+                                            }
                                         </React.Fragment>
                                     )
                                 }))}
@@ -412,7 +535,8 @@ export const Layout = (props) => {
             }
 
             {/* 大於768 與 小於1024的畫面 (Tablet)*/}
-            {(width >= 768 && width < 1024) &&
+            {
+                (width >= 768 && width < 1024) &&
                 <>
                     {/* 標題列容器 Tablet */}
                     <Container
@@ -437,20 +561,72 @@ export const Layout = (props) => {
                                 {TabMapping("allTabNameTablet").map((item => {
                                     return (
                                         <React.Fragment key={item.path}>
-                                            {/* Tab項目容器 */}
-                                            <BasicContainer
-                                                active={location.pathname === item.path}
-                                                theme={layout.titleBarTabItemContainerTablet}
-                                                onClick={() => { history.push(item.path) }}
-                                            >
-                                                {item.icon}
-                                                <Text
-                                                    theme={layout.titleBarTabTextTablet}
-                                                >
-                                                    {item.name}
-                                                </Text>
+                                            {
+                                                (item.path !== "/CallCar") ?
+                                                    <>
+                                                        {/* Tab項目容器 */}
+                                                        < BasicContainer
+                                                            active={location.pathname === item.path}
+                                                            theme={layout.titleBarTabItemContainerTablet}
+                                                            onClick={() => { history.push(item.path) }}
+                                                        >
+                                                            {item.icon}
+                                                            <Text
+                                                                theme={layout.titleBarTabTextTablet}
+                                                            >
+                                                                {item.name}
+                                                            </Text>
 
-                                            </BasicContainer>
+                                                        </BasicContainer>
+                                                    </>
+                                                    :
+                                                    <DropDown
+                                                        placement={"bottomCenter"}
+                                                        dropDownItem={
+                                                            <>
+                                                                {/* DropDown 項目容器 */}
+                                                                <BasicContainer
+                                                                    baseDefaultTheme={"DefaultTheme"}
+                                                                    theme={layout.laptopDropDownItemContainer}
+                                                                >
+                                                                    {/* DropDown 子項目 */}
+                                                                    {item.dropDown.map((it) => {
+                                                                        return (
+                                                                            <Text
+                                                                                onMouseOver={(e) => { setNeedHover(true); props.onMouseover && props.onMouseover(e); }}
+                                                                                onMouseOut={(e) => { setNeedHover(false); props.onMouseout && props.onMouseout(e); }}
+                                                                                key={it.path}
+                                                                                baseDefaultTheme={"DefaultTheme"}
+                                                                                theme={layout.laptopDropDownSubItemContainer}
+                                                                                onClick={() => { history.push(it.path) }}
+                                                                            >
+                                                                                {it.name}
+                                                                            </Text>
+                                                                        )
+                                                                    })
+                                                                    }
+                                                                </BasicContainer>
+                                                            </>
+                                                        }
+                                                    >
+
+                                                        {/* Tab項目容器 */}
+                                                        < BasicContainer
+                                                            active={location.pathname === item.path}
+                                                            needHover={NeedHover}
+                                                            theme={layout.titleBarTabItemContainerTablet}
+                                                        // onClick={() => { history.push(item.path) }}
+                                                        >
+                                                            {item.icon}
+                                                            <Text
+                                                                theme={layout.titleBarTabTextTablet}
+                                                            >
+                                                                {item.name}
+                                                            </Text>
+
+                                                        </BasicContainer>
+                                                    </DropDown>
+                                            }
                                         </React.Fragment>
                                     )
                                 }))}
@@ -528,7 +704,8 @@ export const Layout = (props) => {
             }
 
             {/* 小於等於1024的畫面 (MobileM) */}
-            { width < 768 &&
+            {
+                width < 768 &&
                 <>
                     {/* 標題列容器 MobileM */}
                     <Container

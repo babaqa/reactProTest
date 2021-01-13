@@ -9,6 +9,7 @@ import fareSubsidyParam from './Pages/Base/FareSubsidyParam/FareSubsidyParam'
 import medicalOrgManager from './Pages/Base/MedicalOrgManager/MedicalOrgManager'
 import operatingUnitSetting from './Pages/Base/OperatingUnitSetting/OperatingUnitSetting'
 import news from './Pages/News/News'
+import busRoute from './Pages/BusRoute/BusRoute'
 import systemNewsComponent from './Pages/News/SystemNewsComponent/SystemNewsComponent'
 import caseNewsComponent from './Pages/News/CaseNewsComponent/CaseNewsComponent'
 import busNewsComponent from './Pages/News/BusNewsComponent/BusNewsComponent'
@@ -24,7 +25,7 @@ import userInfo from './Pages/UserInfo/UserInfo'
 import contact from './Pages/Contact/Contact'
 import qAndA from './Pages/QAndA/QAndA'
 import order from './Pages/Order/Order'
-import busRoute from './Pages/BusRouteAndStop/BusRoute/BusRoute'
+// import busRoute from './Pages/BusRouteAndStop/BusRoute/BusRoute'
 import pickUpData from './Pages/Report/PickUpData/PickUpData'
 import revenue from './Pages/Report/Revenue/Revenue'
 import carUsed from './Pages/Report/CarUsed/CarUsed'
@@ -61,6 +62,19 @@ export default {
         //#region 最新消息
         news: {
             ...news,
+            component: {
+                systemNewsComponent,
+                caseNewsComponent,
+                busNewsComponent,
+                whiteNewsComponent,
+            }
+        },
+
+        //#endregion
+
+        //#region 最新消息
+        busRoute: {
+            ...busRoute,
             component: {
                 systemNewsComponent,
                 caseNewsComponent,
@@ -112,7 +126,7 @@ export default {
         exportReport,
         //#endregion
 
-        busRoute,
+        // busRoute,
 
         //#region 司機車輛管理
         drivers,

@@ -234,6 +234,21 @@ export const Routers = (props) => {
                     }
                     }>
                 </Route>
+                <Route exact path={"/BusRoute"}
+                    render={({ location }) => {
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/BusRoute"]
+                        ) : (
+                                urlMapping["/BusRoute"]
+                                // <Redirect
+                                //     to={{
+                                //         pathname: "/Login",
+                                //     }}
+                                // />
+                            );
+                    }
+                    }>
+                </Route>
                 <Route exact path={"/Record"}
                     render={({ location }) => {
                         return (getParseItemLocalStorage("CAuth") !== null) ? (

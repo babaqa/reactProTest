@@ -16,6 +16,7 @@ import { ReactComponent as ContactSvg } from '../Assets/img/BackstageLeftSideMen
 import { News } from '../Pages/News/News';
 import { CallCar } from '../Pages/CallCar/CallCar';
 import { FastCallCar } from '../Pages/FastCallCar/FastCallCar';
+import { BusRoute } from '../Pages/BusRoute/BusRoute';
 import { Record } from '../Pages/Record/Record';
 import { UserInfo } from '../Pages/UserInfo/UserInfo';
 import { Contact } from '../Pages/Contact/Contact';
@@ -27,6 +28,7 @@ export const urlMapping = {
    "/News": <News />,// 最新消息
    "/CallCar": <CallCar />,// 預約訂車
    "/FastCallCar": <FastCallCar />,// 快速叫車
+   "/BusRoute": <BusRoute />,// 快速叫車
    "/Record": <Record />,// 搭乘紀錄
    "/UserInfo": <UserInfo />,// 用戶資料
    "/Contact": <Contact />,// 聯繫客服
