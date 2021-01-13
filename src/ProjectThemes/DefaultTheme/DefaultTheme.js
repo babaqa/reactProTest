@@ -19,6 +19,8 @@ import caseCallCarComponent from './Pages/CallCar/CaseCallCarComponent/CaseCallC
 import busCallCarComponent from './Pages/CallCar/BusCallCarComponent/BusCallCarComponent'
 import whiteCallCarComponent from './Pages/CallCar/WhiteCallCarComponent/WhiteCallCarComponent'
 
+import fastCallCar from './Pages/FastCallCar/FastCallCar'
+
 import record from './Pages/Record/Record'
 import userInfo from './Pages/UserInfo/UserInfo'
 import contact from './Pages/Contact/Contact'
@@ -80,6 +82,10 @@ export default {
                 whiteCallCarComponent,
             }
         },
+        //#endregion
+
+        //#region 快速叫車
+        fastCallCar,
         //#endregion
 
         //#region 搭乘紀錄
