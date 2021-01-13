@@ -28,6 +28,7 @@ export const WhiteCallCarComponent = (props) => {
     const [WhiteOrderAmt, setWhiteOrderAmt] = useState(
         [
             { id: "1", type: "去程" },
+            { id: "2", type: "回程" },
         ]
     ); // 訂單金額資訊
     //#region 當頁 GlobalContextService (GCS) 值 控制
@@ -187,8 +188,10 @@ export const WhiteCallCarComponent = (props) => {
                 if (PreResult.code === 200) {
                     // 成功新增、編輯客戶端用戶 API 
                     // console.log(PreResult.data)
-                    controllGCS("Save", "API");
-                    history.push("/Case");
+                    if (addOrUpdateRowdata?.isLastOrder) {
+                        history.push("/Case");
+                        controllGCS("Save", "API");
+                    }
                 }
                 else {
                     throw PreResult;
@@ -297,7 +300,7 @@ export const WhiteCallCarComponent = (props) => {
     return (
         <>
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     UserId={urlParams.get("userId")}
                     CaseUserId={urlParams.get("caseUserId")}
@@ -313,7 +316,7 @@ export const WhiteCallCarComponent = (props) => {
 
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     UserId={urlParams.get("userId")}
@@ -346,7 +349,7 @@ export const WhiteCallCarComponent = (props) => {
 
                     controllGCS={controllGCS}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM
