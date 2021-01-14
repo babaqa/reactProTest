@@ -5,21 +5,9 @@ export default {
             ...style,
             minHeight: "calc( 100vh - 56px - 94px - 48px)",
             height: "auto",
-            // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
-            // borderRadius: "16px"
-        })
-    },
-    //#endregion
-    //#region 公告容器
-    newsCardContainer: {
-        basic: (style, props) => ({
-            ...style,
-            height: "102px",
             width: "100%",
             // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
-            // borderRadius: "16px",
-            margin: "8px 0 0 0",
-            backgroundColor: "#FFF"
+            // borderRadius: "16px"
         })
     },
     //#endregion
@@ -30,7 +18,7 @@ export default {
             return {
                 ...style,
                 // padding: "24px 12px",
-                margin: "8px 0 0",
+                // margin: "8px 0 0",
                 background: "rgba(0,0,0,0)",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
                 height: "calc( 100vh - 451px)",
@@ -44,13 +32,26 @@ export default {
     },
     //#endregion
 
+    //#region 公告容器
+    newsCardContainer: {
+        basic: (style, props) => ({
+            ...style,
+            height: "87px",
+            width: "100%",
+            boxShadow: "inset 0px -1px 0px #DBE4E8",
+            // borderRadius: "16px",
+            // margin: "8px 0 0 0",
+            backgroundColor: "#FFF"
+        })
+    },
+    //#endregion
     //#region 公告內容容器
     newsCardContentContainer: {
         basic: (style, props) => ({
             ...style,
             ...style.occupy(12),
-            height: "64px",
-            padding: "16px 16px 4px 16px",
+            height: "56px",
+            padding: "4px 16px 8px",
             overflow: "hidden"
             // width: "100%",
         })
@@ -73,7 +74,7 @@ export default {
             ...style,
             ...style.occupy(6),
             height: "auto",
-            padding: "0 16px"
+            padding: "8px 16px 0"
         })
     },
     //#endregion
@@ -86,7 +87,7 @@ export default {
                 basic: (style, props) => ({
                     ...style,
                     margin: "0 0 0 0",
-                    top: "-5px",
+                    top: "0px",
                     padding: "0px 7px",
                     fontSize: "12px",
                     lineHeight: "20px",
@@ -104,7 +105,7 @@ export default {
                 basic: (style, props) => ({
                     ...style,
                     margin: "0 0 0 0",
-                    top: "-5px",
+                    top: "0px",
                     padding: "0px 7px",
                     fontSize: "12px",
                     lineHeight: "20px",
@@ -123,7 +124,7 @@ export default {
                 basic: (style, props) => ({
                     ...style,
                     margin: "0 0 0 0",
-                    top: "-5px",
+                    top: "0px",
                     padding: "0px 7px",
                     fontSize: "12px",
                     lineHeight: "20px",
@@ -142,7 +143,7 @@ export default {
                 basic: (style, props) => ({
                     ...style,
                     margin: "0 0 0 0",
-                    top: "-5px",
+                    top: "0px",
                     padding: "0px 7px",
                     fontSize: "12px",
                     lineHeight: "20px",
@@ -164,7 +165,7 @@ export default {
             ...style,
             ...style.occupy(6),
             height: "auto",
-            padding: "0 16px"
+            padding: "8px 16px 0"
         })
     },
     //#endregion
@@ -173,7 +174,7 @@ export default {
         basic: (style, props) => ({
             ...style,
             fontSize: "12px",
-            top: "-2px",
+            top: "0px",
             right: "20px",
             lineHeight: "18px",
             fontWeight: "400",

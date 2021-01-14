@@ -6,7 +6,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "48px 150px 16px 150px" // 標題列的padding
+                    padding: "12px 0 0 0" // 標題列的padding
                 }
             }
         },
@@ -22,7 +22,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
+                    backgroundColor: "#DBE4E8",
                     padding: "0 150px 236px 150px"
                 }
             }
@@ -32,7 +32,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "32px 48px 16px 48px" // 標題列的padding
+                    padding: "12px 0 0 0" // 標題列的padding
                 }
             }
         },
@@ -48,7 +48,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
+                    backgroundColor: "#DBE4E8",
                     padding: "0 48px 204px 48px" //188 是授權圖高度
                 }
             }
@@ -59,7 +59,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "32px 48px 16px 48px" // 標題列的padding
+                    padding: "12px 0 0 0" // 標題列的padding
                 }
             }
         },
@@ -75,8 +75,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 48px 204px 48px" //188 是授權圖高度
+                    backgroundColor: "#DBE4E8",
+                    padding: "0 24px 204px 24px" //188 是授權圖高度
                 }
             }
         },
@@ -109,18 +109,49 @@ export default {
 
     //#region 標題列
     titleBar: {
-        titleText: {
-            basic: (style, props) => ({
-                ...style,
-                width: "120px"
-            })
-        },
-        rightContainer: {
-            basic: (style, props) => ({
-                ...style,
-                width: "250px"
-            })
-        }
+        basic: (style, props) => ({
+            ...style,
+            width: "236px",
+            height: "40px",
+            backgroundColor: "#FFF",
+            margin: "0 24px 16px"
+        })
+    },
+    //#endregion
+
+    titleText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 600,
+            fontSize: "24px",
+            lineHeight: "32px",
+            color: "#00628F",
+            width: "100%",
+            textAlign: "center",
+            boxShadow: "inset 8px 0px #4DB8BE",
+            top: "4px"
+        })
+    },
+
+    //#region 分頁底色
+    whiteContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "72px",
+            backgroundColor: "#FFFFFF"
+        }),
+    },
+    //#endregion
+
+    //#region 分頁容器
+    tabsContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "56px",
+            backgroundColor: "#6A7987"
+        }),
     },
     //#endregion
 
@@ -128,14 +159,19 @@ export default {
     titleBarCallCarTab: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
-            margin: "0 16px",
+            display: "inline-grid",
+            margin: (props.isActive ? 0 : "0 1px 0 0"),
             lineHeight: "32px",
-            height: "46px",
+            height: (props.isActive ? "56px" : "100%"),
             fontSize: "14px",
             cursor: "pointer",
-            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
-            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
+            width: "160px",
+            color: (props.isActive ? "rgba(0, 0, 0, 0.85)" : "#FFFFFF"),
+            boxShadow: (props.isActive ? "inset 0px 8px 0px #1890FF" : ""),
+            // borderTop: (props.isActive ? "solid 8px #1890FF" : "unset"),
+            backgroundColor: (props.isActive ? "#FFFFFF" : "#9DADBE"),
+            textAlign: "center",
+            alignItems: "center"
         }),
     },
     //#endregion

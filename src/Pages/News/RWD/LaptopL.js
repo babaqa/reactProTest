@@ -46,61 +46,62 @@ const LaptopLBase = (props) => {
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}
-                        <MainPageTitleBar
-                            bascDefaultTheme={"DefaultTheme"}
-                            titleText={"公告"}
-                            theme={laptopL.titleBar}
-                            // onSubmit={(e)=>console.log(e)}
-                            centerContent={
-                                <>
-                                    <BasicContainer>
-                                        {tabMap().map((item, index) => {
-                                            return (
-                                                <React.Fragment key={index}>
-                                                    <Text
-                                                        onClick={() => { props.setNowTab(item) }}
-                                                        isActive={props.nowTab === item}
-                                                        theme={laptopL.titleBarCallCarTab}
-                                                    >
-                                                        {item}
-                                                    </Text>
-                                                </React.Fragment>
-                                            )
-                                        })}
-                                    </BasicContainer>
-                                </>
-                            }
+                        <BasicContainer
+                            theme={laptopL.whiteContainer}
                         >
-                            {/* 日期區間容器 */}
-                            <SubContainer baseDefaultTheme={"DefaultTheme"}>
-                                {/* 日期區間 DateTimeRange  */}
-                                <RangeDateTimePicker
-                                    // topLabel={<></>}
-                                    // type={"time"} time、date、week、month、quarter、year
-                                    type={"date"}
-                                    format={"YYYY-MM-DD"}
-                                    bascDefaultTheme={"DefaultTheme"}
-                                    // viewType
-                                    isSearchable
-                                    placeholder={""}
-                                    value={
-                                        (globalContextService.get("NewsPage", "DateTimeRange") ?
-                                            [moment(globalContextService.get("NewsPage", "DateTimeRange")[0]), moment(globalContextService.get("NewsPage", "DateTimeRange")[1])]
-                                            :
-                                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
+                            <BasicContainer
+                                theme={laptopL.tabsContainer}
+                            >
+                                {
+                                    // <BasicContainer>
+
+                                    tabMap().map((item, index) => {
+                                        return (
+                                            <React.Fragment key={index}>
+                                                <Text
+                                                    onClick={() => { props.setNowTab(item) }}
+                                                    isActive={props.nowTab === item}
+                                                    theme={laptopL.titleBarCallCarTab}
+                                                >
+                                                    {item}
+                                                </Text>
+                                            </React.Fragment>
                                         )
-                                    }
-                                    onChange={(value, momentObj) => {
-                                        if (value !== globalContextService.get("NewsPage", "DateTimeRange")) {
-                                            globalContextService.set("NewsPage", "DateTimeRange", value);
-                                            // console.log("change")
-                                            // setForceUpdate(f => !f)
+                                    })
+
+                                    // </BasicContainer>
+                                }
+                                {/* 日期區間容器 */}
+                                {/* <SubContainer baseDefaultTheme={"DefaultTheme"}> */}
+                                {/* 日期區間 DateTimeRange  */}
+                                {/* <RangeDateTimePicker
+                                        // topLabel={<></>}
+                                        // type={"time"} time、date、week、month、quarter、year
+                                        type={"date"}
+                                        format={"YYYY-MM-DD"}
+                                        bascDefaultTheme={"DefaultTheme"}
+                                        // viewType
+                                        isSearchable
+                                        placeholder={""}
+                                        value={
+                                            (globalContextService.get("NewsPage", "DateTimeRange") ?
+                                                [moment(globalContextService.get("NewsPage", "DateTimeRange")[0]), moment(globalContextService.get("NewsPage", "DateTimeRange")[1])]
+                                                :
+                                                [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
+                                            )
                                         }
-                                    }}
-                                    theme={laptopL.dateTimeRange}
-                                />
-                            </SubContainer>
-                        </MainPageTitleBar>
+                                        onChange={(value, momentObj) => {
+                                            if (value !== globalContextService.get("NewsPage", "DateTimeRange")) {
+                                                globalContextService.set("NewsPage", "DateTimeRange", value);
+                                                // console.log("change")
+                                                // setForceUpdate(f => !f)
+                                            }
+                                        }}
+                                        theme={laptopL.dateTimeRange}
+                                    /> */}
+                                {/* </SubContainer> */}
+                            </BasicContainer>
+                        </BasicContainer>
                     </>
                 }
             >

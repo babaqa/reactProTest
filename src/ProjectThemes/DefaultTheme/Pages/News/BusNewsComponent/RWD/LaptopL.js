@@ -1,11 +1,77 @@
 export default {
+    //#region 日期區間容器
+    dateTimeRangeContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                padding: "16px 0",
+                // margin: "8px 0 0",
+                width: "100%",
+                textAlign: "right"
+                // borderRadius: "16px",
+            }
+        }
+    },
+    //#endregion
+
+    //#region 選擇日期區間 DateTimeRange 
+    dateTimeRange: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                // ...style.occupy(3),
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                padding: 0
+                // ...style.occupy(3),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        dateTimePickerContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    width: "244px",
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        dateTimePickerSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                // height: "auto"
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+
     //#region 無資料表單區容器
     noDataContainer: {
         basic: (style, props) => {
             return {
                 ...style,
                 // padding: "24px 12px",
-                margin: "8px 0 0",
+                // margin: "8px 0 0",
                 background: "white",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
                 height: "100%",
