@@ -11,7 +11,7 @@ import { AddWhiteFastCallCar } from '../AddWhiteFastCallCar/AddWhiteFastCallCar'
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { fastCallCar: { rwd: { mobileM } } } } = Theme;
+    const { pages: { fastCallCar: { addFastCallCar: { rwd: { mobileM } } } } } = Theme;
 
     let history = useHistory()
 
@@ -41,35 +41,12 @@ const MobileMBase = (props) => {
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}
-                        <BasicContainer
+                        <Text
                             theme={mobileM.titleBar}
                         >
-                            {/* 預約訂車按鈕 */}
-                            <NativeLineButton
-                                baseDefaultTheme={"DefaultTheme"}
-                                disable={false}
-                                type="button" // 防止提交
-                                theme={mobileM.preOrderButton}
-                                onClick={() => {
-                                    history.push('/CallCar')
-                                }}
-                            >
-                                預約訂車
-                            </NativeLineButton>
+                            快速叫車-新增常用路線
 
-                            {/* 快速叫車按鈕 */}
-                            <NativeLineButton
-                                baseDefaultTheme={"DefaultTheme"}
-                                disable={false}
-                                type="button" // 防止提交
-                                theme={mobileM.fastOrderButton}
-                                onClick={() => {
-                                }}
-                            >
-                                快速叫車-新增常用路線
-                            </NativeLineButton>
-
-                        </BasicContainer>
+                        </Text>
 
                         {/* 分頁 */}
                         <BasicContainer
@@ -84,7 +61,7 @@ const MobileMBase = (props) => {
                                             <Text
                                                 onClick={() => { props.setNowTab(item) }}
                                                 isActive={props.nowTab === item}
-                                                theme={mobileM.titleBarFastCallCarTab}
+                                                theme={mobileM.titleBarAddFastCallCarTab}
                                             >
                                                 {item}
                                             </Text>

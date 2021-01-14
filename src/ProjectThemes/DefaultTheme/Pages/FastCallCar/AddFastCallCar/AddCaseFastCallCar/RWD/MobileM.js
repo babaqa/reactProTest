@@ -1,460 +1,1317 @@
 export default {
-    //#region 無資料表單區容器
-    noDataContainer: {
-        basic: (style, props) => {
-            return {
+
+    //#region  叫車表單 子標題列
+    callCarSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
                 ...style,
-                // background: "#fff",
-                // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "calc( 100vh - 363px)",
                 width: "100%",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
-            }
+                margin: 0,
+                backgroundColor: "#FFBB96",
+                borderBottom: 0,
+                height: "64px",
+                padding: "16px 24px"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100px",
+                color: "rgba(0,0,0,0.85)"
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "162px",
+                height: "32px"
+            })
         }
     },
     //#endregion
 
-    //#region 新增常用路線按鈕
-    addRouteButton: {
+    //#region 可用補助餘額查詢按鈕
+    balanceInquiryButton: {
         basic: (style) => ({
             ...style,
-            position: "fixed",
-            top: "215px",
-            right: "16px",
-            width: "56px",
-            height: "56px",
-            padding: 0,
-            borderColor: "#FA8C16",
-            borderRadius: "28px",
-            margin: 0,
-            backgroundColor: "#FA8C16",
-            boxShadow: "0px 4px 5px rgba(0, 0, 0, 0.14), 0px 1px 10px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.2)",
-            zIndex: 10
+            width: "162px",
+            height: "28px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            padding: "0 16px 0 0",
+            color: "rgba(0,0,0,0.6)",
+            backgroundColor: "#FFFFFF",
+            borderRadius: "2px",
+            boxShadow: " 0px 2px 2px rgba(0, 0, 0, 0.14), 0px 3px 1px rgba(0, 0, 0, 0.12), 0px 1px 5px rgba(0, 0, 0, 0.2)",
+            textAlign: "right",
         }),
         hover: (style, props) => ({
             ...style,
-            backgroundColor: "rgba(250,140,22,0.85)",
+            backgroundColor: "#f5f5f5"
         }),
         focus: (style, props) => ({})
     },
     //#endregion
-    //#region 預約訂車 圖標
-    addRouteSvg: {
+    //#region 可用補助餘額查詢按鈕 左方圖標
+    balanceInquiryButtonIcon: {
         position: "absolute",
-        // height: "100%",
-        // right: "12px",
+        height: "100%",
+        left: "16px",
         cursor: "pointer",
-        top: "16px",
-        right: "16px"
+        color: "#1890FF",
+        fillOpacity: "unset",
+        top: "0px",
+        color: "rgba(0,0,0,0.6)"
     },
     //#endregion
 
-    //#region 資料外框容器
-    outsideContainer: {
+    //#region 可用補助餘額查詢 Modal 文字容器
+    balanceInquiryMTodalTextContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "80px"
+        })
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 標題
+    balanceInquiryMTodalTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.65)",
+        })
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 文字
+    balanceInquiryMTodalText: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "18px",
+            fontWeight: 600,
+            lineHeight: "24px",
+            color: "#FF7A45",
+        })
+    },
+    //#endregion
+
+    //#region 叫車表單內容容器
+    callCarContainer: {
         basic: (style, props) => ({
             ...style,
             width: "100%",
-            backgroundColor: "#fff",
-            boxShadow: "inset 0px -1px 0px #DBE4E8"
+            padding: "24px 16px",
+            backgroundColor: "#FFFFFF"
         })
     },
     //#endregion
 
-    //#region 路線名稱
-    //#region 路線欄位 容器
-    routeContainer: {
+    //#region 路線名稱 RouteName
+    routeName: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: 0,
+                display: "inline-block",
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(12),
+                padding: 0,
+                display: "inline-block",
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "16px"
+                // minHeight: "16px",
+                // height: "auto",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 訂車人身分 Orderer
+    orderer: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "24px",
+                height: "auto",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 車行選擇容器
+    carDealershipContainer: {
         basic: (style, props) => ({
             ...style,
-            textAlign: "center",
-            padding: "8px 16px"
+            width: "100%",
+            padding: "0 16px",
+            backgroundColor: "#FFFFFF"
         })
     },
     //#endregion
 
-    //#region 快速叫車 身份 Tag 區域
-    fastCallCarIdentityTag: {
-        //#region Tag樣式
-        //#region 長照
-        case: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    position: "absolute",
-                    margin: "0 0 0 0",
-                    top: "8px",
-                    left: "16px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    color: "#EF6C00",
-                    backgroundColor: "#FFF3E0",
-                    borderColor: "#FF9800"
-                }),
-                hover: {}
-            }
+    //#region  車行選擇 子標題列
+    carDealershipSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                margin: "0 0 12px 0",
+                // backgroundColor: "#FFBB96",
+                borderBottom: "2px solid #D9D9D9",
+                height: "36px",
+                padding: 0
+            })
         },
-        //#endregion
-        //#region 共享車隊
-        white: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    position: "absolute",
-                    margin: "0 0 0 0",
-                    top: "8px",
-                    left: "16px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    color: "#558B2F",
-                    backgroundColor: "#E8F5E9",
-                    borderColor: "#4CAF50"
-
-                }),
-                hover: {}
-            }
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "200px",
+                color: "rgba(0,0,0,0.85)"
+            })
         },
-        //#endregion
-        //#region 巴士
-        bus: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    position: "absolute",
-                    margin: "0 0 0 0",
-                    top: "8px",
-                    left: "16px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    color: "#00838F",
-                    backgroundColor: "#E0F7FA",
-                    borderColor: "#00838F"
-
-                }),
-                hover: {}
-            }
-        },
-        //#endregion  
-        //#region 無此身份
-        unknown: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    position: "absolute",
-                    margin: "0 0 0 0",
-                    top: "8px",
-                    left: "16px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    // color: "#2F54EB",
-                    // backgroundColor: "#F0F5FF",
-                    // borderColor: "#ADC6FF"
-
-                }),
-                hover: {}
-            }
-        },
-        //#endregion      
-        //#endregion
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "162px",
+                height: "32px"
+            })
+        }
+    },
+    //#endregion
+    //#region 減號圖標
+    minusSvg: {
+        position: "relative",
+        top: "-5px",
+        left: "4px"
     },
     //#endregion
 
-    //#region 路線名稱 標題 
-    routeTitle: {
-        basic: (style, props) => ({
-            ...style,
-            textAlign: "center",
-            fontWeight: 400,
-            fontSize: "12px",
-            lineHeight: "18px",
-            color: "rgba(0,0,0,0.45)"
-        })
+    //#region 優先搭乘車行排序
+    bUnitSort: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //left:"-8px",
+                // padding: "0 12px",
+                ...style.occupy(12),
+                // maxWidth: "calc( 33.33% - 4px )",
+                // flexBasis: "calc( 33.33% - 4px )",
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                //left:"-8px",
+                // padding: "0 12px",
+                ...style.occupy(12),
+                // maxWidth: "calc( 33.33% - 4px )",
+                // flexBasis: "calc( 33.33% - 4px )",
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        numberInputContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        numberInputSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
     },
     //#endregion
-    //#region 路線名稱 內文 
-    routeText: {
+    //#region 優先搭乘車行排序 (請依序點擊完成排序)
+    bUnitSortNote: {
         basic: (style, props) => ({
             ...style,
             display: "inline-block",
-            fontWeight: 400,
+            color: "#ff4d4f",
             fontSize: "14px",
-            lineHeight: "22px",
-            color: "rgba(0,0,0,0.65)",
-            marginLeft: "8px"
+            lineHeight: "22px"
         })
     },
     //#endregion
-    //#endregion
 
-    //#region 起訖點
-    //#region 起訖點 容器
-    startToEndContainer: {
+    //#region 行程容器
+    strokeContainer: {
         basic: (style, props) => ({
             ...style,
-            padding: "8px 16px",
-            backgroundColor: "#F5F5F5"
+            width: "100%",
+            backgroundColor: "#FFFFFF"
+        })
+    },
+    //#endregion
+
+    //#region  行程 子標題列
+    strokeSubTitleBar: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                margin: 0,
+                // backgroundColor: "#FFBB96",
+                borderBottom: "1px solid #D9D9D9",
+                height: "36px",
+                padding: "0 16px"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                width: "200px",
+                color: "rgba(0,0,0,0.85)"
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "162px",
+                height: "32px"
+            })
+        }
+    },
+    //#endregion
+    //#region 減號圖標
+    minusSvg: {
+        position: "relative",
+        top: "-5px",
+        left: "4px"
+    },
+    //#endregion
+
+    //#region 行程內容容器
+    strokeInContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            backgroundColor: "#F0F0F0"
+        })
+    },
+    //#endregion
+
+    //#region 起點容器
+    startPointContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            ...style.occupy(12),
+            padding: "16px"
         })
     },
     //#endregion
 
     //#region 起點
-    startText: {
+    todayToDoStart: {
         basic: (style, props) => ({
             ...style,
-            position: "relative",
-            fontWeight: 400,
+            fontWeight: 500,
             fontSize: "14px",
             lineHeight: "22px",
-            paddingLeft: "16px",
-            color: "rgba(0,0,0,0.65)"
+            height: "22px",
+            color: "rgba(0,0,0,0.85)",
+            margin: "0 0 12px 0",
+            padding: "0 0 0 24px"
         })
     },
     //#endregion
-    //#region 起點圖標
-    startSvg: {
+
+    //#region 起點 icon
+    todayToDoStartSvg: {
         position: "absolute",
-        top: "6px",
-        left: 0
+        left: 0,
+        top: "2px"
+    },
+    //#endregion
+
+    //#region 起點內容容器
+    startPointDataContainer: {
+        basic: (style, props) => ({
+            ...style,
+            backgroundColor: "#FFFFFF",
+            padding: "16px 0 0"
+        })
+    },
+    //#endregion
+
+    //#region 起點 StartPos
+    startPos: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //left:"-8px",
+                padding: "0 16px",
+                ...style.occupy(12),
+                // maxWidth: "calc( 33.33% - 4px )",
+                // flexBasis: "calc( 33.33% - 4px )",
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                //left:"-8px",
+                padding: "0 16px",
+                ...style.occupy(12),
+                // maxWidth: "calc( 33.33% - 4px )",
+                // flexBasis: "calc( 33.33% - 4px )",
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        gmapInputContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        gmapInputSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "8px",
+                // minHeight: "24px",
+            })
+        }
+    },
+    //#endregion
+
+    //#region 起點備註 StartPosRemarks
+    startPosRemarks: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // minHeight: "8px",
+                height: "8px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 起點備註 - 其他 OtherStartPosRemarks 
+    otherStartPosRemarks: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 迄點容器
+    endPointContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            ...style.occupy(12),
+            padding: "36px 16px 0"
+        })
+    },
+    //#endregion
+
+    //#region 路線預覽按鈕
+    preViewtButton: {
+        basic: (style) => ({
+            ...style,
+            position: "absolute",
+            width: "88px",
+            height: "24px",
+            fontSize: "14px",
+            fontWeight: 600,
+            lineHeight: "22px",
+            top: "14px",
+            padding: 0,
+            color: "#fff",
+            backgroundColor: "#FF7A45",
+            borderColor: "#FF7A45",
+            borderRadius: "2px",
+            margin: 0,
+            right: "130px"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(255,122,69,0.85)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion
+
+    //#region 起訖點互換按鈕
+    convertButton: {
+        basic: (style) => ({
+            ...style,
+            position: "absolute",
+            width: "106px",
+            height: "24px",
+            fontSize: "14px",
+            fontWeight: 600,
+            lineHeight: "22px",
+            top: "14px",
+            padding: 0,
+            color: "#fff",
+            backgroundColor: "#FF7A45",
+            borderColor: "#FF7A45",
+            borderRadius: "2px",
+            margin: 0,
+            right: "16px"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(255,122,69,0.85)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion
+
+    //#region 起訖點互換圖標
+    convertContainerIcon: {
+        position: "relative",
+        top: "3px",
+        margin: "-4px 4px 0 0"
     },
     //#endregion
 
     //#region 迄點
-    endText: {
+    todayToDoEnd: {
         basic: (style, props) => ({
             ...style,
-            position: "relative",
-            fontWeight: 400,
+            fontWeight: 500,
             fontSize: "14px",
             lineHeight: "22px",
-            paddingLeft: "16px",
-            color: "rgba(0,0,0,0.65)"
-        })
-    },
-    //#endregion
-    //#region 迄點圖標
-    endSvg: {
-        position: "absolute",
-        top: "6px",
-        left: 0
-    },
-    //#endregion
-    //#endregion
-
-    //#region 按鈕
-    //#region 按鈕容器
-    buttonContainer: {
-        basic: (style, props) => ({
-            ...style,
-            textAlign: "center",
-            padding: "8px 0"
+            height: "22px",
+            color: "rgba(0,0,0,0.85)",
+            margin: "0 0 12px 0",
+            padding: "0 0 0 24px"
         })
     },
     //#endregion
 
-    //#region 預約訂車按鈕
-    callCarButton: {
-        basic: (style) => ({
-            ...style,
-            width: "86px",
-            height: "28px",
-            fontSize: "14px",
-            lineHeight: "22px",
-            top: "2px",
-            padding: 0,
-            color: "#FA541C",
-            // borderColor: "#fa8c16",
-            borderRadius: "2px",
-            margin: "0 4px 0 0",
-            border: 0,
-            boxShadow: "inset -1px 0 #D9D9D9"
-        }),
-        hover: (style, props) => ({
-            ...style,
-            backgroundColor: "rgba(0,0,0,0.05)"
-        }),
-        focus: (style, props) => ({})
-    },
-    //#endregion
-    //#region 預約訂車 圖標
-    callCarSvg: {
-        position: "relative",
-        // height: "100%",
-        // right: "12px",
-        cursor: "pointer",
-        top: "3px",
-        right: "3px"
-    },
-    //#endregion
-
-    //#region 編輯按鈕
-    editButton: {
-        basic: (style) => ({
-            ...style,
-            width: "58px",
-            height: "28px",
-            fontSize: "14px",
-            lineHeight: "22px",
-            top: "2px",
-            padding: 0,
-            color: "#1890FF",
-            // borderColor: "#fa8c16",
-            borderRadius: "2px",
-            margin: "0 4px 0 0",
-            border: 0,
-            boxShadow: "inset -1px 0 #D9D9D9"
-        }),
-        hover: (style, props) => ({
-            ...style,
-            backgroundColor: "rgba(0,0,0,0.05)"
-        }),
-        focus: (style, props) => ({})
-    },
-    //#endregion
-    //#region 編輯 圖標
-    editSvg: {
-        position: "relative",
-        // height: "100%",
-        // right: "12px",
-        cursor: "pointer",
-        top: "3px",
-        right: "3px"
-    },
-    //#endregion
-
-    //#region 刪除按鈕
-    deleteButton: {
-        basic: (style) => ({
-            ...style,
-            width: "50px",
-            height: "28px",
-            fontSize: "14px",
-            lineHeight: "22px",
-            top: "2px",
-            padding: 0,
-            color: "#F5222D",
-            // borderColor: "#fa8c16",
-            borderRadius: "2px",
-            margin: 0,
-            border: 0,
-        }),
-        hover: (style, props) => ({
-            ...style,
-            backgroundColor: "rgba(0,0,0,0.05)"
-        }),
-        focus: (style, props) => ({})
-    },
-    //#endregion
-    //#region 刪除 圖標
-    deleteSvg: {
-        position: "relative",
-        // height: "100%",
-        // right: "12px",
-        cursor: "pointer",
-        top: "3px",
-        right: "3px"
-    },
-    //#endregion
-
-    //#endregion
-
-    //#region 沒有更多路線
-    noMoreData: {
-        basic: (style, props) => ({
-            ...style,
-            fontWeight: 400,
-            fontSize: "14px",
-            lineHeight: "22px",
-            color: "#1890FF",
-            width: "100%",
-            textAlign: "center",
-            margin: "16px 0"
-        })
-    },
-    //#endregion
-
-    //#region DropDown
-    //#region DropDown容器
-    dropDownContainer: {
-        basic: (style, props) => ({
-            ...style,
-            display: "inline-block"
-        })
-    },
-    //#endregion
-    //#region DropDown 項目容器
-    dropDownItemContainer: {
-        basic: (style, props) => ({
-            ...style,
-            width: "166px",
-            height: "86px",
-            backgroundColor: "#fff",
-            borderRadius: "2px",
-            boxShadow: "0px 3px 6px -4px rgba(0, 0, 0, 0.12), 0px 6px 16px rgba(0, 0, 0, 0.08), 0px 9px 28px 8px rgba(0, 0, 0, 0.05)",
-            padding: "16px",
-        })
-    },
-    //#endregion
-    //#region DropDown 子項目
-    dropDownSubItemContainer: {
-        basic: (style, props) => ({
-            ...style,
-            fontWeight: 400,
-            fontSize: "14px",
-            lineHeight: "22px",
-            color: "rgba(0,0,0,0.65)",
-            paddingLeft: "20px"
-        })
-    },
-    //#endregion
-    //#region 提示圖標
-    tipSvg: {
+    //#region 迄點 icon
+    todayToDoEndSvg: {
         position: "absolute",
         left: 0,
-        top: "5px"
+        top: "2px"
     },
     //#endregion
-    //#region 取消按鈕
-    cancelButton: {
+
+    //#region 迄點內容容器
+    endPointDataContainer: {
+        basic: (style, props) => ({
+            ...style,
+            backgroundColor: "#FFFFFF",
+            padding: "16px 0 0"
+        })
+    },
+    //#endregion
+
+    //#region 迄點 EndPos
+    endPos: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //left:"-8px",
+                padding: "0 16px",
+                ...style.occupy(12),
+                // maxWidth: "calc( 33.33% - 4px )",
+                // flexBasis: "calc( 33.33% - 4px )",
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                //left:"-8px",
+                padding: "0 16px",
+                ...style.occupy(12),
+                // maxWidth: "calc( 33.33% - 4px )",
+                // flexBasis: "calc( 33.33% - 4px )",
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        gmapInputContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        gmapInputSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // minHeight: "24px",
+                height: "8px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 迄點備註 EndPosRemarks
+    endPosRemarks: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "8px"
+                // minHeight: "24px",
+                // height: "auto",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 迄點備註 - 其他 OtherEndPosRemarks
+    otherEndPosRemarks: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 行程資料容器
+    strokeDataContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(12),
+            display: "inline-block",
+            padding: "24px 16px"
+        }),
+    },
+    //#endregion
+
+    //#region 分隔容器
+    halfContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(6),
+            display: "inline-block",
+        }),
+    },
+    //#endregion 
+
+    //#region 願意共乘 CanShareEquipment  
+    canShareEquipment: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 0 0",
+                // display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        checkboxContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        checkboxGroup: {
+            basic: (style, props) => ({
+                //調高度
+                ...style,
+                margin: 0
+                // height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "16px",
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 預約回程 ReturnTipEquipment  
+    returnTipEquipment: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 0 0",
+                // display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        checkboxContainer: {
+            basic: (style, props) => ({
+                ...style,
+                //width: "200px"
+            })
+        },
+        checkboxGroup: {
+            basic: (style, props) => ({
+                //調高度
+                ...style,
+                margin: 0
+                // height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "16px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 回程乘車時間 ReturnEnableDate
+    returnTravelTime: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(6),
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                ...style.occupy(6),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        dateTimePickerContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        dateTimePickerSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px",
+                // width: "90px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "16px",
+                height: "16px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 車種 CarType
+    carType: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                // padding: 0,
+                padding: "0 8px 0 0",
+                display: "inline-block",
+                ...style.occupy(3.5),
+                // width: "90px"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                // width: "100px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "16px",
+                height: "16px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 輪椅種類 Wheelchair
+    wheelchair: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                // padding: 0,
+                display: "inline-block",
+                padding: "0 8px",
+                // width: "150px"
+                ...style.occupy(5.8),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                // width: "153px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "16px",
+                height: "16px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 陪同人數 AccompanyCounts
+    accompanyCounts: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 0 8px",
+                display: "inline-block",
+                ...style.occupy(2.7),
+                // width: "71px"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                // width: "80px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: 0
+                minHeight: "16px",
+                height: "auto",
+            })
+        }
+    },
+    //#endregion
+
+    //#region 接收簡訊號碼 標題
+    smsNumberTitle: {
+        basic: (style, props) => ({
+            display: "inline-block",
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "232px",
+            margin: "0 24px 0 0",
+            color: "rgba(0,0,0,0.85)"
+        })
+    },
+    //#endregion
+
+    //#region 接收簡訊號碼 SmsNumber
+    smsNumber: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 8px",
+                display: "inline-block",
+                // ...style.occupy(4),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 8px",
+                display: "inline-block",
+                // ...style.occupy(4),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)",
+                    width: "130px"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "0px"
+                minHeight: "16px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 陪同人數 AccompanyCounts 下標題 文字樣式
+    accompanyCountsRequired: {
+        basic: (style, props) => ({
+            ...style,
+            display: "block",
+            color: "#000",
+            fontSize: "14px",
+            lineHeight: "22px"
+        }),
+        red: {
+            basic: (style, props) => ({
+                ...style,
+                display: "block",
+                fontSize: "14px",
+                lineHeight: "22px",
+                color: "#ff4d4f",
+            }),
+        }
+    },
+    //#endregion
+
+    //#region 行程表格
+    tableContainer: {
+        basic: (style, props) => ({
+            ...style,
+            ...style.occupy(12),
+            padding: 0,
+            display: "inline-block",
+            height: "187px"
+        }),
+    },
+    //#endregion
+
+    //#region 行程欄位樣式
+    type: {
+        basic: (style, props) => ({
+            ...style,
+            color: "#1890ff",
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "22px"
+        })
+    },
+    //#endregion
+
+    //#region 個案負擔文字
+    redText: {
+        basic: (style, props) => ({
+            ...style,
+            color: "#ff4d4f",
+        }),
+    },
+    //#endregion
+
+    //#region 叫車表單下方按鈕列
+    callCarFormBottomContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "64px",
+            // boxShadow: "0px -2px 8px rgba(0, 0, 0, 0.15)",
+            backgroundColor: "#D9D9D9",
+            textAlign: "right",
+            padding: "16px 24px"
+        })
+    },
+    //#endregion
+
+    //#region 回列表按鈕
+    returnButton: {
         basic: (style) => ({
             ...style,
-            width: "44px",
-            height: "24px",
+            width: "74px",
+            height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
             top: "2px",
             padding: 0,
-            color: "rgba(0,0,0,0.65)",
-            borderColor: "#D9D9D9",
-            backgroundColor: "#FFFFFF",
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
             borderRadius: "2px",
-            margin: "8px 8px 0 38px",
+            margin: "0 16px 0 0"
         }),
         hover: (style, props) => ({
             ...style,
-            backgroundColor: "rgba(0,0,0,0.05)"
+            backgroundColor: "rgba(24,144,255,0.05)"
         }),
         focus: (style, props) => ({})
     },
     //#endregion
-    //#region 確認按鈕
-    submitButton: {
+
+    //#region 儲存按鈕
+    saveButton: {
         basic: (style) => ({
             ...style,
-            width: "44px",
-            height: "24px",
+            width: "60px",
+            height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
             top: "2px",
             padding: 0,
             color: "#fff",
-            borderColor: "#1890FF",
-            backgroundColor: "#1890FF",
+            backgroundColor: "#1890ff",
+            borderColor: "#1890ff",
             borderRadius: "2px",
-            margin: "8px 0 0",
+            margin: 0
         }),
         hover: (style, props) => ({
             ...style,
@@ -463,6 +1320,34 @@ export default {
         focus: (style, props) => ({})
     },
     //#endregion
+
+    //#region 地圖區域樣式
+
+    //#region 叫車地圖區域容器
+    mapContainer: {
+        basic: (style, props) => ({
+            ...style,
+            // ...style.occupy(12),
+            width: "100%",
+            padding: "0 0 0 0"
+        })
+    },
+    //#endregion
+
+    //#region 地圖
+    map: {
+        mapContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                height: "270px"
+            })
+        }
+    },
+    //#endregion
+    //#endregion
+
+
     //#endregion
 
 }

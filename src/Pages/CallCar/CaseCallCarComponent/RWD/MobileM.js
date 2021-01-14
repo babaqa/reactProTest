@@ -771,30 +771,6 @@ const MobileMBase = (props) => {
                                 </Container>
 
                                 <Container>
-
-                                    {/* 接收簡訊號碼 標題 */}
-                                    <Text
-                                        theme={mobileM.smsNumberTitle}
-                                    >
-                                        接收簡訊號碼
-
-                                        {/* 接收簡訊號碼 SmsNumber */}
-                                        <TextInput
-
-                                            topLabel={""}
-                                            baseDefaultTheme={"DefaultTheme"}
-                                            type="text"
-                                            placeholder={"請輸入手機號碼"}
-                                            value={globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
-                                            onChange={(e, value, onInitial) => {
-                                                globalContextService.set("CaseCallCarComponentPage", "SmsNumber", value);
-                                            }}
-                                            theme={mobileM.smsNumber}
-                                        />
-                                    </Text>
-                                </Container>
-
-                                <Container>
                                     {/* 車種 CarType */}
                                     <NewSelector
                                         bascDefaultTheme={"DefaultTheme"}
@@ -907,6 +883,30 @@ const MobileMBase = (props) => {
                                         // menuPosition={true}
                                         theme={mobileM.accompanyCounts}
                                     />
+                                </Container>
+
+                                <Container>
+
+                                    {/* 接收簡訊號碼 標題 */}
+                                    <Text
+                                        theme={mobileM.smsNumberTitle}
+                                    >
+                                        接收簡訊號碼
+
+                                        {/* 接收簡訊號碼 SmsNumber */}
+                                        <TextInput
+
+                                            topLabel={""}
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            type="text"
+                                            placeholder={"請輸入手機號碼"}
+                                            value={globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
+                                            onChange={(e, value, onInitial) => {
+                                                globalContextService.set("CaseCallCarComponentPage", "SmsNumber", value);
+                                            }}
+                                            theme={mobileM.smsNumber}
+                                        />
+                                    </Text>
                                 </Container>
 
                                 <Text

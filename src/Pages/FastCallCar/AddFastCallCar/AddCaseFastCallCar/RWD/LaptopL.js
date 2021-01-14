@@ -183,38 +183,38 @@ const LaptopLBase = (props) => {
                                     <Container>
                                         <BasicContainer theme={laptopL.balanceInquiryMTodalTextContainer}>
                                             <Text
-                                                theme={laptopL.balanceInquiryMTodalText}
+                                                theme={laptopL.balanceInquiryMTodalTitle}
                                             >
                                                 總額度
                                                 </Text>
                                             <Text
                                                 theme={laptopL.balanceInquiryMTodalText}
                                             >
-                                                {/* ${`${props?.CaseDiscount?.totalAmt ?? 0}`} */}
+                                                ${`0`}
                                             </Text>
                                         </BasicContainer>
                                         <BasicContainer theme={laptopL.balanceInquiryMTodalTextContainer}>
                                             <Text
-                                                theme={laptopL.balanceInquiryMTodalText}
+                                                theme={laptopL.balanceInquiryMTodalTitle}
                                             >
                                                 使用額度
                                             </Text>
                                             <Text
                                                 theme={laptopL.balanceInquiryMTodalText}
                                             >
-                                                {/* ${`${props?.CaseDiscount?.discountAmt ?? 0}`} */}
+                                                ${`0`}
                                             </Text>
                                         </BasicContainer>
                                         <BasicContainer theme={laptopL.balanceInquiryMTodalTextContainer}>
                                             <Text
-                                                theme={laptopL.balanceInquiryMTodalText}
+                                                theme={laptopL.balanceInquiryMTodalTitle}
                                             >
                                                 剩餘額度
                                             </Text>
                                             <Text
                                                 theme={laptopL.balanceInquiryMTodalText}
                                             >
-                                                {/* ${`${props?.CaseDiscount?.lastDiscountAmt ?? 0}`} */}
+                                                ${`0`}
                                             </Text>
                                         </BasicContainer>
                                     </Container>
@@ -239,56 +239,18 @@ const LaptopLBase = (props) => {
                 >
 
                     <Container>
-                        {/* 乘車日期 TravelDate */}
-                        <DateTimePicker
-                            topLabel={<>乘車日期</>}
-                            // type={"time"} time、date、week、month、quarter、year
-                            type={"date"}
-                            format={"YYYY-MM-DD"}
-                            bascDefaultTheme={"DefaultTheme"}
+                        {/* 路線名稱 RouteName */}
+                        <TextInput
                             // viewType
-                            isSearchable
+                            topLabel={"路線名稱"}
+                            baseDefaultTheme={"DefaultTheme"}
+                            type="text"
                             placeholder={""}
-                            value={
-                                (globalContextService.get("AddCaseFastCallCarPage", "TravelDate")) ?
-                                    moment(globalContextService.get("AddCaseFastCallCarPage", "TravelDate"), "YYYY-MM-DD HH:mm:ss")
-                                    :
-                                    null
-                            }
-                            onChange={(value, momentObj) => {
-                                if (value !== globalContextService.get("AddCaseFastCallCarPage", "TravelDate")) {
-                                    globalContextService.set("AddCaseFastCallCarPage", "TravelDate", value);
-                                    getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
-                                    setForceUpdate(f => !f)
-                                }
+                            value={globalContextService.get("AddCaseFastCallCarPage", "RouteName") ?? null}
+                            onChange={(e, value, onInitial) => {
+                                globalContextService.set("AddCaseFastCallCarPage", "RouteName", value);
                             }}
-                            theme={laptopL.travelDate}
-                        />
-
-                        {/* 乘車時間 TravelTime */}
-                        <DateTimePicker
-                            topLabel={<>乘車時間</>}
-                            // type={"time"} time、date、week、month、quarter、year
-                            type={"time"}
-                            format={"HH:mm"}
-                            bascDefaultTheme={"DefaultTheme"}
-                            // viewType
-                            isSearchable
-                            placeholder={""}
-                            value={
-                                (globalContextService.get("AddCaseFastCallCarPage", "TravelTime")) ?
-                                    moment(globalContextService.get("AddCaseFastCallCarPage", "TravelTime"), "HH:mm")
-                                    :
-                                    null
-                            }
-                            onChange={(value, momentObj) => {
-                                if (value !== globalContextService.get("AddCaseFastCallCarPage", "TravelTime")) {
-                                    globalContextService.set("AddCaseFastCallCarPage", "TravelTime", value);
-                                    getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
-                                    setForceUpdate(f => !f)
-                                }
-                            }}
-                            theme={laptopL.travelTime}
+                            theme={laptopL.routeName}
                         />
 
                         {/* 訂車人身分 Orderer */}
@@ -318,37 +280,6 @@ const LaptopLBase = (props) => {
                             theme={laptopL.orderer}
                         />
                     </Container>
-
-                    {/* 車行選擇容器 */}
-                    <BasicContainer
-                        baseDefaultTheme={"DefaultTheme"}
-                        theme={laptopL.carDealershipContainer}
-                    >
-                        {/* 車行選擇 子標題列 */}
-                        <MainPageSubTitleBar
-                            bascDefaultTheme={"DefaultTheme"}
-                            titleText={<>車行選擇<Minus style={laptopL.minusSvg} /></>}
-                            theme={laptopL.carDealershipSubTitleBar}
-                        ></MainPageSubTitleBar>
-
-                        {/* 優先搭乘車行排序 */}
-                        <BUnitSort
-                            topLabel={<>優先搭乘車行排序 <Text theme={laptopL.bUnitSortNote}>(請依序點擊完成排序)</Text></>}
-                            // bUnit={props?.CaseUsers?.bUnitForCaseUser}
-                            bUnit={[
-                                { id: "0", name: "0XXXX車行" },
-                                { id: "1", name: "1XXXX車行" },
-                                { id: "2", name: "2XXXX車行" },
-                                { id: "3", name: "3XXXX車行" },
-                            ]}
-                            value={globalContextService.get("AddCaseFastCallCarPage", `BUnitSort`)}
-                            onChange={(e, value, onInitial) => {
-                                console.log(value)
-                                globalContextService.set("AddCaseFastCallCarPage", `BUnitSort`, value);
-                            }}
-                            theme={laptopL.bUnitSort}
-                        />
-                    </BasicContainer>
 
                     {/* 行程容器 */}
                     <BasicContainer
@@ -774,27 +705,6 @@ const LaptopLBase = (props) => {
 
                                     <Container>
 
-                                        {/* 接收簡訊號碼 標題 */}
-                                        <Text
-                                            theme={laptopL.smsNumberTitle}
-                                        >
-                                            接收簡訊號碼
-
-                                        {/* 接收簡訊號碼 SmsNumber */}
-                                            <TextInput
-
-                                                topLabel={""}
-                                                baseDefaultTheme={"DefaultTheme"}
-                                                type="text"
-                                                placeholder={"請輸入手機號碼"}
-                                                value={globalContextService.get("AddCaseFastCallCarPage", "SmsNumber") ?? null}
-                                                onChange={(e, value, onInitial) => {
-                                                    globalContextService.set("AddCaseFastCallCarPage", "SmsNumber", value);
-                                                }}
-                                                theme={laptopL.smsNumber}
-                                            />
-                                        </Text>
-
                                         {/* 車種 標題 */}
                                         <Text
                                             theme={laptopL.carTypeTitle}
@@ -924,6 +834,27 @@ const LaptopLBase = (props) => {
                                                 ]}
                                                 // menuPosition={true}
                                                 theme={laptopL.accompanyCounts}
+                                            />
+                                        </Text>
+
+                                        {/* 接收簡訊號碼 標題 */}
+                                        <Text
+                                            theme={laptopL.smsNumberTitle}
+                                        >
+                                            接收簡訊號碼
+
+                                        {/* 接收簡訊號碼 SmsNumber */}
+                                            <TextInput
+
+                                                topLabel={""}
+                                                baseDefaultTheme={"DefaultTheme"}
+                                                type="text"
+                                                placeholder={"請輸入手機號碼"}
+                                                value={globalContextService.get("AddCaseFastCallCarPage", "SmsNumber") ?? null}
+                                                onChange={(e, value, onInitial) => {
+                                                    globalContextService.set("AddCaseFastCallCarPage", "SmsNumber", value);
+                                                }}
+                                                theme={laptopL.smsNumber}
                                             />
                                         </Text>
 
@@ -1076,81 +1007,25 @@ const LaptopLBase = (props) => {
                         theme={laptopL.callCarFormBottomContainer}
                     >
 
-                        {/* 新增下個地點檢核 */}
-                        {
-                            globalContextService.get("AddCaseFastCallCarPage", "ScheduleReturnReview") !== 1
-                            &&
-                            <>
-                                {/* 新增下個地點按鈕 */}
-                                <NativeLineButton
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    disable={false}
-                                    type="button" // 防止提交
-                                    theme={laptopL.addNextLocation}
-                                    onClick={() => {
-                                        let validMsg = formValid();
-                                        //#region 表單驗證後動作
-                                        if (validMsg !== "") {
-                                            modalsService.infoModal.error({
-                                                id: "top1", //注意 這裡要加上固定id
-                                                iconRightText: validMsg,
-                                                yes: true,
-                                                yesText: "確認",
-                                                // no: true,
-                                                // autoClose: true,
-                                                backgroundClose: false,
-                                                yesOnClick: (e, close) => {
-                                                    close();
-                                                }
-                                            })
-                                        }
-                                        else {
-                                            // props.AddOrderOfCaseUsersExecute({
-                                            //     // id: "", // 訂單id，新增無須上送
-                                            //     userId: props.UserId, // 用戶id
-                                            //     caseUserId: props.CaseUserId, // 長照身份id
-                                            //     orgId: "", // 送空字串
-                                            //     reserveDate: globalContextService.get("AddCaseFastCallCarPage", "TravelDate") + " " + globalContextService.get("AddCaseFastCallCarPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
-                                            //     transOrgs: globalContextService.get("AddCaseFastCallCarPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
-                                            //     createdIdentity: globalContextService.get("AddCaseFastCallCarPage", "Orderer")?.value, // 訂車人身分
-                                            //     fromAddr: globalContextService.get("AddCaseFastCallCarPage", "StartPos"), // 起點
-                                            //     fromAddrRemark: (
-                                            //         globalContextService.get("AddCaseFastCallCarPage", "StartPosRemarks")?.label === "其他" ?
-                                            //             globalContextService.get("AddCaseFastCallCarPage", "OtherStartPosRemarks")
-                                            //             :
-                                            //             globalContextService.get("AddCaseFastCallCarPage", "StartPosRemarks")?.value
-                                            //     ), // 起點備註 (含備註 - 其他)
-                                            //     toAddr: globalContextService.get("AddCaseFastCallCarPage", "EndPos"), // 迄點
-                                            //     toAddrRemark: (
-                                            //         globalContextService.get("AddCaseFastCallCarPage", "EndPosRemarks")?.label === "其他" ?
-                                            //             globalContextService.get("AddCaseFastCallCarPage", "OtherEndPosRemarks")
-                                            //             :
-                                            //             globalContextService.get("AddCaseFastCallCarPage", "EndPosRemarks")?.value
-                                            //     ), // 迄點備註 (含備註 - 其他)
-                                            //     remark: "", // 無此欄位
-                                            //     isBack: globalContextService.get("AddCaseFastCallCarPage", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
-                                            //     canShared: globalContextService.get("AddCaseFastCallCarPage", "RideTogetherReview") === 1 ? true : false, // 願意共乘
-                                            //     carCategoryId: globalContextService.get("AddCaseFastCallCarPage", "CarType")?.value, // 車種id
-                                            //     carCategoryName: globalContextService.get("AddCaseFastCallCarPage", "CarType")?.label, // 車種名稱
-                                            //     wheelchairType: globalContextService.get("AddCaseFastCallCarPage", "Wheelchair")?.value, // 輪椅
-                                            //     familyWith: globalContextService.get("AddCaseFastCallCarPage", "AccompanyCounts")?.value, // 陪同人數
-                                            //     noticePhone: globalContextService.get("AddCaseFastCallCarPage", "SmsNumber"), // 簡訊號碼
-                                            //     haveNextOrderFlag: true, // 新增下個地點 按鈕發送
-                                            // })
-                                        }
-                                    }}
-                                >
-                                    新增下個地點
-                                </NativeLineButton>
-                            </>
-                        }
-
-                        {/* 立即預約按鈕 */}
+                        {/* 回列表按鈕 */}
                         <NativeLineButton
                             baseDefaultTheme={"DefaultTheme"}
                             disable={false}
                             type="button" // 防止提交
-                            theme={laptopL.reservationNow}
+                            theme={laptopL.returnButton}
+                            onClick={() => {
+                                history.goBack();
+                            }}
+                        >
+                            回列表
+                                </NativeLineButton>
+
+                        {/* 儲存按鈕 */}
+                        <NativeLineButton
+                            baseDefaultTheme={"DefaultTheme"}
+                            disable={false}
+                            type="button" // 防止提交
+                            theme={laptopL.saveButton}
                             onClick={() => {
                                 let validMsg = formValid();
                                 //#region 表單驗證後動作
@@ -1236,7 +1111,7 @@ const LaptopLBase = (props) => {
                                 }
                             }}
                         >
-                            立即預約
+                            儲存
                         </NativeLineButton>
                     </BasicContainer>
 

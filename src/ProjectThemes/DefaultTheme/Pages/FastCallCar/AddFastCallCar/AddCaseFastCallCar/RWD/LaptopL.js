@@ -29,6 +29,7 @@ export default {
     },
     //#endregion
 
+    //#region 可用補助餘額查詢
     //#region 可用補助餘額查詢按鈕
     balanceInquiryButton: {
         basic: (style) => ({
@@ -68,7 +69,19 @@ export default {
     balanceInquiryMTodalTextContainer: {
         basic: (style, props) => ({
             ...style,
-            width: "80px"
+            width: "33%"
+        })
+    },
+    //#endregion
+
+    //#region 可用補助餘額查詢 Modal 標題
+    balanceInquiryMTodalTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "22px",
+            color: "rgba(0,0,0,0.85)",
         })
     },
     //#endregion
@@ -77,12 +90,13 @@ export default {
     balanceInquiryMTodalText: {
         basic: (style, props) => ({
             ...style,
-            fontSize: "14px",
-            fontWeight: 400,
-            lineHeight: "22px",
-            color: "rgba(0, 0, 0, 0.65)",
+            fontSize: "18px",
+            fontWeight: 600,
+            lineHeight: "24px",
+            color: "#FF7A45",
         })
     },
+    //#endregion
     //#endregion
 
     //#region 叫車表單內容容器
@@ -96,107 +110,65 @@ export default {
     },
     //#endregion
 
-    //#region 乘車日期 TravelDate
-    travelDate: {
+    //#region 路線名稱 RouteName
+    routeName: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: 0,
-                margin: "0 16px 0 0",
+                padding: "0 12px",
                 display: "inline-block",
-                // ...style.occupy(4),
-                width: "200px"
+                width: "450px",
             })
         },
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: 0,
-                margin: "0 16px 0 0",
+                padding: "0 12px",
                 display: "inline-block",
-                // ...style.occupy(4),
-                width: "200px"
+                width: "450px",
             })
         },
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "0px"
+                //height: "0px"
             })
         },
-        dateTimePickerContainer: {
+        textInputContainer: {
             basic: (style, props) => {
-                return {
-                    ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
-                }
-            }
-        },
-        dateTimePickerSubContainer: {
-            basic: (style, props) => ({
-                ...style,
-                height: "28px",
-            })
-        },
-        bottomLabel: {
-            basic: (style, props) => ({
-                ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
-            })
-        }
-    },
-    //#endregion
 
-    //#region 乘車時間暫用 TravelTime
-    travelTime: {
-        viewTypeContainer: {
-            basic: (style, props) => ({
-                ...style,
-                padding: 0,
-                margin: "0 16px 0 0",
-                display: "inline-block",
-                // ...style.occupy(4),
-                width: "200px"
-            })
-        },
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                padding: 0,
-                margin: "0 16px 0 0",
-                display: "inline-block",
-                // ...style.occupy(4),
-                width: "200px"
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                // height: "0px"
-            })
-        },
-        dateTimePickerContainer: {
-            basic: (style, props) => {
                 return {
                     ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
                 }
             }
         },
-        dateTimePickerSubContainer: {
-            basic: (style, props) => ({
-                ...style,
-                height: "28px",
-            })
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
         },
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "24px"
+                // minHeight: "16px",
+                // height: "auto",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f"
             })
         }
     },
@@ -236,118 +208,6 @@ export default {
                 // width: "600%"
             })
         }
-    },
-    //#endregion
-
-    //#region 車行選擇容器
-    carDealershipContainer: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            padding: 0,
-            backgroundColor: "#FFFFFF"
-        })
-    },
-    //#endregion
-
-    //#region  車行選擇 子標題列
-    carDealershipSubTitleBar: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "100%",
-                margin: "0 0 12px 0",
-                // backgroundColor: "#FFBB96",
-                borderBottom: "2px solid #D9D9D9",
-                height: "36px",
-                padding: 0
-            })
-        },
-        titleText: {
-            basic: (style, props) => ({
-                ...style,
-                width: "200px",
-                color: "rgba(0,0,0,0.85)"
-            })
-        },
-        rightContainer: {
-            basic: (style, props) => ({
-                ...style,
-                width: "162px",
-                height: "32px"
-            })
-        }
-    },
-    //#endregion
-    //#region 減號圖標
-    minusSvg: {
-        position: "relative",
-        top: "-5px",
-        left: "4px"
-    },
-    //#endregion
-
-    //#region 優先搭乘車行排序
-    bUnitSort: {
-        viewTypeContainer: {
-            basic: (style, props) => ({
-                ...style,
-                //left:"-8px",
-                // padding: "0 12px",
-                ...style.occupy(12),
-                // maxWidth: "calc( 33.33% - 4px )",
-                // flexBasis: "calc( 33.33% - 4px )",
-            })
-        },
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                //left:"-8px",
-                // padding: "0 12px",
-                ...style.occupy(12),
-                // maxWidth: "calc( 33.33% - 4px )",
-                // flexBasis: "calc( 33.33% - 4px )",
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                // height: "0px"
-            })
-        },
-        numberInputContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
-                }
-            }
-        },
-        numberInputSubContainer: {
-            basic: (style, props) => ({
-                ...style,
-                height: "28px",
-            })
-        },
-        bottomLabel: {
-            basic: (style, props) => ({
-                ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
-            })
-        }
-    },
-    //#endregion
-    //#region 優先搭乘車行排序 (請依序點擊完成排序)
-    bUnitSortNote: {
-        basic: (style, props) => ({
-            ...style,
-            display: "inline-block",
-            color: "#ff4d4f",
-            fontSize: "14px",
-            lineHeight: "22px"
-        })
     },
     //#endregion
 
@@ -1048,6 +908,151 @@ export default {
     },
     //#endregion
 
+    //#region 車種 標題
+    carTypeTitle: {
+        basic: (style, props) => ({
+            display: "inline-block",
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "146px",
+            // margin: "0 0 0 8px"
+        })
+    },
+    //#endregion
+
+    //#region 車種 CarType
+    carType: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 8px",
+                display: "inline-block",
+                // ...style.occupy(4),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "16px",
+                height: "16px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 輪椅種類 標題
+    wheelchairTitle: {
+        basic: (style, props) => ({
+            display: "inline-block",
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "230px",
+            margin: "0 16px"
+        })
+    },
+    //#endregion
+
+    //#region 輪椅種類 Wheelchair
+    wheelchair: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 8px",
+                display: "inline-block",
+                // margin: "0 8px 0 0"
+                // ...style.occupy(4),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "153px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "16px",
+                height: "16px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 陪同人數 標題
+    accompanyCountsTitle: {
+        basic: (style, props) => ({
+            display: "inline-block",
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "22px",
+            width: "156px",
+            margin: "0 16px 0 0"
+        })
+    },
+    //#endregion
+
+    //#region 陪同人數 AccompanyCounts
+    accompanyCounts: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 8px",
+                display: "inline-block",
+                // ...style.occupy(4),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "80px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: 0
+                minHeight: "16px",
+                height: "auto",
+            })
+        }
+    },
+    //#endregion
+
     //#region 接收簡訊號碼 標題
     smsNumberTitle: {
         basic: (style, props) => ({
@@ -1137,150 +1142,6 @@ export default {
     },
     //#endregion
 
-    //#region 車種 標題
-    carTypeTitle: {
-        basic: (style, props) => ({
-            display: "inline-block",
-            fontWeight: 500,
-            fontSize: "14px",
-            lineHeight: "22px",
-            width: "146px",
-            margin: "0 0 0 8px"
-        })
-    },
-    //#endregion
-
-    //#region 車種 CarType
-    carType: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 8px",
-                display: "inline-block",
-                // ...style.occupy(4),
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-            })
-        },
-        selectorContainer: {
-            basic: (style, props) => ({
-                ...style,
-                width: "100px"
-            })
-        },
-        bottomLabel: {
-            basic: (style, props) => ({
-                ...style,
-                minHeight: "16px",
-                height: "16px",
-                // fontSize: "12px",
-                // lineHeight: "18px",
-                // color: "#ff4d4f",
-                // width: "600%"
-            })
-        }
-    },
-    //#endregion
-
-    //#region 輪椅種類 標題
-    wheelchairTitle: {
-        basic: (style, props) => ({
-            display: "inline-block",
-            fontWeight: 500,
-            fontSize: "14px",
-            lineHeight: "22px",
-            width: "230px",
-            margin: "0 0 0 8px"
-        })
-    },
-    //#endregion
-
-    //#region 輪椅種類 Wheelchair
-    wheelchair: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 8px",
-                display: "inline-block",
-                // margin: "0 8px 0 0"
-                // ...style.occupy(4),
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-            })
-        },
-        selectorContainer: {
-            basic: (style, props) => ({
-                ...style,
-                width: "153px"
-            })
-        },
-        bottomLabel: {
-            basic: (style, props) => ({
-                ...style,
-                minHeight: "16px",
-                height: "16px",
-                // fontSize: "12px",
-                // lineHeight: "18px",
-                // color: "#ff4d4f",
-                // width: "600%"
-            })
-        }
-    },
-    //#endregion
-
-    //#region 陪同人數 標題
-    accompanyCountsTitle: {
-        basic: (style, props) => ({
-            display: "inline-block",
-            fontWeight: 500,
-            fontSize: "14px",
-            lineHeight: "22px",
-            width: "156px",
-            // margin: "0 0 0 8px"
-        })
-    },
-    //#endregion
-
-    //#region 陪同人數 AccompanyCounts
-    accompanyCounts: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 8px",
-                display: "inline-block",
-                // ...style.occupy(4),
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-            })
-        },
-        selectorContainer: {
-            basic: (style, props) => ({
-                ...style,
-                width: "80px"
-            })
-        },
-        bottomLabel: {
-            basic: (style, props) => ({
-                ...style,
-                // height: 0
-                minHeight: "16px",
-                height: "auto",
-            })
-        }
-    },
-    //#endregion
     //#region 陪同人數 AccompanyCounts 下標題 文字樣式
     accompanyCountsRequired: {
         basic: (style, props) => ({
@@ -1357,11 +1218,11 @@ export default {
     },
     //#endregion
 
-    //#region 新增下個地點按鈕
-    addNextLocation: {
+    //#region 回列表按鈕
+    returnButton: {
         basic: (style) => ({
             ...style,
-            width: "116px",
+            width: "74px",
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
@@ -1381,11 +1242,11 @@ export default {
     },
     //#endregion
 
-    //#region 立即預約按鈕
-    reservationNow: {
+    //#region 儲存按鈕
+    saveButton: {
         basic: (style) => ({
             ...style,
-            width: "82px",
+            width: "60px",
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
