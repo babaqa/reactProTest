@@ -12,6 +12,8 @@ import { ReactComponent as End2 } from '../../../../Assets/img/BusCallCarCompone
 import { ReactComponent as Start2 } from '../../../../Assets/img/BusCallCarComponentPage/Start2.svg'
 import { ReactComponent as Vector } from '../../../../Assets/img/BusCallCarComponentPage/Vector.svg'
 import { ReactComponent as Minus } from '../../../../Assets/img/BusCallCarComponentPage/Minus.svg'
+import { ReactComponent as Route } from '../../../../Assets/img/BusCallCarComponentPage/Route.svg'
+import { ReactComponent as Magnifier } from '../../../../Assets/img/BusCallCarComponentPage/Magnifier.svg'
 import { ReactComponent as People } from '../../../../Assets/img/BusCallCarComponentPage/People.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
@@ -142,9 +144,9 @@ const LaptopLBase = (props) => {
                                     行程
                                     <Minus
                                         style={laptopL.strokeMinusSvg}
-                                        // onClick={(e) => {
-                                        //     props.setTodayToDoOpen(t => !t)
-                                        // }}
+                                    // onClick={(e) => {
+                                    //     props.setTodayToDoOpen(t => !t)
+                                    // }}
                                     />
                                 </Text>
 
@@ -155,31 +157,18 @@ const LaptopLBase = (props) => {
                                 theme={laptopL.strokeFormContainer}
                                 open={props.TodayToDoOpen}
                             >
-                                {/* 車行 CarDealership */}
-                                {/* <TextInput
-                                viewType
-                                topLabel={<>車行</>}
-                                baseDefaultTheme={"DefaultTheme"}
-                                type="text"
-                                // placeholder={""}
-                                value={globalContextService.get("BusCallCarComponentPage", "CarDealership") ?? ""}
-                                onChange={(e, value, onInitial) => {
-                                    globalContextService.set("BusCallCarComponentPage", "CarDealership", value);
-                                }}
-                                theme={laptopL.carDealership}
-                            /> */}
-
                                 {/* 路線容器 */}
                                 <Container
                                     theme={laptopL.routeContainer}
                                 >
                                     {/* 路線 Route*/}
+                                    <Route style={laptopL.routeSvg} />
                                     <NewSelector
                                         placeholder={"請選擇路線"}
                                         isSearchable
                                         // viewType
                                         disabled={isNil(globalContextService.get("BusCallCarComponentPage", "TravelDate"))}
-                                        topLabel={"路線"}
+                                        // topLabel={"路線"}
                                         baseDefaultTheme={"DefaultTheme"}
                                         value={globalContextService.get("BusCallCarComponentPage", "Route") ?? null}
                                         onChange={(e, value, onInitial) => {
@@ -201,10 +190,22 @@ const LaptopLBase = (props) => {
 
                                         theme={laptopL.route}
                                     />
+                                    <Container style={{ width: "80px" }}>
+                                        <Text
+                                            theme={laptopL.routeSearchText}
+                                            onClick={() => {
+                                                // props.controllGCS("return");
+                                                history.push("/BusRoute")
+                                            }}
+                                        >
+                                            <Magnifier style={laptopL.searchSvg} />
+                                        路線搜尋
+                                        </Text>
+                                    </Container>
                                 </Container>
-                                <Container
+                                {/* <Container
                                     theme={laptopL.routeContainer}
-                                ></Container>
+                                ></Container> */}
                                 {/* 起點容器 */}
                                 <Container
                                     theme={laptopL.startPosContainer}
@@ -332,19 +333,6 @@ const LaptopLBase = (props) => {
                                 <Container
                                     theme={laptopL.numberContainer}
                                 >
-                                    {/* 簡訊號碼 SmsNumber */}
-                                    <Text theme={laptopL.formSubTitleText}>接收簡訊號碼</Text>
-                                    <TextInput
-                                        // topLabel={<>接收簡訊號碼</>}
-                                        baseDefaultTheme={"DefaultTheme"}
-                                        type="text"
-                                        placeholder={"請輸入手機號碼"}
-                                        value={globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
-                                        onChange={(e, value, onInitial) => {
-                                            globalContextService.set("BusCallCarComponentPage", "SmsNumber", value);
-                                        }}
-                                        theme={laptopL.smsNumber}
-                                    />
 
                                     {/* 搭車人數 AccTotalCounts */}
                                     <Text theme={laptopL.formSubTitleText}>搭車人數</Text>
@@ -373,6 +361,20 @@ const LaptopLBase = (props) => {
                                         ]}
                                         // menuPosition={true}
                                         theme={laptopL.accTotalCounts}
+                                    />
+
+                                    {/* 簡訊號碼 SmsNumber */}
+                                    <Text theme={laptopL.formSubTitleText}>接收簡訊號碼</Text>
+                                    <TextInput
+                                        // topLabel={<>接收簡訊號碼</>}
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        type="text"
+                                        placeholder={"請輸入手機號碼"}
+                                        value={globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
+                                        onChange={(e, value, onInitial) => {
+                                            globalContextService.set("BusCallCarComponentPage", "SmsNumber", value);
+                                        }}
+                                        theme={laptopL.smsNumber}
                                     />
 
                                 </Container>

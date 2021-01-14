@@ -178,8 +178,8 @@ export default {
             height: "auto",
             width: "100%",
             // display: props.open ? "block" : "none",
-            // padding: "16px",
-            minHeight: "142px"
+            padding: "16px 0 0 0",
+            minHeight: "132px"
         })
     },
     //#endregion
@@ -488,8 +488,16 @@ export default {
             // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
             backgroundColor: "transparent",
             // margin: "12px",
-            padding: "16px"
+            padding: "24px 16px"
         })
+    },
+    //#endregion
+
+    //#region 路線 icon
+    routeSvg: {
+        position: "absolute",
+        left: "16px",
+        top: "28px"
     },
     //#endregion
 
@@ -498,41 +506,41 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "16px 12px 0",
+                padding: "0 0 0 32px",
                 // display: "inline-block",
                 ...style.occupy(12),
-                backgroundColor: "#FFF",
+                // backgroundColor: "#FFF",
                 // margin: "16px"
             })
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
                 ...style,
-                //height: "0px"
+                height: "0px"
             })
         },
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         },
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "16px 12px 0",
+                padding: "0 0 0 32px",
                 // display: "inline-block",
                 ...style.occupy(12),
-                backgroundColor: "#FFF",
+                // backgroundColor: "#FFF",
                 // margin: "16px"
             })
         },
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "0px"
+                height: "0px"
             })
         },
         selectorContainer: {
@@ -545,12 +553,32 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         }
     },
     //#endregion
+
+    //路線搜尋 icon
+    searchSvg: {
+        position: "absolute",
+        top: "3px",
+        left: "-20px"
+    },
+
+    //路線搜尋文字
+    routeSearchText: {
+        basic: (style, props) => ({
+            position: "absolute",
+            fontSize: "14px",
+            lineHeight: "22px",
+            fontWeight: 500,
+            color: "#1890FF",
+            top: "5px",
+            right: "4px"
+        })
+    },
 
     //#region 起點容器
     startPosContainer: {
@@ -570,7 +598,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "16px 12px 0",
+                padding: "16px",
                 // display: "inline-block",
                 ...style.occupy(12),
                 marginTop: "12px",
@@ -587,14 +615,14 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         },
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "16px 12px 0",
+                padding: "16px",
                 // display: "inline-block",
                 ...style.occupy(12),
                 marginTop: "12px",
@@ -617,8 +645,8 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         }
     },
@@ -702,7 +730,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "16px 12px 0",
+                padding: "16px",
                 // display: "inline-block",
                 ...style.occupy(12),
                 marginTop: "12px",
@@ -719,14 +747,14 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         },
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "16px 12px 0",
+                padding: "16px",
                 // display: "inline-block",
                 ...style.occupy(12),
                 marginTop: "12px",
@@ -749,8 +777,8 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                // minHeight: "24px",
+                height: "0px"
             })
         }
     },
@@ -866,7 +894,7 @@ export default {
             // boxShadow: "0px 2px 0 rgba(217,217,217,1)",
             backgroundColor: "transparent",
             // margin: "12px",
-            padding: "16px"
+            padding: "8px 16px"
         })
     },
     //#endregion
@@ -910,8 +938,8 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                minHeight: "26px",
-                height: "26px",
+                // minHeight: "24px",
+                height: "0px",
                 // fontSize: "12px",
                 // lineHeight: "18px",
                 // color: "#ff4d4f",

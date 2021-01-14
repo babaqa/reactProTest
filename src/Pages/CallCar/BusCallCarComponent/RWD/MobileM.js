@@ -12,6 +12,8 @@ import { ReactComponent as End2 } from '../../../../Assets/img/BusCallCarCompone
 import { ReactComponent as Start2 } from '../../../../Assets/img/BusCallCarComponentPage/Start2.svg'
 import { ReactComponent as Vector } from '../../../../Assets/img/BusCallCarComponentPage/Vector.svg'
 import { ReactComponent as Minus } from '../../../../Assets/img/BusCallCarComponentPage/Minus.svg'
+import { ReactComponent as Route } from '../../../../Assets/img/BusCallCarComponentPage/Route.svg'
+import { ReactComponent as Magnifier } from '../../../../Assets/img/BusCallCarComponentPage/Magnifier.svg'
 import { ReactComponent as People } from '../../../../Assets/img/BusCallCarComponentPage/People.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
@@ -142,9 +144,9 @@ const MobileMBase = (props) => {
                                     行程
                                     <Minus
                                         style={mobileM.strokeMinusSvg}
-                                        // onClick={(e) => {
-                                        //     props.setTodayToDoOpen(t => !t)
-                                        // }}
+                                    // onClick={(e) => {
+                                    //     props.setTodayToDoOpen(t => !t)
+                                    // }}
                                     />
                                 </Text>
 
@@ -174,12 +176,13 @@ const MobileMBase = (props) => {
                                     theme={mobileM.routeContainer}
                                 >
                                     {/* 路線 Route*/}
+                                    <Route style={mobileM.routeSvg} />
                                     <NewSelector
                                         placeholder={"請選擇路線"}
                                         isSearchable
                                         // viewType
                                         disabled={isNil(globalContextService.get("BusCallCarComponentPage", "TravelDate"))}
-                                        topLabel={"路線"}
+                                        // topLabel={"路線"}
                                         baseDefaultTheme={"DefaultTheme"}
                                         value={globalContextService.get("BusCallCarComponentPage", "Route") ?? null}
                                         onChange={(e, value, onInitial) => {
@@ -201,6 +204,18 @@ const MobileMBase = (props) => {
 
                                         theme={mobileM.route}
                                     />
+                                    <Container>
+                                        <Text
+                                            theme={mobileM.routeSearchText}
+                                            onClick={() => {
+                                                // props.controllGCS("return");
+                                                history.push("/BusRoute")
+                                            }}
+                                        >
+                                            <Magnifier style={mobileM.searchSvg} />
+                                        路線搜尋
+                                        </Text>
+                                    </Container>
                                 </Container>
                                 {/* 起點容器 */}
                                 <Container
@@ -330,6 +345,39 @@ const MobileMBase = (props) => {
                                 <Container
                                     theme={mobileM.numberContainer}
                                 >
+                                    {/* 搭車人數 AccTotalCounts */}
+                                    <Text theme={mobileM.formSubTitleText}>搭車人數</Text>
+                                    <NewSelector
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        // topLabel={"搭車人數"}
+                                        //viewType
+                                        isSearchable
+                                        placeholder={""}
+                                        // isMulti
+                                        // hideSelectedOptions={false}
+                                        value={globalContextService.get("BusCallCarComponentPage", "AccTotalCounts") ?? null}
+                                        onChange={(e, value, onInitial) => {
+                                            globalContextService.set("BusCallCarComponentPage", "AccTotalCounts", value);
+                                        }}
+
+                                        options={[
+                                            { value: 1, label: "1人" },
+                                            { value: 2, label: "2人" },
+                                            { value: 3, label: "3人" },
+                                            { value: 4, label: "4人" },
+                                            { value: 5, label: "5人" },
+                                            { value: 6, label: "6人" },
+                                            { value: 7, label: "7人" },
+                                            { value: 8, label: "8人" },
+                                        ]}
+                                        // menuPosition={true}
+                                        theme={mobileM.accTotalCounts}
+                                    />
+
+                                </Container>
+                                <Container
+                                    theme={mobileM.numberContainer}
+                                >
                                     {/* 簡訊號碼 SmsNumber */}
                                     <Text theme={mobileM.formSubTitleText}>接收簡訊號碼</Text>
                                     <TextInput
@@ -344,138 +392,105 @@ const MobileMBase = (props) => {
                                         theme={mobileM.smsNumber}
                                     />
                                 </Container>
+
+                                {/* Table 容器 */}
                                 <Container
-                                    theme={mobileM.numberContainer}
+                                    bascDefaultTheme={"DefaultTheme"}
+                                    theme={mobileM.tableContainer}
                                 >
-                                {/* 搭車人數 AccTotalCounts */}
-                                <Text theme={mobileM.formSubTitleText}>搭車人數</Text>
-                                <NewSelector
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    // topLabel={"搭車人數"}
-                                    //viewType
-                                    isSearchable
-                                    placeholder={""}
-                                    // isMulti
-                                    // hideSelectedOptions={false}
-                                    value={globalContextService.get("BusCallCarComponentPage", "AccTotalCounts") ?? null}
-                                    onChange={(e, value, onInitial) => {
-                                        globalContextService.set("BusCallCarComponentPage", "AccTotalCounts", value);
-                                    }}
-
-                                    options={[
-                                        { value: 1, label: "1人" },
-                                        { value: 2, label: "2人" },
-                                        { value: 3, label: "3人" },
-                                        { value: 4, label: "4人" },
-                                        { value: 5, label: "5人" },
-                                        { value: 6, label: "6人" },
-                                        { value: 7, label: "7人" },
-                                        { value: 8, label: "8人" },
-                                    ]}
-                                    // menuPosition={true}
-                                    theme={mobileM.accTotalCounts}
-                                />
-
-                            </Container>
-
-                            {/* Table 容器 */}
-                            <Container
-                                bascDefaultTheme={"DefaultTheme"}
-                                theme={mobileM.tableContainer}
-                            >
-                                <OldTable
-                                    pagination={false}
-                                    checkbox={false}
-                                    // checked={["08f41bf6-4388-4b1e-bd3e-2ff538b44b1b"]}
-                                    checkedRowKeyName={"id"}
-                                    checkboxOnChecked={
-                                        (checkedRowKeys, checkedRows) => {
-                                            // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                            globalContextService.set("BusCallCarComponentPage", "CheckedRowKeys", checkedRowKeys);
-                                            globalContextService.set("BusCallCarComponentPage", "CheckedRowsData", checkedRows);
+                                    <OldTable
+                                        pagination={false}
+                                        checkbox={false}
+                                        // checked={["08f41bf6-4388-4b1e-bd3e-2ff538b44b1b"]}
+                                        checkedRowKeyName={"id"}
+                                        checkboxOnChecked={
+                                            (checkedRowKeys, checkedRows) => {
+                                                // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
+                                                globalContextService.set("BusCallCarComponentPage", "CheckedRowKeys", checkedRowKeys);
+                                                globalContextService.set("BusCallCarComponentPage", "CheckedRowsData", checkedRows);
+                                            }
                                         }
-                                    }
-                                    setPerCheckBoxDisabled={(record) => {
-                                        return {
-                                            // ...record, // 對應CheckBox當列資料
-                                            // disabled: record.name === 'Edrward 11',
-                                        }
-                                    }}
-                                    //scrollAreaWidth={"calc( 1900px - 300px )"} // 不用傳 會自適應寬度
-                                    //scrollAreaHeight={"calc( 100% - 55px )"}
-                                    columnsAttr={
-                                        //#region 資料欄設定
-                                        [
-                                            {
-                                                title: '行程',
-                                                width: "60px",
-                                                dataIndex: 'type',
-                                                sorter: (a, b) => a.carNo.length - b.carNo.length,
-                                                fixed: 'left',
-                                                render: (rowData) => {
-                                                    return <>
-                                                        <Text theme={mobileM.type}>
-                                                            {rowData}
-                                                        </Text>
-                                                    </>
+                                        setPerCheckBoxDisabled={(record) => {
+                                            return {
+                                                // ...record, // 對應CheckBox當列資料
+                                                // disabled: record.name === 'Edrward 11',
+                                            }
+                                        }}
+                                        //scrollAreaWidth={"calc( 1900px - 300px )"} // 不用傳 會自適應寬度
+                                        //scrollAreaHeight={"calc( 100% - 55px )"}
+                                        columnsAttr={
+                                            //#region 資料欄設定
+                                            [
+                                                {
+                                                    title: '行程',
+                                                    width: "60px",
+                                                    dataIndex: 'type',
+                                                    sorter: (a, b) => a.carNo.length - b.carNo.length,
+                                                    fixed: 'left',
+                                                    render: (rowData) => {
+                                                        return <>
+                                                            <Text theme={mobileM.type}>
+                                                                {rowData}
+                                                            </Text>
+                                                        </>
+                                                    },
                                                 },
-                                            },
-                                            {
-                                                title: '預估距離',
-                                                width: "74px",
-                                                dataIndex: 'estDistance',
-                                                // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
-                                                // fixed: 'left',
-                                            },
-                                            {
-                                                title: '預估時間',
-                                                width: "74px",
-                                                dataIndex: 'estTime',
-                                                // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
-                                                // fixed: 'left',
-                                            },
-                                            {
-                                                title: '車資總額',
-                                                width: "74px",
-                                                dataIndex: 'totalAmount',
-                                                // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
-                                                // fixed: 'left',
-                                            },
-                                            {
-                                                title: '陪同總額',
-                                                width: "74px",
-                                                dataIndex: 'compAmount',
-                                                // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
-                                                // fixed: 'left',
-                                            },
-                                            {
-                                                title: '',
-                                                width: "0px",
-                                                dataIndex: 'rightOccupy',
-                                                fixed: 'right',
-                                                sorter: false
-                                            },
-                                        ]
-                                        //#endregion
-                                    }
-                                    //sort
-                                    //showHeader={false}
-                                    data={[
-                                        { id: "1", type: "去程" },
-                                    ]}
-                                    // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
-                                    // data={props.AllCars.data}
-                                    clickPage={(currentPage, pageSize) => {
-                                    }}
-                                />
+                                                {
+                                                    title: '預估距離',
+                                                    width: "74px",
+                                                    dataIndex: 'estDistance',
+                                                    // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
+                                                    // fixed: 'left',
+                                                },
+                                                {
+                                                    title: '預估時間',
+                                                    width: "74px",
+                                                    dataIndex: 'estTime',
+                                                    // sorter: (a, b) => a.carCategoryName.length - b.carCategoryName.length,
+                                                    // fixed: 'left',
+                                                },
+                                                {
+                                                    title: '車資總額',
+                                                    width: "74px",
+                                                    dataIndex: 'totalAmount',
+                                                    // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
+                                                    // fixed: 'left',
+                                                },
+                                                {
+                                                    title: '陪同總額',
+                                                    width: "74px",
+                                                    dataIndex: 'compAmount',
+                                                    // sorter: (a, b) => a.seatNum.length - b.seatNum.length,
+                                                    // fixed: 'left',
+                                                },
+                                                {
+                                                    title: '',
+                                                    width: "0px",
+                                                    dataIndex: 'rightOccupy',
+                                                    fixed: 'right',
+                                                    sorter: false
+                                                },
+                                            ]
+                                            //#endregion
+                                        }
+                                        //sort
+                                        //showHeader={false}
+                                        data={[
+                                            { id: "1", type: "去程" },
+                                        ]}
+                                        // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
+                                        // data={props.AllCars.data}
+                                        clickPage={(currentPage, pageSize) => {
+                                        }}
+                                    />
+                                </Container>
                             </Container>
-                            </Container>
-                        {/* 叫車表單下方按鈕列 */}
-                        <BasicContainer
-                            theme={mobileM.callCarFormBottomContainer}
-                        >
-                            {/* 回列表按鈕 */}
-                            {/* <NativeLineButton
+                            {/* 叫車表單下方按鈕列 */}
+                            <BasicContainer
+                                theme={mobileM.callCarFormBottomContainer}
+                            >
+                                {/* 回列表按鈕 */}
+                                {/* <NativeLineButton
                             baseDefaultTheme={"DefaultTheme"}
                             disable={false}
                             type="button" // 防止提交
@@ -488,116 +503,116 @@ const MobileMBase = (props) => {
                             回列表
                                 </NativeLineButton> */}
 
-                            {/* 立即預約按鈕 */}
-                            <NativeLineButton
-                                baseDefaultTheme={"DefaultTheme"}
-                                disable={false}
-                                type="button" // 防止提交
-                                theme={mobileM.reservationNow}
-                                onClick={() => {
-                                    //#region 表單驗證
-                                    let validMsg = "";
-                                    console.log(["props ======= " + props])
-                                    if (valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
-                                        validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
-                                    }
-                                    else if (valid(globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
-                                        validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
-                                    }
-                                    else if (valid(globalContextService.get("BusCallCarComponentPage", "AccTotalCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
-                                        validMsg = valid(globalContextService.get("BusCallCarComponentPage", "AccTotalCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
-                                    }
-                                    else if (valid(globalContextService.get("BusCallCarComponentPage", "Route")?.value ?? "", ["^.{1,}$"], ["請選擇路線"])[1]) {
-                                        validMsg = valid(globalContextService.get("BusCallCarComponentPage", "Route")?.value ?? "", ["^.{1,}$"], ["請選擇路線"])[1]
-                                    }
-                                    else if (valid(globalContextService.get("BusCallCarComponentPage", "StartPos")?.value ?? "", ["^.{1,}$"], ["請選擇起點"])[1]) {
-                                        validMsg = valid(globalContextService.get("BusCallCarComponentPage", "StartPos")?.value ?? "", ["^.{1,}$"], ["請選擇起點"])[1]
-                                    }
-                                    else if (valid(globalContextService.get("BusCallCarComponentPage", "EndPos")?.value ?? "", ["^.{1,}$"], ["請選擇訖點"])[1]) {
-                                        validMsg = valid(globalContextService.get("BusCallCarComponentPage", "EndPos")?.value ?? "", ["^.{1,}$"], ["請選擇訖點"])[1]
-                                    }
-                                    else if (valid(globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
-                                        validMsg = valid(globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
-                                    }
+                                {/* 立即預約按鈕 */}
+                                <NativeLineButton
+                                    baseDefaultTheme={"DefaultTheme"}
+                                    disable={false}
+                                    type="button" // 防止提交
+                                    theme={mobileM.reservationNow}
+                                    onClick={() => {
+                                        //#region 表單驗證
+                                        let validMsg = "";
+                                        console.log(["props ======= " + props])
+                                        if (valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
+                                        }
+                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+                                        }
+                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "AccTotalCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "AccTotalCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
+                                        }
+                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "Route")?.value ?? "", ["^.{1,}$"], ["請選擇路線"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "Route")?.value ?? "", ["^.{1,}$"], ["請選擇路線"])[1]
+                                        }
+                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "StartPos")?.value ?? "", ["^.{1,}$"], ["請選擇起點"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "StartPos")?.value ?? "", ["^.{1,}$"], ["請選擇起點"])[1]
+                                        }
+                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "EndPos")?.value ?? "", ["^.{1,}$"], ["請選擇訖點"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "EndPos")?.value ?? "", ["^.{1,}$"], ["請選擇訖點"])[1]
+                                        }
+                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
+                                        }
 
-                                    //#region 表單驗證後動作
-                                    if (validMsg !== "") {
-                                        // console.log(validMsg, globalContextService.get("CaseAddPage"))
-                                        modalsService.infoModal.error({
-                                            id: "top1", //注意 這裡要加上固定id
-                                            iconRightText: validMsg,
-                                            yes: true,
-                                            yesText: "確認",
-                                            // no: true,
-                                            // autoClose: true,
-                                            backgroundClose: false,
-                                            yesOnClick: (e, close) => {
-                                                close();
-                                            }
-                                        })
-                                    }
+                                        //#region 表單驗證後動作
+                                        if (validMsg !== "") {
+                                            // console.log(validMsg, globalContextService.get("CaseAddPage"))
+                                            modalsService.infoModal.error({
+                                                id: "top1", //注意 這裡要加上固定id
+                                                iconRightText: validMsg,
+                                                yes: true,
+                                                yesText: "確認",
+                                                // no: true,
+                                                // autoClose: true,
+                                                backgroundClose: false,
+                                                yesOnClick: (e, close) => {
+                                                    close();
+                                                }
+                                            })
+                                        }
 
-                                    else {
-                                        // console.log("busUserId : " + props.UserId);
-                                        // console.log("date : " + globalContextService.get("BusCallCarComponentPage", "TravelDate"));
-                                        // console.log("fromStationId : " + globalContextService.get("BusCallCarComponentPage", "StartPos").value);
-                                        // console.log("fromStationName : " + globalContextService.get("BusCallCarComponentPage", "StartPos").label);
-                                        // console.log("passengerNum : " + globalContextService.get("BusCallCarComponentPage", "AccTotalCounts").value);
-                                        // console.log("reserveDate : " + globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime"));
-                                        // console.log("stationLineId : " + globalContextService.get("BusCallCarComponentPage", "Route").value);
-                                        // console.log("stationLineName : " + globalContextService.get("BusCallCarComponentPage", "Route").label);
-                                        // console.log("time : " + globalContextService.get("BusCallCarComponentPage", "TravelTime"));
-                                        // console.log("toStationId : " + globalContextService.get("BusCallCarComponentPage", "EndPos").value);
-                                        // console.log("toStationName : " + globalContextService.get("BusCallCarComponentPage", "EndPosRoute").label);
+                                        else {
+                                            // console.log("busUserId : " + props.UserId);
+                                            // console.log("date : " + globalContextService.get("BusCallCarComponentPage", "TravelDate"));
+                                            // console.log("fromStationId : " + globalContextService.get("BusCallCarComponentPage", "StartPos").value);
+                                            // console.log("fromStationName : " + globalContextService.get("BusCallCarComponentPage", "StartPos").label);
+                                            // console.log("passengerNum : " + globalContextService.get("BusCallCarComponentPage", "AccTotalCounts").value);
+                                            // console.log("reserveDate : " + globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime"));
+                                            // console.log("stationLineId : " + globalContextService.get("BusCallCarComponentPage", "Route").value);
+                                            // console.log("stationLineName : " + globalContextService.get("BusCallCarComponentPage", "Route").label);
+                                            // console.log("time : " + globalContextService.get("BusCallCarComponentPage", "TravelTime"));
+                                            // console.log("toStationId : " + globalContextService.get("BusCallCarComponentPage", "EndPos").value);
+                                            // console.log("toStationName : " + globalContextService.get("BusCallCarComponentPage", "EndPosRoute").label);
 
-                                        props.AddBusCallCarExecute({
-                                            busUserId: props.CaseUserId,// 幸福巴士個案id
-                                            date: globalContextService.get("BusCallCarComponentPage", "TravelDate"), // 預約日期
-                                            fromStationId: globalContextService.get("BusCallCarComponentPage", "StartPos").value, // 起點站牌id
-                                            fromStationName: globalContextService.get("BusCallCarComponentPage", "StartPos").label, // 起點站牌名字
-                                            id: "",// 幸福巴士預約訂單 id	新增無須上送
-                                            orgId: getParseItemLocalStorage("UseOrg")?.id,	// 畫面無此欄位	
-                                            passengerNum: globalContextService.get("BusCallCarComponentPage", "AccTotalCounts").value, // 搭車人數
-                                            reserveDate: globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
-                                            stationLineId: globalContextService.get("BusCallCarComponentPage", "Route").value, // 路線id
-                                            stationLineName: globalContextService.get("BusCallCarComponentPage", "Route").label, // 路線名字
-                                            time: globalContextService.get("BusCallCarComponentPage", "TravelTime"), //預約時間
-                                            toStationId: globalContextService.get("BusCallCarComponentPage", "EndPos").value, // 訖點站牌id
-                                            toStationName: globalContextService.get("BusCallCarComponentPage", "EndPos").label, //訖點站牌名字
-                                            remark: "",
-                                            userId: props.UserId
-                                        })
-                                    }
-                                }}
-                            >
-                                立即預約
+                                            props.AddBusCallCarExecute({
+                                                busUserId: props.CaseUserId,// 幸福巴士個案id
+                                                date: globalContextService.get("BusCallCarComponentPage", "TravelDate"), // 預約日期
+                                                fromStationId: globalContextService.get("BusCallCarComponentPage", "StartPos").value, // 起點站牌id
+                                                fromStationName: globalContextService.get("BusCallCarComponentPage", "StartPos").label, // 起點站牌名字
+                                                id: "",// 幸福巴士預約訂單 id	新增無須上送
+                                                orgId: getParseItemLocalStorage("UseOrg")?.id,	// 畫面無此欄位	
+                                                passengerNum: globalContextService.get("BusCallCarComponentPage", "AccTotalCounts").value, // 搭車人數
+                                                reserveDate: globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
+                                                stationLineId: globalContextService.get("BusCallCarComponentPage", "Route").value, // 路線id
+                                                stationLineName: globalContextService.get("BusCallCarComponentPage", "Route").label, // 路線名字
+                                                time: globalContextService.get("BusCallCarComponentPage", "TravelTime"), //預約時間
+                                                toStationId: globalContextService.get("BusCallCarComponentPage", "EndPos").value, // 訖點站牌id
+                                                toStationName: globalContextService.get("BusCallCarComponentPage", "EndPos").label, //訖點站牌名字
+                                                remark: "",
+                                                userId: props.UserId
+                                            })
+                                        }
+                                    }}
+                                >
+                                    立即預約
                                 </NativeLineButton>
-                        </BasicContainer>
+                            </BasicContainer>
                         </FormRow>
                     </FormContainer>
                 </SubContainer>
-            <SubContainer
-                theme={mobileM.mapContainer}
-            >
-                <MapGoogle
-                    mapId={"test1"}
-                    mapAttr={{
-                        //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
-                        center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
-                        zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
-                        //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
-                        //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
-                        //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
-                        //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
-                        //   attributionControl: false,
-                    }}
+                <SubContainer
+                    theme={mobileM.mapContainer}
+                >
+                    <MapGoogle
+                        mapId={"test1"}
+                        mapAttr={{
+                            //   maxBounds: [[105, 15], [138.45858, 33.4]], // 台灣地圖區域
+                            center: { lat: 25.012930, lng: 121.474708 }, // 初始中心座標，格式為 [lng, lat]  // 25.012930, 121.474708
+                            zoom: 16, // 初始 ZOOM LEVEL; [0-20, 0 為最小 (遠), 20 ;最大 (近)]
+                            //   minZoom: 6, // 限制地圖可縮放之最小等級, 可省略, [0-19.99]
+                            //   maxZoom: 19.99, // 限制地圖可縮放之最大等級, 可省略 [0-19.99]
+                            //   pitch: 0, // 攝影機仰角, 可省略, [0-60] // default 50
+                            //   bearing: 0, // 地圖角度, 可省略, [-180 ~ 180; 0 為正北朝上, 180 為正南朝上]
+                            //   attributionControl: false,
+                        }}
 
-                    theme={mobileM.map}
-                />
+                        theme={mobileM.map}
+                    />
 
-            </SubContainer>
+                </SubContainer>
 
-        </Container>
+            </Container>
         </>
     )
 }
