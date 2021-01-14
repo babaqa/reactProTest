@@ -6,8 +6,6 @@ import busFastCallCar from './BusFastCallCarComponent/BusFastCallCarComponent'
 import caseFastCallCar from './CaseFastCallCarComponent/CaseFastCallCarComponent'
 import whiteFastCallCar from './WhiteFastCallCarComponent/WhiteFastCallCarComponent'
 import allFastCallCar from './AllFastCallCarComponent/AllFastCallCarComponent'
-import addFastCallCar from './AddFastCallCar/AddFastCallCar'
-import editFastCallCar from './EditFastCallCar/EditFastCallCar'
 
 export default {
     rwd: {
@@ -19,7 +17,5 @@ export default {
     busFastCallCar,
     caseFastCallCar,
     whiteFastCallCar,
-    allFastCallCar,
-    addFastCallCar,
-    editFastCallCar
+    allFastCallCar
 }
