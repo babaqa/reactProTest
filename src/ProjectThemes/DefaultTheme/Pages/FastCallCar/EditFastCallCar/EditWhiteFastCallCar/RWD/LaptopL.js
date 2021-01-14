@@ -69,7 +69,8 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: 0,
+                marginLeft: "12px",
                 display: "inline-block",
                 width: "450px",
             })
@@ -77,7 +78,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: 0,
+                marginLeft: "12px",
                 display: "inline-block",
                 width: "450px",
             })
