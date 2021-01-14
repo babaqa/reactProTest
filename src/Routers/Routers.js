@@ -234,6 +234,34 @@ export const Routers = (props) => {
                     }
                     }>
                 </Route>
+                <Route exact path={"/FastCallCar/Add"}
+                    render={({ location }) => {
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/FastCallCar/Add"]
+                        ) : (
+                                <Redirect
+                                    to={{
+                                        pathname: "/Login",
+                                    }}
+                                />
+                            );
+                    }
+                    }>
+                </Route>
+                <Route exact path={"/FastCallCar/Edit"}
+                    render={({ location }) => {
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/FastCallCar/Edit"]
+                        ) : (
+                                <Redirect
+                                    to={{
+                                        pathname: "/Login",
+                                    }}
+                                />
+                            );
+                    }
+                    }>
+                </Route>
                 <Route exact path={"/BusRoute"}
                     render={({ location }) => {
                         return (getParseItemLocalStorage("CAuth") !== null) ? (

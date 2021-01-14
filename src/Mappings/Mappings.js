@@ -15,7 +15,12 @@ import { ReactComponent as ContactSvg } from '../Assets/img/BackstageLeftSideMen
 
 import { News } from '../Pages/News/News';
 import { CallCar } from '../Pages/CallCar/CallCar';
+
+//#region 快速叫車
 import { FastCallCar } from '../Pages/FastCallCar/FastCallCar';
+import { AddFastCallCar } from '../Pages/FastCallCar/AddFastCallCar/AddFastCallCar';
+import { EditFastCallCar } from '../Pages/FastCallCar/EditFastCallCar/EditFastCallCar';
+//#endregion
 import { BusRoute } from '../Pages/BusRoute/BusRoute';
 import { Record } from '../Pages/Record/Record';
 import { UserInfo } from '../Pages/UserInfo/UserInfo';
@@ -27,7 +32,11 @@ export const urlMapping = {
 
    "/News": <News />,// 最新消息
    "/CallCar": <CallCar />,// 預約訂車
+
    "/FastCallCar": <FastCallCar />,// 快速叫車
+   "/FastCallCar/Add": <AddFastCallCar />,// 新增常用路線
+   "/FastCallCar/Edit": <EditFastCallCar />,// 編輯常用路線
+
    "/BusRoute": <BusRoute />,// 快速叫車
    "/Record": <Record />,// 搭乘紀錄
    "/UserInfo": <UserInfo />,// 用戶資料

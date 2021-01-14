@@ -28,7 +28,7 @@ const MobileMBase = (props) => {
                 );
 
             default:
-                return ["全部", "長照", "共享車隊", "巴士"]
+                return ["長照", "共享車隊", "巴士"]
         }
 
     }
@@ -66,7 +66,7 @@ const MobileMBase = (props) => {
                                 onClick={() => {
                                 }}
                             >
-                                快速叫車
+                                快速叫車-新增常用路線
                             </NativeLineButton>
 
                         </BasicContainer>

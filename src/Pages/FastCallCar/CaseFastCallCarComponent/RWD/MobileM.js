@@ -76,6 +76,7 @@ const MobileMBase = (props) => {
                             e.preventDefault();
 
                             let rowData = {};
+                            history.push("/FastCallCar/Add")
 
                         }}
                     >
@@ -208,7 +209,7 @@ const MobileMBase = (props) => {
                                                                 e.preventDefault();
                                                             
                                                                 let rowData = {};
-                                                            
+                                                                history.push("/FastCallCar/Edit")
                                                             }}
                                                         >
                                                             {/* 編輯 圖標 */}
