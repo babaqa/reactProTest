@@ -8,7 +8,7 @@ import { Tablet } from './RWD/Tablet';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { useHistory, useLocation } from 'react-router-dom';
 
-export const SystemNewsComponent = (props) => {
+export const AllBusRouteAomponent = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
 
@@ -39,45 +39,45 @@ export const SystemNewsComponent = (props) => {
             case "return":
 
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("SystemNewsComponentPage");
+                globalContextService.remove("AllBusRouteAomponentPage");
                 //#endregion
 
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
+                globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowKeys");
+                globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowsData");
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("SystemNewsComponentPage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("AllBusRouteAomponentPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("SystemNewsComponentPage", item);
+                        globalContextService.remove("AllBusRouteAomponentPage", item);
                     }
                 })
                 //#endregion
                 //#endregion
                 if (payload === "API") {
-                    globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                    globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
+                    globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowKeys");
+                    globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowsData");
                 }
                 //#endregion
                 break;
             case "Save":
                 //#region 當點擊 立即預約 按鈕時，要清除的資料
-                globalContextService.remove("SystemNewsComponentPage");
+                globalContextService.remove("AllBusRouteAomponentPage");
                 //#endregion
 
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
+                globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowKeys");
+                globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowsData");
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("SystemNewsComponentPage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("AllBusRouteAomponentPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("SystemNewsComponentPage", item);
+                        globalContextService.remove("AllBusRouteAomponentPage", item);
                     }
                 })
                 //#endregion
                 //#endregion
                 if (payload === "API") {
-                    globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                    globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
+                    globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowKeys");
+                    globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowsData");
                 }
                 //#endregion
                 break;
@@ -91,7 +91,7 @@ export const SystemNewsComponent = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             // console.log(location, action, "路由變化")
-            globalContextService.remove("SystemNewsComponentPage", "firstUseAPIgetCarType");
+            globalContextService.remove("AllBusRouteAomponentPage", "firstUseAPIgetCarType");
         });
 
         return () => {
@@ -102,8 +102,9 @@ export const SystemNewsComponent = (props) => {
 
     return (
         <>
+            {/* 共用theme */}
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     UserId={urlParams.get("userId")}
                     CaseUserId={urlParams.get("caseUserId")}
@@ -112,7 +113,7 @@ export const SystemNewsComponent = (props) => {
                     controllGCS={controllGCS}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     UserId={urlParams.get("userId")}
@@ -131,7 +132,7 @@ export const SystemNewsComponent = (props) => {
                     data={data}
                     controllGCS={controllGCS}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM

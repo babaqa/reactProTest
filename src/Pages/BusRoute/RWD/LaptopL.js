@@ -7,7 +7,7 @@ import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
 import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { SystemNewsComponent } from '../SystemNewsComponent/SystemNewsComponent'
+import { AllBusRouteAomponent } from '../AllBusRouteAomponent/AllBusRouteAomponent'
 import { CaseNewsComponent } from '../CaseNewsComponent/CaseNewsComponent'
 import { WhiteNewsComponent } from '../WhiteNewsComponent/WhiteNewsComponent'
 import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
@@ -15,7 +15,7 @@ import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
 const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { news: { rwd: { laptopL } } } } = Theme;
+    const { pages: { busRoute: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
@@ -25,7 +25,7 @@ const LaptopLBase = (props) => {
             case "tabUseComponent":
                 return (
                     {
-                        "系統公告": <SystemNewsComponent />,
+                        "全部路線": <AllBusRouteAomponent />,
                         "長照": <CaseNewsComponent />,
                         "共享車隊": <WhiteNewsComponent />,
                         "巴士": <BusNewsComponent />
@@ -33,7 +33,7 @@ const LaptopLBase = (props) => {
                 );
 
             default:
-                return ["系統公告", "長照", "共享車隊", "巴士"]
+                return ["全部路線", "長照", "共享車隊", "巴士"]
         }
 
     }
@@ -45,62 +45,28 @@ const LaptopLBase = (props) => {
                 theme={laptopL.mainPageContainer}
                 outSideTopComponent={
                     <>
-                        {/* 標題列 */}
-                        <MainPageTitleBar
-                            bascDefaultTheme={"DefaultTheme"}
-                            titleText={"公告"}
-                            theme={laptopL.titleBar}
-                            // onSubmit={(e)=>console.log(e)}
-                            centerContent={
-                                <>
-                                    <BasicContainer>
-                                        {tabMap().map((item, index) => {
-                                            return (
-                                                <React.Fragment key={index}>
-                                                    <Text
-                                                        onClick={() => { props.setNowTab(item) }}
-                                                        isActive={props.nowTab === item}
-                                                        theme={laptopL.titleBarCallCarTab}
-                                                    >
-                                                        {item}
-                                                    </Text>
-                                                </React.Fragment>
-                                            )
-                                        })}
-                                    </BasicContainer>
-                                </>
-                            }
+                        {/* 分頁 */}
+                        <BasicContainer
+                            theme={laptopL.whiteContainer}
                         >
-                            {/* 日期區間容器 */}
-                            <SubContainer baseDefaultTheme={"DefaultTheme"}>
-                                {/* 日期區間 DateTimeRange  */}
-                                <RangeDateTimePicker
-                                    // topLabel={<></>}
-                                    // type={"time"} time、date、week、month、quarter、year
-                                    type={"date"}
-                                    format={"YYYY-MM-DD"}
-                                    bascDefaultTheme={"DefaultTheme"}
-                                    // viewType
-                                    isSearchable
-                                    placeholder={""}
-                                    value={
-                                        (globalContextService.get("NewsPage", "DateTimeRange") ?
-                                            [moment(globalContextService.get("NewsPage", "DateTimeRange")[0]), moment(globalContextService.get("NewsPage", "DateTimeRange")[1])]
-                                            :
-                                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
-                                        )
-                                    }
-                                    onChange={(value, momentObj) => {
-                                        if (value !== globalContextService.get("NewsPage", "DateTimeRange")) {
-                                            globalContextService.set("NewsPage", "DateTimeRange", value);
-                                            // console.log("change")
-                                            // setForceUpdate(f => !f)
-                                        }
-                                    }}
-                                    theme={laptopL.dateTimeRange}
-                                />
-                            </SubContainer>
-                        </MainPageTitleBar>
+                            <BasicContainer
+                                theme={laptopL.tabsContainer}
+                            >
+                                {tabMap().map((item, index) => {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            <Text
+                                                onClick={() => { props.setNowTab(item) }}
+                                                isActive={props.nowTab === item}
+                                                theme={laptopL.titleBarBusRouteCallCarTab}
+                                            >
+                                                {item}
+                                            </Text>
+                                        </React.Fragment>
+                                    )
+                                })}
+                            </BasicContainer>
+                        </BasicContainer>
                     </>
                 }
             >

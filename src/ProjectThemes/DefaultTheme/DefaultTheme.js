@@ -10,6 +10,8 @@ import medicalOrgManager from './Pages/Base/MedicalOrgManager/MedicalOrgManager'
 import operatingUnitSetting from './Pages/Base/OperatingUnitSetting/OperatingUnitSetting'
 import news from './Pages/News/News'
 import busRoute from './Pages/BusRoute/BusRoute'
+import allBusRouteComponent from './Pages/BusRoute/AllBusRouteComponent/AllBusRouteComponent'
+
 import systemNewsComponent from './Pages/News/SystemNewsComponent/SystemNewsComponent'
 import caseNewsComponent from './Pages/News/CaseNewsComponent/CaseNewsComponent'
 import busNewsComponent from './Pages/News/BusNewsComponent/BusNewsComponent'
@@ -78,7 +80,7 @@ export default {
         busRoute: {
             ...busRoute,
             component: {
-                systemNewsComponent,
+                allBusRouteComponent,
                 caseNewsComponent,
                 busNewsComponent,
                 whiteNewsComponent,
