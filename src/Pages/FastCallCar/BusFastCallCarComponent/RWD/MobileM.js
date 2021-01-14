@@ -77,7 +77,7 @@ const MobileMBase = (props) => {
                             e.preventDefault();
 
                             let rowData = {};
-
+                            history.push("/FastCallCar/Add")
                         }}
                     >
                         {/* 新增常用路線 圖標 */}
@@ -209,7 +209,7 @@ const MobileMBase = (props) => {
                                                                 e.preventDefault();
                                                             
                                                                 let rowData = {};
-                                                            
+                                                                history.push("/FastCallCar/Edit")
                                                             }}
                                                         >
                                                             {/* 編輯 圖標 */}

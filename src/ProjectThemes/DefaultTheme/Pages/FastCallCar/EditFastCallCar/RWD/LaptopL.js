@@ -23,7 +23,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "16px 150px 204px", //188 是授權圖高度
+                    padding: "24px 24px 212px", //188 是授權圖高度
                     minHeight: "calc( 100vh - 245px)"
                 }
             }
@@ -50,7 +50,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "16px 48px 204px", //188 是授權圖高度
+                    padding: "24px 24px 212px", //188 是授權圖高度
                     minHeight: "calc( 100vh - 225px)"
                 }
             }
@@ -77,7 +77,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "16px 24px 204px", //188 是授權圖高度
+                    padding: "24px 24px 212px", //188 是授權圖高度
                     minHeight: "calc( 100vh - 225px)"
                 }
             }
@@ -89,7 +89,7 @@ export default {
     titleBar: {
         basic: (style, props) => ({
             ...style,
-            width: "236px",
+            width: "423px",
             height: "40px",
             backgroundColor: "#FFF",
             margin: "0 24px 16px"
@@ -134,7 +134,7 @@ export default {
     //#endregion
 
     //#region 標題列 預約訂車分頁
-    titleBarFastCallCarTab: {
+    titleBarEditFastCallCarTab: {
         basic: (style, props) => ({
             ...style,
             display: "inline-grid",

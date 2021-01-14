@@ -773,27 +773,6 @@ const LaptopLBase = (props) => {
 
                                     <Container>
 
-                                        {/* 接收簡訊號碼 標題 */}
-                                        <Text
-                                            theme={laptopL.smsNumberTitle}
-                                        >
-                                            接收簡訊號碼
-
-                                        {/* 接收簡訊號碼 SmsNumber */}
-                                            <TextInput
-
-                                                topLabel={""}
-                                                baseDefaultTheme={"DefaultTheme"}
-                                                type="text"
-                                                placeholder={"請輸入手機號碼"}
-                                                value={globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
-                                                onChange={(e, value, onInitial) => {
-                                                    globalContextService.set("CaseCallCarComponentPage", "SmsNumber", value);
-                                                }}
-                                                theme={laptopL.smsNumber}
-                                            />
-                                        </Text>
-
                                         {/* 車種 標題 */}
                                         <Text
                                             theme={laptopL.carTypeTitle}
@@ -925,6 +904,28 @@ const LaptopLBase = (props) => {
                                                 theme={laptopL.accompanyCounts}
                                             />
                                         </Text>
+
+                                        {/* 接收簡訊號碼 標題 */}
+                                        <Text
+                                            theme={laptopL.smsNumberTitle}
+                                        >
+                                            接收簡訊號碼
+
+                                        {/* 接收簡訊號碼 SmsNumber */}
+                                            <TextInput
+
+                                                topLabel={""}
+                                                baseDefaultTheme={"DefaultTheme"}
+                                                type="text"
+                                                placeholder={"請輸入手機號碼"}
+                                                value={globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
+                                                onChange={(e, value, onInitial) => {
+                                                    globalContextService.set("CaseCallCarComponentPage", "SmsNumber", value);
+                                                }}
+                                                theme={laptopL.smsNumber}
+                                            />
+                                        </Text>
+
 
                                         <Text
                                             theme={laptopL.accompanyCountsRequired}

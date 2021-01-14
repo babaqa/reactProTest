@@ -11,7 +11,7 @@ export const EditFastCallCar = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
-    const [NowTab, setNowTab] = useState("全部"); // 目前快速叫車頁面
+    const [NowTab, setNowTab] = useState("長照"); // 目前快速叫車頁面
     const [Width, Height] = useWindowSize();
 
     return (

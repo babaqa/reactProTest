@@ -12,7 +12,7 @@ import { AddWhiteFastCallCar } from '../AddWhiteFastCallCar/AddWhiteFastCallCar'
 const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { fastCallCar: { rwd: { laptopL } } } } = Theme;
+    const { pages: { fastCallCar: { addFastCallCar: { rwd: { laptopL } } } } } = Theme;
     let history = useHistory()
 
     //#region 分頁映射
@@ -28,7 +28,7 @@ const LaptopLBase = (props) => {
                 );
 
             default:
-                return ["全部", "長照", "共享車隊", "巴士"]
+                return ["長照", "共享車隊", "巴士"]
         }
 
     }
@@ -47,7 +47,7 @@ const LaptopLBase = (props) => {
                             <Text
                                 theme={laptopL.titleText}
                             >
-                                快速叫車
+                                快速叫車-新增常用路線
                             </Text>
                         </BasicContainer>
 
@@ -64,7 +64,7 @@ const LaptopLBase = (props) => {
                                             <Text
                                                 onClick={() => { props.setNowTab(item) }}
                                                 isActive={props.nowTab === item}
-                                                theme={laptopL.titleBarFastCallCarTab}
+                                                theme={laptopL.titleBarAddFastCallCarTab}
                                             >
                                                 {item}
                                             </Text>

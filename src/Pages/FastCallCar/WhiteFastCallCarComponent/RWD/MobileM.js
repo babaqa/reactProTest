@@ -76,7 +76,7 @@ const MobileMBase = (props) => {
                             e.preventDefault();
 
                             let rowData = {};
-
+                            history.push("/FastCallCar/Add")
                         }}
                     >
                         {/* 新增常用路線 圖標 */}
@@ -207,7 +207,7 @@ const MobileMBase = (props) => {
                                                                 e.preventDefault();
                                                             
                                                                 let rowData = {};
-                                                            
+                                                                history.push("/FastCallCar/Edit")
                                                             }}
                                                         >
                                                             {/* 編輯 圖標 */}
@@ -216,81 +216,81 @@ const MobileMBase = (props) => {
                                                         </NativeLineButton>
                                                         
                                                         <SubContainer
-                                            baseDefaultTheme={"DefaultTheme"}
-                                            theme={mobileM.dropDownContainer}
-                                        >
-                                            <DropDown
-                                                placement={"topCenter"}
-                                                dropDownItem={
-                                                    <>
-                                                        {/* DropDown 項目容器 */}
-                                                        <BasicContainer
                                                             baseDefaultTheme={"DefaultTheme"}
-                                                            theme={mobileM.dropDownItemContainer}>
-                                                            {/* DropDown 子項目 */}
-                                                            <Text
-                                                                baseDefaultTheme={"DefaultTheme"}
-                                                                theme={mobileM.dropDownSubItemContainer}
+                                                            theme={mobileM.dropDownContainer}
+                                                        >
+                                                            <DropDown
+                                                                placement={"topCenter"}
+                                                                dropDownItem={
+                                                                    <>
+                                                                        {/* DropDown 項目容器 */}
+                                                                        <BasicContainer
+                                                                            baseDefaultTheme={"DefaultTheme"}
+                                                                            theme={mobileM.dropDownItemContainer}>
+                                                                            {/* DropDown 子項目 */}
+                                                                            <Text
+                                                                                baseDefaultTheme={"DefaultTheme"}
+                                                                                theme={mobileM.dropDownSubItemContainer}
+                                                                            >
+                                                                                <Tip style={mobileM.tipSvg} />
+                                                                                確定刪除此路線。
+                                                                            </Text>
+                                                                
+                                                                            {/* 取消 */}
+                                                                            <NativeLineButton
+                                                                                baseDefaultTheme={"DefaultTheme"}
+                                                                                disable={false}
+                                                                                type="button" // 防止提交
+                                                                                theme={mobileM.cancelButton}
+                                                                                onClick={(e) => {
+                                                                                    e.preventDefault();
+                                                                                
+                                                                                    let rowData = {};
+                                                                                
+                                                                                }}
+                                                                            >
+                                                                                取消
+                                                                            </NativeLineButton>
+                                                                            
+                                                                            {/* 確認 */}
+                                                                            <NativeLineButton
+                                                                                baseDefaultTheme={"DefaultTheme"}
+                                                                                disable={false}
+                                                                                type="button" // 防止提交
+                                                                                theme={mobileM.submitButton}
+                                                                                onClick={(e) => {
+                                                                                    e.preventDefault();
+                                                                                
+                                                                                    let rowData = {};
+                                                                                
+                                                                                }}
+                                                                            >
+                                                                                確認
+                                                                            </NativeLineButton>
+                                                                            
+                                                                        </BasicContainer>
+                                                                    </>
+                                                                }
                                                             >
-                                                                <Tip style={mobileM.tipSvg} />
-                                                                確定刪除此路線。
-                                                            </Text>
-
-                                                            {/* 取消 */}
-                                                            <NativeLineButton
-                                                                baseDefaultTheme={"DefaultTheme"}
-                                                                disable={false}
-                                                                type="button" // 防止提交
-                                                                theme={mobileM.cancelButton}
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-
-                                                                    let rowData = {};
-
-                                                                }}
-                                                            >
-                                                                取消
-                                                            </NativeLineButton>
-
-                                                            {/* 確認 */}
-                                                            <NativeLineButton
-                                                                baseDefaultTheme={"DefaultTheme"}
-                                                                disable={false}
-                                                                type="button" // 防止提交
-                                                                theme={mobileM.submitButton}
-                                                                onClick={(e) => {
-                                                                    e.preventDefault();
-
-                                                                    let rowData = {};
-
-                                                                }}
-                                                            >
-                                                                確認
-                                                            </NativeLineButton>
-
-                                                        </BasicContainer>
-                                                    </>
-                                                }
-                                            >
-                                                {/* 刪除 */}
-                                                <NativeLineButton
-                                                    baseDefaultTheme={"DefaultTheme"}
-                                                    disable={false}
-                                                    type="button" // 防止提交
-                                                    theme={mobileM.deleteButton}
-                                                    onClick={(e) => {
-                                                        e.preventDefault();
-
-                                                        let rowData = {};
-
-                                                    }}
-                                                >
-                                                    {/* 刪除 圖標 */}
-                                                    <Del style={mobileM.deleteSvg} />
-                                                    刪除
-                                                </NativeLineButton>
-                                            </DropDown>
-                                        </SubContainer>
+                                                                {/* 刪除 */}
+                                                                <NativeLineButton
+                                                                    baseDefaultTheme={"DefaultTheme"}
+                                                                    disable={false}
+                                                                    type="button" // 防止提交
+                                                                    theme={mobileM.deleteButton}
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                    
+                                                                        let rowData = {};
+                                                                    
+                                                                    }}
+                                                                >
+                                                                    {/* 刪除 圖標 */}
+                                                                    <Del style={mobileM.deleteSvg} />
+                                                                    刪除
+                                                                </NativeLineButton>
+                                                            </DropDown>
+                                                        </SubContainer>
 
                                                         
                                                     </BasicContainer>
