@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import styled from 'styled-components';
-import { Context } from '../../../../Store/Store'
-import { CardTable } from '../../../../ProjectComponent/CardTable/CardTable'
-import { ReactComponent as Plus } from '../../../../Assets/img/FastCallCarPage/Plus2.svg'
-import { ReactComponent as Edit } from '../../../../Assets/img/FastCallCarPage/Edit.svg'
-import { ReactComponent as End } from '../../../../Assets/img/FastCallCarPage/End.svg'
-import { ReactComponent as Start } from '../../../../Assets/img/FastCallCarPage/Start.svg'
-import { ReactComponent as Del } from '../../../../Assets/img/FastCallCarPage/Del.svg'
-import { ReactComponent as CallCar } from '../../../../Assets/img/FastCallCarPage/CallCar.svg'
-import { ReactComponent as NoData } from '../../../../Assets/img/FastCallCarPage/NoData.svg'
-import { ReactComponent as Tip } from '../../../../Assets/img/FastCallCarPage/Tip.svg'
+import { Context } from '../../../../../Store/Store'
+import { CardTable } from '../../../../../ProjectComponent/CardTable/CardTable'
+import { ReactComponent as Plus } from '../../../../../Assets/img/FastCallCarPage/Plus2.svg'
+import { ReactComponent as Edit } from '../../../../../Assets/img/FastCallCarPage/Edit.svg'
+import { ReactComponent as End } from '../../../../../Assets/img/FastCallCarPage/End.svg'
+import { ReactComponent as Start } from '../../../../../Assets/img/FastCallCarPage/Start.svg'
+import { ReactComponent as Del } from '../../../../../Assets/img/FastCallCarPage/Del.svg'
+import { ReactComponent as CallCar } from '../../../../../Assets/img/FastCallCarPage/CallCar.svg'
+import { ReactComponent as NoData } from '../../../../../Assets/img/FastCallCarPage/NoData.svg'
+import { ReactComponent as Tip } from '../../../../../Assets/img/FastCallCarPage/Tip.svg'
 import { useHistory } from 'react-router-dom';
-import { Tag,DropDown, DateTimePicker, BasicContainer, FormContainer, FormRow, Checkbox, CheckboxItem, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { Tag,DropDown, DateTimePicker, BasicContainer, FormContainer, FormRow, Checkbox, CheckboxItem, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../../Components';
 import { toString } from 'lodash/lang';
 
 const MobileMBase = (props) => {

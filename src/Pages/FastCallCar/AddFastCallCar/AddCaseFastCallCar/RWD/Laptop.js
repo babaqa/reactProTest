@@ -1,19 +1,19 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import styled from 'styled-components';
-import { Context } from '../../../../Store/Store'
-import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle, mapGoogleControll, MapGoogleInput } from '../../../../ProjectComponent';
-import { ReactComponent as Search } from '../../../../Assets/img/CaseCallCarComponentPage/Search.svg'
-import { ReactComponent as Convert } from '../../../../Assets/img/CaseCallCarComponentPage/Convert.svg'
-import { ReactComponent as StartToEnd } from '../../../../Assets/img/CaseCallCarComponentPage/StartToEnd.svg'
-import { ReactComponent as UpCircle } from '../../../../Assets/img/CaseCallCarComponentPage/UpCircle.svg'
-import { ReactComponent as End } from '../../../../Assets/img/CaseCallCarComponentPage/End.svg'
-import { ReactComponent as Start } from '../../../../Assets/img/CaseCallCarComponentPage/Start.svg'
+import { Context } from '../../../../../Store/Store'
+import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle, mapGoogleControll, MapGoogleInput } from '../../../../../ProjectComponent';
+import { ReactComponent as Search } from '../../../../../Assets/img/CaseCallCarComponentPage/Search.svg'
+import { ReactComponent as Convert } from '../../../../../Assets/img/CaseCallCarComponentPage/Convert.svg'
+import { ReactComponent as StartToEnd } from '../../../../../Assets/img/CaseCallCarComponentPage/StartToEnd.svg'
+import { ReactComponent as UpCircle } from '../../../../../Assets/img/CaseCallCarComponentPage/UpCircle.svg'
+import { ReactComponent as End } from '../../../../../Assets/img/CaseCallCarComponentPage/End.svg'
+import { ReactComponent as Start } from '../../../../../Assets/img/CaseCallCarComponentPage/Start.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
-import { posRemarksSelectOption } from '../../../../Mappings/Mappings';
+import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../../Components';
+import { posRemarksSelectOption } from '../../../../../Mappings/Mappings';
 import { isEqual, isNil } from 'lodash';
-import { valid } from '../../../../Handlers';
+import { valid } from '../../../../../Handlers';
 
 const LaptopBase = (props) => {
 

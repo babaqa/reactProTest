@@ -1,18 +1,18 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import { Context } from '../../../Store/Store'
-import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput, modalsService } from '../../../Components';
+import { Context } from '../../../../Store/Store'
+import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput, modalsService } from '../../../../Components';
 import { LaptopL } from './RWD/LaptopL';
 import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
 import { Tablet } from './RWD/Tablet';
-import { useWindowSize } from '../../../SelfHooks/useWindowSize';
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { useHistory, useLocation } from 'react-router-dom';
 import { isUndefined } from 'lodash';
-import { mapGoogleControll } from '../../../ProjectComponent';
-import { clearLocalStorage, clearSession, getParseItemLocalStorage } from '../../../Handlers';
-import { useAsync } from '../../../SelfHooks/useAsync';
+import { mapGoogleControll } from '../../../../ProjectComponent';
+import { clearLocalStorage, clearSession, getParseItemLocalStorage } from '../../../../Handlers';
+import { useAsync } from '../../../../SelfHooks/useAsync';
 
-export const WhiteFastCallCarComponent = (props) => {
+export const AddWhiteFastCallCar = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
@@ -36,7 +36,7 @@ export const WhiteFastCallCarComponent = (props) => {
             case "return":
 
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("WhiteFastCallCarComponentPage");
+                globalContextService.remove("AddWhiteFastCallCarPage");
                 //#endregion
 
                 //#region 清除上一頁的勾選項
@@ -51,14 +51,14 @@ export const WhiteFastCallCarComponent = (props) => {
                 //#endregion
                 //#endregion
                 if (payload === "API") {
-                    globalContextService.remove("WhiteFastCallCarComponentPage", "CheckedRowKeys");
-                    globalContextService.remove("WhiteFastCallCarComponentPage", "CheckedRowsData");
+                    globalContextService.remove("AddWhiteFastCallCarPage", "CheckedRowKeys");
+                    globalContextService.remove("AddWhiteFastCallCarPage", "CheckedRowsData");
                 }
                 //#endregion
                 break;
             case "Save":
                 //#region 當點擊 立即預約 按鈕時，要清除的資料
-                globalContextService.remove("WhiteFastCallCarComponentPage");
+                globalContextService.remove("AddWhiteFastCallCarPage");
                 //#endregion
 
                 //#region 清除上一頁的勾選項
@@ -73,8 +73,8 @@ export const WhiteFastCallCarComponent = (props) => {
                 //#endregion
                 //#endregion
                 if (payload === "API") {
-                    globalContextService.remove("WhiteFastCallCarComponentPage", "CheckedRowKeys");
-                    globalContextService.remove("WhiteFastCallCarComponentPage", "CheckedRowsData");
+                    globalContextService.remove("AddWhiteFastCallCarPage", "CheckedRowKeys");
+                    globalContextService.remove("AddWhiteFastCallCarPage", "CheckedRowsData");
                 }
                 //#endregion
                 break;
@@ -88,7 +88,7 @@ export const WhiteFastCallCarComponent = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             // console.log(location, action, "路由變化")
-            globalContextService.remove("WhiteFastCallCarComponentPage", "firstUseAPIgetCarType");
+            globalContextService.remove("AddWhiteFastCallCarPage", "firstUseAPIgetCarType");
         });
 
         return () => {

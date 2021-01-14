@@ -1,20 +1,20 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
-import { Context } from '../../../Store/Store'
-import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput, modalsService } from '../../../Components';
+import { Context } from '../../../../Store/Store'
+import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput, modalsService } from '../../../../Components';
 import { LaptopL } from './RWD/LaptopL';
 import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
 import { Tablet } from './RWD/Tablet';
-import { useWindowSize } from '../../../SelfHooks/useWindowSize';
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { useHistory, useLocation } from 'react-router-dom';
 import { isUndefined } from 'lodash';
-import { clearLocalStorage, clearSession, getParseItemLocalStorage } from '../../../Handlers';
-import { useAsync } from '../../../SelfHooks/useAsync';
-import { mapGoogleControll } from '../../../ProjectComponent';
+import { clearLocalStorage, clearSession, getParseItemLocalStorage } from '../../../../Handlers';
+import { useAsync } from '../../../../SelfHooks/useAsync';
+import { mapGoogleControll } from '../../../../ProjectComponent';
 import moment from "moment";
-import { fmt } from '../../../Handlers/DateHandler';
+import { fmt } from '../../../../Handlers/DateHandler';
 
-export const CaseFastCallCarComponent = (props) => {
+export const EditCaseFastCallCar = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
@@ -44,17 +44,17 @@ export const CaseFastCallCarComponent = (props) => {
         switch (type) {
             case "return":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("CaseFastCallCarComponentPage");
+                globalContextService.remove("EditCaseFastCallCarPage");
                 //#endregion
                 break;
             case "SaveHaveNextOrderFlag":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("CaseFastCallCarComponentPage");
+                globalContextService.remove("EditCaseFastCallCarPage");
                 //#endregion
                 break;
             case "SaveNoHaveNextOrderFlag":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("CaseFastCallCarComponentPage");
+                globalContextService.remove("EditCaseFastCallCarPage");
                 //#endregion
                 break;
             default:
@@ -67,8 +67,8 @@ export const CaseFastCallCarComponent = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             // console.log(location, action, "路由變化")
-            globalContextService.remove("CaseFastCallCarComponentPage", "firstUseAPIgetClient");
-            globalContextService.remove("CaseFastCallCarComponentPage", "firstUseAPIgetCaseUsers");
+            globalContextService.remove("EditCaseFastCallCarPage", "firstUseAPIgetClient");
+            globalContextService.remove("EditCaseFastCallCarPage", "firstUseAPIgetCaseUsers");
         });
 
         return () => {
