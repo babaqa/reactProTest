@@ -4,7 +4,7 @@ import { Context } from '../../../../Store/Store'
 import { BUnitSort, MainPageContainer, Map8Canvas, map8Controll, Map8Input } from '../../../../ProjectComponent';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, Tag, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { DateTimePicker, BasicContainer, RangeDateTimePicker, FormContainer, FormRow, globalContextService, Tag, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../Handlers';
 import { toString } from 'lodash/lang';
@@ -21,11 +21,41 @@ const LaptopLBase = (props) => {
 
     return (
         <>
+            {/* 日期區間容器 */}
+            <BasicContainer theme={laptopL.dateTimeRangeContainer}>
+                {/* 日期區間 DateTimeRange  */}
+                <RangeDateTimePicker
+                    // topLabel={<></>}
+                    // type={"time"} time、date、week、month、quarter、year
+                    type={"date"}
+                    format={"YYYY-MM-DD"}
+                    bascDefaultTheme={"DefaultTheme"}
+                    // viewType
+                    isSearchable
+                    placeholder={""}
+                    value={
+                        (globalContextService.get("CaseNewsComponentPage", "DateTimeRange") ?
+                            [moment(globalContextService.get("CaseNewsComponentPage", "DateTimeRange")[0]), moment(globalContextService.get("CaseNewsComponentPage", "DateTimeRange")[1])]
+                            :
+                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
+                        )
+                    }
+                    onChange={(value, momentObj) => {
+                        if (value !== globalContextService.get("CaseNewsComponentPage", "DateTimeRange")) {
+                            globalContextService.set("CaseNewsComponentPage", "DateTimeRange", value);
+                            // setForceUpdate(f => !f)
+                        }
+                    }}
+                    theme={laptopL.dateTimeRange}
+                />
+            </BasicContainer>
+
             {/* Table 容器 */}
             <BasicContainer
                 bascDefaultTheme={"DefaultTheme"}
                 theme={laptopL.tableContainer}
             >
+
                 {props.data.filter(d => d.identity === '1').length === 0
                     ?
                     <>

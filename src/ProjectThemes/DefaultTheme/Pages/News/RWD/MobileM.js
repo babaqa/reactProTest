@@ -104,7 +104,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
+                    backgroundColor: "#DBE4E8",
                     padding: "0 0 204px", //188 是授權圖高度
                 }
             }
@@ -116,7 +116,8 @@ export default {
     titleBar: {
         basic: (style, props) => ({
             ...style,
-            textAlign: "center"
+            textAlign: "center",
+            boxShadow: "inset 0px -1px 0px #DBE4E8",
         })
     },
     //#endregion
@@ -125,14 +126,17 @@ export default {
     titleBarCallCarTab: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
-            margin: "0 16px",
+            display: "inline-grid",
+            // margin: "0 16px",
             lineHeight: "32px",
             height: "46px",
             fontSize: "14px",
             cursor: "pointer",
+            width: "25%",
             color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
-            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset")
+            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset"),
+            textAlign: "center",
+            alignItems: "center"
         }),
     },
     //#endregion

@@ -91,6 +91,24 @@ const MobileMBase = (props) => {
                                                 {/* 公告容器 */}
                                                 <Container theme={mobileM.newsCardContainer}>
 
+                                                    {/* 公告Tag容器 */}
+                                                    <SubContainer theme={mobileM.newsCardTagContainer}>
+                                                        {/* 公告Tag */}
+                                                        <Tag
+                                                            baseDefaultTheme={"DefaultTheme"}
+                                                            theme={statusMapping(props?.tag ?? toString(rowData.identity), true)}
+                                                            text={statusMapping(props?.tag ?? toString(rowData.identity))}
+                                                        />
+                                                    </SubContainer >
+
+                                                    {/* 公告日期容器 */}
+                                                    <SubContainer theme={mobileM.newsCardDateContainer}>
+                                                        {/* 公告日期文字 */}
+                                                        <Text theme={mobileM.newsCardDateText}>
+                                                            {rowData.date ?? "2020-12-31"}
+                                                        </Text>
+                                                    </SubContainer>
+
                                                     {/* 公告內容容器 */}
                                                     <SubContainer theme={mobileM.newsCardContentContainer}>
                                                         {/* 公告內容文字 */}
@@ -126,24 +144,6 @@ const MobileMBase = (props) => {
                                                         </Text>
                                                     </SubContainer>
 
-                                                    {/* 公告Tag容器 */}
-                                                    <SubContainer theme={mobileM.newsCardTagContainer}>
-                                                        {/* 公告Tag */}
-                                                        <Tag
-                                                            baseDefaultTheme={"DefaultTheme"}
-                                                            theme={statusMapping(props?.tag ?? toString(rowData.identity), true)}
-                                                            text={statusMapping(props?.tag ?? toString(rowData.identity))}
-                                                        />
-                                                    </SubContainer >
-
-                                                    {/* 公告日期容器 */}
-                                                    <SubContainer theme={mobileM.newsCardDateContainer}>
-                                                        {/* 公告日期文字 */}
-                                                        <Text theme={mobileM.newsCardDateText}>
-                                                            {rowData.date ?? "2020-12-31"}
-                                                        </Text>
-                                                    </SubContainer>
-
                                                 </Container>
 
                                             </>
@@ -165,7 +165,7 @@ const MobileMBase = (props) => {
                         data={props.data}
                         // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
                         // data={props.AllClient.data}
-                        clickPage={(currentPage, pageSize) => {                            
+                        clickPage={(currentPage, pageSize) => {
                         }}
                     />
                 }

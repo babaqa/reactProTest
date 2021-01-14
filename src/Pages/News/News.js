@@ -17,13 +17,13 @@ export const News = (props) => {
     return (
         <>
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     nowTab={NowTab}
@@ -36,7 +36,7 @@ export const News = (props) => {
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM
