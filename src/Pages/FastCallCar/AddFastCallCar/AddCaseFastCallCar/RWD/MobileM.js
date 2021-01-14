@@ -12,7 +12,7 @@ import moment from 'moment';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, Checkbox, CheckboxItem, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../../Components';
 import { posRemarksSelectOption } from '../../../../../Mappings/Mappings';
 import { isEqual, isNil } from 'lodash';
-import { valid } from '../../../../../Handlers';;
+import { valid } from '../../../../../Handlers';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
