@@ -143,7 +143,7 @@ const LaptopLBase = (props) => {
                                     },
                                     {
                                         title: '公告',
-                                        width: "513px",
+                                        width: "496px",
                                         dataIndex: 'announce',
                                         // sorter: (a, b) => a.brandModel.length - b.brandModel.length,
                                         // fixed: 'left',
