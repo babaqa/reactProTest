@@ -16,7 +16,10 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "200px",
-                color: "rgba(0,0,0,0.85)"
+                fontSize: "24px",
+                lineHeight: "24px",
+                color: "rgba(0,0,0,0.85)",
+                fontWeight: 600,
             })
         },
         rightContainer: {
@@ -115,7 +118,8 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: 0,
+                marginRight: "16px",
                 display: "inline-block",
                 width: "450px",
             })
@@ -123,7 +127,8 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                padding: "0 12px",
+                padding: 0,
+                marginRight: "16px",
                 display: "inline-block",
                 width: "450px",
             })
@@ -238,6 +243,9 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "200px",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "28px",
                 color: "rgba(0,0,0,0.85)"
             })
         },

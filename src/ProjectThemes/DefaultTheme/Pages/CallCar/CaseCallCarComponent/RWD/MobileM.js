@@ -17,7 +17,10 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100px",
-                color: "rgba(0,0,0,0.85)"
+                fontSize: "24px",
+                lineHeight: "24px",
+                color: "rgba(0,0,0,0.85)",
+                fontWeight: 600,
             })
         },
         rightContainer: {
@@ -243,6 +246,9 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "200px",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "28px",
                 color: "rgba(0,0,0,0.85)"
             })
         },
@@ -354,6 +360,9 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "200px",
+                fontWeight: 500,
+                fontSize: "18px",
+                lineHeight: "28px",
                 color: "rgba(0,0,0,0.85)"
             })
         },
@@ -1130,7 +1139,7 @@ export default {
             lineHeight: "22px",
             width: "232px",
             margin: "0 24px 0 0",
-            color:"rgba(0,0,0,0.85)"
+            color: "rgba(0,0,0,0.85)"
         })
     },
     //#endregion
