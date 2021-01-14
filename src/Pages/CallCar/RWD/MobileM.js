@@ -75,9 +75,7 @@ const MobileMBase = (props) => {
                         </BasicContainer>
 
                         {/* 分頁 */}
-                        <BasicContainer
-                            theme={mobileM.titleBar}
-                        >
+                        <BasicContainer>
                             {tabMap().map((item, index) => {
                                 return (
                                     <React.Fragment key={index}>

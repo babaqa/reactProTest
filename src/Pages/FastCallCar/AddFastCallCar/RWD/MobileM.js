@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
-import { Context } from '../../../Store/Store'
-import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
-import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
+import { Context } from '../../../../Store/Store'
+import { MainPageContainer, MainPageTitleBar } from '../../../../ProjectComponent';
+import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../../Components';
 import { useHistory } from 'react-router-dom';
 
-import { AllFastCallCarComponent } from '../AllFastCallCarComponent/AllFastCallCarComponent'
-import { CaseFastCallCarComponent } from '../CaseFastCallCarComponent/CaseFastCallCarComponent'
-import { WhiteFastCallCarComponent } from '../WhiteFastCallCarComponent/WhiteFastCallCarComponent'
-import { BusFastCallCarComponent } from '../BusFastCallCarComponent/BusFastCallCarComponent'
+import { AddCaseFastCallCar } from '../AddCaseFastCallCar/AddCaseFastCallCar'
+import { AddBusFastCallCar } from '../AddBusFastCallCar/AddBusFastCallCar'
+import { AddWhiteFastCallCar } from '../AddWhiteFastCallCar/AddWhiteFastCallCar'
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
@@ -22,10 +21,9 @@ const MobileMBase = (props) => {
             case "tabUseComponent":
                 return (
                     {
-                        "全部": <AllFastCallCarComponent />,
-                        "長照": <CaseFastCallCarComponent />,
-                        "共享車隊": <WhiteFastCallCarComponent />,
-                        "巴士": <BusFastCallCarComponent />
+                        "長照": <AddCaseFastCallCar />,
+                        "共享車隊": <AddWhiteFastCallCar />,
+                        "巴士": <AddBusFastCallCar />
                     }
                 );
 
