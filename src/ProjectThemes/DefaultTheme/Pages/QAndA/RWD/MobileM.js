@@ -7,6 +7,7 @@ export default {
                     ...style,
                     backgroundColor: "#FFFFFF",
                     padding: 0,
+                    boxShadow: "inset 0 -1px #F0F0F0"
                 }
             }
         },
@@ -15,7 +16,7 @@ export default {
                 console.log(props)
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
+                    backgroundColor: "#DBE4E8",
                     height: `calc( ${props.vh}px - 152px)`,
                 }
             }
@@ -24,8 +25,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "4px 0 236px",
+                    backgroundColor: "#DBE4E8",
+                    padding: "0 0 204px",
                     minHeight: "100%"
                 }
             }
@@ -51,8 +52,23 @@ export default {
     qAContainer: {
         basic: (style, props) => ({
             ...style,
-            padding: "0 0px 24px",
+            // padding: "0 0px 24px",
             minHeight: `calc( ${props.vh}px - 152px)`,
+        })
+    },
+    //#endregion
+
+    //#region 沒有更多問題
+    noMoreData: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            textAlign: "center",
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "#1890FF",
+            padding: "16px 0"
         })
     }
     //#endregion

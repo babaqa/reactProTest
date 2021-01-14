@@ -17,18 +17,18 @@ const LaptopLBase = (props) => {
         <>
             <MainPageContainer
                 theme={laptopL.mainPageContainer}
-                outSideTopComponent={
-                    <>
-                        {/* 標題列 */}
-                        <MainPageTitleBar
-                            bascDefaultTheme={"DefaultTheme"}
-                            titleText={"常見問題"}
-                            theme={laptopL.titleBar}
-                        // onSubmit={(e)=>console.log(e)}
-                        >
-                        </MainPageTitleBar>
-                    </>
-                }
+                // outSideTopComponent={
+                //     <>
+                //         {/* 標題列 */}
+                //         <MainPageTitleBar
+                //             bascDefaultTheme={"DefaultTheme"}
+                //             titleText={"常見問題"}
+                //             theme={laptopL.titleBar}
+                //         // onSubmit={(e)=>console.log(e)}
+                //         >
+                //         </MainPageTitleBar>
+                //     </>
+                // }
             >
                 {/* 常見問題容器 */}
                 <BasicContainer

@@ -78,6 +78,7 @@ export default {
             width: "100%",
             padding: "24px 48px",
             backgroundColor: "#fff",
+            boxShadow: props.actived ? "inset 0px 1px 0px #1890FF" : "unset",
             color: props.actived ? "#1890FF" : "rgba(0, 0, 0, 0.65)",
             cursor: "pointer"
         }),

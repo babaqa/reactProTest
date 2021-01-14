@@ -19,8 +19,9 @@ export const QAndA = (props) => {
 
     return (
         <>
+            {/* 共用theme */}
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     WhichForm={WhichForm}
                     setWhichForm={setWhichForm}
@@ -32,7 +33,7 @@ export const QAndA = (props) => {
                     setNowTab={setNowTab}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     WhichForm={WhichForm}
@@ -57,7 +58,7 @@ export const QAndA = (props) => {
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM

@@ -5,8 +5,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "48px 150px 16px 150px" // 標題列的padding
+                    backgroundColor: "#DBE4E8",
+                    padding: "24px 0 0" // 標題列的padding
                 }
             }
         },
@@ -14,7 +14,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8"
                 }
             }
         },
@@ -22,8 +22,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
+                    backgroundColor: "#DBE4E8",
+                    padding: "0 43px 260px" //188 是授權圖高度
                 }
             }
         },
@@ -33,8 +33,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
+                    backgroundColor: "#DBE4E8",
+                    padding: "24px 0 0" // 標題列的padding
                 }
             }
         },
@@ -42,7 +42,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8"
                 }
             }
         },
@@ -50,8 +50,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
+                    backgroundColor: "#DBE4E8",
+                    padding: "0 32px 212px" //188 是授權圖高度
                 }
             }
         },
@@ -60,8 +60,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "24px 150px" // 標題列的padding
+                    backgroundColor: "#DBE4E8",
+                    padding: "24px 0 0" // 標題列的padding
                 }
             }
         },
@@ -69,7 +69,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8"
                 }
             }
         },
@@ -77,32 +77,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "0 0 188px" //188 是授權圖高度
-                }
-            }
-        },
-        basicOutsideOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        basicOutContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
-                }
-            }
-        },
-        basicContentContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#DBE4E8",
+                    padding: "0 24px 212px" //188 是授權圖高度
                 }
             }
         },
@@ -130,7 +106,7 @@ export default {
     qAContainer: {
         basic: (style, props) => ({
             ...style,
-            padding: "0 150px 24px",
+            // padding: "0 150px 24px",
             minHeight: "calc( 100vh - 288px )"
         })
     }

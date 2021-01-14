@@ -112,6 +112,11 @@ const MobileMBase = (props) => {
                             ]
                         } />
 
+                    <Text
+                        theme={mobileM.noMoreData}
+                    >
+                        沒有更多問題
+                    </Text>
                 </BasicContainer>
 
             </MainPageContainer>
