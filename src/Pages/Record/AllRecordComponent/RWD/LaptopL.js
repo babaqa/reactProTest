@@ -9,9 +9,9 @@ import { ReactComponent as Case } from '../../../../Assets/img/RecordPage/CaseLa
 import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/FleetLaptopL.svg'
 import { ReactComponent as Bus } from '../../../../Assets/img/RecordPage/BusLaptopL.svg'
 import { useHistory } from 'react-router-dom';
-import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { DateTimePicker, BasicContainer, RangeDateTimePicker, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { CardTable } from '../../../../ProjectComponent'
-
+import moment from 'moment';
 
 const LaptopLBase = (props) => {
 
@@ -19,8 +19,8 @@ const LaptopLBase = (props) => {
     const { pages: { record: { allRecordComponent: { rwd: { laptopL } } } } } = Theme;
     let history = useHistory()
 
-    let data = [
-        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
+    const [data, setData] = useState([
+        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2021-11-29 21:30", serviceUnit: "測試交通單位", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
         { case: "巴士", passenger: ["123", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
         { case: "共享車隊", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
         { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
@@ -33,7 +33,7 @@ const LaptopLBase = (props) => {
         { case: "巴士", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
         { case: "共享車隊", passenger: ["王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
         { case: "共享車隊", userName: "王大明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-    ]
+    ])
 
     const switchCase = (key) => {
         switch (key) {
@@ -64,324 +64,309 @@ const LaptopLBase = (props) => {
 
     return (
         <>
-            {data.length === 0
-                ?
-                <>
-                    {/* 無資料表單區容器 */}
-                    < BasicContainer
-                        baseDefaultTheme={"DefaultTheme"}
-                        theme={laptopL.noDataContainer}
-                    >
-                        <NoData style={laptopL.noDataSvg} />
-                    </BasicContainer>
-                </>
-                :
-                <>
-                    <Container>
-                        <CardTable
-                            dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
-                            dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                                if (globalContextService.get("RocordPage", "orgId") !== globalContextService.get("RocordPage", "TableCheckedClearKey")) {
-                                    globalContextService.remove("RocordPage", "CheckedRowKeys");
-                                    globalContextService.remove("RocordPage", "CheckedRowsData");
-                                }
-                            }}
-                            checkbox={false}
-                            checked={globalContextService.get("RocordPage", "CheckedRowKeys") && globalContextService.get("RocordPage", "CheckedRowKeys")}
-                            checkedRowKeyName={"id"}
-                            checkboxOnChecked={
-                                (checkedRowKeys, checkedRows) => {
-                                    // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                    globalContextService.set("RocordPage", "CheckedRowKeys", checkedRowKeys);
-                                    globalContextService.set("RocordPage", "CheckedRowsData", checkedRows);
-                                    //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
-                                    //#endregion
-                                }
+            {/* 查詢日期區間容器 */}
+            <BasicContainer theme={laptopL.dateTimeRangeContainer}>
+                {/* 過去-未來訂單 */}
+                <NewSelector
+                    bascDefaultTheme={"DefaultTheme"}
+                    topLabel={""}
+                    bottomLabel={""}
+                    //viewType
+                    isSearchable
+                    placeholder={""}
+                    // isMulti
+                    // hideSelectedOptions={false}
+                    value={globalContextService.get("RecordPage", "OrderTime") ?? null}
+                    onChange={(e, value, onInitial) => {
+                        if (value !== globalContextService.set("RecordPage", "OrderTime", value)) {
+                            if (value?.value === '1') {
+                                //過去訂單 - 預設上個月1號到今天 含已完成，已取消的訂單
+                                setData(
+                                    data
+                                        .filter(d => moment(d.bookRide).isAfter(moment().subtract(1, 'months').startOf('month')))
+                                        .filter(d => moment(d.bookRide).isBefore(moment()))
+                                )
+                            } else if (value?.value === '2') {
+                                //未來訂單 - 預設今天到下個月的最後一天 已完成，已取消之外的訂單
+                                setData(
+                                    data
+                                        .filter(d => moment(d.bookRide).isAfter(moment()))
+                                        .filter(d => moment(d.bookRide).isBefore(moment().add(1, 'months').endOf('month')))
+                                )
                             }
-                            setPerCheckBoxDisabled={(record) => {
-                                return {
-                                    // ...record, // 對應CheckBox當列資料
-                                    // disabled: record.name === 'Edrward 11',
+                            globalContextService.set("RecordPage", "OrderTime", value);
+                        }
+                    }}
+                    options={
+                        [
+                            { value: '1', label: "過去" },
+                            { value: '2', label: "未來" },
+                        ]
+                    }
+                    // menuPosition={true}
+                    theme={laptopL.orderTime}
+                />
+
+                {/*  查詢日期區間 DateTimeRange  */}
+                <RangeDateTimePicker
+                    topLabel={<></>}
+                    // type={"time"} time、date、week、month、quarter、year
+                    type={"date"}
+                    format={"YYYY-MM-DD"}
+                    bascDefaultTheme={"DefaultTheme"}
+                    // viewType
+                    isSearchable
+                    placeholder={""}
+                    value={
+                        (globalContextService.get("RecordPage", "DateTimeRange") ?
+                            [moment(globalContextService.get("RecordPage", "DateTimeRange")[0]), moment(globalContextService.get("RecordPage", "DateTimeRange")[1])]
+                            :
+                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2015-06-06', "YYYY-MM-DD")]
+                        )
+                    }
+                    onChange={(value, momentObj) => {
+                        globalContextService.set("RecordPage", "DateTimeRange", value);
+                    }}
+                    theme={laptopL.dateTimeRange}
+                />
+            </BasicContainer>
+
+            {
+                data.length === 0
+                    ?
+                    <>
+                        {/* 無資料表單區容器 */}
+                        < BasicContainer
+                            baseDefaultTheme={"DefaultTheme"}
+                            theme={laptopL.noDataContainer}
+                        >
+                            <NoData style={laptopL.noDataSvg} />
+                        </BasicContainer>
+                    </>
+                    :
+                    <>
+                        <Container>
+                            <CardTable
+                                dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
+                                dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
+                                    if (globalContextService.get("RocordPage", "orgId") !== globalContextService.get("RocordPage", "TableCheckedClearKey")) {
+                                        globalContextService.remove("RocordPage", "CheckedRowKeys");
+                                        globalContextService.remove("RocordPage", "CheckedRowsData");
+                                    }
+                                }}
+                                checkbox={false}
+                                checked={globalContextService.get("RocordPage", "CheckedRowKeys") && globalContextService.get("RocordPage", "CheckedRowKeys")}
+                                checkedRowKeyName={"id"}
+                                checkboxOnChecked={
+                                    (checkedRowKeys, checkedRows) => {
+                                        // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
+                                        globalContextService.set("RocordPage", "CheckedRowKeys", checkedRowKeys);
+                                        globalContextService.set("RocordPage", "CheckedRowsData", checkedRows);
+                                        //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
+                                        //#endregion
+                                    }
                                 }
-                            }}
-                            //scrollAreaWidth={"calc( 1900px - 300px )"} // 不用傳 會自適應寬度
-                            //scrollAreaHeight={"calc( 100% - 55px )"}
-                            columnsAttr={
-                                //#region 資料欄設定
-                                [
-                                    {
-                                        // title: '用戶列表',
-                                        width: "100%",
-                                        dataIndex: '',
-                                        // sorter: (a, b) => a.carType.length - b.carType.length,
-                                        // fixed: 'left',
-                                        render: (rowData) => {
-                                            return (
-                                                <>
-                                                    {/* 卡片資料表單區容器 */}
-                                                    < BasicContainer
-                                                        baseDefaultTheme={"DefaultTheme"}
-                                                        theme={laptopL.cardContainer}
-                                                    >
-                                                        <Container>
+                                setPerCheckBoxDisabled={(record) => {
+                                    return {
+                                        // ...record, // 對應CheckBox當列資料
+                                        // disabled: record.name === 'Edrward 11',
+                                    }
+                                }}
+                                //scrollAreaWidth={"calc( 1900px - 300px )"} // 不用傳 會自適應寬度
+                                //scrollAreaHeight={"calc( 100% - 55px )"}
+                                columnsAttr={
+                                    //#region 資料欄設定
+                                    [
+                                        {
+                                            // title: '用戶列表',
+                                            width: "100%",
+                                            dataIndex: '',
+                                            // sorter: (a, b) => a.carType.length - b.carType.length,
+                                            // fixed: 'left',
+                                            render: (rowData) => {
+                                                return (
+                                                    <>
+                                                        {/* 卡片資料表單區容器 */}
+                                                        < BasicContainer
+                                                            baseDefaultTheme={"DefaultTheme"}
+                                                            theme={laptopL.cardContainer}
+                                                        >
+                                                            <Container>
 
-                                                            {/* 第一區塊 容器 */}
-                                                            <SubContainer
-                                                                theme={laptopL.firstAreaContainer}
-                                                            >
-                                                                {
-                                                                    switchCase(rowData?.case)
-                                                                }
-
-                                                                {/* 使用者名稱 UserName*/}
-                                                                <Text
-                                                                    theme={laptopL.userName}
+                                                                {/* 第一區塊 容器 */}
+                                                                <SubContainer
+                                                                    theme={laptopL.firstAreaContainer}
                                                                 >
-                                                                    {rowData?.userName}
-
-                                                                    {rowData?.case === "長照"
-                                                                        &&
-                                                                        <>
-                                                                            {/* 案號 標題*/}
-                                                                            < Text
-                                                                                theme={laptopL.caseNumberTitle}
-                                                                            >
-                                                                                案號
-                                                                         {/* 案號 內文*/}
-                                                                                <Text
-                                                                                    theme={laptopL.caseNumberText}
-                                                                                >
-                                                                                    {rowData?.caseNumber}
-                                                                                </Text>
-                                                                            </Text>
-                                                                        </>
+                                                                    {
+                                                                        switchCase(rowData?.case)
                                                                     }
-                                                                </Text>
 
-                                                                <Tag
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    theme={laptopL.cancelTag}
-                                                                    text={"服務單位取消"}
-                                                                />
-
-                                                                {rowData?.case !== "巴士"
-                                                                    &&
-                                                                    <>
-                                                                        {/* 已共乘  ShareText*/}
-                                                                        < Text
-                                                                            theme={laptopL.shareText}
-                                                                        >
-                                                                            <Share
-                                                                                style={laptopL.shareSvg}
-                                                                            />
-                                                                    已共乘
-                                                                </Text>
-                                                                    </>
-                                                                }
-
-                                                            </SubContainer>
-
-
-                                                            {/* 第二區塊 容器 */}
-                                                            <SubContainer
-                                                                theme={laptopL.secondAreaContainer}
-                                                            >
-                                                                {/* 訂單編號 標題 */}
-                                                                <Text
-                                                                    theme={laptopL.orderNumberTitle}
-                                                                >
-                                                                    訂單編號
-
-                                                                        {/* 訂單編號 內文 */}
+                                                                    {/* 使用者名稱 UserName*/}
                                                                     <Text
-                                                                        theme={laptopL.orderNumberText}
+                                                                        theme={laptopL.userName}
                                                                     >
-                                                                        {rowData?.orderNumber}
+                                                                        {rowData?.userName}
+
+                                                                        {rowData?.case === "長照"
+                                                                            &&
+                                                                            <>
+                                                                                {/* 案號 標題*/}
+                                                                                < Text
+                                                                                    theme={laptopL.caseNumberTitle}
+                                                                                >
+                                                                                    案號
+                                                                         {/* 案號 內文*/}
+                                                                                    <Text
+                                                                                        theme={laptopL.caseNumberText}
+                                                                                    >
+                                                                                        {rowData?.caseNumber}
+                                                                                    </Text>
+                                                                                </Text>
+                                                                            </>
+                                                                        }
                                                                     </Text>
-                                                                </Text>
 
-                                                                {/* 預約搭乘時間 標題 */}
-                                                                <Text
-                                                                    theme={laptopL.bookRideTitle}
-                                                                >
-                                                                    預約搭乘時間
-
-                                                                    {/* 預約搭乘時間 內文 */}
-                                                                    <Text
-                                                                        theme={laptopL.bookRideText}
-                                                                    >
-                                                                        {rowData?.bookRide}
-                                                                    </Text>
-                                                                </Text>
-
-
-
-                                                                {/* 服務單位 標題 */}
-                                                                <Text
-                                                                    theme={laptopL.serviceUnitTitle}
-                                                                >
-                                                                    服務單位
-
-                                                                    {/* 服務單位 內文 */}
-                                                                    <Tooltip placement="top" title={rowData?.serviceUnit}>
-
-                                                                        <Text
-                                                                            theme={laptopL.serviceUnitText}
-                                                                        >
-                                                                            {rowData?.serviceUnit}
-                                                                        </Text>
-                                                                    </Tooltip>
-
-                                                                </Text>
-
-                                                                {/* 司機 標題 */}
-                                                                <Text
-                                                                    theme={laptopL.driverTitle}
-                                                                >
-                                                                    司機
-
-                                                                    {/* 司機 內文 */}
-                                                                    <Text
-                                                                        theme={laptopL.driverText}
-                                                                    >
-                                                                        {rowData?.driver}
-                                                                    </Text>
-                                                                </Text>
-
-                                                                {/* 車牌 標題 */}
-                                                                <Text
-                                                                    theme={laptopL.licensePlateTitle}
-                                                                >
-                                                                    車牌
-
-                                                                    {/* 車牌 內文 */}
-                                                                    <Text
-                                                                        theme={laptopL.licensePlateText}
-                                                                    >
-                                                                        {rowData?.licensePlate}
-                                                                    </Text>
-                                                                </Text>
-
-                                                                {/* 司機未執行按鈕 */}
-                                                                <NativeLineButton
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    disable={false}
-                                                                    type="button" // 防止提交
-                                                                    theme={laptopL.noExecuteButton}
-                                                                    onClick={() => {
-                                                                        //#region 打開司機未執行警示 Modal
-                                                                        modalsService.infoModal.warn({
-                                                                            iconRightText: "確定司機未執行?",
-                                                                            yes: true,
-                                                                            yesText: "確認",
-                                                                            no: true,
-                                                                            noText: "取消",
-                                                                            // autoClose: true,
-                                                                            backgroundClose: false,
-                                                                            yesOnClick: (e, close) => { close(); },
-                                                                            noOnClick: (e, close) => { },
-                                                                        })
-                                                                        // endregion
-                                                                    }}
-                                                                >
-                                                                    司機未執行
-                                                                </NativeLineButton>
-
-                                                            </SubContainer>
-
-
-                                                            {/* 第三區塊 容器 */}
-                                                            <SubContainer
-                                                                theme={laptopL.thirdAreaContainer}
-                                                            >
-                                                                {rowData?.case === "長照"
-                                                                    &&
-                                                                    <Container>
-                                                                        {/* 車資總額 標題 */}
-                                                                        <Text
-                                                                            theme={laptopL.totalFareTitle}
-                                                                        >
-                                                                            車資總額
-
-                                                                                {/* 車資總額 內文 */}
-                                                                            <Text
-                                                                                theme={laptopL.totalFareText}
-                                                                            >
-                                                                                {"$" + rowData?.totalFareText}
-                                                                            </Text>
-                                                                        </Text>
-
-                                                                        {/* 政府補助 標題 */}
-                                                                        <Text
-                                                                            theme={laptopL.govSubsidyTitle}
-                                                                        >
-                                                                            政府補助
-
-                                                                            {/* 政府補助 內文 */}
-                                                                            <Text
-                                                                                theme={laptopL.govSubsidyText}
-                                                                            >
-                                                                                {"$" + rowData?.govSubsidy}
-                                                                            </Text>
-                                                                        </Text>
-
-                                                                        {/* 陪同金額 標題 */}
-                                                                        <Text
-                                                                            theme={laptopL.accompanyingAmountTitle}
-                                                                        >
-                                                                            陪同金額
-
-                                                                            {/* 陪同金額 內文 */}
-                                                                            <Text
-                                                                                theme={laptopL.accompanyingAmountText}
-                                                                            >
-                                                                                {"$" + rowData?.accompanyingAmount}
-                                                                            </Text>
-                                                                        </Text>
-
-                                                                    </Container>
-                                                                }
-
-                                                                <Container>
+                                                                    <Tag
+                                                                        baseDefaultTheme={"DefaultTheme"}
+                                                                        theme={laptopL.cancelTag}
+                                                                        text={"服務單位取消"}
+                                                                    />
 
                                                                     {rowData?.case !== "巴士"
                                                                         &&
                                                                         <>
-                                                                            {/* 是否共乘 標題 */}
-                                                                            <Text
-                                                                                theme={laptopL.canShareTitle}
+                                                                            {/* 已共乘  ShareText*/}
+                                                                            < Text
+                                                                                theme={laptopL.shareText}
                                                                             >
-                                                                                是否共乘
-
-                                                                                {/* 是否共乘 內文 */}
-                                                                                <Text
-                                                                                    theme={laptopL.canShareText}
-                                                                                >
-                                                                                    {rowData?.canShare}
-                                                                                </Text>
-                                                                            </Text>
+                                                                                <Share
+                                                                                    style={laptopL.shareSvg}
+                                                                                />
+                                                                    已共乘
+                                                                </Text>
                                                                         </>
                                                                     }
 
-                                                                    {/* 人數 標題 */}
-                                                                    <Text
-                                                                        theme={laptopL.numberOfPeopleTitle}
-                                                                    >
-                                                                        人數
+                                                                </SubContainer>
 
-                                                                        {/* 人數 內文 */}
+
+                                                                {/* 第二區塊 容器 */}
+                                                                <SubContainer
+                                                                    theme={laptopL.secondAreaContainer}
+                                                                >
+                                                                    {/* 訂單編號 標題 */}
+                                                                    <Text
+                                                                        theme={laptopL.orderNumberTitle}
+                                                                    >
+                                                                        訂單編號
+
+                                                                        {/* 訂單編號 內文 */}
                                                                         <Text
-                                                                            theme={laptopL.numberOfPeopleText}
+                                                                            theme={laptopL.orderNumberText}
                                                                         >
-                                                                            {rowData?.numberOfPeople + "人"}
+                                                                            {rowData?.orderNumber}
                                                                         </Text>
                                                                     </Text>
 
-                                                                    {rowData?.case === "巴士"
+                                                                    {/* 預約搭乘時間 標題 */}
+                                                                    <Text
+                                                                        theme={laptopL.bookRideTitle}
+                                                                    >
+                                                                        預約搭乘時間
+
+                                                                    {/* 預約搭乘時間 內文 */}
+                                                                        <Text
+                                                                            theme={laptopL.bookRideText}
+                                                                        >
+                                                                            {rowData?.bookRide}
+                                                                        </Text>
+                                                                    </Text>
+
+
+
+                                                                    {/* 服務單位 標題 */}
+                                                                    <Text
+                                                                        theme={laptopL.serviceUnitTitle}
+                                                                    >
+                                                                        服務單位
+
+                                                                    {/* 服務單位 內文 */}
+                                                                        <Tooltip placement="top" title={rowData?.serviceUnit}>
+
+                                                                            <Text
+                                                                                theme={laptopL.serviceUnitText}
+                                                                            >
+                                                                                {rowData?.serviceUnit}
+                                                                            </Text>
+                                                                        </Tooltip>
+
+                                                                    </Text>
+
+                                                                    {/* 司機 標題 */}
+                                                                    <Text
+                                                                        theme={laptopL.driverTitle}
+                                                                    >
+                                                                        司機
+
+                                                                    {/* 司機 內文 */}
+                                                                        <Text
+                                                                            theme={laptopL.driverText}
+                                                                        >
+                                                                            {rowData?.driver}
+                                                                        </Text>
+                                                                    </Text>
+
+                                                                    {/* 車牌 標題 */}
+                                                                    <Text
+                                                                        theme={laptopL.licensePlateTitle}
+                                                                    >
+                                                                        車牌
+
+                                                                    {/* 車牌 內文 */}
+                                                                        <Text
+                                                                            theme={laptopL.licensePlateText}
+                                                                        >
+                                                                            {rowData?.licensePlate}
+                                                                        </Text>
+                                                                    </Text>
+
+                                                                    {/* 司機未到按鈕 */}
+                                                                    <NativeLineButton
+                                                                        baseDefaultTheme={"DefaultTheme"}
+                                                                        disable={false}
+                                                                        type="button" // 防止提交
+                                                                        theme={laptopL.noExecuteButton}
+                                                                        onClick={() => {
+                                                                            //#region 打開司機未執行警示 Modal
+                                                                            modalsService.infoModal.warn({
+                                                                                iconRightText: "確定司機未到?",
+                                                                                yes: true,
+                                                                                yesText: "確認",
+                                                                                no: true,
+                                                                                noText: "取消",
+                                                                                // autoClose: true,
+                                                                                backgroundClose: false,
+                                                                                yesOnClick: (e, close) => { close(); },
+                                                                                noOnClick: (e, close) => { },
+                                                                            })
+                                                                            // endregion
+                                                                        }}
+                                                                    >
+                                                                        司機未到
+                                                                </NativeLineButton>
+
+                                                                </SubContainer>
+
+
+                                                                {/* 第三區塊 容器 */}
+                                                                <SubContainer
+                                                                    theme={laptopL.thirdAreaContainer}
+                                                                >
+                                                                    {rowData?.case === "長照"
                                                                         &&
-                                                                        <>
+                                                                        <Container>
                                                                             {/* 車資總額 標題 */}
-                                                                            < Text
+                                                                            <Text
                                                                                 theme={laptopL.totalFareTitle}
                                                                             >
                                                                                 車資總額
@@ -393,182 +378,265 @@ const LaptopLBase = (props) => {
                                                                                     {"$" + rowData?.totalFareText}
                                                                                 </Text>
                                                                             </Text>
-                                                                        </>
-                                                                    }
-                                                                </Container>
 
-                                                                {rowData?.case !== "長照"
-                                                                    &&
+                                                                            {/* 政府補助 標題 */}
+                                                                            <Text
+                                                                                theme={laptopL.govSubsidyTitle}
+                                                                            >
+                                                                                政府補助
+
+                                                                            {/* 政府補助 內文 */}
+                                                                                <Text
+                                                                                    theme={laptopL.govSubsidyText}
+                                                                                >
+                                                                                    {"$" + rowData?.govSubsidy}
+                                                                                </Text>
+                                                                            </Text>
+
+                                                                            {/* 陪同金額 標題 */}
+                                                                            <Text
+                                                                                theme={laptopL.accompanyingAmountTitle}
+                                                                            >
+                                                                                陪同金額
+
+                                                                            {/* 陪同金額 內文 */}
+                                                                                <Text
+                                                                                    theme={laptopL.accompanyingAmountText}
+                                                                                >
+                                                                                    {"$" + rowData?.accompanyingAmount}
+                                                                                </Text>
+                                                                            </Text>
+
+                                                                        </Container>
+                                                                    }
+
                                                                     <Container>
 
-                                                                        {/* 乘客 標題 */}
+                                                                        {rowData?.case !== "巴士"
+                                                                            &&
+                                                                            <>
+                                                                                {/* 是否共乘 標題 */}
+                                                                                <Text
+                                                                                    theme={laptopL.canShareTitle}
+                                                                                >
+                                                                                    是否共乘
+
+                                                                                {/* 是否共乘 內文 */}
+                                                                                    <Text
+                                                                                        theme={laptopL.canShareText}
+                                                                                    >
+                                                                                        {rowData?.canShare}
+                                                                                    </Text>
+                                                                                </Text>
+                                                                            </>
+                                                                        }
+
+                                                                        {/* 人數 標題 */}
                                                                         <Text
-                                                                            theme={laptopL.passengerTitle}
+                                                                            theme={laptopL.numberOfPeopleTitle}
                                                                         >
-                                                                            乘客
+                                                                            人數
+
+                                                                        {/* 人數 內文 */}
+                                                                            <Text
+                                                                                theme={laptopL.numberOfPeopleText}
+                                                                            >
+                                                                                {rowData?.numberOfPeople + "人"}
+                                                                            </Text>
+                                                                        </Text>
+
+                                                                        {rowData?.case === "巴士"
+                                                                            &&
+                                                                            <>
+                                                                                {/* 車資總額 標題 */}
+                                                                                < Text
+                                                                                    theme={laptopL.totalFareTitle}
+                                                                                >
+                                                                                    車資總額
+
+                                                                                {/* 車資總額 內文 */}
+                                                                                    <Text
+                                                                                        theme={laptopL.totalFareText}
+                                                                                    >
+                                                                                        {"$" + rowData?.totalFareText}
+                                                                                    </Text>
+                                                                                </Text>
+                                                                            </>
+                                                                        }
+                                                                    </Container>
+
+                                                                    {rowData?.case !== "長照"
+                                                                        &&
+                                                                        <Container>
+
+                                                                            {/* 乘客 標題 */}
+                                                                            <Text
+                                                                                theme={laptopL.passengerTitle}
+                                                                            >
+                                                                                乘客
 
 
                                                                             </Text>
 
-                                                                        {/* 乘客 內文 容器*/}
-                                                                        <Text
-                                                                            theme={laptopL.passengerContainer}
-                                                                        >
-                                                                            <Container>
-                                                                                {
-                                                                                    (rowData?.passenger ?? []).map((passenger, index) => {
-                                                                                        return (
-                                                                                            <React.Fragment key={index}>
-                                                                                                {/* 乘客 內文 */}
-                                                                                                <Text
-                                                                                                    theme={laptopL.passengerText}
-                                                                                                >
-                                                                                                    {passenger}
+                                                                            {/* 乘客 內文 容器*/}
+                                                                            <Text
+                                                                                theme={laptopL.passengerContainer}
+                                                                            >
+                                                                                <Container>
+                                                                                    {
+                                                                                        (rowData?.passenger ?? []).map((passenger, index) => {
+                                                                                            return (
+                                                                                                <React.Fragment key={index}>
+                                                                                                    {/* 乘客 內文 */}
+                                                                                                    <Text
+                                                                                                        theme={laptopL.passengerText}
+                                                                                                    >
+                                                                                                        {passenger}
 
-                                                                                                </Text>
-                                                                                            </React.Fragment>
-                                                                                        )
-                                                                                    })
-                                                                                }
-                                                                            </Container>
-                                                                        </Text>
+                                                                                                    </Text>
+                                                                                                </React.Fragment>
+                                                                                            )
+                                                                                        })
+                                                                                    }
+                                                                                </Container>
+                                                                            </Text>
 
-                                                                    </Container>
-                                                                }
+                                                                        </Container>
+                                                                    }
 
-                                                                <Container
-                                                                    theme={laptopL.startToEndContainer}
-                                                                >
-                                                                    {/* 起點 標題 */}
-                                                                    <Text
-                                                                        theme={laptopL.startPointTitle}
+                                                                    <Container
+                                                                        theme={laptopL.startToEndContainer}
                                                                     >
+                                                                        {/* 起點 標題 */}
+                                                                        <Text
+                                                                            theme={laptopL.startPointTitle}
+                                                                        >
 
-                                                                        <Start style={laptopL.startPointSvg} />
+                                                                            <Start style={laptopL.startPointSvg} />
                                                                             起點
 
                                                                             {/* 起點 內文 */}
-                                                                        <Text
-                                                                            theme={laptopL.startPointText}
-                                                                        >
-                                                                            {rowData?.startPoint}
+                                                                            <Text
+                                                                                theme={laptopL.startPointText}
+                                                                            >
+                                                                                {rowData?.startPoint}
+                                                                            </Text>
+
                                                                         </Text>
 
-                                                                    </Text>
+                                                                        {/* 迄點 標題 */}
+                                                                        <Text
+                                                                            theme={laptopL.endPointTitle}
+                                                                        >
 
-                                                                    {/* 迄點 標題 */}
-                                                                    <Text
-                                                                        theme={laptopL.endPointTitle}
-                                                                    >
-
-                                                                        <End style={laptopL.endPointSvg} />
+                                                                            <End style={laptopL.endPointSvg} />
                                                                             迄點
 
                                                                             {/* 迄點 內文 */}
-                                                                        <Text
-                                                                            theme={laptopL.endPointText}
-                                                                        >
-                                                                            {rowData?.endPoint}
+                                                                            <Text
+                                                                                theme={laptopL.endPointText}
+                                                                            >
+                                                                                {rowData?.endPoint}
+                                                                            </Text>
+
                                                                         </Text>
 
+                                                                    </Container>
+
+                                                                </SubContainer>
+
+                                                                {/* 第四區塊 容器 */}
+                                                                <SubContainer
+                                                                    theme={laptopL.forthAreaContainer}
+                                                                >
+
+                                                                    {/* 個案負擔 標題 */}
+                                                                    <Text
+                                                                        theme={laptopL.caseBurdenTitle}
+                                                                    >
+                                                                        {rowData?.case === "長照"
+                                                                            ?
+                                                                            "個案負擔"
+                                                                            :
+                                                                            "用戶負擔"
+                                                                        }
                                                                     </Text>
 
-                                                                </Container>
+                                                                    {/* 個案負擔 內文 */}
+                                                                    <Text
+                                                                        theme={laptopL.caseBurdenText}
+                                                                    >
+                                                                        {"$" + rowData?.caseBurden}
+                                                                    </Text>
 
-                                                            </SubContainer>
-
-                                                            {/* 第四區塊 容器 */}
-                                                            <SubContainer
-                                                                theme={laptopL.forthAreaContainer}
-                                                            >
-
-                                                                {/* 個案負擔 標題 */}
-                                                                <Text
-                                                                    theme={laptopL.caseBurdenTitle}
-                                                                >
-                                                                    {rowData?.case === "長照"
-                                                                        ?
-                                                                        "個案負擔"
-                                                                        :
-                                                                        "用戶負擔"
-                                                                    }
-                                                                </Text>
-
-                                                                {/* 個案負擔 內文 */}
-                                                                <Text
-                                                                    theme={laptopL.caseBurdenText}
-                                                                >
-                                                                    {"$" + rowData?.caseBurden}
-                                                                </Text>
-
-                                                                {rowData?.case !== "巴士"
-                                                                    &&
-                                                                    <>
-                                                                        {/* 再叫一次按鈕 */}
-                                                                        <NativeLineButton
-                                                                            baseDefaultTheme={"DefaultTheme"}
-                                                                            disable={false}
-                                                                            type="button" // 防止提交
-                                                                            theme={laptopL.againButton}
-                                                                            onClick={() => {
-                                                                                // history.push("/Order/WhiteOrder");
-                                                                                // props.controllGCS("return")
-                                                                            }}
-                                                                        >
-                                                                            再叫一次
+                                                                    {rowData?.case !== "巴士"
+                                                                        &&
+                                                                        <>
+                                                                            {/* 再次預約按鈕 */}
+                                                                            <NativeLineButton
+                                                                                baseDefaultTheme={"DefaultTheme"}
+                                                                                disable={false}
+                                                                                type="button" // 防止提交
+                                                                                theme={laptopL.againButton}
+                                                                                onClick={() => {
+                                                                                    // history.push("/Order/WhiteOrder");
+                                                                                    // props.controllGCS("return")
+                                                                                }}
+                                                                            >
+                                                                                再次預約
                                                                             </NativeLineButton>
-                                                                    </>
-                                                                }
+                                                                        </>
+                                                                    }
 
-                                                                {/* 乘車明細按鈕 */}
-                                                                <NativeLineButton
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    disable={false}
-                                                                    type="button" // 防止提交
-                                                                    theme={laptopL.rideDetailsButton}
-                                                                    onClick={() => {
-                                                                        // history.push("/Order/WhiteOrder");
-                                                                        // props.controllGCS("return")
-                                                                    }}
-                                                                >
-                                                                    乘車明細
+                                                                    {/* 乘車明細按鈕 */}
+                                                                    <NativeLineButton
+                                                                        baseDefaultTheme={"DefaultTheme"}
+                                                                        disable={false}
+                                                                        type="button" // 防止提交
+                                                                        theme={laptopL.rideDetailsButton}
+                                                                        onClick={() => {
+                                                                            // history.push("/Order/WhiteOrder");
+                                                                            // props.controllGCS("return")
+                                                                        }}
+                                                                    >
+                                                                        乘車明細
                                                                     </NativeLineButton>
 
-                                                                {/* 填寫問卷按鈕 */}
-                                                                <NativeLineButton
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    disable={false}
-                                                                    type="button" // 防止提交
-                                                                    theme={laptopL.questionnaireButton}
-                                                                    onClick={() => {
-                                                                        // history.push("/Order/WhiteOrder");
-                                                                        // props.controllGCS("return")
-                                                                    }}
-                                                                >
-                                                                    填寫問卷
+                                                                    {/* 填寫問卷按鈕 */}
+                                                                    <NativeLineButton
+                                                                        baseDefaultTheme={"DefaultTheme"}
+                                                                        disable={false}
+                                                                        type="button" // 防止提交
+                                                                        theme={laptopL.questionnaireButton}
+                                                                        onClick={() => {
+                                                                            // history.push("/Order/WhiteOrder");
+                                                                            // props.controllGCS("return")
+                                                                        }}
+                                                                    >
+                                                                        填寫問卷
                                                                         </NativeLineButton>
 
-                                                            </SubContainer>
+                                                                </SubContainer>
 
-                                                        </Container>
-                                                    </BasicContainer>
-                                                </>
-                                            )
-                                        }
-                                    },
+                                                            </Container>
+                                                        </BasicContainer>
+                                                    </>
+                                                )
+                                            }
+                                        },
 
-                                ]
-                                //#endregion
-                            }
-                            //sort
-                            showHeader={false}
-                            data={data}
-                            clickPage={(currentPage, pageSize) => {
-                            }}
-                        />
+                                    ]
+                                    //#endregion
+                                }
+                                //sort
+                                showHeader={false}
+                                data={data}
+                                clickPage={(currentPage, pageSize) => {
+                                }}
+                            />
 
-                    </Container>
-                </>
+                        </Container>
+                    </>
             }
         </>
     )

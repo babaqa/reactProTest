@@ -23,12 +23,60 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "4px 0 236px",
+                    backgroundColor: "#DBE4E8",
+                    padding: "1px 0 204px",
                     minHeight: "calc( 100vh - 197px)"
                 }
             }
         },
+    },
+    //#endregion
+
+    //#region 過去訂單按鈕
+    preOrderButton: {
+        basic: (style, props) => ({
+            ...style,
+            width: "50%",
+            height: "28px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            top: "2px",
+            padding: 0,
+            color: props.orderStatus === "1" ? "#fff" : "#1890ff",
+            backgroundColor: props.orderStatus === "1" ? "#1890ff" : "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            margin: 0
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: props.orderStatus === "2" ? "rgba(24,144,255,0.05)" : ""
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion
+
+    //#region 未來訂單按鈕
+    futureOrderButton: {
+        basic: (style, props) => ({
+            ...style,
+            width: "50%",
+            height: "28px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            top: "2px",
+            padding: 0,
+            color: props.orderStatus === "2" ? "#fff" : "#1890ff",
+            backgroundColor: props.orderStatus === "2" ? "#1890ff" : "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            margin: 0
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: props.orderStatus === "1" ? "rgba(24,144,255,0.05)" : ""
+        }),
+        focus: (style, props) => ({})
     },
     //#endregion
 
@@ -84,22 +132,32 @@ export default {
     },
     //#endregion
 
-    //#region 標題列 聯繫客服分頁
-    titleBarRecordTab: {
+    //#region 標題列
+    titleBar: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
-            margin: "0 16px",
-            lineHeight: "46px",
-            height: "46px",
-            fontSize: "14px",
-            cursor: "pointer",
-            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
-            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset"),
-            width: "calc( 25% - 32px )",
-            textAlign: "center"
-        }),
+            textAlign: "center",
+            boxShadow: "inset 0px -1px 0px #DBE4E8",
+        })
     },
     //#endregion
 
+    //#region 標題列 預約訂車分頁
+    titleBarRecordTab: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-grid",
+            // margin: "0 16px",
+            lineHeight: "32px",
+            height: "46px",
+            fontSize: "14px",
+            cursor: "pointer",
+            width: "33%",
+            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
+            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset"),
+            textAlign: "center",
+            alignItems: "center"
+        }),
+    },
+    //#endregion
 }

@@ -24,7 +24,7 @@ const LaptopLBase = (props) => {
             case "tabUseComponent":
                 return (
                     {
-                        "全部": <AllRecordComponent />,
+                        // "全部": <AllRecordComponent />,
                         "長照": <CaseRecordComponent />,
                         "共享車隊": <FleetRecordComponent />,
                         "巴士": <BusRecordComponent />
@@ -32,7 +32,7 @@ const LaptopLBase = (props) => {
                 );
 
             default:
-                return ["全部", "長照", "共享車隊", "巴士"]
+                return ["長照", "共享車隊", "巴士"]
         }
 
     }
@@ -45,53 +45,62 @@ const LaptopLBase = (props) => {
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}
-                        <MainPageTitleBar
-                            bascDefaultTheme={"DefaultTheme"}
-                            titleText={"訂單檢視"}
-                            theme={laptopL.titleBar}
-                            centerContent={
-                                <>
-                                    <BasicContainer>
-                                        {tabMap().map((item, index) => {
-                                            return (
-                                                <React.Fragment key={index}>
-                                                    <Text
-                                                        onClick={() => { props.setNowTab(item) }}
-                                                        isActive={props.nowTab === item}
-                                                        theme={laptopL.titleBarRecordTab}
-                                                    >
-                                                        {item}
-                                                    </Text>
-                                                </React.Fragment>
-                                            )
-                                        })}
-                                    </BasicContainer>
-                                </>
-                            }
+                        <BasicContainer
+                            theme={laptopL.whiteContainer}
                         >
-                            {/*  查詢日期區間 DateTimeRange  */}
-                            <RangeDateTimePicker
-                                topLabel={<></>}
-                                // type={"time"} time、date、week、month、quarter、year
-                                type={"date"}
-                                format={"YYYY-MM-DD"}
-                                bascDefaultTheme={"DefaultTheme"}
-                                // viewType
-                                isSearchable
-                                placeholder={""}
-                                value={
-                                    (globalContextService.get("RecordPage", "DateTimeRange") ?
-                                        [moment(globalContextService.get("RecordPage", "DateTimeRange")[0]), moment(globalContextService.get("RecordPage", "DateTimeRange")[1])]
-                                        :
-                                        [moment('2015-06-06', "YYYY-MM-DD"), moment('2015-06-06', "YYYY-MM-DD")]
-                                    )
+                            <BasicContainer
+                                theme={laptopL.tabsContainer}
+                            >
+                                {
+                                    // <BasicContainer>
+
+                                    tabMap().map((item, index) => {
+                                        return (
+                                            <React.Fragment key={index}>
+                                                <Text
+                                                    onClick={() => { props.setNowTab(item) }}
+                                                    isActive={props.nowTab === item}
+                                                    theme={laptopL.titleBarRecordTab}
+                                                >
+                                                    {item}
+                                                </Text>
+                                            </React.Fragment>
+                                        )
+                                    })
+
+                                    // </BasicContainer>
                                 }
-                                onChange={(value, momentObj) => {
-                                    globalContextService.set("RecordPage", "DateTimeRange", value);
-                                }}
-                                theme={laptopL.dateTimeRange}
-                            />
-                        </MainPageTitleBar>
+                                {/* 日期區間容器 */}
+                                {/* <SubContainer baseDefaultTheme={"DefaultTheme"}> */}
+                                {/* 日期區間 DateTimeRange  */}
+                                {/* <RangeDateTimePicker
+                                        // topLabel={<></>}
+                                        // type={"time"} time、date、week、month、quarter、year
+                                        type={"date"}
+                                        format={"YYYY-MM-DD"}
+                                        bascDefaultTheme={"DefaultTheme"}
+                                        // viewType
+                                        isSearchable
+                                        placeholder={""}
+                                        value={
+                                            (globalContextService.get("NewsPage", "DateTimeRange") ?
+                                                [moment(globalContextService.get("NewsPage", "DateTimeRange")[0]), moment(globalContextService.get("NewsPage", "DateTimeRange")[1])]
+                                                :
+                                                [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
+                                            )
+                                        }
+                                        onChange={(value, momentObj) => {
+                                            if (value !== globalContextService.get("NewsPage", "DateTimeRange")) {
+                                                globalContextService.set("NewsPage", "DateTimeRange", value);
+                                                // console.log("change")
+                                                // setForceUpdate(f => !f)
+                                            }
+                                        }}
+                                        theme={laptopL.dateTimeRange}
+                                    /> */}
+                                {/* </SubContainer> */}
+                            </BasicContainer>
+                        </BasicContainer>
                     </>
                 }
             >
