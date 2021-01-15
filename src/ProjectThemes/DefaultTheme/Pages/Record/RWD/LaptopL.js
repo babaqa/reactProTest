@@ -127,7 +127,7 @@ export default {
     },
     //#endregion
 
-    //#region 標題列 搭乘紀錄分頁
+    //#region 標題列 訂單檢視分頁
     titleBarRecordTab: {
         basic: (style, props) => ({
             ...style,

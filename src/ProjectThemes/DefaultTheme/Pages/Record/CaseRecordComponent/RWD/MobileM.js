@@ -888,7 +888,7 @@ export default {
     //#endregion
     //#endregion
 
-    //#region 沒有更多搭乘紀錄 提醒 
+    //#region 沒有更多訂單檢視 提醒 
     noDataTip: {
         basic: (style, props) => ({
             ...style,

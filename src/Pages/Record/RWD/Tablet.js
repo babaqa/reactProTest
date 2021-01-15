@@ -49,7 +49,7 @@ const TabletBase = (props) => {
                         {/* 標題列 */}
                         <MainPageTitleBar
                             bascDefaultTheme={"DefaultTheme"}
-                            titleText={"搭乘紀錄"}
+                            titleText={"訂單檢視"}
                             theme={tablet.titleBar}
                             centerContent={
                                 <>

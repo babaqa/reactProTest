@@ -38,7 +38,7 @@ export const urlMapping = {
    "/FastCallCar/Edit": <EditFastCallCar />,// 編輯常用路線
 
    "/BusRoute": <BusRoute />,// 快速叫車
-   "/Record": <Record />,// 搭乘紀錄
+   "/Record": <Record />,// 訂單檢視
    "/UserInfo": <UserInfo />,// 用戶資料
    "/Contact": <Contact />,// 聯繫客服
    "/QAndA": <QAndA />,// 常見問題

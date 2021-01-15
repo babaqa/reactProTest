@@ -123,7 +123,7 @@ export const Layout = (props) => {
         // 最新消息  News
         // 預約訂車  CallCar
         // 快速叫車  FastCallCar
-        // 搭乘紀錄  Record
+        // 訂單檢視  Record
         // 用戶資料  UserInfo
         // 聯繫客服  Contact
         // 常見問題  QAndA
@@ -139,7 +139,7 @@ export const Layout = (props) => {
                         ]
                     },
                     { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconLaptopL} /> },
-                    { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconLaptopL} /> },
+                    { path: "/Record", name: "訂單檢視", icon: <RecordTab style={layout.titleBarTabIconLaptopL} /> },
                     { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconLaptopL} /> },
                     { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconLaptopL} /> },
                     { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconLaptopL} /> },
@@ -155,7 +155,7 @@ export const Layout = (props) => {
                         ]
                     },
                     { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/Record", name: "訂單檢視", icon: <RecordTab style={layout.titleBarTabIconLaptop} /> },
                     { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconLaptop} /> },
                     { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconLaptop} /> },
                     { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconLaptop} /> },
@@ -171,7 +171,7 @@ export const Layout = (props) => {
                         ]
                     },
                     { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/Record", name: "訂單檢視", icon: <RecordTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconTablet} /> },
@@ -186,7 +186,7 @@ export const Layout = (props) => {
                     { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconMobileM} /> },
                     { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconMobileM} /> },
                     { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/Record", name: "搭乘紀錄", icon: <RecordTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/Record", name: "訂單檢視", icon: <RecordTab style={layout.titleBarTabIconMobileM} /> },
                     { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconMobileM} /> },
                 ]
             default:

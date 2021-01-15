@@ -601,11 +601,11 @@ const MobileMBase = (props) => {
             {data.length <= 10
                 &&
                 <>
-                    {/* 沒有更多搭乘紀錄 提醒 */}
+                    {/* 沒有更多訂單檢視 提醒 */}
                     <Text
                         theme={mobileM.noDataTip}
                     >
-                        沒有更多搭乘紀錄
+                        沒有更多訂單檢視
                     </Text>
                 </>
             }
