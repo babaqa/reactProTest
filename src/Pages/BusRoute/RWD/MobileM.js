@@ -7,7 +7,7 @@ import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
 import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { SystemNewsComponent } from '../SystemNewsComponent/SystemNewsComponent'
+import { AllBusRouteAomponent } from '../AllBusRouteAomponent/AllBusRouteAomponent'
 import { CaseNewsComponent } from '../CaseNewsComponent/CaseNewsComponent'
 import { WhiteNewsComponent } from '../WhiteNewsComponent/WhiteNewsComponent'
 import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
@@ -24,7 +24,7 @@ const MobileMBase = (props) => {
             case "tabUseComponent":
                 return (
                     {
-                        "系統公告": <SystemNewsComponent />,
+                        "全部路線": <AllBusRouteAomponent />,
                         "長照": <CaseNewsComponent />,
                         "共享車隊": <WhiteNewsComponent />,
                         "巴士": <BusNewsComponent />
@@ -32,7 +32,7 @@ const MobileMBase = (props) => {
                 );
             case "tabArray":
             default:
-                return ["系統公告", "長照", "共享車隊", "巴士"]
+                return ["全部路線", "長照", "共享車隊", "巴士"]
         }
 
     }
