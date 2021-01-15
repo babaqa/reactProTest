@@ -8,9 +8,6 @@ import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { AllBusRouteAomponent } from '../AllBusRouteAomponent/AllBusRouteAomponent'
-import { CaseNewsComponent } from '../CaseNewsComponent/CaseNewsComponent'
-import { WhiteNewsComponent } from '../WhiteNewsComponent/WhiteNewsComponent'
-import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
 
 const LaptopLBase = (props) => {
 
@@ -19,6 +16,15 @@ const LaptopLBase = (props) => {
     let history = useHistory()
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
+    const data = [
+        { township: "滿州鄉", routeName: ["綠線(龍口線)", "橘線(龍爪線)", "高士四林線", "旭海南線"] },
+        { township: "牡丹鄉", routeName: ["藍線(龍脊線)", "紅線(龍尾線)", "牡丹東源線"] },
+        { township: "貴州鄉", routeName: ["旭海北線"] },
+    ]
+
+    const list = ["全部路線"].concat(data.map(item => item.township));
+    // console.log(list)
+
     //#region 分頁映射
     const tabMap = (key) => {
         switch (key) {
@@ -26,14 +32,11 @@ const LaptopLBase = (props) => {
                 return (
                     {
                         "全部路線": <AllBusRouteAomponent />,
-                        "長照": <CaseNewsComponent />,
-                        "共享車隊": <WhiteNewsComponent />,
-                        "巴士": <BusNewsComponent />
                     }
                 );
 
             default:
-                return ["全部路線", "長照", "共享車隊", "巴士"]
+                return list
         }
 
     }
@@ -71,7 +74,11 @@ const LaptopLBase = (props) => {
                 }
             >
                 {/* 切換使用的組件 */}
-                {tabMap("tabUseComponent")?.[props.nowTab]}
+                {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
+                {/* {console.log(data.filter(X => X.township === props.nowTab || "全部路線" === props.nowTab).map(item => { return item.routeName }).flat())} */}
+                <AllBusRouteAomponent
+                    data={data.filter(X => X.township === props.nowTab || "全部路線" === props.nowTab).map(item => { return item.routeName }).flat()}
+                />
 
             </MainPageContainer>
         </>

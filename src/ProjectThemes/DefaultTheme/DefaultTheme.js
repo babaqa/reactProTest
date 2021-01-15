@@ -81,9 +81,6 @@ export default {
             ...busRoute,
             component: {
                 allBusRouteComponent,
-                caseNewsComponent,
-                busNewsComponent,
-                whiteNewsComponent,
             }
         },
 

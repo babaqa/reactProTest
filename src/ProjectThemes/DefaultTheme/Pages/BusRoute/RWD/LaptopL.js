@@ -120,7 +120,9 @@ export default {
             ...style,
             width: "100%",
             height: "56px",
-            backgroundColor: "#6A7987"
+            backgroundColor: "#6A7987",
+            overflow: "auto hidden",
+            whiteSpace: "nowrap"
         }),
     },
     //#endregion
