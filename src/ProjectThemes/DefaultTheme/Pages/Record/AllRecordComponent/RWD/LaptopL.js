@@ -1,4 +1,127 @@
 export default {
+    //#region 過去-未來訂單 OrderTime
+    orderTime: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px",
+                display: "inline-block",
+                // ...style.occupy(12),
+                // margin: "16px"
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                height: "0px"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px",
+                display: "inline-block",
+                // ...style.occupy(12),
+                // margin: "16px"
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "120px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 日期區間容器
+    dateTimeRangeContainer: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                padding: "16px 0 8px",
+                // margin: "8px 0 0",
+                width: "100%",
+                textAlign: "right"
+                // borderRadius: "16px",
+            }
+        }
+    },
+    //#endregion
+
+    //#region 選擇日期區間 DateTimeRange 
+    dateTimeRange: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: 0,
+                display: "inline-block",
+                // ...style.occupy(3),
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                padding: 0
+                // ...style.occupy(3),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        dateTimePickerContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    width: "244px",
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
+                }
+            }
+        },
+        dateTimePickerSubContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "28px",
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                // minHeight: "24px",
+                // height: "auto"
+                height: "0px"
+            })
+        }
+    },
+    //#endregion
+
     //#region 無資料表單區容器
     noDataContainer: {
         basic: (style, props) => {
@@ -39,15 +162,46 @@ export default {
 
     //#region 第一區塊 容器
     firstAreaContainer: {
-        basic: (style, props) => {
-            return {
-                ...style,
-                ...style.occupy(3),
-                position: "relative",
-                display: "inline-block",
-                // boxShadow: "inset 0 0 0 1px #D9D9D9",
-                height: "158px",
-                padding: "0 12px 0 0"
+        laptopL: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(3),
+                    position: "relative",
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    height: "158px",
+                    minHeight: "auto",
+                    padding: "0 12px 0 0"
+                }
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(2.5),
+                    position: "relative",
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    height: "158px",
+                    minHeight: "auto",
+                    padding: "0 8px 0 0"
+                }
+            }
+        },
+        tablet: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(2.4),
+                    position: "relative",
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    minHeight: "192px",
+                    height: "100%",
+                    padding: "0 8px 0 0"
+                }
             }
         }
     },
@@ -152,14 +306,40 @@ export default {
 
     //#region 第二區塊 容器
     secondAreaContainer: {
-        basic: (style, props) => {
-            return {
-                ...style,
-                ...style.occupy(4),
-                // display: "inline-block",
-                // boxShadow: "inset 0 0 0 1px #D9D9D9",
-                padding: "0 8px 0 12px",
-                height: "158px"
+        laptopL: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(4),
+                    // display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 8px 0 12px",
+                    height: "158px"
+                }
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(3.8),
+                    // display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 8px",
+                    height: "158px"
+                }
+            }
+        },
+        tablet: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(6.4),
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 8px",
+                    height: "auto"
+                }
             }
         }
     },
@@ -315,7 +495,7 @@ export default {
     },
     //#endregion
 
-    //#region 司機未執行按鈕
+    //#region 司機未到按鈕
     noExecuteButton: {
         basic: (style) => ({
             ...style,
@@ -349,14 +529,43 @@ export default {
 
     //#region 第三區塊 容器
     thirdAreaContainer: {
-        basic: (style, props) => {
-            return {
-                ...style,
-                ...style.occupy(4),
-                display: "inline-block",
-                // boxShadow: "inset 0 0 0 1px #D9D9D9",
-                padding: "0 12px 0 8px",
-                height: "158px"
+        laptopL: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(4),
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 12px 0 8px",
+                    height: "158px",
+                    minHeight: "auto"
+                }
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(4.5),
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 8px",
+                    height: "158px",
+                    minHeight: "auto"
+                }
+            }
+        },
+        tablet: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(5.6),
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 0 0 8px",
+                    height: "auto",
+                    minHeight: "170px"
+                }
             }
         }
     },
@@ -651,15 +860,42 @@ export default {
 
     //#region 第四區塊 容器
     forthAreaContainer: {
-        basic: (style, props) => {
-            return {
-                ...style,
-                ...style.occupy(1),
-                display: "inline-block",
-                // boxShadow: "inset 0 0 0 1px #D9D9D9",
-                padding: "0 0 0 12px",
-                height: "158px",
-                textAlign: "center"
+        laptopL: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(1),
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 0 0 12px",
+                    height: "158px",
+                    textAlign: "center"
+                }
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(1.2),
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 0 0 8px",
+                    height: "158px",
+                    textAlign: "center"
+                }
+            }
+        },
+        tablet: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    ...style.occupy(12),
+                    display: "inline-block",
+                    // boxShadow: "inset 0 0 0 1px #D9D9D9",
+                    padding: "0 0 8px 8px",
+                    // height: "24px",
+                }
             }
         }
     },
@@ -695,7 +931,7 @@ export default {
     },
     //#endregion
 
-    //#region 再叫一次按鈕
+    //#region 再次預約按鈕
     againButton: {
         basic: (style) => ({
             ...style,

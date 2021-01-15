@@ -26,9 +26,9 @@ export default {
                 ...style,
                 // display: "inline-block",
                 padding: "8px",
-                margin: "4px 0",
+                // margin: "4px 0",
                 background: "#fff",
-                boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                boxShadow: "inset 0px -1px 0px #00628F",
                 height: "auto",
                 width: "100%",
                 // borderRadius: "16px"

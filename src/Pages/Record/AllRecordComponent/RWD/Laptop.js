@@ -9,8 +9,9 @@ import { ReactComponent as Case } from '../../../../Assets/img/RecordPage/CaseLa
 import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/FleetLaptop.svg'
 import { ReactComponent as Bus } from '../../../../Assets/img/RecordPage/BusLaptop.svg'
 import { useHistory } from 'react-router-dom';
-import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { DateTimePicker, BasicContainer, RangeDateTimePicker, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { CardTable } from '../../../../ProjectComponent'
+import moment from 'moment';
 
 const LaptopBase = (props) => {
 
@@ -63,6 +64,57 @@ const LaptopBase = (props) => {
 
     return (
         <>
+            {/* 查詢日期區間容器 */}
+            <BasicContainer theme={laptop.dateTimeRangeContainer}>
+                {/* 過去-未來訂單 */}
+                <NewSelector
+                    bascDefaultTheme={"DefaultTheme"}
+                    topLabel={""}
+                    bottomLabel={""}
+                    //viewType
+                    isSearchable
+                    placeholder={""}
+                    // isMulti
+                    // hideSelectedOptions={false}
+                    value={globalContextService.get("CaseCallCarComponentPage", "OrderTime") ?? null}
+                    onChange={(e, value, onInitial) => {
+                        globalContextService.set("CaseCallCarComponentPage", "OrderTime", value);
+                        // console.log("請選擇居住縣市", value, globalContextService.get("OrderTime", "County"))
+                    }}
+                    options={
+                        [
+                            { value: '1', label: "過去" },
+                            { value: '2', label: "未來" },
+                        ]
+                    }
+                    // menuPosition={true}
+                    theme={laptop.orderTime}
+                />
+
+                {/*  查詢日期區間 DateTimeRange  */}
+                <RangeDateTimePicker
+                    topLabel={<></>}
+                    // type={"time"} time、date、week、month、quarter、year
+                    type={"date"}
+                    format={"YYYY-MM-DD"}
+                    bascDefaultTheme={"DefaultTheme"}
+                    // viewType
+                    isSearchable
+                    placeholder={""}
+                    value={
+                        (globalContextService.get("RecordPage", "DateTimeRange") ?
+                            [moment(globalContextService.get("RecordPage", "DateTimeRange")[0]), moment(globalContextService.get("RecordPage", "DateTimeRange")[1])]
+                            :
+                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2015-06-06', "YYYY-MM-DD")]
+                        )
+                    }
+                    onChange={(value, momentObj) => {
+                        globalContextService.set("RecordPage", "DateTimeRange", value);
+                    }}
+                    theme={laptop.dateTimeRange}
+                />
+            </BasicContainer>
+
             {data.length === 0
                 ?
                 <>

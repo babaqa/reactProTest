@@ -14,13 +14,13 @@ export const Record = (props) => {
     const [WhichForm, setWhichForm] = useState("Login"); // 切換 登入、忘記密碼、設定登入密碼 表單
     const [SendedAuthCode, setSendedAuthCode] = useState(false); // 紀錄是否已經發送過驗證碼 (要不要顯示重新發送驗證碼)
     const [WaitSecToZero, setWaitSecToZero] = useState(true); // 控制驗證碼倒數
-    const [NowTab, setNowTab] = useState("全部"); // 目前公告頁面
+    const [NowTab, setNowTab] = useState("長照"); // 目前公告頁面
     const [Width, Height] = useWindowSize();
 
     return (
         <>
             {
-                1440 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     WhichForm={WhichForm}
                     setWhichForm={setWhichForm}
@@ -32,7 +32,7 @@ export const Record = (props) => {
                     setNowTab={setNowTab}
                 />
             }
-            {
+            {/* {
                 (1024 <= Width && Width < 1440) &&
                 <Laptop
                     WhichForm={WhichForm}
@@ -57,7 +57,7 @@ export const Record = (props) => {
                     nowTab={NowTab}
                     setNowTab={setNowTab}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM
