@@ -42,4 +42,5 @@ export { DropDown } from './DropDown/DropDown'
 export { Transfer } from './Transfer/Transfer'
 export { Resizable } from './Resizable/Resizable'
 export { NewSelector } from './Form/NewSelector/NewSelector'
+export { TextEditor } from './Form/TextEditor/TextEditor'
 
