@@ -38,9 +38,9 @@ export const News = (props) => {
     //#endregion
 
     //#region 取得所有最新消息類別 選項 API
-    const getNewsType = useCallback(async (useAPI = false) => {
+    const getNewsType = useCallback(async (useAPI = false, newsCategoryId = "", releaseDate = fmt(moment(), "YYYY-MM")) => {
 
-        let defaultLoad = "";
+        let defaultLoad;
         //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
         if (isUndefined(globalContextService.get("NewsPage", "firstUseAPIgetNewsType")) || useAPI) {
             //#endregion
@@ -119,8 +119,9 @@ export const News = (props) => {
                     });
                 //#endregion
             }
+
             //#region 取得所有最新消息類別 API
-            await fetch(`${APIUrl}Newss/Load?page=1&limit=99999&IsClient=true&NewsCategoryId=${defaultLoad}&ReleaseDate=${fmt(moment(), "YYYY-MM")}`, //categorys/load?page=1&limit=20&TypeId=SYS_DRIVER_LICENSE
+            await fetch(`${APIUrl}Newss/Load?page=1&limit=99999&IsClient=true&NewsCategoryId=${defaultLoad ?? newsCategoryId}&ReleaseDate=${releaseDate}`, //categorys/load?page=1&limit=20&TypeId=SYS_DRIVER_LICENSE  
                 {
                     headers: {
                         "X-Token": getParseItemLocalStorage("Auth"),
@@ -194,7 +195,7 @@ export const News = (props) => {
             {
                 768 <= Width &&
                 <LaptopL
-                    nowTab={NowTab} // 目前公告頁面
+                    NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面
                     NewsType={NewsType} // 所有最新消息類別
                     AllNews={AllNews} // 類別下所有最新消息

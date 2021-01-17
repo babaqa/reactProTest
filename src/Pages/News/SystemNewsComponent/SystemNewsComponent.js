@@ -45,6 +45,7 @@ export const SystemNewsComponent = (props) => {
                 768 <= Width &&
                 <LaptopL
                     AllNews={props.AllNews} // 類別下所有最新消息
+                    NowTab={props.NowTab} // 目前使用的頁籤資訊
                     GetNewsTypeExecute={props.GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消
                 />
             }

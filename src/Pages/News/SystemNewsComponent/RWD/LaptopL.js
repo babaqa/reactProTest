@@ -18,7 +18,7 @@ const LaptopLBase = (props) => {
     const { pages: { news: { component: { systemNewsComponent: { rwd: { laptopL } } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
-    console.log(props.AllNews)
+
     let history = useHistory()
     return (
         <>
@@ -41,18 +41,14 @@ const LaptopLBase = (props) => {
                             moment()
                     }
                     onChange={(value, momentObj, OnInitial) => {
-                        // console.log(value)
-                        // console.log(globalContextService.get("SystemNewsComponentPage", "DateTimeRange"))
-                        // console.log(OnInitial)
-                        if (!isEqual(value, globalContextService.get("SystemNewsComponentPage", "DateTimeRange")) && !isUndefined(globalContextService.get("SystemNewsComponentPage", "DateTimeRange"))) {
-
+                        if (!isEqual(value, globalContextService.get("SystemNewsComponentPage", "DateTimeRange"))) {
                             // console.log("undefined", isUndefined(globalContextService.get("NewsPage", "firstUseAPIgetNewsType")))
                             // 阻擋第一次渲染即觸發
                             if (!isUndefined(globalContextService.get("NewsPage", "firstUseAPIgetNewsType"))) {
-                                globalContextService.set("SystemNewsComponentPage", "DateTimeRange", value);
-                                props.GetNewsTypeExecute(true, value)
-                                setForceUpdate(f => !f)
+                                props.GetNewsTypeExecute(true, props.NowTab?.value, value)
                             }
+                            globalContextService.set("SystemNewsComponentPage", "DateTimeRange", value);
+                            setForceUpdate(f => !f)
                         }
                     }}
                     theme={laptopL.dateTimeRange}

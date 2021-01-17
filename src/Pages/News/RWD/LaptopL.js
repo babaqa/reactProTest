@@ -46,8 +46,13 @@ const LaptopLBase = (props) => {
                                         return (
                                             <React.Fragment key={index}>
                                                 <Text
-                                                    onClick={() => { props.setNowTab(item) }}
-                                                    isActive={props.nowTab === item}
+                                                    onClick={() => {
+                                                        if (props.NowTab !== item) {
+                                                            props.setNowTab(item);
+                                                            props.GetNewsTypeExecute(true, props.NewsType[index]?.value, globalContextService.get("SystemNewsComponentPage", "DateTimeRange"));
+                                                        }
+                                                    }}
+                                                    isActive={props.NowTab === item}
                                                     theme={laptopL.titleBarCallCarTab}
                                                 >
                                                     {item}
@@ -68,6 +73,7 @@ const LaptopLBase = (props) => {
                 {/* {console.log(props.NewsType)} */}
                 <SystemNewsComponent
                     AllNews={props.AllNews} // 類別下所有最新消息
+                    NowTab={props.NewsType.filter((it) => (it.label === props.NowTab))?.[0]}
                     GetNewsTypeExecute={props.GetNewsTypeExecute}
                 />
             </MainPageContainer>
