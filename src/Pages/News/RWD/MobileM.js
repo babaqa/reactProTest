@@ -11,6 +11,7 @@ import { SystemNewsComponent } from '../SystemNewsComponent/SystemNewsComponent'
 import { CaseNewsComponent } from '../CaseNewsComponent/CaseNewsComponent'
 import { WhiteNewsComponent } from '../WhiteNewsComponent/WhiteNewsComponent'
 import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 const MobileMBase = (props) => {
 
@@ -18,6 +19,7 @@ const MobileMBase = (props) => {
     const { pages: { news: { rwd: { mobileM } } } } = Theme;
     let history = useHistory()
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
+    const [Width, Height] = useWindowSize();
     //#region 分頁映射
     const tabMap = (key) => {
         switch (key) {
@@ -41,6 +43,7 @@ const MobileMBase = (props) => {
     return (
         <>
             <MainPageContainer
+                height={Height}
                 theme={mobileM.mainPageContainer}
                 outSideTopComponent={
                     <>

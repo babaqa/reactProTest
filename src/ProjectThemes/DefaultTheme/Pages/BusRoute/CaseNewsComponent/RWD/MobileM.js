@@ -3,7 +3,7 @@ export default {
     newsContainer: {
         basic: (style, props) => ({
             ...style,
-            minHeight: "calc( 100vh - 56px - 94px - 48px)",
+            minHeight: `calc( ${props.height}px - 56px - 94px - 48px)`,
             height: "auto",
             // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
             // borderRadius: "16px"

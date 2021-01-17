@@ -1,12 +1,12 @@
 import React, { useContext, useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../Store/Store'
-import { BasicContainer, ScrollBar } from '../../Components';
+import { BasicContainer, ScrollBar, Text } from '../../Components';
 import { iterateTheme } from '../../Handlers/ThemeHandler';
 import { ReactComponent as LaptopLCopyright } from '../../Assets/img/LaptopLCopyright.svg'
 import { ReactComponent as LaptopCopyright } from '../../Assets/img/LaptopCopyright.svg'
 import { ReactComponent as TabletCopyright } from '../../Assets/img/TabletCopyright.svg'
-import { ReactComponent as MobileMCopyright } from '../../Assets/img/MobileMCopyright.svg'
+// import { ReactComponent as MobileMCopyright } from '../../Assets/img/MobileMCopyright.svg'
 
 //#region 擴充基本樣式區
 import DefaultTheme from './Theme/DefaultTheme'
@@ -91,6 +91,26 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                     left: "0px",
                                     bottom: "0px"
                                 }} />
+
+                                {/* COPYRIGHT (laptopL) */}
+                                <Text
+                                    theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopLCopyRight") }}
+                                >
+                                    COPYRIGHT © 屏東客戶端
+                                </Text>
+
+                                {/* 單位資訊 (laptopL) */}
+                                <Text
+                                    theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopLUnitInfo") }}
+                                >
+                                    屏東縣政府 版權所有 辦公時間：週一至週五 08:00~12:00 13:30~17:30
+                                    <br />
+                                    總機電話：(08)732-0415 地址：900219屏東縣屏東市自由路527號
+                                    <br />
+                                    1999便民服務專線(付費專線)服務時間每日08:00~22:00
+                                    <br />
+                                    縣境內直撥1999，外縣市請撥(08)732-0415
+                                </Text>
                             </BasicContainer>
                         </ScrollBar>
                     </BasicContainer>
@@ -140,6 +160,27 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                     left: "0px",
                                     bottom: "0px"
                                 }} />
+
+                                {/* COPYRIGHT (laptop) */}
+                                <Text
+                                    theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopCopyRight") }}
+                                >
+                                    COPYRIGHT © 屏東客戶端
+                                </Text>
+
+                                {/* 單位資訊 (laptop) */}
+                                <Text
+                                    theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopUnitInfo") }}
+                                >
+                                    屏東縣政府 版權所有 辦公時間：週一至週五 08:00~12:00 13:30~17:30
+                                    <br />
+                                    總機電話：(08)732-0415 地址：900219屏東縣屏東市自由路527號
+                                    <br />
+                                    1999便民服務專線(付費專線)服務時間每日08:00~22:00
+                                    <br />
+                                    縣境內直撥1999，外縣市請撥(08)732-0415
+                                </Text>
+
                             </BasicContainer>
                         </ScrollBar>
                     </BasicContainer>
@@ -165,7 +206,7 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                         {...props.tabletOutContainerEvent}
                         className={`tabletOutContainer`}
                         baseDefaultTheme={"DefaultTheme"}
-                        theme={{ ...iterateTheme({ ...props, collapse: Collapse, outSideTopComponentHeight: OutSideTopComponentHeight }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletOutContainer") }}
+                        theme={{ ...iterateTheme({ ...props, collapse: Collapse, outSideTopComponentHeight: OutSideTopComponentHeight, height: Height }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletOutContainer") }}
                     >
                         {/* 容器內滾動條 (tablet)*/}
                         <ScrollBar
@@ -189,6 +230,27 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                     left: "0px",
                                     bottom: "0px"
                                 }} />
+
+                                {/* COPYRIGHT (laptop) */}
+                                <Text
+                                    theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletCopyRight") }}
+                                >
+                                    COPYRIGHT © 屏東客戶端
+                                </Text>
+
+                                {/* 單位資訊 (laptop) */}
+                                <Text
+                                    theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletUnitInfo") }}
+                                >
+                                    屏東縣政府 版權所有 辦公時間：週一至週五 08:00~12:00 13:30~17:30
+                                    <br />
+                                    總機電話：(08)732-0415 地址：900219屏東縣屏東市自由路527號
+                                    <br />
+                                    1999便民服務專線(付費專線)服務時間每日08:00~22:00
+                                    <br />
+                                    縣境內直撥1999，外縣市請撥(08)732-0415
+                                </Text>
+
                             </BasicContainer>
                         </ScrollBar>
                     </BasicContainer>
@@ -212,7 +274,7 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                         {...props.basicOutContainerEvent}
                         className={`basicOutContainer`}
                         baseDefaultTheme={"DefaultTheme"}
-                        theme={{ ...iterateTheme({ ...props, outSideTopComponentHeight: OutSideTopComponentHeight }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "basicOutContainer") }}
+                        theme={{ ...iterateTheme({ ...props, outSideTopComponentHeight: OutSideTopComponentHeight, height: Height }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "basicOutContainer") }}
                     >
                         {/* 容器內滾動條 (basic)*/}
                         <ScrollBar
@@ -230,12 +292,12 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                 theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "basicContentContainer") }} //吃theme
                             >
                                 {props.children}
-                                <MobileMCopyright style={{
+                                {/* <MobileMCopyright style={{
                                     width: "100%",
                                     position: "absolute",
                                     left: "0px",
                                     bottom: "0px"
-                                }} />
+                                }} /> */}
                             </BasicContainer>
                         </ScrollBar>
                     </BasicContainer>

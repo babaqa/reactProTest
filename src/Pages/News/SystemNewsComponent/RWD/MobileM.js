@@ -9,12 +9,14 @@ import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../Handlers';
 import { toString } from 'lodash/lang';
 import { ReactComponent as NoData } from '../../../../Assets/img/SystemNewsComponentPage/NoData.svg'
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 const MobileMBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { news: { component: { systemNewsComponent: { rwd: { mobileM } } } } } } = Theme;
 
+    const [Width, Height] = useWindowSize();
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     const statusMapping = (status, getTheme = false) => {
@@ -37,6 +39,7 @@ const MobileMBase = (props) => {
             {/* 公告外層 容器 */}
             <BasicContainer
                 bascDefaultTheme={"DefaultTheme"}
+                height={Height}
                 theme={mobileM.newsContainer}
             >
                 {props.data.length === 0

@@ -133,9 +133,85 @@ export default {
         }
     },
     //#endregion
+    //#region COPYRIGHT
+    laptopLCopyRight: {
+        basic: (style, props) => ({
+            //#region BasicContainer 原生樣式
+            boxSizing: "border-box",
+            // position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            // lineHeight: "normal",
+            // backgroundColor: "#ffffff",
+            // backgroundImage: "none",
+            // backgroundPosition: "0% 0%",
+            // backgroundRepeat: "repeat",
+            // backgroundSize: "auto auto",
+            // cursor: "auto",
+            whiteSpace: "normal",
+            textAlign: 'normal',
+            // fontSize: "medium",
+            // color: '#000',
+            //#endregion 
+            //#region 覆寫樣式
+            cursor: "default",
+            userSelect: "none",
+            height: "auto",
+            //#endregion
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "20px",
+            color: "#FF7A45",
+            position: "absolute",
+            bottom: "18px",
+            left: "14%"
+        }),
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
+    //#region 單位資訊 
+    laptopLUnitInfo: {
+        basic: (style, props) => ({
+            //#region BasicContainer 原生樣式
+            boxSizing: "border-box",
+            // position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            // lineHeight: "normal",
+            // backgroundColor: "#ffffff",
+            // backgroundImage: "none",
+            // backgroundPosition: "0% 0%",
+            // backgroundRepeat: "repeat",
+            // backgroundSize: "auto auto",
+            // cursor: "auto",
+            whiteSpace: "normal",
+            textAlign: 'normal',
+            // fontSize: "medium",
+            // color: '#000',
+            //#endregion 
+            //#region 覆寫樣式
+            cursor: "default",
+            userSelect: "none",
+            height: "auto",
+            //#endregion
+            color: "#fff",
+            fontSize: "16px",
+            fontWeight: 500,
+            lineHeight: "28px",
+            position: "absolute",
+            bottom: "44px",
+            left: "43%"
+        }),
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
     //#endregion
 
-    //#region 大於1024 與 小於1440的畫面 (laptop)
+    //#region 大於等於1024 與 小於1440的畫面 (laptop)
     //#region 外部傳入頂部組件容器 (laptop)
     laptopOutsideOutContainer: {
         basic: (style, props) => {
@@ -269,9 +345,85 @@ export default {
         }
     },
     //#endregion
+    //#region COPYRIGHT
+    laptopCopyRight: {
+        basic: (style, props) => ({
+            //#region BasicContainer 原生樣式
+            boxSizing: "border-box",
+            // position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            // lineHeight: "normal",
+            // backgroundColor: "#ffffff",
+            // backgroundImage: "none",
+            // backgroundPosition: "0% 0%",
+            // backgroundRepeat: "repeat",
+            // backgroundSize: "auto auto",
+            // cursor: "auto",
+            whiteSpace: "normal",
+            textAlign: 'normal',
+            // fontSize: "medium",
+            // color: '#000',
+            //#endregion 
+            //#region 覆寫樣式
+            cursor: "default",
+            userSelect: "none",
+            height: "auto",
+            //#endregion
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "20px",
+            color: "#FF7A45",
+            position: "absolute",
+            bottom: "14px",
+            left: "14%"
+        }),
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
+    //#region 單位資訊 
+    laptopUnitInfo: {
+        basic: (style, props) => ({
+            //#region BasicContainer 原生樣式
+            boxSizing: "border-box",
+            // position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            // lineHeight: "normal",
+            // backgroundColor: "#ffffff",
+            // backgroundImage: "none",
+            // backgroundPosition: "0% 0%",
+            // backgroundRepeat: "repeat",
+            // backgroundSize: "auto auto",
+            // cursor: "auto",
+            whiteSpace: "normal",
+            textAlign: 'normal',
+            // fontSize: "medium",
+            // color: '#000',
+            //#endregion 
+            //#region 覆寫樣式
+            cursor: "default",
+            userSelect: "none",
+            height: "auto",
+            //#endregion
+            color: "#fff",
+            fontSize: "16px",
+            fontWeight: 500,
+            lineHeight: "28px",
+            position: "absolute",
+            bottom: "44px",
+            left: "46%"
+        }),
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
     //#endregion
 
-    //#region 大於1024 與 小於1440的畫面 (tablet)
+    //#region 大於等於768 與 小於1024的畫面 (tablet)
     //#region 外部傳入頂部組件容器 (tablet)
     tabletOutsideOutContainer: {
         basic: (style, props) => {
@@ -311,7 +463,7 @@ export default {
     //#region 容器 (tablet)
     tabletOutContainer: {
         basic: (style, props) => {
-            // console.log(style, props)
+            // console.log(style, props.height)
             return {
                 //#region 基本設置
                 boxSizing: "border-box",
@@ -336,7 +488,7 @@ export default {
                 width: "100%",
                 top: "80px",
                 // left: props.collapse ? "4rem" : "15rem",
-                height: `calc( 100vh - 80px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( ${props.height}px - 80px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
                 //#endregion
             }
         }
@@ -405,9 +557,85 @@ export default {
         }
     },
     //#endregion
+    //#region COPYRIGHT
+    tabletCopyRight: {
+        basic: (style, props) => ({
+            //#region BasicContainer 原生樣式
+            boxSizing: "border-box",
+            // position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            // lineHeight: "normal",
+            // backgroundColor: "#ffffff",
+            // backgroundImage: "none",
+            // backgroundPosition: "0% 0%",
+            // backgroundRepeat: "repeat",
+            // backgroundSize: "auto auto",
+            // cursor: "auto",
+            whiteSpace: "normal",
+            textAlign: 'normal',
+            // fontSize: "medium",
+            // color: '#000',
+            //#endregion 
+            //#region 覆寫樣式
+            cursor: "default",
+            userSelect: "none",
+            height: "auto",
+            //#endregion
+            fontWeight: 500,
+            fontSize: "14px",
+            lineHeight: "20px",
+            color: "#FF7A45",
+            position: "absolute",
+            bottom: "14px",
+            left: "14%"
+        }),
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
+    //#region 單位資訊 
+    tabletUnitInfo: {
+        basic: (style, props) => ({
+            //#region BasicContainer 原生樣式
+            boxSizing: "border-box",
+            // position: "relative",       //控制position屬性: static、relative、fixed、absolute、sticky、inherit、initial
+            width: "auto",
+            minWidth: '0',//修復滾動條 x 方向
+            // lineHeight: "normal",
+            // backgroundColor: "#ffffff",
+            // backgroundImage: "none",
+            // backgroundPosition: "0% 0%",
+            // backgroundRepeat: "repeat",
+            // backgroundSize: "auto auto",
+            // cursor: "auto",
+            whiteSpace: "normal",
+            textAlign: 'normal',
+            // fontSize: "medium",
+            // color: '#000',
+            //#endregion 
+            //#region 覆寫樣式
+            cursor: "default",
+            userSelect: "none",
+            height: "auto",
+            //#endregion
+            color: "#fff",
+            fontSize: "16px",
+            fontWeight: 500,
+            lineHeight: "28px",
+            position: "absolute",
+            bottom: "64px",
+            left: "14%"
+        }),
+        hover: {
+            //backgroundColor: "#d9d9d9"
+        }
+    },
+    //#endregion
     //#endregion
 
-    //#region 小於等於768的畫面 (basic)
+    //#region 小於768的畫面 (basic)
     //#region 外部傳入頂部組件容器 (basic)
     basicOutsideOutContainer: {
         basic: (style, props) => {
@@ -445,6 +673,7 @@ export default {
     //#region 容器 (basic)
     basicOutContainer: {
         basic: (style, props) => {
+            // console.log(style, props.height)
             return {
                 //#region 基本設置
                 boxSizing: "border-box",
@@ -468,7 +697,7 @@ export default {
                 //margin: `0 0.5rem 0 ${Collapse ? "1rem" : "1.5rem"}`,
                 width: "100%",
                 top: "56px",
-                height: `calc( 100vh - 56px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( ${props.height}px - 56px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
                 //#endregion
             }
         }
