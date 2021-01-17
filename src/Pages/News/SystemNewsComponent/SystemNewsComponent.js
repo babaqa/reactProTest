@@ -7,16 +7,21 @@ import { MobileM } from './RWD/MobileM';
 import { Tablet } from './RWD/Tablet';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { useHistory, useLocation } from 'react-router-dom';
+import { clearLocalStorage, clearSession, getParseItemLocalStorage, valid } from '../../../Handlers';
+import { useAsync } from '../../../SelfHooks/useAsync';
+import moment from 'moment';
+import { fmt } from '../../../Handlers/DateHandler';
 
 export const SystemNewsComponent = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
 
     const [Width, Height] = useWindowSize();
-
     let history = useHistory();
     let urlParams = new URLSearchParams(useLocation().search);//取得參數
     // let userId = urlParams.get("userId"); //會是最新的值
+
+    // console.log(props.type)
 
     const data =
         [
@@ -33,83 +38,14 @@ export const SystemNewsComponent = (props) => {
             { id: "11", identity: "2", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
         ];
 
-    //#region 當頁 GlobalContextService (GCS) 值 控制
-    const controllGCS = (type, payload) => {
-        switch (type) {
-            case "return":
-
-                //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("SystemNewsComponentPage");
-                //#endregion
-
-                //#region 清除上一頁的勾選項
-                globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
-                //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("SystemNewsComponentPage") ?? {}).forEach((item, index) => {
-                    if (item.includes("CaseList_")) {
-                        globalContextService.remove("SystemNewsComponentPage", item);
-                    }
-                })
-                //#endregion
-                //#endregion
-                if (payload === "API") {
-                    globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                    globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
-                }
-                //#endregion
-                break;
-            case "Save":
-                //#region 當點擊 立即預約 按鈕時，要清除的資料
-                globalContextService.remove("SystemNewsComponentPage");
-                //#endregion
-
-                //#region 清除上一頁的勾選項
-                globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
-                //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("SystemNewsComponentPage") ?? {}).forEach((item, index) => {
-                    if (item.includes("CaseList_")) {
-                        globalContextService.remove("SystemNewsComponentPage", item);
-                    }
-                })
-                //#endregion
-                //#endregion
-                if (payload === "API") {
-                    globalContextService.remove("SystemNewsComponentPage", "CheckedRowKeys");
-                    globalContextService.remove("SystemNewsComponentPage", "CheckedRowsData");
-                }
-                //#endregion
-                break;
-            default:
-                break;
-        }
-    }
-    //#endregion
-
-    //#region 路由監聽，清除API紀錄 (渲染即觸發的每一個API都要有)
-    useEffect(() => {
-        const historyUnlisten = history.listen((location, action) => {
-            // console.log(location, action, "路由變化")
-            globalContextService.remove("SystemNewsComponentPage", "firstUseAPIgetCarType");
-        });
-
-        return () => {
-            historyUnlisten();
-        }
-    }, [])
-    //#endregion
 
     return (
         <>
             {
                 768 <= Width &&
                 <LaptopL
-                    UserId={urlParams.get("userId")}
-                    CaseUserId={urlParams.get("caseUserId")}
-                    UserName={urlParams.get("caseName")}
-                    data={data}
-                    controllGCS={controllGCS}
+                    AllNews={props.AllNews} // 類別下所有最新消息
+                    GetNewsTypeExecute={props.GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消
                 />
             }
             {/* {
@@ -139,7 +75,6 @@ export const SystemNewsComponent = (props) => {
                     CaseUserId={urlParams.get("caseUserId")}
                     UserName={urlParams.get("caseName")}
                     data={data}
-                    controllGCS={controllGCS}
                 />
             }
         </>

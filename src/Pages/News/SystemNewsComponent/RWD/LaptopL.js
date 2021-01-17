@@ -9,6 +9,8 @@ import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../Handlers';
 import { toString } from 'lodash/lang';
 import { ReactComponent as NoData } from '../../../../Assets/img/SystemNewsComponentPage/NoData.svg'
+import isUndefined from 'lodash/isUndefined';
+import { fmt } from '../../../../Handlers/DateHandler';
 
 const LaptopLBase = (props) => {
 
@@ -16,34 +18,41 @@ const LaptopLBase = (props) => {
     const { pages: { news: { component: { systemNewsComponent: { rwd: { laptopL } } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
-
+    console.log(props.AllNews)
     let history = useHistory()
-
     return (
         <>
             {/* 日期區間容器 */}
             <BasicContainer theme={laptopL.dateTimeRangeContainer}>
                 {/* 日期區間 DateTimeRange  */}
-                <RangeDateTimePicker
-                    // topLabel={<></>}
+                <DateTimePicker
+                    topLabel={<>日期區間</>}
                     // type={"time"} time、date、week、month、quarter、year
-                    type={"date"}
-                    format={"YYYY-MM-DD"}
+                    type={"month"}
+                    format={"YYYY-MM"}
                     bascDefaultTheme={"DefaultTheme"}
                     // viewType
-                    isSearchable
+                    isSearchableSystemNewsComponentPage
                     placeholder={""}
                     value={
-                        (globalContextService.get("SystemNewsComponentPage", "DateTimeRange") ?
-                            [moment(globalContextService.get("SystemNewsComponentPage", "DateTimeRange")[0]), moment(globalContextService.get("SystemNewsComponentPage", "DateTimeRange")[1])]
+                        (globalContextService.get("SystemNewsComponentPage", "DateTimeRange")) ?
+                            moment(globalContextService.get("SystemNewsComponentPage", "DateTimeRange"), "YYYY-MM")
                             :
-                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
-                        )
+                            moment()
                     }
-                    onChange={(value, momentObj) => {
-                        if (value !== globalContextService.get("SystemNewsComponentPage", "DateTimeRange")) {
-                            globalContextService.set("SystemNewsComponentPage", "DateTimeRange", value);
-                            // setForceUpdate(f => !f)
+                    onChange={(value, momentObj, OnInitial) => {
+                        // console.log(value)
+                        // console.log(globalContextService.get("SystemNewsComponentPage", "DateTimeRange"))
+                        // console.log(OnInitial)
+                        if (!isEqual(value, globalContextService.get("SystemNewsComponentPage", "DateTimeRange")) && !isUndefined(globalContextService.get("SystemNewsComponentPage", "DateTimeRange"))) {
+
+                            // console.log("undefined", isUndefined(globalContextService.get("NewsPage", "firstUseAPIgetNewsType")))
+                            // 阻擋第一次渲染即觸發
+                            if (!isUndefined(globalContextService.get("NewsPage", "firstUseAPIgetNewsType"))) {
+                                globalContextService.set("SystemNewsComponentPage", "DateTimeRange", value);
+                                props.GetNewsTypeExecute(true, value)
+                                setForceUpdate(f => !f)
+                            }
                         }
                     }}
                     theme={laptopL.dateTimeRange}
@@ -55,7 +64,7 @@ const LaptopLBase = (props) => {
                 bascDefaultTheme={"DefaultTheme"}
                 theme={laptopL.tableContainer}
             >
-                {props.data.length === 0
+                {props.AllNews.length === 0
                     ?
                     <>
                         {/* 無資料表單區容器 */}
@@ -199,7 +208,7 @@ const LaptopLBase = (props) => {
                             }
                             //sort
                             //showHeader={false}
-                            data={props.data}
+                            data={props?.AllNews ?? []}
                             // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
                             // data={props.AllClient.data}
                             clickPage={(currentPage, pageSize) => {
