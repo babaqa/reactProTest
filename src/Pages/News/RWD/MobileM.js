@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
-import { Container, BasicContainer, RangeDateTimePicker, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
+import { Container, BasicContainer, DateTimePicker, TextEditor, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
 import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
@@ -12,6 +12,8 @@ import { CaseNewsComponent } from '../CaseNewsComponent/CaseNewsComponent'
 import { WhiteNewsComponent } from '../WhiteNewsComponent/WhiteNewsComponent'
 import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
+import isUndefined from 'lodash/isUndefined';
+import { isEqual, isNil } from 'lodash';
 
 const MobileMBase = (props) => {
 
@@ -22,21 +24,7 @@ const MobileMBase = (props) => {
     const [Width, Height] = useWindowSize();
     //#region 分頁映射
     const tabMap = (key) => {
-        switch (key) {
-            case "tabUseComponent":
-                return (
-                    {
-                        "系統公告": <SystemNewsComponent />,
-                        "長照": <CaseNewsComponent />,
-                        "共享車隊": <WhiteNewsComponent />,
-                        "巴士": <BusNewsComponent />
-                    }
-                );
-            case "tabArray":
-            default:
-                return ["系統公告", "長照", "共享車隊", "巴士"]
-        }
-
+        return props.NewsType.map(item => { return item.label })
     }
     //#endregion
 
@@ -54,39 +42,48 @@ const MobileMBase = (props) => {
                             {/* 日期區間容器 */}
                             <SubContainer baseDefaultTheme={"DefaultTheme"}>
                                 {/* 日期區間 DateTimeRange  */}
-                                <RangeDateTimePicker
-                                    // topLabel={<></>}
+                                <DateTimePicker
+                                    topLabel={<>日期區間</>}
                                     // type={"time"} time、date、week、month、quarter、year
-                                    type={"date"}
-                                    format={"YYYY-MM-DD"}
+                                    type={"month"}
+                                    format={"YYYY-MM"}
                                     bascDefaultTheme={"DefaultTheme"}
                                     // viewType
-                                    isSearchable
+                                    isSearchableSystemNewsComponentPage
                                     placeholder={""}
                                     value={
-                                        (globalContextService.get("NewsPage", "DateTimeRange") ?
-                                            [moment(globalContextService.get("NewsPage", "DateTimeRange")[0]), moment(globalContextService.get("NewsPage", "DateTimeRange")[1])]
+                                        (globalContextService.get("SystemNewsComponentPage", "DateTimeRange")) ?
+                                            moment(globalContextService.get("SystemNewsComponentPage", "DateTimeRange"), "YYYY-MM")
                                             :
-                                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
-                                        )
+                                            moment()
                                     }
-                                    onChange={(value, momentObj) => {
-                                        if (value !== globalContextService.get("NewsPage", "DateTimeRange")) {
-                                            globalContextService.set("NewsPage", "DateTimeRange", value);
-                                            // setForceUpdate(f => !f)
+                                    onChange={(value, momentObj, OnInitial) => {
+                                        if (!isEqual(value, globalContextService.get("SystemNewsComponentPage", "DateTimeRange"))) {
+                                            // console.log("undefined", isUndefined(globalContextService.get("NewsPage", "firstUseAPIgetNewsType")))
+                                            // 阻擋第一次渲染即觸發
+                                            if (!isUndefined(globalContextService.get("NewsPage", "firstUseAPIgetNewsType"))) {
+                                                console.log(props.NowTab)
+                                                props.GetNewsTypeExecute(true, props.NewsType.filter((it) => (it.label === props.NowTab))?.[0]?.value, value)
+                                            }
+                                            globalContextService.set("SystemNewsComponentPage", "DateTimeRange", value);
+                                            setForceUpdate(f => !f)
                                         }
                                     }}
                                     theme={mobileM.dateTimeRange}
                                 />
                             </SubContainer>
 
-
                             {tabMap().map((item, index) => {
                                 return (
                                     <React.Fragment key={index}>
                                         <Text
-                                            onClick={() => { props.setNowTab(item) }}
-                                            isActive={props.nowTab === item}
+                                            onClick={() => {
+                                                if (props.NowTab !== item) {
+                                                    props.setNowTab(item);
+                                                    props.GetNewsTypeExecute(true, props.NewsType[index]?.value, globalContextService.get("SystemNewsComponentPage", "DateTimeRange"));
+                                                }
+                                            }}
+                                            isActive={props.NowTab === item}
                                             theme={mobileM.titleBarCallCarTab}
                                         >
                                             {item}
@@ -99,8 +96,66 @@ const MobileMBase = (props) => {
                 }
             >
                 {/* 切換使用的組件 */}
-                {tabMap("tabUseComponent")?.[props.nowTab]}
+                {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
+                {/* {console.log(props.NewsType)} */}
+                {/* {console.log(props.AllNews)} */}
+                {!isUndefined(props?.CheckDetail?.title)
+                    ?
+                    <>
+                        <Container>
+                            {/* 詳細資料外側容器 */}
+                            <BasicContainer
+                                height={Height}
+                                theme={mobileM.detailOutContainer}
+                            >
+                                {/* 詳細資料容器 */}
+                                <BasicContainer
+                                    theme={mobileM.detailContainer}
+                                >
+                                    {/* 詳細資料 標題 */}
+                                    <Text
+                                        theme={mobileM.detailHeader}
+                                    >
+                                        {props.CheckDetail.title}
+                                    </Text>
 
+                                    {/* 詳細資料 內文 */}
+                                    <TextEditor
+                                        viewType
+                                        value={props.CheckDetail.contents}
+                                        // onChange={(e, value, onInitial) => {
+                                        //     console.log(value)
+                                        //     globalContextService.set("NewsAddPage", "NewsEditor", value)
+                                        // }}
+                                        // placeholder={'請輸入最新消息內容...'}
+                                        theme={mobileM.newsEditor}
+                                    />
+
+                                </BasicContainer>
+
+                                {/* 回列表按鈕 */}
+                                <NativeLineButton
+                                    baseDefaultTheme={"DefaultTheme"}
+                                    disable={false}
+                                    type="button" // 防止提交
+                                    theme={mobileM.returnButton}
+                                    onClick={() => {
+                                        props.setCheckDetail({})
+                                    }}
+                                >
+                                    回列表
+                                </NativeLineButton>
+                            </BasicContainer>
+                        </Container>
+                    </>
+                    :
+                    <SystemNewsComponent
+                        AllNews={props.AllNews} // 類別下所有最新消息
+                        NowTab={props.NewsType.filter((it) => (it.label === props.NowTab))?.[0]}
+                        CheckDetail={props.CheckDetail} // 詳細資料
+                        setCheckDetail={props.setCheckDetail} // 設定詳細資料
+                    />
+                }
             </MainPageContainer>
         </>
     )

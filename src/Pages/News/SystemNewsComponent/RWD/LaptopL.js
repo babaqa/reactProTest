@@ -10,6 +10,7 @@ import { valid } from '../../../../Handlers';
 import { toString } from 'lodash/lang';
 import { ReactComponent as NoData } from '../../../../Assets/img/SystemNewsComponentPage/NoData.svg'
 import isUndefined from 'lodash/isUndefined';
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { fmt } from '../../../../Handlers/DateHandler';
 
 const LaptopLBase = (props) => {
@@ -17,6 +18,7 @@ const LaptopLBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { news: { component: { systemNewsComponent: { rwd: { laptopL } } } } } } = Theme;
 
+    const [Width, Height] = useWindowSize();
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
     let history = useHistory()
     return (
@@ -57,6 +59,7 @@ const LaptopLBase = (props) => {
             {/* Table 外側容器 */}
             <BasicContainer
                 bascDefaultTheme={"DefaultTheme"}
+                height={Height}
                 theme={laptopL.tableOutsideContainer}
             >
 
@@ -66,6 +69,7 @@ const LaptopLBase = (props) => {
                         {/* 無資料表單區容器 */}
                         < BasicContainer
                             baseDefaultTheme={"DefaultTheme"}
+                            height={Height}
                             theme={laptopL.noDataContainer}
                         >
                             <NoData style={laptopL.noDataSvg} />
@@ -153,8 +157,12 @@ const LaptopLBase = (props) => {
                                             dataIndex: 'releaseDate',
                                             // sorter: (a, b) => a.brandModel.length - b.brandModel.length,
                                             // fixed: 'left',
-                                            render:(rowData) =>{
-                                                
+                                            render: (rowData) => {
+                                                return (
+                                                    <>
+                                                        {rowData.split(" ")[0]}
+                                                    </>
+                                                )
                                             }
                                         },
                                         {
@@ -170,40 +178,8 @@ const LaptopLBase = (props) => {
                                                             <Text
                                                                 baseDefaultTheme={"DefaultTheme"}
                                                                 onClick={() => {
-                                                                    modalsService.titleModal.normal({
-                                                                        //id: "top1",
-                                                                        title: "公告",
-                                                                        yes: true,
-                                                                        yesText: "確認",
-                                                                        no: false,
-                                                                        noText: "取消",
-                                                                        // autoClose: true,
-                                                                        backgroundClose: false,
-                                                                        noOnClick: (e) => {
-                                                                        },
-                                                                        yesOnClick: (e, close) => {
-                                                                            close();
-                                                                        },
-                                                                        closeIconOnClick: (e) => {
-                                                                        },
-                                                                        content: (
-
-                                                                            <>
-                                                                                {/* 最新消息編輯器 NewsEditor */}
-                                                                                <TextEditor
-                                                                                    viewType
-                                                                                    value={allRowData?.contents ?? ""}
-                                                                                    // onChange={(e, value, onInitial) => {
-                                                                                    //     console.log(value)
-                                                                                    //     globalContextService.set("NewsAddPage", "NewsEditor", value)
-                                                                                    // }}
-                                                                                    // placeholder={'請輸入最新消息內容...'}
-                                                                                    theme={laptopL.newsEditor}
-                                                                                />
-                                                                            </>
-                                                                        ),
-                                                                        theme: laptopL.newsModal
-                                                                    })
+                                                                    // console.log(allRowData)
+                                                                    props.setCheckDetail((({ title, contents }) => ({ title, contents }))(allRowData))
                                                                 }}
                                                                 theme={laptopL.newsContentText}
                                                             >

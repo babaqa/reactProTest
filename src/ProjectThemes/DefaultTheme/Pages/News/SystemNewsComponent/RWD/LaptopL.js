@@ -74,7 +74,8 @@ export default {
                 // margin: "8px 0 0",
                 background: "white",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "100%",
+                // height: "100%",
+                minHeight: `calc( ${props.height}px - 295px )`,
                 width: "100%",
                 borderRadius: "16px",
                 display: "flex",
@@ -89,9 +90,18 @@ export default {
     tableOutsideContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "669px",
+            height: "auto",
+            minHeight: `calc( ${props.height}px - 240px )`,
             width: "100%",
-        })
+        }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto",
+                minHeight: "calc( 100vh - 295px )",
+                width: "100%",
+            })
+        }
     },
     //#endregion
     //#region Table容器
@@ -101,6 +111,7 @@ export default {
             return {
                 ...style,
                 height: `${((props.length) + 1) * 55 + 64}px`,
+                maxHeight: `${(11) * 55 + 64}px`,
                 width: "100%",
                 boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
                 borderRadius: "16px"
@@ -168,7 +179,7 @@ export default {
             }
         },
         //#endregion  
-        //#region 無此身份
+        //#region 系統公告
         systemNews: {
             container: {
                 basic: (style, props) => ({
@@ -186,6 +197,7 @@ export default {
                 hover: {}
             }
         },
+        //#endregion
         //#region 無此身份
         unknownNews: {
             container: {
@@ -227,6 +239,10 @@ export default {
             fontWeight: 400,
             lineHeight: "22px",
             color: "rgba(0, 0, 0, 0.65)",
+            cursor: "pointer",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            whiteSpace: "nowrap"
         })
     },
     //#endregion
@@ -248,33 +264,6 @@ export default {
                 zIndex: 100
             }),
         }
-    },
-    //#endregion
-
-    //#region 最新消息編輯器 NewsEditor
-    newsEditor: {
-        viewTypeContainer: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 0 0 0",
-                display: "inline-block",
-                ...style.occupy(12),
-            })
-        },
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 0 24px 0",
-                display: "inline-block",
-                ...style.occupy(12),
-            })
-        },
-        textEditor: {
-            basic: (style, props) => ({
-                ...style,
-                height: "500px",
-            })
-        },
     },
     //#endregion
 

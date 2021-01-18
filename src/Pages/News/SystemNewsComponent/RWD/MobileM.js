@@ -4,7 +4,7 @@ import { Context } from '../../../../Store/Store'
 import { BUnitSort, MainPageContainer, Map8Canvas, map8Controll, Map8Input, CardTable } from '../../../../ProjectComponent';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, Tag, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, NativeLineButton } from '../../../../Components';
+import { DateTimePicker, BasicContainer, TextEditor, FormContainer, FormRow, globalContextService, Tag, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, NativeLineButton } from '../../../../Components';
 import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../Handlers';
 import { toString } from 'lodash/lang';
@@ -21,12 +21,14 @@ const MobileMBase = (props) => {
 
     const statusMapping = (status, getTheme = false) => {
         switch (toString(status)) {
-            case "1":
+            case "長照":
                 return (getTheme ? mobileM.newsIdentityTag.caseNews : "長照");
-            case "2":
+            case "共享車隊":
                 return (getTheme ? mobileM.newsIdentityTag.whiteNews : "共享車隊");
-            case "3":
+            case "巴士":
                 return (getTheme ? mobileM.newsIdentityTag.busNews : "巴士");
+            case "系統公告":
+                return (getTheme ? mobileM.newsIdentityTag.systemNews : "系統公告");
             default:
                 return (getTheme ? mobileM.newsIdentityTag.unknownNews : "無此身份");
         }
@@ -42,12 +44,13 @@ const MobileMBase = (props) => {
                 height={Height}
                 theme={mobileM.newsContainer}
             >
-                {props.data.length === 0
+                {props.AllNews.length === 0
                     ?
                     <>
                         {/* 無資料表單區容器 */}
                         < BasicContainer
                             baseDefaultTheme={"DefaultTheme"}
+                            height={Height}
                             theme={mobileM.noDataContainer}
                         >
                             <NoData style={mobileM.noDataSvg} />
@@ -99,8 +102,8 @@ const MobileMBase = (props) => {
                                                         {/* 公告Tag */}
                                                         <Tag
                                                             baseDefaultTheme={"DefaultTheme"}
-                                                            theme={statusMapping(props?.tag ?? toString(rowData.identity), true)}
-                                                            text={statusMapping(props?.tag ?? toString(rowData.identity))}
+                                                            theme={statusMapping(props?.tag ?? toString(rowData.newsCategoryName), true)}
+                                                            text={statusMapping(props?.tag ?? toString(rowData.newsCategoryName))}
                                                         />
                                                     </SubContainer >
 
@@ -108,7 +111,7 @@ const MobileMBase = (props) => {
                                                     <SubContainer theme={mobileM.newsCardDateContainer}>
                                                         {/* 公告日期文字 */}
                                                         <Text theme={mobileM.newsCardDateText}>
-                                                            {rowData.date ?? "2020-12-31"}
+                                                            {rowData?.releaseDate.split(" ")[0] ?? "2020-12-31"}
                                                         </Text>
                                                     </SubContainer>
 
@@ -118,32 +121,10 @@ const MobileMBase = (props) => {
                                                         <Text
                                                             theme={mobileM.newsCardContentText}
                                                             onClick={() => {
-                                                                modalsService.titleModal.normal({
-                                                                    //id: "top1",
-                                                                    title: "公告",
-                                                                    yes: true,
-                                                                    yesText: "確認",
-                                                                    no: false,
-                                                                    noText: "取消",
-                                                                    // autoClose: true,
-                                                                    backgroundClose: false,
-                                                                    noOnClick: (e) => {
-                                                                    },
-                                                                    yesOnClick: (e, close) => {
-                                                                        close();
-                                                                    },
-                                                                    closeIconOnClick: (e) => {
-                                                                    },
-                                                                    content: (
-                                                                        <Text theme={mobileM.newsCardContentModalText}>
-                                                                            {rowData.announce ?? "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序順序順序順序順序順序順序順序順序順序順序順..."}
-                                                                        </Text>
-                                                                    ),
-                                                                    theme: mobileM.newsModal
-                                                                })
+                                                                props.setCheckDetail((({ title, contents }) => ({ title, contents }))(allRowData))
                                                             }}
                                                         >
-                                                            {rowData.announce}
+                                                            {rowData.title}
                                                         </Text>
                                                     </SubContainer>
 
@@ -165,14 +146,14 @@ const MobileMBase = (props) => {
                         }
                         //sort
                         showHeader={false}
-                        data={props.data}
+                        data={props.AllNews}
                         // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
                         // data={props.AllClient.data}
                         clickPage={(currentPage, pageSize) => {
                         }}
                     />
                 }
-                {(props.data.length > 0 && props.data.length <= 10)
+                {(props.AllNews.length > 0 && props.AllNews.length <= 10)
                     &&
                     <>
                         {/* 沒有更多公告 提醒 */}

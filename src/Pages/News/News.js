@@ -20,6 +20,7 @@ export const News = (props) => {
     const [NowTab, setNowTab] = useState("系統公告"); // 目前公告頁面
     const [NewsType, setNewsType] = useState([]); //所有最新消息類別
     const [AllNews, setAllNews] = useState([]); // 類別下所有最新消息
+    const [CheckDetail, setCheckDetail] = useState({}); // 詳細資料
     const [Width, Height] = useWindowSize();
 
     let history = useHistory();
@@ -139,6 +140,7 @@ export const News = (props) => {
                         // 成功取得司機 證照 API
                         console.log(PreResult)
                         setAllNews(PreResult.data)
+                        setCheckDetail({})
                     }
                     else {
                         throw PreResult;
@@ -199,7 +201,8 @@ export const News = (props) => {
                     setNowTab={setNowTab} // 設定目前公告頁面
                     NewsType={NewsType} // 所有最新消息類別
                     AllNews={AllNews} // 類別下所有最新消息
-
+                    CheckDetail={CheckDetail} // 詳細資料
+                    setCheckDetail={setCheckDetail} // 設定詳細資料
                     GetNewsTypeExecute={GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消息
                 />
             }
@@ -220,8 +223,13 @@ export const News = (props) => {
             {
                 Width < 768 &&
                 <MobileM
-                    nowTab={NowTab}
-                    setNowTab={setNowTab}
+                    NowTab={NowTab} // 目前公告頁面
+                    setNowTab={setNowTab} // 設定目前公告頁面
+                    NewsType={NewsType} // 所有最新消息類別
+                    AllNews={AllNews} // 類別下所有最新消息
+                    CheckDetail={CheckDetail} // 詳細資料
+                    setCheckDetail={setCheckDetail} // 設定詳細資料
+                    GetNewsTypeExecute={GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消息
                 />
             }
         </>
