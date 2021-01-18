@@ -6,6 +6,7 @@ import { Container, BasicContainer, RangeDateTimePicker, Tooltip, Tag, OldTable,
 import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
 import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
+import { ScrollBar } from '../../../Components/ScrollBar/ScrollBar';
 import moment from 'moment';
 import { AllBusRouteAomponent } from '../AllBusRouteAomponent/AllBusRouteAomponent'
 
@@ -48,28 +49,37 @@ const LaptopLBase = (props) => {
                 theme={laptopL.mainPageContainer}
                 outSideTopComponent={
                     <>
+
                         {/* 分頁 */}
                         <BasicContainer
                             theme={laptopL.whiteContainer}
                         >
+
                             <BasicContainer
                                 theme={laptopL.tabsContainer}
                             >
-                                {tabMap().map((item, index) => {
-                                    return (
-                                        <React.Fragment key={index}>
-                                            <Text
-                                                onClick={() => { props.setNowTab(item) }}
-                                                isActive={props.nowTab === item}
-                                                theme={laptopL.titleBarBusRouteCallCarTab}
-                                            >
-                                                {item}
-                                            </Text>
-                                        </React.Fragment>
-                                    )
-                                })}
+                                <ScrollBar
+                                    basedefaulttheme={"DefaultTheme"}
+                                    autoHide={true}
+                                    theme={laptopL.containerScrollBar}
+                                >
+                                    {tabMap().map((item, index) => {
+                                        return (
+                                            <React.Fragment key={index}>
+                                                <Text
+                                                    onClick={() => { props.setNowTab(item) }}
+                                                    isActive={props.nowTab === item}
+                                                    theme={laptopL.titleBarBusRouteCallCarTab}
+                                                >
+                                                    {item}
+                                                </Text>
+                                            </React.Fragment>
+                                        )
+                                    })}
+                                </ScrollBar>
                             </BasicContainer>
                         </BasicContainer>
+
                     </>
                 }
             >

@@ -121,20 +121,50 @@ export default {
             width: "100%",
             height: "56px",
             backgroundColor: "#6A7987",
-            overflow: "auto hidden",
             whiteSpace: "nowrap"
         }),
     },
     //#endregion
 
+    containerScrollBar: {
+        basic: {
+            width: "100%",
+            maxWidth: "100%",
+            height: "72px",
+            maxHeight: "72px",
+            borderRight: 0,
+            boxSizing: "border-box",
+        },
+        scrollbarTrackX: {
+            height: "8px",
+            display: "block"
+        },
+        scrollbarThumbX: {
+            backgroundImage: "linear-gradient(90deg, rgba(144, 147, 153, 0.3) 100%, rgba(144, 147, 153, 0.3) 100%)",
+            opacity: 0.3,
+            transition: "opacity 0s linear"
+        },
+        scrollbarTrackY: {
+            width: 0,
+            display: "block"
+        },
+        scrollbarThumbY: {
+            backgroundImage: "linear-gradient(90deg, rgba(144, 147, 153, 0.3) 100%, rgba(144, 147, 153, 0.3) 100%)",
+            opacity: 0.3,
+            transition: "opacity 0s linear",
+            right: "0px",
+            left: "0px"
+        }
+    },
+
     //#region 標題列 路線分頁
     titleBarBusRouteCallCarTab: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-grid",
+            display: "inline-flex",
             margin: (props.isActive ? 0 : "0 1px 0 0"),
             lineHeight: "32px",
-            height: (props.isActive ? "56px" : "100%"),
+            height: "56px",
             fontSize: "14px",
             cursor: "pointer",
             width: "160px",
@@ -142,7 +172,7 @@ export default {
             boxShadow: (props.isActive ? "inset 0px 8px 0px #1890FF" : ""),
             // borderTop: (props.isActive ? "solid 8px #1890FF" : "unset"),
             backgroundColor: (props.isActive ? "#FFFFFF" : "#9DADBE"),
-            textAlign: "center",
+            justifyContent: "center",
             alignItems: "center"
         }),
     },

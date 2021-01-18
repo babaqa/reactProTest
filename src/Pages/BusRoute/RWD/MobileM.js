@@ -8,11 +8,14 @@ import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { AllBusRouteAomponent } from '../AllBusRouteAomponent/AllBusRouteAomponent'
+import { ScrollBar } from '../../../Components/ScrollBar/ScrollBar';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 const MobileMBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { busRoute: { rwd: { mobileM } } } } = Theme;
+    const [Width, Height] = useWindowSize();
     let history = useHistory()
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
@@ -45,26 +48,33 @@ const MobileMBase = (props) => {
         <>
             <MainPageContainer
                 theme={mobileM.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}
                         <BasicContainer
                             theme={mobileM.titleBar}
                         >
+                            <ScrollBar
+                                basedefaulttheme={"DefaultTheme"}
+                                autoHide={true}
+                                theme={mobileM.containerScrollBar}
+                            >
+                                {tabMap().map((item, index) => {
+                                    return (
+                                        <React.Fragment key={index}>
+                                            <Text
+                                                onClick={() => { props.setNowTab(item) }}
+                                                isActive={props.nowTab === item}
+                                                theme={mobileM.titleBarBusRouteCallCarTab}
+                                            >
+                                                {item}
+                                            </Text>
+                                        </React.Fragment>
+                                    )
+                                })}
 
-                            {tabMap().map((item, index) => {
-                                return (
-                                    <React.Fragment key={index}>
-                                        <Text
-                                            onClick={() => { props.setNowTab(item) }}
-                                            isActive={props.nowTab === item}
-                                            theme={mobileM.titleBarBusRouteCallCarTab}
-                                        >
-                                            {item}
-                                        </Text>
-                                    </React.Fragment>
-                                )
-                            })}
+                            </ScrollBar>
                         </BasicContainer>
                     </>
                 }
