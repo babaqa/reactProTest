@@ -183,10 +183,19 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
-            minHeight: `calc( ${props.height}px - 292px )`,
+            minHeight: `calc( ${props.height}px - 240px )`,
             margin: "60px 0 0",
             textAlign: "right"
         }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                minHeight: `calc( ${props.height}px - 292px )`,
+                margin: "60px 0 0",
+                textAlign: "right"
+            }),
+        }
     },
     //#endregion
 
@@ -225,6 +234,19 @@ export default {
                 padding: "0 0 0 0",
                 display: "inline-block",
                 ...style.occupy(12),
+            })
+        },
+        viewTypeTextEditorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto"
+            })
+        },
+        viewTypeTextEditor: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto",
+                wordBreak: "break-all"
             })
         },
         container: {

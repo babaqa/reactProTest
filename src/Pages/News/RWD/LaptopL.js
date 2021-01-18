@@ -98,7 +98,8 @@ const LaptopLBase = (props) => {
                                     {/* 詳細資料 內文 */}
                                     <TextEditor
                                         viewType
-                                        value={props.CheckDetail.contents}
+                                        value={props.CheckDetail.contents?.replaceAll('<img', `<img style="max-width:100%" `)}
+
                                         // onChange={(e, value, onInitial) => {
                                         //     console.log(value)
                                         //     globalContextService.set("NewsAddPage", "NewsEditor", value)
@@ -106,7 +107,6 @@ const LaptopLBase = (props) => {
                                         // placeholder={'請輸入最新消息內容...'}
                                         theme={laptopL.newsEditor}
                                     />
-
                                 </BasicContainer>
 
                                 {/* 回列表按鈕 */}
