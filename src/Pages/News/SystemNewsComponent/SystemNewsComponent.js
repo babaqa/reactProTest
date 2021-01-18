@@ -23,22 +23,6 @@ export const SystemNewsComponent = (props) => {
 
     // console.log(props.type)
 
-    const data =
-        [
-            { id: "1", identity: "1", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "2", identity: "2", date: "2018-04-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "3", identity: "3", date: "2018-05-12", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "4", identity: "2", date: "2018-03-22", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "5", identity: "2", date: "2018-06-01", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "6", identity: "3", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "7", identity: "1", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "8", identity: "2", date: "2018-06-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "9", identity: "1", date: "2018-02-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "10", identity: "1", date: "2018-05-06", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-            { id: "11", identity: "2", date: "2018-05-02", announce: "武漢肺炎》明年Q1疫苗可望施打！莊人祥透露優先施打順序。" },
-        ];
-
-
     return (
         <>
             {
@@ -47,6 +31,8 @@ export const SystemNewsComponent = (props) => {
                     AllNews={props.AllNews} // 類別下所有最新消息
                     NowTab={props.NowTab} // 目前使用的頁籤資訊
                     GetNewsTypeExecute={props.GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消
+                    CheckDetail={props.CheckDetail} // 詳細資料
+                    setCheckDetail={props.setCheckDetail} // 設定詳細資料
                 />
             }
             {/* {
@@ -72,10 +58,10 @@ export const SystemNewsComponent = (props) => {
             {
                 Width < 768 &&
                 <MobileM
-                    UserId={urlParams.get("userId")}
-                    CaseUserId={urlParams.get("caseUserId")}
-                    UserName={urlParams.get("caseName")}
-                    data={data}
+                    AllNews={props.AllNews} // 類別下所有最新消息
+                    NowTab={props.NowTab} // 目前使用的頁籤資訊
+                    CheckDetail={props.CheckDetail} // 詳細資料
+                    setCheckDetail={props.setCheckDetail} // 設定詳細資料
                 />
             }
         </>

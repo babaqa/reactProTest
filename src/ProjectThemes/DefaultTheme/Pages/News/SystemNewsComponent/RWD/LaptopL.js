@@ -74,7 +74,8 @@ export default {
                 // margin: "8px 0 0",
                 background: "white",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "100%",
+                // height: "100%",
+                minHeight: `calc( ${props.height}px - 295px )`,
                 width: "100%",
                 borderRadius: "16px",
                 display: "flex",
@@ -85,15 +86,37 @@ export default {
     },
     //#endregion
     //#region Table區域
-    //#region Table容器
-    tableContainer: {
+    //#region Table外側容器
+    tableOutsideContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "678px",
+            height: "auto",
+            minHeight: `calc( ${props.height}px - 240px )`,
             width: "100%",
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
-            borderRadius: "16px"
-        })
+        }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto",
+                minHeight: "calc( 100vh - 295px )",
+                width: "100%",
+            })
+        }
+    },
+    //#endregion
+    //#region Table容器
+    tableContainer: {
+        basic: (style, props) => {
+            // console.log(props)
+            return {
+                ...style,
+                height: `${((props.length) + 1) * 55 + 64}px`,
+                maxHeight: `${(11) * 55 + 64}px`,
+                width: "100%",
+                boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
+                borderRadius: "16px"
+            }
+        }
     },
     //#endregion
 
@@ -156,6 +179,25 @@ export default {
             }
         },
         //#endregion  
+        //#region 系統公告
+        systemNews: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 0 0 0",
+                    // top: "3px",
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    // color: "#2F54EB",
+                    // backgroundColor: "#F0F5FF",
+                    // borderColor: "#ADC6FF"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
         //#region 無此身份
         unknownNews: {
             container: {
@@ -197,6 +239,10 @@ export default {
             fontWeight: 400,
             lineHeight: "22px",
             color: "rgba(0, 0, 0, 0.65)",
+            cursor: "pointer",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            whiteSpace: "nowrap"
         })
     },
     //#endregion
@@ -218,18 +264,6 @@ export default {
                 zIndex: 100
             }),
         }
-    },
-    //#endregion
-
-    //#region Modal 文字
-    newsContentModalText: {
-        basic: (style, props) => ({
-            ...style,
-            fontSize: "14px",
-            fontWeight: 400,
-            lineHeight: "22px",
-            color: "rgba(0, 0, 0, 0.65)",
-        })
     },
     //#endregion
 

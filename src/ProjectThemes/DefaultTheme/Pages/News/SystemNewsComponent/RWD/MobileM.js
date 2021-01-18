@@ -3,7 +3,7 @@ export default {
     newsContainer: {
         basic: (style, props) => ({
             ...style,
-            minHeight: `calc( ${props.height}px - 56px - 94px - 48px)`,
+            minHeight: `calc( ${props.height}px - 56px - 94px - 64px)`,
             height: "auto",
             width: "100%",
             // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
@@ -21,7 +21,7 @@ export default {
                 // margin: "8px 0 0",
                 background: "rgba(0,0,0,0)",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "calc( 100vh - 451px)",
+                minHeight: `calc( ${props.height}px - 56px - 94px - 64px)`,
                 width: "100%",
                 borderRadius: "16px",
                 display: "flex",
@@ -64,7 +64,11 @@ export default {
             fontSize: "14px",
             lineHeight: "22px",
             fontWeight: "400",
-            color: "rgba(0, 0, 0, 0.65)"
+            color: "rgba(0, 0, 0, 0.65)",
+            cursor: "pointer",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            whiteSpace: "nowrap"
         })
     },
     //#endregion
@@ -137,6 +141,25 @@ export default {
             }
         },
         //#endregion  
+        //#region 系統公告
+        systemNews: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 0 0 0",
+                    // top: "3px",
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    // color: "#2F54EB",
+                    // backgroundColor: "#F0F5FF",
+                    // borderColor: "#ADC6FF"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
         //#region 無此身份
         unknownNews: {
             container: {
