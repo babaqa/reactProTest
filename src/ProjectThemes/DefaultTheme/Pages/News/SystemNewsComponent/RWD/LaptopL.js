@@ -85,15 +85,27 @@ export default {
     },
     //#endregion
     //#region Table區域
-    //#region Table容器
-    tableContainer: {
+    //#region Table外側容器
+    tableOutsideContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "678px",
+            height: "669px",
             width: "100%",
-            boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
-            borderRadius: "16px"
         })
+    },
+    //#endregion
+    //#region Table容器
+    tableContainer: {
+        basic: (style, props) => {
+            // console.log(props)
+            return {
+                ...style,
+                height: `${((props.length) + 1) * 55 + 64}px`,
+                width: "100%",
+                boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
+                borderRadius: "16px"
+            }
+        }
     },
     //#endregion
 
@@ -156,6 +168,24 @@ export default {
             }
         },
         //#endregion  
+        //#region 無此身份
+        systemNews: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 0 0 0",
+                    // top: "3px",
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    // color: "#2F54EB",
+                    // backgroundColor: "#F0F5FF",
+                    // borderColor: "#ADC6FF"
+
+                }),
+                hover: {}
+            }
+        },
         //#region 無此身份
         unknownNews: {
             container: {
@@ -221,15 +251,30 @@ export default {
     },
     //#endregion
 
-    //#region Modal 文字
-    newsContentModalText: {
-        basic: (style, props) => ({
-            ...style,
-            fontSize: "14px",
-            fontWeight: 400,
-            lineHeight: "22px",
-            color: "rgba(0, 0, 0, 0.65)",
-        })
+    //#region 最新消息編輯器 NewsEditor
+    newsEditor: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 0 0",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 24px 0",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        textEditor: {
+            basic: (style, props) => ({
+                ...style,
+                height: "500px",
+            })
+        },
     },
     //#endregion
 

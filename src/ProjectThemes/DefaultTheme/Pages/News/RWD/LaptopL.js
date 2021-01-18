@@ -23,7 +23,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "0 150px 236px 150px"
+                    padding: "0 150px 236px 150px",
+                    minHeight: "calc( 100vh - 184px )"
                 }
             }
         },
