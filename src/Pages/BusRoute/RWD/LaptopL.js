@@ -9,12 +9,15 @@ import { useHistory } from 'react-router-dom';
 import { ScrollBar } from '../../../Components/ScrollBar/ScrollBar';
 import moment from 'moment';
 import { AllBusRouteAomponent } from '../AllBusRouteAomponent/AllBusRouteAomponent'
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { busRoute: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
+    const [Width, Height] = useWindowSize();
+
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     const data = [
@@ -47,6 +50,7 @@ const LaptopLBase = (props) => {
         <>
             <MainPageContainer
                 theme={laptopL.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
 

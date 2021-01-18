@@ -8,7 +8,7 @@ export default {
                 margin: 0,
                 background: "transparent",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "calc( 100vh - 485px)",
+                height: `calc( ${props.height}px - 273px)`,
                 width: "100%",
                 borderRadius: "16px",
                 display: "flex",
@@ -18,7 +18,7 @@ export default {
         }
     },
     //#endregion
-
+    
     //#region 卡片資料外層容器
     cardOutContainer: {
         basic: (style, props) => {

@@ -8,12 +8,14 @@ import { useHistory } from 'react-router-dom';
 import { CaseContactComponent } from '../CaseContactComponent/CaseContactComponent'
 import { BusContactComponent } from '../BusContactComponent/BusContactComponent'
 import { FleetContactComponent } from '../FleetContactComponent/FleetContactComponent'
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { contact: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
+    const [Width, Height] = useWindowSize();
 
     //#region 分頁映射
     const tabMap = (key) => {
@@ -38,6 +40,7 @@ const LaptopLBase = (props) => {
         <>
             <MainPageContainer
                 theme={laptopL.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}
