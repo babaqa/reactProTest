@@ -13,7 +13,7 @@ const LaptopLBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { userInfo: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
-
+    console.log(props.BasicInf, props.CaseInf, props.WhiteInf, props.BusInf)
     return (
         <>
             <MainPageContainer
@@ -448,7 +448,7 @@ const LaptopLBase = (props) => {
                             baseDefaultTheme={"DefaultTheme"}
                             type="text"
                             placeholder={""}
-                            value={globalContextService.get("UserInfoPage", "Name") ?? props.Client?.name}
+                            value={globalContextService.get("UserInfoPage", "Name") ?? props.BasicInf?.name}
                             onChange={(e, value, onInitial) => {
                                 globalContextService.set("UserInfoPage", "Name", value);
                             }}
@@ -469,8 +469,8 @@ const LaptopLBase = (props) => {
                                 // (globalContextService.get("UserInfoPage", `Birthday`) ?
                                 //     moment(globalContextService.get("UserInfoPage", `Birthday`), "YYYY-MM-DD")
                                 //     :
-                                (props.Client?.birthday) ?
-                                    moment(props.Client.birthday, "YYYY-MM-DD HH:mm:ss")
+                                (props.BasicInf?.birthday) ?
+                                    moment(props.BasicInf.birthday, "YYYY-MM-DD HH:mm:ss")
                                     :
                                     null
                                 // )
@@ -492,8 +492,8 @@ const LaptopLBase = (props) => {
                             // hideSelectedOptions={false}
                             value={
                                 // globalContextService.get("UserInfoPage", "Sex") ?? { value: props.Client.sex, label: props.Client.sex === 1 ? '男' : '女' }
-                                (!isNil(props.Client?.sex)) ?
-                                    { value: props.Client.sex, label: props.Client.sex === 1 ? '男' : '女' }
+                                (!isNil(props.BasicInf?.sex)) ?
+                                    { value: props.BasicInf.sex, label: props.BasicInf.sex === 1 ? '男' : '女' }
                                     :
                                     null
                             }
@@ -518,7 +518,7 @@ const LaptopLBase = (props) => {
                             baseDefaultTheme={"DefaultTheme"}
                             type="text"
                             placeholder={""}
-                            value={globalContextService.get("UserInfoPage", "Uid") ?? props.Client?.uid}
+                            value={globalContextService.get("UserInfoPage", "Uid") ?? props.BasicInf?.uid}
                             onChange={(e, value, onInitial) => {
                                 globalContextService.set("UserInfoPage", "Uid", value);
                             }}
@@ -532,7 +532,7 @@ const LaptopLBase = (props) => {
                             baseDefaultTheme={"DefaultTheme"}
                             type="text"
                             placeholder={""}
-                            value={globalContextService.get("UserInfoPage", "Cellphone") ?? props.Client?.phone}
+                            value={globalContextService.get("UserInfoPage", "Cellphone") ?? props.BasicInf?.phone}
                             onChange={(e, value, onInitial) => {
                                 globalContextService.set("UserInfoPage", "Cellphone", value);
                             }}
