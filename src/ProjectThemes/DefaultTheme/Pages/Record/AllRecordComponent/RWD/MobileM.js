@@ -8,7 +8,7 @@ export default {
                 margin: "8px 0 0",
                 background: "rgba(0,0,0,0)",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "calc( 100vh - 451px)",
+                height: `calc(  ${props.height}px - 254px)`,
                 width: "100%",
                 borderRadius: "16px",
                 display: "flex",

@@ -23,7 +23,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "0 150px 196px 150px"
+                    padding: "0 150px 196px 150px",
+                    minHeight: "calc( 100vh - 184px)"
                 }
             }
         },
@@ -49,7 +50,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "0 48px 196px 48px" //188 是授權圖高度
+                    padding: "0 48px 196px 48px", //188 是授權圖高度
+                    minHeight: "calc( 100vh - 164px)"
                 }
             }
         },
@@ -76,7 +78,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "0 24px 196px 24px" //188 是授權圖高度
+                    padding: "0 24px 196px 24px", //188 是授權圖高度
+                    minHeight: `calc(  ${props.height}px - 164px)`
                 }
             }
         },

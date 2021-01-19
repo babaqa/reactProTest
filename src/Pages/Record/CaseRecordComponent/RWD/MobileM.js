@@ -10,11 +10,12 @@ import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, RangeDateTimePicker, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { CardTable } from '../../../../ProjectComponent'
 import moment from 'moment';
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { caseRecordComponent: { rwd: { mobileM } } } } } = Theme;
-
+    const [Width, Height] = useWindowSize();
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
 
@@ -28,6 +29,7 @@ const MobileMBase = (props) => {
                     {/* 無資料表單區容器 */}
                     < BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        height={Height}
                         theme={mobileM.noDataContainer}
                     >
                         <NoData style={mobileM.noDataSvg} />

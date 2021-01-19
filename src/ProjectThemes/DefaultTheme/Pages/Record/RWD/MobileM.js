@@ -15,7 +15,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    height: "calc( 100vh - 197px)",
+                    height: `calc(  ${props.height}px - 197px)`,
                 }
             }
         },
@@ -24,8 +24,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "1px 0 204px",
-                    minHeight: "calc( 100vh - 197px)"
+                    padding: "1px 0 48px",
+                    minHeight: `calc(  ${props.height}px - 197px)`
                 }
             }
         },

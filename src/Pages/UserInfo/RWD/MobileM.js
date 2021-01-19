@@ -7,14 +7,18 @@ import { ReactComponent as Lock } from '../../../Assets/img/UserInfoPage/Lock.sv
 import { isNil } from 'lodash';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
+
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { userInfo: { rwd: { mobileM } } } } = Theme;
+    const [Width, Height] = useWindowSize();
 
     return (
         <>
             <MainPageContainer
+                height={Height}
                 theme={mobileM.mainPageContainer}
             >
                 {/* 基本資料表單區容器 */}
