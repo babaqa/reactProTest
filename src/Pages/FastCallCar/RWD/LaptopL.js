@@ -4,6 +4,7 @@ import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { useHistory } from 'react-router-dom';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 import { AllFastCallCarComponent } from '../AllFastCallCarComponent/AllFastCallCarComponent'
 import { CaseFastCallCarComponent } from '../CaseFastCallCarComponent/CaseFastCallCarComponent'
@@ -14,6 +15,7 @@ const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { fastCallCar: { rwd: { laptopL } } } } = Theme;
+    const [Width, Height] = useWindowSize();
     let history = useHistory()
 
     //#region 分頁映射
@@ -40,6 +42,7 @@ const LaptopLBase = (props) => {
         <>
             <MainPageContainer
                 theme={laptopL.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}

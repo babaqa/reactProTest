@@ -15,7 +15,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    height: "calc( 100vh - 56px - 46px - 48px )",
+                    height: `calc(  ${props.height}px - 56px - 46px - 48px )`,
                 }
             }
         },
@@ -24,8 +24,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "8px 0 204px", //188 是授權圖高度
-                    minHeight: "calc( 100vh - 195px)"
+                    padding: "8px 0 48px ", //188 是授權圖高度
+                    minHeight: `calc(  ${props.height}px - 195px)`
                 }
             }
         },
