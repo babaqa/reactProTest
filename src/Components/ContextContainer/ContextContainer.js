@@ -44,18 +44,20 @@ export const ContextContainerBase = (props) => {
           <Portal /> */}
             </>
             {/* } */}
-            {/* 最底層Modal */}
-            <Modals />
-            {/* 次層Modal */}
-            <Modals id="top1" />
-            {/* 最上層Modal */}
-            <Modals id="top2" />
+  
             {/* 
               Date   : 2020-06-12 12:18:46
               Author : Arhua Ho
               Content: 寫死的路由
             */}
             <Routers />
+
+            {/* 最底層Modal */}
+            <Modals />
+            {/* 次層Modal */}
+            <Modals id="top1" />
+            {/* 最上層Modal */}
+            <Modals id="top2" />
         </>
     )
 }

@@ -11,6 +11,7 @@ import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { fmt } from '../../../Handlers/DateHandler';
 import { isUndefined, isEqual } from 'lodash';
 import { valid } from '../../../Handlers';
+import { WhiteSingUp } from '../../../ProjectComponent/WhiteSingUp/WhiteSingUp';
 
 
 const MobileMBase = (props) => {
@@ -1406,7 +1407,7 @@ const MobileMBase = (props) => {
                             theme={mobileM.bottomContainer}
                         >
                             {/* 若無共享車隊身分則可以註冊 */}
-                            {!isEqual(props.WhiteInf, {})
+                            {isEqual(props.WhiteInf, {})
                                 &&
                                 <>
                                     {/* 註冊共享車隊按鈕 */}
@@ -1416,7 +1417,10 @@ const MobileMBase = (props) => {
                                         type="button" // 防止提交
                                         theme={mobileM.registeredFleetButton}
                                         onClick={(e) => {
+                                            e.preventDefault();
 
+                                            //#region 打開修改密碼 Modal
+                                            props.setOpenWhiteModal(true)
                                         }}
                                     >
                                         註冊共享車隊
@@ -1446,6 +1450,20 @@ const MobileMBase = (props) => {
                     </>
                 }
             </MainPageContainer>
+
+            {/* 檢核是否開啟共享車隊彈窗 */}
+            {props.OpenWhiteModal
+                &&
+                <WhiteSingUp
+                    UserId={props.BasicInf.id}
+                    setOpenWhiteModal={props.setOpenWhiteModal}
+                    GetGeocodeExecute={props.GetGeocodeExecute} //轉換經緯度
+                    GetGeocodePending={props.GetGeocodePending}
+                    AddWhiteUserExecute={props.AddWhiteUserExecute} // 新增共享車隊
+                    AddWhiteUserPending={props.AddWhiteUserPending}
+                    controllGCS={props.controllGCS}
+                />
+            }
         </>
     )
 }

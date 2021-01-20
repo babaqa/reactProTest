@@ -11,6 +11,7 @@ import isUndefined from 'lodash/isUndefined';
 import { isEqual } from 'lodash';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { valid } from '../../../Handlers';
+import { WhiteSingUp } from '../../../ProjectComponent/WhiteSingUp/WhiteSingUp';
 
 const TabletBase = (props) => {
 
@@ -63,7 +64,10 @@ const TabletBase = (props) => {
                                         type="button" // 防止提交
                                         theme={tablet.registeredFleetButton}
                                         onClick={(e) => {
+                                            e.preventDefault();
 
+                                            //#region 打開修改密碼 Modal
+                                            props.setOpenWhiteModal(true)
                                         }}
                                     >
                                         註冊共享車隊
@@ -1283,6 +1287,20 @@ const TabletBase = (props) => {
                     }
                 </Container>
             </MainPageContainer>
+
+            {/* 檢核是否開啟共享車隊彈窗 */}
+            {props.OpenWhiteModal
+                &&
+                <WhiteSingUp
+                    UserId={props.BasicInf.id}
+                    setOpenWhiteModal={props.setOpenWhiteModal}
+                    GetGeocodeExecute={props.GetGeocodeExecute} //轉換經緯度
+                    GetGeocodePending={props.GetGeocodePending}
+                    AddWhiteUserExecute={props.AddWhiteUserExecute} // 新增共享車隊
+                    AddWhiteUserPending={props.AddWhiteUserPending}
+                    controllGCS={props.controllGCS}
+                />
+            }
         </>
     )
 }

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar, MainPageSubTitleBar, TimeCounterButton } from '../../../ProjectComponent';
-import { Container, BasicContainer, BasicButton, TreeSelector, Tooltip, DateTimePicker, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
+import { Container, BasicContainer, BasicButton, TreeSelector, Tooltip, DateTimePicker, Textarea, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Lock } from '../../../Assets/img/UserInfoPage/Lock.svg'
 import { isNil } from 'lodash';
 import moment from 'moment';
@@ -10,12 +10,14 @@ import { useHistory } from 'react-router-dom';
 import isUndefined from 'lodash/isUndefined';
 import { isEqual } from 'lodash';
 import { valid } from '../../../Handlers';
+import { WhiteSingUp } from '../../../ProjectComponent/WhiteSingUp/WhiteSingUp';
 
 const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { userInfo: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
+
     // console.log("basic", props.BasicInf)
     // console.log("case", props.CaseInf)
     // console.log("white", props.WhiteInf)
@@ -64,7 +66,10 @@ const LaptopLBase = (props) => {
                                         type="button" // 防止提交
                                         theme={laptopL.registeredFleetButton}
                                         onClick={(e) => {
+                                            e.preventDefault();
 
+                                            //#region 打開修改密碼 Modal
+                                            props.setOpenWhiteModal(true)
                                         }}
                                     >
                                         註冊共享車隊
@@ -722,7 +727,7 @@ const LaptopLBase = (props) => {
                                         />
 
                                         {/* 長照居住地址 CaseResidentialAddress */}
-                                        <TextInput
+                                        <Textarea
                                             viewType
                                             topLabel={<>居住地址</>}
                                             baseDefaultTheme={"DefaultTheme"}
@@ -758,6 +763,25 @@ const LaptopLBase = (props) => {
                                                 globalContextService.set("UserInfoPage", "CaseEmergencyName", value);
                                             }}
                                             theme={laptopL.caseEmergencyName}
+                                        />
+
+                                        {/* 長照緊急聯絡人關係 CaseEmergencyRelationship */}
+                                        <TextInput
+                                            viewType
+                                            topLabel={<>緊急聯絡人姓名</>}
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            type="text"
+                                            placeholder={""}
+                                            value={
+                                                props.CaseInf?.urgentRelationship ?
+                                                    props.CaseInf?.urgentRelationship
+                                                    :
+                                                    "未填寫"
+                                            }
+                                            onChange={(e, value, onInitial) => {
+                                                globalContextService.set("UserInfoPage", "CaseEmergencyRelationship", value);
+                                            }}
+                                            theme={laptopL.caseEmergencyRelationship}
                                         />
 
                                         {/* 長照緊急聯絡人手機 CaseEmergencyCellPhone */}
@@ -843,7 +867,7 @@ const LaptopLBase = (props) => {
                                     <Container>
 
                                         {/* 共享車隊居住地址 FleetResidentialAddress */}
-                                        <TextInput
+                                        <Textarea
                                             viewType
                                             topLabel={<>居住地址</>}
                                             baseDefaultTheme={"DefaultTheme"}
@@ -879,6 +903,25 @@ const LaptopLBase = (props) => {
                                                 globalContextService.set("UserInfoPage", "FleetEmergencyName", value);
                                             }}
                                             theme={laptopL.fleetEmergencyName}
+                                        />
+
+                                        {/* 共享車隊緊急聯絡人關係 FleetEmergencyRelationship */}
+                                        <TextInput
+                                            viewType
+                                            topLabel={<>緊急聯絡人姓名</>}
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            type="text"
+                                            placeholder={""}
+                                            value={
+                                                props.WhiteInf?.urgentRelationship ?
+                                                    props.WhiteInf?.urgentRelationship
+                                                    :
+                                                    "未填寫"
+                                            }
+                                            onChange={(e, value, onInitial) => {
+                                                globalContextService.set("UserInfoPage", "FleetEmergencyRelationship", value);
+                                            }}
+                                            theme={laptopL.fleetEmergencyRelationship}
                                         />
 
                                         {/* 共享車隊緊急聯絡人手機 FleetEmergencyCellPhone */}
@@ -1098,7 +1141,7 @@ const LaptopLBase = (props) => {
                                         />
 
                                         {/* 日照居住地址 DayCareResidentialAddress */}
-                                        <TextInput
+                                        <Textarea
                                             viewType
                                             topLabel={<>居住地址</>}
                                             baseDefaultTheme={"DefaultTheme"}
@@ -1134,6 +1177,25 @@ const LaptopLBase = (props) => {
                                                 globalContextService.set("UserInfoPage", "DayCareEmergencyName", value);
                                             }}
                                             theme={laptopL.dayCareEmergencyName}
+                                        />
+
+                                        {/* 日照緊急聯絡人關係 DayCareEmergencyRelationship */}
+                                        <TextInput
+                                            viewType
+                                            topLabel={<>緊急聯絡人姓名</>}
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            type="text"
+                                            placeholder={""}
+                                            value={
+                                                props.DayCareInf?.urgentRelationship ?
+                                                    props.DayCareInf?.urgentRelationship
+                                                    :
+                                                    "未填寫"
+                                            }
+                                            onChange={(e, value, onInitial) => {
+                                                globalContextService.set("UserInfoPage", "DayCareEmergencyRelationship", value);
+                                            }}
+                                            theme={laptopL.dayCareEmergencyRelationship}
                                         />
 
                                         {/* 日照緊急聯絡人手機 DayCareEmergencyCellPhone */}
@@ -1220,7 +1282,7 @@ const LaptopLBase = (props) => {
                                     <Container>
 
                                         {/* 偏鄉居住地址 RuralResidentialAddress */}
-                                        <TextInput
+                                        <Textarea
                                             viewType
                                             topLabel={<>居住地址</>}
                                             baseDefaultTheme={"DefaultTheme"}
@@ -1256,6 +1318,25 @@ const LaptopLBase = (props) => {
                                                 globalContextService.set("UserInfoPage", "RuralEmergencyName", value);
                                             }}
                                             theme={laptopL.ruralEmergencyName}
+                                        />
+
+                                        {/* 偏鄉緊急聯絡人關係 RuralEmergencyRelationship */}
+                                        <TextInput
+                                            viewType
+                                            topLabel={<>緊急聯絡人姓名</>}
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            type="text"
+                                            placeholder={""}
+                                            value={
+                                                props.CountryInf?.urgentRelationship ?
+                                                    props.CountryInf?.urgentRelationship
+                                                    :
+                                                    "未填寫"
+                                            }
+                                            onChange={(e, value, onInitial) => {
+                                                globalContextService.set("UserInfoPage", "RuralEmergencyRelationship", value);
+                                            }}
+                                            theme={laptopL.ruralEmergencyRelationship}
                                         />
 
                                         {/* 偏鄉緊急聯絡人手機 RuralEmergencyCellPhone */}
@@ -1319,6 +1400,21 @@ const LaptopLBase = (props) => {
 
                 </Container>
             </MainPageContainer>
+
+            {/* 檢核是否開啟共享車隊彈窗 */}
+            {props.OpenWhiteModal
+                &&
+                <WhiteSingUp
+                    UserId={props.BasicInf.id}
+                    setOpenWhiteModal={props.setOpenWhiteModal}
+                    GetGeocodeExecute={props.GetGeocodeExecute} //轉換經緯度
+                    GetGeocodePending={props.GetGeocodePending}
+                    AddWhiteUserExecute={props.AddWhiteUserExecute} // 新增共享車隊
+                    AddWhiteUserPending={props.AddWhiteUserPending}
+                    controllGCS={props.controllGCS}
+                />
+            }
+
         </>
     )
 }

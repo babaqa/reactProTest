@@ -23,6 +23,7 @@ export const UserInfo = (props) => {
     const [CountryInf, setCountryInf] = useState({}); // 用戶偏鄉運能不足資料
     const [DayCareInf, setDayCareInf] = useState({}); // 用戶日照資料
     const [Quota, setQuota] = useState({}); // 用戶可用額度資料
+    const [OpenWhiteModal, setOpenWhiteModal] = useState(false); // 是否開啟白牌註冊
     // const [UserTypeInf, setUserTypeInf] = useState([]); // 用戶所有身分
     const [Width, Height] = useWindowSize();
 
@@ -36,6 +37,19 @@ export const UserInfo = (props) => {
                 globalContextService.remove("UserInfoPage", "OldPwd");
                 globalContextService.remove("UserInfoPage", "NewPwd");
                 globalContextService.remove("UserInfoPage", "ConfirmPwd");
+                //#endregion
+                break;
+            case "whiteModalClose":
+                //#region 當 編輯 Modal 關閉時，要清除的資料
+                globalContextService.remove("UserInfoPage", "County");
+                globalContextService.remove("UserInfoPage", "District");
+                globalContextService.remove("UserInfoPage", "Address");
+                globalContextService.remove("UserInfoPage", "Longitude0");
+                globalContextService.remove("UserInfoPage", "Latitude0");
+                globalContextService.remove("UserInfoPage", "ContactName");
+                globalContextService.remove("UserInfoPage", "Relationship");
+                globalContextService.remove("UserInfoPage", "ContactCellphone");
+                globalContextService.remove("UserInfoPage", "ContactTelephone");
                 //#endregion
                 break;
             default:
@@ -183,7 +197,7 @@ export const UserInfo = (props) => {
 
                                         if (PreResult.code === 200) {
                                             // 成功用戶資料 API
-                                            // console.log(item.userType, PreResult)
+                                            console.log(item.userType, PreResult)
                                             switch (item.userType) {
                                                 case "caseuser":
                                                     GetQuotasExecute(item.caseId);
@@ -463,6 +477,161 @@ export const UserInfo = (props) => {
     const [ChangePwdExecute, ChangePwdPending] = useAsync(changePwd, false);
     //#endregion
 
+    //#region 轉換經緯度 API 
+    const getGeocode = useCallback(async (addr) => {
+
+        // console.log(updateRowdata)
+        //#region 取得經緯度 API 
+        fetch(`${APIUrl}Maps/Geocode?_addr=${addr}`,
+            {
+                headers: {
+                    "X-Token": getParseItemLocalStorage("CAuth"),
+                    "content-type": "application/json; charset=utf-8",
+                },
+                method: "Get",
+            })
+            .then(Result => {
+                const ResultJson = Result.clone().json();//Respone.clone()
+                return ResultJson;
+            })
+            .then((PreResult) => {
+
+                if (PreResult.code === 200) {
+                    // 成功取得經緯度  
+                    // console.log(PreResult.result)
+                    globalContextService.set("UserInfoPage", "Latitude0", PreResult?.result?.lat)
+                    globalContextService.set("UserInfoPage", "Longitude0", PreResult?.result?.lon)
+                    Switch();
+                }
+                else {
+                    throw PreResult;
+                }
+            })
+            .catch((Error) => {
+                modalsService.infoModal.warn({
+                    id: "top1",
+                    iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                    yes: true,
+                    yesText: "確認",
+                    // no: true,
+                    // autoClose: true,
+                    backgroundClose: false,
+                    yesOnClick: (e, close) => {
+                        if (Error.code === 401) {
+                            clearSession();
+                            clearLocalStorage();
+                            globalContextService.clear();
+                            Switch();
+                        }
+                        close();
+                    }
+                    // theme: {
+                    //     yesButton: {
+                    //         text: {
+                    //             basic: (style, props) => {
+                    //                 console.log(style)
+                    //                 return {
+                    //                     ...style,
+                    //                     color: "red"
+                    //                 }
+                    //             },
+                    //         }
+                    //     }
+                    // }
+                })
+                throw Error.message;
+            })
+            .finally(() => {
+            });
+        //#endregion
+    }, [APIUrl, Switch])
+
+    const [GetGeocodeExecute, GetGeocodePending] = useAsync(getGeocode, false);
+    //#endregion 
+
+    //#region 新增共享車隊身份 API 
+    const addWhiteUser = useCallback(async (addOrUpdateRowdata) => {
+
+        // console.log(updateRowdata)
+        //#region 新增共享車隊身份 API 
+        fetch(`${APIUrl}selfpayusers/add`,
+            {
+                headers: {
+                    "X-Token": getParseItemLocalStorage("CAuth"),
+                    "content-type": "application/json; charset=utf-8",
+                },
+                method: "POST",
+                body: JSON.stringify({ ...addOrUpdateRowdata })
+            })
+            .then(Result => {
+                const ResultJson = Result.clone().json();//Respone.clone()
+                return ResultJson;
+            })
+            .then((PreResult) => {
+
+                if (PreResult.code === 200) {
+                    // 成功新增白牌身份 API 
+                    // console.log(PreResult)
+                    controllGCS("whiteModalClose");
+                    // 在查一次客戶資料
+                    GetUsersExecute(true);
+                    modalsService.infoModal.success({
+                        iconRightText: "共享車隊註冊成功",
+                        yes: true,
+                        yesText: "確認",
+                        // no: true,
+                        // autoClose: true,
+                        backgroundClose: false,
+                        yesOnClick: (e, close) => {
+                            close();
+                        }
+                    })
+                }
+                else {
+                    throw PreResult;
+                }
+            })
+            .catch((Error) => {
+                modalsService.infoModal.warn({
+                    iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                    yes: true,
+                    yesText: "確認",
+                    // no: true,
+                    // autoClose: true,
+                    backgroundClose: false,
+                    yesOnClick: (e, close) => {
+                        if (Error.code === 401) {
+                            clearSession();
+                            clearLocalStorage();
+                            globalContextService.clear();
+                            Switch();
+                        }
+                        close();
+                    }
+                    // theme: {
+                    //     yesButton: {
+                    //         text: {
+                    //             basic: (style, props) => {
+                    //                 console.log(style)
+                    //                 return {
+                    //                     ...style,
+                    //                     color: "red"
+                    //                 }
+                    //             },
+                    //         }
+                    //     }
+                    // }
+                })
+                throw Error.message;
+            })
+            .finally(() => {
+            });
+        //#endregion
+    }, [APIUrl, Switch])
+
+    const [AddWhiteUserExecute, AddWhiteUserPending] = useAsync(addWhiteUser, false);
+    //#endregion 
+
     return (
         <>
             {/* laptopL、laptop 共用theme */}
@@ -478,6 +647,12 @@ export const UserInfo = (props) => {
                     Quota={Quota} // 用戶可用額度資料
                     ChangePwdExecute={ChangePwdExecute} // 修改密媽功能
                     ChangePwdPending={ChangePwdPending}
+                    GetGeocodeExecute={GetGeocodeExecute} //轉換經緯度
+                    GetGeocodePending={GetGeocodePending}
+                    AddWhiteUserExecute={AddWhiteUserExecute} // 新增共享車隊
+                    AddWhiteUserPending={AddWhiteUserPending}
+                    OpenWhiteModal={OpenWhiteModal} // 是否開啟白牌註冊
+                    setOpenWhiteModal={setOpenWhiteModal} // 設定開啟白牌註冊
                     controllGCS={controllGCS}
                 // CaseListInfo={[CaseInf, WhiteInf, BusInf, CountryInf, DayCareInf].filter(it => !isEqual(it, {}))}
                 // GetUsersPending={GetUsersPending}
@@ -508,6 +683,12 @@ export const UserInfo = (props) => {
                     Quota={Quota} // 用戶可用額度資料
                     ChangePwdExecute={ChangePwdExecute} // 修改密媽功能
                     ChangePwdPending={ChangePwdPending}
+                    GetGeocodeExecute={GetGeocodeExecute} //轉換經緯度
+                    GetGeocodePending={GetGeocodePending}
+                    AddWhiteUserExecute={AddWhiteUserExecute} // 新增共享車隊
+                    AddWhiteUserPending={AddWhiteUserPending}
+                    OpenWhiteModal={OpenWhiteModal} // 是否開啟白牌註冊
+                    setOpenWhiteModal={setOpenWhiteModal} // 設定開啟白牌註冊
                     controllGCS={controllGCS}
                 />
             }
@@ -523,6 +704,12 @@ export const UserInfo = (props) => {
                     Quota={Quota} // 用戶可用額度資料
                     ChangePwdExecute={ChangePwdExecute} // 修改密媽功能
                     ChangePwdPending={ChangePwdPending}
+                    GetGeocodeExecute={GetGeocodeExecute} //轉換經緯度
+                    GetGeocodePending={GetGeocodePending}
+                    AddWhiteUserExecute={AddWhiteUserExecute} // 新增共享車隊
+                    AddWhiteUserPending={AddWhiteUserPending}
+                    OpenWhiteModal={OpenWhiteModal} // 是否開啟白牌註冊
+                    setOpenWhiteModal={setOpenWhiteModal} // 設定開啟白牌註冊
                     controllGCS={controllGCS}
                 />
             }
