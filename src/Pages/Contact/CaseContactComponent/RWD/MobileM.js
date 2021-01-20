@@ -5,14 +5,14 @@ import { ReactComponent as NoData } from '../../../../Assets/img/ContactPage/NoD
 import { ReactComponent as Phone } from '../../../../Assets/img/ContactPage/Phone2.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
-
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { contact: { caseContactComponent: { rwd: { mobileM } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
-
+    const [Width, Height] = useWindowSize();
 
     let history = useHistory()
 
@@ -37,6 +37,7 @@ const MobileMBase = (props) => {
                     {/* 無資料表單區容器 */}
                     < BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        height={Height}
                         theme={mobileM.noDataContainer}
                     >
                         <NoData />

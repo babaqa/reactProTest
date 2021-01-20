@@ -13,13 +13,14 @@ import { ReactComponent as Tip } from '../../../../Assets/img/FastCallCarPage/Ti
 import { useHistory } from 'react-router-dom';
 import { Tag,DropDown, DateTimePicker, BasicContainer, FormContainer, FormRow, Checkbox, CheckboxItem, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { toString } from 'lodash/lang';
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 const MobileMBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { fastCallCar: { whiteFastCallCar: { rwd: { mobileM } } } } } = Theme;
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
-
+    const [Width, Height] = useWindowSize();
     let history = useHistory();
 
     const statusMapping = (status, getTheme = false) => {
@@ -59,6 +60,7 @@ const MobileMBase = (props) => {
                     {/* 無資料表單區容器 */}
                     < BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        height={Height}
                         theme={mobileM.noDataContainer}
                     >
                         <NoData />

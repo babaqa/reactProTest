@@ -3,8 +3,8 @@ export default {
     mapContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 175px )",
-            // height: "100vh",
+            height: `calc(  ${props.height}px - 175px )`,
+            // height: ` ${props.height}px`,
             // minHeight: "1200px"
         })
     },

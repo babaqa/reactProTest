@@ -6,6 +6,7 @@ import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Select
 import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
 import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 import { CaseCallCarComponent } from '../CaseCallCarComponent/CaseCallCarComponent'
 import { BusCallCarComponent } from '../BusCallCarComponent/BusCallCarComponent'
@@ -16,6 +17,7 @@ const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { callCar: { rwd: { mobileM } } } } = Theme;
     let history = useHistory()
+    const [Width, Height] = useWindowSize();
 
     //#region 分頁映射
     const tabMap = (key) => {
@@ -40,6 +42,7 @@ const MobileMBase = (props) => {
         <>
             <MainPageContainer
                 theme={mobileM.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}

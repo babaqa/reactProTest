@@ -6,7 +6,7 @@ export default {
                 ...style,
                 // background: "#fff",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "calc( 100vh - 363px)",
+                height: `calc(  ${props.height}px - 204px)`,
                 width: "100%",
                 display: "flex",
                 alignItems: "center",

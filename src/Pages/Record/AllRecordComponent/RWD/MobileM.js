@@ -11,10 +11,12 @@ import { ReactComponent as Bus } from '../../../../Assets/img/RecordPage/BusMobi
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { CardTable } from '../../../../ProjectComponent'
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { allRecordComponent: { rwd: { mobileM } } } } } = Theme;
+    const [Width, Height] = useWindowSize();
 
     let data = [
         { id: 0, case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
@@ -67,6 +69,7 @@ const MobileMBase = (props) => {
                     {/* 無資料表單區容器 */}
                     < BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        height={Height}
                         theme={mobileM.noDataContainer}
                     >
                         <NoData style={mobileM.noDataSvg} />

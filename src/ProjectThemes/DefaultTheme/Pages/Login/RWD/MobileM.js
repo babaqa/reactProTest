@@ -38,7 +38,7 @@ export default {
     //         display: "block",
     //         width: "100%",
     //         minHeight: "630px",
-    //         height: "calc( 100vh - 56px - 48px )",
+    //         height: `calc(  ${props.height}px - 56px - 48px )`,
     //         top: "0",
     //         background: "#d4d4d4",
     //     })

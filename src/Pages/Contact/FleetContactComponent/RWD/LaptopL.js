@@ -6,6 +6,7 @@ import { ReactComponent as Phone } from '../../../../Assets/img/ContactPage/Phon
 import { ReactComponent as Search } from '../../../../Assets/img/ContactPage/Search.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 
 const LaptopLBase = (props) => {
@@ -13,6 +14,7 @@ const LaptopLBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { contact: { fleetContactComponent: { rwd: { laptopL } } } } } = Theme;
     let history = useHistory()
+    const [Width, Height] = useWindowSize();
     let data = [
         // { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00", carServiceTimeTip: "國定假日提前預約，皆可服務，依車行調度情況" },
         // { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00", carServiceTimeTip: "國定假日提前預約，皆可服務，依車行調度情況" },
@@ -56,6 +58,7 @@ const LaptopLBase = (props) => {
                     {/* 無資料表單區容器 */}
                     < BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        height={Height}
                         theme={laptopL.noDataContainer}
                     >
                         <NoData />

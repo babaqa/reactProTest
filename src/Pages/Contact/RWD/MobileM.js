@@ -5,6 +5,7 @@ import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Search } from '../../../Assets/img/CasePage/Search.svg'
 import { useHistory } from 'react-router-dom';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 import { CaseContactComponent } from '../CaseContactComponent/CaseContactComponent'
 import { BusContactComponent } from '../BusContactComponent/BusContactComponent'
@@ -13,6 +14,7 @@ import { FleetContactComponent } from '../FleetContactComponent/FleetContactComp
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { contact: { rwd: { mobileM } } } } = Theme;
+    const [Width, Height] = useWindowSize();
 
     //#region 分頁映射
     const tabMap = (key) => {
@@ -37,6 +39,7 @@ const MobileMBase = (props) => {
         <>
             <MainPageContainer
                 theme={mobileM.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
                         <Text

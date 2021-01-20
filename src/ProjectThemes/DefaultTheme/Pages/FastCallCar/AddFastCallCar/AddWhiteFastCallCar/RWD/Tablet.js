@@ -3,7 +3,7 @@ export default {
     mapContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 175px )"
+            height: `calc(  ${props.height}px - 175px )`
         })
     },
     //#endregion

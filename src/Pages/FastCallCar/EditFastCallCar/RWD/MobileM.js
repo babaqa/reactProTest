@@ -4,6 +4,7 @@ import { Context } from '../../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar } from '../../../../ProjectComponent';
 import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../../Components';
 import { useHistory } from 'react-router-dom';
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 import { EditCaseFastCallCar } from '../EditCaseFastCallCar/EditCaseFastCallCar'
 import { EditBusFastCallCar } from '../EditBusFastCallCar/EditBusFastCallCar'
@@ -12,7 +13,7 @@ import { EditWhiteFastCallCar } from '../EditWhiteFastCallCar/EditWhiteFastCallC
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { fastCallCar: { editFastCallCar: { rwd: { mobileM } } } } } = Theme;
-
+    const [Width, Height] = useWindowSize();
     let history = useHistory()
 
     //#region 分頁映射
@@ -38,6 +39,7 @@ const MobileMBase = (props) => {
         <>
             <MainPageContainer
                 theme={mobileM.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}

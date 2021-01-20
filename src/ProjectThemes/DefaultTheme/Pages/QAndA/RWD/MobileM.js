@@ -26,7 +26,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "0 0 204px",
+                    padding: "0",
                     minHeight: "100%"
                 }
             }

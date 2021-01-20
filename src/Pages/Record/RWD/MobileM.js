@@ -5,6 +5,7 @@ import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, RangeDateTimePicker, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 import { AllRecordComponent } from '../AllRecordComponent/AllRecordComponent'
 import { CaseRecordComponent } from '../CaseRecordComponent/CaseRecordComponent'
@@ -15,6 +16,7 @@ import { FleetRecordComponent } from '../FleetRecordComponent/FleetRecordCompone
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { rwd: { mobileM } } } } = Theme;
+    const [Width, Height] = useWindowSize();
     const [OrderStatus, setOrderStatus] = useState(globalContextService.get("RecordPage", "OrderTime") ?? "2")
     //#region 分頁映射
     const tabMap = (key) => {
@@ -40,6 +42,7 @@ const MobileMBase = (props) => {
         <>
             <MainPageContainer
                 theme={mobileM.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}

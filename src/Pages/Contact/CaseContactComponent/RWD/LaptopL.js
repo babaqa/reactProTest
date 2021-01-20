@@ -6,6 +6,7 @@ import { ReactComponent as Phone } from '../../../../Assets/img/ContactPage/Phon
 import { ReactComponent as Search } from '../../../../Assets/img/ContactPage/Search.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 const LaptopLBase = (props) => {
 
@@ -13,7 +14,7 @@ const LaptopLBase = (props) => {
     const { pages: { contact: { caseContactComponent: { rwd: { laptopL } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
-
+    const [Width, Height] = useWindowSize();
     let history = useHistory()
 
     let data = [
@@ -59,6 +60,7 @@ const LaptopLBase = (props) => {
                     {/* 無資料表單區容器 */}
                     < BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
+                        height={Height}
                         theme={laptopL.noDataContainer}
                     >
                         <NoData />

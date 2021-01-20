@@ -5,6 +5,7 @@ import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, RangeDateTimePicker, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 import { AllRecordComponent } from '../AllRecordComponent/AllRecordComponent'
 import { CaseRecordComponent } from '../CaseRecordComponent/CaseRecordComponent'
@@ -17,6 +18,7 @@ const LaptopLBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
+    const [Width, Height] = useWindowSize();
 
     //#region 分頁映射
     const tabMap = (key) => {
@@ -42,6 +44,7 @@ const LaptopLBase = (props) => {
         <>
             <MainPageContainer
                 theme={laptopL.mainPageContainer}
+                height={Height}
                 outSideTopComponent={
                     <>
                         {/* 標題列 */}

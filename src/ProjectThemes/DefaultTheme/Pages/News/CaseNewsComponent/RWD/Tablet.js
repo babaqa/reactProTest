@@ -23,7 +23,7 @@ export default {
     tableContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 175px - 16px)",
+            height: `calc(  ${props.height}px - 175px - 16px)`,
             width: "100%",
             boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
             borderRadius: "16px"

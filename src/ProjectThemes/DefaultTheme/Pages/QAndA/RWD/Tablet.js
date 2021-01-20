@@ -131,7 +131,7 @@ export default {
         basic: (style, props) => ({
             ...style,
             padding: "0 24px 24px",
-            minHeight: "calc( 100vh - 288px )"
+            minHeight: `calc(  ${props.height}px - 288px )`
         })
     }
     //#endregion
