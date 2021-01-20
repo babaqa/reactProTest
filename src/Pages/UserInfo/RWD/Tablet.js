@@ -115,7 +115,7 @@ const TabletBase = (props) => {
                                         // autoClose: true,
                                         backgroundClose: false,
                                         noOnClick: (e) => {
-                                            // props.controllGCS("addClientModalClose")
+                                            props.controllGCS("changePwd")
                                         },
                                         yesOnClick: (e, close) => {
                                             //#region 表單驗證
@@ -123,8 +123,8 @@ const TabletBase = (props) => {
                                             if (valid(globalContextService.get("UserInfoPage", "OldPwd") ?? "", ["^.{1,}$"], ["請輸入舊密碼"])[1]) {
                                                 validMsg = valid(globalContextService.get("UserInfoPage", "OldPwd") ?? "", ["^.{1,}$"], ["請輸入舊密碼"])[1]
                                             }
-                                            else if (valid(globalContextService.get("UserInfoPage", "NewPwd") ?? "", ["^.{1,}$"], ["請輸入新密碼"])[1]) {
-                                                validMsg = valid(globalContextService.get("UserInfoPage", "NewPwd") ?? "", ["^.{1,}$"], ["請輸入新密碼"])[1]
+                                            else if (valid(globalContextService.get("UserInfoPage", "NewPwd") ?? "", ["^.{1,}$", "^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\\W_]+$)(?![a-z0-9]+$)(?![a-z\\W_]+$)(?![0-9\\W_]+$)[a-zA-Z0-9\\W_]{8,}$"], ["請輸入新密碼", "新密碼請輸入：8碼以上且大寫英文、小寫英文、數字、特殊符號，4選3。"])[1]) {
+                                                validMsg = valid(globalContextService.get("UserInfoPage", "NewPwd") ?? "", ["^.{1,}$", "^(?![a-zA-Z]+$)(?![A-Z0-9]+$)(?![A-Z\\W_]+$)(?![a-z0-9]+$)(?![a-z\\W_]+$)(?![0-9\\W_]+$)[a-zA-Z0-9\\W_]{8,}$"], ["請輸入新密碼", "新密碼請輸入：8碼以上且大寫英文、小寫英文、數字、特殊符號，4選3。"])[1]
                                             }
                                             else if (valid(globalContextService.get("UserInfoPage", "ConfirmPwd") ?? "", ["^.{1,}$"], ["請輸入確認新密碼"])[1]) {
                                                 validMsg = valid(globalContextService.get("UserInfoPage", "ConfirmPwd") ?? "", ["^.{1,}$"], ["請輸入確認新密碼"])[1]
@@ -164,7 +164,7 @@ const TabletBase = (props) => {
                                             //#endregion
                                         },
                                         closeIconOnClick: (e) => {
-                                            // props.controllGCS("addClientModalClose")
+                                            props.controllGCS("changePwd")
                                         },
                                         content: (
                                             <FormContainer
