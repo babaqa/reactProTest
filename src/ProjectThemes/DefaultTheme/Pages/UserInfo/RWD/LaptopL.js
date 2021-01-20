@@ -23,7 +23,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "0px 138px 188px"
+                    padding: "0px 138px 188px",
+                    minHeight: "calc( 100vh - 124px )"
                 }
             }
         },
@@ -49,7 +50,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "0px 36px 188px"
+                    padding: "0px 36px 188px",
+                    minHeight: "calc( 100vh - 104px )"
                 }
             }
         },
@@ -2083,6 +2085,81 @@ export default {
         //         height: "32px"
         //     })
         // }
+    },
+    //#endregion
+
+    //#region 巴士卡號 BusCardNumber
+    busCardNumber: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
     },
     //#endregion
 

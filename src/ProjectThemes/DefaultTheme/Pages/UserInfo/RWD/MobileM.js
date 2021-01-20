@@ -1284,6 +1284,32 @@ export default {
     },
     //#endregion
 
+    //#region 巴士卡號 標題 
+    busCardNumberTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "30%"
+        })
+    },
+    //#endregion
+    //#region 巴士卡號 內文 
+    busCardNumberText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "70%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
     //#region 巴士居住地址 標題 
     busResidentialAddressTitle: {
         basic: (style, props) => ({
