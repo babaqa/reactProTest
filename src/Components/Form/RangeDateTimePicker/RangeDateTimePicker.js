@@ -206,11 +206,11 @@ export const RangeDateTimePickerBase = (props) => {
 
     useEffect(() => {
         //  console.log("props", props.value,moment.isMoment(props.value),moment(Value))
-        console.log(
-            props.value,
-            isArray(props.value),
-            isArray(props.value) && (moment.isMoment(props.value?.[0]) || moment.isMoment(props.value?.[1]))
-        )
+        // console.log(
+        //     props.value,
+        //     isArray(props.value),
+        //     isArray(props.value) && (moment.isMoment(props.value?.[0]) || moment.isMoment(props.value?.[1]))
+        // )
         let momentParse = null;
         if (isArray(props.value) && (moment.isMoment(props.value?.[0]) || moment.isMoment(props.value?.[1]))) {
             setValue(props.value);

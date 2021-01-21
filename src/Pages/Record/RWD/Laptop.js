@@ -9,9 +9,6 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 
 import { AllRecordComponent } from '../AllRecordComponent/AllRecordComponent'
-import { CaseRecordComponent } from '../CaseRecordComponent/CaseRecordComponent'
-import { BusRecordComponent } from '../BusRecordComponent/BusRecordComponent'
-import { FleetRecordComponent } from '../FleetRecordComponent/FleetRecordComponent'
 
 
 const LaptopBase = (props) => {
@@ -27,9 +24,6 @@ const LaptopBase = (props) => {
                 return (
                     {
                         "全部": <AllRecordComponent />,
-                        "長照": <CaseRecordComponent />,
-                        "共享車隊": <FleetRecordComponent />,
-                        "巴士": <BusRecordComponent />
                     }
                 );
 
@@ -71,28 +65,7 @@ const LaptopBase = (props) => {
                                 </>
                             }
                         >
-                            {/*  查詢日期區間 DateTimeRange  */}
-                            <RangeDateTimePicker
-                                topLabel={<></>}
-                                // type={"time"} time、date、week、month、quarter、year
-                                type={"date"}
-                                format={"YYYY-MM-DD"}
-                                bascDefaultTheme={"DefaultTheme"}
-                                // viewType
-                                isSearchable
-                                placeholder={""}
-                                value={
-                                    (globalContextService.get("RecordPage", "DateTimeRange") ?
-                                        [moment(globalContextService.get("RecordPage", "DateTimeRange")[0]), moment(globalContextService.get("RecordPage", "DateTimeRange")[1])]
-                                        :
-                                        [moment('2015-06-06', "YYYY-MM-DD"), moment('2015-06-06', "YYYY-MM-DD")]
-                                    )
-                                }
-                                onChange={(value, momentObj) => {
-                                    globalContextService.set("RecordPage", "DateTimeRange", value);
-                                }}
-                                theme={laptop.dateTimeRange}
-                            />
+
                         </MainPageTitleBar>
                     </>
                 }

@@ -131,12 +131,29 @@ export default {
                 // margin: "8px 0 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "calc( 100vh - 459px)",
+                height: "calc( 100vh - 246px)",
                 width: "100%",
                 borderRadius: "16px",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center"
+            }
+        },
+        laptopL: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    // padding: "24px 12px",
+                    // margin: "8px 0 0",
+                    background: "#fff",
+                    boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                    height: "calc( 100vh - 265px)",
+                    width: "100%",
+                    borderRadius: "16px",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center"
+                }
             }
         }
     },
@@ -148,7 +165,7 @@ export default {
             return {
                 ...style,
                 // display: "inline-block",
-                padding: "24px 24px 0",
+                padding: "24px 16px 0 24px",
                 margin: "8px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
@@ -156,10 +173,26 @@ export default {
                 width: "100%",
                 borderRadius: "16px"
             }
+        },
+        laptopL: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    // display: "inline-block",
+                    padding: "24px 24px 0",
+                    margin: "8px 0",
+                    background: "#fff",
+                    boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                    height: "206px",
+                    width: "100%",
+                    borderRadius: "16px"
+                }
+            }
         }
     },
     //#endregion
 
+    //#region 第一區塊
     //#region 第一區塊 容器
     firstAreaContainer: {
         laptopL: {
@@ -260,23 +293,127 @@ export default {
     },
     //#endregion
 
-    //#region 服務單位取消
-    cancelTag: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                position: "absolute",
-                margin: "0 48px 0 0",
-                bottom: 0,
-                padding: "0px 7px",
-                fontSize: "12px",
-                lineHeight: "20px",
-                color: "#FA8C16",
-                backgroundColor: "#FFF7E6",
-                borderColor: "#FFD591"
-            }),
-            hover: {}
-        }
+    //#region 訂單狀態 Tag 區域
+    statusTag: {
+        //#region 新訂單
+        newOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 36px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#FA8C16",
+                    backgroundColor: "#FFF7E6",
+                    borderColor: "#FFD591"
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 已排班
+        assignedOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 36px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#52C41A",
+                    backgroundColor: "#F6FFED",
+                    borderColor: "#B7EB8F"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 抵達搭車地點
+        arrivalOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 0 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#1890FF",
+                    backgroundColor: "#E6F7FF",
+                    borderColor: "#91D5FF"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 客上
+        customUpOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 48px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#F5222D",
+                    backgroundColor: "#FFF1F0",
+                    borderColor: "#FFA39E"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 已完成
+        finishedOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 36px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "rgba(0, 0, 0, 0.65)",
+                    backgroundColor: "#FAFAFA",
+                    borderColor: "#D9D9D9"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 已取消
+        unitCancleOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 36px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#FA541C",
+                    backgroundColor: "#FFF2E8",
+                    borderColor: "#FFBB96"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
     },
     //#endregion
 
@@ -432,8 +569,24 @@ export default {
             lineHeight: "22px",
             color: "rgba(0,0,0,0.85)",
             margin: "0 0 0 8px",
-            maxWidth: "80%"
+            maxWidth: "73%"
         }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                textOverflow: "ellipsis",
+                // height: "22px",
+                overflow: "hidden",
+                whiteSpace: "nowrap",
+                fontWeight: 400,
+                fontSize: "14px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.85)",
+                margin: "0 0 0 8px",
+                maxWidth: "80%"
+            }),
+        }
     },
     //#endregion
 
@@ -787,7 +940,8 @@ export default {
             color: "#FF7A45",
             padding: "0 0 0 24px",
             alignItems: "baseline",
-            display: "flex"
+            display: "flex",
+            width: "100%"
         })
     },
     //#endregion
@@ -827,7 +981,8 @@ export default {
             color: "#FF7A45",
             padding: "0 0 0 24px",
             alignItems: "baseline",
-            display: "flex"
+            display: "flex",
+            width: "100%"
         })
     },
     //#endregion
@@ -920,13 +1075,15 @@ export default {
     caseBurdenText: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
+            display: "block",
             height: "32px",
             fontWeight: 600,
             fontSize: "24px",
             lineHeight: "32px",
             color: "#F5222D",
-            margin: "0 0 10px 0"
+            margin: "0 0 10px 0",
+            width: "100%",
+            textAlign: "center"
         })
     },
     //#endregion
@@ -965,8 +1122,8 @@ export default {
             ...style,
             position: "absolute",
             bottom: "32px",
-            left: "12px",
-            width: "calc( 100% - 12px )",
+            left: "8px",
+            width: "calc( 100% - 8px )",
             height: "24px",
             fontSize: "14px",
             lineHeight: "22px",
@@ -986,7 +1143,35 @@ export default {
             ...style,
             backgroundColor: "rgba(24,144,255, 0.65)"
         }),
-        focus: (style, props) => ({})
+        focus: (style, props) => ({}),
+        laptopL: {
+            basic: (style) => ({
+                ...style,
+                position: "absolute",
+                bottom: "32px",
+                left: "12px",
+                width: "calc( 100% - 12px )",
+                height: "24px",
+                fontSize: "14px",
+                lineHeight: "22px",
+                // top: "13px",
+                padding: 0,
+                color: "#fff",
+                backgroundColor: "#1890FF",
+                borderColor: "#1890FF",
+                borderRadius: "2px",
+                // margin: "0 0 8px 0",
+                // position: "absolute",
+                fontWeight: "400",
+                // left: "116px",
+                boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)"
+            }),
+            hover: (style, props) => ({
+                ...style,
+                backgroundColor: "rgba(24,144,255, 0.65)"
+            }),
+            focus: (style, props) => ({})
+        }
     },
     //#endregion
 
@@ -996,8 +1181,8 @@ export default {
             ...style,
             position: "absolute",
             bottom: 0,
-            left: "12px",
-            width: "calc( 100% - 12px )",
+            left: "8px",
+            width: "calc( 100% - 8px )",
             height: "24px",
             fontSize: "14px",
             lineHeight: "22px",
@@ -1017,7 +1202,35 @@ export default {
             ...style,
             backgroundColor: "rgba(24,144,255, 0.65)"
         }),
-        focus: (style, props) => ({})
+        focus: (style, props) => ({}),
+        laptopL: {
+            basic: (style) => ({
+                ...style,
+                position: "absolute",
+                bottom: 0,
+                left: "12px",
+                width: "calc( 100% - 12px )",
+                height: "24px",
+                fontSize: "14px",
+                lineHeight: "22px",
+                // top: "13px",
+                padding: 0,
+                color: "#fff",
+                backgroundColor: "#1890FF",
+                borderColor: "#1890FF",
+                borderRadius: "2px",
+                // margin: "0 0 8px 0",
+                // position: "absolute",
+                fontWeight: "400",
+                // left: "116px",
+                boxShadow: "0px 2px 0px rgba(0, 0, 0, 0.043)"
+            }),
+            hover: (style, props) => ({
+                ...style,
+                backgroundColor: "rgba(24,144,255, 0.65)"
+            }),
+            focus: (style, props) => ({})
+        }
     },
     //#endregion
     //#endregion

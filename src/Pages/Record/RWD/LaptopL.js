@@ -8,10 +8,6 @@ import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 import { AllRecordComponent } from '../AllRecordComponent/AllRecordComponent'
-import { CaseRecordComponent } from '../CaseRecordComponent/CaseRecordComponent'
-import { BusRecordComponent } from '../BusRecordComponent/BusRecordComponent'
-import { FleetRecordComponent } from '../FleetRecordComponent/FleetRecordComponent'
-
 
 const LaptopLBase = (props) => {
 
@@ -23,23 +19,22 @@ const LaptopLBase = (props) => {
     //#region 分頁映射
     const tabMap = (key) => {
         switch (key) {
-            case "tabUseComponent":
-                return (
-                    {
-                        // "全部": <AllRecordComponent />,
-                        "長照": <CaseRecordComponent />,
-                        "共享車隊": <FleetRecordComponent />,
-                        "巴士": <BusRecordComponent />
-                    }
-                );
-
+            case "長照":
+                return props.CaseRecord
+            case "共享車隊":
+                return props.WhiteRecord
+            case "巴士":
+                return props.BusRecord
             default:
                 return ["長照", "共享車隊", "巴士"]
         }
 
     }
     //#endregion
-
+    // console.log(props.nowTab)
+    // console.log(props.CaseRecord)
+    // console.log(props.WhiteRecord)
+    // console.log(props.BusRecord)
     return (
         <>
             <MainPageContainer
@@ -73,42 +68,19 @@ const LaptopLBase = (props) => {
 
                                     // </BasicContainer>
                                 }
-                                {/* 日期區間容器 */}
-                                {/* <SubContainer baseDefaultTheme={"DefaultTheme"}> */}
-                                {/* 日期區間 DateTimeRange  */}
-                                {/* <RangeDateTimePicker
-                                        // topLabel={<></>}
-                                        // type={"time"} time、date、week、month、quarter、year
-                                        type={"date"}
-                                        format={"YYYY-MM-DD"}
-                                        bascDefaultTheme={"DefaultTheme"}
-                                        // viewType
-                                        isSearchable
-                                        placeholder={""}
-                                        value={
-                                            (globalContextService.get("NewsPage", "DateTimeRange") ?
-                                                [moment(globalContextService.get("NewsPage", "DateTimeRange")[0]), moment(globalContextService.get("NewsPage", "DateTimeRange")[1])]
-                                                :
-                                                [moment('2015-06-06', "YYYY-MM-DD"), moment('2018-06-06', "YYYY-MM-DD")]
-                                            )
-                                        }
-                                        onChange={(value, momentObj) => {
-                                            if (value !== globalContextService.get("NewsPage", "DateTimeRange")) {
-                                                globalContextService.set("NewsPage", "DateTimeRange", value);
-                                                // console.log("change")
-                                                // setForceUpdate(f => !f)
-                                            }
-                                        }}
-                                        theme={laptopL.dateTimeRange}
-                                    /> */}
-                                {/* </SubContainer> */}
                             </BasicContainer>
                         </BasicContainer>
                     </>
                 }
             >
                 {/* 切換使用的組件 */}
-                {tabMap("tabUseComponent")?.[props.nowTab]}
+                {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
+                <AllRecordComponent
+                    data={tabMap(props.nowTab)}
+                    nowTab={props.nowTab}
+                    GetRecordsExecute={props.GetRecordsExecute} // 取得用戶各種訂單紀錄資料
+                    GetRecordsPending={props.GetRecordsPending}
+                />
             </MainPageContainer>
         </>
     )

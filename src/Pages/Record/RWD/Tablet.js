@@ -9,10 +9,6 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 
 import { AllRecordComponent } from '../AllRecordComponent/AllRecordComponent'
-import { CaseRecordComponent } from '../CaseRecordComponent/CaseRecordComponent'
-import { BusRecordComponent } from '../BusRecordComponent/BusRecordComponent'
-import { FleetRecordComponent } from '../FleetRecordComponent/FleetRecordComponent'
-
 
 const TabletBase = (props) => {
 
@@ -27,9 +23,6 @@ const TabletBase = (props) => {
                 return (
                     {
                         "全部": <AllRecordComponent />,
-                        "長照": <CaseRecordComponent />,
-                        "共享車隊": <FleetRecordComponent />,
-                        "巴士": <BusRecordComponent />
                     }
                 );
 

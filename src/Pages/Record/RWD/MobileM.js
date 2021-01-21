@@ -7,36 +7,13 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
-import { AllRecordComponent } from '../AllRecordComponent/AllRecordComponent'
-import { CaseRecordComponent } from '../CaseRecordComponent/CaseRecordComponent'
-import { BusRecordComponent } from '../BusRecordComponent/BusRecordComponent'
-import { FleetRecordComponent } from '../FleetRecordComponent/FleetRecordComponent'
-
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { rwd: { mobileM } } } } = Theme;
     const [Width, Height] = useWindowSize();
     const [OrderStatus, setOrderStatus] = useState(globalContextService.get("RecordPage", "OrderTime") ?? "2")
-    //#region 分頁映射
-    const tabMap = (key) => {
-        switch (key) {
-            case "tabUseComponent":
-                return (
-                    {
-                        // "全部": <AllRecordComponent />,
-                        "長照": <CaseRecordComponent />,
-                        "共享車隊": <FleetRecordComponent />,
-                        "巴士": <BusRecordComponent />
-                    }
-                );
 
-            default:
-                return ["長照", "共享車隊", "巴士"]
-        }
-
-    }
-    //#endregion
 
     return (
         <>
@@ -91,7 +68,7 @@ const MobileMBase = (props) => {
                             {/* 日期區間容器 */}
                             <SubContainer baseDefaultTheme={"DefaultTheme"}>
                                 {/*  查詢日期區間 DateTimeRange  */}
-                                <RangeDateTimePicker
+                                {/* <RangeDateTimePicker
                                     topLabel={<></>}
                                     // type={"time"} time、date、week、month、quarter、year
                                     type={"date"}
@@ -111,30 +88,14 @@ const MobileMBase = (props) => {
                                         globalContextService.set("RecordPage", "DateTimeRange", value);
                                     }}
                                     theme={mobileM.dateTimeRange}
-                                />
+                                /> */}
                             </SubContainer>
 
-
-                            {tabMap().map((item, index) => {
-                                return (
-                                    <React.Fragment key={index}>
-                                        <Text
-                                            onClick={() => { props.setNowTab(item) }}
-                                            isActive={props.nowTab === item}
-                                            theme={mobileM.titleBarRecordTab}
-                                        >
-                                            {item}
-                                        </Text>
-                                    </React.Fragment>
-                                )
-                            })}
                         </BasicContainer>
 
                     </>
                 }
             >
-                {/* 切換使用的組件 */}
-                {tabMap("tabUseComponent")?.[props.nowTab]}
             </MainPageContainer>
         </>
     )
