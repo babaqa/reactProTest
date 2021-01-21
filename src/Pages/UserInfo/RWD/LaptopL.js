@@ -4,11 +4,10 @@ import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar, MainPageSubTitleBar, TimeCounterButton } from '../../../ProjectComponent';
 import { Container, BasicContainer, BasicButton, TreeSelector, Tooltip, DateTimePicker, Textarea, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Lock } from '../../../Assets/img/UserInfoPage/Lock.svg'
-import { isNil } from 'lodash';
 import moment from 'moment';
 import { useHistory } from 'react-router-dom';
-import isUndefined from 'lodash/isUndefined';
-import { isEqual } from 'lodash';
+import { isEqual, isUndefined, isNil } from 'lodash';
+import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { valid } from '../../../Handlers';
 import { WhiteSingUp } from '../../../ProjectComponent/WhiteSingUp/WhiteSingUp';
 
@@ -16,6 +15,7 @@ const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { userInfo: { rwd: { laptopL } } } } = Theme;
+    const [Width, Height] = useWindowSize();
     let history = useHistory()
 
     // console.log("basic", props.BasicInf)
@@ -27,6 +27,7 @@ const LaptopLBase = (props) => {
     return (
         <>
             <MainPageContainer
+                height={Height}
                 theme={laptopL.mainPageContainer}
             // outSideTopComponent={
             //     <>
@@ -580,7 +581,7 @@ const LaptopLBase = (props) => {
                         <>
                             {/* 下方左側資料 容器 */}
                             <SubContainer
-                                theme={laptopL.leftBottomContainer}
+                                theme={laptopL.universalContainer}
                             >
                                 {/* 長照資料表單區容器 */}
                                 <BasicContainer
@@ -768,7 +769,7 @@ const LaptopLBase = (props) => {
                                         {/* 長照緊急聯絡人關係 CaseEmergencyRelationship */}
                                         <TextInput
                                             viewType
-                                            topLabel={<>緊急聯絡人姓名</>}
+                                            topLabel={<>緊急聯絡人關係</>}
                                             baseDefaultTheme={"DefaultTheme"}
                                             type="text"
                                             placeholder={""}
@@ -848,7 +849,7 @@ const LaptopLBase = (props) => {
                         <>
                             {/* 下方中間資料 容器 */}
                             <SubContainer
-                                theme={laptopL.centerBottomContainer}
+                                theme={laptopL.universalContainer}
                             >
                                 {/* 共享車隊資料表單區容器 */}
                                 <BasicContainer
@@ -908,7 +909,7 @@ const LaptopLBase = (props) => {
                                         {/* 共享車隊緊急聯絡人關係 FleetEmergencyRelationship */}
                                         <TextInput
                                             viewType
-                                            topLabel={<>緊急聯絡人姓名</>}
+                                            topLabel={<>緊急聯絡人關係</>}
                                             baseDefaultTheme={"DefaultTheme"}
                                             type="text"
                                             placeholder={""}
@@ -989,7 +990,7 @@ const LaptopLBase = (props) => {
                         <>
                             {/* 下方右側資料 容器 */}
                             <SubContainer
-                                theme={laptopL.rightBottomContainer}
+                                theme={laptopL.universalContainer}
                             >
                                 {/* 巴士資料表單區容器 */}
                                 <BasicContainer
@@ -1110,7 +1111,7 @@ const LaptopLBase = (props) => {
                         <>
                             {/* 下方左側第二行資料 容器 */}
                             <SubContainer
-                                theme={laptopL.leftSecBottomContainer}
+                                theme={laptopL.universalContainer}
                             >
                                 {/* 日照資料表單區容器 */}
                                 <BasicContainer
@@ -1182,7 +1183,7 @@ const LaptopLBase = (props) => {
                                         {/* 日照緊急聯絡人關係 DayCareEmergencyRelationship */}
                                         <TextInput
                                             viewType
-                                            topLabel={<>緊急聯絡人姓名</>}
+                                            topLabel={<>緊急聯絡人關係</>}
                                             baseDefaultTheme={"DefaultTheme"}
                                             type="text"
                                             placeholder={""}
@@ -1263,7 +1264,7 @@ const LaptopLBase = (props) => {
                         <>
                             {/* 下方中間第二行資料 容器 */}
                             <SubContainer
-                                theme={laptopL.centerSecBottomContainer}
+                                theme={laptopL.universalContainer}
                             >
                                 {/* 偏鄉資料表單區容器 */}
                                 <BasicContainer
@@ -1323,7 +1324,7 @@ const LaptopLBase = (props) => {
                                         {/* 偏鄉緊急聯絡人關係 RuralEmergencyRelationship */}
                                         <TextInput
                                             viewType
-                                            topLabel={<>緊急聯絡人姓名</>}
+                                            topLabel={<>緊急聯絡人關係</>}
                                             baseDefaultTheme={"DefaultTheme"}
                                             type="text"
                                             placeholder={""}

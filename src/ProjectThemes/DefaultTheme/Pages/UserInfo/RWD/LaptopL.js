@@ -55,6 +55,33 @@ export default {
                 }
             }
         },
+        tabletOutsideOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#DBE4E8",
+                    padding: "6px 24px"
+                }
+            }
+        },
+        tabletOutContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#DBE4E8"
+                }
+            }
+        },
+        tabletContentContainer: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    backgroundColor: "#DBE4E8",
+                    padding: "0px 24px 212px",
+                    minHeight: `calc( ${props.height}px - 104px )`
+                }
+            }
+        },
     },
     //#endregion
 
@@ -64,7 +91,7 @@ export default {
         rightContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "940px"
+                width: "520px"
             })
         }
     },
@@ -78,12 +105,26 @@ export default {
             return {
                 ...style,
                 padding: "24px 12px",
-                margin: "0 12px 24px",
+                margin: "12px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "174px",
-                width: "calc( 100% - 24px )",
+                height: "260px",
+                width: "100%",
                 borderRadius: "16px"
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    padding: "24px 12px",
+                    margin: "0 12px 24px",
+                    background: "#fff",
+                    boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                    height: "174px",
+                    width: "calc( 100% - 24px )",
+                    borderRadius: "16px"
+                }
             }
         }
     },
@@ -158,6 +199,7 @@ export default {
         focus: (style, props) => ({})
     },
     //#endregion
+
     //#region 修改密碼按鈕
     editPwdButton: {
         basic: (style) => ({
@@ -625,8 +667,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -637,9 +687,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
-                // minHeight: "24px",
-                // height: "auto"
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         },
         container: {
@@ -647,8 +697,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -685,9 +743,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
-                // minHeight: "24px",
-                // height: "auto"
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         }
     },
@@ -700,8 +758,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -712,9 +778,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
-                // minHeight: "24px",
-                // height: "auto"
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         },
         container: {
@@ -722,8 +788,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -748,9 +822,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
-                // minHeight: "24px",
-                // height: "auto"
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         }
     },
@@ -763,8 +837,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -775,9 +857,9 @@ export default {
         viewTypeBottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
-                // minHeight: "24px",
-                // height: "auto"
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         },
         container: {
@@ -785,8 +867,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -803,9 +893,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "0px"
-                // minHeight: "24px",
-                // height: "auto"
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         }
     },
@@ -818,8 +908,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -840,8 +938,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -893,8 +999,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -915,8 +1029,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(2.4),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(2.4),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -962,31 +1084,49 @@ export default {
     //#endregion
     //#endregion
 
-    //#region 下方左側資料
-    //#region 下方左側資料 容器
-    leftBottomContainer: {
+    //#region 通用容器
+    universalContainer: {
         basic: (style, props) => ({
             ...style,
-            ...style.occupy(4),
-            padding: "0 12px",
-            margin: "0 0 24px"
-        })
+            ...style.occupy(12),
+            padding: 0,
+            margin: 0
+        }),
+        laptop: {
+            basic: (style, props) => ({
+                ...style,
+                ...style.occupy(4),
+                padding: "0 12px",
+                margin: "0 0 24px"
+            })
+        }
     },
     //#endregion
 
+    //#region 長照資料表單區
     //#region 長照資料表單區容器
     caseInformationContainer: {
-        basic: (style, props) => {
-            return {
+        basic: (style, props) => ({
+            ...style,
+            padding: "24px 12px",
+            margin: "24px 0",
+            background: "#fff",
+            boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+            height: "346px",
+            width: "100%",
+            borderRadius: "16px"
+        }),
+        laptop: {
+            basic: (style, props) => ({
                 ...style,
                 padding: "24px 12px",
-                // margin: "0 12px 48px 0",
+                margin: 0,
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "604px",
+                height: "652px",
                 width: "100%",
                 borderRadius: "16px"
-            }
+            })
         }
     },
     //#endregion
@@ -1003,7 +1143,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "60px",
+                width: "40px",
                 color: "#EF6C00",
             })
         },
@@ -1157,8 +1297,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -1179,8 +1327,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -1232,8 +1388,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(8),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -1254,8 +1418,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(8),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -1307,8 +1479,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -1329,8 +1509,107 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
             })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 長照緊急聯絡人關係 CaseEmergencyRelationship 
+    caseEmergencyRelationship: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -1382,8 +1661,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -1404,8 +1691,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -1457,8 +1752,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -1479,8 +1782,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -1517,9 +1828,9 @@ export default {
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "0px"
+                // minHeight: "24px",
+                // height: "auto"
             })
         }
     },
@@ -1601,30 +1912,33 @@ export default {
     //#endregion
     //#endregion
 
-    //#region 下方中間資料
-    //#region 下方中間資料 容器
-    centerBottomContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(4),
-            padding: "0 12px",
-            margin: "0 0 24px"
-        })
-    },
-    //#endregion
-
+    //#region 共享車隊資料表單區
     //#region 共享車隊資料表單區容器
     fleetInformationContainer: {
         basic: (style, props) => {
             return {
                 ...style,
                 padding: "24px 12px",
-                // margin: "0 12px 48px",
+                margin: "24px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "604px",
+                height: "346px",
                 width: "100%",
                 borderRadius: "16px"
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    padding: "24px 12px",
+                    margin: 0,
+                    background: "#fff",
+                    boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                    height: "652px",
+                    width: "100%",
+                    borderRadius: "16px"
+                }
             }
         }
     },
@@ -1642,7 +1956,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "200px",
+                width: "80px",
                 color: "#558B2F"
             })
         },
@@ -1738,8 +2052,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -1760,8 +2082,107 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
             })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 共享車隊緊急聯絡人關係 FleetEmergencyRelationship
+    fleetEmergencyRelationship: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -1813,8 +2234,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -1835,8 +2264,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -1888,8 +2325,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -1910,8 +2355,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -2032,31 +2485,35 @@ export default {
     //#endregion
     //#endregion
 
-    //#region 下方右側資料
-    //#region 下方右側資料 容器
-    rightBottomContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(4),
-            padding: "0 12px",
-            margin: "0 0 24px"
-        })
-    },
-    //#endregion
-
+    //#region 巴士資料表單區
     //#region 巴士資料表單區容器
     busInformationContainer: {
         basic: (style, props) => {
             return {
                 ...style,
                 padding: "24px 12px",
-                // margin: "0 0 48px 12px",
+                margin: "24px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "604px",
+                height: "346px",
                 width: "100%",
                 borderRadius: "16px",
                 // flexGrow: 1
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    padding: "24px 12px",
+                    margin: 0,
+                    background: "#fff",
+                    boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                    height: "652px",
+                    width: "100%",
+                    borderRadius: "16px",
+                    // flexGrow: 1
+                }
             }
         }
     },
@@ -2074,7 +2531,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "200px",
+                width: "40px",
                 color: "#00838F"
             })
         },
@@ -2539,30 +2996,33 @@ export default {
     //#endregion
     //#endregion
 
-    //#region 下方左側第二行資料
-    //#region 下方左側第二行資料 容器
-    leftSecBottomContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(4),
-            padding: "0 12px",
-            margin: "0 0 24px"
-        })
-    },
-    //#endregion
-
+    //#region 日照資料表單區
     //#region 日照資料表單區容器
     dayCareInformationContainer: {
         basic: (style, props) => {
             return {
                 ...style,
                 padding: "24px 12px",
-                // margin: "0 12px 48px 0",
+                margin: "24px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "604px",
+                height: "346px",
                 width: "100%",
                 borderRadius: "16px"
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    padding: "24px 12px",
+                    margin: 0,
+                    background: "#fff",
+                    boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                    height: "652px",
+                    width: "100%",
+                    borderRadius: "16px"
+                }
             }
         }
     },
@@ -2580,7 +3040,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "60px",
+                width: "40px",
                 color: "#EF6C00",
             })
         },
@@ -2594,15 +3054,23 @@ export default {
     },
     //#endregion
 
-    //#region 案號 dayCareNumber
+    //#region 案號 DayCareNumber
     dayCareNumber: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -2623,8 +3091,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -2676,8 +3152,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(8),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -2698,8 +3182,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(8),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -2751,8 +3243,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -2773,8 +3273,107 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
             })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 日照緊急聯絡人關係 DayCareEmergencyRelationship
+    dayCareEmergencyRelationship: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -2826,8 +3425,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -2848,8 +3455,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -2901,8 +3516,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -2923,8 +3546,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -3045,30 +3676,33 @@ export default {
     //#endregion
     //#endregion
 
-    //#region 下方中間第二行資料
-    //#region 下方中間第二行資料 容器
-    centerSecBottomContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(4),
-            padding: "0 12px",
-            margin: "0 0 24px"
-        })
-    },
-    //#endregion
-
+    //#region 偏鄉資料表單區
     //#region 偏鄉資料表單區容器
     ruralInformationContainer: {
         basic: (style, props) => {
             return {
                 ...style,
                 padding: "24px 12px",
-                // margin: "0 12px 48px",
+                margin: "24px 0",
                 background: "#fff",
                 boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: "604px",
+                height: "346px",
                 width: "100%",
                 borderRadius: "16px"
+            }
+        },
+        laptop: {
+            basic: (style, props) => {
+                return {
+                    ...style,
+                    padding: "24px 12px",
+                    margin: 0,
+                    background: "#fff",
+                    boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
+                    height: "652px",
+                    width: "100%",
+                    borderRadius: "16px"
+                }
             }
         }
     },
@@ -3086,7 +3720,7 @@ export default {
         titleText: {
             basic: (style, props) => ({
                 ...style,
-                width: "200px",
+                width: "120px",
                 color: "#558B2F"
             })
         },
@@ -3182,8 +3816,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -3204,8 +3846,107 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
             })
+        },
+        textInputContainer: {
+            basic: (style, props) => {
+
+                return {
+                    ...style,
+                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
+                }
+            }
+        },
+        textInput: {
+            basic: (style, props) => {
+                //console.log(style, props)
+                return {
+                    ...style,
+                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
+                    ...(
+                        props.openEye && {
+                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
+                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
+                        }
+                    ),
+                    //#endregion
+                    height: "28px"
+                }
+            }
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 偏鄉緊急聯絡人關係 RuralEmergencyRelationship
+    ruralEmergencyRelationship: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 12px",
+                display: "inline-block",
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -3257,8 +3998,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -3279,8 +4028,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({
@@ -3332,8 +4089,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         viewTypeTopLabel: {
             basic: (style, props) => ({
@@ -3354,8 +4119,16 @@ export default {
                 ...style,
                 padding: "0 12px",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
+                ...style.occupy(4),
+            }),
+            laptop: {
+                basic: (style, props) => ({
+                    ...style,
+                    padding: "0 12px",
+                    display: "inline-block",
+                    ...style.occupy(12),
+                })
+            }
         },
         topLabel: {
             basic: (style, props) => ({

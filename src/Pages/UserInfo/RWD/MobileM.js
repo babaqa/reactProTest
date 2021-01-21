@@ -728,6 +728,30 @@ const MobileMBase = (props) => {
 
                                 </Container>
 
+                                {/* 長照緊急聯絡人關係 CaseEmergencyName */}
+                                <Container
+                                    theme={mobileM.universalContainer}
+                                >
+                                    {/* 長照緊急聯絡人關係 標題 */}
+                                    <Text
+                                        theme={mobileM.caseEmergencyRelationshipTitle}
+                                    >
+                                        緊急聯絡人關係
+                                    </Text>
+
+                                    {/* 長照緊急聯絡人關係 內文 */}
+                                    <Text
+                                        theme={mobileM.caseEmergencyRelationshipText}
+                                    >
+                                        {props.CaseInf?.urgentRelationship ?
+                                            props.CaseInf?.urgentRelationship
+                                            :
+                                            "未填寫"
+                                        }
+                                    </Text>
+
+                                </Container>
+
                                 {/* 長照緊急聯絡人手機 CaseEmergencyCellPhone */}
                                 <Container
                                     theme={mobileM.universalContainer}
@@ -871,6 +895,30 @@ const MobileMBase = (props) => {
 
                                 </Container>
 
+                                {/* 共享車隊緊急聯絡人關係 FleetEmergencyName */}
+                                <Container
+                                    theme={mobileM.universalContainer}
+                                >
+                                    {/* 共享車隊緊急聯絡人關係 標題 */}
+                                    <Text
+                                        theme={mobileM.fleetEmergencyRelationshipTitle}
+                                    >
+                                        緊急聯絡人關係
+                                    </Text>
+
+                                    {/* 共享車隊緊急聯絡人關係 內文 */}
+                                    <Text
+                                        theme={mobileM.fleetEmergencyRelationshipText}
+                                    >
+                                        {props.WhiteInf?.urgentRelationship ?
+                                            props.WhiteInf?.urgentRelationship
+                                            :
+                                            "未填寫"
+                                        }
+                                    </Text>
+
+                                </Container>
+
                                 {/* 共享車隊緊急聯絡人手機 FleetEmergencyCellPhone */}
                                 <Container
                                     theme={mobileM.universalContainer}
@@ -880,7 +928,7 @@ const MobileMBase = (props) => {
                                         theme={mobileM.fleetEmergencyCellPhoneTitle}
                                     >
                                         緊急聯絡人手機
-                                </Text>
+                                    </Text>
 
                                     {/* 共享車隊緊急聯絡人手機 內文 */}
                                     <Text
@@ -1178,6 +1226,30 @@ const MobileMBase = (props) => {
 
                                 </Container>
 
+                                {/* 日照緊急聯絡人關係 DayCareEmergencyName */}
+                                <Container
+                                    theme={mobileM.universalContainer}
+                                >
+                                    {/* 日照緊急聯絡人關係 標題 */}
+                                    <Text
+                                        theme={mobileM.dayCareEmergencyRelationshipTitle}
+                                    >
+                                        緊急聯絡人關係
+                                    </Text>
+
+                                    {/* 日照緊急聯絡人關係 內文 */}
+                                    <Text
+                                        theme={mobileM.dayCareEmergencyRelationshipText}
+                                    >
+                                        {props.DayCareInf?.urgentRelationship ?
+                                            props.DayCareInf?.urgentRelationship
+                                            :
+                                            "未填寫"
+                                        }
+                                    </Text>
+
+                                </Container>
+
                                 {/* 日照緊急聯絡人手機 DayCareEmergencyCellPhone */}
                                 <Container
                                     theme={mobileM.universalContainer}
@@ -1281,7 +1353,7 @@ const MobileMBase = (props) => {
                                         theme={mobileM.ruralResidentialAddressTitle}
                                     >
                                         居住地址
-                                </Text>
+                                    </Text>
 
                                     {/* 偏鄉居住地址 內文 */}
                                     <Text
@@ -1314,6 +1386,30 @@ const MobileMBase = (props) => {
                                     >
                                         {props.CountryInf?.urgentName ?
                                             props.CountryInf?.urgentName
+                                            :
+                                            "未填寫"
+                                        }
+                                    </Text>
+
+                                </Container>
+
+                                {/* 偏鄉緊急聯絡人關係 RuralEmergencyName */}
+                                <Container
+                                    theme={mobileM.universalContainer}
+                                >
+                                    {/* 偏鄉緊急聯絡人關係 標題 */}
+                                    <Text
+                                        theme={mobileM.ruralEmergencyRelationshipTitle}
+                                    >
+                                        緊急聯絡人關係
+                                    </Text>
+
+                                    {/* 偏鄉緊急聯絡人關係 內文 */}
+                                    <Text
+                                        theme={mobileM.ruralEmergencyRelationshipText}
+                                    >
+                                        {props.CountryInf?.urgentRelationship ?
+                                            props.CountryInf?.urgentRelationship
                                             :
                                             "未填寫"
                                         }

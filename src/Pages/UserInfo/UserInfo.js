@@ -636,7 +636,7 @@ export const UserInfo = (props) => {
         <>
             {/* laptopL、laptop 共用theme */}
             {
-                1024 <= Width &&
+                768 <= Width &&
                 <LaptopL
                     BasicInf={BasicInf}  // 用戶基本資料
                     CaseInf={CaseInf} // 用戶長照資料
@@ -671,7 +671,7 @@ export const UserInfo = (props) => {
                     setNowTab={setNowTab}
                 />
             } */}
-            {
+            {/* {
                 (768 <= Width && Width < 1024) &&
                 <Tablet
                     BasicInf={BasicInf}  // 用戶基本資料
@@ -691,7 +691,7 @@ export const UserInfo = (props) => {
                     setOpenWhiteModal={setOpenWhiteModal} // 設定開啟白牌註冊
                     controllGCS={controllGCS}
                 />
-            }
+            } */}
             {
                 Width < 768 &&
                 <MobileM

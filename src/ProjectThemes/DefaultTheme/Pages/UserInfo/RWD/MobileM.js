@@ -722,7 +722,7 @@ export default {
                 ...style,
                 // padding: "24px 12px",
                 background: "#fff",
-                height: "304px",
+                // height: "304px",
                 width: "100%",
 
             }
@@ -976,6 +976,32 @@ export default {
     },
     //#endregion
 
+    //#region 長照緊急聯絡人關係 標題 
+    caseEmergencyRelationshipTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 長照緊急聯絡人關係 內文 
+    caseEmergencyRelationshipText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
     //#region 長照緊急聯絡人手機 標題 
     caseEmergencyCellPhoneTitle: {
         basic: (style, props) => ({
@@ -1063,7 +1089,7 @@ export default {
                 ...style,
                 // padding: "24px 12px",
                 background: "#fff",
-                height: "260px",
+                // height: "260px",
                 width: "100%",
 
             }
@@ -1144,6 +1170,32 @@ export default {
     //#endregion
     //#region 共享車隊緊急聯絡人姓名 內文 
     fleetEmergencyNameText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 共享車隊緊急聯絡人關係 標題 
+    fleetEmergencyRelationshipTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 共享車隊緊急聯絡人關係 內文 
+    fleetEmergencyRelationshipText: {
         basic: (style, props) => ({
             ...style,
             fontWeight: 400,
@@ -1243,7 +1295,7 @@ export default {
                 ...style,
                 // padding: "24px 12px",
                 background: "#fff",
-                height: "260px",
+                // height: "260px",
                 width: "100%",
 
             }
@@ -1449,7 +1501,7 @@ export default {
                 ...style,
                 // padding: "24px 12px",
                 background: "#fff",
-                height: "304px",
+                // height: "304px",
                 width: "100%",
 
             }
@@ -1568,6 +1620,32 @@ export default {
     },
     //#endregion
 
+    //#region 日照緊急聯絡人關係 標題 
+    dayCareEmergencyRelationshipTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 日照緊急聯絡人關係 內文 
+    dayCareEmergencyRelationshipText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
     //#region 日照緊急聯絡人手機 標題 
     dayCareEmergencyCellPhoneTitle: {
         basic: (style, props) => ({
@@ -1655,7 +1733,7 @@ export default {
                 ...style,
                 // padding: "24px 12px",
                 background: "#fff",
-                height: "260px",
+                // height: "260px",
                 width: "100%",
 
             }
@@ -1736,6 +1814,32 @@ export default {
     //#endregion
     //#region 偏鄉緊急聯絡人姓名 內文 
     ruralEmergencyNameText: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%",
+            textAlign: "right"
+        })
+    },
+    //#endregion
+
+    //#region 偏鄉緊急聯絡人關係 標題 
+    ruralEmergencyRelationshipTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0, 0, 0, 0.85)",
+            width: "50%"
+        })
+    },
+    //#endregion
+    //#region 偏鄉緊急聯絡人關係 內文 
+    ruralEmergencyRelationshipText: {
         basic: (style, props) => ({
             ...style,
             fontWeight: 400,
