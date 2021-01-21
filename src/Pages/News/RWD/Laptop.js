@@ -8,9 +8,6 @@ import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { SystemNewsComponent } from '../SystemNewsComponent/SystemNewsComponent'
-import { CaseNewsComponent } from '../CaseNewsComponent/CaseNewsComponent'
-import { WhiteNewsComponent } from '../WhiteNewsComponent/WhiteNewsComponent'
-import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
 
 const LaptopBase = (props) => {
 
@@ -26,9 +23,6 @@ const LaptopBase = (props) => {
                 return (
                     {
                         "系統公告": <SystemNewsComponent />,
-                        "長照": <CaseNewsComponent />,
-                        "共享車隊": <WhiteNewsComponent />,
-                        "巴士": <BusNewsComponent />
                     }
                 );
 

@@ -9,9 +9,6 @@ import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { SystemNewsComponent } from '../SystemNewsComponent/SystemNewsComponent'
-import { CaseNewsComponent } from '../CaseNewsComponent/CaseNewsComponent'
-import { WhiteNewsComponent } from '../WhiteNewsComponent/WhiteNewsComponent'
-import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
 import isUndefined from 'lodash/isUndefined';
 
 const LaptopLBase = (props) => {

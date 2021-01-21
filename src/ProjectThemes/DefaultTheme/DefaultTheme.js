@@ -13,9 +13,6 @@ import busRoute from './Pages/BusRoute/BusRoute'
 import allBusRouteComponent from './Pages/BusRoute/AllBusRouteComponent/AllBusRouteComponent'
 
 import systemNewsComponent from './Pages/News/SystemNewsComponent/SystemNewsComponent'
-import caseNewsComponent from './Pages/News/CaseNewsComponent/CaseNewsComponent'
-import busNewsComponent from './Pages/News/BusNewsComponent/BusNewsComponent'
-import whiteNewsComponent from './Pages/News/WhiteNewsComponent/WhiteNewsComponent'
 
 import callCar from './Pages/CallCar/CallCar'
 import caseCallCarComponent from './Pages/CallCar/CaseCallCarComponent/CaseCallCarComponent'
@@ -68,9 +65,6 @@ export default {
             ...news,
             component: {
                 systemNewsComponent,
-                caseNewsComponent,
-                busNewsComponent,
-                whiteNewsComponent,
             }
         },
 

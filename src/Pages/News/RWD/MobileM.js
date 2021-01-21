@@ -8,12 +8,8 @@ import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { SystemNewsComponent } from '../SystemNewsComponent/SystemNewsComponent'
-import { CaseNewsComponent } from '../CaseNewsComponent/CaseNewsComponent'
-import { WhiteNewsComponent } from '../WhiteNewsComponent/WhiteNewsComponent'
-import { BusNewsComponent } from '../BusNewsComponent/BusNewsComponent'
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
-import isUndefined from 'lodash/isUndefined';
-import { isEqual, isNil } from 'lodash';
+import { isEqual, isNil, isUndefined } from 'lodash';
 
 const MobileMBase = (props) => {
 
