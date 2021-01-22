@@ -25,7 +25,13 @@ const MobileMBase = (props) => {
             case "tabUseComponent":
                 return (
                     {
-                        "長照": <CaseCallCarComponent />,
+                        "長照": <CaseCallCarComponent
+                            BasicInf={props.BasicInf}
+                            CaseInf={props.CaseInf}
+                            Quota={props.Quota}
+                            BUnits={props.BUnits}
+                            CarType={props.CarType}
+                        />,
                         "共享車隊": <WhiteCallCarComponent />,
                         "巴士": <BusCallCarComponent />
                     }

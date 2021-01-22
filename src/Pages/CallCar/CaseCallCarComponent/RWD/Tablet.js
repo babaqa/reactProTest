@@ -190,7 +190,7 @@ const TabletBase = (props) => {
                     <Text
                         theme={tablet.callCarFormCaseName}
                     >
-                        {props?.UserName}
+                        {props.UserName}
                     </Text>
                     {/* 可用補助餘額查詢按鈕 */}
                     <NativeLineButton
@@ -227,7 +227,7 @@ const TabletBase = (props) => {
                                             <Text
                                                 theme={tablet.balanceInquiryMTodalText}
                                             >
-                                                ${`${props?.CaseDiscount?.totalAmt ?? 0}`}
+                                                ${`${props?.CaseDiscount?.totalDiscount ?? 0}`}
                                             </Text>
                                         </BasicContainer>
                                         <BasicContainer theme={tablet.balanceInquiryMTodalTextContainer}>
@@ -239,7 +239,7 @@ const TabletBase = (props) => {
                                             <Text
                                                 theme={tablet.balanceInquiryMTodalText}
                                             >
-                                                ${`${props?.CaseDiscount?.discountAmt ?? 0}`}
+                                                ${`${props?.CaseDiscount?.useDiscount ?? 0}`}
                                             </Text>
                                         </BasicContainer>
                                         <BasicContainer theme={tablet.balanceInquiryMTodalTextContainer}>
@@ -251,7 +251,7 @@ const TabletBase = (props) => {
                                             <Text
                                                 theme={tablet.balanceInquiryMTodalText}
                                             >
-                                                ${`${props?.CaseDiscount?.lastDiscountAmt ?? 0}`}
+                                                ${`${props?.CaseDiscount?.lastDiscount ?? 0}`}
                                             </Text>
                                         </BasicContainer>
                                     </Container>
@@ -368,7 +368,7 @@ const TabletBase = (props) => {
                         {/* 優先搭乘車行排序 */}
                         <BUnitSort
                             topLabel={<>優先搭乘車行排序 <Text theme={tablet.bUnitSortNote}>(請依序點擊完成排序)</Text></>}
-                            bUnit={props?.CaseUsers?.bUnitForCaseUser}
+                            bUnit={props.BUnits}
                             // bUnit={[
                             //     { id: "0", name: "0XXXX車行" },
                             //     { id: "1", name: "1XXXX車行" },
