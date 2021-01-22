@@ -533,16 +533,16 @@ const MobileMBase = (props) => {
                                                             <SubContainer
                                                                 theme={mobileM.forthAreaContainer}
                                                             >
-                                                                {/* 司機未執行按鈕 */}
+                                                                {/* 司機未到按鈕 */}
                                                                 <NativeLineButton
                                                                     baseDefaultTheme={"DefaultTheme"}
                                                                     disable={false}
                                                                     type="button" // 防止提交
                                                                     theme={mobileM.noExecuteButton}
                                                                     onClick={() => {
-                                                                        //#region 打開司機未執行警示 Modal
+                                                                        //#region 打開司機未到警示 Modal
                                                                         modalsService.infoModal.warn({
-                                                                            iconRightText: "確定司機未執行?",
+                                                                            iconRightText: "確定司機未到?",
                                                                             yes: true,
                                                                             yesText: "確認",
                                                                             no: true,
@@ -555,7 +555,7 @@ const MobileMBase = (props) => {
                                                                         // endregion
                                                                     }}
                                                                 >
-                                                                    司機未執行
+                                                                    司機未到
                                                                 </NativeLineButton>
 
 
