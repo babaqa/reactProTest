@@ -9,30 +9,22 @@ import { ReactComponent as Case } from '../../../../Assets/img/RecordPage/CaseMo
 import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/FleetMobileM.svg'
 import { ReactComponent as Bus } from '../../../../Assets/img/RecordPage/BusMobileM.svg'
 import { useHistory } from 'react-router-dom';
-import { DateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { DateTimePicker, BasicContainer, RangeDateTimePicker, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { CardTable } from '../../../../ProjectComponent'
+import moment from 'moment';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
+import { fmt } from '../../../../Handlers/DateHandler';
+import { isEqual, isEmpty, toString, isUndefined } from 'lodash';
+import { getParseItemLocalStorage } from '../../../../Handlers';
+
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { allRecordComponent: { rwd: { mobileM } } } } } = Theme;
+    let history = useHistory()
+    const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
     const [Width, Height] = useWindowSize();
 
-    let data = [
-        { id: 0, case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 1, case: "巴士", passenger: ["123", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 2, case: "共享車隊", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 3, case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 4, case: "巴士", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 5, case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 6, case: "巴士", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 7, case: "共享車隊", passenger: ["王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 8, case: "共享車隊", userName: "王大明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 9, case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 10, case: "巴士", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 11, case: "共享車隊", passenger: ["王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        { id: 12, case: "共享車隊", userName: "王大明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-    ]
 
     const switchCase = (key) => {
         switch (key) {
@@ -63,7 +55,7 @@ const MobileMBase = (props) => {
 
     return (
         <>
-            {data.length === 0
+            {props.data.length === 0
                 ?
                 <>
                     {/* 無資料表單區容器 */}
@@ -81,19 +73,19 @@ const MobileMBase = (props) => {
                         <CardTable
                             dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
                             dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                                if (globalContextService.get("RocordPage", "orgId") !== globalContextService.get("RocordPage", "TableCheckedClearKey")) {
-                                    globalContextService.remove("RocordPage", "CheckedRowKeys");
-                                    globalContextService.remove("RocordPage", "CheckedRowsData");
+                                if (globalContextService.get("RecordPage", "orgId") !== globalContextService.get("RecordPage", "TableCheckedClearKey")) {
+                                    globalContextService.remove("RecordPage", "CheckedRowKeys");
+                                    globalContextService.remove("RecordPage", "CheckedRowsData");
                                 }
                             }}
                             checkbox={false}
-                            checked={globalContextService.get("RocordPage", "CheckedRowKeys") && globalContextService.get("RocordPage", "CheckedRowKeys")}
+                            checked={globalContextService.get("RecordPage", "CheckedRowKeys") && globalContextService.get("RecordPage", "CheckedRowKeys")}
                             checkedRowKeyName={"id"}
                             checkboxOnChecked={
                                 (checkedRowKeys, checkedRows) => {
                                     // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                    globalContextService.set("RocordPage", "CheckedRowKeys", checkedRowKeys);
-                                    globalContextService.set("RocordPage", "CheckedRowsData", checkedRows);
+                                    globalContextService.set("RecordPage", "CheckedRowKeys", checkedRowKeys);
+                                    globalContextService.set("RecordPage", "CheckedRowsData", checkedRows);
                                     //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
                                     //#endregion
                                 }
@@ -116,6 +108,42 @@ const MobileMBase = (props) => {
                                         // sorter: (a, b) => a.carType.length - b.carType.length,
                                         // fixed: 'left',
                                         render: (rowData) => {
+                                            const cancelStatus = (status) => {
+                                                switch (toString(status)) {
+                                                    case "SYS_ORDERCANCEL_REMARK_ADMIN":
+                                                        return "單位取消";
+                                                    case "SYS_ORDERCANCEL_REMARK_CLIENT":
+                                                        return "個案取消";
+                                                    case "SYS_ORDERCANCEL_REMARK_DRIVER":
+                                                        return "空趟";
+                                                    case "SYS_ORDERCANCEL_REMARK_CLIENT_NOTARRIVED":
+                                                        return "司機未到";
+                                                    case "SYS_ORDERCANCEL_REMARK_CLIENT_NOORG":
+                                                        return "無派車";
+                                                    default:
+                                                        return "已取消";
+                                                }
+                                            }
+
+                                            const statusMapping = (status, getTheme = false, cancelReamrk = "") => {
+                                                switch (toString(status)) {
+                                                    case "1":
+                                                        return (getTheme ? mobileM.statusTag.newOrder : "新訂單");
+                                                    case "2":
+                                                        return (getTheme ? mobileM.statusTag.assignedOrder : "已排班");
+                                                    case "3":
+                                                        return (getTheme ? mobileM.statusTag.arrivalOrder : "抵達搭車地點");
+                                                    case "4":
+                                                        return (getTheme ? mobileM.statusTag.customUpOrder : "客上");
+                                                    case "5":
+                                                        return (getTheme ? mobileM.statusTag.finishedOrder : "已完成");
+                                                    case "9":
+                                                        return (getTheme ? mobileM.statusTag.unitCancleOrder : cancelStatus(cancelReamrk));
+                                                    default:
+                                                        return (getTheme ? {} : "無此狀態");
+                                                }
+                                            }
+
                                             return (
                                                 <>
                                                     {/* 卡片資料表單區容器 */}
@@ -130,17 +158,17 @@ const MobileMBase = (props) => {
                                                                 theme={mobileM.firstAreaContainer}
                                                             >
                                                                 {
-                                                                    switchCase(rowData?.case)
+                                                                    switchCase(props.nowTab)
                                                                 }
 
                                                                 {/* 使用者名稱 UserName*/}
                                                                 <Text
                                                                     theme={mobileM.userName}
                                                                 >
-                                                                    {rowData?.userName}
+                                                                    {rowData?.userName ?? getParseItemLocalStorage("UserName")}
 
 
-                                                                    {rowData?.case === "長照"
+                                                                    {props.nowTab === "長照"
                                                                         &&
                                                                         <>
                                                                             {/* 案號 標題*/}
@@ -161,7 +189,7 @@ const MobileMBase = (props) => {
 
                                                                 </Text>
 
-                                                                {rowData?.case !== "巴士"
+                                                                {props.nowTab !== "巴士"
                                                                     &&
                                                                     <>
                                                                         {/* 已共乘  ShareText*/}
@@ -178,8 +206,8 @@ const MobileMBase = (props) => {
 
                                                                 <Tag
                                                                     baseDefaultTheme={"DefaultTheme"}
-                                                                    theme={mobileM.cancelTag}
-                                                                    text={"服務單位取消"}
+                                                                    theme={statusMapping(rowData.status, true)}
+                                                                    text={statusMapping(rowData.status, false, rowData.cancelReamrk)}
                                                                 />
 
 
@@ -201,7 +229,7 @@ const MobileMBase = (props) => {
                                                                     <Text
                                                                         theme={mobileM.orderNumberText}
                                                                     >
-                                                                        {rowData?.orderNumber}
+                                                                        {rowData?.orderNo}
                                                                     </Text>
                                                                 </Text>
 
@@ -215,7 +243,7 @@ const MobileMBase = (props) => {
                                                                     <Text
                                                                         theme={mobileM.bookRideText}
                                                                     >
-                                                                        {rowData?.bookRide}
+                                                                        {rowData?.reserveDate}
                                                                     </Text>
                                                                 </Text>
 
@@ -229,7 +257,7 @@ const MobileMBase = (props) => {
                                                                     <Text
                                                                         theme={mobileM.driverText}
                                                                     >
-                                                                        {rowData?.driver}
+                                                                        {rowData?.driverInfoName}
                                                                     </Text>
                                                                 </Text>
 
@@ -243,7 +271,7 @@ const MobileMBase = (props) => {
                                                                     <Text
                                                                         theme={mobileM.licensePlateText}
                                                                     >
-                                                                        {rowData?.licensePlate}
+                                                                        {rowData?.carNo}
                                                                     </Text>
                                                                 </Text>
 
@@ -261,26 +289,26 @@ const MobileMBase = (props) => {
                                                                     theme={mobileM.thirdAreaTopContainer}
                                                                 >
 
-                                                                    {rowData?.case === "共享車隊"
+                                                                    {props.nowTab === "共享車隊"
                                                                         &&
                                                                         <>
-                                                                            {/* 是否共乘 特別版 標題 */}
+                                                                            {/* 可否共乘 特別版 標題 */}
                                                                             <Text
                                                                                 theme={mobileM.specialCanShareTitle}
                                                                             >
-                                                                                是否共乘
+                                                                                可否共乘
 
-                                                                                {/* 是否共乘 特別版 內文 */}
+                                                                                {/* 可否共乘 特別版 內文 */}
                                                                                 <Text
                                                                                     theme={mobileM.specialCanShareText}
                                                                                 >
-                                                                                    {rowData?.canShare}
+                                                                                    {rowData?.canShared ? "願意共乘" : "不願共乘"}
                                                                                 </Text>
                                                                             </Text>
                                                                         </>
                                                                     }
 
-                                                                    {rowData?.case !== "長照"
+                                                                    {props.nowTab !== "長照"
                                                                         &&
                                                                         <>
                                                                             {/* 人數 特別版 標題 */}
@@ -293,13 +321,13 @@ const MobileMBase = (props) => {
                                                                                 <Text
                                                                                     theme={mobileM.specialNumberOfPeopleText}
                                                                                 >
-                                                                                    {rowData?.numberOfPeople + "人"}
+                                                                                    {rowData?.passengerNum}人
                                                                                 </Text>
                                                                             </Text>
                                                                         </>
                                                                     }
 
-                                                                    {rowData?.case !== "共享車隊"
+                                                                    {props.nowTab !== "共享車隊"
                                                                         &&
                                                                         <>
                                                                             {/* 車資總額 標題 */}
@@ -308,15 +336,15 @@ const MobileMBase = (props) => {
                                                                             >
                                                                                 車資總額
 
-                                                                                    {/* 車資總額 內文 */}
+                                                                                {/* 車資總額 內文 */}
                                                                                 <Text
                                                                                     theme={mobileM.totalFareText}
                                                                                 >
-                                                                                    {"$" + rowData?.totalFareText}
+                                                                                    ${rowData?.totalAmt ?? 0}
                                                                                 </Text>
                                                                             </Text>
 
-                                                                            {rowData?.case === "長照"
+                                                                            {props.nowTab === "長照"
                                                                                 &&
                                                                                 <>
                                                                                     {/* 政府補助 標題 */}
@@ -325,11 +353,11 @@ const MobileMBase = (props) => {
                                                                                     >
                                                                                         政府補助
 
-                                                                                {/* 政府補助 內文 */}
+                                                                                    {/* 政府補助 內文 */}
                                                                                         <Text
                                                                                             theme={mobileM.govSubsidyText}
                                                                                         >
-                                                                                            {"$" + rowData?.govSubsidy}
+                                                                                            ${rowData?.govSubsidy ?? 0}
                                                                                         </Text>
                                                                                     </Text>
 
@@ -343,7 +371,7 @@ const MobileMBase = (props) => {
                                                                                         <Text
                                                                                             theme={mobileM.accompanyingAmountText}
                                                                                         >
-                                                                                            {"$" + rowData?.accompanyingAmount}
+                                                                                            ${rowData?.withAmt ?? 0}
                                                                                         </Text>
                                                                                     </Text>
                                                                                 </>
@@ -354,7 +382,7 @@ const MobileMBase = (props) => {
                                                                     <Text
                                                                         theme={mobileM.caseBurdenTitle}
                                                                     >
-                                                                        {rowData?.case === "長照"
+                                                                        {props.nowTab === "長照"
                                                                             ?
                                                                             "個案負擔"
                                                                             :
@@ -365,26 +393,26 @@ const MobileMBase = (props) => {
                                                                         <Text
                                                                             theme={mobileM.caseBurdenText}
                                                                         >
-                                                                            {"$" + rowData?.caseBurden}
+                                                                            ${rowData?.caseBurden ?? 0}
                                                                         </Text>
                                                                     </Text>
 
                                                                 </Container>
 
-                                                                {rowData?.case === "長照"
+                                                                {props.nowTab === "長照"
                                                                     &&
                                                                     <>
-                                                                        {/* 是否共乘 標題 */}
+                                                                        {/* 可否共乘 標題 */}
                                                                         <Text
                                                                             theme={mobileM.canShareTitle}
                                                                         >
-                                                                            是否共乘
+                                                                            可否共乘
 
-                                                                                {/* 是否共乘 內文 */}
+                                                                                {/* 可否共乘 內文 */}
                                                                             <Text
                                                                                 theme={mobileM.canShareText}
                                                                             >
-                                                                                {rowData?.canShare}
+                                                                                {rowData?.canShared ? "願意共乘" : "不願共乘"}
                                                                             </Text>
                                                                         </Text>
 
@@ -400,7 +428,7 @@ const MobileMBase = (props) => {
                                                                             <Text
                                                                                 theme={mobileM.numberOfPeopleText}
                                                                             >
-                                                                                {rowData?.numberOfPeople + "人"}
+                                                                                {rowData?.familyWith}人
                                                                             </Text>
                                                                         </Text>
                                                                     </>
@@ -414,18 +442,18 @@ const MobileMBase = (props) => {
                                                                     服務單位
 
                                                                     {/* 服務單位 內文 */}
-                                                                    <Tooltip placement="top" title={rowData?.serviceUnit}>
+                                                                    <Tooltip placement="top" title={rowData?.orgName}>
 
                                                                         <Text
                                                                             theme={mobileM.serviceUnitText}
                                                                         >
-                                                                            {rowData?.serviceUnit}
+                                                                            {rowData?.orgName}
                                                                         </Text>
                                                                     </Tooltip>
 
                                                                 </Text>
 
-                                                                {rowData?.case !== "長照"
+                                                                {props.nowTab !== "長照"
                                                                     &&
                                                                     <Container>
 
@@ -442,14 +470,14 @@ const MobileMBase = (props) => {
                                                                         >
                                                                             <Container>
                                                                                 {
-                                                                                    (rowData?.passenger ?? []).map((passenger, index) => {
+                                                                                    (JSON.parse(isEmpty(rowData?.remark) ? "[]" : rowData.remark)).map((passenger, index) => {
                                                                                         return (
                                                                                             <React.Fragment key={index}>
                                                                                                 {/* 乘客 內文 */}
                                                                                                 <Text
                                                                                                     theme={mobileM.passengerText}
                                                                                                 >
-                                                                                                    {passenger}
+                                                                                                    {passenger.name}
 
                                                                                                 </Text>
                                                                                             </React.Fragment>
@@ -478,7 +506,7 @@ const MobileMBase = (props) => {
                                                                     <Text
                                                                         theme={mobileM.startPointText}
                                                                     >
-                                                                        {rowData?.startPoint}
+                                                                        {props.nowTab === "巴士" ? rowData?.fromStationName : rowData?.fromAddr}
                                                                     </Text>
 
                                                                     {/* 迄點 標題 */}
@@ -494,7 +522,7 @@ const MobileMBase = (props) => {
                                                                     <Text
                                                                         theme={mobileM.endPointText}
                                                                     >
-                                                                        {rowData?.endPoint}
+                                                                        {props.nowTab === "巴士" ? rowData?.toStationName : rowData?.toAddr}
                                                                     </Text>
 
                                                                 </Container>
@@ -531,7 +559,7 @@ const MobileMBase = (props) => {
                                                                 </NativeLineButton>
 
 
-                                                                {rowData?.case !== "巴士"
+                                                                {props.nowTab !== "巴士"
                                                                     &&
                                                                     <>
                                                                         {/* 再叫一次按鈕 */}
@@ -592,25 +620,26 @@ const MobileMBase = (props) => {
                             }
                             //sort
                             showHeader={false}
-                            data={data}
+                            data={props.data}
                             clickPage={(currentPage, pageSize) => {
                             }}
                         />
 
                     </Container>
-                </>
-            }
 
-            {data.length <= 10
-                &&
-                <>
-                    {/* 沒有更多訂單檢視 提醒 */}
-                    <Text
-                        theme={mobileM.noDataTip}
-                    >
-                        沒有更多訂單檢視
-                    </Text>
+                    {props.data.length <= 10
+                        &&
+                        <>
+                            {/* 沒有更多訂單檢視 提醒 */}
+                            <Text
+                                theme={mobileM.noDataTip}
+                            >
+                                沒有更多訂單檢視
+                            </Text>
+                        </>
+                    }
                 </>
+
             }
         </>
 

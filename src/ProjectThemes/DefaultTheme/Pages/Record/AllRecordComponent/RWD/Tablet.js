@@ -230,23 +230,127 @@ export default {
     },
     //#endregion
 
-    //#region 服務單位取消
-    cancelTag: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                position: "absolute",
-                margin: 0,
-                bottom: 0,
-                padding: "0px 7px",
-                fontSize: "12px",
-                lineHeight: "20px",
-                color: "#FA8C16",
-                backgroundColor: "#FFF7E6",
-                borderColor: "#FFD591"
-            }),
-            hover: {}
-        }
+    //#region 訂單狀態 Tag 區域
+    statusTag: {
+        //#region 新訂單
+        newOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 36px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#FA8C16",
+                    backgroundColor: "#FFF7E6",
+                    borderColor: "#FFD591"
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 已排班
+        assignedOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 36px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#52C41A",
+                    backgroundColor: "#F6FFED",
+                    borderColor: "#B7EB8F"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 抵達搭車地點
+        arrivalOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 0 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#1890FF",
+                    backgroundColor: "#E6F7FF",
+                    borderColor: "#91D5FF"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 客上
+        customUpOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 48px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#F5222D",
+                    backgroundColor: "#FFF1F0",
+                    borderColor: "#FFA39E"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 已完成
+        finishedOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 36px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "rgba(0, 0, 0, 0.65)",
+                    backgroundColor: "#FAFAFA",
+                    borderColor: "#D9D9D9"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
+        //#region 已取消
+        unitCancleOrder: {
+            container: {
+                basic: (style, props) => ({
+                    ...style,
+                    margin: "0 36px 0 0",
+                    position: "absolute",
+                    bottom: 0,
+                    padding: "0px 7px",
+                    fontSize: "12px",
+                    lineHeight: "20px",
+                    color: "#FA541C",
+                    backgroundColor: "#FFF2E8",
+                    borderColor: "#FFBB96"
+
+                }),
+                hover: {}
+            }
+        },
+        //#endregion
     },
     //#endregion
 

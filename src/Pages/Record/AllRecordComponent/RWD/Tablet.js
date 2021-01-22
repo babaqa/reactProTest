@@ -5,57 +5,84 @@ import { ReactComponent as NoData } from '../../../../Assets/img/RecordPage/NoDa
 import { ReactComponent as Share } from '../../../../Assets/img/RecordPage/Share.svg'
 import { ReactComponent as Start } from '../../../../Assets/img/RecordPage/Start.svg'
 import { ReactComponent as End } from '../../../../Assets/img/RecordPage/End.svg'
-import { ReactComponent as Case } from '../../../../Assets/img/RecordPage/CaseTablet.svg'
-import { ReactComponent as Fleet } from '../../../../Assets/img/RecordPage/FleetTablet.svg'
-import { ReactComponent as Bus } from '../../../../Assets/img/RecordPage/BusTablet.svg'
+import { ReactComponent as CaseLaptopL } from '../../../../Assets/img/RecordPage/CaseLaptopL.svg'
+import { ReactComponent as CaseLaptop } from '../../../../Assets/img/RecordPage/CaseLaptop.svg'
+import { ReactComponent as CaseTablet } from '../../../../Assets/img/RecordPage/CaseTablet.svg'
+import { ReactComponent as FleetLaptopL } from '../../../../Assets/img/RecordPage/FleetLaptopL.svg'
+import { ReactComponent as FleetLaptop } from '../../../../Assets/img/RecordPage/FleetLaptop.svg'
+import { ReactComponent as FleetTablet } from '../../../../Assets/img/RecordPage/FleetTablet.svg'
+import { ReactComponent as BusLaptopL } from '../../../../Assets/img/RecordPage/BusLaptopL.svg'
+import { ReactComponent as BusLaptop } from '../../../../Assets/img/RecordPage/BusLaptop.svg'
+import { ReactComponent as BusTablet } from '../../../../Assets/img/RecordPage/BusTablet.svg'
 import { useHistory } from 'react-router-dom';
-import { DateTimePicker, RangeDateTimePicker, BasicContainer, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { DateTimePicker, BasicContainer, RangeDateTimePicker, Tag, Tooltip, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { CardTable } from '../../../../ProjectComponent'
 import moment from 'moment';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
+import { fmt } from '../../../../Handlers/DateHandler';
+import { isEqual, isEmpty, toString, isUndefined } from 'lodash';
+import { getParseItemLocalStorage } from '../../../../Handlers';
 
 const TabletBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { allRecordComponent: { rwd: { tablet } } } } } = Theme;
+    const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     let history = useHistory()
     const [Width, Height] = useWindowSize();
-
-    let data = [
-        { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "巴士", passenger: ["123", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "共享車隊", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路", endPoint: "台灣新北市板橋區自由路車站前", caseBurden: "123" },
-        // { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓台灣新北市板橋區自由路車站前麵線肉圓台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "巴士", passenger: ["123", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "巴士", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "共享車隊", passenger: ["王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "共享車隊", userName: "王大明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "長照", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "巴士", userName: "王小明明", caseNumber: "1081213001", share: true, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "願意共乘", numberOfPeople: "10", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "共享車隊", passenger: ["王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明", "321", "王小花", "王大明"], userName: "王小明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-        // { case: "共享車隊", userName: "王大明明", caseNumber: "1081213001", share: false, orderNumber: "TS16063797554258", bookRide: "2020-11-29 21:30", serviceUnit: "測試交通單位1測試交通單位1測試交通單位位測試交通單位1測試交通單位1測試交通單位位 text", driver: "王小明明", licensePlate: "MMM-0000", totalFareText: "480", govSubsidy: "480", accompanyingAmount: "0", canShare: "不願意共乘", numberOfPeople: "5", startPoint: "台灣新北市板橋區中山路一段161號一段161號一段161號一段161號", endPoint: "台灣新北市板橋區自由路車站前麵線肉圓", caseBurden: "123" },
-    ]
 
     const switchCase = (key) => {
         switch (key) {
             case "長照":
                 return (
                     <>
-                        <Case style={tablet.caseSvg} />
+                        {
+                            1440 <= Width &&
+                            <CaseLaptopL style={tablet.caseSvg} />
+                        }
+                        {
+                            (1024 <= Width && Width < 1440) &&
+                            <CaseLaptop style={tablet.caseSvg} />
+                        }
+                        {
+                            (768 <= Width && Width < 1024) &&
+                            <CaseTablet style={tablet.caseSvg} />
+                        }
                     </>
                 );
             case "共享車隊":
                 return (
                     <>
-                        <Fleet style={tablet.caseSvg} />
+                        {
+                            1440 <= Width &&
+                            <FleetLaptopL style={tablet.caseSvg} />
+                        }
+                        {
+                            (1024 <= Width && Width < 1440) &&
+                            <FleetLaptop style={tablet.caseSvg} />
+                        }
+                        {
+                            (768 <= Width && Width < 1024) &&
+                            <FleetTablet style={tablet.caseSvg} />
+                        }
                     </>
                 );
             case "巴士":
                 return (
                     <>
-                        <Bus style={tablet.caseSvg} />
+                        {
+                            1440 <= Width &&
+                            <BusLaptopL style={tablet.caseSvg} />
+                        }
+                        {
+                            (1024 <= Width && Width < 1440) &&
+                            <BusLaptop style={tablet.caseSvg} />
+                        }
+                        {
+                            (768 <= Width && Width < 1024) &&
+                            <BusTablet style={tablet.caseSvg} />
+                        }
                     </>
                 );
             default:
@@ -79,11 +106,22 @@ const TabletBase = (props) => {
                     placeholder={""}
                     // isMulti
                     // hideSelectedOptions={false}
-                    value={globalContextService.get("CaseCallCarComponentPage", "OrderTime") ?? null}
+                    value={globalContextService.get("RecordPage", "OrderTime") ?? { value: '2', label: "未來" }}
                     onChange={(e, value, onInitial) => {
-                        globalContextService.set("CaseCallCarComponentPage", "OrderTime", value);
-                        // console.log("請選擇居住縣市", value, globalContextService.get("OrderTime", "County"))
-                    }}
+                        if (!isEqual(value, globalContextService.get("RecordPage", "OrderTime"))) {
+                            if (value?.value === '1') {
+                                //過去訂單 - 預設上個月1號到今天 含已完成，已取消的訂單
+                                globalContextService.set("RecordPage", "DateTimeRange", [moment().add(-1, 'months').startOf("month"), moment().startOf("day")]);
+                            } else if (value?.value === '2') {
+                                //未來訂單 - 預設今天到下個月的最後一天 已完成，已取消之外的訂單
+                                globalContextService.set("RecordPage", "DateTimeRange", [moment().startOf("day"), moment().add(1, 'months').endOf('month')]);
+                            }
+                            globalContextService.set("RecordPage", "OrderTime", value);
+
+                            setForceUpdate(f => !f)
+                        }
+                    }
+                    }
                     options={
                         [
                             { value: '1', label: "過去" },
@@ -108,17 +146,24 @@ const TabletBase = (props) => {
                         (globalContextService.get("RecordPage", "DateTimeRange") ?
                             [moment(globalContextService.get("RecordPage", "DateTimeRange")[0]), moment(globalContextService.get("RecordPage", "DateTimeRange")[1])]
                             :
-                            [moment('2015-06-06', "YYYY-MM-DD"), moment('2015-06-06', "YYYY-MM-DD")]
+                            [moment().startOf("day"), moment().add(1, 'months').endOf('month')]
                         )
                     }
                     onChange={(value, momentObj) => {
-                        globalContextService.set("RecordPage", "DateTimeRange", value);
+                        if (!isEqual(value, globalContextService.get("RecordPage", "DateTimeRange"))) {
+
+                            if (!isUndefined(globalContextService.get("RecordPage", "firstUseAPIgetRecords"))) {
+                                props.GetRecordsExecute(true, fmt(moment(value[0])), fmt(moment(value[1])))
+
+                            }
+                            globalContextService.set("RecordPage", "DateTimeRange", value);
+                        }
                     }}
                     theme={tablet.dateTimeRange}
                 />
             </BasicContainer>
 
-            {data.length === 0
+            {props.data.length === 0
                 ?
                 <>
                     {/* 無資料表單區容器 */}
@@ -136,19 +181,19 @@ const TabletBase = (props) => {
                         <CardTable
                             dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
                             dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                                if (globalContextService.get("RocordPage", "orgId") !== globalContextService.get("RocordPage", "TableCheckedClearKey")) {
-                                    globalContextService.remove("RocordPage", "CheckedRowKeys");
-                                    globalContextService.remove("RocordPage", "CheckedRowsData");
+                                if (globalContextService.get("RecordPage", "orgId") !== globalContextService.get("RecordPage", "TableCheckedClearKey")) {
+                                    globalContextService.remove("RecordPage", "CheckedRowKeys");
+                                    globalContextService.remove("RecordPage", "CheckedRowsData");
                                 }
                             }}
                             checkbox={false}
-                            checked={globalContextService.get("RocordPage", "CheckedRowKeys") && globalContextService.get("RocordPage", "CheckedRowKeys")}
+                            checked={globalContextService.get("RecordPage", "CheckedRowKeys") && globalContextService.get("RecordPage", "CheckedRowKeys")}
                             checkedRowKeyName={"id"}
                             checkboxOnChecked={
                                 (checkedRowKeys, checkedRows) => {
                                     // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                    globalContextService.set("RocordPage", "CheckedRowKeys", checkedRowKeys);
-                                    globalContextService.set("RocordPage", "CheckedRowsData", checkedRows);
+                                    globalContextService.set("RecordPage", "CheckedRowKeys", checkedRowKeys);
+                                    globalContextService.set("RecordPage", "CheckedRowsData", checkedRows);
                                     //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
                                     //#endregion
                                 }
@@ -171,6 +216,42 @@ const TabletBase = (props) => {
                                         // sorter: (a, b) => a.carType.length - b.carType.length,
                                         // fixed: 'left',
                                         render: (rowData) => {
+                                            const cancelStatus = (status) => {
+                                                switch (toString(status)) {
+                                                    case "SYS_ORDERCANCEL_REMARK_ADMIN":
+                                                        return "單位取消";
+                                                    case "SYS_ORDERCANCEL_REMARK_CLIENT":
+                                                        return "個案取消";
+                                                    case "SYS_ORDERCANCEL_REMARK_DRIVER":
+                                                        return "空趟";
+                                                    case "SYS_ORDERCANCEL_REMARK_CLIENT_NOTARRIVED":
+                                                        return "司機未到";
+                                                    case "SYS_ORDERCANCEL_REMARK_CLIENT_NOORG":
+                                                        return "無派車";
+                                                    default:
+                                                        return "已取消";
+                                                }
+                                            }
+
+                                            const statusMapping = (status, getTheme = false, cancelReamrk = "") => {
+                                                switch (toString(status)) {
+                                                    case "1":
+                                                        return (getTheme ? tablet.statusTag.newOrder : "新訂單");
+                                                    case "2":
+                                                        return (getTheme ? tablet.statusTag.assignedOrder : "已排班");
+                                                    case "3":
+                                                        return (getTheme ? tablet.statusTag.arrivalOrder : "抵達搭車地點");
+                                                    case "4":
+                                                        return (getTheme ? tablet.statusTag.customUpOrder : "客上");
+                                                    case "5":
+                                                        return (getTheme ? tablet.statusTag.finishedOrder : "已完成");
+                                                    case "9":
+                                                        return (getTheme ? tablet.statusTag.unitCancleOrder : cancelStatus(cancelReamrk));
+                                                    default:
+                                                        return (getTheme ? {} : "無此狀態");
+                                                }
+                                            }
+
                                             return (
                                                 <>
                                                     {/* 卡片資料表單區容器 */}
@@ -185,16 +266,16 @@ const TabletBase = (props) => {
                                                                 theme={tablet.firstAreaContainer}
                                                             >
                                                                 {
-                                                                    switchCase(rowData?.case)
+                                                                    switchCase(props.nowTab)
                                                                 }
 
                                                                 {/* 使用者名稱 UserName*/}
                                                                 <Text
                                                                     theme={tablet.userName}
                                                                 >
-                                                                    {rowData?.userName}
+                                                                    {rowData?.userName ?? getParseItemLocalStorage("UserName")}
 
-                                                                    {rowData?.case === "長照"
+                                                                    {props.nowTab === "長照"
                                                                         &&
                                                                         <>
                                                                             {/* 案號 標題*/}
@@ -202,7 +283,7 @@ const TabletBase = (props) => {
                                                                                 theme={tablet.caseNumberTitle}
                                                                             >
                                                                                 案號
-                                                                     {/* 案號 內文*/}
+                                                                                {/* 案號 內文*/}
                                                                                 <Text
                                                                                     theme={tablet.caseNumberText}
                                                                                 >
@@ -217,11 +298,11 @@ const TabletBase = (props) => {
 
                                                             <Tag
                                                                 baseDefaultTheme={"DefaultTheme"}
-                                                                theme={tablet.cancelTag}
-                                                                text={"服務單位取消"}
+                                                                theme={statusMapping(rowData.status, true)}
+                                                                text={statusMapping(rowData.status, false, rowData.cancelReamrk)}
                                                             />
 
-                                                            {rowData?.case !== "巴士"
+                                                            {props.nowTab !== "巴士"
                                                                 &&
                                                                 <>
                                                                     {/* 已共乘  ShareText*/}
@@ -231,7 +312,7 @@ const TabletBase = (props) => {
                                                                         <Share
                                                                             style={tablet.shareSvg}
                                                                         />
-                                                                已共乘
+                                                                        已共乘
                                                                     </Text>
                                                                 </>
                                                             }
@@ -255,7 +336,7 @@ const TabletBase = (props) => {
                                                                             <Text
                                                                                 theme={tablet.orderNumberText}
                                                                             >
-                                                                                {rowData?.orderNumber}
+                                                                                {rowData?.orderNo}
                                                                             </Text>
                                                                         </Text>
 
@@ -269,7 +350,7 @@ const TabletBase = (props) => {
                                                                             <Text
                                                                                 theme={tablet.bookRideText}
                                                                             >
-                                                                                {rowData?.bookRide}
+                                                                                {rowData?.reserveDate}
                                                                             </Text>
                                                                         </Text>
 
@@ -282,12 +363,12 @@ const TabletBase = (props) => {
                                                                             服務單位
 
                                                                             {/* 服務單位 內文 */}
-                                                                            <Tooltip placement="top" title={rowData?.serviceUnit}>
+                                                                            <Tooltip placement="top" title={rowData?.orgName}>
 
                                                                                 <Text
                                                                                     theme={tablet.serviceUnitText}
                                                                                 >
-                                                                                    {rowData?.serviceUnit}
+                                                                                    {rowData?.orgName}
                                                                                 </Text>
                                                                             </Tooltip>
 
@@ -303,7 +384,7 @@ const TabletBase = (props) => {
                                                                             <Text
                                                                                 theme={tablet.driverText}
                                                                             >
-                                                                                {rowData?.driver}
+                                                                                {rowData?.driverInfoName}
                                                                             </Text>
                                                                         </Text>
 
@@ -317,11 +398,11 @@ const TabletBase = (props) => {
                                                                             <Text
                                                                                 theme={tablet.licensePlateText}
                                                                             >
-                                                                                {rowData?.licensePlate}
+                                                                                {rowData?.carNo}
                                                                             </Text>
                                                                         </Text>
 
-                                                                        {rowData?.case === "長照"
+                                                                        {props.nowTab === "長照"
                                                                             &&
                                                                             <Container>
                                                                                 {/* 車資總額 標題 */}
@@ -334,7 +415,7 @@ const TabletBase = (props) => {
                                                                                     <Text
                                                                                         theme={tablet.totalFareText}
                                                                                     >
-                                                                                        {"$" + rowData?.totalFareText}
+                                                                                        ${rowData?.totalAmt ?? 0}
                                                                                     </Text>
                                                                                 </Text>
 
@@ -348,7 +429,7 @@ const TabletBase = (props) => {
                                                                                     <Text
                                                                                         theme={tablet.govSubsidyText}
                                                                                     >
-                                                                                        {"$" + rowData?.govSubsidy}
+                                                                                        ${rowData?.govSubsidy ?? 0}
                                                                                     </Text>
                                                                                 </Text>
 
@@ -362,7 +443,7 @@ const TabletBase = (props) => {
                                                                                     <Text
                                                                                         theme={tablet.accompanyingAmountText}
                                                                                     >
-                                                                                        {"$" + rowData?.accompanyingAmount}
+                                                                                        ${rowData?.withAmt ?? 0}
                                                                                     </Text>
                                                                                 </Text>
 
@@ -371,20 +452,20 @@ const TabletBase = (props) => {
 
                                                                         <Container>
 
-                                                                            {rowData?.case !== "巴士"
+                                                                            {props.nowTab !== "巴士"
                                                                                 &&
                                                                                 <>
-                                                                                    {/* 是否共乘 標題 */}
+                                                                                    {/* 可否共乘 標題 */}
                                                                                     <Text
                                                                                         theme={tablet.canShareTitle}
                                                                                     >
-                                                                                        是否共乘
+                                                                                        可否共乘
 
-                                                                                        {/* 是否共乘 內文 */}
+                                                                                        {/* 可否共乘 內文 */}
                                                                                         <Text
                                                                                             theme={tablet.canShareText}
                                                                                         >
-                                                                                            {rowData?.canShare}
+                                                                                            {rowData?.canShared ? "願意共乘" : "不願共乘"}
                                                                                         </Text>
                                                                                     </Text>
                                                                                 </>
@@ -400,11 +481,11 @@ const TabletBase = (props) => {
                                                                                 <Text
                                                                                     theme={tablet.numberOfPeopleText}
                                                                                 >
-                                                                                    {rowData?.numberOfPeople + "人"}
+                                                                                    {props.nowTab === "長照" ? rowData?.familyWith : rowData?.passengerNum}人
                                                                                 </Text>
                                                                             </Text>
 
-                                                                            {rowData?.case === "巴士"
+                                                                            {props.nowTab === "巴士"
                                                                                 &&
                                                                                 <>
                                                                                     {/* 車資總額 標題 */}
@@ -417,7 +498,7 @@ const TabletBase = (props) => {
                                                                                         <Text
                                                                                             theme={tablet.totalFareText}
                                                                                         >
-                                                                                            {"$" + rowData?.totalFareText}
+                                                                                            ${rowData?.totalFareText ?? 0}
                                                                                         </Text>
                                                                                     </Text>
                                                                                 </>
@@ -447,7 +528,7 @@ const TabletBase = (props) => {
                                                                         <Text
                                                                             theme={tablet.startPointText}
                                                                         >
-                                                                            {rowData?.startPoint}
+                                                                            {props.nowTab === "巴士" ? rowData?.fromStationName : rowData?.fromAddr}
                                                                         </Text>
 
                                                                         {/* 迄點 標題 */}
@@ -463,10 +544,10 @@ const TabletBase = (props) => {
                                                                         <Text
                                                                             theme={tablet.endPointText}
                                                                         >
-                                                                            {rowData?.endPoint}
+                                                                            {props.nowTab === "巴士" ? rowData?.toStationName : rowData?.toAddr}
                                                                         </Text>
 
-                                                                        {rowData?.case === "長照"
+                                                                        {props.nowTab === "長照"
                                                                             &&
                                                                             <>
 
@@ -485,7 +566,7 @@ const TabletBase = (props) => {
                                                                                         <Text
                                                                                             theme={tablet.caseBurdenText}
                                                                                         >
-                                                                                            {"$" + rowData?.caseBurden}
+                                                                                            ${rowData?.caseBurden ?? 0}
                                                                                         </Text>
                                                                                     </Text>
 
@@ -514,10 +595,10 @@ const TabletBase = (props) => {
                                                                                                 // endregion
                                                                                             }}
                                                                                         >
-                                                                                            司機未執行
+                                                                                            司機未到
                                                                                         </NativeLineButton>
 
-                                                                                        {rowData?.case !== "巴士"
+                                                                                        {props.nowTab !== "巴士"
                                                                                             &&
                                                                                             <>
                                                                                                 {/* 再叫一次按鈕 */}
@@ -574,7 +655,7 @@ const TabletBase = (props) => {
                                                                             </>
                                                                         }
 
-                                                                        {rowData?.case !== "長照"
+                                                                        {props.nowTab !== "長照"
                                                                             &&
                                                                             <Container>
 
@@ -593,14 +674,14 @@ const TabletBase = (props) => {
                                                                                 >
                                                                                     <Container>
                                                                                         {
-                                                                                            (rowData?.passenger ?? []).map((passenger, index) => {
+                                                                                            (JSON.parse(isEmpty(rowData?.remark) ? "[]" : rowData.remark)).map((passenger, index) => {
                                                                                                 return (
                                                                                                     <React.Fragment key={index}>
                                                                                                         {/* 乘客 內文 */}
                                                                                                         <Text
                                                                                                             theme={tablet.passengerText}
                                                                                                         >
-                                                                                                            {passenger}
+                                                                                                            {passenger.name}
 
                                                                                                         </Text>
                                                                                                     </React.Fragment>
@@ -619,7 +700,7 @@ const TabletBase = (props) => {
                                                                 </Container>
 
                                                                 <Container>
-                                                                    {rowData?.case !== "長照"
+                                                                    {props.nowTab !== "長照"
                                                                         &&
                                                                         <>
                                                                             {/* 第四區塊 容器 */}
@@ -639,7 +720,7 @@ const TabletBase = (props) => {
                                                                                         <Text
                                                                                             theme={tablet.userBurdenText}
                                                                                         >
-                                                                                            {"$" + rowData?.caseBurden}
+                                                                                            ${rowData?.caseBurden ?? 0}
                                                                                         </Text>
                                                                                     </Text>
 
@@ -669,10 +750,10 @@ const TabletBase = (props) => {
                                                                                                 // endregion
                                                                                             }}
                                                                                         >
-                                                                                            司機未執行
+                                                                                            司機未到
                                                                                         </NativeLineButton>
 
-                                                                                        {rowData?.case !== "巴士"
+                                                                                        {props.nowTab !== "巴士"
                                                                                             &&
                                                                                             <>
                                                                                                 {/* 再叫一次按鈕 */}
@@ -739,7 +820,7 @@ const TabletBase = (props) => {
                             }
                             //sort
                             showHeader={false}
-                            data={data}
+                            data={props.data}
                             clickPage={(currentPage, pageSize) => {
                             }}
                         />

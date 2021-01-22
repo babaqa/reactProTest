@@ -32,13 +32,6 @@ const LaptopLBase = (props) => {
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
     const [Width, Height] = useWindowSize();
 
-    let data = props.data
-        .filter(X => {
-            if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value, '2') && (X.status === 9 || X.status === 5)) {
-                return false
-            }
-            return true
-        })
     // console.log("data", data)
     const switchCase = (key) => {
         switch (key) {
@@ -160,9 +153,6 @@ const LaptopLBase = (props) => {
                         )
                     }
                     onChange={(value, momentObj) => {
-                        // console.log("sdfsdfsdf", moment().startOf("day"), moment().add(1, 'months').endOf('month'), moment('2015-06-06', "YYYY-MM-DD"))
-
-                        // console.log(globalContextService.get("RecordPage", "DateTimeRange"))
                         if (!isEqual(value, globalContextService.get("RecordPage", "DateTimeRange"))) {
 
                             if (!isUndefined(globalContextService.get("RecordPage", "firstUseAPIgetRecords"))) {
@@ -178,7 +168,7 @@ const LaptopLBase = (props) => {
             {/* {console.log(data)} */}
 
             {
-                data.length === 0
+                props.data.length === 0
                     ?
                     <>
                         {/* 無資料表單區容器 */}
@@ -196,19 +186,19 @@ const LaptopLBase = (props) => {
                             <CardTable
                                 dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
                                 dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                                    if (globalContextService.get("RocordPage", "orgId") !== globalContextService.get("RocordPage", "TableCheckedClearKey")) {
-                                        globalContextService.remove("RocordPage", "CheckedRowKeys");
-                                        globalContextService.remove("RocordPage", "CheckedRowsData");
+                                    if (globalContextService.get("RecordPage", "orgId") !== globalContextService.get("RecordPage", "TableCheckedClearKey")) {
+                                        globalContextService.remove("RecordPage", "CheckedRowKeys");
+                                        globalContextService.remove("RecordPage", "CheckedRowsData");
                                     }
                                 }}
                                 checkbox={false}
-                                checked={globalContextService.get("RocordPage", "CheckedRowKeys") && globalContextService.get("RocordPage", "CheckedRowKeys")}
+                                checked={globalContextService.get("RecordPage", "CheckedRowKeys") && globalContextService.get("RecordPage", "CheckedRowKeys")}
                                 checkedRowKeyName={"id"}
                                 checkboxOnChecked={
                                     (checkedRowKeys, checkedRows) => {
                                         // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                        globalContextService.set("RocordPage", "CheckedRowKeys", checkedRowKeys);
-                                        globalContextService.set("RocordPage", "CheckedRowsData", checkedRows);
+                                        globalContextService.set("RecordPage", "CheckedRowKeys", checkedRowKeys);
+                                        globalContextService.set("RecordPage", "CheckedRowsData", checkedRows);
                                         //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
                                         //#endregion
                                     }
@@ -372,7 +362,7 @@ const LaptopLBase = (props) => {
                                                                         服務單位
 
                                                                     {/* 服務單位 內文 */}
-                                                                        <Tooltip placement="top" title={rowData?.serviceUnit}>
+                                                                        <Tooltip placement="top" title={rowData?.orgName}>
 
                                                                             <Text
                                                                                 theme={laptopL.serviceUnitText}
@@ -708,7 +698,7 @@ const LaptopLBase = (props) => {
                                 }
                                 //sort
                                 showHeader={false}
-                                data={data}
+                                data={props.data}
                                 clickPage={(currentPage, pageSize) => {
                                 }}
                             />

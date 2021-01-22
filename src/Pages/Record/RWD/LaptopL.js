@@ -8,6 +8,7 @@ import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
 import { AllRecordComponent } from '../AllRecordComponent/AllRecordComponent'
+import { isEqual } from 'lodash';
 
 const LaptopLBase = (props) => {
 
@@ -76,7 +77,17 @@ const LaptopLBase = (props) => {
                 {/* 切換使用的組件 */}
                 {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
                 <AllRecordComponent
-                    data={tabMap(props.nowTab)}
+                    data={tabMap(props.nowTab)
+                        .filter(X => {
+                            if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value ?? '2', '2') && (X.status === 9 || X.status === 5)) {
+                                return false
+                            }
+                            else if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value ?? '1', '1') && (X.status !== 9 && X.status !== 5)) {
+                                return false
+                            }
+                            return true
+                        })
+                    }
                     nowTab={props.nowTab}
                     GetRecordsExecute={props.GetRecordsExecute} // 取得用戶各種訂單紀錄資料
                     GetRecordsPending={props.GetRecordsPending}

@@ -22,7 +22,7 @@ export const Record = (props) => {
     const [BusRecord, setBusRecord] = useState([]); // 巴士搭乘紀錄
     // const [RemoteCithRecord, setRemoteCithRecord] = useState([]); // 偏鄉搭乘紀錄
     // const [DayCareRecord, setDayCareRecord] = useState([]); // 日照搭乘紀錄
-    const [NowTab, setNowTab] = useState("長照"); // 目前搭乘紀錄葉面
+    const [NowTab, setNowTab] = useState("長照"); // 目前搭乘紀錄頁面
     const [Width, Height] = useWindowSize();
     let history = useHistory();
 
@@ -157,7 +157,7 @@ export const Record = (props) => {
                     CaseRecord={CaseRecord} // 長照搭乘紀錄
                     WhiteRecord={WhiteRecord} // 共享車隊搭乘紀錄
                     BusRecord={BusRecord}  // 巴士搭乘紀錄
-                    nowTab={NowTab} // 目前搭乘紀錄葉面
+                    nowTab={NowTab}  // 目前搭乘紀錄頁面
                     GetRecordsExecute={GetRecordsExecute} // 取得用戶各種訂單紀錄資料
                     GetRecordsPending={GetRecordsPending}
                     setNowTab={setNowTab} // 設定目前搭乘紀錄葉面
@@ -192,8 +192,13 @@ export const Record = (props) => {
             {
                 Width < 768 &&
                 <MobileM
-                    nowTab={NowTab}
-                    setNowTab={setNowTab}
+                    CaseRecord={CaseRecord} // 長照搭乘紀錄
+                    WhiteRecord={WhiteRecord} // 共享車隊搭乘紀錄
+                    BusRecord={BusRecord}  // 巴士搭乘紀錄
+                    nowTab={NowTab}  // 目前搭乘紀錄頁面
+                    GetRecordsExecute={GetRecordsExecute} // 取得用戶各種訂單紀錄資料
+                    GetRecordsPending={GetRecordsPending}
+                    setNowTab={setNowTab} // 設定目前搭乘紀錄葉面
                 />
             }
         </>
