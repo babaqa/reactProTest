@@ -14,7 +14,7 @@ const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { record: { rwd: { mobileM } } } } = Theme;
     const [Width, Height] = useWindowSize();
-    const [OrderStatus, setOrderStatus] = useState(globalContextService.get("RecordPage", "OrderTime") ?? { value: '2', label: "未來" })
+    const [OrderStatus, setOrderStatus] = useState(globalContextService.get("RecordPage", "OrderTime") ?? { value: '2', label: "未來訂單" })
 
     //#region 分頁映射
     const tabMap = (key) => {
@@ -56,8 +56,8 @@ const MobileMBase = (props) => {
                                         if (OrderStatus?.value === '2') {
                                             //過去訂單 - 預設上個月1號到今天 含已完成，已取消的訂單
                                             globalContextService.set("RecordPage", "DateTimeRange", [moment().add(-1, 'months').startOf("month"), moment().startOf("day")]);
-                                            globalContextService.set("RecordPage", "OrderTime", { value: '1', label: "過去" })
-                                            setOrderStatus({ value: '1', label: "過去" })
+                                            globalContextService.set("RecordPage", "OrderTime", { value: '1', label: "過去訂單" })
+                                            setOrderStatus({ value: '1', label: "過去訂單" })
 
                                         }
                                     }}
@@ -76,8 +76,8 @@ const MobileMBase = (props) => {
                                         if (OrderStatus?.value === '1') {
                                             //未來訂單 - 預設今天到下個月的最後一天 已完成，已取消之外的訂單
                                             globalContextService.set("RecordPage", "DateTimeRange", [moment().startOf("day"), moment().add(1, 'months').endOf('month')]);
-                                            globalContextService.set("RecordPage", "OrderTime", { value: '2', label: "未來" })
-                                            setOrderStatus({ value: '2', label: "未來" })
+                                            globalContextService.set("RecordPage", "OrderTime", { value: '2', label: "未來訂單" })
+                                            setOrderStatus({ value: '2', label: "未來訂單" })
                                         }
                                     }}
                                 >

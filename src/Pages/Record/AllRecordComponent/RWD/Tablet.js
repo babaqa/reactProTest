@@ -106,7 +106,7 @@ const TabletBase = (props) => {
                     placeholder={""}
                     // isMulti
                     // hideSelectedOptions={false}
-                    value={globalContextService.get("RecordPage", "OrderTime") ?? { value: '2', label: "未來" }}
+                    value={globalContextService.get("RecordPage", "OrderTime") ?? { value: '2', label: "未來訂單" }}
                     onChange={(e, value, onInitial) => {
                         if (!isEqual(value, globalContextService.get("RecordPage", "OrderTime"))) {
                             if (value?.value === '1') {
@@ -124,8 +124,8 @@ const TabletBase = (props) => {
                     }
                     options={
                         [
-                            { value: '1', label: "過去" },
-                            { value: '2', label: "未來" },
+                            { value: '1', label: "過去訂單" },
+                            { value: '2', label: "未來訂單" },
                         ]
                     }
                     // menuPosition={true}
