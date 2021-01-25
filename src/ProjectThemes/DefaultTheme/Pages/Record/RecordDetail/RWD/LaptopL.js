@@ -1245,4 +1245,44 @@ export default {
     },
     //#endregion
     //#endregion
+
+    //#region 回列表按鈕
+    //#region 回列表按鈕容器
+    returnContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            width: "100%",
+            textAlign: "right",
+            padding: "16px"
+        }),
+    },
+    //#endregion
+
+    //#region 回列表按鈕
+    returnButton: {
+        basic: (style) => ({
+            ...style,
+            width: "82px",
+            height: "28px",
+            fontSize: "14px",
+            lineHeight: "22px",
+            top: "2px",
+            padding: 0,
+            color: "#1890ff",
+            backgroundColor: "#fff",
+            borderColor: "#1890ff",
+            borderRadius: "2px",
+            // margin: "0 16px 0 0"
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion
+
+    //#endregion
+
 }

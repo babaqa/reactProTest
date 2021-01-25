@@ -6,7 +6,7 @@ import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Select
 import { ReactComponent as CaseLaptopL } from '../../../../Assets/img/RecordDetailPage/CaseLaptopL.svg'
 import { ReactComponent as FleetLaptopL } from '../../../../Assets/img/RecordDetailPage/FleetLaptopL.svg'
 import { ReactComponent as BusLaptopL } from '../../../../Assets/img/RecordDetailPage/BusLaptopL.svg'
-import { ReactComponent as Share } from '../../../../Assets/img/RecordPage/Share.svg'
+import { ReactComponent as Share } from '../../../../Assets/img/RecordDetailPage/Share.svg'
 import { useHistory } from 'react-router-dom';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { toString, isNil } from 'lodash';
@@ -19,7 +19,7 @@ const LaptopLBase = (props) => {
     const [Width, Height] = useWindowSize();
     let history = useHistory()
 
-    let caseflg = "巴士"
+    let caseflg = "長照"
     // "長照", "共享車隊", "巴士"
     //#region 取消狀態分類
     const cancelStatus = (status) => {
@@ -180,7 +180,7 @@ const LaptopLBase = (props) => {
                         <SubContainer
                             theme={laptopL.caseDetailContainer}
                         >
-                            {/* 姓名行容器 */}
+                            {/* 案件明細內容器 */}
                             <Container
                                 theme={laptopL.insideContainer}
                             >
@@ -401,11 +401,11 @@ const LaptopLBase = (props) => {
                                                     >
                                                         政府補助
 
-                                {/* 政府補助 內文 */}
+                                                        {/* 政府補助 內文 */}
                                                         <Text
                                                             theme={laptopL.govSubsidyText}
                                                         >
-                                                            ${props?.govSubsidy ?? 0}
+                                                            ${props?.govSubsidy ?? 1234}
                                                         </Text>
                                                     </Text>
 
@@ -415,11 +415,11 @@ const LaptopLBase = (props) => {
                                                     >
                                                         陪同金額
 
-                                {/* 陪同金額 內文 */}
+                                                        {/* 陪同金額 內文 */}
                                                         <Text
                                                             theme={laptopL.accompanyingAmountText}
                                                         >
-                                                            ${props?.withAmt ?? 0}
+                                                            ${props?.withAmt ?? 4321}
                                                         </Text>
                                                     </Text>
                                                 </>
@@ -599,8 +599,8 @@ const LaptopLBase = (props) => {
                                     theme={laptopL.endPointTitle}
                                 >
 
-                                    {/* 迄 {props.fromAddr ?? "(復健診所)"} */}
-                                    迄
+                                    迄 {props.fromAddr ?? "(復健診所)"}
+                                    {/* 迄 */}
                                 </Text>
 
                                 {/* 迄點 內文 */}
@@ -756,6 +756,25 @@ const LaptopLBase = (props) => {
                     </SubContainer>
 
                 </BasicContainer>
+
+                {/*  回列表按鈕 (標題列右方) 容器 */}
+                <SubContainer
+                    baseDefaultTheme={"DefaultTheme"}
+                    theme={laptopL.returnContainer}
+                >
+                    {/* 回列表按鈕 */}
+                    <NativeLineButton
+                        baseDefaultTheme={"DefaultTheme"}
+                        disable={false}
+                        type="button" // 防止提交
+                        theme={laptopL.returnButton}
+                        onClick={() => {
+                            history.goBack()
+                        }}
+                    >
+                        回列表
+                    </NativeLineButton>
+                </SubContainer>
 
             </MainPageContainer>
         </>

@@ -29,7 +29,7 @@ export const Record = (props) => {
     //#region 路由監聽，清除API紀錄 (渲染即觸發的每一個API都要有)
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
-            //console.log(location, action)
+            // console.log(location, action)
             globalContextService.remove("RecordPage", "firstUseAPIgetRecords");
             globalContextService.remove("RecordPage")
         });
@@ -39,7 +39,6 @@ export const Record = (props) => {
         }
     }, [])
     //#endregion
-    console.log()
     //#region 取得用戶各種訂單紀錄資料 API
     const getRecords = useCallback(async (useAPI = false, startData = fmt(moment().startOf("day")), endDate = fmt(moment().add(1, 'months').endOf('month'))) => {
 

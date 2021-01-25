@@ -585,8 +585,7 @@ const MobileMBase = (props) => {
                                                                     type="button" // 防止提交
                                                                     theme={mobileM.rideDetailsButton}
                                                                     onClick={() => {
-                                                                        // history.push("/Order/WhiteOrder");
-                                                                        // props.controllGCS("return")
+                                                                        history.push("/Record/Detail");
                                                                     }}
                                                                 >
                                                                     乘車明細

@@ -624,7 +624,7 @@ const TabletBase = (props) => {
                                                                                             type="button" // 防止提交
                                                                                             theme={tablet.rideDetailsButton}
                                                                                             onClick={() => {
-                                                                                                // history.push("/Order/WhiteOrder");
+                                                                                                history.push("/Record/Detail");
                                                                                                 // props.controllGCS("return")
                                                                                             }}
                                                                                         >
