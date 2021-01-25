@@ -12,7 +12,7 @@ export default {
         },
         basicOutContainer: {
             basic: (style, props) => {
-                console.log(props)
+                // console.log(props)
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",

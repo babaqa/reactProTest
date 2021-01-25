@@ -9,8 +9,10 @@ import { ReactComponent as BusLaptopL } from '../../../../Assets/img/RecordDetai
 import { ReactComponent as Share } from '../../../../Assets/img/RecordDetailPage/Share.svg'
 import { useHistory } from 'react-router-dom';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
-import { toString, isNil } from 'lodash';
+import { toString, isNil, isEmpty } from 'lodash';
 import { getParseItemLocalStorage } from '../../../../Handlers';
+import isUndefined from 'lodash/isUndefined';
+import { posRemarksSelectOption } from '../../../../Mappings/Mappings'
 
 const LaptopLBase = (props) => {
 
@@ -19,7 +21,7 @@ const LaptopLBase = (props) => {
     const [Width, Height] = useWindowSize();
     let history = useHistory()
 
-    let caseflg = "長照"
+    // let props.case = "長照"
     // "長照", "共享車隊", "巴士"
     //#region 取消狀態分類
     const cancelStatus = (status) => {
@@ -117,7 +119,7 @@ const LaptopLBase = (props) => {
                         theme={laptopL.titleContainer}
                     >
                         {/* 案件類型圖標 */}
-                        {switchCase(caseflg)}
+                        {switchCase(props.case)}
 
                         <Container>
                             {/* 訂單編號 標題 */}
@@ -130,7 +132,7 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.orderNoText}
                                 >
-                                    {props?.orderNo ?? "TS16063797554258"}
+                                    {props.data?.orderNo}
                                 </Text>
                             </Text>
 
@@ -144,7 +146,7 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.reserveDateText}
                                 >
-                                    {props?.reserveDate ?? "2020-11-29 21:30"}
+                                    {props.data?.reserveDate}
                                 </Text>
 
                             </Text>
@@ -168,8 +170,8 @@ const LaptopLBase = (props) => {
                             {/* 狀態標籤 */}
                             <Tag
                                 baseDefaultTheme={"DefaultTheme"}
-                                theme={statusMapping(props.status ?? 9, true)}
-                                text={statusMapping(props.status ?? 9, false, props.cancelReamrk)}
+                                theme={statusMapping(props.data.status ?? 9, true)}
+                                text={statusMapping(props.data.status ?? 9, false, props.data.cancelReamrk)}
                             />
                         </SubContainer>
 
@@ -188,12 +190,12 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.userName}
                                 >
-                                    {props?.userName ?? getParseItemLocalStorage("UserName")}
+                                    {props.data?.userName ?? getParseItemLocalStorage("UserName")}
                                 </Text>
 
                                 {/* 案號檢核 */}
                                 {
-                                    caseflg === "長照"
+                                    props.case === "長照"
                                     &&
                                     <>
                                         {/* 案號 標題*/}
@@ -206,7 +208,7 @@ const LaptopLBase = (props) => {
                                             <Text
                                                 theme={laptopL.caseNumberText}
                                             >
-                                                {props?.caseNumber ?? "1081213001"}
+                                                {props.data?.caseNumber}
                                             </Text>
                                         </Text>
 
@@ -215,7 +217,7 @@ const LaptopLBase = (props) => {
 
                                 {/* 可否共乘檢核 */}
                                 {
-                                    caseflg !== "巴士"
+                                    props.case !== "巴士"
                                     &&
                                     <>
                                         {/* 可否共乘 標題 */}
@@ -223,11 +225,11 @@ const LaptopLBase = (props) => {
                                             theme={laptopL.canShareTitle}
                                         >
                                             可否共乘
-                                    {/* 可否共乘 內文 */}
+                                            {/* 可否共乘 內文 */}
                                             <Text
                                                 theme={laptopL.canShareText}
                                             >
-                                                {props?.canShared ? "願意共乘" : "不願共乘"}
+                                                {props.data?.canShared ? "願意共乘" : "不願共乘"}
                                             </Text>
                                         </Text>
                                     </>
@@ -243,7 +245,7 @@ const LaptopLBase = (props) => {
                                     <Text
                                         theme={laptopL.numberOfPeopleText}
                                     >
-                                        {props.nowTab === "長照" ? props?.familyWith : props?.passengerNum ?? 0}人
+                                        {props.case === "長照" ? props.data?.familyWith : props.data?.passengerNum}人
                                     </Text>
                                 </Text>
 
@@ -259,7 +261,7 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.driverText}
                                 >
-                                    {props?.driverInfoName ?? "王小明明"}
+                                    {props.data?.driverInfoName ?? "未排班"}
                                 </Text>
                             </Text>
 
@@ -273,7 +275,7 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.licensePlateText}
                                 >
-                                    {props?.carNo ?? "MMM-0000"}
+                                    {props.data?.carNo ?? "未排班"}
                                 </Text>
                             </Text>
 
@@ -284,12 +286,12 @@ const LaptopLBase = (props) => {
                                 服務單位
 
                             {/* 服務單位 內文 */}
-                                <Tooltip placement="top" title={props?.orgName ?? "測試交通單位1測試交通單位1測試交通單位位"}>
+                                <Tooltip placement="top" title={props.data?.orgName ?? "未排班"}>
 
                                     <Text
                                         theme={laptopL.serviceUnitText}
                                     >
-                                        {props?.orgName ?? "測試交通單位1測試交通單位1測試交通單位位"}
+                                        {props.data?.orgName ?? "未排班"}
                                     </Text>
                                 </Tooltip>
                             </Text>
@@ -303,7 +305,7 @@ const LaptopLBase = (props) => {
                         >
                             {/* 分隔容器 */}
                             <Container
-                                caseflag={caseflg !== "長照"}
+                                caseflag={props.case !== "長照"}
                                 theme={laptopL.separateContainer}
                             >
                                 {/* 按鈕內容器 */}
@@ -367,17 +369,17 @@ const LaptopLBase = (props) => {
 
                                 {/* 車資容器 */}
                                 <Container
-                                    caseflag={caseflg !== "長照"}
+                                    caseflag={props.case !== "長照"}
                                     theme={laptopL.fareContainer}
                                 >
                                     {/* 車資檢核 */}
                                     {
-                                        caseflg !== "共享車隊"
+                                        props.case !== "共享車隊"
                                         &&
                                         <>
                                             {/* 車資總額 標題 */}
                                             <Text
-                                                caseflag={caseflg !== "長照"}
+                                                caseflag={props.case !== "長照"}
                                                 theme={laptopL.totalFareTitle}
                                             >
                                                 車資總額
@@ -386,13 +388,13 @@ const LaptopLBase = (props) => {
                                                 <Text
                                                     theme={laptopL.totalFareText}
                                                 >
-                                                    ${props?.totalAmt ?? 4321}
+                                                    ${props.data?.totalAmt}
                                                 </Text>
                                             </Text>
 
                                             {/* 政府補助檢核 */}
                                             {
-                                                caseflg === "長照"
+                                                props.case === "長照"
                                                 &&
                                                 <>
                                                     {/* 政府補助 標題 */}
@@ -405,7 +407,7 @@ const LaptopLBase = (props) => {
                                                         <Text
                                                             theme={laptopL.govSubsidyText}
                                                         >
-                                                            ${props?.govSubsidy ?? 1234}
+                                                            ${props.data?.govSubsidy}
                                                         </Text>
                                                     </Text>
 
@@ -419,7 +421,7 @@ const LaptopLBase = (props) => {
                                                         <Text
                                                             theme={laptopL.accompanyingAmountText}
                                                         >
-                                                            ${props?.withAmt ?? 4321}
+                                                            ${props.data?.withAmt}
                                                         </Text>
                                                     </Text>
                                                 </>
@@ -429,10 +431,10 @@ const LaptopLBase = (props) => {
 
                                     {/* 個案負擔 標題 */}
                                     <Text
-                                        caseflag={caseflg !== "長照"}
+                                        caseflag={props.case !== "長照"}
                                         theme={laptopL.caseBurdenTitle}
                                     >
-                                        {caseflg === "長照"
+                                        {props.case === "長照"
                                             ?
                                             "個案負擔"
                                             :
@@ -443,7 +445,7 @@ const LaptopLBase = (props) => {
                                         <Text
                                             theme={laptopL.caseBurdenText}
                                         >
-                                            ${props?.caseBurden ?? 1234}
+                                            ${props.data?.caseBurden}
                                         </Text>
                                     </Text>
 
@@ -452,7 +454,7 @@ const LaptopLBase = (props) => {
 
                             {/* 乘客檢核 */}
                             {
-                                caseflg !== "長照"
+                                props.case !== "長照"
                                 &&
                                 <>
                                     {/* 乘客容器 */}
@@ -464,42 +466,28 @@ const LaptopLBase = (props) => {
                                             theme={laptopL.passengerTitle}
                                         >
                                             乘客
-                                </Text>
+                                        </Text>
 
                                         {/* 乘客內文容器 */}
                                         <Text
                                             theme={laptopL.passengerTextContainer}
                                         >
-                                            <Container>
-                                                {
-                                                    [
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                        "王曉明",
-                                                    ].map(item => {
-                                                        return (
-                                                            <>
-                                                                {/* 乘客內文 */}
-                                                                <Text
-                                                                    theme={laptopL.passengerText}
-                                                                >
-                                                                    {item}
-                                                                </Text>
-                                                            </>
-                                                        )
-                                                    }
+                                            {
+
+                                                (JSON.parse(isEmpty(props.data?.remark) ? "[]" : props.data.remark)).map((passenger, index) => {
+                                                    return (
+                                                        <React.Fragment key={index}>
+                                                            {/* 乘客 內文 */}
+                                                            <Text
+                                                                theme={laptopL.passengerText}
+                                                            >
+                                                                {passenger.name}
+
+                                                            </Text>
+                                                        </React.Fragment>
                                                     )
-                                                }
-                                            </Container>
+                                                })
+                                            }
 
                                         </Text>
                                     </Container>
@@ -531,7 +519,7 @@ const LaptopLBase = (props) => {
                             <Text
                                 theme={laptopL.distanceText}
                             >
-                                {props?.carNo ?? "100km"}
+                                {props.data.totalMileage}
                             </Text>
                         </Text>
 
@@ -545,7 +533,7 @@ const LaptopLBase = (props) => {
                             <Text
                                 theme={laptopL.timingText}
                             >
-                                {props?.carNo ?? "18分鐘"}
+                                {props.data.carNo ?? "18分鐘"}
                             </Text>
                         </Text>
 
@@ -564,7 +552,7 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.startPointTitle}
                                 >
-                                    起 {props.fromAddr ?? "(住家)"}
+                                    起 {posRemarksSelectOption.some(V => V.value === props.data.fromAddrRemark) ? `(${props.data?.fromAddrRemark})` : ""}
                                     {/* 起 */}
                                 </Text>
 
@@ -572,21 +560,20 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.startPointText}
                                 >
-                                    {props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "台灣新北市板橋區中山路一段161號"}
+                                    {props.nowTab === "巴士" ? props.data.fromStationName : props.data.fromAddr ?? "台灣新北市板橋區中山路一段161號"}
                                 </Text>
 
                             </Container>
-
                             {/* 備註檢核 */}
                             {
-                                caseflg === "長照"
+                                props.case === "長照" && !(posRemarksSelectOption.some(V => V.value === props.data.fromAddrRemark))
                                 &&
                                 <>
                                     {/* 起點 備註 */}
                                     <Text
                                         theme={laptopL.startPointnote}
                                     >
-                                        備註：{props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "在立德路和延和路交叉口,靠近延和路這邊。"}
+                                        備註：{props.data.fromStationName}
                                     </Text>
                                 </>
                             }
@@ -599,7 +586,7 @@ const LaptopLBase = (props) => {
                                     theme={laptopL.endPointTitle}
                                 >
 
-                                    迄 {props.fromAddr ?? "(復健診所)"}
+                                    迄 {posRemarksSelectOption.some(V => V.value === props.data.toAddrRemark) ? `(${props.data?.toAddrRemark})` : ""}
                                     {/* 迄 */}
                                 </Text>
 
@@ -607,20 +594,20 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.endPointText}
                                 >
-                                    {props.nowTab === "巴士" ? props?.toStationName : props?.toAddr ?? "台灣省台中市北屯區大鵬路陳平里12之3巷5之1弄1之1鄰11號1樓之1"}
+                                    {props.nowTab === "巴士" ? props.data.toStationName : props.data.toAddr ?? "台灣省台中市北屯區大鵬路陳平里12之3巷5之1弄1之1鄰11號1樓之1"}
                                 </Text>
                             </Container>
 
                             {/* 備註檢核 */}
                             {
-                                caseflg === "長照"
+                                props.case === "長照" && !(posRemarksSelectOption.some(V => V.value === props.data.toAddrRemark))
                                 &&
                                 <>
                                     {/* 迄點 備註 */}
                                     <Text
                                         theme={laptopL.endPointnote}
                                     >
-                                        備註：{props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "在立德路和延和路交叉口,靠近延和路這邊。"}
+                                        備註：{props.data.toAddrRemark}
                                     </Text>
                                 </>
                             }
@@ -769,7 +756,7 @@ const LaptopLBase = (props) => {
                         type="button" // 防止提交
                         theme={laptopL.returnButton}
                         onClick={() => {
-                            history.goBack()
+                            history.push("/Record")
                         }}
                     >
                         回列表

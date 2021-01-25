@@ -585,7 +585,7 @@ const MobileMBase = (props) => {
                                                                     type="button" // 防止提交
                                                                     theme={mobileM.rideDetailsButton}
                                                                     onClick={() => {
-                                                                        history.push("/Record/Detail");
+                                                                        history.push(`/Record/Detail?CaseId=${rowData.id}&&case=${props.nowTab}`);
                                                                     }}
                                                                 >
                                                                     乘車明細

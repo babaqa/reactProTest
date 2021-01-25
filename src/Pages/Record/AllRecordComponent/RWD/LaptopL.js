@@ -663,7 +663,7 @@ const LaptopLBase = (props) => {
                                                                         type="button" // 防止提交
                                                                         theme={laptopL.rideDetailsButton}
                                                                         onClick={() => {
-                                                                            history.push("/Record/Detail");
+                                                                            history.push(`/Record/Detail?CaseId=${rowData.id}&&case=${props.nowTab}`);
                                                                             // props.controllGCS("return")
                                                                         }}
                                                                     >

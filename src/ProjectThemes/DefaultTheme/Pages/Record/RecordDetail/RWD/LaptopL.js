@@ -892,6 +892,7 @@ export default {
             backgroundColor: "#F5F5F5",
             padding: "6px 8px",
             width: "100%",
+            minHeight: "22px"
         }),
         laptop: {
             basic: (style, props) => ({
@@ -900,7 +901,8 @@ export default {
                 backgroundColor: "#F5F5F5",
                 padding: "6px 8px",
                 width: "100%",
-                maxWidth: "499px"
+                maxWidth: "499px",
+                minHeight: "22px"
             }),
         },
         laptopL: {
@@ -910,7 +912,8 @@ export default {
                 backgroundColor: "#F5F5F5",
                 padding: "6px 8px",
                 flexGrow: 1,
-                maxWidth: "518px"
+                maxWidth: "518px",
+                minHeight: "22px"
             }),
         }
     },
