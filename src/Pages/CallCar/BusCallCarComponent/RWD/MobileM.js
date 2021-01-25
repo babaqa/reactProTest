@@ -33,7 +33,7 @@ const MobileMBase = (props) => {
     //#region 路由監聽，清除API紀錄 (渲染即觸發的每一個API都要有)
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
-            console.log(location, action, "路由變化")
+            // console.log(location, action, "路由變化")
             // globalContextService.remove("BusCallCarPage", "firstUseAPIgetClient");
             // globalContextService.remove("BusCallCarPage", "firstUseAPIgetSubOrgs");
         });
@@ -92,7 +92,6 @@ const MobileMBase = (props) => {
                                 }
                                 onChange={(value, momentObj) => {
                                     if (value !== globalContextService.get("BusCallCarComponentPage", "TravelDate")) {
-                                        console.log("乘車日期")
                                         globalContextService.set("BusCallCarComponentPage", "TravelDate", value);
                                         globalContextService.remove("BusCallCarComponentPage", "Route")
                                         globalContextService.remove("BusCallCarComponentPage", "StartPos")
@@ -187,7 +186,6 @@ const MobileMBase = (props) => {
                                         value={globalContextService.get("BusCallCarComponentPage", "Route") ?? null}
                                         onChange={(e, value, onInitial) => {
                                             if (value !== globalContextService.get("BusCallCarComponentPage", "Route")) {
-                                                console.log("路線")
                                                 globalContextService.set("BusCallCarComponentPage", "Route", value);
                                                 globalContextService.remove("BusCallCarComponentPage", "StartPos")
                                                 globalContextService.remove("BusCallCarComponentPage", "EndPos")
@@ -233,7 +231,7 @@ const MobileMBase = (props) => {
                                     <Text
                                         theme={mobileM.todayToDoStartAddr}
                                     >
-                                        {globalContextService.get("BusCallCarComponentPage", "StartPos")?.label}
+                                        {/* {globalContextService.get("BusCallCarComponentPage", "StartPos")?.label} */}
                                     </Text>
 
                                     {/* 起點站牌 StartPos*/}
@@ -248,7 +246,6 @@ const MobileMBase = (props) => {
                                         onChange={(e, value, onInitial) => {
                                             globalContextService.set("BusCallCarComponentPage", "StartPos", value);
                                             setForceUpdate(f => !f)
-                                            console.log("1440 change value === " + props.AllRoute)
                                         }}
                                         options={[
                                             ...(props?.StationOnRoute?.assignLineStations ?? []).map((item, index) => {
@@ -277,7 +274,7 @@ const MobileMBase = (props) => {
                                     <Text
                                         theme={mobileM.todayToDoEndAddr}
                                     >
-                                        {globalContextService.get("BusCallCarComponentPage", "EndPos")?.label}
+                                        {/* {globalContextService.get("BusCallCarComponentPage", "EndPos")?.label} */}
                                     </Text>
 
                                     <NativeLineButton theme={mobileM.convertButton}
@@ -512,7 +509,6 @@ const MobileMBase = (props) => {
                                     onClick={() => {
                                         //#region 表單驗證
                                         let validMsg = "";
-                                        console.log(["props ======= " + props])
                                         if (valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
                                             validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
                                         }

@@ -21,6 +21,7 @@ export default {
                 lineHeight: "24px",
                 color: "rgba(0,0,0,0.85)",
                 fontWeight: 600,
+                padding: "4px 0 0"
             })
         },
         rightContainer: {

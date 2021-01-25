@@ -232,7 +232,7 @@ export default {
             ...style,
             fontSize: "24px",
             lineHeight: "32px",
-            color: "#1890ff",
+            color: "rgba(0,0,0,0.85)",
             fontWeight: 700,
             display: "inline-block",
             // top: "24px",

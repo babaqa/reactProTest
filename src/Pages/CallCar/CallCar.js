@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Context } from '../../Store/Store'
 import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput, modalsService } from '../../Components';
+import { mapGoogleControll } from '../../ProjectComponent';
 import { LaptopL } from './RWD/LaptopL';
 import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
@@ -8,7 +9,7 @@ import { Tablet } from './RWD/Tablet';
 import { clearLocalStorage, clearSession, getParseItemLocalStorage, valid } from '../../Handlers';
 import { useHistory } from 'react-router-dom';
 import { useAsync } from '../../SelfHooks/useAsync';
-import { isUndefined } from 'lodash';
+import { isUndefined, isNil } from 'lodash';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
 
 export const CallCar = (props) => {
@@ -24,19 +25,41 @@ export const CallCar = (props) => {
     const [Quota, setQuota] = useState({}); // 用戶可用額度資料
     const [BUnits, setBUnits] = useState([]); // B單位
     const [CarType, setCarType] = useState([]); // 車種
+    const [AllRoute, setAllRoute] = useState([]); // 全部路線
+    const [AllStation, setAllStation] = useState([]); // 全部站牌
+    const [CaseUserId, setCaseUserId] = useState(); // CaseUserId
+    const [WhiteUserId, setWhiteUserId] = useState(); // WhiteUserId
+    const [BusUserId, setBusUserId] = useState(); // BusUserId
     const [OpenWhiteModal, setOpenWhiteModal] = useState(false); // 是否開啟白牌註冊
     // const [UserTypeInf, setUserTypeInf] = useState([]); // 用戶所有身分
     const [Width, Height] = useWindowSize();
-
-    const [NowTab, setNowTab] = useState("長照"); // 目前預約訂車頁面
+    const [TabMenu, setTabMenu] = useState([]); // 頁籤
+    const [NowTab, setNowTab] = useState(); // 目前預約訂車頁面
+    const [StationOnRoute, setStationOnRoute] = useState(); // 路線下站牌資訊
 
     let history = useHistory();
+
+    //#region 當頁 GlobalContextService (GCS) 值 控制
+    const controllGCS = (type, page) => {
+        switch (type) {
+            case "deleteTabData":
+                //#region 當點擊不同頁籤時，將當前頁面資料清除
+                globalContextService.remove(page);
+                //#endregion
+                break;
+            default:
+                break;
+        }
+    }
+    //#endregion
 
     //#region 路由監聽，清除API紀錄 (渲染即觸發的每一個API都要有)
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             //console.log(location, action)
             globalContextService.remove("CallCarPage", "firstUseAPIgetUsers");
+            globalContextService.remove("CallCarPage", "firstUseAPIgetAllRoute");
+            globalContextService.remove("CallCarPage", "firstUseAPIgetAllStation");
             globalContextService.remove("CallCarPage")
         });
 
@@ -187,6 +210,7 @@ export const CallCar = (props) => {
                             });
                         //#endregion
                         let CaseYet = 0;
+                        let tabMenu = []
                         let permission = PreResult.data
                             .filter(X => {
                                 if (X.userType === "caseuser") {
@@ -221,21 +245,27 @@ export const CallCar = (props) => {
 
                                         if (PreResult.code === 200) {
                                             // 成功用戶資料 API
-                                            console.log(item.userType, PreResult)
+                                            // console.log(item.userType, PreResult)
                                             switch (item.userType) {
                                                 case "caseuser":
                                                     GetQuotasExecute(item.caseId);
+                                                    setCaseUserId(item.caseId)
                                                     setCaseInf(PreResult.result);
                                                     let hadBUnit = ["orgBId1", "orgBId2", "orgBId3"].map(item => PreResult?.result?.[item]).filter(i => i !== null)
 
                                                     let bUnitForCaseUser = (allBunit ?? []).filter(item => hadBUnit.includes(item?.id))
                                                     setBUnits(bUnitForCaseUser)
-                                                    break;
-                                                case "bususer":
-                                                    setBusInf(PreResult.result);
+                                                    tabMenu.push("長照")
                                                     break;
                                                 case "selfpayuser":
+                                                    setWhiteUserId(item.caseId)
                                                     setWhiteInf(PreResult.result);
+                                                    tabMenu.push("共享車隊")
+                                                    break;
+                                                case "bususer":
+                                                    setBusUserId(item.caseId)
+                                                    setBusInf(PreResult.result);
+                                                    tabMenu.push("巴士")
                                                     break;
                                                 case "countryside":
                                                     setCountryInf(PreResult.result);
@@ -286,6 +316,8 @@ export const CallCar = (props) => {
                                         throw Error.message;
                                     })
                                     .finally(() => {
+                                        setTabMenu(tabMenu.sort())
+                                        setNowTab(tabMenu?.[0])
                                         //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
                                         // globalContextService.set("CallCarPage", "firstUseAPIgetUsers", false);
                                         //#endregion
@@ -485,6 +517,270 @@ export const CallCar = (props) => {
     const [GetQuotasExecute, GetQuotasPending] = useAsync(getQuota, false);
     //#endregion
 
+    //#region 取得 全部路線下拉選單選項 API
+    const getAllRoute = useCallback(async (useAPI = false) => {
+
+        //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
+        if (isUndefined(globalContextService.get("CallCarPage", "firstUseAPIgetAllRoute")) || useAPI) {
+            //#endregion
+
+            //#region 取得 全部路線下拉選單選項 API
+            fetch(`${APIUrl}busStationLiness/load?page=1&limit=99999`, // busStationLiness/load?page=1&limit=99999              
+                {
+                    headers: {
+                        "X-Token": getParseItemLocalStorage("CAuth"),
+                        "content-type": "application/json; charset=utf-8",
+                    },
+                    method: "GET"
+                })
+                .then(Result => {
+                    const ResultJson = Result.clone().json();//Respone.clone()
+                    return ResultJson;
+                })
+                .then((PreResult) => {
+
+                    if (PreResult.code === 200) {
+                        // 成功取得 全部路線下拉選單選項 
+                        setAllRoute(PreResult.data
+                            .map(item => ({ ...item, value: item.id, label: item.name }))
+                        );
+                    }
+                    else {
+                        throw PreResult;
+                    }
+                })
+                .catch((Error) => {
+                    modalsService.infoModal.warn({
+                        iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                        yes: true,
+                        yesText: "確認",
+                        // no: true,
+                        // autoClose: true,
+                        backgroundClose: false,
+                        yesOnClick: (e, close) => {
+                            if (Error.code === 401) {
+                                clearSession();
+                                clearLocalStorage();
+                                globalContextService.clear();
+                                Switch();
+                            }
+                            close();
+                        }
+                    })
+                    throw Error.message;
+                })
+                .finally(() => {
+                    //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
+                    globalContextService.set("CallCarPage", "firstUseAPIgetAllRoute", false);
+                    //#endregion
+                });
+            //#endregion
+
+        }
+    }, [APIUrl, Switch])
+
+    const [GetAllRouteExecute, GetAllRoutePending] = useAsync(getAllRoute, true);
+    //#endregion
+
+    //#region 取得 全部站牌 API
+    const getAllStation = useCallback(async (useAPI = false) => {
+
+        //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
+        if (isUndefined(globalContextService.get("CallCarPage", "firstUseAPIgetAllStation")) || useAPI) {
+            //#endregion
+
+            //#region 取得 全部站牌 API
+            fetch(`${APIUrl}busStationss/load?page=1&limit=99999`, // busStationss/load?page=1&limit=99999          
+                {
+                    headers: {
+                        "X-Token": getParseItemLocalStorage("CAuth"),
+                        "content-type": "application/json; charset=utf-8",
+                    },
+                    method: "GET"
+                })
+                .then(Result => {
+                    const ResultJson = Result.clone().json();//Respone.clone()
+                    return ResultJson;
+                })
+                .then((PreResult) => {
+
+                    if (PreResult.code === 200) {
+                        // 成功取得 全部站牌
+                        setAllStation(PreResult.data
+                            .map(item => ({ ...item, value: item.id, label: item.stationName }))
+                        );
+                    }
+                    else {
+                        throw PreResult;
+                    }
+                })
+                .catch((Error) => {
+                    modalsService.infoModal.warn({
+                        iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                        yes: true,
+                        yesText: "確認",
+                        // no: true,
+                        // autoClose: true,
+                        backgroundClose: false,
+                        yesOnClick: (e, close) => {
+                            if (Error.code === 401) {
+                                clearSession();
+                                clearLocalStorage();
+                                globalContextService.clear();
+                                Switch();
+                            }
+                            close();
+                        }
+                    })
+                    throw Error.message;
+                })
+                .finally(() => {
+                    //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
+                    globalContextService.set("CallCarPage", "firstUseAPIgetAllStation", false);
+                    //#endregion
+                });
+            //#endregion
+
+        }
+    }, [APIUrl, Switch])
+
+    const [GetAllStationExecute, GetAllStationPending] = useAsync(getAllStation, true);
+    //#endregion
+
+    //#region 取得 路線上的所有站牌 API
+    const getStationOnRoute = useCallback(async (stationId) => {
+
+        //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
+        if (!isNil(stationId)) {
+            //#endregion
+
+            //#region 取得 路線上的所有站牌 API
+            fetch(`${APIUrl}busStationLiness/get?id=${stationId}`, // busStationLiness/get?id=6725790941894451200       
+                {
+                    headers: {
+                        "X-Token": getParseItemLocalStorage("CAuth"),
+                        "content-type": "application/json; charset=utf-8",
+                    },
+                    method: "GET"
+                })
+                .then(Result => {
+                    const ResultJson = Result.clone().json();//Respone.clone()
+                    return ResultJson;
+                })
+                .then((PreResult) => {
+
+                    if (PreResult.code === 200) {
+                        // 成功取得 路線上的所有站牌 
+                        setStationOnRoute(PreResult.result);
+                    }
+                    else {
+                        throw PreResult;
+                    }
+                })
+                .catch((Error) => {
+                    modalsService.infoModal.warn({
+                        iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                        yes: true,
+                        yesText: "確認",
+                        // no: true,
+                        // autoClose: true,
+                        backgroundClose: false,
+                        yesOnClick: (e, close) => {
+                            if (Error.code === 401) {
+                                clearSession();
+                                clearLocalStorage();
+                                globalContextService.clear();
+                                Switch();
+                            }
+                            close();
+                        }
+                    })
+                    throw Error.message;
+                })
+                .finally(() => {
+                    //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
+                    globalContextService.set("CallCarPage", "firstUseAPIgetStationOnRoute", false);
+                    //#endregion
+                });
+            //#endregion
+
+        }
+    }, [APIUrl, Switch])
+
+    const [GetStationOnRouteExecute, GetStationOnRoutePending] = useAsync(getStationOnRoute, true);
+    //#endregion
+
+    //#region 取得 Polyline 加密路線字串 API
+    const getPolylineRoute = useCallback(async (addrData) => {
+
+        // console.log(updateRowdata)
+        //#region 取得 Polyline 加密路線字串 API
+        fetch(`${APIUrl}Maps/Route`,
+            {
+                headers: {
+                    "X-Token": getParseItemLocalStorage("CAuth"),
+                    "content-type": "application/json; charset=utf-8",
+                },
+                method: "POST",
+                body: JSON.stringify({ ...addrData })
+            })
+            .then(Result => {
+                const ResultJson = Result.clone().json();//Respone.clone()
+                return ResultJson;
+            })
+            .then((PreResult) => {
+
+                if (PreResult.code === 200) {
+                    // 取得 Polyline 加密路線字串 API
+                    // console.log(PreResult.data)
+                    // controllGCS("UpdateWealType", "API");
+                    mapGoogleControll.addPolylineRoute(addrData?.mapId, PreResult?.result?.polyLine, addrData?.routeAttr)
+                }
+                else {
+                    throw PreResult;
+                }
+            })
+            .catch((Error) => {
+                modalsService.infoModal.warn({
+                    iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                    yes: true,
+                    yesText: "確認",
+                    // no: true,
+                    // autoClose: true,
+                    backgroundClose: false,
+                    yesOnClick: (e, close) => {
+                        if (Error.code === 401) {
+                            clearSession();
+                            clearLocalStorage();
+                            globalContextService.clear();
+                            Switch();
+                        }
+                        close();
+                    }
+                    // theme: {
+                    //     yesButton: {
+                    //         text: {
+                    //             basic: (style, props) => {
+                    //                 console.log(style)
+                    //                 return {
+                    //                     ...style,
+                    //                     color: "red"
+                    //                 }
+                    //             },
+                    //         }
+                    //     }
+                    // }
+                })
+                throw Error.message;
+            })
+            .finally(() => {
+            });
+        //#endregion
+    }, [APIUrl, Switch])
+
+    const [GetPolylineRouteExecute, GetPolylineRoutePending] = useAsync(getPolylineRoute, false);
+    //#endregion 
+
     return (
         <>
             {/* 共用theme */}
@@ -492,42 +788,58 @@ export const CallCar = (props) => {
                 768 <= Width &&
                 <LaptopL
                     BasicInf={BasicInf}
-                    Quota={Quota}
-                    CaseInf={CaseInf}
-                    WhiteInf={WhiteInf}
-                    BusInf={BusInf}
-                    nowTab={NowTab}
-                    setNowTab={setNowTab}
                     BUnits={BUnits}
                     CarType={CarType}
-                />
-            }
-            {/* {
-                (1024 <= Width && Width < 1440) &&
-                <Laptop
+
+                    Quota={Quota}
+                    CaseInf={CaseInf}
+                    CaseUserId={CaseUserId}
+
+                    WhiteInf={WhiteInf}
+                    WhiteUserId={WhiteUserId}
+
+                    BusInf={BusInf}
+                    BusUserId={BusUserId}
+                    AllRoute={AllRoute}
+                    AllStation={AllStation}
+                    StationOnRoute={StationOnRoute}
+                    getStationOnRoute={getStationOnRoute}
+
                     nowTab={NowTab}
                     setNowTab={setNowTab}
+                    TabMenu={TabMenu}
+                    controllGCS={controllGCS}
+                    mapGoogleControll={mapGoogleControll}
+                    GetPolylineRouteExecute={GetPolylineRouteExecute}
                 />
             }
-            {
-                (768 <= Width && Width < 1024) &&
-                <Tablet
-                    nowTab={NowTab}
-                    setNowTab={setNowTab}
-                />
-            } */}
             {
                 Width < 768 &&
                 <MobileM
                     BasicInf={BasicInf}
-                    Quota={Quota}
-                    CaseInf={CaseInf}
-                    WhiteInf={WhiteInf}
-                    BusInf={BusInf}
-                    nowTab={NowTab}
-                    setNowTab={setNowTab}
                     BUnits={BUnits}
                     CarType={CarType}
+
+                    Quota={Quota}
+                    CaseInf={CaseInf}
+                    CaseUserId={CaseUserId}
+
+                    WhiteInf={WhiteInf}
+                    WhiteUserId={WhiteUserId}
+
+                    BusInf={BusInf}
+                    BusUserId={BusUserId}
+                    AllRoute={AllRoute}
+                    AllStation={AllStation}
+                    StationOnRoute={StationOnRoute}
+                    getStationOnRoute={getStationOnRoute}
+
+                    nowTab={NowTab}
+                    setNowTab={setNowTab}
+                    TabMenu={TabMenu}
+                    controllGCS={controllGCS}
+                    mapGoogleControll={mapGoogleControll}
+                    GetPolylineRouteExecute={GetPolylineRouteExecute}
                 />
             }
         </>

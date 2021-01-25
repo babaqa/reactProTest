@@ -142,9 +142,9 @@ const LaptopBase = (props) => {
                                     行程
                                     <Minus
                                         style={laptop.strokeMinusSvg}
-                                        // onClick={(e) => {
-                                        //     props.setTodayToDoOpen(t => !t)
-                                        // }}
+                                    // onClick={(e) => {
+                                    //     props.setTodayToDoOpen(t => !t)
+                                    // }}
                                     />
                                 </Text>
 
@@ -236,7 +236,6 @@ const LaptopBase = (props) => {
                                         onChange={(e, value, onInitial) => {
                                             globalContextService.set("BusCallCarComponentPage", "StartPos", value);
                                             setForceUpdate(f => !f)
-                                            console.log("1440 change value === " + props.AllRoute)
                                         }}
                                         options={[
                                             ...(props?.StationOnRoute?.assignLineStations ?? []).map((item, index) => {

@@ -25,24 +25,50 @@ const MobileMBase = (props) => {
             case "tabUseComponent":
                 return (
                     {
-                        "長照": <CaseCallCarComponent
-                            BasicInf={props.BasicInf}
-                            CaseInf={props.CaseInf}
-                            Quota={props.Quota}
-                            BUnits={props.BUnits}
-                            CarType={props.CarType}
-                        />,
-                        "共享車隊": <WhiteCallCarComponent />,
-                        "巴士": <BusCallCarComponent />
+                        "長照":
+                            <CaseCallCarComponent
+                                BasicInf={props.BasicInf}
+                                CaseInf={props.CaseInf}
+                                CaseUserId={props.CaseUserId}
+                                Quota={props.Quota}
+                                BUnits={props.BUnits}
+                                CarType={props.CarType}
+                                mapGoogleControll={props.mapGoogleControll}
+                                GetPolylineRouteExecute={props.GetPolylineRouteExecute}
+                            />,
+                        "共享車隊":
+                            <WhiteCallCarComponent
+                                BasicInf={props.BasicInf}
+                                WhiteUserId={props.WhiteUserId}
+                                WhiteInf={props.WhiteInf}
+                                CarType={props.CarType}
+                                mapGoogleControll={props.mapGoogleControll}
+                                GetPolylineRouteExecute={props.GetPolylineRouteExecute}
+                            />,
+                        "巴士":
+                            <BusCallCarComponent
+                                BasicInf={props.BasicInf}
+                                BusInf={props.BusInf}
+                                BusUserId={props.BusUserId}
+                                AllRoute={props.AllRoute}
+                                AllStation={props.AllStation}
+                            />
                     }
-                )
-            case "tabArray":
+                );
+
             default:
-                return ["長照", "共享車隊", "巴士"]
+                return props.TabMenu
         }
 
     }
     //#endregion
+
+    const tabPageMap =
+    {
+        "長照": "CaseCallCarComponentPage",
+        "共享車隊": "WhiteCallCarComponentPage",
+        "巴士": "BusCallCarComponentPage",
+    }
 
     return (
         <>
@@ -89,7 +115,10 @@ const MobileMBase = (props) => {
                                 return (
                                     <React.Fragment key={index}>
                                         <Text
-                                            onClick={() => { props.setNowTab(item) }}
+                                            onClick={() => {
+                                                props.setNowTab(item)
+                                                props.controllGCS("deleteTabData", tabPageMap[props.nowTab])
+                                            }}
                                             isActive={props.nowTab === item}
                                             theme={mobileM.titleBarCallCarTab}
                                         >

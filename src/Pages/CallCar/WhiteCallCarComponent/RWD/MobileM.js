@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle, mapGoogleControll, MapGoogleInput } from '../../../../ProjectComponent';
+import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle, MapGoogleInput } from '../../../../ProjectComponent';
 import { ReactComponent as Search } from '../../../../Assets/img/WhiteCallCarComponentPage/Search.svg'
 import { ReactComponent as Convert } from '../../../../Assets/img/WhiteCallCarComponentPage/Convert.svg'
 import { ReactComponent as StartToEnd } from '../../../../Assets/img/WhiteCallCarComponentPage/StartToEnd.svg'
@@ -30,8 +30,8 @@ const MobileMBase = (props) => {
 
     //#region 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
     const getCaseOrderAmtAPI = useCallback(() => {
-        let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
-        let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
+        let end = props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+        let start = props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
 
         let validMsg = "";
         if (valid(globalContextService.get("WhiteCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
@@ -127,7 +127,7 @@ const MobileMBase = (props) => {
                         <Text
                             theme={mobileM.callCarFormCaseName}
                         >
-                            {props?.UserName}
+                            {props?.CaseName}
                         </Text>
                         {/* 可用補助餘額查詢按鈕 */}
                         {/* <NativeLineButton
@@ -309,7 +309,7 @@ const MobileMBase = (props) => {
                                     <Text
                                         theme={mobileM.todayToDoStartAddr}
                                     >
-                                        {globalContextService.get("WhiteCallCarComponentPage", "StartPos")}
+                                        {/* {globalContextService.get("WhiteCallCarComponentPage", "StartPos")} */}
                                     </Text>
 
                                     {/* 起點 StartPos*/}
@@ -329,15 +329,15 @@ const MobileMBase = (props) => {
                                             globalContextService.set("WhiteCallCarComponentPage", "StartPos", value);
                                         }}
                                         onSelect={(e, option, onInitial, posInfo) => {
-                                            if (mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
-                                                let endMarker = mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
-                                                mapGoogleControll.deletePolylineRoute("test1"); // 移除路線  
-                                                mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
-                                                mapGoogleControll.addMarkerWithIndex("test1", endMarker, 1) // 更新選中起點
+                                            if (props.mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
+                                                let endMarker = props.mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
+                                                props.mapGoogleControll.deletePolylineRoute("test1"); // 移除路線  
+                                                props.mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
+                                                props.mapGoogleControll.addMarkerWithIndex("test1", endMarker, 1) // 更新選中起點
                                             }
 
-                                            mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
-                                            mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
+                                            props.mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
+                                            props.mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
 
                                             globalContextService.set("WhiteCallCarComponentPage", "StartPos", option.label);
 
@@ -366,14 +366,14 @@ const MobileMBase = (props) => {
                                     <Text
                                         theme={mobileM.todayToDoEndAddr}
                                     >
-                                        {globalContextService.get("WhiteCallCarComponentPage", "EndPos")}
+                                        {/* {globalContextService.get("WhiteCallCarComponentPage", "EndPos")} */}
                                     </Text>
 
                                     {/* 預覽路線按鈕 */}
                                     <NativeLineButton theme={mobileM.seeRouteButton}
                                         onClick={() => {
-                                            let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
-                                            let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
+                                            let end = props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+                                            let start = props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
 
                                             let validMsg = "";
                                             if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
@@ -401,11 +401,11 @@ const MobileMBase = (props) => {
                                                 // 如果起迄點都已經輸入
 
                                                 //#region 由前端Call Google畫路線的方法
-                                                // mapGoogleControll.addRoute("test1",
+                                                // props.mapGoogleControll.addRoute("test1",
                                                 //     {
                                                 //         // origin: new window.google.maps.LatLng(25.012930,121.994708),
-                                                //         origin: mapGoogleControll.getMarkers("test1")[0].position,
-                                                //         destination: mapGoogleControll.getMarkers("test1")[1].position,// new window.google.maps.LatLng(25.012930,121.974708),
+                                                //         origin: props.mapGoogleControll.getMarkers("test1")[0].position,
+                                                //         destination: props.mapGoogleControll.getMarkers("test1")[1].position,// new window.google.maps.LatLng(25.012930,121.974708),
                                                 //         waypoints: [
                                                 //             // {
                                                 //             //     location: { lat: 25.012930, lng: 121.984708 },// new window.google.maps.LatLng(25.012930,121.984708), // 或是地址
@@ -425,8 +425,8 @@ const MobileMBase = (props) => {
                                                         mapId: "test1",
                                                         routeAttr: {
                                                             // origin: new window.google.maps.LatLng(25.012930,121.994708),
-                                                            origin: mapGoogleControll.getMarkers("test1")[0].position,
-                                                            destination: mapGoogleControll.getMarkers("test1")[1].position,// new window.google.maps.LatLng(25.012930,121.974708),
+                                                            origin: props.mapGoogleControll.getMarkers("test1")[0].position,
+                                                            destination: props.mapGoogleControll.getMarkers("test1")[1].position,// new window.google.maps.LatLng(25.012930,121.974708),
                                                             waypoints: [
                                                                 // {
                                                                 //     location: { lat: 25.012930, lng: 121.984708 },// new window.google.maps.LatLng(25.012930,121.984708), // 或是地址
@@ -446,8 +446,8 @@ const MobileMBase = (props) => {
                                     </NativeLineButton>
                                     <NativeLineButton theme={mobileM.convertButton}
                                         onClick={() => {
-                                            let end = mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
-                                            let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
+                                            let end = props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat // 迄點緯度
+                                            let start = props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
 
                                             let validMsg = "";
                                             if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
@@ -479,14 +479,14 @@ const MobileMBase = (props) => {
                                                 globalContextService.set("WhiteCallCarComponentPage", "EndPos", startAddr);
                                                 globalContextService.set("WhiteCallCarComponentPage", "StartPos", endAddr);
 
-                                                let startMarker = mapGoogleControll.getMarkers("test1")?.[0]?.position  // 起點經緯度
-                                                let endMarker = mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
+                                                let startMarker = props.mapGoogleControll.getMarkers("test1")?.[0]?.position  // 起點經緯度
+                                                let endMarker = props.mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
 
-                                                // mapGoogleControll.deleteRoute("test1"); // 移除路線 由前端Call Google畫路線的方法
-                                                mapGoogleControll.deletePolylineRoute("test1"); // 移除路線 透過後端回傳 加密路徑字串 (decodePath) 並透過 polyline 畫路線的方法      
+                                                // props.mapGoogleControll.deleteRoute("test1"); // 移除路線 由前端Call Google畫路線的方法
+                                                props.mapGoogleControll.deletePolylineRoute("test1"); // 移除路線 透過後端回傳 加密路徑字串 (decodePath) 並透過 polyline 畫路線的方法      
 
-                                                mapGoogleControll.addMarker("test1", endMarker); // 替換起迄點
-                                                mapGoogleControll.addMarker("test1", startMarker); // 替換起迄點
+                                                props.mapGoogleControll.addMarker("test1", endMarker); // 替換起迄點
+                                                props.mapGoogleControll.addMarker("test1", startMarker); // 替換起迄點
                                             }
                                             setForceUpdate(f => !f)
                                         }}
@@ -512,19 +512,19 @@ const MobileMBase = (props) => {
                                             globalContextService.set("WhiteCallCarComponentPage", "EndPos", value);
                                         }}
                                         onSelect={(e, option, onInitial, posInfo) => {
-                                            if (mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
-                                                let startMarker = mapGoogleControll.getMarkers("test1")?.[0]?.position // 起點經緯度
-                                                mapGoogleControll.deletePolylineRoute("test1"); // 移除路線  
-                                                mapGoogleControll.addMarkerWithIndex("test1", startMarker, 0) // 更新選中起點
+                                            if (props.mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
+                                                let startMarker = props.mapGoogleControll.getMarkers("test1")?.[0]?.position // 起點經緯度
+                                                props.mapGoogleControll.deletePolylineRoute("test1"); // 移除路線  
+                                                props.mapGoogleControll.addMarkerWithIndex("test1", startMarker, 0) // 更新選中起點
                                             }
 
                                             //#region 如果沒有先打起點
-                                            if (!mapGoogleControll.getMarkers("test1")?.[0]) {
-                                                mapGoogleControll.addMarkerWithIndex("test1", {}, 0) // 更新 一個卡位給 起點
+                                            if (!props.mapGoogleControll.getMarkers("test1")?.[0]) {
+                                                props.mapGoogleControll.addMarkerWithIndex("test1", {}, 0) // 更新 一個卡位給 起點
                                             }
                                             //#endregion
-                                            mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 1) // 更新選中起點
-                                            mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
+                                            props.mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 1) // 更新選中起點
+                                            props.mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
 
                                             globalContextService.set("WhiteCallCarComponentPage", "EndPos", option.label);
 
@@ -946,7 +946,7 @@ const MobileMBase = (props) => {
                                                         <TextInput
                                                             topLabel={
                                                                 <Text
-                                                                    style={{ fontSize: "14px", fontWeight: "normal" }}
+                                                                    style={{ fontSize: "14px", fontWeight: 300 }}
                                                                 >
                                                                     <Delete
                                                                         style={mobileM.deleteSvg}
@@ -1130,7 +1130,7 @@ const MobileMBase = (props) => {
                                                                 <TextInput
                                                                     topLabel={
                                                                         <Text
-                                                                            style={{ fontSize: "14px", fontWeight: "normal" }}
+                                                                            style={{ fontSize: "14px", fontWeight: 300 }}
                                                                         >
                                                                             <Delete
                                                                                 style={mobileM.deleteSvg}
@@ -1139,7 +1139,6 @@ const MobileMBase = (props) => {
                                                                                     for (let i = index + 1; i < preNum; i++) {
                                                                                         // 將後面資料向前放
                                                                                         if (i >= index + 1) {
-                                                                                            console.log("i===" + i)
                                                                                             globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerName_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerName_${i + 1}`));
                                                                                             globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerBirthday_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerBirthday_${i + 1}`));
                                                                                             globalContextService.set("WhiteCallCarComponentPage", `ReturnTakerPhone_${i}`, globalContextService.get("WhiteCallCarComponentPage", `TakerPhone_${i + 1}`));
@@ -1305,7 +1304,7 @@ const MobileMBase = (props) => {
 
                                         else {
                                             //有回程
-                                            if (globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview") === 1) {
+                                            if (globalContextService.get("WhiteCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1) {
                                                 //去程
                                                 props.AddOrderOfSelfPayUsersExecute({
                                                     CarCategoryName: globalContextService.get("WhiteCallCarComponentPage", "CarType").label, //車種 的 label
@@ -1313,8 +1312,8 @@ const MobileMBase = (props) => {
                                                     carCategoryId: globalContextService.get("WhiteCallCarComponentPage", "CarType").value,	//車種 的 value
                                                     date: globalContextService.get("WhiteCallCarComponentPage", "TravelDate"), //預約日期
                                                     fromAddr: globalContextService.get("WhiteCallCarComponentPage", "StartPos"), //	起點
-                                                    fromLat: mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0, //起點緯度
-                                                    fromLon: mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//起點經度
+                                                    fromLat: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0, //起點緯度
+                                                    fromLon: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//起點經度
                                                     // id: ""	白牌預約訂單 id
                                                     noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
                                                     orgId: "",//	畫面無此欄位
@@ -1331,8 +1330,8 @@ const MobileMBase = (props) => {
                                                     status: 1,	//畫面無此欄位
                                                     time: globalContextService.get("WhiteCallCarComponentPage", "TravelTime"), //預約時間
                                                     toAddr: globalContextService.get("WhiteCallCarComponentPage", "EndPos"), //	迄點
-                                                    toLat: mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
-                                                    toLon: mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//	迄點經度
+                                                    toLat: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
+                                                    toLon: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
                                                     isLastOrder: false
                                                 })
@@ -1344,8 +1343,8 @@ const MobileMBase = (props) => {
                                                     carCategoryId: globalContextService.get("WhiteCallCarComponentPage", "CarType").value,	//車種 的 value
                                                     date: globalContextService.get("WhiteCallCarComponentPage", "TravelDate"), //預約日期
                                                     fromAddr: globalContextService.get("WhiteCallCarComponentPage", "EndPos"), //	起點
-                                                    fromLat: mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0, //起點緯度
-                                                    fromLon: mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//起點經度
+                                                    fromLat: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0, //起點緯度
+                                                    fromLon: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//起點經度
                                                     // id: ""	白牌預約訂單 id
                                                     noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
                                                     orgId: "",//	畫面無此欄位
@@ -1362,8 +1361,8 @@ const MobileMBase = (props) => {
                                                     status: 1,	//畫面無此欄位
                                                     time: globalContextService.get("WhiteCallCarComponentPage", "ReturnTravelTime"), //預約時間
                                                     toAddr: globalContextService.get("WhiteCallCarComponentPage", "StartPos"), //	迄點
-                                                    toLat: mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
-                                                    toLon: mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//	迄點經度
+                                                    toLat: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
+                                                    toLon: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
                                                     isLastOrder: true
                                                 })
@@ -1375,8 +1374,8 @@ const MobileMBase = (props) => {
                                                     carCategoryId: globalContextService.get("WhiteCallCarComponentPage", "CarType").value,	//車種 的 value
                                                     date: globalContextService.get("WhiteCallCarComponentPage", "TravelDate"), //預約日期
                                                     fromAddr: globalContextService.get("WhiteCallCarComponentPage", "StartPos"), //	起點
-                                                    fromLat: mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0, //起點緯度
-                                                    fromLon: mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//起點經度
+                                                    fromLat: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0, //起點緯度
+                                                    fromLon: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//起點經度
                                                     // id: ""	白牌預約訂單 id
                                                     noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
                                                     orgId: "",//	畫面無此欄位
@@ -1393,8 +1392,8 @@ const MobileMBase = (props) => {
                                                     status: 1,	//畫面無此欄位
                                                     time: globalContextService.get("WhiteCallCarComponentPage", "TravelTime"), //預約時間
                                                     toAddr: globalContextService.get("WhiteCallCarComponentPage", "EndPos"), //	迄點
-                                                    toLat: mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
-                                                    toLon: mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//	迄點經度
+                                                    toLat: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
+                                                    toLon: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
                                                     isLastOrder: true
                                                 })
