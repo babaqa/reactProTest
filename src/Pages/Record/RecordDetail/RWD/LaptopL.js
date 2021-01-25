@@ -19,6 +19,8 @@ const LaptopLBase = (props) => {
     const [Width, Height] = useWindowSize();
     let history = useHistory()
 
+    let caseflg = "巴士"
+    // "長照", "共享車隊", "巴士"
     //#region 取消狀態分類
     const cancelStatus = (status) => {
         switch (toString(status)) {
@@ -59,6 +61,34 @@ const LaptopLBase = (props) => {
     }
     //#endregion
 
+    //#region 案件類型分類
+    const switchCase = (key) => {
+        switch (key) {
+            case "長照":
+                return (
+                    <>
+                        <CaseLaptopL style={laptopL.caseSvg} />
+                    </>
+                );
+            case "共享車隊":
+                return (
+                    <>
+                        <FleetLaptopL style={laptopL.caseSvg} />
+                    </>
+                );
+            case "巴士":
+                return (
+                    <>
+                        <BusLaptopL style={laptopL.caseSvg} />
+                    </>
+                );
+            default:
+                return undefined
+        }
+
+    }
+    //#endregion
+
     return (
         <>
             <MainPageContainer
@@ -87,7 +117,7 @@ const LaptopLBase = (props) => {
                         theme={laptopL.titleContainer}
                     >
                         {/* 案件類型圖標 */}
-                        <CaseLaptopL style={laptopL.caseSvg} />
+                        {switchCase(caseflg)}
 
                         <Container>
                             {/* 訂單編號 標題 */}
@@ -161,32 +191,47 @@ const LaptopLBase = (props) => {
                                     {props?.userName ?? getParseItemLocalStorage("UserName")}
                                 </Text>
 
-                                {/* 案號 標題*/}
-                                < Text
-                                    theme={laptopL.caseNumberTitle}
-                                >
-                                    案號
+                                {/* 案號檢核 */}
+                                {
+                                    caseflg === "長照"
+                                    &&
+                                    <>
+                                        {/* 案號 標題*/}
+                                        < Text
+                                            theme={laptopL.caseNumberTitle}
+                                        >
+                                            案號
 
-                                {/* 案號 內文*/}
-                                    <Text
-                                        theme={laptopL.caseNumberText}
-                                    >
-                                        {props?.caseNumber ?? "1081213001"}
-                                    </Text>
-                                </Text>
+                                            {/* 案號 內文*/}
+                                            <Text
+                                                theme={laptopL.caseNumberText}
+                                            >
+                                                {props?.caseNumber ?? "1081213001"}
+                                            </Text>
+                                        </Text>
 
-                                {/* 可否共乘 標題 */}
-                                <Text
-                                    theme={laptopL.canShareTitle}
-                                >
-                                    可否共乘
+                                    </>
+                                }
+
+                                {/* 可否共乘檢核 */}
+                                {
+                                    caseflg !== "巴士"
+                                    &&
+                                    <>
+                                        {/* 可否共乘 標題 */}
+                                        <Text
+                                            theme={laptopL.canShareTitle}
+                                        >
+                                            可否共乘
                                     {/* 可否共乘 內文 */}
-                                    <Text
-                                        theme={laptopL.canShareText}
-                                    >
-                                        {props?.canShared ? "願意共乘" : "不願共乘"}
-                                    </Text>
-                                </Text>
+                                            <Text
+                                                theme={laptopL.canShareText}
+                                            >
+                                                {props?.canShared ? "願意共乘" : "不願共乘"}
+                                            </Text>
+                                        </Text>
+                                    </>
+                                }
 
                                 {/* 人數 標題 */}
                                 <Text
@@ -256,125 +301,210 @@ const LaptopLBase = (props) => {
                         <SubContainer
                             theme={laptopL.buttonContainer}
                         >
-                            <Container>
-                                {/* 司機未到按鈕 */}
-                                <NativeLineButton
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    disable={false}
-                                    type="button" // 防止提交
-                                    theme={laptopL.noExecuteButton}
-                                    onClick={() => {
-                                        //#region 打開司機未執行警示 Modal
-                                        modalsService.infoModal.warn({
-                                            iconRightText: "確定司機未到?",
-                                            yes: true,
-                                            yesText: "確認",
-                                            no: true,
-                                            noText: "取消",
-                                            // autoClose: true,
-                                            backgroundClose: false,
-                                            yesOnClick: (e, close) => { close(); },
-                                            noOnClick: (e, close) => { },
-                                        })
-                                        // endregion
-                                    }}
+                            {/* 分隔容器 */}
+                            <Container
+                                caseflag={caseflg !== "長照"}
+                                theme={laptopL.separateContainer}
+                            >
+                                {/* 按鈕內容器 */}
+                                <Container
+                                    theme={laptopL.buttonInsideContainer}
                                 >
-                                    司機未到
-                                </NativeLineButton>
-
-                                {/* 再次預約按鈕 */}
-                                <NativeLineButton
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    disable={false}
-                                    type="button" // 防止提交
-                                    theme={laptopL.againButton}
-                                    onClick={() => {
-                                        // history.push("/Order/WhiteOrder");
-                                        // props.controllGCS("return")
-                                    }}
-                                >
-                                    再次預約
-                                </NativeLineButton>
-
-                                {/* 填寫問卷按鈕 */}
-                                <NativeLineButton
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    disable={false}
-                                    type="button" // 防止提交
-                                    theme={laptopL.questionnaireButton}
-                                    onClick={() => {
-                                        // history.push("/Order/WhiteOrder");
-                                        // props.controllGCS("return")
-                                    }}
-                                >
-                                    填寫問卷
-                                </NativeLineButton>
-
-                            </Container>
-
-                            <Container>
-                                {/* 車資總額 標題 */}
-                                <Text
-                                    theme={laptopL.totalFareTitle}
-                                >
-                                    車資總額
-
-                                {/* 車資總額 內文 */}
-                                    <Text
-                                        theme={laptopL.totalFareText}
+                                    {/* 司機未到按鈕 */}
+                                    <NativeLineButton
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        disable={false}
+                                        type="button" // 防止提交
+                                        theme={laptopL.noExecuteButton}
+                                        onClick={() => {
+                                            //#region 打開司機未執行警示 Modal
+                                            modalsService.infoModal.warn({
+                                                iconRightText: "確定司機未到?",
+                                                yes: true,
+                                                yesText: "確認",
+                                                no: true,
+                                                noText: "取消",
+                                                // autoClose: true,
+                                                backgroundClose: false,
+                                                yesOnClick: (e, close) => { close(); },
+                                                noOnClick: (e, close) => { },
+                                            })
+                                            // endregion
+                                        }}
                                     >
-                                        ${props?.totalAmt ?? 0}
-                                    </Text>
-                                </Text>
+                                        司機未到
+                                </NativeLineButton>
 
-                                {/* 政府補助 標題 */}
-                                <Text
-                                    theme={laptopL.govSubsidyTitle}
+                                    {/* 再次預約按鈕 */}
+                                    <NativeLineButton
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        disable={false}
+                                        type="button" // 防止提交
+                                        theme={laptopL.againButton}
+                                        onClick={() => {
+                                            // history.push("/Order/WhiteOrder");
+                                            // props.controllGCS("return")
+                                        }}
+                                    >
+                                        再次預約
+                                </NativeLineButton>
+
+                                    {/* 填寫問卷按鈕 */}
+                                    <NativeLineButton
+                                        baseDefaultTheme={"DefaultTheme"}
+                                        disable={false}
+                                        type="button" // 防止提交
+                                        theme={laptopL.questionnaireButton}
+                                        onClick={() => {
+                                            // history.push("/Order/WhiteOrder");
+                                            // props.controllGCS("return")
+                                        }}
+                                    >
+                                        填寫問卷
+                                </NativeLineButton>
+
+                                </Container>
+
+                                {/* 車資容器 */}
+                                <Container
+                                    caseflag={caseflg !== "長照"}
+                                    theme={laptopL.fareContainer}
                                 >
-                                    政府補助
+                                    {/* 車資檢核 */}
+                                    {
+                                        caseflg !== "共享車隊"
+                                        &&
+                                        <>
+                                            {/* 車資總額 標題 */}
+                                            <Text
+                                                caseflag={caseflg !== "長照"}
+                                                theme={laptopL.totalFareTitle}
+                                            >
+                                                車資總額
+
+                                            {/* 車資總額 內文 */}
+                                                <Text
+                                                    theme={laptopL.totalFareText}
+                                                >
+                                                    ${props?.totalAmt ?? 4321}
+                                                </Text>
+                                            </Text>
+
+                                            {/* 政府補助檢核 */}
+                                            {
+                                                caseflg === "長照"
+                                                &&
+                                                <>
+                                                    {/* 政府補助 標題 */}
+                                                    <Text
+                                                        theme={laptopL.govSubsidyTitle}
+                                                    >
+                                                        政府補助
 
                                 {/* 政府補助 內文 */}
-                                    <Text
-                                        theme={laptopL.govSubsidyText}
-                                    >
-                                        ${props?.govSubsidy ?? 0}
-                                    </Text>
-                                </Text>
+                                                        <Text
+                                                            theme={laptopL.govSubsidyText}
+                                                        >
+                                                            ${props?.govSubsidy ?? 0}
+                                                        </Text>
+                                                    </Text>
 
-                                {/* 陪同金額 標題 */}
-                                <Text
-                                    theme={laptopL.accompanyingAmountTitle}
-                                >
-                                    陪同金額
+                                                    {/* 陪同金額 標題 */}
+                                                    <Text
+                                                        theme={laptopL.accompanyingAmountTitle}
+                                                    >
+                                                        陪同金額
 
                                 {/* 陪同金額 內文 */}
-                                    <Text
-                                        theme={laptopL.accompanyingAmountText}
-                                    >
-                                        ${props?.withAmt ?? 0}
-                                    </Text>
-                                </Text>
-
-                                {/* 個案負擔 標題 */}
-                                <Text
-                                    theme={laptopL.caseBurdenTitle}
-                                >
-                                    {props.nowTab === "長照"
-                                        ?
-                                        "個案負擔"
-                                        :
-                                        "用戶負擔"
+                                                        <Text
+                                                            theme={laptopL.accompanyingAmountText}
+                                                        >
+                                                            ${props?.withAmt ?? 0}
+                                                        </Text>
+                                                    </Text>
+                                                </>
+                                            }
+                                        </>
                                     }
 
-                                    {/* 個案負擔 內文 */}
+                                    {/* 個案負擔 標題 */}
                                     <Text
-                                        theme={laptopL.caseBurdenText}
+                                        caseflag={caseflg !== "長照"}
+                                        theme={laptopL.caseBurdenTitle}
                                     >
-                                        ${props?.caseBurden ?? 1245451510}
+                                        {caseflg === "長照"
+                                            ?
+                                            "個案負擔"
+                                            :
+                                            "用戶負擔"
+                                        }
+
+                                        {/* 個案負擔 內文 */}
+                                        <Text
+                                            theme={laptopL.caseBurdenText}
+                                        >
+                                            ${props?.caseBurden ?? 1234}
+                                        </Text>
                                     </Text>
+
+                                </Container>
+                            </Container>
+
+                            {/* 乘客檢核 */}
+                            {
+                                caseflg !== "長照"
+                                &&
+                                <>
+                                    {/* 乘客容器 */}
+                                    <Container
+                                        theme={laptopL.passengerContainer}
+                                    >
+                                        {/* 乘客標題 */}
+                                        <Text
+                                            theme={laptopL.passengerTitle}
+                                        >
+                                            乘客
                                 </Text>
 
-                            </Container>
+                                        {/* 乘客內文容器 */}
+                                        <Text
+                                            theme={laptopL.passengerTextContainer}
+                                        >
+                                            <Container>
+                                                {
+                                                    [
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                        "王曉明",
+                                                    ].map(item => {
+                                                        return (
+                                                            <>
+                                                                {/* 乘客內文 */}
+                                                                <Text
+                                                                    theme={laptopL.passengerText}
+                                                                >
+                                                                    {item}
+                                                                </Text>
+                                                            </>
+                                                        )
+                                                    }
+                                                    )
+                                                }
+                                            </Container>
+
+                                        </Text>
+                                    </Container>
+                                </>
+                            }
 
                         </SubContainer>
 
@@ -427,13 +557,16 @@ const LaptopLBase = (props) => {
                         <SubContainer
                             theme={laptopL.startToEndContainer}
                         >
-                            <Container>
+                            <Container
+                                theme={laptopL.addressContainer}
+                            >
                                 {/* 起點 標題 */}
                                 <Text
                                     theme={laptopL.startPointTitle}
                                 >
-                                    起 ({props.fromAddr ?? "住家"})
-                            </Text>
+                                    起 {props.fromAddr ?? "(住家)"}
+                                    {/* 起 */}
+                                </Text>
 
                                 {/* 起點 內文 */}
                                 <Text
@@ -444,37 +577,53 @@ const LaptopLBase = (props) => {
 
                             </Container>
 
-                            {/* 起點 備註 */}
-                            <Text
-                                theme={laptopL.startPointnote}
-                            >
-                                備註：{props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "在立德路和延和路交叉口,靠近延和路這邊。"}
-                            </Text>
+                            {/* 備註檢核 */}
+                            {
+                                caseflg === "長照"
+                                &&
+                                <>
+                                    {/* 起點 備註 */}
+                                    <Text
+                                        theme={laptopL.startPointnote}
+                                    >
+                                        備註：{props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "在立德路和延和路交叉口,靠近延和路這邊。"}
+                                    </Text>
+                                </>
+                            }
 
-                            <Container>
+                            <Container
+                                theme={laptopL.addressContainer}
+                            >
                                 {/* 迄點 標題 */}
                                 <Text
                                     theme={laptopL.endPointTitle}
                                 >
 
-                                    迄 ({props.fromAddr ?? "復健診所"})
-                            </Text>
+                                    {/* 迄 {props.fromAddr ?? "(復健診所)"} */}
+                                    迄
+                                </Text>
 
                                 {/* 迄點 內文 */}
                                 <Text
                                     theme={laptopL.endPointText}
                                 >
-                                    {props.nowTab === "巴士" ? props?.toStationName : props?.toAddr ?? "台灣新北市板橋區中山路一段161號"}
+                                    {props.nowTab === "巴士" ? props?.toStationName : props?.toAddr ?? "台灣省台中市北屯區大鵬路陳平里12之3巷5之1弄1之1鄰11號1樓之1"}
                                 </Text>
                             </Container>
 
-                            {/* 迄點 備註 */}
-                            <Text
-                                theme={laptopL.endPointnote}
-                            >
-                                備註：{props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "在立德路和延和路交叉口,靠近延和路這邊。"}
-                            </Text>
-
+                            {/* 備註檢核 */}
+                            {
+                                caseflg === "長照"
+                                &&
+                                <>
+                                    {/* 迄點 備註 */}
+                                    <Text
+                                        theme={laptopL.endPointnote}
+                                    >
+                                        備註：{props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "在立德路和延和路交叉口,靠近延和路這邊。"}
+                                    </Text>
+                                </>
+                            }
                         </SubContainer>
 
                         {/* 行程表格容器 */}

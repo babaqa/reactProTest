@@ -556,7 +556,7 @@ export default {
 
     //#endregion
 
-    //#region 按鈕容器
+    //#region 按鈕
     //#region 按鈕容器
     buttonContainer: {
         basic: (style, props) => ({
@@ -574,6 +574,49 @@ export default {
                 padding: "24px",
                 // height: "56px",
                 // width: "376px"
+            })
+        },
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-flex",
+                backgroundColor: "transparent",
+                padding: "24px",
+                flexGrow: 1
+                // height: "56px",
+                // width: "376px"
+            })
+        }
+    },
+    //#endregion
+
+    //#region 分隔容器
+    separateContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "auto",
+            display: props.caseflag ? "inline-flex" : "inline-block",
+        }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                width: "auto",
+                display: "inline-block",
+            })
+        }
+    },
+    //#endregion
+
+    //#region 按鈕內容器
+    buttonInsideContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "auto",
+            display: "inline-block",
+        }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
             })
         }
     },
@@ -649,7 +692,7 @@ export default {
             backgroundColor: "#1890FF",
             borderColor: "#1890FF",
             borderRadius: "2px",
-            margin: "0 4px 0 0",
+            margin: "0 24px 0 0",
             // position: "absolute",
             fontWeight: "400",
             // left: "116px",
@@ -663,6 +706,21 @@ export default {
     },
     //#endregion
 
+    //#region 車資容器
+    fareContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "auto",
+            display: props.caseflag ? "inline-block" : "block",
+        }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+            })
+        }
+    },
+    //#endregion
+
     //#region 車資總額 標題
     totalFareTitle: {
         basic: (style, props) => ({
@@ -672,8 +730,19 @@ export default {
             fontSize: "14px",
             lineHeight: "22px",
             color: "rgba(0,0,0,0.45)",
-            margin: "16px 24px 0 0 "
-        })
+            margin: props.caseflag ? "0 24px 0 0 " : "16px 24px 0 0 "
+        }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                fontWeight: 500,
+                fontSize: "14px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.45)",
+                margin: "16px 24px 0 0 "
+            })
+        }
     },
     //#endregion
 
@@ -753,8 +822,19 @@ export default {
             fontSize: "14px",
             lineHeight: "22px",
             color: "rgba(0,0,0,0.45)",
-            margin: "16px 24px 0 0 "
-        })
+            margin: props.caseflag ? "0 24px 0 0 " : "16px 24px 0 0 "
+        }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                fontWeight: 500,
+                fontSize: "14px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.45)",
+                margin: "16px 24px 0 0 "
+            })
+        }
     },
     //#endregion
 
@@ -771,7 +851,86 @@ export default {
     },
     //#endregion
 
+    //#region 乘客容器
+    passengerContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "block",
+            width: "100%",
+        }),
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                display: "flex",
+                flexGrow: 1,
+                width: "auto",
+            }),
+        }
+    },
     //#endregion
+
+    //#region 乘客標題
+    passengerTitle: {
+        basic: (style, props) => ({
+            ...style,
+            fontWeight: 500,
+            display: "inline-block",
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0,0,0,0.45)",
+            margin: "0 8px 0 0",
+            width: "28px"
+        }),
+    },
+    //#endregion
+
+    //#region 乘客內文容器
+    passengerTextContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            backgroundColor: "#F5F5F5",
+            padding: "6px 8px",
+            width: "100%",
+        }),
+        laptop: {
+            basic: (style, props) => ({
+                ...style,
+                display: "block",
+                backgroundColor: "#F5F5F5",
+                padding: "6px 8px",
+                width: "100%",
+                maxWidth: "499px"
+            }),
+        },
+        laptopL: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                backgroundColor: "#F5F5F5",
+                padding: "6px 8px",
+                flexGrow: 1,
+                maxWidth: "518px"
+            }),
+        }
+    },
+    //#endregion
+
+    //#region 乘客內文
+    passengerText: {
+        basic: (style, props) => ({
+            ...style,
+            margin: "2px 4px",
+            fontWeight: 500,
+            // display: "inline-block",
+            fontSize: "14px",
+            lineHeight: "22px",
+            color: "rgba(0,0,0,0.85)",
+        }),
+    },
+    //#endregion
+    //#endregion
+
 
     //#region  行程一覽
     //#region 行程一覽容器
@@ -881,6 +1040,15 @@ export default {
     },
     //#endregion
 
+    //#region 地址容器
+    addressContainer: {
+        basic: (style, props) => ({
+            ...style,
+            alignItems: "center"
+        }),
+    },
+    //#endregion
+
     //#region 起點 標題
     startPointTitle: {
         basic: (style, props) => ({
@@ -890,8 +1058,19 @@ export default {
             fontSize: "12px",
             lineHeight: "32px",
             color: "#FF7A45",
-            width: "74px"
-        })
+            width: "74px",
+        }),
+        laptop: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                fontWeight: 600,
+                fontSize: "12px",
+                lineHeight: "32px",
+                color: "#FF7A45",
+                // width: "17%",
+            })
+        }
     },
     //#endregion
 
@@ -909,7 +1088,23 @@ export default {
             flexGrow: 1,
             borderRadius: "8px",
             padding: "5px 12px"
-        })
+        }),
+        laptop: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                fontWeight: 500,
+                fontSize: "14px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.85)",
+                backgroundColor: "#F5F5F5",
+                margin: "0 0 0 8px",
+                // flexGrow: 1,
+                width: "calc( 83% - 8px )",
+                borderRadius: "8px",
+                padding: "5px 12px"
+            })
+        }
     },
     //#endregion
 
@@ -917,6 +1112,7 @@ export default {
     startPointnote: {
         basic: (style, props) => ({
             ...style,
+            margin: "4px 0 0",
             display: "inline-block",
             fontWeight: 500,
             fontSize: "12px",
@@ -935,8 +1131,21 @@ export default {
             fontSize: "12px",
             lineHeight: "32px",
             color: "#FF7A45",
-            width: "74px"
-        })
+            width: "74px",
+            margin: "8px 0 0"
+        }),
+        laptop: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                fontWeight: 600,
+                fontSize: "12px",
+                lineHeight: "32px",
+                color: "#FF7A45",
+                // width: "17%",
+                margin: "8px 0 0"
+            })
+        }
     },
     //#endregion
 
@@ -950,11 +1159,27 @@ export default {
             lineHeight: "22px",
             color: "rgba(0,0,0,0.85)",
             backgroundColor: "#F5F5F5",
-            margin: "0 0 0 8px",
+            margin: "8px 0 0 8px",
             flexGrow: 1,
             borderRadius: "8px",
             padding: "5px 12px"
-        })
+        }),
+        laptop: {
+            basic: (style, props) => ({
+                ...style,
+                display: "inline-block",
+                fontWeight: 500,
+                fontSize: "14px",
+                lineHeight: "22px",
+                color: "rgba(0,0,0,0.85)",
+                backgroundColor: "#F5F5F5",
+                margin: "8px 0 0 8px",
+                // flexGrow: 1,
+                width: "calc( 83% - 8px )",
+                borderRadius: "8px",
+                padding: "5px 12px"
+            })
+        }
     },
     //#endregion
 
@@ -967,6 +1192,7 @@ export default {
             fontSize: "12px",
             lineHeight: "16px",
             color: "#CF1322",
+            margin: "4px 0 0",
         })
     },
     //#endregion
@@ -993,6 +1219,7 @@ export default {
     },
     //#endregion
 
+    //#region 地圖
     //#region 地圖容器
     mapContainer: {
         basic: (style, props) => ({
@@ -1017,5 +1244,5 @@ export default {
         }
     },
     //#endregion
-
+    //#endregion
 }
