@@ -92,6 +92,8 @@ const LaptopLBase = (props) => {
                 {/* {console.log(data.filter(X => X.township === props.nowTab || "全部路線" === props.nowTab).map(item => { return item.routeName }).flat())} */}
                 <AllBusRouteAomponent
                     data={data.filter(X => X.township === props.nowTab || "全部路線" === props.nowTab).map(item => { return item.routeName }).flat()}
+                    CheckDetail={props.CheckDetail}
+                    setCheckDetail={props.setCheckDetail}
                 />
 
             </MainPageContainer>

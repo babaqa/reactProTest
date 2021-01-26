@@ -11,6 +11,7 @@ export const BusRoute = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
+    const [CheckDetail, setCheckDetail] = useState({}); // 詳細資料
     const [NowTab, setNowTab] = useState("全部路線"); // 目前公告頁面
     const [Width, Height] = useWindowSize();
 
@@ -22,6 +23,8 @@ export const BusRoute = (props) => {
                 <LaptopL
                     nowTab={NowTab}
                     setNowTab={setNowTab}
+                    CheckDetail={CheckDetail}
+                    setCheckDetail={setCheckDetail}
                 />
             }
             {/* {

@@ -37,7 +37,7 @@ export const AllBusRouteAomponent = (props) => {
                     }
                 })
                 //#endregion
-                //#endregion
+
                 if (payload === "API") {
                     globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowKeys");
                     globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowsData");
@@ -59,7 +59,7 @@ export const AllBusRouteAomponent = (props) => {
                     }
                 })
                 //#endregion
-                //#endregion
+
                 if (payload === "API") {
                     globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowKeys");
                     globalContextService.remove("AllBusRouteAomponentPage", "CheckedRowsData");
@@ -93,6 +93,8 @@ export const AllBusRouteAomponent = (props) => {
                 <LaptopL
                     data={props.data}
                     controllGCS={controllGCS}
+                    CheckDetail={props.CheckDetail}
+                    setCheckDetail={props.setCheckDetail}
                 />
             }
             {/* {
@@ -120,6 +122,8 @@ export const AllBusRouteAomponent = (props) => {
                 <MobileM
                     data={props.data}
                     controllGCS={controllGCS}
+                    CheckDetail={props.CheckDetail}
+                    setCheckDetail={props.setCheckDetail}
                 />
             }
         </>
