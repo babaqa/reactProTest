@@ -143,7 +143,7 @@ const MobileMBase = (props) => {
                 <AllRecordComponent
                     data={tabMap(props.nowTab)
                         .filter(X => {
-                            if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value, '2' ?? '2') && (X.status === 9 || X.status === 5)) {
+                            if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value ?? '2', '2') && (X.status === 9 || X.status === 5)) {
                                 return false
                             }
                             else if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value, '1') && (X.status !== 9 && X.status !== 5)) {
