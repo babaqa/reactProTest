@@ -79,10 +79,11 @@ const LaptopLBase = (props) => {
                 <AllRecordComponent
                     data={tabMap(props.nowTab)
                         .filter(X => {
+                            // console.log(X)
                             if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value ?? '2', '2') && (X.status === 9 || X.status === 5)) {
                                 return false
                             }
-                            else if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value ?? '1', '1') && (X.status !== 9 && X.status !== 5)) {
+                            else if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value, '1') && (X.status !== 9 && X.status !== 5)) {
                                 return false
                             }
                             return true

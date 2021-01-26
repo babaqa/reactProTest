@@ -108,7 +108,7 @@ const LaptopLBase = (props) => {
                     placeholder={""}
                     // isMulti
                     // hideSelectedOptions={false}
-                    value={globalContextService.get("RecordPage", "OrderTime") ?? { value: '2', label: "未來" }}
+                    value={globalContextService.get("RecordPage", "OrderTime") ?? { value: '2', label: "未來訂單" }}
                     onChange={(e, value, onInitial) => {
                         if (!isEqual(value, globalContextService.get("RecordPage", "OrderTime"))) {
                             if (value?.value === '1') {
@@ -126,8 +126,8 @@ const LaptopLBase = (props) => {
                     }
                     options={
                         [
-                            { value: '1', label: "過去" },
-                            { value: '2', label: "未來" },
+                            { value: '1', label: "過去訂單" },
+                            { value: '2', label: "未來訂單" },
                         ]
                     }
                     // menuPosition={true}
@@ -361,13 +361,13 @@ const LaptopLBase = (props) => {
                                                                     >
                                                                         服務單位
 
-                                                                    {/* 服務單位 內文 */}
-                                                                        <Tooltip placement="top" title={rowData?.orgName}>
+                                                                        {/* 服務單位 內文 */}
+                                                                        <Tooltip placement="top" title={rowData?.orgName ?? "未排班"}>
 
                                                                             <Text
                                                                                 theme={laptopL.serviceUnitText}
                                                                             >
-                                                                                {rowData?.orgName}
+                                                                                {rowData?.orgName ?? "未排班"}
                                                                             </Text>
                                                                         </Tooltip>
 
@@ -383,7 +383,7 @@ const LaptopLBase = (props) => {
                                                                         <Text
                                                                             theme={laptopL.driverText}
                                                                         >
-                                                                            {rowData?.driverInfoName}
+                                                                            {rowData?.driverInfoName ?? "未排班"}
                                                                         </Text>
                                                                     </Text>
 
@@ -397,7 +397,7 @@ const LaptopLBase = (props) => {
                                                                         <Text
                                                                             theme={laptopL.licensePlateText}
                                                                         >
-                                                                            {rowData?.carNo}
+                                                                            {rowData?.carNo ?? "未排班"}
                                                                         </Text>
                                                                     </Text>
 
@@ -663,7 +663,7 @@ const LaptopLBase = (props) => {
                                                                         type="button" // 防止提交
                                                                         theme={laptopL.rideDetailsButton}
                                                                         onClick={() => {
-                                                                            // history.push("/Order/WhiteOrder");
+                                                                            history.push(`/Record/Detail?CaseId=${rowData.id}&&case=${props.nowTab}`);
                                                                             // props.controllGCS("return")
                                                                         }}
                                                                     >

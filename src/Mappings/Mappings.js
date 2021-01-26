@@ -22,10 +22,14 @@ import { AddFastCallCar } from '../Pages/FastCallCar/AddFastCallCar/AddFastCallC
 import { EditFastCallCar } from '../Pages/FastCallCar/EditFastCallCar/EditFastCallCar';
 //#endregion
 import { BusRoute } from '../Pages/BusRoute/BusRoute';
+// 訂單檢視
 import { Record } from '../Pages/Record/Record';
+import { RecordDetail } from '../Pages/Record/RecordDetail/RecordDetail';
+
 import { UserInfo } from '../Pages/UserInfo/UserInfo';
 import { Contact } from '../Pages/Contact/Contact';
 import { QAndA } from '../Pages/QAndA/QAndA';
+import { from } from 'rxjs';
 
 //#region 
 export const urlMapping = {
@@ -38,7 +42,10 @@ export const urlMapping = {
    "/FastCallCar/Edit": <EditFastCallCar />,// 編輯常用路線
 
    "/BusRoute": <BusRoute />,// 快速叫車
+
    "/Record": <Record />,// 訂單檢視
+   "/Record/Detail": <RecordDetail />,// 訂單乘車明細
+
    "/UserInfo": <UserInfo />,// 用戶資料
    "/Contact": <Contact />,// 聯繫客服
    "/QAndA": <QAndA />,// 常見問題
