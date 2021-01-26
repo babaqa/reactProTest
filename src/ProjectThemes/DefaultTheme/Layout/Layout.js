@@ -621,7 +621,9 @@ export default {
             color: "rgba(0, 0, 0, 0.65)",
             padding: "4px 0",
             cursor: "pointer",
-            userSelect: "none"
+            userSelect: "none",
+            display: "inline-block",
+
         }),
         hover: (style, props) => ({
             color: "#FFE977",
