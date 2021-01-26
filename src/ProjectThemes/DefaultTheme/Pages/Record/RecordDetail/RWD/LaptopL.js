@@ -943,7 +943,8 @@ export default {
             display: "flex",
             backgroundColor: "transparent",
             height: "48px",
-            padding: "16px 24px 0",
+            margin: "0 24px",
+            padding: "16px 0 0",
             boxShadow: "inset 0 -1px #D9D9D9",
         })
     },

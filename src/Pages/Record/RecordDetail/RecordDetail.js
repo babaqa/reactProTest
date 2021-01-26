@@ -128,6 +128,7 @@ export const RecordDetail = (props) => {
 
 
     const [GetCaseRecordExecute, GetCaseRecordPending] = useAsync(getCaseRecord, true);
+    //#endregion
 
     return (
         <>
@@ -168,6 +169,8 @@ export const RecordDetail = (props) => {
             {
                 Width < 768 &&
                 <MobileM
+                    data={CaseData}
+                    case={urlParams.get("case")}
                 />
             }
         </>

@@ -361,13 +361,13 @@ const LaptopLBase = (props) => {
                                                                     >
                                                                         服務單位
 
-                                                                    {/* 服務單位 內文 */}
-                                                                        <Tooltip placement="top" title={rowData?.orgName}>
+                                                                        {/* 服務單位 內文 */}
+                                                                        <Tooltip placement="top" title={rowData?.orgName ?? "未排班"}>
 
                                                                             <Text
                                                                                 theme={laptopL.serviceUnitText}
                                                                             >
-                                                                                {rowData?.orgName}
+                                                                                {rowData?.orgName ?? "未排班"}
                                                                             </Text>
                                                                         </Tooltip>
 
@@ -383,7 +383,7 @@ const LaptopLBase = (props) => {
                                                                         <Text
                                                                             theme={laptopL.driverText}
                                                                         >
-                                                                            {rowData?.driverInfoName}
+                                                                            {rowData?.driverInfoName ?? "未排班"}
                                                                         </Text>
                                                                     </Text>
 
@@ -397,7 +397,7 @@ const LaptopLBase = (props) => {
                                                                         <Text
                                                                             theme={laptopL.licensePlateText}
                                                                         >
-                                                                            {rowData?.carNo}
+                                                                            {rowData?.carNo ?? "未排班"}
                                                                         </Text>
                                                                     </Text>
 

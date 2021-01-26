@@ -9,8 +9,9 @@ import { ReactComponent as CaseMobileM } from '../../../../Assets/img/RecordDeta
 import { ReactComponent as FleetMobileM } from '../../../../Assets/img/RecordDetailPage/FleetMobileM.svg'
 import { ReactComponent as BusMobileM } from '../../../../Assets/img/RecordDetailPage/BusMobileM.svg'
 import { ReactComponent as Share } from '../../../../Assets/img/RecordDetailPage/Share.svg'
-import { toString, isNil } from 'lodash';
+import { toString, isNil, isEmpty } from 'lodash';
 import { getParseItemLocalStorage } from '../../../../Handlers';
+import { posRemarksSelectOption } from '../../../../Mappings/Mappings';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
@@ -19,7 +20,7 @@ const MobileMBase = (props) => {
 
     let history = useHistory();
 
-    let caseflg = "長照"
+    // let props.case = "長照"
     // "長照", "共享車隊", "巴士"
 
     //#region 取消狀態分類
@@ -102,28 +103,34 @@ const MobileMBase = (props) => {
                             <Container
                                 theme={mobileM.caseTypeContainer}
                             >
-                                {switchCase(caseflg)}
+                                {switchCase(props.case)}
                             </Container>
 
                             {/* 案件標籤容器 */}
                             <Container
                                 theme={mobileM.tagContainer}
                             >
-                                {/* 已共乘  ShareText*/}
-                                < Text
-                                    theme={mobileM.shareText}
-                                >
-                                    <Share
-                                        style={mobileM.shareSvg}
-                                    />
-                                    已共乘
-                                </Text>
+                                {
+                                    props.case !== "巴士"
+                                    &&
+                                    <>
+                                        {/* 已共乘  ShareText*/}
+                                        < Text
+                                            theme={mobileM.shareText}
+                                        >
+                                            <Share
+                                                style={mobileM.shareSvg}
+                                            />
+                                            已共乘
+                                        </Text>
+                                    </>
+                                }
 
                                 {/* 狀態標籤 */}
                                 <Tag
                                     baseDefaultTheme={"DefaultTheme"}
-                                    theme={statusMapping(props.status ?? 9, true)}
-                                    text={statusMapping(props.status ?? 9, false, props.cancelReamrk)}
+                                    theme={statusMapping(props.data?.status ?? 9, true)}
+                                    text={statusMapping(props.data?.status ?? 9, false, props.data?.cancelReamrk)}
                                 />
 
                             </Container>
@@ -143,7 +150,7 @@ const MobileMBase = (props) => {
                                 <Text
                                     theme={mobileM.orderNoText}
                                 >
-                                    {props?.orderNo ?? "TS16063797554258"}
+                                    {props.data?.orderNo}
                                 </Text>
                             </Text>
 
@@ -157,7 +164,7 @@ const MobileMBase = (props) => {
                                 <Text
                                     theme={mobileM.reserveDateText}
                                 >
-                                    {props?.reserveDate ?? "2020-11-29 21:30"}
+                                    {props.data?.reserveDate}
                                 </Text>
 
                             </Text>
@@ -178,12 +185,12 @@ const MobileMBase = (props) => {
                         <Text
                             theme={mobileM.userName}
                         >
-                            {props?.userName ?? getParseItemLocalStorage("UserName")}
+                            {props.data?.userName ?? getParseItemLocalStorage("UserName")}
                         </Text>
 
                         {/* 案號檢核 */}
                         {
-                            caseflg === "長照"
+                            props.case === "長照"
                             &&
                             <>
                                 {/* 案號 標題*/}
@@ -196,7 +203,7 @@ const MobileMBase = (props) => {
                                     <Text
                                         theme={mobileM.caseNumberText}
                                     >
-                                        {props?.caseNumber ?? "1081213001"}
+                                        {props.data?.caseNumber}
                                     </Text>
                                 </Text>
 
@@ -205,12 +212,12 @@ const MobileMBase = (props) => {
 
                         {/* 共乘容器 */}
                         <Container
-                            caseflag={caseflg !== "長照"}
+                            caseflag={props.case !== "長照"}
                             theme={mobileM.shareContainer}
                         >
                             {/* 可否共乘檢核 */}
                             {
-                                caseflg !== "巴士"
+                                props.case !== "巴士"
                                 &&
                                 <>
                                     {/* 可否共乘 標題 */}
@@ -222,7 +229,7 @@ const MobileMBase = (props) => {
                                         <Text
                                             theme={mobileM.canShareText}
                                         >
-                                            {props?.canShared ? "願意共乘" : "不願共乘"}
+                                            {props.data?.canShared ? "願意共乘" : "不願共乘"}
                                         </Text>
                                     </Text>
                                 </>
@@ -238,7 +245,7 @@ const MobileMBase = (props) => {
                                 <Text
                                     theme={mobileM.numberOfPeopleText}
                                 >
-                                    {props.nowTab === "長照" ? props?.familyWith : props?.passengerNum ?? 0}人
+                                    {props.case === "長照" ? props.data?.familyWith : props.data?.passengerNum ?? 0}人
                                     </Text>
                             </Text>
                         </Container>
@@ -255,7 +262,7 @@ const MobileMBase = (props) => {
                         <Text
                             theme={mobileM.driverText}
                         >
-                            {props?.driverInfoName ?? "王小明明"}
+                            {props.data?.driverInfoName ?? "未排班"}
                         </Text>
                     </Text>
 
@@ -265,11 +272,11 @@ const MobileMBase = (props) => {
                     >
                         車牌
 
-                                {/* 車牌 內文 */}
+                        {/* 車牌 內文 */}
                         <Text
                             theme={mobileM.licensePlateText}
                         >
-                            {props?.carNo ?? "MMM-0000"}
+                            {props.data?.carNo ?? "未排班"}
                         </Text>
                     </Text>
 
@@ -280,12 +287,12 @@ const MobileMBase = (props) => {
                         服務單位
 
                             {/* 服務單位 內文 */}
-                        <Tooltip placement="top" title={props?.orgName ?? "測試交通單位1測試交通單位1測試交通單位位"}>
+                        <Tooltip placement="top" title={props.data?.orgName ?? "未排班"}>
 
                             <Text
                                 theme={mobileM.serviceUnitText}
                             >
-                                {props?.orgName ?? "測試交通單位1測試交通單位1測試交通單位位"}
+                                {props.data?.orgName ?? "未排班"}
                             </Text>
                         </Tooltip>
                     </Text>
@@ -357,12 +364,12 @@ const MobileMBase = (props) => {
                 >
                     {/* 車資檢核 */}
                     {
-                        caseflg !== "共享車隊"
+                        props.case !== "共享車隊"
                         &&
                         <>
                             {/* 車資總額 標題 */}
                             <Text
-                                caseflag={caseflg !== "長照"}
+                                caseflag={props.case !== "長照"}
                                 theme={mobileM.totalFareTitle}
                             >
                                 車資總額
@@ -371,13 +378,13 @@ const MobileMBase = (props) => {
                                 <Text
                                     theme={mobileM.totalFareText}
                                 >
-                                    ${props?.totalAmt ?? 4321}
+                                    ${props.data?.totalAmt}
                                 </Text>
                             </Text>
 
                             {/* 政府補助檢核 */}
                             {
-                                caseflg === "長照"
+                                props.case === "長照"
                                 &&
                                 <>
                                     {/* 政府補助 標題 */}
@@ -390,7 +397,7 @@ const MobileMBase = (props) => {
                                         <Text
                                             theme={mobileM.govSubsidyText}
                                         >
-                                            ${props?.govSubsidy ?? 4321}
+                                            ${props.data?.govSubsidy}
                                         </Text>
                                     </Text>
 
@@ -404,7 +411,7 @@ const MobileMBase = (props) => {
                                         <Text
                                             theme={mobileM.accompanyingAmountText}
                                         >
-                                            ${props?.withAmt ?? 1234}
+                                            ${props.data?.withAmt}
                                         </Text>
                                     </Text>
                                 </>
@@ -414,10 +421,10 @@ const MobileMBase = (props) => {
 
                     {/* 個案負擔 標題 */}
                     <Text
-                        caseflag={caseflg !== "長照"}
+                        caseflag={props.case !== "長照"}
                         theme={mobileM.caseBurdenTitle}
                     >
-                        {caseflg === "長照"
+                        {props.case === "長照"
                             ?
                             "個案負擔"
                             :
@@ -428,7 +435,7 @@ const MobileMBase = (props) => {
                         <Text
                             theme={mobileM.caseBurdenText}
                         >
-                            ${props?.caseBurden ?? 1234}
+                            ${props.data?.caseBurden}
                         </Text>
                     </Text>
 
@@ -436,7 +443,7 @@ const MobileMBase = (props) => {
 
                 {/* 乘客檢核 */}
                 {
-                    caseflg !== "長照"
+                    props.case !== "長照"
                     &&
                     <>
                         {/* 乘客容器 */}
@@ -456,32 +463,20 @@ const MobileMBase = (props) => {
                             >
                                 <Container>
                                     {
-                                        [
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                            "王曉明",
-                                        ].map(item => {
+
+                                        (JSON.parse(isEmpty(props.data?.remark) ? "[]" : props.data.remark)).map((passenger, index) => {
                                             return (
-                                                <>
-                                                    {/* 乘客內文 */}
+                                                <React.Fragment key={index}>
+                                                    {/* 乘客 內文 */}
                                                     <Text
                                                         theme={mobileM.passengerText}
                                                     >
-                                                        {item}
+                                                        {passenger.name}
+
                                                     </Text>
-                                                </>
+                                                </React.Fragment>
                                             )
-                                        }
-                                        )
+                                        })
                                     }
                                 </Container>
 
@@ -514,7 +509,7 @@ const MobileMBase = (props) => {
                             <Text
                                 theme={mobileM.distanceText}
                             >
-                                {props?.carNo ?? "100km"}
+                                {(props.data?.totalMileage / 1000)}km
                             </Text>
                         </Text>
 
@@ -528,7 +523,7 @@ const MobileMBase = (props) => {
                             <Text
                                 theme={mobileM.timingText}
                             >
-                                {props?.carNo ?? "18分鐘"}
+                                {props.data?.expectedMinute}分鐘
                             </Text>
                         </Text>
                     </Container>
@@ -542,32 +537,32 @@ const MobileMBase = (props) => {
                         >
                             {/* 起點 標題 */}
                             <Text
-                                caseflag={caseflg !== "長照"}
+                                caseflag={props.case !== "長照"}
                                 theme={mobileM.startPointTitle}
                             >
-                                {caseflg !== "長照" ? "起" : "起 (住家)"}
+                                起 {posRemarksSelectOption.some(V => V.value === props.data.fromAddrRemark) ? `(${props.data?.fromAddrRemark})` : ""}
                             </Text>
 
                             {/* 起點 內文 */}
                             <Text
-                                caseflag={caseflg !== "長照"}
+                                caseflag={props.case !== "長照"}
                                 theme={mobileM.startPointText}
                             >
-                                {props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "台灣新北市板橋區中山路一段161號"}
+                                {props.case === "巴士" ? props.data?.fromStationName : props.data?.fromAddr}
                             </Text>
 
                         </Container>
 
                         {/* 備註檢核 */}
                         {
-                            caseflg === "長照"
+                            props.case === "長照" && !(posRemarksSelectOption.some(V => V.value === props.data.fromAddrRemark))
                             &&
                             <>
                                 {/* 起點 備註 */}
                                 <Text
                                     theme={mobileM.startPointnote}
                                 >
-                                    備註：{props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "在立德路和延和路交叉口,靠近延和路這邊。"}
+                                    備註：{props.data.fromStationName}
                                 </Text>
                             </>
                         }
@@ -577,33 +572,33 @@ const MobileMBase = (props) => {
                         >
                             {/* 迄點 標題 */}
                             <Text
-                                caseflag={caseflg !== "長照"}
+                                caseflag={props.case !== "長照"}
                                 theme={mobileM.endPointTitle}
                             >
 
                                 {/* 迄 {props.fromAddr ?? "(復健診所)"} */}
-                                {caseflg !== "長照" ? "迄" : "迄 (復健診所)"}
+                                迄 {posRemarksSelectOption.some(V => V.value === props.data.toAddrRemark) ? `(${props.data?.toAddrRemark})` : ""}
                             </Text>
 
                             {/* 迄點 內文 */}
                             <Text
-                                caseflag={caseflg !== "長照"}
+                                caseflag={props.case !== "長照"}
                                 theme={mobileM.endPointText}
                             >
-                                {props.nowTab === "巴士" ? props?.toStationName : props?.toAddr ?? "台灣省台中市北屯區大鵬路陳平里12之3巷5之1弄1之1鄰11號1樓之1"}
+                                {props.case === "巴士" ? props.data?.toStationName : props.data?.toAddr}
                             </Text>
                         </Container>
 
                         {/* 備註檢核 */}
                         {
-                            caseflg === "長照"
+                            props.case === "長照" && !(posRemarksSelectOption.some(V => V.value === props.data.toAddrRemark))
                             &&
                             <>
                                 {/* 迄點 備註 */}
                                 <Text
                                     theme={mobileM.endPointnote}
                                 >
-                                    備註：{props.nowTab === "巴士" ? props?.fromStationName : props?.fromAddr ?? "在立德路和延和路交叉口,靠近延和路這邊。"}
+                                    備註：{props.data.toAddrRemark}
                                 </Text>
                             </>
                         }
@@ -710,7 +705,7 @@ const MobileMBase = (props) => {
                         //sort
                         //showHeader={false}
                         data={[
-                            { id: "1", totalAmt: "1000" },
+                            props.data
                         ]}
                         // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
                         // data={props.CaseOrderAmt}
@@ -752,7 +747,7 @@ const MobileMBase = (props) => {
                         type="button" // 防止提交
                         theme={mobileM.returnButton}
                         onClick={() => {
-                            history.goBack()
+                            history.push("/Record")
                         }}
                     >
                         回列表

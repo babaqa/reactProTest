@@ -157,15 +157,21 @@ const LaptopLBase = (props) => {
                         <SubContainer
                             theme={laptopL.rightTitleContainer}
                         >
-                            {/* 已共乘  ShareText*/}
-                            < Text
-                                theme={laptopL.shareText}
-                            >
-                                <Share
-                                    style={laptopL.shareSvg}
-                                />
-                                    已共乘
-                            </Text>
+                            {
+                                props.case !== "巴士"
+                                &&
+                                <>
+                                    {/* 已共乘  ShareText*/}
+                                    < Text
+                                        theme={laptopL.shareText}
+                                    >
+                                        <Share
+                                            style={laptopL.shareSvg}
+                                        />
+                                            已共乘
+                                        </Text>
+                                </>
+                            }
 
                             {/* 狀態標籤 */}
                             <Tag
@@ -519,7 +525,7 @@ const LaptopLBase = (props) => {
                             <Text
                                 theme={laptopL.distanceText}
                             >
-                                {props.data.totalMileage}
+                                {(props.data.totalMileage / 1000)}km
                             </Text>
                         </Text>
 
@@ -533,7 +539,7 @@ const LaptopLBase = (props) => {
                             <Text
                                 theme={laptopL.timingText}
                             >
-                                {props.data.carNo ?? "18分鐘"}
+                                {props.data?.expectedMinute}分鐘
                             </Text>
                         </Text>
 
@@ -560,7 +566,7 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.startPointText}
                                 >
-                                    {props.nowTab === "巴士" ? props.data.fromStationName : props.data.fromAddr ?? "台灣新北市板橋區中山路一段161號"}
+                                    {props.case === "巴士" ? props.data.fromStationName : props.data.fromAddr}
                                 </Text>
 
                             </Container>
@@ -594,7 +600,7 @@ const LaptopLBase = (props) => {
                                 <Text
                                     theme={laptopL.endPointText}
                                 >
-                                    {props.nowTab === "巴士" ? props.data.toStationName : props.data.toAddr ?? "台灣省台中市北屯區大鵬路陳平里12之3巷5之1弄1之1鄰11號1樓之1"}
+                                    {props.case === "巴士" ? props.data.toStationName : props.data.toAddr}
                                 </Text>
                             </Container>
 
@@ -710,9 +716,7 @@ const LaptopLBase = (props) => {
                                 }
                                 //sort
                                 //showHeader={false}
-                                data={[
-                                    { id: "1", totalAmt: "1000" },
-                                ]}
+                                data={[props.data]}
                                 // data={[{}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {}, {},]}
                                 // data={props.CaseOrderAmt}
                                 clickPage={(currentPage, pageSize) => {
