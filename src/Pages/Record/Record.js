@@ -12,6 +12,7 @@ import { clearSession, clearLocalStorage, getParseItemLocalStorage } from '../..
 import { isUndefined } from 'lodash';
 import { fmt } from '../../Handlers/DateHandler';
 import moment from 'moment';
+import { allCaseListMapping } from '../../Mappings/Mappings';
 
 export const Record = (props) => {
 
@@ -23,6 +24,7 @@ export const Record = (props) => {
     // const [RemoteCithRecord, setRemoteCithRecord] = useState([]); // 偏鄉搭乘紀錄
     // const [DayCareRecord, setDayCareRecord] = useState([]); // 日照搭乘紀錄
     const [NowTab, setNowTab] = useState("長照"); // 目前搭乘紀錄頁面
+    const [AllTabs, setAllTabs] = useState([]); // 用戶身分頁面
     const [Width, Height] = useWindowSize();
     let history = useHistory();
 
@@ -31,6 +33,7 @@ export const Record = (props) => {
         const historyUnlisten = history.listen((location, action) => {
             // console.log(location, action)
             globalContextService.remove("RecordPage", "firstUseAPIgetRecords");
+            globalContextService.remove("RecordPage", "firstUseAPIgetUsers");
             globalContextService.remove("RecordPage")
         });
 
@@ -39,6 +42,110 @@ export const Record = (props) => {
         }
     }, [])
     //#endregion
+
+    //#region 取得用戶所有身分 API
+    const getUsers = useCallback(async (useAPI = false) => {
+
+        //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
+        if (isUndefined(globalContextService.get("RecordPage", "firstUseAPIgetUsers")) || useAPI) {
+            //#endregion
+
+            //#region 取得用戶所有身分 API
+            fetch(`${APIUrl}Users/GetUnPermissionUserType?userId=${getParseItemLocalStorage("UserID")}`, //Users/GetUnPermissionUserType
+                {
+                    headers: {
+                        "X-Token": getParseItemLocalStorage("CAuth"),
+                        "content-type": "application/json; charset=utf-8",
+                    },
+                    method: "GET"
+                })
+                .then(Result => {
+                    const ResultJson = Result.clone().json();//Respone.clone()
+                    return ResultJson;
+                })
+                .then((PreResult) => {
+
+                    if (PreResult.code === 200) {
+                        // 成功用戶資料 API
+                        // console.log(PreResult.data.filter(X => X.isEnable === true))
+                        console.log(PreResult.data);
+                        let CaseYet = 0;
+                        let filterTabs = PreResult.data
+                            .map(X => {
+                                // console.log(X.userType)
+                                if (X.userType === "caseuser") {
+                                    if (CaseYet === 0 && X.isEnable === true) {
+                                        CaseYet = 1;
+                                        return allCaseListMapping[X.userType];
+                                    }
+                                    else {
+                                        return null
+                                    }
+                                }
+                                else if (X.isEnable === true) {
+                                    return allCaseListMapping[X.userType];
+                                }
+                                return null
+                            })
+                        let allTabs = Object.values(allCaseListMapping)
+                            .filter(V => {
+                                return filterTabs.includes(V)
+                            })
+                        // console.log(allTabs)
+                        setAllTabs(allTabs)
+                        setNowTab(allTabs[0])
+                    }
+                    else {
+                        throw PreResult;
+                    }
+                })
+                .catch((Error) => {
+                    modalsService.infoModal.warn({
+                        iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                        yes: true,
+                        yesText: "確認",
+                        // no: true,
+                        // autoClose: true,
+                        backgroundClose: false,
+                        yesOnClick: (e, close) => {
+                            if (Error.code === 401) {
+                                clearSession();
+                                clearLocalStorage();
+                                globalContextService.clear();
+                                Switch();
+                            }
+                            close();
+                        }
+                        // theme: {
+                        //     yesButton: {
+                        //         text: {
+                        //             basic: (style, props) => {
+                        //                 console.log(style)
+                        //                 return {
+                        //                     ...style,
+                        //                     color: "red"
+                        //                 }
+                        //             },
+                        //         }
+                        //     }
+                        // }
+                    })
+                    throw Error.message;
+                })
+                .finally(() => {
+                    //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
+                    globalContextService.set("RecordPage", "firstUseAPIgetUsers", false);
+                    //#endregion
+                });
+            //#endregion
+        }
+    }, [APIUrl, Switch])
+
+
+    const [GetUsersExecute, GetUsersPending] = useAsync(getUsers, true);
+    //#endregion
+
+
     //#region 取得用戶各種訂單紀錄資料 API
     const getRecords = useCallback(async (useAPI = false, startData = fmt(moment().startOf("day")), endDate = fmt(moment().add(1, 'months').endOf('month'))) => {
 
@@ -160,6 +267,7 @@ export const Record = (props) => {
                     GetRecordsExecute={GetRecordsExecute} // 取得用戶各種訂單紀錄資料
                     GetRecordsPending={GetRecordsPending}
                     setNowTab={setNowTab} // 設定目前搭乘紀錄葉面
+                    AllTabs={AllTabs} // 用戶身分頁面
                 />
             }
             {/* {
@@ -198,6 +306,7 @@ export const Record = (props) => {
                     GetRecordsExecute={GetRecordsExecute} // 取得用戶各種訂單紀錄資料
                     GetRecordsPending={GetRecordsPending}
                     setNowTab={setNowTab} // 設定目前搭乘紀錄葉面
+                    AllTabs={AllTabs} // 用戶身分頁面
                 />
             }
         </>

@@ -340,9 +340,9 @@ export const allCaseListMapping = {
    "caseuser": "長照",
    "日照個案": "日照個案",
    "偏鄉運能不足": "偏鄉運能不足", // 未確定
-   "selfpayuser": "白牌",
+   "selfpayuser": "共享車隊",
    "5": "噗噗共乘",
-   "bususer": "幸福巴士",
+   "bususer": "巴士",
    "7": "DRTS"
 }
 //#endregion

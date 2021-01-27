@@ -27,7 +27,7 @@ const LaptopLBase = (props) => {
             case "巴士":
                 return props.BusRecord
             default:
-                return ["長照", "共享車隊", "巴士"]
+                return props.AllTabs
         }
 
     }
