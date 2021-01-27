@@ -157,7 +157,7 @@ export const CallCar = (props) => {
 
                     if (PreResult.code === 200) {
                         // 成功用戶資料 API
-                        // console.log(PreResult.data.filter(X => X.isEnable === true))
+                        // console.log(PreResult.data)
                         let allBunit;
                         //#region 取得所有 B單位選項 API
                         fetch(`${APIUrl}orgs/LoadOrgB`, // orgs/LoadOrgB
@@ -227,7 +227,6 @@ export const CallCar = (props) => {
                                 }
                             })
                             .map(async item => {
-
                                 //#region 取得用戶身分資料 API
                                 await fetch(`${APIUrl}${item.userType}s/Get?id=${item.caseId}`, //CaseUsers/Get
                                     {
@@ -248,6 +247,7 @@ export const CallCar = (props) => {
                                             // console.log(item.userType, PreResult)
                                             switch (item.userType) {
                                                 case "caseuser":
+                                                    tabMenu.push("長照")
                                                     GetQuotasExecute(item.caseId);
                                                     setCaseUserId(item.caseId)
                                                     setCaseInf(PreResult.result);
@@ -255,17 +255,19 @@ export const CallCar = (props) => {
 
                                                     let bUnitForCaseUser = (allBunit ?? []).filter(item => hadBUnit.includes(item?.id))
                                                     setBUnits(bUnitForCaseUser)
-                                                    tabMenu.push("長照")
+
                                                     break;
                                                 case "selfpayuser":
+                                                    tabMenu.push("共享車隊")
                                                     setWhiteUserId(item.caseId)
                                                     setWhiteInf(PreResult.result);
-                                                    tabMenu.push("共享車隊")
+
                                                     break;
                                                 case "bususer":
+                                                    tabMenu.push("巴士")
                                                     setBusUserId(item.caseId)
                                                     setBusInf(PreResult.result);
-                                                    tabMenu.push("巴士")
+
                                                     break;
                                                 case "countryside":
                                                     setCountryInf(PreResult.result);
@@ -277,6 +279,7 @@ export const CallCar = (props) => {
                                                     break;
                                             }
                                             // setCaseInf(PreResult);
+
                                         }
                                         else {
                                             throw PreResult;
@@ -316,6 +319,7 @@ export const CallCar = (props) => {
                                         throw Error.message;
                                     })
                                     .finally(() => {
+                                        // console.log(tabMenu.sort())
                                         setTabMenu(tabMenu.sort())
                                         setNowTab(tabMenu?.[0])
                                         //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
@@ -327,6 +331,7 @@ export const CallCar = (props) => {
 
                                 return item;
                             })
+
                     }
                     else {
                         throw PreResult;
