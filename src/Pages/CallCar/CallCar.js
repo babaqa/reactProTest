@@ -11,6 +11,7 @@ import { useHistory } from 'react-router-dom';
 import { useAsync } from '../../SelfHooks/useAsync';
 import { isUndefined, isNil } from 'lodash';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
+import { allCaseListMapping } from '../../Mappings/Mappings';
 
 export const CallCar = (props) => {
 
@@ -209,9 +210,10 @@ export const CallCar = (props) => {
 
                             });
                         //#endregion
+                        
                         let CaseYet = 0;
-                        let tabMenu = []
-                        let permission = PreResult.data
+                        // let tabMenu = []
+                        let filterTabs = PreResult.data
                             .filter(X => {
                                 if (X.userType === "caseuser") {
                                     if (CaseYet === 0 && X.isEnable === true) {
@@ -226,6 +228,18 @@ export const CallCar = (props) => {
                                     return X.isEnable === true
                                 }
                             })
+
+                        //#region 分頁篩選
+                        let allTabs = Object.values(allCaseListMapping)
+                            .filter(V => {
+                                return filterTabs.map(X => { return allCaseListMapping[X.userType] }).includes(V)
+                            })
+                        // console.log(allTabs)
+                        setTabMenu(allTabs)
+                        setNowTab(allTabs?.[0])
+                        //#endregion
+
+                        let permission = filterTabs
                             .map(async item => {
                                 //#region 取得用戶身分資料 API
                                 await fetch(`${APIUrl}${item.userType}s/Get?id=${item.caseId}`, //CaseUsers/Get
@@ -247,7 +261,7 @@ export const CallCar = (props) => {
                                             // console.log(item.userType, PreResult)
                                             switch (item.userType) {
                                                 case "caseuser":
-                                                    tabMenu.push("長照")
+                                                    // tabMenu.push("長照")
                                                     GetQuotasExecute(item.caseId);
                                                     setCaseUserId(item.caseId)
                                                     setCaseInf(PreResult.result);
@@ -258,13 +272,13 @@ export const CallCar = (props) => {
 
                                                     break;
                                                 case "selfpayuser":
-                                                    tabMenu.push("共享車隊")
+                                                    // tabMenu.push("共享車隊")
                                                     setWhiteUserId(item.caseId)
                                                     setWhiteInf(PreResult.result);
 
                                                     break;
                                                 case "bususer":
-                                                    tabMenu.push("巴士")
+                                                    // tabMenu.push("巴士")
                                                     setBusUserId(item.caseId)
                                                     setBusInf(PreResult.result);
 
@@ -320,8 +334,12 @@ export const CallCar = (props) => {
                                     })
                                     .finally(() => {
                                         // console.log(tabMenu.sort())
-                                        setTabMenu(tabMenu.sort())
-                                        setNowTab(tabMenu?.[0])
+                                        // let allTabs = Object.values(allCaseListMapping)
+                                        //     .filter(V => {
+                                        //         return tabMenu.includes(V)
+                                        //     })
+                                        // setTabMenu(allTabs)
+                                        // setNowTab(allTabs?.[0])
                                         //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
                                         // globalContextService.set("CallCarPage", "firstUseAPIgetUsers", false);
                                         //#endregion
@@ -331,6 +349,7 @@ export const CallCar = (props) => {
 
                                 return item;
                             })
+
 
                     }
                     else {

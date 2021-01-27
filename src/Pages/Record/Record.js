@@ -68,7 +68,7 @@ export const Record = (props) => {
                     if (PreResult.code === 200) {
                         // 成功用戶資料 API
                         // console.log(PreResult.data.filter(X => X.isEnable === true))
-                        console.log(PreResult.data);
+                        // console.log(PreResult.data);
                         let CaseYet = 0;
                         let filterTabs = PreResult.data
                             .map(X => {
