@@ -583,19 +583,52 @@ const LaptopLBase = (props) => {
                                         theme={laptopL.carType}
                                     />
 
-                                    {/* 簡訊號碼 SmsNumber */}
-                                    <Text theme={laptopL.formSubTitleText}>接收簡訊號碼</Text>
-                                    <TextInput
-                                        topLabel={<>簡訊號碼</>}
-                                        baseDefaultTheme={"DefaultTheme"}
-                                        type="text"
-                                        placeholder={"請輸入手機號碼"}
-                                        value={globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? null}
+                                    {/* 輪椅 Wheelchair */}
+                                    <Text theme={laptopL.formSubTitleText}>輪椅</Text>
+                                    <NewSelector
+                                        bascDefaultTheme={"DefaultTheme"}
+                                        topLabel={<>輪椅</>}
+                                        bottomLabel={""}
+                                        //viewType
+                                        isSearchable
+                                        placeholder={""}
+                                        // isMulti
+                                        // hideSelectedOptions={false}
+                                        value={globalContextService.get("WhiteCallCarComponentPage", "Wheelchair") ?? null}
                                         onChange={(e, value, onInitial) => {
-                                            globalContextService.set("WhiteCallCarComponentPage", "SmsNumber", value);
+                                            // console.log(props?.AllCarType)
+                                            globalContextService.set("WhiteCallCarComponentPage", "Wheelchair", value);
                                         }}
-                                        theme={laptopL.smsNumber}
+
+                                        options={[
+                                            { value: '0', label: "請選擇車種類型", isDisabled: true },
+                                            { value: '1', label: "無" },
+                                            { value: '2', label: "普通輪椅(可收折)" },
+                                            // ...props?.AllCarType
+                                        ]}
+                                        // menuPosition={true}
+                                        theme={laptopL.wheelchair}
                                     />
+
+                                    {/* 簡訊號碼 容器 SmsNumberContainer */}
+                                    <Container
+                                        theme={laptopL.smsNumberContainer}
+                                    >
+                                        {/* 簡訊號碼 SmsNumber */}
+                                        <Text theme={laptopL.formSubTitleText}>接收簡訊號碼</Text>
+                                        <TextInput
+                                            topLabel={<>簡訊號碼</>}
+                                            baseDefaultTheme={"DefaultTheme"}
+                                            type="text"
+                                            placeholder={"請輸入手機號碼"}
+                                            value={globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? null}
+                                            onChange={(e, value, onInitial) => {
+                                                globalContextService.set("WhiteCallCarComponentPage", "SmsNumber", value);
+                                            }}
+                                            theme={laptopL.smsNumber}
+                                        />
+                                    </Container>
+
                                     <Container
                                         style={{ width: "auto" }}
                                     >
@@ -1225,6 +1258,9 @@ const LaptopLBase = (props) => {
                                         else if (valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
                                         }
+                                        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]) {
+                                            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]
+                                        }
                                         else if (valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
                                         }
@@ -1328,6 +1364,7 @@ const LaptopLBase = (props) => {
                                                     toLat: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
                                                     toLon: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
+                                                    wheelchairType: globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.label, //	輪椅
                                                     isLastOrder: false
                                                 })
 
@@ -1359,6 +1396,7 @@ const LaptopLBase = (props) => {
                                                     toLat: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
                                                     toLon: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
+                                                    wheelchairType: globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.label, //	輪椅
                                                     isLastOrder: true
                                                 })
                                             } else {
@@ -1390,6 +1428,7 @@ const LaptopLBase = (props) => {
                                                     toLat: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
                                                     toLon: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
+                                                    wheelchairType: globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.label, //	輪椅
                                                     isLastOrder: true
                                                 })
                                             }

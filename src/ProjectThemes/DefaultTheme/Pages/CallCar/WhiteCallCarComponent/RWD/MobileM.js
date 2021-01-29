@@ -945,6 +945,42 @@ export default {
     },
     //#endregion
 
+    //#region 輪椅 Wheelchair
+    wheelchair: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px 0 8px",
+                display: "inline-block",
+                // ...style.occupy(4),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "154px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "26px",
+                height: "26px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
     //#region 去程搭車人數容器
     takerCountsContainer: {
         basic: (style, props) => ({

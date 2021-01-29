@@ -584,6 +584,35 @@ const MobileMBase = (props) => {
                                         theme={mobileM.carType}
                                     />
 
+                                    {/* 輪椅 Wheelchair */}
+                                    <Container style={{ width: "auto" }}>
+                                        <Text theme={mobileM.formSubTitleText}>輪椅</Text>
+                                        <NewSelector
+                                            bascDefaultTheme={"DefaultTheme"}
+                                            topLabel={<>輪椅</>}
+                                            bottomLabel={""}
+                                            //viewType
+                                            isSearchable
+                                            placeholder={""}
+                                            // isMulti
+                                            // hideSelectedOptions={false}
+                                            value={globalContextService.get("WhiteCallCarComponentPage", "Wheelchair") ?? null}
+                                            onChange={(e, value, onInitial) => {
+                                                // console.log(props?.AllCarType)
+                                                globalContextService.set("WhiteCallCarComponentPage", "Wheelchair", value);
+                                            }}
+
+                                            options={[
+                                                { value: '0', label: "請選擇車種類型", isDisabled: true },
+                                                { value: '1', label: "無" },
+                                                { value: '2', label: "普通輪椅(可收折)" },
+                                                // ...props?.AllCarType
+                                            ]}
+                                            // menuPosition={true}
+                                            theme={mobileM.wheelchair}
+                                        />
+                                    </Container>
+
                                     {/* 簡訊號碼 SmsNumber */}
                                     <Container style={{ width: "auto" }}>
                                         <Text theme={mobileM.formSubTitleText}>接收簡訊號碼</Text>
@@ -1230,6 +1259,9 @@ const MobileMBase = (props) => {
                                         else if (valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
                                         }
+                                        else if (valid(globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]) {
+                                            validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]
+                                        }
                                         else if (valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
                                             validMsg = valid(globalContextService.get("WhiteCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
                                         }
@@ -1333,6 +1365,7 @@ const MobileMBase = (props) => {
                                                     toLat: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
                                                     toLon: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
+                                                    wheelchairType: globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.label, //	輪椅
                                                     isLastOrder: false
                                                 })
 
@@ -1364,6 +1397,7 @@ const MobileMBase = (props) => {
                                                     toLat: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
                                                     toLon: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
+                                                    wheelchairType: globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.label, //	輪椅
                                                     isLastOrder: true
                                                 })
                                             } else {
@@ -1395,6 +1429,7 @@ const MobileMBase = (props) => {
                                                     toLat: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0,//	迄點緯度
                                                     toLon: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//	迄點經度
                                                     userId: props.UserId,
+                                                    wheelchairType: globalContextService.get("WhiteCallCarComponentPage", "Wheelchair")?.label, //	輪椅
                                                     isLastOrder: true
                                                 })
                                             }

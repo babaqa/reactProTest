@@ -989,6 +989,42 @@ export default {
     },
     //#endregion
 
+    //#region 輪椅 Wheelchair
+    wheelchair: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 16px 0 8px",
+                display: "inline-block",
+                // ...style.occupy(4),
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        selectorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "154px"
+            })
+        },
+        bottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                minHeight: "26px",
+                height: "26px",
+                // fontSize: "12px",
+                // lineHeight: "18px",
+                // color: "#ff4d4f",
+                // width: "600%"
+            })
+        }
+    },
+    //#endregion
+
     //#region 去程搭車人數容器
     takerCountsContainer: {
         basic: (style, props) => ({
@@ -1306,6 +1342,16 @@ export default {
         right: "0px",
         color: "#FF4D4F"
     },
+
+    //#region 簡訊號碼容器
+    smsNumberContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "auto",
+            display: "inline-flex"
+        })
+    },
+    //#endregion
 
     //#region 簡訊號碼 SmsNumber
     smsNumber: {
