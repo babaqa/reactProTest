@@ -528,8 +528,8 @@ const MobileMBase = (props) => {
                                         if (valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
                                             validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
                                         }
-                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
-                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "TravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
                                         }
                                         else if (valid(globalContextService.get("BusCallCarComponentPage", "AccTotalCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
                                             validMsg = valid(globalContextService.get("BusCallCarComponentPage", "AccTotalCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
@@ -585,10 +585,10 @@ const MobileMBase = (props) => {
                                                 id: "",// 幸福巴士預約訂單 id	新增無須上送
                                                 orgId: getParseItemLocalStorage("UseOrg")?.id,	// 畫面無此欄位	
                                                 passengerNum: globalContextService.get("BusCallCarComponentPage", "AccTotalCounts").value, // 搭車人數
-                                                reserveDate: globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
+                                                reserveDate: globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime")?.value, // 預約日期+預約時間	如: "2020-11-25 17:45"
                                                 stationLineId: globalContextService.get("BusCallCarComponentPage", "Route").value, // 路線id
                                                 stationLineName: globalContextService.get("BusCallCarComponentPage", "Route").label, // 路線名字
-                                                time: globalContextService.get("BusCallCarComponentPage", "TravelTime"), //預約時間
+                                                time: globalContextService.get("BusCallCarComponentPage", "TravelTime")?.value, //預約時間
                                                 toStationId: globalContextService.get("BusCallCarComponentPage", "EndPos").value, // 訖點站牌id
                                                 toStationName: globalContextService.get("BusCallCarComponentPage", "EndPos").label, //訖點站牌名字
                                                 remark: "",
