@@ -20,6 +20,8 @@ import moment from 'moment';
 import { BasicButton, CheckboxGroup, NumberInput, Checkbox, CheckboxItem, DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, OldList, NewSelector, SubContainer, Text, Textarea, TextInput, Upload, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { isEqual, isNil, isUndefined } from 'lodash';
 import { getParseItemLocalStorage, valid } from '../../../../Handlers';
+import { fmt } from '../../../../Handlers/DateHandler';
+import { tenMinTimes } from '../../../../Mappings/Mappings'
 
 const LaptopLBase = (props) => {
 
@@ -96,8 +98,13 @@ const LaptopLBase = (props) => {
                                         globalContextService.remove("BusCallCarComponentPage", "Route")
                                         globalContextService.remove("BusCallCarComponentPage", "StartPos")
                                         globalContextService.remove("BusCallCarComponentPage", "EndPos")
+                                        globalContextService.remove("BusCallCarComponentPage", "TravelTime")
                                         setForceUpdate(f => !f)
                                     }
+                                }}
+                                disabledDate={(perMoment) => {
+                                    // 去除掉今天以前的日期
+                                    return perMoment && (perMoment < moment().startOf('day'));
                                 }}
                                 theme={laptopL.travelDate}
                             />
@@ -108,24 +115,34 @@ const LaptopLBase = (props) => {
                                 // &&
                                 <>
                                     {/* 乘車時間 TravelTime */}
-                                    <DateTimePicker
-                                        topLabel={<>乘車時間</>}
-                                        // type={"time"} time、date、week、month、quarter、year
-                                        type={"time"}
-                                        format={"HH:mm"}
+                                    <NewSelector
                                         bascDefaultTheme={"DefaultTheme"}
-                                        // viewType
+                                        topLabel={"乘車時間"}
+                                        bottomLabel={""}
+                                        //viewType
                                         isSearchable
                                         placeholder={""}
-                                        value={
-                                            (globalContextService.get("BusCallCarComponentPage", "TravelTime")) ?
-                                                moment(globalContextService.get("BusCallCarComponentPage", "TravelTime"), "HH:mm")
-                                                :
-                                                null
-                                        }
-                                        onChange={(value, momentObj) => {
+                                        // isMulti
+                                        // hideSelectedOptions={false}
+                                        value={globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? null}
+                                        onChange={(e, value, OnInitial) => {
                                             globalContextService.set("BusCallCarComponentPage", "TravelTime", value);
                                         }}
+
+                                        options={[
+                                            ...tenMinTimes
+                                                .filter((X) => {
+
+                                                    if (moment(globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + X.value).isBefore(moment())) {
+                                                        return null
+                                                    }
+                                                    else if (parseInt(X.value.split(":")) < 6 || parseInt(X.value.split(":")) > 21) {
+                                                        return null
+                                                    }
+                                                    return X
+                                                })
+                                        ]}
+                                        // menuPosition={true}
                                         theme={laptopL.travelTime}
                                     />
                                 </>
@@ -499,8 +516,8 @@ const LaptopLBase = (props) => {
                                         if (valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
                                             validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
                                         }
-                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
-                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+                                        else if (valid(globalContextService.get("BusCallCarComponentPage", "TravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+                                            validMsg = valid(globalContextService.get("BusCallCarComponentPage", "TravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
                                         }
                                         else if (valid(globalContextService.get("BusCallCarComponentPage", "AccTotalCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]) {
                                             validMsg = valid(globalContextService.get("BusCallCarComponentPage", "AccTotalCounts")?.value ?? "", ["^.{1,}$"], ["請選擇搭車人數"])[1]
@@ -556,10 +573,10 @@ const LaptopLBase = (props) => {
                                                 id: "",// 幸福巴士預約訂單 id	新增無須上送
                                                 orgId: getParseItemLocalStorage("UseOrg")?.id,	// 畫面無此欄位	
                                                 passengerNum: globalContextService.get("BusCallCarComponentPage", "AccTotalCounts").value, // 搭車人數
-                                                reserveDate: globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
+                                                reserveDate: globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + globalContextService.get("BusCallCarComponentPage", "TravelTime")?.value, // 預約日期+預約時間	如: "2020-11-25 17:45"
                                                 stationLineId: globalContextService.get("BusCallCarComponentPage", "Route").value, // 路線id
                                                 stationLineName: globalContextService.get("BusCallCarComponentPage", "Route").label, // 路線名字
-                                                time: globalContextService.get("BusCallCarComponentPage", "TravelTime"), //預約時間
+                                                time: globalContextService.get("BusCallCarComponentPage", "TravelTime")?.value, //預約時間
                                                 toStationId: globalContextService.get("BusCallCarComponentPage", "EndPos").value, // 訖點站牌id
                                                 toStationName: globalContextService.get("BusCallCarComponentPage", "EndPos").label, //訖點站牌名字
                                                 remark: "",

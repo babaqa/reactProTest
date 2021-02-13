@@ -15,7 +15,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    height: `calc(  ${props.height}px - 56px - 46px - 48px )`,
+                    height: `calc(  ${props.height}px - 56px - 44px - 48px )`,
                 }
             }
         },

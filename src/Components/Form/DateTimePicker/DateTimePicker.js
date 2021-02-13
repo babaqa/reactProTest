@@ -95,13 +95,6 @@ const DatePickerExtendStyle = styled(DatePickerExtend).attrs((props) => ({}))`
 }
 //#endregion
 
-&.ant-picker-focused {
-    ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "dateTimePickerSubContainer")['focus']))}     
-}
-&.ant-picker:hover {
-    ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "dateTimePickerSubContainer")['hover']))}     
-}
-
 //#region 修改右方 Icon 樣式 (不開放)
 & .ant-picker-input {
     color: inherit;
@@ -112,10 +105,6 @@ const DatePickerExtendStyle = styled(DatePickerExtend).attrs((props) => ({}))`
         ${props => (cssifyObject(iterateTheme({ ...props, focus: props.focus, hover: props.hover, disable: props.disable }, props.theme, switchDefaultTheme(props.disable ? "DisableTheme" : props.baseDefaultTheme), "dateTimePickerInput")['basic']))}  
     }
     //#endregion
-}
-
-& .ant-picker-input input::placeholder {
-    color: rgba(0,0,0,0.65);
 }
 
 && .ant-picker-suffix {
@@ -170,6 +159,14 @@ const TimePickerExtendStyle = styled(TimePickerExtend).attrs((props) => ({}))`
 
 `
 //#endregion
+
+function range(start, end) {
+    const result = [];
+    for (let i = start; i < end; i++) {
+        result.push(i);
+    }
+    return result;
+}
 
 //#region 表單內的勾選框
 export const DateTimePickerBase = (props) => {
@@ -369,6 +366,8 @@ export const DateTimePickerBase = (props) => {
                                             setValue(momentObj);
                                             setViewTypeValue(value)
                                         }}
+                                        disabledDate={props?.disabledDate}
+                                        disabledTime={props?.disabledTime}
                                         theme={props.theme}
                                     />
                                 </>
@@ -404,6 +403,10 @@ export const DateTimePickerBase = (props) => {
                                             setValue(momentObj);
                                             setViewTypeValue(value)
                                         }}
+                                        disabledHours={props?.disabledHours && props.disabledHours(range)}
+                                        disabledMinutes={props?.disabledMinutes && props.disabledMinutes(range)}
+                                        disabledSeconds={props?.disabledSeconds && props.disabledSeconds(range)}
+                                        hideDisabledOptions={props?.hideDisabledOptions ?? true}
                                         theme={props.theme}
                                     />
                                 </>

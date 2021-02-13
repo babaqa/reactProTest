@@ -379,14 +379,28 @@ export default {
     },
     //#endregion
 
-    //#region 乘車時間暫用 TravelTime
+    //#region 乘車時間 TravelTime
     travelTime: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
                 padding: "0 12px 0 8px",
                 display: "inline-block",
-                // ...style.occupy(2),
+                // ...style.occupy(12),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         },
         container: {
@@ -394,36 +408,25 @@ export default {
                 ...style,
                 padding: "0 12px 0 8px",
                 display: "inline-block",
-                // ...style.occupy(2),
+                // ...style.occupy(12),
             })
         },
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "0px"
+                height: "32px", 
             })
         },
-        dateTimePickerContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)"),
-                    width: "200px"
-                }
-            }
-        },
-        dateTimePickerSubContainer: {
+        selectorContainer: {
             basic: (style, props) => ({
                 ...style,
-                height: "28px",
+                width: "200px"
             })
         },
         bottomLabel: {
             basic: (style, props) => ({
                 ...style,
-                // height: "24px"
-                minHeight: "24px",
-                height: "auto"
+                height: "24px"
             })
         }
     },

@@ -20,6 +20,7 @@ import moment from 'moment';
 import { BasicButton, CheckboxGroup, NumberInput, Checkbox, CheckboxItem, DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, OldList, NewSelector, SubContainer, Text, Textarea, TextInput, Upload, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { isEqual, isNil, isUndefined } from 'lodash';
 import { getParseItemLocalStorage, valid } from '../../../../Handlers';
+import { tenMinTimes } from '../../../../Mappings/Mappings'
 
 const MobileMBase = (props) => {
 
@@ -96,8 +97,13 @@ const MobileMBase = (props) => {
                                         globalContextService.remove("BusCallCarComponentPage", "Route")
                                         globalContextService.remove("BusCallCarComponentPage", "StartPos")
                                         globalContextService.remove("BusCallCarComponentPage", "EndPos")
+                                        globalContextService.remove("BusCallCarComponentPage", "TravelTime")
                                         setForceUpdate(f => !f)
                                     }
+                                }}
+                                disabledDate={(perMoment) => {
+                                    // 去除掉今天以前的日期
+                                    return perMoment && (perMoment < moment().startOf('day'));
                                 }}
                                 theme={mobileM.travelDate}
                             />
@@ -108,24 +114,34 @@ const MobileMBase = (props) => {
                                 // &&
                                 <>
                                     {/* 乘車時間 TravelTime */}
-                                    <DateTimePicker
-                                        topLabel={<>乘車時間</>}
-                                        // type={"time"} time、date、week、month、quarter、year
-                                        type={"time"}
-                                        format={"HH:mm"}
+                                    <NewSelector
                                         bascDefaultTheme={"DefaultTheme"}
-                                        // viewType
+                                        topLabel={"乘車時間"}
+                                        bottomLabel={""}
+                                        //viewType
                                         isSearchable
                                         placeholder={""}
-                                        value={
-                                            (globalContextService.get("BusCallCarComponentPage", "TravelTime")) ?
-                                                moment(globalContextService.get("BusCallCarComponentPage", "TravelTime"), "HH:mm")
-                                                :
-                                                null
-                                        }
-                                        onChange={(value, momentObj) => {
+                                        // isMulti
+                                        // hideSelectedOptions={false}
+                                        value={globalContextService.get("BusCallCarComponentPage", "TravelTime") ?? null}
+                                        onChange={(e, value, OnInitial) => {
                                             globalContextService.set("BusCallCarComponentPage", "TravelTime", value);
                                         }}
+
+                                        options={[
+                                            ...tenMinTimes
+                                                .filter((X) => {
+
+                                                    if (moment(globalContextService.get("BusCallCarComponentPage", "TravelDate") + " " + X.value).isBefore(moment())) {
+                                                        return null
+                                                    }
+                                                    else if (parseInt(X.value.split(":")) < 6 || parseInt(X.value.split(":")) > 21) {
+                                                        return null
+                                                    }
+                                                    return X
+                                                })
+                                        ]}
+                                        // menuPosition={true}
                                         theme={mobileM.travelTime}
                                     />
                                 </>
