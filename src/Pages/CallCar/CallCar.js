@@ -142,7 +142,7 @@ export const CallCar = (props) => {
             //#endregion
 
             //#region 取得用戶所有身分 API
-            fetch(`${APIUrl}Users/GetUnPermissionUserType?userId=${getParseItemLocalStorage("UserID")}`, //Users/GetUnPermissionUserType
+            fetch(`${APIUrl}Users/GetUnPermissionUserType?userId=${getParseItemLocalStorage("UserID")}&UID=${getParseItemLocalStorage("UserAccount")}`, //Users/GetUnPermissionUserType
                 {
                     headers: {
                         "X-Token": getParseItemLocalStorage("CAuth"),
@@ -210,7 +210,7 @@ export const CallCar = (props) => {
 
                             });
                         //#endregion
-                        
+
                         let CaseYet = 0;
                         // let tabMenu = []
                         let filterTabs = PreResult.data

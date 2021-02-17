@@ -120,21 +120,21 @@ export const BUnitSortBase = (props) => {
                                 theme={{
                                     basic: (style) => ({
                                         ...style,
-                                        width: "70px",
+                                        width: "88px",
                                         height: "24px",
                                         fontSize: "14px",
                                         fontWeight: "400",
                                         lineHeight: "22px",
                                         padding: 0,
-                                        color: "#1890FF",
-                                        backgroundColor: "#fff",
-                                        borderColor: "#1890FF",
+                                        color: "#fff",
+                                        backgroundColor: "#ff7a45",
+                                        borderColor: "#ff7a45",
                                         borderRadius: "2px",
-                                        margin: "0 0 0 2px"
+                                        margin: "0 0 0 16px"
                                     }),
                                     hover: (style, props) => ({
                                         ...style,
-                                        backgroundColor: "rgba(24, 144, 255, 0.05)"
+                                        backgroundColor: "rgba(255, 122, 69, 0.85)"
                                     }),
                                     focus: (style, props) => ({})
                                 }}
@@ -172,9 +172,9 @@ export const BUnitSortBase = (props) => {
                                                         flexBasis: "calc( 50% - 4px )",
                                                         margin: "0 0 4px 0",
                                                         height: "60px",
-                                                        border: "1px solid #D9D9D9",
+                                                        border: "1px solid #8C8C8C",
                                                         borderRadius: "2px",
-                                                        background: "#f5f5f5",
+                                                        background: "#fff",
                                                         cursor: "pointer"
                                                     })
                                                 }}
@@ -214,7 +214,7 @@ export const BUnitSortBase = (props) => {
                                                             fontSize: "14px",
                                                             padding: "8px 24px",
                                                             lineHeight: "22px",
-                                                            color: "rgba(0, 0, 0, 0.65)",
+                                                            color: "rgba(0,0,0,0.65)",
                                                             cursor: "pointer"
                                                         })
                                                     }}
@@ -235,17 +235,42 @@ export const BUnitSortBase = (props) => {
                                                                 width: "100%",
                                                                 position: "absolute",
                                                                 top: "0px",
-                                                                background: "rgba(0, 0, 0, 0.45)",
+                                                                background: "rgba(0, 0, 0, 0.65)",
                                                                 borderRadius: "2px",
-                                                                fontSize: "38px",
-                                                                lineHeight: "60px",
+                                                                // fontSize: "38px",
+                                                                // lineHeight: "60px",
+                                                                fontSize: "14px",
+                                                                padding: "8px 24px",
+                                                                lineHeight: "22px",
                                                                 color: "#fff",
-                                                                textAlign: "center",
+                                                                // textAlign: "center",
                                                                 cursor: "pointer"
                                                             })
                                                         }}
                                                     >
-                                                        {(Value ?? []).map((v) => (v.id)).indexOf(item.id) + 1}
+                                                        {item.name}
+
+                                                        {/* 優先搭乘車行排序項目選中遮罩順序 */}
+                                                        <Text
+                                                            theme={{
+                                                                basic: (style, props) => ({
+                                                                    ...style,
+                                                                    position: "absolute",
+                                                                    top: "8px",
+                                                                    left: "-4px",
+                                                                    width: "24px",
+                                                                    height: "24px",
+                                                                    backgroundColor: "#FAAD14",
+                                                                    color: "#fff",
+                                                                    fontWeight: 600,
+                                                                    fontSize: "14px",
+                                                                    lineHeight: "24px",
+                                                                    textAlign: "center"
+                                                                })
+                                                            }}
+                                                        >
+                                                            {(Value ?? []).map((v) => (v.id)).indexOf(item.id) + 1}
+                                                        </Text>
                                                     </Text>
                                                 }
                                             </SubContainer>

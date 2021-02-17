@@ -186,6 +186,7 @@ export const Login = (props) => {
                     setItemLocalStorage("UserName", JSON.stringify(PreResult.result?.name));
                     setItemLocalStorage("CAuth", JSON.stringify(token));
                     setItemLocalStorage("UserID", JSON.stringify(PreResult.result?.id));
+                    setItemLocalStorage("UserAccount", JSON.stringify(PreResult.result?.account));
                     controllGCS("Login");
                 } else {
                     throw PreResult.message;
