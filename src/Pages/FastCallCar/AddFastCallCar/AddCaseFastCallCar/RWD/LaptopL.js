@@ -10,7 +10,7 @@ import { ReactComponent as Minus } from '../../../../../Assets/img/AddCaseFastCa
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, Checkbox, CheckboxItem, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../../Components';
-import { posRemarksSelectOption } from '../../../../../Mappings/Mappings';
+import { posRemarksSelectOption, tenMinTimes } from '../../../../../Mappings/Mappings';
 import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../../Handlers';
 
@@ -112,14 +112,14 @@ const LaptopLBase = (props) => {
         else if (
             (globalContextService.get("AddCaseFastCallCarPage", "ScheduleReturnReview") === 1)
             &&
-            valid(globalContextService.get("AddCaseFastCallCarPage", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
+            valid(globalContextService.get("AddCaseFastCallCarPage", "ReturnTravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
         ) {
-            validMsg = valid(globalContextService.get("AddCaseFastCallCarPage", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
+            validMsg = valid(globalContextService.get("AddCaseFastCallCarPage", "ReturnTravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
         }
         else if (
             (globalContextService.get("AddCaseFastCallCarPage", "ScheduleReturnReview") === 1)
             &&
-            !moment(globalContextService.get("AddCaseFastCallCarPage", "ReturnEnableDate"), "HH:mm").isAfter(moment(globalContextService.get("AddCaseFastCallCarPage", "TravelTime"), "HH:mm"))
+            !moment(globalContextService.get("AddCaseFastCallCarPage", "ReturnTravelTime")?.value, "HH:mm").isAfter(moment(globalContextService.get("AddCaseFastCallCarPage", "TravelTime"), "HH:mm"))
         ) {  // !(去程時間 > 回程時間)
             validMsg = "回程乘車時間不可早於或等於去程時間"
         }
@@ -678,25 +678,35 @@ const LaptopLBase = (props) => {
                                         >
                                             回程乘車時間
 
-                                         {/* 回程乘車時間 ReturnEnableDate */}
-                                            <DateTimePicker
-                                                topLabel={""}
-                                                // type={"time"} time、date、week、month、quarter、year
-                                                type={"time"}
-                                                format={"HH:mm"}
+                                            {/* 回程乘車時間 ReturnTravelTime */}
+                                            <NewSelector
                                                 bascDefaultTheme={"DefaultTheme"}
-                                                // viewType
+                                                topLabel={""}
+                                                bottomLabel={""}
+                                                //viewType
                                                 isSearchable
                                                 placeholder={""}
-                                                value={
-                                                    (globalContextService.get("AddCaseFastCallCarPage", "ReturnEnableDate")) ?
-                                                        moment(globalContextService.get("AddCaseFastCallCarPage", "ReturnEnableDate"), "HH:mm")
-                                                        :
-                                                        null
-                                                }
-                                                onChange={(value, momentObj) => {
-                                                    globalContextService.set("AddCaseFastCallCarPage", `ReturnEnableDate`, value);
+                                                // isMulti
+                                                // hideSelectedOptions={false}
+                                                value={globalContextService.get("AddCaseFastCallCarPage", "ReturnTravelTime") ?? null}
+                                                onChange={(e, value, OnInitial) => {
+                                                    globalContextService.set("AddCaseFastCallCarPage", "ReturnTravelTime", value);
                                                 }}
+
+                                                options={[
+                                                    ...tenMinTimes
+                                                        .filter((X) => {
+
+                                                            if (moment(globalContextService.get("AddCaseFastCallCarPage", "TravelDate") + " " + X.value).isBefore(moment())) {
+                                                                return null
+                                                            }
+                                                            else if (parseInt(X.value.split(":")) < 6 || parseInt(X.value.split(":")) > 21) {
+                                                                return null
+                                                            }
+                                                            return X
+                                                        })
+                                                ]}
+                                                // menuPosition={true}
                                                 theme={laptopL.returnTravelTime}
                                             />
                                         </Text>
@@ -1085,7 +1095,7 @@ const LaptopLBase = (props) => {
                                     //     userId: props.UserId, // 用戶id
                                     //     caseUserId: props.CaseUserId, // 長照身份id
                                     //     orgId: "", // 送空字串
-                                    //     reserveDate: globalContextService.get("AddCaseFastCallCarPage", "TravelDate") + " " + globalContextService.get("AddCaseFastCallCarPage", "ReturnEnableDate"), // 預約日期+預約回程時間	如: "2020-11-25 17:45",
+                                    //     reserveDate: globalContextService.get("AddCaseFastCallCarPage", "TravelDate") + " " + globalContextService.get("AddCaseFastCallCarPage", "ReturnTravelTime"), // 預約日期+預約回程時間	如: "2020-11-25 17:45",
                                     //     transOrgs: globalContextService.get("AddCaseFastCallCarPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
                                     //     createdIdentity: globalContextService.get("AddCaseFastCallCarPage", "Orderer")?.value, // 訂車人身分
                                     //     fromAddr: globalContextService.get("AddCaseFastCallCarPage", "EndPos"), // 起點

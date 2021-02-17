@@ -10,7 +10,7 @@ import { ReactComponent as Minus } from '../../../../Assets/img/CaseCallCarCompo
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, Checkbox, CheckboxItem, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
-import { posRemarksSelectOption } from '../../../../Mappings/Mappings';
+import { posRemarksSelectOption, tenMinTimes } from '../../../../Mappings/Mappings';
 import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../Handlers';
 
@@ -31,8 +31,8 @@ const MobileMBase = (props) => {
         if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
             validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
         }
         else if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
             validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
@@ -53,7 +53,7 @@ const MobileMBase = (props) => {
                 ToAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"),
                 FamilyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value,
                 // ToAddrId:, // 不用丟
-                ReservationDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
+                ReservationDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value, // 預約日期+預約時間	如: "2020-11-25 17:45"
             })
         }
 
@@ -68,8 +68,8 @@ const MobileMBase = (props) => {
         if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
             validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+        else if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
         }
         else if (valid(globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value ?? "", ["^.{1,}$"], ["請選擇訂車人身分"])[1]) {
             validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value ?? "", ["^.{1,}$"], ["請選擇訂車人身分"])[1]
@@ -111,14 +111,14 @@ const MobileMBase = (props) => {
         else if (
             (globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1)
             &&
-            valid(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
+            valid(globalContextService.get("CaseCallCarComponentPage", "ReturnTravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
         ) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
+            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "ReturnTravelTime")?.value ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
         }
         else if (
             (globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1)
             &&
-            !moment(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), "HH:mm").isAfter(moment(globalContextService.get("CaseCallCarComponentPage", "TravelTime"), "HH:mm"))
+            !moment(globalContextService.get("CaseCallCarComponentPage", "ReturnTravelTime")?.value, "HH:mm").isAfter(moment(globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value, "HH:mm"))
         ) {  // !(去程時間 > 回程時間)
             validMsg = "回程乘車時間不可早於或等於去程時間"
         }
@@ -258,35 +258,47 @@ const MobileMBase = (props) => {
                                 if (value !== globalContextService.get("CaseCallCarComponentPage", "TravelDate")) {
                                     globalContextService.set("CaseCallCarComponentPage", "TravelDate", value);
                                     getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
+                                    globalContextService.remove("CaseCallCarComponentPage", "TravelTime")
+                                    globalContextService.remove("CaseCallCarComponentPage", "ReturnTravelTime")
                                     setForceUpdate(f => !f)
                                 }
+                            }}
+                            disabledDate={(perMoment) => {
+                                // 去除掉今天以前的日期
+                                return perMoment && (perMoment < moment().startOf('day'));
                             }}
                             theme={mobileM.travelDate}
                         />
 
                         {/* 乘車時間 TravelTime */}
-                        <DateTimePicker
-                            topLabel={<>乘車時間</>}
-                            // type={"time"} time、date、week、month、quarter、year
-                            type={"time"}
-                            format={"HH:mm"}
+                        <NewSelector
                             bascDefaultTheme={"DefaultTheme"}
-                            // viewType
+                            topLabel={"乘車時間"}
+                            bottomLabel={""}
+                            //viewType
                             isSearchable
                             placeholder={""}
-                            value={
-                                (globalContextService.get("CaseCallCarComponentPage", "TravelTime")) ?
-                                    moment(globalContextService.get("CaseCallCarComponentPage", "TravelTime"), "HH:mm")
-                                    :
-                                    null
-                            }
-                            onChange={(value, momentObj) => {
-                                if (value !== globalContextService.get("CaseCallCarComponentPage", "TravelTime")) {
-                                    globalContextService.set("CaseCallCarComponentPage", "TravelTime", value);
-                                    getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
-                                    setForceUpdate(f => !f)
-                                }
+                            // isMulti
+                            // hideSelectedOptions={false}
+                            value={globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? null}
+                            onChange={(e, value, OnInitial) => {
+                                globalContextService.set("CaseCallCarComponentPage", "TravelTime", value);
                             }}
+
+                            options={[
+                                ...tenMinTimes
+                                    .filter((X) => {
+
+                                        if (moment(globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + X.value).isBefore(moment())) {
+                                            return null
+                                        }
+                                        else if (parseInt(X.value.split(":")) < 6 || parseInt(X.value.split(":")) > 21) {
+                                            return null
+                                        }
+                                        return X
+                                    })
+                            ]}
+                            // menuPosition={true}
                             theme={mobileM.travelTime}
                         />
 
@@ -753,28 +765,37 @@ const MobileMBase = (props) => {
                                         </Checkbox>
                                     </SubContainer>
 
-                                    {/* 回程乘車時間 ReturnEnableDate */}
-                                    <DateTimePicker
-                                        topLabel={"回程乘車時間"}
-                                        // type={"time"} time、date、week、month、quarter、year
-                                        type={"time"}
-                                        format={"HH:mm"}
+                                    {/* 回程乘車時間 ReturnTravelTime */}
+                                    <NewSelector
                                         bascDefaultTheme={"DefaultTheme"}
-                                        // viewType
+                                        topLabel={"回程乘車時間"}
+                                        bottomLabel={""}
+                                        //viewType
                                         isSearchable
                                         placeholder={""}
-                                        value={
-                                            (globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate")) ?
-                                                moment(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), "HH:mm")
-                                                :
-                                                null
-                                        }
-                                        onChange={(value, momentObj) => {
-                                            globalContextService.set("CaseCallCarComponentPage", `ReturnEnableDate`, value);
+                                        // isMulti
+                                        // hideSelectedOptions={false}
+                                        value={globalContextService.get("CaseCallCarComponentPage", "ReturnTravelTime") ?? null}
+                                        onChange={(e, value, OnInitial) => {
+                                            globalContextService.set("CaseCallCarComponentPage", "ReturnTravelTime", value);
                                         }}
+
+                                        options={[
+                                            ...tenMinTimes
+                                                .filter((X) => {
+
+                                                    if (moment(globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + X.value).isBefore(moment())) {
+                                                        return null
+                                                    }
+                                                    else if (parseInt(X.value.split(":")) < 6 || parseInt(X.value.split(":")) > 21) {
+                                                        return null
+                                                    }
+                                                    return X
+                                                })
+                                        ]}
+                                        // menuPosition={true}
                                         theme={mobileM.returnTravelTime}
                                     />
-
                                 </Container>
 
                                 <Container>
@@ -1098,7 +1119,7 @@ const MobileMBase = (props) => {
                                             userId: props.UserId, // 用戶id
                                             caseUserId: props.CaseUserId, // 長照身份id
                                             orgId: "", // 送空字串
-                                            reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
+                                            reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value, // 預約日期+預約時間	如: "2020-11-25 17:45",
                                             transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
                                             createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
                                             fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"), // 起點
@@ -1165,7 +1186,7 @@ const MobileMBase = (props) => {
                                         userId: props.UserId, // 用戶id
                                         caseUserId: props.CaseUserId, // 長照身份id
                                         orgId: "", // 送空字串
-                                        reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
+                                        reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value, // 預約日期+預約時間	如: "2020-11-25 17:45",
                                         transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
                                         createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
                                         fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"), // 起點
@@ -1200,7 +1221,7 @@ const MobileMBase = (props) => {
                                         userId: props.UserId, // 用戶id
                                         caseUserId: props.CaseUserId, // 長照身份id
                                         orgId: "", // 送空字串
-                                        reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), // 預約日期+預約回程時間	如: "2020-11-25 17:45",
+                                        reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "ReturnTravelTime")?.value, // 預約日期+預約回程時間	如: "2020-11-25 17:45",
                                         transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
                                         createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
                                         fromAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"), // 起點
@@ -1230,7 +1251,7 @@ const MobileMBase = (props) => {
                                         userId: props.UserId, // 用戶id
                                         caseUserId: props.CaseUserId, // 長照身份id
                                         orgId: "", // 送空字串
-                                        reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
+                                        reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime")?.value, // 預約日期+預約時間	如: "2020-11-25 17:45",
                                         transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
                                         createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
                                         fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"), // 起點

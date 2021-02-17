@@ -867,7 +867,7 @@ export default {
     },
     //#endregion
 
-    //#region 回程乘車時間 ReturnEnableDate
+    //#region 回程乘車時間 ReturnTravelTime
     returnTravelTime: {
         viewTypeContainer: {
             basic: (style, props) => ({
@@ -875,6 +875,20 @@ export default {
                 padding: "0 8px",
                 display: "inline-block",
                 ...style.occupy(6),
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
             })
         },
         container: {
@@ -891,15 +905,7 @@ export default {
                 height: "0px"
             })
         },
-        dateTimePickerContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
-                }
-            }
-        },
-        dateTimePickerSubContainer: {
+        selectorContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
