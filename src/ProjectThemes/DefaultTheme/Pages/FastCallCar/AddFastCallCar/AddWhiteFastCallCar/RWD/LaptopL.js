@@ -828,6 +828,20 @@ export default {
                 // ...style.occupy(6),
             })
         },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
         container: {
             basic: (style, props) => ({
                 ...style,
@@ -842,19 +856,11 @@ export default {
                 height: "0px"
             })
         },
-        dateTimePickerContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)"),
-                    width: "200px"
-                }
-            }
-        },
-        dateTimePickerSubContainer: {
+        selectorContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
+                width: "200px"
             })
         },
         bottomLabel: {

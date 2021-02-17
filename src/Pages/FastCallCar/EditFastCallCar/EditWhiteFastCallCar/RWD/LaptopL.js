@@ -12,6 +12,7 @@ import moment from 'moment';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Checkbox, CheckboxItem, modalsService, Container, OldTable } from '../../../../../Components';
 import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../../Handlers';
+import { tenMinTimes } from '../../../../../Mappings/Mappings';
 
 const LaptopLBase = (props) => {
 
@@ -571,27 +572,37 @@ const LaptopLBase = (props) => {
                                                 <>
                                                     {/* 回程乘車時間 ReturnTravelTime */}
                                                     <Text theme={laptopL.formSubTitleText}>回程乘車時間</Text>
-                                                    <DateTimePicker
-                                                        topLabel={<>回程乘車時間</>}
-                                                        // type={"time"} time、date、week、month、quarter、year
-                                                        type={"time"}
-                                                        format={"HH:mm"}
+                                                    <NewSelector
                                                         bascDefaultTheme={"DefaultTheme"}
-                                                        // viewType
+                                                        topLabel={""}
+                                                        bottomLabel={""}
+                                                        //viewType
                                                         isSearchable
                                                         placeholder={""}
-                                                        value={
-                                                            (globalContextService.get("EditWhiteFastCallCarPage", "ReturnTravelTime")) ?
-                                                                moment(globalContextService.get("EditWhiteFastCallCarPage", "ReturnTravelTime"), "HH:mm")
-                                                                :
-                                                                null
-                                                        }
-                                                        onChange={(value, momentObj) => {
+                                                        // isMulti
+                                                        // hideSelectedOptions={false}
+                                                        value={globalContextService.get("EditWhiteFastCallCarPage", "ReturnTravelTime") ?? null}
+                                                        onChange={(e, value, OnInitial) => {
                                                             if (value !== globalContextService.get("EditWhiteFastCallCarPage", "ReturnTravelTime")) {
                                                                 globalContextService.set("EditWhiteFastCallCarPage", `ReturnTravelTime`, value);
                                                                 setForceUpdate(f => !f); // 剛選擇 預約回程 是 時，重新渲染
                                                             }
                                                         }}
+
+                                                        options={[
+                                                            ...tenMinTimes
+                                                                .filter((X) => {
+
+                                                                    if (moment(globalContextService.get("EditWhiteFastCallCarPage", "TravelDate") + " " + X.value).isBefore(moment())) {
+                                                                        return null
+                                                                    }
+                                                                    else if (parseInt(X.value.split(":")) < 6 || parseInt(X.value.split(":")) > 21) {
+                                                                        return null
+                                                                    }
+                                                                    return X
+                                                                })
+                                                        ]}
+                                                        // menuPosition={true}
                                                         theme={laptopL.returnTravelTime}
                                                     />
                                                 </>
@@ -866,6 +877,10 @@ const LaptopLBase = (props) => {
                                                             onChange={(value, momentObj) => {
                                                                 globalContextService.set("EditWhiteFastCallCarPage", `TakerBirthday_${index + 1}`, value);
                                                             }}
+                                                            disabledDate={(perMoment) => {
+                                                                // 去除掉今天以後的日期
+                                                                return perMoment && (perMoment > moment().endOf('day'));
+                                                            }}
                                                             theme={laptopL.takerBirthday}
                                                         />
 
@@ -1050,6 +1065,10 @@ const LaptopLBase = (props) => {
                                                                     }
                                                                     onChange={(value, momentObj) => {
                                                                         globalContextService.set("EditWhiteFastCallCarPage", `ReturnTakerBirthday_${index + 1}`, value);
+                                                                    }}
+                                                                    disabledDate={(perMoment) => {
+                                                                        // 去除掉今天以後的日期
+                                                                        return perMoment && (perMoment > moment().endOf('day'));
                                                                     }}
                                                                     theme={laptopL.takerBirthday}
                                                                 />

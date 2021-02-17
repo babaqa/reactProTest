@@ -406,16 +406,8 @@ export default {
     },
     //#endregion
 
-    //#region 乘車時間 TravelTime
+    //#region 乘車時間暫用 TravelTime
     travelTime: {
-        viewTypeContainer: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 16px 0 8px",
-                display: "inline-block",
-                ...style.occupy(6),
-            })
-        },
         container: {
             basic: (style, props) => ({
                 ...style,
@@ -434,8 +426,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)"),
-                    // width: "200px"
+                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
                 }
             }
         },
@@ -511,6 +502,20 @@ export default {
                 // ...style.occupy(6),
             })
         },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                //height: "0px"
+            })
+        },
+        viewTypeBottomLabel: {
+            basic: (style, props) => ({
+                ...style,
+                // height: "24px"
+                minHeight: "24px",
+                height: "auto"
+            })
+        },
         container: {
             basic: (style, props) => ({
                 ...style,
@@ -525,19 +530,11 @@ export default {
                 height: "0px"
             })
         },
-        dateTimePickerContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)"),
-                    width: "200px"
-                }
-            }
-        },
-        dateTimePickerSubContainer: {
+        selectorContainer: {
             basic: (style, props) => ({
                 ...style,
                 height: "28px",
+                width: "200px"
             })
         },
         bottomLabel: {
