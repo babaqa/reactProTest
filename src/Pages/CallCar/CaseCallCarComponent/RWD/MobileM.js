@@ -321,8 +321,8 @@ const MobileMBase = (props) => {
                                 { value: 'hint', label: "請選擇訂車人身分", isDisabled: true },
                                 { value: '本人', label: "本人" },
                                 { value: '家屬', label: "家屬" },
-                                { value: 'A單位', label: "A單位" },
-                                { value: 'B單位', label: "B單位" },
+                                // { value: 'A單位', label: "A單位" },
+                                // { value: 'B單位', label: "B單位" },
                                 // ...Counties
                             ]}
                             // menuPosition={true}
