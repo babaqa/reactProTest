@@ -59,7 +59,7 @@ const MobileMBase = (props) => {
                                         <Text
                                             theme={mobileM.routeNameText}
                                             onClick={() => {
-                                                console.log("hi")
+                                                props.setCheckDetail(props.dataDetail?.filter(d => d.routeName === item)?.[0])
                                             }}
                                         >
                                             <Check style={mobileM.checkSvg} />
@@ -97,124 +97,164 @@ const MobileMBase = (props) => {
                             <Text
                                 theme={mobileM.detailRouteName}
                             >
-                                {props.CheckDetail?.routeName ?? "綠線(龍口線)"}
+                                {props.CheckDetail?.routeName}
                             </Text>
 
                             {/* 詳細資料 資料容器 */}
                             <SubContainer
                                 theme={mobileM.detailDataContainer}
                             >
+                                {/* 詳細資料 營運里程 標題 */}
+                                <Text
+                                    theme={mobileM.detailDataTitle}
+                                >
+                                    營運里程：
 
                                 {/* 詳細資料 營運里程 內文 */}
-                                <Text
-                                    theme={mobileM.detailDataText}
-                                >
-                                    {/* 詳細資料 營運里程 標題 */}
                                     <Text
-                                        theme={mobileM.detailDataTitle}
+                                        theme={mobileM.detailDataText}
                                     >
-                                        營運里程：
-                                    </Text>
-                                        每班次營運里程約
-                                    {
+                                        {"每班次營運里程約 "}
+                                        {
+                                            <Text
+                                                theme={mobileM.pointText}
+                                            >
+                                                {props.CheckDetail?.totalMileage}
+                                                {" 公里"}
+                                            </Text>}
+                                        {"，約 "}
+                                        {
+                                            <Text
+                                                theme={mobileM.pointText}
+                                            >
+                                                {props.CheckDetail?.expectedMinute}
+                                                {" 分"}
+                                            </Text>
+                                        }。
+                                </Text>
+                                </Text>
+                                {props.CheckDetail?.goDataText ?
+                                    <>
+                                        {/* 詳細資料 去程 標題 */}
                                         <Text
-                                            theme={mobileM.pointText}
+                                            theme={mobileM.detailDataTitle}
                                         >
-                                            {props.CheckDetail?.totalMileage ?? 33.9}
-                                        </Text>} 公里，約 {
-                                        <Text
-                                            theme={mobileM.pointText}
-                                        >
-                                            {props.CheckDetail?.expectedMinute ?? 51}
+                                            去程：
+
+                                    {/* 詳細資料 去程 內文 */}
+                                            <Text
+                                                theme={mobileM.detailDataText}
+                                            >
+                                                {props.CheckDetail?.goDataText}
+                                            </Text>
                                         </Text>
-                                    } 分。
 
-                                </Text>
+                                        {/* 詳細資料 回程 標題 */}
+                                        <Text
+                                            theme={mobileM.detailDataTitle}
+                                        >
+                                            回程：
 
-                                {/* 詳細資料 去程 內文 */}
-                                <Text
-                                    theme={mobileM.detailDataText}
-                                >
-                                    {/* 詳細資料 去程 標題 */}
-                                    <Text
-                                        theme={mobileM.detailDataTitle}
-                                    >
-                                        去程：
-                                    </Text>
-                                        滿州鄉公所、分水嶺社區、三灣、南仁港、片埔路口、中山港。
-                                </Text>
+                                    {/* 詳細資料 回程 內文 */}
+                                            <Text
+                                                theme={mobileM.detailDataText}
+                                            >
+                                                {props.CheckDetail?.backDataText}
+                                            </Text>
+                                        </Text>
+                                        {/* 詳細資料 營運時間 標題 */}
+                                        <Text
+                                            theme={mobileM.detailDataTitle}
+                                        >
+                                            營運時間：
 
-                                {/* 詳細資料 回程 內文 */}
-                                <Text
-                                    theme={mobileM.detailDataText}
-                                >
-                                    {/* 詳細資料 回程 標題 */}
-                                    <Text
-                                        theme={mobileM.detailDataTitle}
-                                    >
-                                        回程：
-                                    </Text>
-                                        中山港、片埔路口、南仁港、三灣、分水嶺社區、滿州鄉公所。
-                                </Text>
-
-                                {/* 詳細資料 營運時間 內文 */}
-                                <Text
-                                    theme={mobileM.detailDataText}
-                                >
-                                    {/* 詳細資料 營運時間 標題 */}
-                                    <Text
-                                        theme={mobileM.detailDataTitle}
-                                    >
-                                        營運時間：
-                                    </Text>
-
-                                    {routeTime.split('去程：').length > 1
+                                    {/* 詳細資料 營運時間 內文 */}
+                                            <Text
+                                                theme={mobileM.detailDataText}
+                                            >
+                                                {props.CheckDetail?.serviceTime}
+                                                {/* {props.CheckDetail?.serviceTime.split('去程：').length > 1
                                         &&
                                         <>
-                                            {routeTime.split('去程：')[0]}
+                                            {props.CheckDetail?.serviceTime.split('去程：')[0]}
                                             去程：
                                             <Text
                                                 theme={mobileM.pointText}
                                             >
-                                                {routeTime.split('去程：')[1].split('；')[0]}
+                                                {props.CheckDetail?.serviceTime.split('去程：')[1].split('；')[0]}
                                             </Text>
                                             ；回程：
                                             <Text
                                                 theme={mobileM.pointText}
                                             >
-                                                {routeTime.split('返程：')[1].split('。')[0]}
+                                                {props.CheckDetail?.serviceTime.split('返程：')[1].split('。')[0]}
                                             </Text>
                                             。
-                                            {routeTime.split('返程：')[1].split('。')[1]}
+                                            {props.CheckDetail?.serviceTime.split('返程：')[1].split('。')[1]}
                                         </>
                                     }
 
-                                    {routeTime.split('預約制').length > 1
+                                    {props.CheckDetail?.serviceTime.split('預約制').length > 1
                                         &&
                                         <>
-                                            {routeTime.split('預約制')[0]}
+                                            {props.CheckDetail?.serviceTime.split('預約制')[0]}
                                             <Text
                                                 theme={mobileM.pointText}
                                             >
                                                 預約制
                                             </Text>
-                                            {routeTime.split('預約制')[1]}
+                                            {props.CheckDetail?.serviceTime.split('預約制')[1]}
                                         </>
-                                    }
+                                    } */}
+                                            </Text>
+                                        </Text>
+                                    </>
+                                    :
+                                    <>
+                                        {/* 詳細資料 營運天數及時間： 標題 */}
+                                        <Text
+                                            theme={mobileM.detailDataTitle}
+                                        >
+                                            營運天數及時間：
 
-                                </Text>
+                                    {/* 詳細資料 營運天數及時間： 內文 */}
+                                            <Text
+                                                theme={mobileM.detailDataText}
+                                            >
+                                                {props.CheckDetail?.serviceTime}
+
+                                            </Text>
+                                        </Text>
+                                        {/* 詳細資料 營運路線 標題 */}
+                                        <Text
+                                            theme={mobileM.detailDataTitle}
+                                        >
+                                            營運路線：
+
+                                    {/* 詳細資料 營運路線 內文 */}
+                                            <Text
+                                                theme={mobileM.detailDataText}
+                                            >
+                                                {props.CheckDetail?.dataText}
+                                            </Text>
+                                        </Text>
+                                    </>
+                                }
 
                             </SubContainer>
 
                             {/* 詳細資料 圖片 */}
-                            <Upload
-                                viewType
-                                imageUrl={undefined}
-                                onChange={(info, acceptFileType, imageUrl, OnInitial) => {
-                                    globalContextService.set("CarsEditPage", "CarPic", info?.file?.originFileObj)
-                                }}
-                                theme={mobileM.detailImg}
-                            />
+                            {/* <Upload
+                            viewType
+                            imageUrl={undefined}
+                            onChange={(info, acceptFileType, imageUrl, OnInitial) => {
+                                globalContextService.set("CarsEditPage", "CarPic", info?.file?.originFileObj)
+                            }}
+                            theme={mobileM.detailImg}
+                        /> */}
+                            <BasicContainer>
+                                {props.CheckDetail?.pic}
+                            </BasicContainer>
 
                         </BasicContainer>
 

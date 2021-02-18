@@ -92,6 +92,7 @@ export const AllBusRouteAomponent = (props) => {
                 768 <= Width &&
                 <LaptopL
                     data={props.data}
+                    dataDetail={props.dataDetail}
                     controllGCS={controllGCS}
                     CheckDetail={props.CheckDetail}
                     setCheckDetail={props.setCheckDetail}
@@ -121,6 +122,7 @@ export const AllBusRouteAomponent = (props) => {
                 Width < 768 &&
                 <MobileM
                     data={props.data}
+                    dataDetail={props.dataDetail}
                     controllGCS={controllGCS}
                     CheckDetail={props.CheckDetail}
                     setCheckDetail={props.setCheckDetail}

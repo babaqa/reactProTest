@@ -100,7 +100,8 @@ export default {
                 backgroundColor: "transparent",
                 padding: "16px",
                 width: "100%",
-                height: `calc( ${props.height}px - 160px )`
+                height:"auto"
+                // height: `calc( ${props.height}px - 160px )`
             }
         },
     },

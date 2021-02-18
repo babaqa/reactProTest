@@ -46,6 +46,8 @@ export const BusRoute = (props) => {
                 <MobileM
                     nowTab={NowTab}
                     setNowTab={setNowTab}
+                    CheckDetail={CheckDetail}
+                    setCheckDetail={setCheckDetail}
                 />
             }
         </>
