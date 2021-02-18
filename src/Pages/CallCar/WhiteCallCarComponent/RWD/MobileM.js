@@ -1389,7 +1389,7 @@ const MobileMBase = (props) => {
                                                     fromLat: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0, //起點緯度
                                                     fromLon: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//起點經度
                                                     // id: ""	白牌預約訂單 id
-                                                    noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
+                                                    noticePhone: globalContextService.get("WhiteCallCarComponentPage", "SmsNumber"),	//簡訊號碼
                                                     orgId: "",//	畫面無此欄位
                                                     passengerNum: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value,	//搭乘人數
                                                     remark: JSON.stringify((Array(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value)).fill(0).map((item, index) => {
@@ -1421,7 +1421,7 @@ const MobileMBase = (props) => {
                                                     fromLat: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lat ?? 0, //起點緯度
                                                     fromLon: props.mapGoogleControll.getMarkers("test1")?.[1]?.position?.toJSON()?.lng ?? 0,//起點經度
                                                     // id: ""	白牌預約訂單 id
-                                                    noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
+                                                    noticePhone: globalContextService.get("WhiteCallCarComponentPage", "SmsNumber"),	//簡訊號碼
                                                     orgId: "",//	畫面無此欄位
                                                     passengerNum: globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts").value,	//搭乘人數
                                                     remark: JSON.stringify((Array(globalContextService.get("WhiteCallCarComponentPage", "ReturnAccompanyCounts")?.value)).fill(0).map((item, index) => {
@@ -1453,7 +1453,7 @@ const MobileMBase = (props) => {
                                                     fromLat: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat ?? 0, //起點緯度
                                                     fromLon: props.mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lng ?? 0,//起點經度
                                                     // id: ""	白牌預約訂單 id
-                                                    noticePhone: globalContextService.get("WhiteCallCarComponentPage", "Phone"),	//畫面無此欄位
+                                                    noticePhone: globalContextService.get("WhiteCallCarComponentPage", "SmsNumber"),	//簡訊號碼
                                                     orgId: "",//	畫面無此欄位
                                                     passengerNum: globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts").value,	//搭乘人數
                                                     remark: JSON.stringify((Array(globalContextService.get("WhiteCallCarComponentPage", "AccompanyCounts")?.value)).fill(0).map((item, index) => {
