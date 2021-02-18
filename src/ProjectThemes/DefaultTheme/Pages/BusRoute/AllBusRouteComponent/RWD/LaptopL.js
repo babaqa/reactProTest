@@ -171,7 +171,8 @@ export default {
                 backgroundColor: "transparent",
                 padding: "52px 16px 0",
                 width: "100%",
-                height: `calc( ${props.height}px - 189px )`
+                height:"auto"
+                // height: `calc( ${props.height}px - 189px )`
             }
         },
         laptop: {
@@ -180,7 +181,8 @@ export default {
                 backgroundColor: "transparent",
                 padding: "52px 40px 0",
                 width: "100%",
-                height: "calc( 100vh - 189px )"
+                height:"auto"
+                // height: "calc( 100vh - 189px )"
             }),
         },
         laptopL: {
@@ -189,7 +191,8 @@ export default {
                 backgroundColor: "transparent",
                 padding: "52px 138px 0",
                 width: "100%",
-                height: "calc( 100vh - 209px )"
+                height:"auto"
+                // height: "calc( 100vh - 209px )"
             }),
         }
     },

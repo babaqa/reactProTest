@@ -178,4 +178,36 @@ export default {
     },
     //#endregion
 
+    //#region 地圖圖片 
+    mapPic: {
+        width: "100%",
+        height: "100%"
+    },
+    //#endregion
+
+    //#region 詳細資料 營運里程 內文
+    detailDataText: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "32px",
+            color: "rgba( 0,0,0,0.85 )"
+        }),
+    },
+    //#endregion
+
+    //#region 詳細資料 營運里程 提示文字
+    pointText: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            fontWeight: 600,
+            fontSize: "14px",
+            lineHeight: "32px",
+            color: "#F5222D"
+        }),
+    },
+    //#endregion
 }
