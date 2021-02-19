@@ -40,12 +40,12 @@ export const WhiteFastCallCarComponent = (props) => {
                 //#endregion
 
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("CasePage", "CheckedRowKeys");
-                globalContextService.remove("CasePage", "CheckedRowsData");
+                globalContextService.remove("WhiteFastCallCarComponentPage", "CheckedRowKeys");
+                globalContextService.remove("WhiteFastCallCarComponentPage", "CheckedRowsData");
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("CasePage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("WhiteFastCallCarComponentPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("CasePage", item);
+                        globalContextService.remove("WhiteFastCallCarComponentPage", item);
                     }
                 })
                 //#endregion
@@ -62,12 +62,12 @@ export const WhiteFastCallCarComponent = (props) => {
                 //#endregion
 
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("CasePage", "CheckedRowKeys");
-                globalContextService.remove("CasePage", "CheckedRowsData");
+                globalContextService.remove("WhiteFastCallCarComponentPage", "CheckedRowKeys");
+                globalContextService.remove("WhiteFastCallCarComponentPage", "CheckedRowsData");
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("CasePage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("WhiteFastCallCarComponentPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("CasePage", item);
+                        globalContextService.remove("WhiteFastCallCarComponentPage", item);
                     }
                 })
                 //#endregion

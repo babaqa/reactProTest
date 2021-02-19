@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
-import { ReactComponent as Search } from '../../../Assets/img/CasePage/Search.svg'
+// import { ReactComponent as Search } from '../../../Assets/img/CasePage/Search.svg'
 import { useHistory } from 'react-router-dom';
 
 import { CaseContactComponent } from '../CaseContactComponent/CaseContactComponent'
@@ -77,16 +77,16 @@ const TabletBase = (props) => {
                                 theme={tablet.keyword}
                                 type="text"
                                 placeholder={"請輸入車行名稱"}
-                                rightIcon={
-                                    <Search
-                                        style={tablet.keywordRightIcon}
-                                        onClick={(e) => {
-                                            console.log("目前不支援搜尋功能")
-                                            // props.GetSubOrgsExecute(true, "");
-                                        }
-                                        }
-                                    />
-                                }
+                                // rightIcon={
+                                    // <Search
+                                    //     style={tablet.keywordRightIcon}
+                                    //     onClick={(e) => {
+                                    //         console.log("目前不支援搜尋功能")
+                                    //         // props.GetSubOrgsExecute(true, "");
+                                    //     }
+                                    //     }
+                                    // />
+                                // }
                                 value={globalContextService.get("ContactPage", "Keyword") ?? ""}
                                 onChange={(e, value, onInitial) => {
                                     globalContextService.set("ContactPage", "Keyword", value);

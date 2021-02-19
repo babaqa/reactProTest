@@ -40,12 +40,12 @@ export const AddWhiteFastCallCar = (props) => {
                 //#endregion
 
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("CasePage", "CheckedRowKeys");
-                globalContextService.remove("CasePage", "CheckedRowsData");
+                globalContextService.remove("AddWhiteFastCallCarPage", "CheckedRowKeys");
+                globalContextService.remove("AddWhiteFastCallCarPage", "CheckedRowsData");
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("CasePage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("AddWhiteFastCallCarPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("CasePage", item);
+                        globalContextService.remove("AddWhiteFastCallCarPage", item);
                     }
                 })
                 //#endregion
@@ -62,12 +62,12 @@ export const AddWhiteFastCallCar = (props) => {
                 //#endregion
 
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("CasePage", "CheckedRowKeys");
-                globalContextService.remove("CasePage", "CheckedRowsData");
+                globalContextService.remove("AddWhiteFastCallCarPage", "CheckedRowKeys");
+                globalContextService.remove("AddWhiteFastCallCarPage", "CheckedRowsData");
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("CasePage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("AddWhiteFastCallCarPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("CasePage", item);
+                        globalContextService.remove("AddWhiteFastCallCarPage", item);
                     }
                 })
                 //#endregion

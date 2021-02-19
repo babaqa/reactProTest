@@ -41,12 +41,12 @@ export const BusFastCallCarComponent = (props) => {
                 globalContextService.remove("BusFastCallCarComponentPage");
 
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("CasePage", "CheckedRowKeys");
-                globalContextService.remove("CasePage", "CheckedRowsData");
+                globalContextService.remove("BusFastCallCarComponentPage", "CheckedRowKeys");
+                globalContextService.remove("BusFastCallCarComponentPage", "CheckedRowsData");
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("CasePage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("BusFastCallCarComponentPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("CasePage", item);
+                        globalContextService.remove("BusFastCallCarComponentPage", item);
                     }
                 })
                 //#endregion
@@ -61,13 +61,13 @@ export const BusFastCallCarComponent = (props) => {
                 //#region 當點擊 立即預約 按鈕時，要清除的資料
                 globalContextService.remove("BusFastCallCarComponentPage");
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("CasePage", "CheckedRowKeys");
-                globalContextService.remove("CasePage", "CheckedRowsData");
+                globalContextService.remove("BusFastCallCarComponentPage", "CheckedRowKeys");
+                globalContextService.remove("BusFastCallCarComponentPage", "CheckedRowsData");
 
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("CasePage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("BusFastCallCarComponentPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("CasePage", item);
+                        globalContextService.remove("BusFastCallCarComponentPage", item);
                     }
                 })
                 //#endregion

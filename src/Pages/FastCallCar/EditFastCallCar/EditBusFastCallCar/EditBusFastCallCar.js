@@ -41,12 +41,12 @@ export const EditBusFastCallCar = (props) => {
                 globalContextService.remove("EditBusFastCallCarPage");
 
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("CasePage", "CheckedRowKeys");
-                globalContextService.remove("CasePage", "CheckedRowsData");
+                globalContextService.remove("EditBusFastCallCarPage", "CheckedRowKeys");
+                globalContextService.remove("EditBusFastCallCarPage", "CheckedRowsData");
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("CasePage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("EditBusFastCallCarPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("CasePage", item);
+                        globalContextService.remove("EditBusFastCallCarPage", item);
                     }
                 })
                 //#endregion
@@ -61,13 +61,13 @@ export const EditBusFastCallCar = (props) => {
                 //#region 當點擊 立即預約 按鈕時，要清除的資料
                 globalContextService.remove("EditBusFastCallCarPage");
                 //#region 清除上一頁的勾選項
-                globalContextService.remove("CasePage", "CheckedRowKeys");
-                globalContextService.remove("CasePage", "CheckedRowsData");
+                globalContextService.remove("EditBusFastCallCarPage", "CheckedRowKeys");
+                globalContextService.remove("EditBusFastCallCarPage", "CheckedRowsData");
 
                 //#region Table內 身份下拉選單值清空
-                Object.keys(globalContextService.get("CasePage") ?? {}).forEach((item, index) => {
+                Object.keys(globalContextService.get("EditBusFastCallCarPage") ?? {}).forEach((item, index) => {
                     if (item.includes("CaseList_")) {
-                        globalContextService.remove("CasePage", item);
+                        globalContextService.remove("EditBusFastCallCarPage", item);
                     }
                 })
                 //#endregion
