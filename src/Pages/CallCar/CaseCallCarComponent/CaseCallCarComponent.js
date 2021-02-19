@@ -289,7 +289,7 @@ export const CaseCallCarComponent = (props) => {
                 Width < 768 &&
                 <MobileM
                     UserId={getParseItemLocalStorage("UserID")}
-                    CaseUserId={urlParams.get("caseUserId")}
+                    CaseUserId={props.CaseUserId}
                     UserName={getParseItemLocalStorage("UserName")}
                     BasicInf={props.BasicInf}
                     CaseUsers={props.CaseInf} // 用戶長照身份的基本資料
