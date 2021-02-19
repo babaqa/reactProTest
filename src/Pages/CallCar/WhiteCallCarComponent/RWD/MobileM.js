@@ -211,7 +211,7 @@ const MobileMBase = (props) => {
                                 onChange={(value, momentObj) => {
                                     if (value !== globalContextService.get("WhiteCallCarComponentPage", "TravelDate")) {
                                         globalContextService.set("WhiteCallCarComponentPage", "TravelDate", value);
-                                        getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
+                                        // getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
                                         globalContextService.remove("WhiteCallCarComponentPage", "TravelTime")
                                         globalContextService.remove("WhiteCallCarComponentPage", "ReturnTravelTime")
                                         setForceUpdate(f => !f)
@@ -243,7 +243,7 @@ const MobileMBase = (props) => {
                                         onChange={(e, value, OnInitial) => {
                                             if (value !== globalContextService.get("WhiteCallCarComponentPage", "TravelTime")) {
                                                 globalContextService.set("WhiteCallCarComponentPage", "TravelTime", value);
-                                                getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
+                                                // getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
                                                 setForceUpdate(f => !f)
                                             }
                                         }}
@@ -358,7 +358,7 @@ const MobileMBase = (props) => {
 
                                             globalContextService.set("WhiteCallCarComponentPage", "StartPos", option.label);
 
-                                            getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
+                                            // getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
 
                                             setForceUpdate(f => !f)
                                         }}
@@ -545,7 +545,7 @@ const MobileMBase = (props) => {
 
                                             globalContextService.set("WhiteCallCarComponentPage", "EndPos", option.label);
 
-                                            getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
+                                            // getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
 
                                             setForceUpdate(f => !f)
                                         }}
@@ -590,7 +590,12 @@ const MobileMBase = (props) => {
                                         value={globalContextService.get("WhiteCallCarComponentPage", "CarType") ?? null}
                                         onChange={(e, value, onInitial) => {
                                             // console.log(props?.AllCarType)
-                                            globalContextService.set("WhiteCallCarComponentPage", "CarType", value);
+                                            // globalContextService.set("WhiteCallCarComponentPage", "CarType", value);
+                                            if (!isEqual(value, globalContextService.get("WhiteCallCarComponentPage", "CarType"))) {
+                                                globalContextService.remove("WhiteCallCarComponentPage", "Wheelchair")
+                                                globalContextService.set("WhiteCallCarComponentPage", "CarType", value);
+                                                setForceUpdate(f => !f); // 剛選擇 車種 時，重新渲染
+                                            }
                                         }}
 
                                         options={[
@@ -619,12 +624,38 @@ const MobileMBase = (props) => {
                                                 globalContextService.set("WhiteCallCarComponentPage", "Wheelchair", value);
                                             }}
 
-                                            options={[
-                                                { value: '0', label: "請選擇車種類型", isDisabled: true },
-                                                { value: '1', label: "無" },
-                                                { value: '2', label: "普通輪椅(可收折)" },
-                                                // ...props?.AllCarType
-                                            ]}
+                                            options={
+                                                // { value: '0', label: "請選擇車種類型", isDisabled: true },
+                                                // { value: '1', label: "無" },
+                                                // { value: '2', label: "普通輪椅(可收折)" },
+                                                [
+                                                    { value: 'hint', label: "請選擇輪椅", isDisabled: true },
+                                                    ...(
+                                                        (
+                                                            globalContextService.get("WhiteCallCarComponentPage", "CarType")?.label === "一般車"
+                                                                ?
+                                                                [
+                                                                    { value: '無', label: "無" },
+                                                                    { value: '普通輪椅(可收折)', label: "普通輪椅(可收折)" },
+                                                                ]
+                                                                :
+                                                                (
+                                                                    globalContextService.get("WhiteCallCarComponentPage", "CarType")?.label === "福祉車"
+                                                                        ?
+                                                                        [
+                                                                            // { value: '無', label: "無" },
+                                                                            { value: '普通輪椅', label: "普通輪椅" },
+                                                                            { value: '高背輪椅', label: "高背輪椅" },
+                                                                            { value: '電動輪椅', label: "電動輪椅" },
+                                                                            { value: '電動高背輪椅', label: "電動高背輪椅" },
+                                                                        ]
+                                                                        :
+                                                                        []
+                                                                )
+                                                        )
+                                                    )
+                                                ]
+                                            }
                                             // menuPosition={true}
                                             theme={mobileM.wheelchair}
                                         />
