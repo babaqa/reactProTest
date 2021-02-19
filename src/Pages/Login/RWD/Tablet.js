@@ -8,7 +8,7 @@ import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
 import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
 import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
 import { ReactComponent as Tabletbg } from '../../../Assets/img/Tabletbg.svg'
-import { MapGoogleInput, TabletPlacard } from '../../../ProjectComponent';
+import { MapGoogleInput } from '../../../ProjectComponent';
 import moment from 'moment';
 import { cityAndCountiesLite, Counties } from '../../../Mappings/Mappings';
 import { isEqual, isNil } from 'lodash';

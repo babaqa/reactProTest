@@ -9,7 +9,7 @@ import { ReactComponent as Lock } from '../../../Assets/img/Lock.svg'
 import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
 import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
 import { BasicContainer, Container, ScrollBar, Radio, SubContainer, Text, FormContainer, FormRow, NewSelector, TextInput, BasicButton, Checkbox, CheckboxItem, modalsService, InfoModal, globalContextService, DateTimePicker, RadioItem } from '../../../Components';
-import { MapGoogleInput, MobileMPlacard } from '../../../ProjectComponent';
+import { MapGoogleInput } from '../../../ProjectComponent';
 import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { cityAndCountiesLite, Counties } from '../../../Mappings/Mappings';

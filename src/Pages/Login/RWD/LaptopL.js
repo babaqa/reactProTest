@@ -9,7 +9,7 @@ import { ReactComponent as Phone } from '../../../Assets/img/Phone.svg'
 import { ReactComponent as AuthCode } from '../../../Assets/img/AuthCode.svg'
 import { ReactComponent as LaptopLbg } from '../../../Assets/img/LaptopLbg.svg'
 // import LaptopLbg from '../../../Assets/img/LaptopLbg.svg'
-import { LaptopPlacard, mapGoogleControll, MapGoogleInput } from '../../../ProjectComponent';
+import { mapGoogleControll, MapGoogleInput } from '../../../ProjectComponent';
 import moment from 'moment';
 import { isEqual, isNil } from 'lodash';
 import { cityAndCountiesLite, Counties } from '../../../Mappings/Mappings';
