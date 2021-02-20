@@ -2,10 +2,7 @@ import mobileM from './RWD/MobileM'
 import tablet from './RWD/Tablet'
 import laptop from './RWD/Laptop'
 import laptopL from './RWD/LaptopL'
-import busFastCallCar from './BusFastCallCarComponent/BusFastCallCarComponent'
-import caseFastCallCar from './CaseFastCallCarComponent/CaseFastCallCarComponent'
-import whiteFastCallCar from './WhiteFastCallCarComponent/WhiteFastCallCarComponent'
-import allFastCallCar from './AllFastCallCarComponent/AllFastCallCarComponent'
+import fastCallCar from './FastCallCarComponent/FastCallCarComponent'
 import addFastCallCar from './AddFastCallCar/AddFastCallCar'
 import editFastCallCar from './EditFastCallCar/EditFastCallCar'
 
@@ -16,10 +13,7 @@ export default {
         laptop,
         laptopL
     },
-    busFastCallCar,
-    caseFastCallCar,
-    whiteFastCallCar,
-    allFastCallCar,
+    fastCallCar,
     addFastCallCar,
     editFastCallCar
 }

@@ -15,11 +15,24 @@ import { toString } from 'lodash/lang';
 const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { fastCallCar: { allFastCallCar: { rwd: { laptopL } } } } } = Theme;
+    const { pages: { fastCallCar: { fastCallCar: { rwd: { laptopL } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     let history = useHistory()
+
+    const statusMapping = (status, getTheme = false) => {
+        switch (toString(status)) {
+            case "1":
+                return (getTheme ? laptopL.fastCallCarIdentityTag.case : "長照");
+            case "2":
+                return (getTheme ? laptopL.fastCallCarIdentityTag.white : "共享車隊");
+            case "3":
+                return (getTheme ? laptopL.fastCallCarIdentityTag.bus : "巴士");
+            default:
+                return (getTheme ? laptopL.fastCallCarIdentityTag.unknown : "無此身份");
+        }
+    }
 
     let data = [
         { identity: "1", roadName: "家-亞東醫院測試用個案a", start: "新北市板橋區板新路27號", end: "新北市板橋區板新路27號新北市板橋區板新路27號" },
@@ -64,8 +77,8 @@ const LaptopLBase = (props) => {
             <OldTable
                 dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
                 dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                    globalContextService.remove("CaseNewsComponentPage", "CheckedRowKeys");
-                    globalContextService.remove("CaseNewsComponentPage", "CheckedRowsData");
+                    globalContextService.remove("FastCallCarComponent", "CheckedRowKeys");
+                    globalContextService.remove("FastCallCarComponent", "CheckedRowsData");
                 }}
                 checkbox={false}
                 // checked={["08f41bf6-4388-4b1e-bd3e-2ff538b44b1b"]}
@@ -73,8 +86,8 @@ const LaptopLBase = (props) => {
                 checkboxOnChecked={
                     (checkedRowKeys, checkedRows) => {
                         // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                        globalContextService.set("CaseNewsComponentPage", "CheckedRowKeys", checkedRowKeys);
-                        globalContextService.set("CaseNewsComponentPage", "CheckedRowsData", checkedRows);
+                        globalContextService.set("FastCallCarComponent", "CheckedRowKeys", checkedRowKeys);
+                        globalContextService.set("FastCallCarComponent", "CheckedRowsData", checkedRows);
                     }
                 }
                 setPerCheckBoxDisabled={(record) => {
@@ -104,19 +117,6 @@ const LaptopLBase = (props) => {
                             // sorter: (a, b) => a.brandModel.length - b.brandModel.length,
                             // fixed: 'left',
                             render: (rowData) => {
-                                const statusMapping = (status, getTheme = false) => {
-                                    switch (toString(status)) {
-                                        case "1":
-                                            return (getTheme ? laptopL.fastCallCarIdentityTag.case : "長照");
-                                        case "2":
-                                            return (getTheme ? laptopL.fastCallCarIdentityTag.white : "共享車隊");
-                                        case "3":
-                                            return (getTheme ? laptopL.fastCallCarIdentityTag.bus : "巴士");
-                                        default:
-                                            return (getTheme ? laptopL.fastCallCarIdentityTag.unknown : "無此身份");
-                                    }
-                                }
-
                                 return (
                                     <>
                                         <Tag
@@ -187,7 +187,7 @@ const LaptopLBase = (props) => {
                             // dataIndex: 'announce',
                             // sorter: (a, b) => a.brandModel.length - b.brandModel.length,
                             fixed: 'right',
-                            render: (allRowData) => {
+                            render: (rowData, allRowData) => {
                                 return (
                                     <>
                                         {/* 預約訂車 */}
@@ -199,7 +199,7 @@ const LaptopLBase = (props) => {
                                             onClick={(e) => {
                                                 e.preventDefault();
 
-                                                let rowData = {};
+                                                history.push(`/CallCarAgain?identity=${statusMapping(allRowData.identity)}&fast=${"test"}`)
 
                                             }}
                                         >

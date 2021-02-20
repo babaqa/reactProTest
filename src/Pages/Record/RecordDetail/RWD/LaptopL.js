@@ -341,21 +341,27 @@ const LaptopLBase = (props) => {
                                         }}
                                     >
                                         司機未到
-                                </NativeLineButton>
+                                    </NativeLineButton>
+                                    
+                                    {
+                                        props.case !== "巴士"
+                                        &&
+                                        <>
 
-                                    {/* 再次預約按鈕 */}
-                                    <NativeLineButton
-                                        baseDefaultTheme={"DefaultTheme"}
-                                        disable={false}
-                                        type="button" // 防止提交
-                                        theme={laptopL.againButton}
-                                        onClick={() => {
-                                            // history.push("/Order/WhiteOrder");
-                                            // props.controllGCS("return")
-                                        }}
-                                    >
-                                        再次預約
-                                </NativeLineButton>
+                                            {/* 再次預約按鈕 */}
+                                            <NativeLineButton
+                                                baseDefaultTheme={"DefaultTheme"}
+                                                disable={false}
+                                                type="button" // 防止提交
+                                                theme={laptopL.againButton}
+                                                onClick={() => {
+                                                    history.push(`/CallCarAgain?identity=${props.case}&record=${props.data.id}`)
+                                                }}
+                                            >
+                                                再次預約
+                                            </NativeLineButton>
+                                        </>
+                                    }
 
                                     {/* 填寫問卷按鈕 */}
                                     <NativeLineButton
@@ -364,8 +370,7 @@ const LaptopLBase = (props) => {
                                         type="button" // 防止提交
                                         theme={laptopL.questionnaireButton}
                                         onClick={() => {
-                                            // history.push("/Order/WhiteOrder");
-                                            // props.controllGCS("return")
+
                                         }}
                                     >
                                         填寫問卷

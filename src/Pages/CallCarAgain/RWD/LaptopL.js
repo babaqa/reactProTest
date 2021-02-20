@@ -26,10 +26,8 @@ const LaptopLBase = (props) => {
                     {
                         "長照":
                             <CaseCallCarAgain
-                                BasicInf={props.BasicInf}
-                                CaseInf={props.CaseInf}
                                 CaseUserId={props.CaseUserId}
-                                Quota={props.Quota}
+                                OrderData={props.OrderData} // 訂單紀錄
                                 BUnits={props.BUnits}
                                 CarType={props.CarType}
                                 mapGoogleControll={props.mapGoogleControll}
@@ -37,18 +35,16 @@ const LaptopLBase = (props) => {
                             />,
                         "共享車隊":
                             <WhiteCallCarAgain
-                                BasicInf={props.BasicInf}
                                 WhiteUserId={props.WhiteUserId}
-                                WhiteInf={props.WhiteInf}
+                                OrderData={props.OrderData} // 訂單紀錄
                                 CarType={props.CarType}
                                 mapGoogleControll={props.mapGoogleControll}
                                 GetPolylineRouteExecute={props.GetPolylineRouteExecute}
                             />,
                         "巴士":
                             <BusCallCarAgain
-                                BasicInf={props.BasicInf}
-                                BusInf={props.BusInf}
                                 BusUserId={props.BusUserId}
+                                OrderData={props.OrderData} // 訂單紀錄
                                 AllRoute={props.AllRoute}
                                 AllStation={props.AllStation}
                                 StationOnRoute={props.StationOnRoute}

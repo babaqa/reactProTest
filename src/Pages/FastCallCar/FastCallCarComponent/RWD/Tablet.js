@@ -2,13 +2,13 @@ import React, { useState, useEffect, useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
 import { BUnitSort, MainPageContainer, MapGoogle, mapGoogleControll, MapGoogleInput } from '../../../../ProjectComponent';
-import { ReactComponent as Search } from '../../../../Assets/img/CaseCallCarComponentPage/Search.svg'
-import { ReactComponent as Convert } from '../../../../Assets/img/CaseCallCarComponentPage/Convert.svg'
-import { ReactComponent as StartToEnd } from '../../../../Assets/img/CaseCallCarComponentPage/StartToEnd.svg'
-import { ReactComponent as Resize } from '../../../../Assets/img/CaseCallCarComponentPage/Resize.svg'
-import { ReactComponent as Arrow } from '../../../../Assets/img/CaseCallCarComponentPage/Arrow.svg'
-import { ReactComponent as End } from '../../../../Assets/img/CaseCallCarComponentPage/End.svg'
-import { ReactComponent as Start } from '../../../../Assets/img/CaseCallCarComponentPage/Start.svg'
+import { ReactComponent as Search } from '../../../../Assets/img/FastCallCarComponent/Search.svg'
+import { ReactComponent as Convert } from '../../../../Assets/img/FastCallCarComponent/Convert.svg'
+import { ReactComponent as StartToEnd } from '../../../../Assets/img/FastCallCarComponent/StartToEnd.svg'
+import { ReactComponent as Resize } from '../../../../Assets/img/FastCallCarComponent/Resize.svg'
+import { ReactComponent as Arrow } from '../../../../Assets/img/FastCallCarComponent/Arrow.svg'
+import { ReactComponent as End } from '../../../../Assets/img/FastCallCarComponent/End.svg'
+import { ReactComponent as Start } from '../../../../Assets/img/FastCallCarComponent/Start.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable, Resizable } from '../../../../Components';
@@ -31,11 +31,11 @@ const TabletBase = (props) => {
         let start = mapGoogleControll.getMarkers("test1")?.[0]?.position?.toJSON()?.lat  // 起點緯度
 
         let validMsg = "";
-        if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
+        if (valid(globalContextService.get("FastCallCarComponent", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
         }
         else if (valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
             validMsg = valid(end ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
@@ -43,20 +43,20 @@ const TabletBase = (props) => {
         else if (valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]) {
             validMsg = valid(start ?? "", ["^.{1,}$"], ["請輸入起點與迄點"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]
         }
 
         if (validMsg === "") {
             // 如果起迄點、搭車日期、搭車時間有值、陪同人數 皆已有有值
             props.GetCaseOrderAmtExecute({
                 CaseUserId: props.CaseUserId,
-                FromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"),
+                FromAddr: globalContextService.get("FastCallCarComponent", "StartPos"),
                 // FromAddrId:, // 不用丟
-                ToAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"),
-                FamilyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value,
+                ToAddr: globalContextService.get("FastCallCarComponent", "EndPos"),
+                FamilyWith: globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value,
                 // ToAddrId:, // 不用丟
-                ReservationDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
+                ReservationDate: globalContextService.get("FastCallCarComponent", "TravelDate") + " " + globalContextService.get("FastCallCarComponent", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45"
             })
         }
 
@@ -68,74 +68,74 @@ const TabletBase = (props) => {
         //#region 表單驗證
         let validMsg = "";
 
-        if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
+        if (valid(globalContextService.get("FastCallCarComponent", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "TravelDate") ?? "", ["^.{1,}$"], ["請選擇乘車日期"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "TravelTime") ?? "", ["^.{1,}$"], ["請選擇乘車時間"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.[0]?.id ?? "", ["^.{1,}$"], ["請選擇優先搭乘車行排序，或需先新增B單位"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.[0]?.id ?? "", ["^.{1,}$"], ["請選擇優先搭乘車行排序，或需先新增B單位"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "BUnitSort")?.[0]?.id ?? "", ["^.{1,}$"], ["請選擇優先搭乘車行排序，或需先新增B單位"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "BUnitSort")?.[0]?.id ?? "", ["^.{1,}$"], ["請選擇優先搭乘車行排序，或需先新增B單位"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value ?? "", ["^.{1,}$"], ["請選擇訂車人身分"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value ?? "", ["^.{1,}$"], ["請選擇訂車人身分"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "Orderer")?.value ?? "", ["^.{1,}$"], ["請選擇訂車人身分"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "Orderer")?.value ?? "", ["^.{1,}$"], ["請選擇訂車人身分"])[1]
         }
         // 其實 應該要連實際經緯度標記坐標一起檢核，目前尚未防堵 選擇自動完成選項後，又改動輸入框地址內容，然後送出的情況  
         // PS.可以分成 目前輸入框內容 與 onSelect的值，onChange時清掉onSelect的值，然後送出時一律檢核onSelect的值
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "StartPos") ?? "", ["^.{1,}$"], ["請輸入起點地址"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "StartPos") ?? "", ["^.{1,}$"], ["請輸入起點地址"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "StartPos") ?? "", ["^.{1,}$"], ["請輸入起點地址"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "StartPos") ?? "", ["^.{1,}$"], ["請輸入起點地址"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇起點備註"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇起點備註"])[1]
-        }
-        else if (
-            (globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label === "其他")
-            &&
-            valid(globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks") ?? "", ["^.{1,}$"], ["請輸入起點備註 - 其他"])[1]
-        ) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks") ?? "", ["^.{1,}$"], ["請輸入起點備註 - 其他"])[1]
-        }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]
-        }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇迄點備註"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇迄點備註"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇起點備註"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇起點備註"])[1]
         }
         else if (
-            (globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他")
+            (globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.label === "其他")
             &&
-            valid(globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks") ?? "", ["^.{1,}$"], ["請輸入迄點備註 - 其他"])[1]
+            valid(globalContextService.get("FastCallCarComponent", "OtherStartPosRemarks") ?? "", ["^.{1,}$"], ["請輸入起點備註 - 其他"])[1]
         ) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks") ?? "", ["^.{1,}$"], ["請輸入迄點備註 - 其他"])[1]
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "OtherStartPosRemarks") ?? "", ["^.{1,}$"], ["請輸入起點備註 - 其他"])[1]
+        }
+        else if (valid(globalContextService.get("FastCallCarComponent", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "EndPos") ?? "", ["^.{1,}$"], ["請輸入迄點地址"])[1]
+        }
+        else if (valid(globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇迄點備註"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.value ?? "", ["^.{1,}$"], ["請選擇迄點備註"])[1]
+        }
+        else if (
+            (globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.label === "其他")
+            &&
+            valid(globalContextService.get("FastCallCarComponent", "OtherEndPosRemarks") ?? "", ["^.{1,}$"], ["請輸入迄點備註 - 其他"])[1]
+        ) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "OtherEndPosRemarks") ?? "", ["^.{1,}$"], ["請輸入迄點備註 - 其他"])[1]
         }
         // else if (map8Controll.getMarkerPoints("test1").length !== 2) {
         //     validMsg = "請重新輸入起訖地址"
         // }
         else if (
-            (globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1)
+            (globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") === 1)
             &&
-            valid(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
+            valid(globalContextService.get("FastCallCarComponent", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
         ) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "ReturnEnableDate") ?? "", ["^.{1,}$"], ["請選擇回程乘車時間"])[1]
         }
         else if (
-            (globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1)
+            (globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") === 1)
             &&
-            !moment(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), "HH:mm").isAfter(moment(globalContextService.get("CaseCallCarComponentPage", "TravelTime"), "HH:mm"))
+            !moment(globalContextService.get("FastCallCarComponent", "ReturnEnableDate"), "HH:mm").isAfter(moment(globalContextService.get("FastCallCarComponent", "TravelTime"), "HH:mm"))
         ) {  // !(去程時間 > 回程時間)
             validMsg = "回程乘車時間不可早於或等於去程時間"
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "CarType")?.value ?? "", ["^.{1,}$"], ["請選擇車種"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "Wheelchair")?.value ?? "", ["^.{1,}$"], ["請選擇輪椅"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value ?? "", ["^.{1,}$"], ["請選擇陪同人數"])[1]
         }
-        else if (valid(globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
-            validMsg = valid(globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
+        else if (valid(globalContextService.get("FastCallCarComponent", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]) {
+            validMsg = valid(globalContextService.get("FastCallCarComponent", "SmsNumber") ?? "", ["^.{1,}$", "^09[0-9]{8,8}$"], ["請輸入接收簡訊號碼", "請輸入正確手機格式"])[1]
         }
         //#endregion
 
@@ -287,14 +287,14 @@ const TabletBase = (props) => {
                             isSearchable
                             placeholder={""}
                             value={
-                                (globalContextService.get("CaseCallCarComponentPage", "TravelDate")) ?
-                                    moment(globalContextService.get("CaseCallCarComponentPage", "TravelDate"), "YYYY-MM-DD HH:mm:ss")
+                                (globalContextService.get("FastCallCarComponent", "TravelDate")) ?
+                                    moment(globalContextService.get("FastCallCarComponent", "TravelDate"), "YYYY-MM-DD HH:mm:ss")
                                     :
                                     null
                             }
                             onChange={(value, momentObj) => {
-                                if (value !== globalContextService.get("CaseCallCarComponentPage", "TravelDate")) {
-                                    globalContextService.set("CaseCallCarComponentPage", "TravelDate", value);
+                                if (value !== globalContextService.get("FastCallCarComponent", "TravelDate")) {
+                                    globalContextService.set("FastCallCarComponent", "TravelDate", value);
                                     getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
                                     setForceUpdate(f => !f)
                                 }
@@ -304,7 +304,7 @@ const TabletBase = (props) => {
 
                         {/*  乘車日期檢核 */}
                         {
-                            !isNil(globalContextService.get("CaseCallCarComponentPage", "TravelDate"))
+                            !isNil(globalContextService.get("FastCallCarComponent", "TravelDate"))
                                 ?
                                 <>
                                     {/* 乘車時間 TravelTime */}
@@ -318,14 +318,14 @@ const TabletBase = (props) => {
                                         isSearchable
                                         placeholder={""}
                                         value={
-                                            (globalContextService.get("CaseCallCarComponentPage", "TravelTime")) ?
-                                                moment(globalContextService.get("CaseCallCarComponentPage", "TravelTime"), "HH:mm")
+                                            (globalContextService.get("FastCallCarComponent", "TravelTime")) ?
+                                                moment(globalContextService.get("FastCallCarComponent", "TravelTime"), "HH:mm")
                                                 :
                                                 null
                                         }
                                         onChange={(value, momentObj) => {
-                                            if (value !== globalContextService.get("CaseCallCarComponentPage", "TravelTime")) {
-                                                globalContextService.set("CaseCallCarComponentPage", "TravelTime", value);
+                                            if (value !== globalContextService.get("FastCallCarComponent", "TravelTime")) {
+                                                globalContextService.set("FastCallCarComponent", "TravelTime", value);
                                                 getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
                                                 setForceUpdate(f => !f)
                                             }
@@ -348,9 +348,9 @@ const TabletBase = (props) => {
                             placeholder={"請選擇訂車人身分"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "Orderer") ?? null}
+                            value={globalContextService.get("FastCallCarComponent", "Orderer") ?? null}
                             onChange={(e, value, onInitial) => {
-                                globalContextService.set("CaseCallCarComponentPage", "Orderer", value);
+                                globalContextService.set("FastCallCarComponent", "Orderer", value);
                             }}
 
                             options={[
@@ -375,10 +375,10 @@ const TabletBase = (props) => {
                             //     { id: "2", name: "2XXXX車行" },
                             //     { id: "3", name: "3XXXX車行" },
                             // ]}
-                            value={globalContextService.get("CaseCallCarComponentPage", `BUnitSort`)}
+                            value={globalContextService.get("FastCallCarComponent", `BUnitSort`)}
                             onChange={(e, value, onInitial) => {
                                 console.log(value)
-                                globalContextService.set("CaseCallCarComponentPage", `BUnitSort`, value);
+                                globalContextService.set("FastCallCarComponent", `BUnitSort`, value);
                             }}
                             theme={tablet.bUnitSort}
                         />
@@ -391,9 +391,9 @@ const TabletBase = (props) => {
                             // disable
                             topLabel={"起點"}
                             baseDefaultTheme={"DefaultTheme"}
-                            value={globalContextService.get("CaseCallCarComponentPage", "StartPos") ?? ""}
+                            value={globalContextService.get("FastCallCarComponent", "StartPos") ?? ""}
                             onChange={(e, value, onInitial) => {
-                                globalContextService.set("CaseCallCarComponentPage", "StartPos", value);
+                                globalContextService.set("FastCallCarComponent", "StartPos", value);
                             }}
                             onSelect={(e, option, onInitial, posInfo) => {
                                 if (mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
@@ -406,7 +406,7 @@ const TabletBase = (props) => {
                                 mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 0) // 更新選中起點
                                 mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
 
-                                globalContextService.set("CaseCallCarComponentPage", "StartPos", option.label);
+                                globalContextService.set("FastCallCarComponent", "StartPos", option.label);
 
                                 getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
 
@@ -426,17 +426,17 @@ const TabletBase = (props) => {
                             placeholder={"請選擇備註"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks") ?? null}
+                            value={globalContextService.get("FastCallCarComponent", "StartPosRemarks") ?? null}
                             onChange={(e, value, onInitial) => {
                                 if (value?.label === '其他') {
-                                    if (value?.label !== globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label) {
+                                    if (value?.label !== globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.label) {
                                         setForceUpdate(f => !f); // 剛選擇 起點備註 時，重新渲染
                                     }
                                 }
-                                else if (globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label === '其他') {
+                                else if (globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.label === '其他') {
                                     setForceUpdate(f => !f); // 剛選擇 起點備註 時，重新渲染
                                 }
-                                globalContextService.set("CaseCallCarComponentPage", "StartPosRemarks", value);
+                                globalContextService.set("FastCallCarComponent", "StartPosRemarks", value);
 
                             }}
 
@@ -451,7 +451,7 @@ const TabletBase = (props) => {
 
                         {/*  起點備註檢核 */}
                         {
-                            globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label === "其他"
+                            globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.label === "其他"
                             &&
                             <>
                                 {/* 起點備註 - 其他 OtherStartPosRemarks */}
@@ -460,9 +460,9 @@ const TabletBase = (props) => {
                                     baseDefaultTheme={"DefaultTheme"}
                                     type="text"
                                     placeholder={"請輸入起點備註 - 其他"}
-                                    value={globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks") ?? null}
+                                    value={globalContextService.get("FastCallCarComponent", "OtherStartPosRemarks") ?? null}
                                     onChange={(e, value, onInitial) => {
-                                        globalContextService.set("CaseCallCarComponentPage", "OtherStartPosRemarks", value);
+                                        globalContextService.set("FastCallCarComponent", "OtherStartPosRemarks", value);
                                     }}
                                     theme={tablet.otherStartPosRemarks}
                                 />
@@ -501,11 +501,11 @@ const TabletBase = (props) => {
                                     }
                                     else {
                                         // 如果起迄點都已經輸入
-                                        let startAddr = globalContextService.get("CaseCallCarComponentPage", "StartPos");
-                                        let endAddr = globalContextService.get("CaseCallCarComponentPage", "EndPos");
+                                        let startAddr = globalContextService.get("FastCallCarComponent", "StartPos");
+                                        let endAddr = globalContextService.get("FastCallCarComponent", "EndPos");
 
-                                        globalContextService.set("CaseCallCarComponentPage", "EndPos", startAddr);
-                                        globalContextService.set("CaseCallCarComponentPage", "StartPos", endAddr);
+                                        globalContextService.set("FastCallCarComponent", "EndPos", startAddr);
+                                        globalContextService.set("FastCallCarComponent", "StartPos", endAddr);
 
                                         let startMarker = mapGoogleControll.getMarkers("test1")?.[0]?.position  // 起點經緯度
                                         let endMarker = mapGoogleControll.getMarkers("test1")?.[1]?.position // 迄點經緯度
@@ -583,8 +583,8 @@ const TabletBase = (props) => {
 
                                                 props.GetPolylineRouteExecute(
                                                     {
-                                                        fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"),
-                                                        toAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"),
+                                                        fromAddr: globalContextService.get("FastCallCarComponent", "StartPos"),
+                                                        toAddr: globalContextService.get("FastCallCarComponent", "EndPos"),
                                                         mapId: "test1",
                                                         routeAttr: {
                                                             // origin: new window.google.maps.LatLng(25.012930,121.994708),
@@ -610,9 +610,9 @@ const TabletBase = (props) => {
                                 </>
                             }
                             baseDefaultTheme={"DefaultTheme"}
-                            value={globalContextService.get("CaseCallCarComponentPage", "EndPos") ?? ""}
+                            value={globalContextService.get("FastCallCarComponent", "EndPos") ?? ""}
                             onChange={(e, value, onInitial) => {
-                                globalContextService.set("CaseCallCarComponentPage", "EndPos", value);
+                                globalContextService.set("FastCallCarComponent", "EndPos", value);
                             }}
                             onSelect={(e, option, onInitial, posInfo) => {
                                 if (mapGoogleControll.getPolylineRoutes("test1")?.[0]) {
@@ -629,7 +629,7 @@ const TabletBase = (props) => {
                                 mapGoogleControll.addMarkerWithIndex("test1", { lat: posInfo?.lat, lng: posInfo?.lon }, 1) // 更新選中起點
                                 mapGoogleControll.setCenter("test1", { lat: posInfo?.lat, lng: posInfo?.lon }); // 移動中心點
 
-                                globalContextService.set("CaseCallCarComponentPage", "EndPos", option.label);
+                                globalContextService.set("FastCallCarComponent", "EndPos", option.label);
 
                                 getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
 
@@ -649,17 +649,17 @@ const TabletBase = (props) => {
                             placeholder={"請選擇備註"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks") ?? null}
+                            value={globalContextService.get("FastCallCarComponent", "EndPosRemarks") ?? null}
                             onChange={(e, value, onInitial) => {
                                 if (value?.label === '其他') {
-                                    if (value?.label !== globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label) {
+                                    if (value?.label !== globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.label) {
                                         setForceUpdate(f => !f); // 剛選擇 迄點備註 時，重新渲染
                                     }
                                 }
-                                else if (globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === '其他') {
+                                else if (globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.label === '其他') {
                                     setForceUpdate(f => !f); // 剛選擇 迄點備註 時，重新渲染
                                 }
-                                globalContextService.set("CaseCallCarComponentPage", "EndPosRemarks", value);
+                                globalContextService.set("FastCallCarComponent", "EndPosRemarks", value);
 
                             }}
 
@@ -674,7 +674,7 @@ const TabletBase = (props) => {
 
                         {/*  迄點備註註檢核 */}
                         {
-                            globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他"
+                            globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.label === "其他"
                             &&
                             <>
                                 {/* 迄點備註 - 其他 OtherEndPosRemarks */}
@@ -683,9 +683,9 @@ const TabletBase = (props) => {
                                     baseDefaultTheme={"DefaultTheme"}
                                     type="text"
                                     placeholder={"請輸入迄點備註"}
-                                    value={globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks") ?? null}
+                                    value={globalContextService.get("FastCallCarComponent", "OtherEndPosRemarks") ?? null}
                                     onChange={(e, value, onInitial) => {
-                                        globalContextService.set("CaseCallCarComponentPage", "OtherEndPosRemarks", value);
+                                        globalContextService.set("FastCallCarComponent", "OtherEndPosRemarks", value);
                                     }}
                                     theme={tablet.otherEndPosRemarks}
                                 />
@@ -724,7 +724,7 @@ const TabletBase = (props) => {
                                     <Text
                                         theme={tablet.todayToDoStartAddr}
                                     >
-                                        {globalContextService.get("CaseCallCarComponentPage", "StartPos")}
+                                        {globalContextService.get("FastCallCarComponent", "StartPos")}
                                     </Text>
 
                                 </SubContainer>
@@ -744,7 +744,7 @@ const TabletBase = (props) => {
                                     <Text
                                         theme={tablet.todayToDoEndAddr}
                                     >
-                                        {globalContextService.get("CaseCallCarComponentPage", "EndPos")}
+                                        {globalContextService.get("FastCallCarComponent", "EndPos")}
                                     </Text>
 
                                 </SubContainer>
@@ -768,8 +768,8 @@ const TabletBase = (props) => {
                                 checkboxOnChecked={
                                     (checkedRowKeys, checkedRows) => {
                                         // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                        globalContextService.set("CaseCallCarComponentPage", "CheckedRowKeys", checkedRowKeys);
-                                        globalContextService.set("CaseCallCarComponentPage", "CheckedRowsData", checkedRows);
+                                        globalContextService.set("FastCallCarComponent", "CheckedRowKeys", checkedRowKeys);
+                                        globalContextService.set("FastCallCarComponent", "CheckedRowsData", checkedRows);
                                     }
                                 }
                                 setPerCheckBoxDisabled={(record) => {
@@ -892,7 +892,7 @@ const TabletBase = (props) => {
 
                         {/* 預約回程檢核 */}
                         {
-                            !isNil(globalContextService.get("CaseCallCarComponentPage", "TravelTime"))
+                            !isNil(globalContextService.get("FastCallCarComponent", "TravelTime"))
                             &&
                             <>
                                 {/* 我要預約回程(回居住地址) ScheduleReturnReview */}
@@ -900,17 +900,17 @@ const TabletBase = (props) => {
                                     // viewType
                                     // disable
                                     topLabel={"我要預約回程(回居住地址)"}
-                                    value={globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") ?? 0}
+                                    value={globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") ?? 0}
                                     onChange={(e, value, onInitial) => {
                                         if (value === 1) {
-                                            if (value !== globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview")) {
+                                            if (value !== globalContextService.get("FastCallCarComponent", "ScheduleReturnReview")) {
                                                 setForceUpdate(f => !f); // 剛選擇 預約回程 是 時，重新渲染
                                             }
                                         }
-                                        else if (globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1) {
+                                        else if (globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") === 1) {
                                             setForceUpdate(f => !f); // 剛選擇 預約回程 是，重新渲染
                                         }
-                                        globalContextService.set("CaseCallCarComponentPage", "ScheduleReturnReview", value);
+                                        globalContextService.set("FastCallCarComponent", "ScheduleReturnReview", value);
                                     }}
                                     theme={tablet.scheduleReturnReview}
                                 >
@@ -920,7 +920,7 @@ const TabletBase = (props) => {
                                 </Radio>
 
                                 {
-                                    globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1
+                                    globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") === 1
                                         ?
                                         <>
                                             {/* 回程乘車時間 ReturnEnableDate */}
@@ -934,13 +934,13 @@ const TabletBase = (props) => {
                                                 isSearchable
                                                 placeholder={""}
                                                 value={
-                                                    (globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate")) ?
-                                                        moment(globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), "HH:mm")
+                                                    (globalContextService.get("FastCallCarComponent", "ReturnEnableDate")) ?
+                                                        moment(globalContextService.get("FastCallCarComponent", "ReturnEnableDate"), "HH:mm")
                                                         :
                                                         null
                                                 }
                                                 onChange={(value, momentObj) => {
-                                                    globalContextService.set("CaseCallCarComponentPage", `ReturnEnableDate`, value);
+                                                    globalContextService.set("FastCallCarComponent", `ReturnEnableDate`, value);
                                                 }}
                                                 theme={tablet.returnTravelTime}
                                             />
@@ -957,10 +957,10 @@ const TabletBase = (props) => {
                             // viewType
                             // disable
                             topLabel={"願意共乘"}
-                            value={globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview") ?? 1}
+                            value={globalContextService.get("FastCallCarComponent", "RideTogetherReview") ?? 1}
                             onChange={(e, value, onInitial) => {
                                 // console.log(value)
-                                globalContextService.set("CaseCallCarComponentPage", "RideTogetherReview", value);
+                                globalContextService.set("FastCallCarComponent", "RideTogetherReview", value);
                                 // console.log(globalContextService.get("CarsAddPage", "CarReview"));
                             }}
                             theme={tablet.rideTogetherReview}
@@ -980,13 +980,13 @@ const TabletBase = (props) => {
                             placeholder={"請選擇車種類型"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "CarType") ?? null}
+                            value={globalContextService.get("FastCallCarComponent", "CarType") ?? null}
                             onChange={(e, value, onInitial) => {
                                 // console.log(value?.label)
-                                // console.log(globalContextService.get("CaseCallCarComponentPage", "CarType"))
-                                if (!isEqual(value, globalContextService.get("CaseCallCarComponentPage", "CarType"))) {
-                                    globalContextService.remove("CaseCallCarComponentPage", "Wheelchair")
-                                    globalContextService.set("CaseCallCarComponentPage", "CarType", value);
+                                // console.log(globalContextService.get("FastCallCarComponent", "CarType"))
+                                if (!isEqual(value, globalContextService.get("FastCallCarComponent", "CarType"))) {
+                                    globalContextService.remove("FastCallCarComponent", "Wheelchair")
+                                    globalContextService.set("FastCallCarComponent", "CarType", value);
                                     setForceUpdate(f => !f); // 剛選擇 車種 時，重新渲染
                                 }
                             }}
@@ -1010,9 +1010,9 @@ const TabletBase = (props) => {
                             placeholder={"請選擇輪椅"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "Wheelchair") ?? null}
+                            value={globalContextService.get("FastCallCarComponent", "Wheelchair") ?? null}
                             onChange={(e, value, onInitial) => {
-                                globalContextService.set("CaseCallCarComponentPage", "Wheelchair", value);
+                                globalContextService.set("FastCallCarComponent", "Wheelchair", value);
                                 // console.log("請選擇居住縣市", value, globalContextService.get("CaseEditPage", "County"))
                             }}
                             options={
@@ -1020,7 +1020,7 @@ const TabletBase = (props) => {
                                     { value: 'hint', label: "請選擇輪椅", isDisabled: true },
                                     ...(
                                         (
-                                            globalContextService.get("CaseCallCarComponentPage", "CarType")?.label === "一般車"
+                                            globalContextService.get("FastCallCarComponent", "CarType")?.label === "一般車"
                                                 ?
                                                 [
                                                     { value: '無', label: "無" },
@@ -1028,7 +1028,7 @@ const TabletBase = (props) => {
                                                 ]
                                                 :
                                                 (
-                                                    globalContextService.get("CaseCallCarComponentPage", "CarType")?.label === "福祉車"
+                                                    globalContextService.get("FastCallCarComponent", "CarType")?.label === "福祉車"
                                                         ?
                                                         [
                                                             { value: '無', label: "無" },
@@ -1058,11 +1058,11 @@ const TabletBase = (props) => {
                             placeholder={"請選擇陪同人數"}
                             // isMulti
                             // hideSelectedOptions={false}
-                            value={globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts") ?? null}
+                            value={globalContextService.get("FastCallCarComponent", "AccompanyCounts") ?? null}
                             onChange={(e, value, onInitial) => {
 
-                                if ((!isEqual(value?.value, globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value))) {
-                                    globalContextService.set("CaseCallCarComponentPage", "AccompanyCounts", value);
+                                if ((!isEqual(value?.value, globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value))) {
+                                    globalContextService.set("FastCallCarComponent", "AccompanyCounts", value);
                                     getCaseOrderAmtAPI(); // 如果起迄點、搭車日期、搭車時間有值、陪同人數皆已有有值，則帶回 本日行程一覽 Table資料
                                 }
                             }
@@ -1089,9 +1089,9 @@ const TabletBase = (props) => {
                             baseDefaultTheme={"DefaultTheme"}
                             type="text"
                             placeholder={"請輸入接收簡訊號碼"}
-                            value={globalContextService.get("CaseCallCarComponentPage", "SmsNumber") ?? props.CaseUsers?.enableDate}
+                            value={globalContextService.get("FastCallCarComponent", "SmsNumber") ?? props.CaseUsers?.enableDate}
                             onChange={(e, value, onInitial) => {
-                                globalContextService.set("CaseCallCarComponentPage", "SmsNumber", value);
+                                globalContextService.set("FastCallCarComponent", "SmsNumber", value);
                             }}
                             theme={tablet.smsNumber}
                         />
@@ -1119,7 +1119,7 @@ const TabletBase = (props) => {
 
                     {/* 新增下個地點檢核 */}
                     {
-                        globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") !== 1
+                        globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") !== 1
                         &&
                         <>
                             {/* 新增下個地點按鈕 */}
@@ -1151,31 +1151,31 @@ const TabletBase = (props) => {
                                             userId: props.UserId, // 用戶id
                                             caseUserId: props.CaseUserId, // 長照身份id
                                             orgId: "", // 送空字串
-                                            reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
-                                            transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
-                                            createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
-                                            fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"), // 起點
+                                            reserveDate: globalContextService.get("FastCallCarComponent", "TravelDate") + " " + globalContextService.get("FastCallCarComponent", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
+                                            transOrgs: globalContextService.get("FastCallCarComponent", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
+                                            createdIdentity: globalContextService.get("FastCallCarComponent", "Orderer")?.value, // 訂車人身分
+                                            fromAddr: globalContextService.get("FastCallCarComponent", "StartPos"), // 起點
                                             fromAddrRemark: (
-                                                globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label === "其他" ?
-                                                    globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks")
+                                                globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.label === "其他" ?
+                                                    globalContextService.get("FastCallCarComponent", "OtherStartPosRemarks")
                                                     :
-                                                    globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.value
+                                                    globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.value
                                             ), // 起點備註 (含備註 - 其他)
-                                            toAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"), // 迄點
+                                            toAddr: globalContextService.get("FastCallCarComponent", "EndPos"), // 迄點
                                             toAddrRemark: (
-                                                globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他" ?
-                                                    globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks")
+                                                globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.label === "其他" ?
+                                                    globalContextService.get("FastCallCarComponent", "OtherEndPosRemarks")
                                                     :
-                                                    globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value
+                                                    globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.value
                                             ), // 迄點備註 (含備註 - 其他)
                                             remark: "", // 無此欄位
-                                            isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
-                                            canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview") === 1 ? true : false, // 願意共乘
-                                            carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
-                                            carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
-                                            wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
-                                            familyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value, // 陪同人數
-                                            noticePhone: globalContextService.get("CaseCallCarComponentPage", "SmsNumber"), // 簡訊號碼
+                                            isBack: globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
+                                            canShared: globalContextService.get("FastCallCarComponent", "RideTogetherReview") === 1 ? true : false, // 願意共乘
+                                            carCategoryId: globalContextService.get("FastCallCarComponent", "CarType")?.value, // 車種id
+                                            carCategoryName: globalContextService.get("FastCallCarComponent", "CarType")?.label, // 車種名稱
+                                            wheelchairType: globalContextService.get("FastCallCarComponent", "Wheelchair")?.value, // 輪椅
+                                            familyWith: globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value, // 陪同人數
+                                            noticePhone: globalContextService.get("FastCallCarComponent", "SmsNumber"), // 簡訊號碼
                                             haveNextOrderFlag: true, // 新增下個地點 按鈕發送
                                         })
                                     }
@@ -1216,31 +1216,31 @@ const TabletBase = (props) => {
                                     userId: props.UserId, // 用戶id
                                     caseUserId: props.CaseUserId, // 長照身份id
                                     orgId: "", // 送空字串
-                                    reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
-                                    transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
-                                    createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
-                                    fromAddr: globalContextService.get("CaseCallCarComponentPage", "StartPos"), // 起點
+                                    reserveDate: globalContextService.get("FastCallCarComponent", "TravelDate") + " " + globalContextService.get("FastCallCarComponent", "TravelTime"), // 預約日期+預約時間	如: "2020-11-25 17:45",
+                                    transOrgs: globalContextService.get("FastCallCarComponent", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
+                                    createdIdentity: globalContextService.get("FastCallCarComponent", "Orderer")?.value, // 訂車人身分
+                                    fromAddr: globalContextService.get("FastCallCarComponent", "StartPos"), // 起點
                                     fromAddrRemark: (
-                                        globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.label === "其他" ?
-                                            globalContextService.get("CaseCallCarComponentPage", "OtherStartPosRemarks")
+                                        globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.label === "其他" ?
+                                            globalContextService.get("FastCallCarComponent", "OtherStartPosRemarks")
                                             :
-                                            globalContextService.get("CaseCallCarComponentPage", "StartPosRemarks")?.value
+                                            globalContextService.get("FastCallCarComponent", "StartPosRemarks")?.value
                                     ), // 起點備註 (含備註 - 其他)
-                                    toAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"), // 迄點
+                                    toAddr: globalContextService.get("FastCallCarComponent", "EndPos"), // 迄點
                                     toAddrRemark: (
-                                        globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他" ?
-                                            globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks")
+                                        globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.label === "其他" ?
+                                            globalContextService.get("FastCallCarComponent", "OtherEndPosRemarks")
                                             :
-                                            globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value
+                                            globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.value
                                     ), // 迄點備註 (含備註 - 其他)
                                     remark: "", // 無此欄位
-                                    isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
-                                    canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview") === 1 ? true : false, // 願意共乘
-                                    carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
-                                    carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
-                                    wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
-                                    familyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value, // 陪同人數
-                                    noticePhone: globalContextService.get("CaseCallCarComponentPage", "SmsNumber"), // 簡訊號碼
+                                    isBack: globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
+                                    canShared: globalContextService.get("FastCallCarComponent", "RideTogetherReview") === 1 ? true : false, // 願意共乘
+                                    carCategoryId: globalContextService.get("FastCallCarComponent", "CarType")?.value, // 車種id
+                                    carCategoryName: globalContextService.get("FastCallCarComponent", "CarType")?.label, // 車種名稱
+                                    wheelchairType: globalContextService.get("FastCallCarComponent", "Wheelchair")?.value, // 輪椅
+                                    familyWith: globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value, // 陪同人數
+                                    noticePhone: globalContextService.get("FastCallCarComponent", "SmsNumber"), // 簡訊號碼
                                     haveNextOrderFlag: false, // 立即預約 按鈕發送
                                     isBackOrder: false, // 立即預約 按鈕發送 (去程)
                                 })
@@ -1251,26 +1251,26 @@ const TabletBase = (props) => {
                                     userId: props.UserId, // 用戶id
                                     caseUserId: props.CaseUserId, // 長照身份id
                                     orgId: "", // 送空字串
-                                    reserveDate: globalContextService.get("CaseCallCarComponentPage", "TravelDate") + " " + globalContextService.get("CaseCallCarComponentPage", "ReturnEnableDate"), // 預約日期+預約回程時間	如: "2020-11-25 17:45",
-                                    transOrgs: globalContextService.get("CaseCallCarComponentPage", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
-                                    createdIdentity: globalContextService.get("CaseCallCarComponentPage", "Orderer")?.value, // 訂車人身分
-                                    fromAddr: globalContextService.get("CaseCallCarComponentPage", "EndPos"), // 起點
+                                    reserveDate: globalContextService.get("FastCallCarComponent", "TravelDate") + " " + globalContextService.get("FastCallCarComponent", "ReturnEnableDate"), // 預約日期+預約回程時間	如: "2020-11-25 17:45",
+                                    transOrgs: globalContextService.get("FastCallCarComponent", "BUnitSort")?.map(item => item?.id), // 優先搭乘車行排序
+                                    createdIdentity: globalContextService.get("FastCallCarComponent", "Orderer")?.value, // 訂車人身分
+                                    fromAddr: globalContextService.get("FastCallCarComponent", "EndPos"), // 起點
                                     fromAddrRemark: (
-                                        globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.label === "其他" ?
-                                            globalContextService.get("CaseCallCarComponentPage", "OtherEndPosRemarks")
+                                        globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.label === "其他" ?
+                                            globalContextService.get("FastCallCarComponent", "OtherEndPosRemarks")
                                             :
-                                            globalContextService.get("CaseCallCarComponentPage", "EndPosRemarks")?.value
+                                            globalContextService.get("FastCallCarComponent", "EndPosRemarks")?.value
                                     ), // 起點備註 (含備註 - 其他)
                                     toAddr: `${props?.CaseUsers?.county}${props?.CaseUsers?.district}${props?.CaseUsers?.addr}`,
                                     toAddrRemark: "住家",
                                     remark: "", // 無此欄位
-                                    isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
-                                    canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview") === 1 ? true : false, // 願意共乘
-                                    carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
-                                    carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
-                                    wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
-                                    familyWith: globalContextService.get("CaseCallCarComponentPage", "AccompanyCounts")?.value, // 陪同人數
-                                    noticePhone: globalContextService.get("CaseCallCarComponentPage", "SmsNumber"), // 簡訊號碼
+                                    isBack: globalContextService.get("FastCallCarComponent", "ScheduleReturnReview") === 1 ? true : false, //我要預約回程 
+                                    canShared: globalContextService.get("FastCallCarComponent", "RideTogetherReview") === 1 ? true : false, // 願意共乘
+                                    carCategoryId: globalContextService.get("FastCallCarComponent", "CarType")?.value, // 車種id
+                                    carCategoryName: globalContextService.get("FastCallCarComponent", "CarType")?.label, // 車種名稱
+                                    wheelchairType: globalContextService.get("FastCallCarComponent", "Wheelchair")?.value, // 輪椅
+                                    familyWith: globalContextService.get("FastCallCarComponent", "AccompanyCounts")?.value, // 陪同人數
+                                    noticePhone: globalContextService.get("FastCallCarComponent", "SmsNumber"), // 簡訊號碼
                                     haveNextOrderFlag: false, // 立即預約 按鈕發送
                                     isBackOrder: true, // 立即預約 按鈕發送 (回程)
                                 })

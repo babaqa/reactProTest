@@ -601,18 +601,17 @@ const TabletBase = (props) => {
                                                                                         {props.nowTab !== "巴士"
                                                                                             &&
                                                                                             <>
-                                                                                                {/* 再叫一次按鈕 */}
+                                                                                                {/* 再次預約按鈕 */}
                                                                                                 <NativeLineButton
                                                                                                     baseDefaultTheme={"DefaultTheme"}
                                                                                                     disable={false}
                                                                                                     type="button" // 防止提交
                                                                                                     theme={tablet.againButton}
                                                                                                     onClick={() => {
-                                                                                                        // history.push("/Order/WhiteOrder");
-                                                                                                        // props.controllGCS("return")
+                                                                                                        history.push(`/CallCarAgain?identity=${props.nowTab}&id=${rowData.id}`)
                                                                                                     }}
                                                                                                 >
-                                                                                                    再叫一次
+                                                                                                    再次預約
                                                                                                 </NativeLineButton>
                                                                                             </>
                                                                                         }
@@ -756,19 +755,18 @@ const TabletBase = (props) => {
                                                                                         {props.nowTab !== "巴士"
                                                                                             &&
                                                                                             <>
-                                                                                                {/* 再叫一次按鈕 */}
+                                                                                                {/* 再次預約按鈕 */}
                                                                                                 <NativeLineButton
                                                                                                     baseDefaultTheme={"DefaultTheme"}
                                                                                                     disable={false}
                                                                                                     type="button" // 防止提交
                                                                                                     theme={tablet.againButton}
                                                                                                     onClick={() => {
-                                                                                                        // history.push("/Order/WhiteOrder");
-                                                                                                        // props.controllGCS("return")
+                                                                                                        history.push(`/CallCarAgain?identity=${props.nowTab}&record=${rowData.id}`)
                                                                                                     }}
                                                                                                 >
-                                                                                                    再叫一次
-                                                                                        </NativeLineButton>
+                                                                                                    再次預約
+                                                                                                </NativeLineButton>
                                                                                             </>
                                                                                         }
 

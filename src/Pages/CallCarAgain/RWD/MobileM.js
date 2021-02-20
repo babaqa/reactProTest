@@ -30,6 +30,7 @@ const MobileMBase = (props) => {
                                 BasicInf={props.BasicInf}
                                 CaseInf={props.CaseInf}
                                 CaseUserId={props.CaseUserId}
+                                OrderData={props.OrderData} // 訂單紀錄
                                 Quota={props.Quota}
                                 BUnits={props.BUnits}
                                 CarType={props.CarType}
@@ -40,6 +41,7 @@ const MobileMBase = (props) => {
                             <WhiteCallCarAgain
                                 BasicInf={props.BasicInf}
                                 WhiteUserId={props.WhiteUserId}
+                                OrderData={props.OrderData} // 訂單紀錄
                                 WhiteInf={props.WhiteInf}
                                 CarType={props.CarType}
                                 mapGoogleControll={props.mapGoogleControll}
@@ -49,6 +51,7 @@ const MobileMBase = (props) => {
                             <BusCallCarAgain
                                 BasicInf={props.BasicInf}
                                 BusInf={props.BusInf}
+                                OrderData={props.OrderData} // 訂單紀錄
                                 BusUserId={props.BusUserId}
                                 AllRoute={props.AllRoute}
                                 AllStation={props.AllStation}

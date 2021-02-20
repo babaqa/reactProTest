@@ -335,8 +335,7 @@ const MobileMBase = (props) => {
                         type="button" // 防止提交
                         theme={mobileM.againButton}
                         onClick={() => {
-                            // history.push("/Order/WhiteOrder");
-                            // props.controllGCS("return")
+                            history.push(`/CallCarAgain?identity=${props.case}&record=${props.data.id}`)
                         }}
                     >
                         再次預約

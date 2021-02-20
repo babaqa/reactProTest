@@ -414,7 +414,7 @@ export default {
         topLabel: {
             basic: (style, props) => ({
                 ...style,
-                height: "32px", 
+                height: "32px",
             })
         },
         selectorContainer: {
@@ -1087,7 +1087,7 @@ export default {
             backgroundColor: "#D9D9D9",
             textAlign: "right",
             padding: "16px 24px",
-            margin: "0 12px"
+            margin: "0 12px 24px"
         }),
     },
     //#endregion
@@ -1096,11 +1096,11 @@ export default {
     returnButton: {
         basic: (style) => ({
             ...style,
-            width: "82px",
+            width: "74px",
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            // top: "2px",
+            top: "2px",
             padding: 0,
             color: "#1890ff",
             backgroundColor: "#fff",
@@ -1110,7 +1110,7 @@ export default {
         }),
         hover: (style, props) => ({
             ...style,
-            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+            backgroundColor: "rgba(24,144,255,0.05)"
         }),
         focus: (style, props) => ({})
     },

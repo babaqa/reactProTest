@@ -496,19 +496,19 @@ const MobileMBase = (props) => {
                             <BasicContainer
                                 theme={mobileM.callCarFormBottomContainer}
                             >
-                                {/* 回列表按鈕 */}
-                                {/* <NativeLineButton
-                            baseDefaultTheme={"DefaultTheme"}
-                            disable={false}
-                            type="button" // 防止提交
-                            theme={mobileM.returnButton}
-                            onClick={() => {
-                                props.controllGCS("return");
-                                history.push("/Case")
-                            }}
-                        >
-                            回列表
-                                </NativeLineButton> */}
+                                {/* 回上一頁按鈕 */}
+                                <NativeLineButton
+                                    baseDefaultTheme={"DefaultTheme"}
+                                    disable={false}
+                                    type="button" // 防止提交
+                                    theme={mobileM.returnButton}
+                                    onClick={() => {
+                                        props.controllGCS("return")
+                                        history.goBack();
+                                    }}
+                                >
+                                    回上一頁
+                                </NativeLineButton>
 
                                 {/* 立即預約按鈕 */}
                                 <NativeLineButton

@@ -2,9 +2,9 @@ import React, { useContext, useState, useEffect, useCallback } from 'react';
 import { Context } from '../../../Store/Store'
 import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput, modalsService } from '../../../Components';
 import { LaptopL } from './RWD/LaptopL';
-import { Laptop } from './RWD/Laptop';
+// import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
-import { Tablet } from './RWD/Tablet';
+// import { Tablet } from './RWD/Tablet';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { useHistory, useLocation } from 'react-router-dom';
 import { isUndefined } from 'lodash';
@@ -14,7 +14,7 @@ import { mapGoogleControll } from '../../../ProjectComponent';
 import moment from "moment";
 import { fmt } from '../../../Handlers/DateHandler';
 
-export const AllFastCallCarComponent = (props) => {
+export const FastCallCarComponent = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
@@ -44,17 +44,17 @@ export const AllFastCallCarComponent = (props) => {
         switch (type) {
             case "return":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("AllFastCallCarComponentPage");
+                globalContextService.remove("FastCallCarComponentPage");
                 //#endregion
                 break;
             case "SaveHaveNextOrderFlag":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("AllFastCallCarComponentPage");
+                globalContextService.remove("FastCallCarComponentPage");
                 //#endregion
                 break;
             case "SaveNoHaveNextOrderFlag":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("AllFastCallCarComponentPage");
+                globalContextService.remove("FastCallCarComponentPage");
                 //#endregion
                 break;
             default:
@@ -67,8 +67,8 @@ export const AllFastCallCarComponent = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             // console.log(location, action, "路由變化")
-            globalContextService.remove("AllFastCallCarComponentPage", "firstUseAPIgetClient");
-            globalContextService.remove("AllFastCallCarComponentPage", "firstUseAPIgetCaseUsers");
+            globalContextService.remove("FastCallCarComponentPage", "firstUseAPIgetClient");
+            globalContextService.remove("FastCallCarComponentPage", "firstUseAPIgetCaseUsers");
         });
 
         return () => {

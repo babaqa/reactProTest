@@ -1506,11 +1506,11 @@ export default {
     returnButton: {
         basic: (style) => ({
             ...style,
-            width: "82px",
+            width: "74px",
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",
-            // top: "2px",
+            top: "2px",
             padding: 0,
             color: "#1890ff",
             backgroundColor: "#fff",
@@ -1520,7 +1520,7 @@ export default {
         }),
         hover: (style, props) => ({
             ...style,
-            backgroundColor: "rgba(24, 144, 255 ,0.05)"
+            backgroundColor: "rgba(24,144,255,0.05)"
         }),
         focus: (style, props) => ({})
     },

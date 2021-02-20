@@ -7,14 +7,15 @@ import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
 import { Tablet } from './RWD/Tablet';
 import { clearLocalStorage, clearSession, getParseItemLocalStorage, valid } from '../../Handlers';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useAsync } from '../../SelfHooks/useAsync';
 import { isUndefined, isNil } from 'lodash';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
 import { allCaseListMapping } from '../../Mappings/Mappings';
+import { CloseOutlined } from '@material-ui/icons';
 
 export const CallCarAgain = (props) => {
-
+    let urlParams = new URLSearchParams(useLocation().search);//取得參數
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
     const [BasicInf, setBasicInf] = useState({}); // 用戶基本資料
@@ -35,10 +36,27 @@ export const CallCarAgain = (props) => {
     // const [UserTypeInf, setUserTypeInf] = useState([]); // 用戶所有身分
     const [Width, Height] = useWindowSize();
     const [TabMenu, setTabMenu] = useState([]); // 頁籤
-    const [NowTab, setNowTab] = useState(); // 目前預約訂車頁面
+    const [NowTab, setNowTab] = useState(urlParams.get("identity")); // 目前預約訂車頁面
+    const [OrderData, setOrderData] = useState([]); // 用戶訂單紀錄資料
     const [StationOnRoute, setStationOnRoute] = useState(); // 路線下站牌資訊
 
     let history = useHistory();
+
+    //#region 個案類型
+    const caseSwitch = (key) => {
+        switch (key) {
+            case "長照":
+                return "CaseUsers"
+            case "共享車隊":
+                return "SelfPayUsers"
+            case "巴士":
+                return "BusUsers"
+            default:
+                return "CaseUsers"
+        }
+
+    }
+    //#endregion
 
     //#region 當頁 GlobalContextService (GCS) 值 控制
     const controllGCS = (type, page) => {
@@ -57,10 +75,11 @@ export const CallCarAgain = (props) => {
     //#region 路由監聽，清除API紀錄 (渲染即觸發的每一個API都要有)
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
-            //console.log(location, action)
+            // console.log(location, action)
             globalContextService.remove("CallCarAgainPage", "firstUseAPIgetUsers");
             globalContextService.remove("CallCarAgainPage", "firstUseAPIgetAllRoute");
             globalContextService.remove("CallCarAgainPage", "firstUseAPIgetAllStation");
+            globalContextService.remove("CallCarAgainPage", "firstUseAPIgetCaseRecords");
             globalContextService.remove("CallCarAgainPage")
         });
 
@@ -236,7 +255,7 @@ export const CallCarAgain = (props) => {
                             })
                         // console.log(allTabs)
                         setTabMenu(allTabs)
-                        setNowTab(allTabs?.[0])
+                        // setNowTab(allTabs?.[0])
                         //#endregion
 
                         let permission = filterTabs
@@ -805,6 +824,94 @@ export const CallCarAgain = (props) => {
     const [GetPolylineRouteExecute, GetPolylineRoutePending] = useAsync(getPolylineRoute, false);
     //#endregion 
 
+    //#region 取得用戶訂單紀錄資料 選項 API
+    const getCaseRecord = useCallback(async (useAPI = false) => {
+        console.log(urlParams.get("record"))
+        console.log(urlParams.get("fast"))
+        //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
+        if (isUndefined(globalContextService.get("CallCarAgainPage", "firstUseAPIgetCaseRecords")) || useAPI) {
+            //#endregion
+
+            //#region 判斷從訂單檢視來的
+            if (!isUndefined(urlParams.get("record"))) {
+                //#region 取得用戶訂單紀錄資料 API
+                fetch(`${APIUrl}OrderOf${caseSwitch(urlParams.get("identity"))}/Get?id=${urlParams.get("record")}`, ///api/OrderOfCaseUsers/Get?id=
+                    {
+                        headers: {
+                            "X-Token": getParseItemLocalStorage("CAuth"),
+                            "content-type": "application/json; charset=utf-8",
+                        },
+                        method: "GET"
+                    })
+                    .then(Result => {
+                        const ResultJson = Result.clone().json();//Respone.clone()
+                        return ResultJson;
+                    })
+                    .then((PreResult) => {
+
+                        if (PreResult.code === 200) {
+                            // 成功取得司機 證照 API
+                            // console.log(PreResult.result)
+                            setOrderData(PreResult.result)
+                        }
+                        else {
+                            throw PreResult;
+                        }
+                    })
+                    .catch((Error) => {
+                        modalsService.infoModal.warn({
+                            iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                            yes: true,
+                            yesText: "確認",
+                            // no: true,
+                            // autoClose: true,
+                            backgroundClose: false,
+                            yesOnClick: (e, close) => {
+                                if (Error.code === 401) {
+                                    clearSession();
+                                    clearLocalStorage();
+                                    globalContextService.clear();
+                                    Switch();
+                                }
+                                close();
+                            }
+                            // theme: {
+                            //     yesButton: {
+                            //         text: {
+                            //             basic: (style, props) => {
+                            //                 console.log(style)
+                            //                 return {
+                            //                     ...style,
+                            //                     color: "red"
+                            //                 }
+                            //             },
+                            //         }
+                            //     }
+                            // }
+                        })
+                        throw Error.message;
+                    })
+                    .finally(() => {
+                        //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
+                        globalContextService.set("CallCarAgainPage", "firstUseAPIgetCaseRecords", false);
+                        //#endregion
+                    });
+                //#endregion
+            }
+            //#endregion
+
+            //#region 判斷從快速叫車來的
+            if (!isUndefined(urlParams.get("fast"))) {
+            }
+            //#endregion
+
+        }
+    }, [APIUrl, Switch])
+
+
+    const [GetCaseRecordExecute, GetCaseRecordPending] = useAsync(getCaseRecord, true);
+    //#endregion
+
     return (
         <>
             {/* 共用theme */}
@@ -814,6 +921,7 @@ export const CallCarAgain = (props) => {
                     BasicInf={BasicInf}
                     BUnits={BUnits}
                     CarType={CarType}
+                    OrderData={OrderData} // 訂單紀錄
 
                     Quota={Quota}
                     CaseInf={CaseInf}
@@ -843,6 +951,7 @@ export const CallCarAgain = (props) => {
                     BasicInf={BasicInf}
                     BUnits={BUnits}
                     CarType={CarType}
+                    OrderData={OrderData} // 訂單紀錄
 
                     Quota={Quota}
                     CaseInf={CaseInf}

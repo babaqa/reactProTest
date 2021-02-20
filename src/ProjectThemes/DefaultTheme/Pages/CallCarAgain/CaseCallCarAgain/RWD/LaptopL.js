@@ -1380,11 +1380,11 @@ export default {
     },
     //#endregion
 
-    //#region 新增下個地點按鈕
-    addNextLocation: {
+    //#region 回列表按鈕
+    returnButton: {
         basic: (style) => ({
             ...style,
-            width: "116px",
+            width: "74px",
             height: "28px",
             fontSize: "14px",
             lineHeight: "22px",

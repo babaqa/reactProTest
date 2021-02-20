@@ -647,8 +647,7 @@ const LaptopLBase = (props) => {
                                                                                 type="button" // 防止提交
                                                                                 theme={laptopL.againButton}
                                                                                 onClick={() => {
-                                                                                    // history.push("/Order/WhiteOrder");
-                                                                                    // props.controllGCS("return")
+                                                                                    history.push(`/CallCarAgain?identity=${props.nowTab}&record=${rowData.id}`)
                                                                                 }}
                                                                             >
                                                                                 再次預約

@@ -18,12 +18,6 @@ export const CaseCallCarAgain = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
-    const [Client, setClient] = useState(true); // 客戶端用戶的基本資料
-    const [CaseUsers, setCaseUsers] = useState({}); // 用戶長照身份的基本資料
-    // const [AllBUnits, setAllBUnits] = useState([]); // 所有 B單位
-    const [TodayToDoOpen, setTodayToDoOpen] = useState(true); // 本日行程一覽 展開
-    const [CarType, setCarType] = useState([]); // 車輛類別
-    const [CaseDiscount, setCaseDiscount] = useState([]); // 補助餘額
 
     const [CaseOrderAmt, setCaseOrderAmt] = useState(
         [
@@ -44,12 +38,13 @@ export const CaseCallCarAgain = (props) => {
         switch (type) {
             case "return":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("CaseCallCarAgain");
+                globalContextService.remove("CallCarAgainPage");
+                globalContextService.remove("CaseCallCarAgainPage");
                 //#endregion
                 break;
             case "SaveHaveNextOrderFlag":
                 //#region 當點擊 新增下一個地點 按鈕時，要清除的資料
-                globalContextService.remove("CaseCallCarAgain");
+                globalContextService.remove("CaseCallCarAgainPage");
                 setCaseOrderAmt(
                     [
                         { id: "1", type: "去程" },
@@ -60,7 +55,7 @@ export const CaseCallCarAgain = (props) => {
                 break;
             case "SaveNoHaveNextOrderFlag":
                 //#region 當點擊 立即預約 按鈕時，要清除的資料
-                globalContextService.remove("CaseCallCarAgain");
+                globalContextService.remove("CaseCallCarAgainPage");
                 globalContextService.remove("CallCarAgainPage");
                 //#endregion
                 break;
@@ -74,7 +69,7 @@ export const CaseCallCarAgain = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             // console.log(location, action, "路由變化")
-            globalContextService.remove("CaseCallCarAgain");
+            globalContextService.remove("CaseCallCarAgainPage");
             globalContextService.remove("CallCarAgainPage");
         });
 
@@ -190,30 +185,10 @@ export const CaseCallCarAgain = (props) => {
                     // 新增長照訂單 API
                     // console.log(PreResult.data)
 
-                    if (addOrUpdateRowdata?.haveNextOrderFlag) {
-                        // 新增下個地點 按鈕發送
-                        controllGCS("SaveHaveNextOrderFlag", "API");
-                        Switch();
-
-                        modalsService.infoModal.success({
-                            iconRightText: "預約成功，請接續預約。",
-                            yes: true,
-                            yesText: "確認",
-                            // no: true,
-                            // autoClose: true,
-                            backgroundClose: false,
-                            yesOnClick: (e, close) => {
-                                close();
-                            }
-                        })
-
-                    }
-                    else {
-                        // 立即預約 按鈕發送
-                        if (addOrUpdateRowdata?.isBackOrder) {
-                            history.push("/Record");
-                            controllGCS("SaveNoHaveNextOrderFlag", "API");
-                        }
+                    // 立即預約 按鈕發送
+                    if (addOrUpdateRowdata?.isBackOrder) {
+                        history.push("/Record");
+                        controllGCS("SaveNoHaveNextOrderFlag", "API");
                     }
                 }
                 else {
@@ -270,14 +245,10 @@ export const CaseCallCarAgain = (props) => {
                     UserId={getParseItemLocalStorage("UserID")}
                     CaseUserId={props.CaseUserId}
                     UserName={getParseItemLocalStorage("UserName")}
-                    BasicInf={props.BasicInf}
-                    CaseUsers={props.CaseInf} // 用戶長照身份的基本資料
+                    OrderData={props.OrderData} // 訂單紀錄
                     CarType={props.CarType}  // 車輛類別
                     CaseOrderAmt={CaseOrderAmt} // 訂單金額資訊
-                    CaseDiscount={props.Quota} // 補助餘額   
                     BUnits={props.BUnits}
-                    TodayToDoOpen={TodayToDoOpen}
-                    setTodayToDoOpen={setTodayToDoOpen}
                     mapGoogleControll={props.mapGoogleControll}
                     GetPolylineRouteExecute={props.GetPolylineRouteExecute} //  取得 Polyline 加密路線字串 API
                     GetCaseOrderAmtExecute={GetCaseOrderAmtExecute} // 抓取訂單金額資訊
@@ -291,14 +262,10 @@ export const CaseCallCarAgain = (props) => {
                     UserId={getParseItemLocalStorage("UserID")}
                     CaseUserId={props.CaseUserId}
                     UserName={getParseItemLocalStorage("UserName")}
-                    BasicInf={props.BasicInf}
-                    CaseUsers={props.CaseInf} // 用戶長照身份的基本資料
+                    OrderData={props.OrderData} // 訂單紀錄
                     CarType={props.CarType}  // 車輛類別
                     CaseOrderAmt={CaseOrderAmt} // 訂單金額資訊
-                    CaseDiscount={props.Quota} // 補助餘額   
                     BUnits={props.BUnits}
-                    TodayToDoOpen={TodayToDoOpen}
-                    setTodayToDoOpen={setTodayToDoOpen}
                     mapGoogleControll={props.mapGoogleControll}
                     GetPolylineRouteExecute={props.GetPolylineRouteExecute} //  取得 Polyline 加密路線字串 API
                     GetCaseOrderAmtExecute={GetCaseOrderAmtExecute} // 抓取訂單金額資訊

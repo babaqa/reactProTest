@@ -732,7 +732,7 @@ const LaptopLBase = (props) => {
                                             theme={laptopL.canShareEquipment}
                                         >
                                             {/* 願意共乘 CarEquipment  選項 */}
-                                            <CheckboxItem value={"canShare"} >願意共乘</CheckboxItem>
+                                            <CheckboxItem value={1} >願意共乘</CheckboxItem>
                                         </Checkbox>
 
                                         {/* 預約回程 ReturnTipEquipment */}
@@ -1159,7 +1159,7 @@ const LaptopLBase = (props) => {
                                                 ), // 迄點備註 (含備註 - 其他)
                                                 remark: "", // 無此欄位
                                                 isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1 ? true : false, //我要預約回程 
-                                                canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview")?.[0] === 1 ? true : false, // 願意共乘
+                                                canShared: globalContextService.get("CaseCallCarComponentPage", "CanShareEquipment")?.[0] === 1 ? true : false, // 願意共乘
                                                 carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
                                                 carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
                                                 wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
@@ -1226,7 +1226,7 @@ const LaptopLBase = (props) => {
                                             ), // 迄點備註 (含備註 - 其他)
                                             remark: "", // 無此欄位
                                             isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1 ? true : false, //我要預約回程 
-                                            canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview")?.[0] === 1 ? true : false, // 願意共乘
+                                            canShared: globalContextService.get("CaseCallCarComponentPage", "CanShareEquipment")?.[0] === 1 ? true : false, // 願意共乘
                                             carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
                                             carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
                                             wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
@@ -1256,7 +1256,7 @@ const LaptopLBase = (props) => {
                                             toAddrRemark: "住家",
                                             remark: "", // 無此欄位
                                             isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1 ? true : false, //我要預約回程 
-                                            canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview")?.[0] === 1 ? true : false, // 願意共乘
+                                            canShared: globalContextService.get("CaseCallCarComponentPage", "CanShareEquipment")?.[0] === 1 ? true : false, // 願意共乘
                                             carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
                                             carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
                                             wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅
@@ -1291,7 +1291,7 @@ const LaptopLBase = (props) => {
                                             ), // 迄點備註 (含備註 - 其他)
                                             remark: "", // 無此欄位
                                             isBack: globalContextService.get("CaseCallCarComponentPage", "ScheduleReturnReview")?.[0] === 1 ? true : false, //我要預約回程 
-                                            canShared: globalContextService.get("CaseCallCarComponentPage", "RideTogetherReview")?.[0] === 1 ? true : false, // 願意共乘
+                                            canShared: globalContextService.get("CaseCallCarComponentPage", "CanShareEquipment")?.[0] === 1 ? true : false, // 願意共乘
                                             carCategoryId: globalContextService.get("CaseCallCarComponentPage", "CarType")?.value, // 車種id
                                             carCategoryName: globalContextService.get("CaseCallCarComponentPage", "CarType")?.label, // 車種名稱
                                             wheelchairType: globalContextService.get("CaseCallCarComponentPage", "Wheelchair")?.value, // 輪椅

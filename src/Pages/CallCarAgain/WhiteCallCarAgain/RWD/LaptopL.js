@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext, useCallback } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle, MapGoogleInput } from '../../../../ProjectComponent';
+import { BUnitSort, MainPageContainer, MainPageSubTitleBar, MainPageTitleBar, MapGoogle, mapGoogleControll, MapGoogleInput } from '../../../../ProjectComponent';
 import { ReactComponent as End2 } from '../../../../Assets/img/WhiteCallCarAgainPage/End2.svg'
 import { ReactComponent as Start2 } from '../../../../Assets/img/WhiteCallCarAgainPage/Start2.svg'
 import { ReactComponent as Minus } from '../../../../Assets/img/WhiteCallCarAgainPage/Minus.svg'
@@ -13,6 +13,7 @@ import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextSe
 import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../Handlers';
 import { tenMinTimes } from '../../../../Mappings/Mappings';
+import { JsonHubProtocol } from '@microsoft/signalr';
 
 const LaptopLBase = (props) => {
 
@@ -22,6 +23,32 @@ const LaptopLBase = (props) => {
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
     let history = useHistory()
+
+    //#region 初始化時將起點預設為居住地，起點備註預設為住家並增加googlemap marker資訊;
+    useEffect(() => {
+        mapGoogleControll.addMarkerWithIndex("test1", { lat: props?.OrderData?.fromLat, lng: props?.OrderData?.fromLon }, 0) // 更新選中起點   
+        mapGoogleControll.addMarkerWithIndex("test1", { lat: props?.OrderData?.toLat, lng: props?.OrderData?.toLon }, 1) // 更新選中迄點   
+        mapGoogleControll.setCenter("test1", { lat: props?.OrderData?.fromLat ?? 25.012930, lng: props?.OrderData?.fromLon ?? 121.474708 }); // 移動中心點
+        // 設定初始值
+
+        !isNil(props.OrderData?.fromAddr) && globalContextService.set("WhiteCallCarAgainPage", "StartPos", props?.OrderData?.fromAddr); // 起點地址
+        !isNil(props.OrderData?.toAddr) && globalContextService.set("WhiteCallCarAgainPage", "EndPos", props?.OrderData?.toAddr); // 迄點地址
+        !isNil(props.OrderData?.canShared) && globalContextService.set("WhiteCallCarAgainPage", "Equipment", props?.OrderData?.canShared ? [1] : []); // 願意共乘
+        !isNil(props.OrderData?.carCategoryName) && globalContextService.set("WhiteCallCarAgainPage", "CarType", { value: props?.OrderData?.carCategoryName, label: props?.OrderData?.carCategoryName }); // 車種
+        !isNil(props.OrderData?.wheelchairType) && globalContextService.set("WhiteCallCarAgainPage", "Wheelchair", { value: props?.OrderData?.wheelchairType, label: props?.OrderData?.wheelchairType }); // 輪椅
+        !isNil(props.OrderData?.passengerNum) && globalContextService.set("WhiteCallCarAgainPage", "AccompanyCounts", { value: props?.OrderData?.passengerNum, label: props?.OrderData?.passengerNum + "人" }); // 去程搭車人數
+        !isNil(props.OrderData?.remark) &&
+            (Array(props.OrderData?.passengerNum).fill(0).forEach((it, ind) => {
+                let jsonObject = JSON.parse(props.OrderData?.remark);
+                globalContextService.set("WhiteCallCarAgainPage", `TakerName_${ind + 1}`, jsonObject[ind]?.name)
+                globalContextService.set("WhiteCallCarAgainPage", `TakerBirthday_${ind + 1}`, jsonObject[ind]?.birth)
+                globalContextService.set("WhiteCallCarAgainPage", `TakerPhone_${ind + 1}`, jsonObject[ind]?.phone)
+            })
+            )
+        !isNil(props.OrderData?.noticePhone) && globalContextService.set("WhiteCallCarAgainPage", "SmsNumber", props?.OrderData?.noticePhone); // 簡訊號碼
+    }, [props.OrderData])
+    //#endregion
+
 
     //#region 如果起迄點、搭車日期、搭車時間有值、搭車人數皆已有有值，則帶回 本日行程一覽 Table資料
     const getCaseOrderAmtAPI = useCallback(() => {
@@ -566,7 +593,7 @@ const LaptopLBase = (props) => {
                                         theme={laptopL.rideTogetherReview}
                                     >
                                         {/* 願意共乘 RideTogetherReview  選項 */}
-                                        <CheckboxItem value={"canShare"} >願意共乘</CheckboxItem>
+                                        <CheckboxItem value={1} >願意共乘</CheckboxItem>
                                     </Checkbox>
 
                                     {/* 車種 CarType */}
@@ -1270,20 +1297,19 @@ const LaptopLBase = (props) => {
                             <BasicContainer
                                 theme={laptopL.callCarFormBottomContainer}
                             >
-                                {/* 回列表按鈕 */}
-                                {/* <NativeLineButton
-                            baseDefaultTheme={"DefaultTheme"}
-                            disable={false}
-                            type="button" // 防止提交
-                            theme={laptopL.returnButton}
-                            onClick={() => {
-                                history.push("/Case");
-                                props.controllGCS("return")
-
-                            }}
-                        >
-                            回列表
-                                </NativeLineButton> */}
+                                {/* 回上一頁按鈕 */}
+                                <NativeLineButton
+                                    baseDefaultTheme={"DefaultTheme"}
+                                    disable={false}
+                                    type="button" // 防止提交
+                                    theme={laptopL.returnButton}
+                                    onClick={() => {
+                                        props.controllGCS("return")
+                                        history.goBack();
+                                    }}
+                                >
+                                    回上一頁
+                                </NativeLineButton>
 
                                 {/* 立即預約按鈕 */}
                                 {/* 立即預約按鈕 */}

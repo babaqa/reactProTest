@@ -37,6 +37,7 @@ export const WhiteCallCarAgain = (props) => {
             case "return":
 
                 //#region 當點擊 回列表 按鈕時，要清除的資料
+                globalContextService.remove("CallCarAgainPage");
                 globalContextService.remove("WhiteCallCarAgainPage");
                 //#endregion
 
@@ -135,6 +136,7 @@ export const WhiteCallCarAgain = (props) => {
                     UserId={getParseItemLocalStorage("UserID")}
                     CaseUserId={props.WhiteUserId}
                     CaseName={getParseItemLocalStorage("UserName")}
+                    OrderData={props.OrderData} // 訂單紀錄
                     AllCarType={props.CarType} // 車種
                     WhiteOrderAmt={WhiteOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}
@@ -153,6 +155,7 @@ export const WhiteCallCarAgain = (props) => {
                     UserId={getParseItemLocalStorage("UserID")}
                     CaseUserId={props.WhiteUserId}
                     CaseName={getParseItemLocalStorage("UserName")}
+                    OrderData={props.OrderData} // 訂單紀錄
                     AllCarType={props.CarType} // 車種
                     WhiteOrderAmt={WhiteOrderAmt} // 訂單金額資訊
                     TodayToDoOpen={TodayToDoOpen}

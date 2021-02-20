@@ -38,6 +38,7 @@ export const BusCallCarAgain = (props) => {
         switch (type) {
             case "return":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
+                globalContextService.remove("CallCarAgainPage");
                 globalContextService.remove("BusCallCarAgainPage");
                 //#endregion
                 if (payload === "API") {

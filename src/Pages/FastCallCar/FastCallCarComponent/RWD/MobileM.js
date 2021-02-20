@@ -17,7 +17,7 @@ import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { fastCallCar: { caseFastCallCar: { rwd: { mobileM } } } } } = Theme;
+    const { pages: { fastCallCar: { fastCallCar: { rwd: { mobileM } } } } } = Theme;
     const [Width, Height] = useWindowSize();
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
@@ -72,19 +72,19 @@ const MobileMBase = (props) => {
                         <CardTable
                             dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
                             dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                                if (globalContextService.get("RocordPage", "orgId") !== globalContextService.get("RocordPage", "TableCheckedClearKey")) {
-                                    globalContextService.remove("RocordPage", "CheckedRowKeys");
-                                    globalContextService.remove("RocordPage", "CheckedRowsData");
+                                if (globalContextService.get("FastCallCarComponent", "orgId") !== globalContextService.get("FastCallCarComponent", "TableCheckedClearKey")) {
+                                    globalContextService.remove("FastCallCarComponent", "CheckedRowKeys");
+                                    globalContextService.remove("FastCallCarComponent", "CheckedRowsData");
                                 }
                             }}
                             checkbox={false}
-                            checked={globalContextService.get("RocordPage", "CheckedRowKeys") && globalContextService.get("RocordPage", "CheckedRowKeys")}
+                            checked={globalContextService.get("FastCallCarComponent", "CheckedRowKeys") && globalContextService.get("FastCallCarComponent", "CheckedRowKeys")}
                             checkedRowKeyName={"id"}
                             checkboxOnChecked={
                                 (checkedRowKeys, checkedRows) => {
                                     // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                    globalContextService.set("RocordPage", "CheckedRowKeys", checkedRowKeys);
-                                    globalContextService.set("RocordPage", "CheckedRowsData", checkedRows);
+                                    globalContextService.set("FastCallCarComponent", "CheckedRowKeys", checkedRowKeys);
+                                    globalContextService.set("FastCallCarComponent", "CheckedRowsData", checkedRows);
                                     //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
                                     //#endregion
                                 }
@@ -174,7 +174,7 @@ const MobileMBase = (props) => {
                                                             onClick={(e) => {
                                                                 e.preventDefault();
                                                             
-                                                                let rowData = {};
+                                                                history.push(`/CallCarAgain?identity=${statusMapping(rowData.identity)}&fast=${"test"}`)
                                                             
                                                             }}
                                                         >

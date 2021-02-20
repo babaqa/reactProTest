@@ -389,7 +389,7 @@ const LaptopLBase = (props) => {
                                 </Container>
 
                                 {/* Table 容器 */}
-                                <Container
+                                {/* <Container
                                     bascDefaultTheme={"DefaultTheme"}
                                     theme={laptopL.tableContainer}
                                 >
@@ -478,25 +478,26 @@ const LaptopLBase = (props) => {
                                         clickPage={(currentPage, pageSize) => {
                                         }}
                                     />
-                                </Container>
+                                </Container> */}
                             </Container>
+                            
                             {/* 叫車表單下方按鈕列 */}
                             <BasicContainer
                                 theme={laptopL.callCarFormBottomContainer}
                             >
-                                {/* 回列表按鈕 */}
-                                {/* <NativeLineButton
-                            baseDefaultTheme={"DefaultTheme"}
-                            disable={false}
-                            type="button" // 防止提交
-                            theme={laptopL.returnButton}
-                            onClick={() => {
-                                props.controllGCS("return");
-                                history.push("/Case")
-                            }}
-                        >
-                            回列表
-                                </NativeLineButton> */}
+                                {/* 回上一頁按鈕 */}
+                                <NativeLineButton
+                                    baseDefaultTheme={"DefaultTheme"}
+                                    disable={false}
+                                    type="button" // 防止提交
+                                    theme={laptopL.returnButton}
+                                    onClick={() => {
+                                        props.controllGCS("return")
+                                        history.goBack();
+                                    }}
+                                >
+                                    回上一頁
+                                </NativeLineButton>
 
                                 {/* 立即預約按鈕 */}
                                 <NativeLineButton
@@ -585,7 +586,8 @@ const LaptopLBase = (props) => {
                         </FormRow>
                     </FormContainer>
                 </SubContainer>
-                <SubContainer
+               
+                {/* <SubContainer
                     theme={laptopL.mapContainer}
                 >
                     <MapGoogle
@@ -604,7 +606,7 @@ const LaptopLBase = (props) => {
                         theme={laptopL.map}
                     />
 
-                </SubContainer>
+                </SubContainer> */}
 
             </Container>
         </>
