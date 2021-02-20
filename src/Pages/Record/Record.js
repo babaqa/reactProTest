@@ -148,7 +148,9 @@ export const Record = (props) => {
 
     //#region 取得用戶各種訂單紀錄資料 API
     const getRecords = useCallback(async (useAPI = false, startData = fmt(moment().startOf("day")), endDate = fmt(moment().add(1, 'months').endOf('month'))) => {
-
+        setCaseRecord([])
+        setWhiteRecord([])
+        setBusRecord([])
         //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
         if (isUndefined(globalContextService.get("RecordPage", "firstUseAPIgetRecords")) || useAPI) {
             //#endregion

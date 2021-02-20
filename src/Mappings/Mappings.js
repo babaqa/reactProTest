@@ -21,6 +21,11 @@ import { FastCallCar } from '../Pages/FastCallCar/FastCallCar';
 import { AddFastCallCar } from '../Pages/FastCallCar/AddFastCallCar/AddFastCallCar';
 import { EditFastCallCar } from '../Pages/FastCallCar/EditFastCallCar/EditFastCallCar';
 //#endregion
+
+//#region 再次預約
+import { CallCarAgain } from '../Pages/CallCarAgain/CallCarAgain'
+//#endregion
+
 import { BusRoute } from '../Pages/BusRoute/BusRoute';
 // 訂單檢視
 import { Record } from '../Pages/Record/Record';
@@ -40,6 +45,7 @@ export const urlMapping = {
    "/FastCallCar": <FastCallCar />,// 快速叫車
    "/FastCallCar/Add": <AddFastCallCar />,// 新增常用路線
    "/FastCallCar/Edit": <EditFastCallCar />,// 編輯常用路線
+   "/CallCarAgain": <CallCarAgain />,//再次預約
 
    "/BusRoute": <BusRoute />,// 快速叫車
 

@@ -10,6 +10,7 @@ import callCar from './Pages/CallCar/CallCar'
 import caseCallCarComponent from './Pages/CallCar/CaseCallCarComponent/CaseCallCarComponent'
 import busCallCarComponent from './Pages/CallCar/BusCallCarComponent/BusCallCarComponent'
 import whiteCallCarComponent from './Pages/CallCar/WhiteCallCarComponent/WhiteCallCarComponent'
+import callCarAgain from './Pages/CallCarAgain/CallCarAgain'
 
 import fastCallCar from './Pages/FastCallCar/FastCallCar'
 
@@ -56,6 +57,10 @@ export default {
 
         //#region 快速叫車
         fastCallCar,
+        //#endregion
+
+        //#region 再次預約
+        callCarAgain,
         //#endregion
 
         //#region 訂單檢視
