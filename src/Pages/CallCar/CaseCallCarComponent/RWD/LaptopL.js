@@ -58,7 +58,7 @@ const LaptopLBase = (props) => {
             })
         }
 
-    }, [])
+    }, [props.CaseUserId])
     //#endregion
 
     //#region 新增下個地點、立即預約 送出前欄位檢核
