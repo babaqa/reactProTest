@@ -26,7 +26,7 @@ export default {
                 //#region 覆寫樣式
                 // width: `calc( 100% - ${props.collapse ? "4rem" : "15rem"})`,
                 width: "100%",
-                top: "100px",
+                top: "95px",
                 // left: props.collapse ? "4rem" : "15rem",
                 height: "auto",
                 userSelect: "none",
@@ -62,9 +62,9 @@ export default {
                 //#region 覆寫樣式
                 // width: `calc( 100% - ${props.collapse ? "4rem" : "15rem"})`,
                 width: "100%",
-                top: "100px",
+                top: "95px",
                 // left: props.collapse ? "4rem" : "15rem",
-                height: `calc( 100vh - 100px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
                 //#endregion
             }
         }

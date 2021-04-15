@@ -5,9 +5,10 @@ export default {
     titleBarContainerLaptopL: {
         basic: (style, props) => ({
             ...style,
-            height: "100px",
+            height: "95px",
             width: "100%",
             position: "fixed",
+            background: "#FFFFFF",
         })
     },
     //#endregion
@@ -16,7 +17,7 @@ export default {
     titleBarLogoContainerLaptopL: {
         basic: (style, props) => ({
             ...style,
-            height: "100px",
+            height: "95px",
             width: "335px",
         })
     },
@@ -34,7 +35,7 @@ export default {
     titleBarTabContainerLaptopL: {
         basic: (style, props) => ({
             ...style,
-            height: "100px",
+            height: "95px",
             width: "calc( 100% - 503px )",
         })
     },
@@ -44,8 +45,8 @@ export default {
     titleBarTabSubContainerLaptopL: {
         basic: (style, props) => ({
             ...style,
-            backgroundColor: "#4DB8BE",
-            height: "100px",
+            backgroundColor: "#FFFFFF",
+            height: "95px",
             justifyContent: "space-between",
         })
     },
@@ -56,19 +57,21 @@ export default {
         basic: (style, props) => {
             return {
                 ...style,
-                backgroundColor: "#4DB8BE",
-                height: "100px",
-                width: "128px",
-                borderBottom: props?.active ? "3px solid" : "unset",
-                color: props?.active ? "#FFE977" : "#fff",
+                // backgroundColor: "#FFFFFF",
+                justifyContent: "center",
+                height: "95px",
+                width: "auto",
+                // borderBottom: props?.active ? "6px solid" : "unset",
+                color: props?.active ? "#54524C" : "#54524C",
+                display: "flex",
                 cursor: "pointer",
-                ...(props.needHover && { color: "#FFE977" })
+                ...(props.needHover && { color: "#54524C" })
             }
         },
-        hover: (style, props) => ({
-            color: "#FFE977",
-            borderBottom: "3px solid",
-        })
+        // hover: (style, props) => ({
+        //     color: "rgba(173, 157, 114, 1)",
+        //     borderBottom: "6px solid",
+        // })
     },
     //#endregion
 
@@ -84,12 +87,22 @@ export default {
     titleBarTabTextLaptopL: {
         basic: (style, props) => ({
             ...style,
-            color: "inherit",
+            // color: "inherit",
             cursor: "pointer",
-            position: "absolute",
-            top: "64px",
-            left: "32px",
-            userSelect: "none"
+            position: "relative",
+            // top: "38px",
+            // left: "32px",
+            userSelect: "none",
+            lineHeight: "95px",
+            textDecoration: "none",
+            color: "rgba(84, 82, 76, 1)",
+            fontWeight: 400,
+            fontSize: "18px",
+            fontFamily: "Roboto",
+        }),
+        hover: (style, props) => ({
+            // color: "rgba(173, 157, 114, 1)",
+            borderBottom: "6px solid rgba(173, 157, 114, 1)",
         })
     },
     //#endregion
@@ -99,7 +112,7 @@ export default {
         basic: (style, props) => ({
             ...style,
             backgroundColor: "#4DB8BE",
-            height: "100px",
+            height: "95px",
             width: "168px"
         })
     },

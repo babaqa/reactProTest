@@ -136,19 +136,20 @@ export const Layout = (props) => {
         switch (key) {
             case "allTabNameLaptopL":
                 return [
-                    { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconLaptopL} /> },
-                    {
-                        path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptopL} />,
-                        dropDown: [
-                            { path: "/CallCar", name: "預約訂車" },
-                            { path: "/FastCallCar", name: "快速叫車" },
-                        ]
-                    },
-                    { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconLaptopL} /> },
-                    { path: "/Record", name: "訂單檢視", icon: <RecordTab style={layout.titleBarTabIconLaptopL} /> },
-                    { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconLaptopL} /> },
-                    { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconLaptopL} /> },
-                    { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconLaptopL} /> },
+                    { path: "/News", name: "單位介紹" },
+                    // {
+                    //     path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptopL} />,
+                    //     dropDown: [
+                    //         { path: "/CallCar", name: "預約訂車" },
+                    //         { path: "/FastCallCar", name: "快速叫車" },
+                    //     ]
+                    // },
+                    { path: "/BusRoute", name: "成員介紹" },
+                    { path: "/Record", name: "法令規章" },
+                    { path: "/UserInfo", name: "臺藝檔案" },
+                    { path: "/Contact", name: "檔案應用" },
+                    { path: "/QAndA", name: "文書檔案相關Q&A" },
+                    { path: "/Test", name: "郵寄服務", icon: <QAndATab style={layout.titleBarTabIconLaptop} /> },
                 ]
             case "allTabNameLaptop":
                 return [
@@ -230,7 +231,7 @@ export const Layout = (props) => {
                                     return (
                                         <React.Fragment key={item.path}>
                                             {
-                                                (item.path !== "/CallCar") ?
+                                                (item.path !== "/Test") ?
                                                     <>
                                                         {/* Tab項目容器 */}
                                                         < BasicContainer
@@ -238,7 +239,7 @@ export const Layout = (props) => {
                                                             theme={layout.titleBarTabItemContainerLaptopL}
                                                             onClick={() => { history.push(item.path) }}
                                                         >
-                                                            {item.icon}
+                                                            {/* {item.icon} */}
                                                             <Text
                                                                 theme={layout.titleBarTabTextLaptopL}
                                                             >
@@ -248,51 +249,21 @@ export const Layout = (props) => {
                                                         </BasicContainer>
                                                     </>
                                                     :
-                                                    <DropDown
-                                                        placement={"bottomRight"}
-                                                        dropDownItem={
-                                                            <>
-                                                                {/* DropDown 項目容器 */}
-                                                                <BasicContainer
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    theme={layout.laptopDropDownItemContainer}
-                                                                >
-                                                                    {/* DropDown 子項目 */}
-                                                                    {item.dropDown.map((it) => {
-                                                                        return (
-                                                                            <Text
-                                                                                onMouseOver={(e) => { setNeedHover(true); props.onMouseover && props.onMouseover(e); }}
-                                                                                onMouseOut={(e) => { setNeedHover(false); props.onMouseout && props.onMouseout(e); }}
-                                                                                key={it.path}
-                                                                                baseDefaultTheme={"DefaultTheme"}
-                                                                                theme={layout.laptopDropDownSubItemContainer}
-                                                                                onClick={() => { history.push(it.path) }}
-                                                                            >
-                                                                                {it.name}
-                                                                            </Text>
-                                                                        )
-                                                                    })
-                                                                    }
-                                                                </BasicContainer>
-                                                            </>
-                                                        }
-                                                    >
+                                                    <>
                                                         {/* Tab項目容器 */}
                                                         < BasicContainer
                                                             active={location.pathname === item.path}
-                                                            needHover={NeedHover}
                                                             theme={layout.titleBarTabItemContainerLaptopL}
-                                                        // onClick={() => { history.push(item.path) }}
+                                                            onClick={() => { history.push(item.path) }}
                                                         >
-                                                            {item.icon}
+                                                            {/* {item.icon} */}
                                                             <Text
                                                                 theme={layout.titleBarTabTextLaptopL}
                                                             >
                                                                 {item.name}
                                                             </Text>
-
                                                         </BasicContainer>
-                                                    </DropDown>
+                                                    </>
                                             }
                                         </React.Fragment>
                                     )
@@ -301,71 +272,7 @@ export const Layout = (props) => {
                             </Container>
                         </SubContainer>
 
-                        {/* 使用者名稱、登出容器 */}
-                        <SubContainer
-                            theme={layout.titleBarUserAndLogoutLaptopL}
-                        >
-                            {/* 使用者名稱、登出次容器 */}
-                            <BasicContainer
-                                theme={layout.titleBarUserAndLogoutSubLaptopL}
-                            >
-                                {/* 使用者名稱 */}
-                                <Text
-                                    theme={layout.titleBarUserLaptopL}
-                                >
-                                    Hi! {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
-                                </Text>
-                                {/* 使用者名稱 分隔 */}
-                                <Text
-                                    theme={layout.titleBarUserStepLaptopL}
-                                >
-                                    |
-                                </Text>
 
-                                {getParseItemLocalStorage("CAuth")
-                                    ?
-                                    <>
-                                        {/* 登出 */}
-                                        <Text
-                                            theme={layout.titleBarLogoutLaptopL}
-                                            onClick={() => {
-                                                modalsService.infoModal.warn({
-                                                    iconRightText: "是否要登出?",
-                                                    yes: true,
-                                                    yesText: "確認",
-                                                    no: true,
-                                                    noText: "取消",
-                                                    // autoClose: true,
-                                                    backgroundClose: false,
-                                                    yesOnClick: (e, close) => {
-                                                        clearLocalStorage();
-                                                        clearSession();
-                                                        globalContextService.clear();
-                                                        Switch();
-                                                        close();
-                                                    }
-                                                })
-                                            }}
-                                        >
-                                            <LogoutLaptop style={layout.titleBarLogoutIconLaptopL} />
-                                            登出
-                                        </Text>
-                                    </>
-                                    :
-                                    <>
-                                        {/* 登入 */}
-                                        <Text
-                                            theme={layout.titleBarLogoutLaptopL}
-                                            onClick={() => { history.push("/Login") }}
-                                        >
-                                            <LoginLaptop style={layout.titleBarLogoutIconLaptopL} />
-                                            登入
-                                    </Text>
-                                    </>
-                                }
-
-                            </BasicContainer>
-                        </SubContainer>
 
                     </Container>
                 </>
