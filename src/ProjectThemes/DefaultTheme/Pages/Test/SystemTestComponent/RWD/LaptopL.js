@@ -8,7 +8,7 @@ export default {
             height: "auto",
             display: "flex",
             top: "63px",
-            padding: "50px 0",
+            padding: "50px 0",            
         }),
     },
     //#endregion

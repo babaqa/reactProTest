@@ -37,7 +37,7 @@ const LaptopLBase = (props) => {
                 <Container theme={laptopL.simpleMenuContainer}>
                     <SubContainer theme={laptopL.simpleMenuLeftContainer}>
 
-                        <Container style={{ width: "100%" }}>
+                        <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                             {/* 臺藝檔案 */}
                             <Container theme={laptopL.fileContainer}>
                                 <Container theme={laptopL.moreTextContainer}>
@@ -68,7 +68,7 @@ const LaptopLBase = (props) => {
                             </Text>
                             </Container>
                         </Container>
-                        <Container style={{ width: "100%" }}>
+                        <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                             {/* 線上檔案展 */}
                             <Container theme={laptopL.fileShowContainer}>
                                 <Container theme={laptopL.moreTextContainer}>
