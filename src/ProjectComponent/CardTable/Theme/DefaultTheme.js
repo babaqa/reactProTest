@@ -39,7 +39,8 @@ export default {
     container: {
         basic: (style, props) => ({
             // height: `${props.fatherHeight}px`,
-            height: "auto"
+            height: "auto",
+            textAlign: "center"
         })
     },
     //#endregion

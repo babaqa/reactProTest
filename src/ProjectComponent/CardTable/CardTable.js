@@ -186,9 +186,34 @@ const TableExtendStyle = styled(TableExtend).attrs((props) => ({}))`
 //#region 頁腳
 && .ant-pagination {
     ${props => (cssifyObject(iterateTheme({ ...props, fatherHeight: props.fatherHeight, tableHeaderHeight: props.tableHeaderHeight, pageFootHeight: props.pageFootHeight }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tablefooterPagination")['basic']))}  
- 
 }
 //#endregion
+
+&& .ant-pagination-item-link{
+    border: 0;
+}
+
+&& .ant-pagination-item{
+    color: #1A1A1A;
+    border: 0;
+}
+
+&& .ant-pagination-item-active{
+    color: #1A1A1A;
+    border-bottom: 1px solid #1A1A1A;
+}
+
+&& .ant-pagination-item-active a{
+    color: #1A1A1A;
+}
+
+&& .ant-pagination-options-quick-jumper{
+    display: none;
+}
+
+&& .ant-table-pagination-right{
+    float: unset;
+}
 `
 //#endregion
 

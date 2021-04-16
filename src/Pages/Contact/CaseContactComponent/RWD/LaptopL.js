@@ -5,8 +5,9 @@ import { ReactComponent as NoData } from '../../../../Assets/img/ContactPage/NoD
 import { ReactComponent as Phone } from '../../../../Assets/img/ContactPage/Phone.svg'
 import { ReactComponent as Search } from '../../../../Assets/img/ContactPage/Search.svg'
 import { useHistory } from 'react-router-dom';
-import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
+import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable, OldList } from '../../../../Components';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
+import { CardTable } from '../../../../ProjectComponent';
 
 const LaptopLBase = (props) => {
 
@@ -18,42 +19,21 @@ const LaptopLBase = (props) => {
     let history = useHistory()
 
     let data = [
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
-        { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00" },
+        { date: "2012.11.29", title: "機關檔案點收作業要點" },
+        { date: "2017.08.16", title: "會計憑證應否適用檔案法及其如何辦理立案編目等作業乙案" },
+        { date: "2017.07.31", title: "國家檔案內含政治受難者私人文書申請返還作業要點" },
+        { date: "2017.07.13", title: "文書流程管理作業規範" },
+        { date: "2017.07.13", title: "人事類檔案保存年限基準表" },
+        { date: "2017.07.13", title: "「100年度教育部檔案管理作業成效訪視」簡報檔" },
+        { date: "2017.07.13", title: "本組檔案活動相簿" },
+        { date: "2017.07.13", title: "為遴選檔案管理人員參加第15屆機關績優檔案管理人員金質獎評獎乙案" },
+        { date: "2017.07.13", title: "臺南市左鎮區 公所遷回原辦公處所，其地址變更及公文電子交換收發文等事項..." },
+        { date: "2017.07.13", title: "國家發展委員會檔案管理局函請就「大專校院類檔案保存年限基準表(草案)」..." },
+        { date: "2017.07.13", title: "國家發展委員會檔案管理局函請就「大專校院類檔案保存年限基準表(草案)」..." },
 
     ]
     return (
         <>
-            {/* 一般輸入框 請輸入車行名稱  */}
-            <TextInput
-                bascDefaultTheme={"DefaultTheme"}
-                theme={laptopL.keyword}
-                type="text"
-                placeholder={"請輸入車行名稱"}
-                rightIcon={
-                    <Search
-                        style={laptopL.keywordRightIcon}
-                        onClick={(e) => {
-                            console.log("目前不支援搜尋功能")
-                            // props.GetSubOrgsExecute(true, "");
-                        }
-                        }
-                    />
-                }
-                value={globalContextService.get("ContactPage", "Keyword") ?? ""}
-                onChange={(e, value, onInitial) => {
-                    globalContextService.set("ContactPage", "Keyword", value);
-                }}
-            />
-
             {data.length === 0
                 ?
                 <>
@@ -68,145 +48,104 @@ const LaptopLBase = (props) => {
                 </>
                 :
                 <>
-
-                    <Container>
-                        {
-                            (data).map((item, index) => {
-                                return (
-                                    <React.Fragment key={index}>
-
-                                        {/* 卡片資料外層容器 */}
-                                        <SubContainer
-                                            theme={laptopL.cardOutContainer}
-                                        >
-                                            {/* 卡片資料表單區容器 */}
-                                            < SubContainer
-                                                baseDefaultTheme={"DefaultTheme"}
-                                                theme={laptopL.cardContainer}
-                                            >
-
-                                                {/* 公司 容器 */}
-                                                <Container
-                                                    theme={laptopL.companyContainer}
-                                                >
-                                                    {/* 公司名稱 */}
-                                                    <Text
-                                                        theme={laptopL.companyName}
-                                                    >
-                                                        {item?.companyName}
-                                                    </Text>
-
-                                                    {/* 公司電話 */}
-                                                    <Text
-                                                        theme={laptopL.companyPhone}
-                                                    >
-                                                        <Phone
-                                                            style={laptopL.phoneSvg}
-                                                        />
-                                                        {item?.companyPhone}
-                                                    </Text>
-
-                                                    {/* 提醒 */}
-                                                    <Text
-                                                        theme={laptopL.tip}
-                                                    >
-                                                        國定假日提前預約，皆可服務，依車行調度情況
-                                                    </Text>
-
-                                                </Container>
-
-                                                <Container>
-
-                                                    {/* 車趟服務時間 容器 */}
-                                                    <Container
-                                                        theme={laptopL.carServiceTimeContainer}
-                                                    >
-                                                        {/* 車趟服務時間 標題 */}
-                                                        <Text
-                                                            theme={laptopL.carServiceTimeTitle}
-                                                        >
-                                                            車趟服務時間
-                                                        </Text>
-
-                                                        {([
-                                                            { week: "平日", time: "08:00-18:00" },
-                                                            { week: "六", time: "08:00-18:00" },
-                                                            { week: "日", time: "08:00-18:00" }
-                                                        ]).map((date) => {
-                                                            return (
-                                                                <>
-                                                                    {/* 車趟服務時間 內文 */}
-                                                                    {/* 車趟服務時間 星期 */}
-                                                                    < Text
-                                                                        theme={laptopL.carServiceWeekText}
-                                                                    >
-                                                                        ({date.week})
-
-                                                                    {/* 車趟服務時間 時段 */}
-                                                                        < Text
-                                                                            theme={laptopL.carServiceTimeText}
-                                                                        >
-                                                                            {date.time}
-                                                                        </Text>
-                                                                    </Text>
-                                                                </>
-                                                            )
-                                                        })}
-
-
-                                                    </Container>
-
-
-                                                    {/* 客服服務時間 容器 */}
-                                                    <Container
-                                                        theme={laptopL.customerServiceTimeContainer}
-                                                    >
-                                                        {/* 客服服務時間 */}
-                                                        <Text
-                                                            theme={laptopL.customerServiceTime}
-                                                        >
-                                                            客服服務時間
-                                                    </Text>
-
-                                                        {([
-                                                            { week: "一", time: "08:00-18:00" },
-                                                            { week: "二", time: "08:00-18:00" },
-                                                            { week: "三", time: "08:00-18:00" },
-                                                            { week: "四", time: "08:00-18:00" },
-                                                            { week: "五", time: "08:00-18:00" },
-                                                            { week: "六", time: "08:00-18:00" },
-                                                        ]).map((date) => {
-                                                            return (
-                                                                <>
-                                                                    {/* 客服服務時間 內文 */}
-                                                                    {/* 客服服務時間 星期 */}
-                                                                    <Text
-                                                                        theme={laptopL.customerServiceWeekText}
-                                                                    >
-                                                                        ({date.week})
-                                                                        {/* 客服服務時間 時段 */}
-                                                                        <Text
-                                                                            theme={laptopL.customerServiceTimeText}
-                                                                        >
-                                                                            {date.time}
-                                                                        </Text>
-                                                                    </Text>
-                                                                </>
-                                                            )
-                                                        })}
-
-                                                    </Container>
-
-                                                </Container>
-                                            </SubContainer>
-                                        </SubContainer>
-
-                                    </React.Fragment>
-                                )
-                            })
-
+                    <CardTable
+                        dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
+                        dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
+                            if (globalContextService.get("RecordPage", "orgId") !== globalContextService.get("RecordPage", "TableCheckedClearKey")) {
+                                globalContextService.remove("RecordPage", "CheckedRowKeys");
+                                globalContextService.remove("RecordPage", "CheckedRowsData");
+                            }
+                        }}
+                        checkbox={false}
+                        checked={globalContextService.get("RecordPage", "CheckedRowKeys") && globalContextService.get("RecordPage", "CheckedRowKeys")}
+                        checkedRowKeyName={"id"}
+                        checkboxOnChecked={
+                            (checkedRowKeys, checkedRows) => {
+                                // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
+                                globalContextService.set("RecordPage", "CheckedRowKeys", checkedRowKeys);
+                                globalContextService.set("RecordPage", "CheckedRowsData", checkedRows);
+                                //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
+                                //#endregion
+                            }
                         }
-                    </Container>
+                        setPerCheckBoxDisabled={(record) => {
+                            return {
+                                // ...record, // 對應CheckBox當列資料
+                                // disabled: record.name === 'Edrward 11',
+                            }
+                        }}
+                        //scrollAreaWidth={"calc( 1900px - 300px )"} // 不用傳 會自適應寬度
+                        //scrollAreaHeight={"calc( 100% - 55px )"}
+                        columnsAttr={
+                            //#region 資料欄設定
+                            [
+                                {
+                                    // title: '用戶列表',
+                                    width: "100%",
+                                    dataIndex: '',
+                                    // sorter: (a, b) => a.carType.length - b.carType.length,
+                                    // fixed: 'left',
+                                    render: (rowData) => {
+
+                                        return (
+                                            <>
+                                                <BasicContainer
+                                                    theme={{
+                                                        basic: (style, props) => ({
+                                                            ...style,
+                                                            width: "100%",
+                                                            height: "72px",
+                                                            display: "block",
+                                                            padding: "8px",
+                                                            borderBottom: "2px solid #C4C4C4",
+                                                        }),
+                                                    }}
+                                                >
+                                                    <Text
+                                                        theme={{
+                                                            basic: (style, props) => ({
+                                                                ...style,
+                                                                display: "inline-block",
+                                                                fontWeight: 400,
+                                                                fontSize: "16px",
+                                                                color: "#B0B0B0",
+                                                                padding: "18px 12px"
+                                                            }),
+                                                        }}
+                                                    >
+                                                        {rowData.date}
+                                                    </Text>
+
+                                                    <Text
+                                                        theme={{
+                                                            basic: (style, props) => ({
+                                                                ...style,
+                                                                display: "inline-block",
+                                                                fontWeight: 400,
+                                                                fontSize: "16px",
+                                                                color: "#5F5D56",
+                                                                padding: "18px 12px"
+                                                            }),
+                                                        }}
+                                                    >
+                                                        {rowData.title}
+                                                    </Text>
+                                                </BasicContainer>
+                                            </>
+                                        )
+                                    }
+                                },
+
+                            ]
+                            //#endregion
+                        }
+                        //sort
+                        showHeader={false}
+                        data={data}
+                        clickPage={(currentPage, pageSize) => {
+                        }}
+                    />
+
                 </>
             }
         </>

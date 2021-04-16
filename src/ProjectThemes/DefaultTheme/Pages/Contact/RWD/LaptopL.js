@@ -6,7 +6,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "32px 24px" // 標題列的padding
+                    padding: "32px 119px 32px" // 標題列的padding
                 }
             }
         },
@@ -23,7 +23,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "8px 24px 212px", //188 是授權圖高度
+                    padding: "8px 119px 659px", //635 是授權圖高度
                     minHeight: "calc( 100vh - 184px)"
                 }
             }
@@ -33,7 +33,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "12px 0px 0px" // 標題列的padding
+                    padding: "32px 24px" // 標題列的padding
                 }
             }
         },
@@ -50,7 +50,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "56px 24px 212px",//188 是授權圖高度
+                    padding: "8px 24px 212px", //188 是授權圖高度
                     minHeight: "calc( 100vh - 164px)"
                 }
             }
@@ -60,7 +60,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "12px 0px 0px" // 標題列的padding
+                    padding: "32px 24px" // 標題列的padding
                 }
             }
         },
@@ -77,7 +77,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#DBE4E8",
-                    padding: "56px 24px 212px", //188 是授權圖高度
+                    padding: "8px 24px 212px", //188 是授權圖高度
                     minHeight: `calc( ${props.height}px - 164px)`
                 }
             }
