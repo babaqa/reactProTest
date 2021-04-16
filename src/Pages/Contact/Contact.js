@@ -2,16 +2,16 @@ import React, { useContext, useState } from 'react';
 import { Context } from '../../Store/Store'
 import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput } from '../../Components';
 import { LaptopL } from './RWD/LaptopL';
-import { Laptop } from './RWD/Laptop';
+// import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
-import { Tablet } from './RWD/Tablet';
+// import { Tablet } from './RWD/Tablet';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
 
 export const Contact = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
-    const [NowTab, setNowTab] = useState("長照"); // 目前預約訂車頁面
+    const [NowTab, setNowTab] = useState("相關法令規章"); // 目前預約訂車頁面
     const [Width, Height] = useWindowSize();
 
     return (
