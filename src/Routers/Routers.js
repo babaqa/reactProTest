@@ -191,6 +191,21 @@ export const Routers = (props) => {
                    Author : Arhua Ho
                    Content: 寫死的路由
                 */}
+                <Route exact path={"/Test"}
+                    render={({ location }) => {
+                        return (getParseItemLocalStorage("CAuth") !== null) ? (
+                            urlMapping["/Test"]
+                        ) : (
+                                urlMapping["/Test"]
+                                // <Redirect
+                                //     to={{
+                                //         pathname: "/Login",
+                                //     }}
+                                // />
+                            );
+                    }
+                    }>
+                </Route>
                 <Route exact path={"/News"}
                     render={({ location }) => {
                         return (getParseItemLocalStorage("CAuth") !== null) ? (

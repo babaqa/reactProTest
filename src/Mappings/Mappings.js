@@ -34,10 +34,12 @@ import { RecordDetail } from '../Pages/Record/RecordDetail/RecordDetail';
 import { UserInfo } from '../Pages/UserInfo/UserInfo';
 import { Contact } from '../Pages/Contact/Contact';
 import { QAndA } from '../Pages/QAndA/QAndA';
+import { Test } from '../Pages/Test/Test';
 import { from } from 'rxjs';
 
 //#region 
 export const urlMapping = {
+   "/Test": <Test />,
 
    "/News": <News />,// 最新消息
    "/CallCar": <CallCar />,// 預約訂車

@@ -64,7 +64,8 @@ export default {
                 width: "100%",
                 top: "95px",
                 // left: props.collapse ? "4rem" : "15rem",
-                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                // height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( 100vh - 95px )`,
                 //#endregion
             }
         }
@@ -94,7 +95,7 @@ export default {
         },
         scrollbarThumbY: {
             backgroundImage: "linear-gradient(90deg, rgba(144, 147, 153, 0.3) 100%, rgba(144, 147, 153, 0.3) 100%)",
-            background:"white",
+            background: "white",
             opacity: 0.3,
             transition: "opacity 0s linear",
             right: "0px",
