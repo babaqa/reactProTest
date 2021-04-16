@@ -1,10 +1,12 @@
 import layout from './Layout/Layout'
 import login from './Pages/Login/Login'
 import news from './Pages/News/News'
+import test from './Pages/Test/Test'
 import busRoute from './Pages/BusRoute/BusRoute'
 import allBusRouteComponent from './Pages/BusRoute/AllBusRouteComponent/AllBusRouteComponent'
 
 import systemNewsComponent from './Pages/News/SystemNewsComponent/SystemNewsComponent'
+import systemTestComponent from './Pages/Test/SystemTestComponent/SystemTestComponent'
 
 import callCar from './Pages/CallCar/CallCar'
 import caseCallCarComponent from './Pages/CallCar/CaseCallCarComponent/CaseCallCarComponent'
@@ -23,6 +25,16 @@ export default {
     layout,
     pages: {
         login,
+
+        //#region 測試首頁
+        test: {
+            ...test,
+            component: {
+                systemTestComponent,
+            }
+        },
+
+        //#endregion
 
         //#region 最新消息
         news: {

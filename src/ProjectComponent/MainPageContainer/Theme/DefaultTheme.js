@@ -64,7 +64,8 @@ export default {
                 width: "100%",
                 top: "95px",
                 // left: props.collapse ? "4rem" : "15rem",
-                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                // height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( 100vh - 95px )`,
                 //#endregion
             }
         }
@@ -94,6 +95,7 @@ export default {
         },
         scrollbarThumbY: {
             backgroundImage: "linear-gradient(90deg, rgba(144, 147, 153, 0.3) 100%, rgba(144, 147, 153, 0.3) 100%)",
+            background: "white",
             opacity: 0.3,
             transition: "opacity 0s linear",
             right: "0px",
@@ -101,6 +103,95 @@ export default {
         }
     },
     //#endregion
+
+    //#region 右方黏著容器
+    laptopLRightStickyContainer: {
+        basic: (style, props) => ({
+            position: "fixed",
+            right: 0,
+            top: "95px",
+            width: "95px",
+            height: "100%",
+            background: "rgba(75, 75, 75, 1)",
+            display: "flex",
+            justifyContent: "center",
+            zIndex: 99,
+        })
+    },
+    //#endregion
+
+    //#region 右方上黏著線容器
+    laptopLRightStickyTopLineContainer: {
+        basic: (style, props) => ({
+            position: "fixed",
+            top: "265px",
+            width: "55px",
+            height: "1px",
+            background: "rgba(165, 164, 162, 1)",
+        })
+    },
+    //#endregion
+
+    //#region 右方黏著容器左方文字
+    laptopLRightStickyLeftText: {
+        basic: (style, props) => ({
+            position: "fixed",
+            top: "285px",
+            width: "20px",
+            height: "auto",
+            color: "rgba(165, 164, 162, 1)",
+            lineHeight: "34px",
+            fontSize: "20px",
+            right: "55px",
+        })
+    },
+    //#endregion
+
+    //#region 右方黏著容器右方文字
+    laptopLRightStickyRightText: {
+        basic: (style, props) => ({
+            position: "fixed",
+            top: "285px",
+            width: "20px",
+            height: "auto",
+            color: "rgba(165, 164, 162, 1)",
+            lineHeight: "34px",
+            fontSize: "20px",
+            right: "20px",
+        })
+    },
+    //#endregion
+
+    //#region 右方下黏著線容器
+    laptopLRightStickyBottomLineContainer: {
+        basic: (style, props) => ({
+            position: "fixed",
+            top: "645px",
+            width: "55px",
+            height: "1px",
+            background: "rgba(165, 164, 162, 1)",
+        })
+    },
+    //#endregion
+
+    //#region 右方回到頁頂容器
+    laptopLRightStickygoTopContainer: {
+        basic: (style, props) => ({
+            display: "flex",
+            position: "fixed",
+            height: "258px",
+            width: "95px",
+            top: "678px",
+            textAlign: "center",
+            justifyContent: "center"
+        }),
+        hover: {
+            background: "grey",
+            cursor: "pointer",
+        }
+    },
+    //#endregion
+
     //#region 容器內 ScrollBar 下容器 (laptopL)
     laptopLContentContainer: {
         basic: (style, props) => ({
@@ -131,6 +222,117 @@ export default {
         hover: {
             //backgroundColor: "#d9d9d9"
         }
+    },
+    //#endregion
+
+    //#region Footer左上區塊容器
+    laptopLFooterLeftBlockContainer: {
+        basic: (style, props) => ({
+            position: "absolute",
+            bottom: "71px",
+            background: "rgba(173, 157, 114, 1)",
+            width: "calc(100% - 362px)",
+            height: "506px",
+            left: "0",
+            zIndex: 98,
+            justifyContent: "center",
+            display: "flex",
+            alignItems: "center"
+        })
+    },
+    //#endregion
+
+    //#region Footer左上區塊左方容器
+    laptopLFooterLeftBlockFirstContentContainer: {
+        basic: (style, props) => ({
+            width: "60%",
+            // margin: "193px 0 0 0",
+            padding: "0 50px",
+            height: "auto",
+        })
+    },
+    //#endregion
+    //#region Footer左上區塊右方容器
+    laptopLFooterLeftBlockSecondContentContainer: {
+        basic: (style, props) => ({
+            width: "40%",
+            // margin: "193px 0 0 0",
+            padding: "0 50px",
+            height: "auto",
+        })
+    },
+    //#endregion
+
+    //#region Footer線容器
+    laptopLFooterLineContainer: {
+        basic: (style, props) => ({
+            width: "100%",
+            background: "rgba(255, 255, 255, 1)",
+            height: "2px",
+            bottom: "16px",
+            margin: 0,
+            position: "relative",
+        })
+    },
+    //#endregion
+
+    //#region Footer左上區塊標題
+    laptopLFooterLeftBlockTitle: {
+        basic: (style, props) => ({
+            width: "100%",
+            fontFamily: "Roboto",
+            fontSize: "62px",
+            fontWeight: 700,
+            color: "rgba(255, 255, 255, 1)",
+            position: "relative",
+            /* left          : "80px", */
+            letterSpacing: "15px",
+            margin: "50px 0 0 0"
+        })
+    },
+    //#endregion
+
+    //#region Footer左上區塊內文
+    laptopLFooterLeftBlockContent: {
+        basic: (style, props) => ({
+            width: "100%",
+            position: "relative",
+            /* left          : "80px", */
+            fontFamily: "Roboto",
+            fontSize: "22px",
+            fontWeight: 400,
+            letterSpacing: "5px",
+        })
+    },
+    //#endregion
+
+
+    //#region Footer下方區塊容器
+    laptopLFooterBottomBlockContainer: {
+        basic: (style, props) => ({
+            position: "absolute",
+            bottom: "0",
+            background: "rgba(75, 75, 75, 1)",
+            width: "100%",
+            height: "208px",
+            left: "0",
+            zIndex: 97,
+        })
+    },
+    //#endregion
+
+    //#region Footer下方區塊文字
+    laptopLFooterBottomBlockText: {
+        basic: (style, props) => ({
+            color: "rgba(255, 255, 255, 1)",
+            width: "100%",
+            fontFamily: "Roboto",
+            fontWeight: 400,
+            fontSize: "18px",
+            position: "absolute",
+            bottom: "24px",
+            textAlign: "center",
+        })
     },
     //#endregion
     //#region COPYRIGHT

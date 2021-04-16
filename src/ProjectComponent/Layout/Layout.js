@@ -19,6 +19,7 @@ import { ReactComponent as ContactTab } from '../../Assets/img/ContactTab.svg'
 import { ReactComponent as QAndATab } from '../../Assets/img/QAndATab.svg'
 import { ReactComponent as LogoutLaptop } from '../../Assets/img/LogoutLaptop.svg'
 import { ReactComponent as LoginLaptop } from '../../Assets/img/LoginLaptop.svg'
+import { ReactComponent as MailService } from '../../Assets/img/MailService.svg'
 
 import { ReactComponent as Line } from '../../Assets/img/Line.svg'
 import { ReactComponent as Castle } from '../../Assets/img/Castle.svg'
@@ -149,7 +150,7 @@ export const Layout = (props) => {
                     { path: "/UserInfo", name: "臺藝檔案" },
                     { path: "/Contact", name: "檔案應用" },
                     { path: "/QAndA", name: "文書檔案相關Q&A" },
-                    { path: "/Test", name: "郵寄服務", icon: <QAndATab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameLaptop":
                 return [
@@ -231,7 +232,7 @@ export const Layout = (props) => {
                                     return (
                                         <React.Fragment key={item.path}>
                                             {
-                                                (item.path !== "/Test") ?
+                                                (item.path !== "/MailService") ?
                                                     <>
                                                         {/* Tab項目容器 */}
                                                         < BasicContainer
@@ -253,12 +254,12 @@ export const Layout = (props) => {
                                                         {/* Tab項目容器 */}
                                                         < BasicContainer
                                                             active={location.pathname === item.path}
-                                                            theme={layout.titleBarTabItemContainerLaptopL}
+                                                            theme={layout.titleBarTabItemMailContainerLaptopL}
                                                             onClick={() => { history.push(item.path) }}
                                                         >
-                                                            {/* {item.icon} */}
+                                                            {item.icon}
                                                             <Text
-                                                                theme={layout.titleBarTabTextLaptopL}
+                                                                theme={layout.titleBarTabMailTextLaptopL}
                                                             >
                                                                 {item.name}
                                                             </Text>
