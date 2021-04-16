@@ -124,7 +124,7 @@ export default {
     laptopLRightStickyTopLineContainer: {
         basic: (style, props) => ({
             position: "fixed",
-            top: "265px",
+            bottom: "calc(0% + 638px)",
             width: "55px",
             height: "1px",
             background: "rgba(165, 164, 162, 1)",
@@ -136,7 +136,7 @@ export default {
     laptopLRightStickyLeftText: {
         basic: (style, props) => ({
             position: "fixed",
-            top: "285px",
+            bottom: "calc(0% + 278px)",
             width: "20px",
             height: "auto",
             color: "rgba(165, 164, 162, 1)",
@@ -151,7 +151,7 @@ export default {
     laptopLRightStickyRightText: {
         basic: (style, props) => ({
             position: "fixed",
-            top: "285px",
+            bottom: "calc(0% + 278px)",
             width: "20px",
             height: "auto",
             color: "rgba(165, 164, 162, 1)",
@@ -166,7 +166,8 @@ export default {
     laptopLRightStickyBottomLineContainer: {
         basic: (style, props) => ({
             position: "fixed",
-            top: "645px",
+            // top: "645px",
+            bottom: "calc(0% + 258px)",
             width: "55px",
             height: "1px",
             background: "rgba(165, 164, 162, 1)",
@@ -181,7 +182,8 @@ export default {
             position: "fixed",
             height: "258px",
             width: "95px",
-            top: "678px",
+            // top: "678px",
+            bottom: "0%",
             textAlign: "center",
             justifyContent: "center"
         }),

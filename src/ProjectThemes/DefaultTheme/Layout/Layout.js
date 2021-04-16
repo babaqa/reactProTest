@@ -9,6 +9,7 @@ export default {
             width: "100%",
             position: "fixed",
             background: "#FFFFFF",
+            zIndex: 100,
         })
     },
     //#endregion
