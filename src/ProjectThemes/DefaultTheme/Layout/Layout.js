@@ -19,15 +19,21 @@ export default {
             ...style,
             height: "95px",
             width: "335px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            margin: "0 50px 0 0"
         })
     },
     //#endregion
 
     //#region Logo ICON LaptopL
     titleBarLogoIconLaptopL: {
-        position: "absolute",
-        top: "-6px",
-        left: "-8px"
+        // position: "absolute",
+        // top: "-6px",
+        // left: "-8px",
+        height: "78px",
+        width: "292px",
     },
     //#endregion
 
@@ -36,7 +42,7 @@ export default {
         basic: (style, props) => ({
             ...style,
             height: "95px",
-            width: "calc( 100% - 503px )",
+            width: "calc( 100% - 385px )",
         })
     },
     //#endregion
@@ -104,6 +110,62 @@ export default {
             // color: "rgba(173, 157, 114, 1)",
             borderBottom: "6px solid rgba(173, 157, 114, 1)",
         })
+    },
+    //#endregion
+
+    //#region Tab項目容器(Mail)
+    titleBarTabItemMailContainerLaptopL: {
+        basic: (style, props) => {
+            return {
+                ...style,
+                backgroundColor: "rgba(173, 157, 114, 1)",
+                justifyContent: "center",
+                height: "95px",
+                width: "182px",
+                // borderBottom: props?.active ? "6px solid" : "unset",
+                // color: props?.active ? "#54524C" : "#54524C",
+                display: "flex",
+                cursor: "pointer",
+                alignItems: "center",
+                // ...(props.needHover && { color: "#54524C" })
+            }
+        },
+        // hover: (style, props) => ({
+        //     color: "rgba(173, 157, 114, 1)",
+        //     borderBottom: "6px solid",
+        // })
+    },
+    //#endregion
+
+    //#region Tab項目圖標(Mail)
+    titleBarTabMailIconLaptopL: {
+        position: "relative",
+        top: "-2px",
+    },
+    //#endregion
+
+    //#region Tab項目文字(Mail)
+    titleBarTabMailTextLaptopL: {
+        basic: (style, props) => ({
+            ...style,
+            // color: "inherit",
+            cursor: "pointer",
+            position: "relative",
+            // top: "38px",
+            // left: "32px",
+            userSelect: "none",
+            lineHeight: "95px",
+            textDecoration: "none",
+            color: "rgba(255, 255, 255, 1)",
+            fontWeight: 400,
+            fontSize: "18px",
+            fontFamily: "Roboto",
+            margin: "0 0 0 10px"
+        }),
+        // hover: (style, props) => ({
+        // color: "rgba(173, 157, 114, 1)",
+        //     borderBottom: "6px solid rgba(173, 157, 114, 1)",
+        // })
     },
     //#endregion
 

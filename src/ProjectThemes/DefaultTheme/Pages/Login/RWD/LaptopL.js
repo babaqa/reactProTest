@@ -3,8 +3,8 @@ export default {
     outContainer: {
         basic: (style, props) => ({
             ...style,
-            height: "calc( 100vh - 100px )",
-            top: "100px",
+            height: "calc( 100vh - 95px )",
+            top: "95px",
         })
     },
     //#endregion
