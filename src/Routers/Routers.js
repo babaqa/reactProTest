@@ -211,12 +211,12 @@ export const Routers = (props) => {
                         return (getParseItemLocalStorage("CAuth") !== null) ? (
                             urlMapping["/Unit"]
                         ) : (
-                            // urlMapping["/Unit"]
-                            <Redirect
-                                to={{
-                                    pathname: "/",
-                                }}
-                            />
+                            urlMapping["/Unit"]
+                            // <Redirect
+                            //     to={{
+                            //         pathname: "/",
+                            //     }}
+                            // />
                         );
                     }
                     }>
