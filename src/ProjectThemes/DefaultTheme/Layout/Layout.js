@@ -756,11 +756,8 @@ export default {
     menuAreaScrollBarMobileM: {
         basic: {
             width: "100%",
-            maxWidth: "15rem",
-            height: "calc( 100% - 4rem )",
-            maxHeight: "calc( 100% - 4rem )",
-            borderRight: "1px solid #f0f0f0",
-            boxSizing: "border-box",
+            height: "100%",
+            backgroundColor: "#2E2E2E"
         }
     },
     menuArea: {
@@ -790,14 +787,12 @@ export default {
     titleBarFixedBottomMobileM: {
         basic: (style, props) => ({
             ...style,
-            borderTop: "1px solid rgba(140, 140, 140, 0.13)",
-            height: "48px",
+            height: "100%",
             width: "100%",
-            position: "fixed",
-            justifyContent: "space-between",
-            bottom: "0px",
-            backgroundColor: "#fff",
-            zIndex: 1000
+            justifyContent: "center",
+            alignItems: "center",
+            flexDirection: "column",
+            padding: "162px 0 0"
         })
     },
     //#endregion
@@ -806,12 +801,11 @@ export default {
     titleBarTabItemContainerMobileM: {
         basic: (style, props) => ({
             ...style,
-            backgroundColor: "#fff",
-            height: "48px",
-            width: "20%",
-            borderBottom: props?.active ? "3px solid" : "unset",
+            backgroundColor: "transparent",
+            height: "21px",
+            width: "100%",
             color: props?.active ? "#1890FF" : "#8C8C8C",
-            cursor: "pointer"
+            margin: "0 0 39px"
         }),
         hover: (style, props) => ({
             color: "#1890FF",
@@ -834,18 +828,26 @@ export default {
     titleBarTabTextMobileM: {
         basic: (style, props) => ({
             ...style,
-            color: "inherit",
-            cursor: "pointer",
-            position: "absolute",
-            top: "24px",
-            left: "calc( 50% - 32px )",
-            userSelect: "none"
+            color: "#FFFFFF",
+            userSelect: "none",
+            fontWeight: 700,
+            fontSize: "18px",
+            fontFamily: "Roboto",
+            lineHeight: "21px",
+            padding: "0 0 0 131px",
+            width: "266px",
+            margin: "0 24px 0 0"
         })
     },
     //#endregion
 
-
-
+    //#region Tab項目圖標
+    LeftMenuTabPoent: {
+        position: "absolute",
+        top: "3px",
+        left: "109px"
+    },
+    //#endregion
 
 
 
