@@ -68,17 +68,16 @@ export default {
                 justifyContent: "center",
                 height: "95px",
                 width: "auto",
-                // borderBottom: props?.active ? "6px solid" : "unset",
+                borderBottom: props?.active ? "6px solid rgba(173, 157, 114, 1)" : "unset",
                 color: props?.active ? "#54524C" : "#54524C",
                 display: "flex",
                 cursor: "pointer",
                 ...(props.needHover && { color: "#54524C" })
             }
         },
-        // hover: (style, props) => ({
-        //     color: "rgba(173, 157, 114, 1)",
-        //     borderBottom: "6px solid",
-        // })
+        hover: (style, props) => ({
+            borderBottom: "6px solid rgba(173, 157, 114, 1)",
+        })
     },
     //#endregion
 
@@ -103,14 +102,14 @@ export default {
             lineHeight: "95px",
             textDecoration: "none",
             color: "rgba(84, 82, 76, 1)",
-            fontWeight: 400,
+            fontWeight: 500,
             fontSize: "18px",
             fontFamily: "Roboto",
         }),
-        hover: (style, props) => ({
-            // color: "rgba(173, 157, 114, 1)",
-            borderBottom: "6px solid rgba(173, 157, 114, 1)",
-        })
+        // hover: (style, props) => ({
+        //     // color: "rgba(173, 157, 114, 1)",
+        //     borderBottom: "6px solid rgba(173, 157, 114, 1)",
+        // })
     },
     //#endregion
 
@@ -255,7 +254,7 @@ export default {
     titleBarContainerLaptop: {
         basic: (style, props) => ({
             ...style,
-            height: "80px",
+            height: "95px",
             width: "100%",
             position: "fixed",
         })
@@ -266,17 +265,20 @@ export default {
     titleBarLogoContainerLaptop: {
         basic: (style, props) => ({
             ...style,
-            height: "80px",
+            height: "95px",
             width: "323px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
         })
     },
     //#endregion
 
     //#region Logo ICON Laptop
     titleBarLogoIconLaptop: {
-        position: "absolute",
-        top: "0px",
-        left: "0px"
+        // position: "absolute",
+        // top: "0px",
+        // left: "0px"
     },
     //#endregion
 
@@ -284,8 +286,8 @@ export default {
     titleBarTabContainerLaptop: {
         basic: (style, props) => ({
             ...style,
-            height: "80px",
-            width: "calc( 100% - 323px - 168px )",
+            height: "95px",
+            width: "calc( 100% - 323px )",
         })
     },
     //#endregion
@@ -294,8 +296,8 @@ export default {
     titleBarTabSubContainerLaptop: {
         basic: (style, props) => ({
             ...style,
-            backgroundColor: "#4DB8BE",
-            height: "80px",
+            backgroundColor: "transparent",
+            height: "95px",
             justifyContent: "space-between",
         })
     },
@@ -305,17 +307,19 @@ export default {
     titleBarTabItemContainerLaptop: {
         basic: (style, props) => ({
             ...style,
-            backgroundColor: "#4DB8BE",
-            height: "80px",
-            width: "70px",
-            borderBottom: props?.active ? "3px solid" : "unset",
-            color: props?.active ? "#FFE977" : "#fff",
+            display: "flex",
+            alignItems: "center",
+            backgroundColor: "transparent",
+            height: "95px",
+            width: "auto",
+            borderBottom: props?.active ? "4px solid rgba(173, 157, 114, 1)" : "unset",
+            color: "#54524C",
             cursor: "pointer",
-            ...(props.needHover && { color: "#FFE977" })
+            ...(props.needHover && { color: "#54524C" })
         }),
         hover: (style, props) => ({
-            color: "#FFE977",
-            borderBottom: "3px solid",
+            color: "#54524C",
+            borderBottom: "4px solid rgba(173, 157, 114, 1)",
         })
     },
     //#endregion
@@ -327,6 +331,7 @@ export default {
         width: "32px",
         top: "16px",
         left: "19px",
+        fontFamily: "Roboto",
     },
     //#endregion
 
@@ -336,14 +341,36 @@ export default {
             ...style,
             color: "inherit",
             cursor: "pointer",
-            position: "absolute",
-            top: "48px",
-            left: "0px",
+            position: "relative",
+            // top: "48px",
+            // left: "0px",
             userSelect: "none",
-            fontSize: "16px",
-            lineHeight: "28px",
-
+            fontSize: "14px",
+            lineHeight: "16px",
+            fontWeight: 500
         })
+    },
+    //#endregion
+
+    //#region Tab項目容器 (MailService)
+    titleBarMailServiceContainerLaptop: {
+        basic: (style, props) => ({
+            ...style,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            backgroundColor: "#AD9D72",
+            height: "95px",
+            width: "95px",
+            // borderBottom: props?.active ? "4px solid rgba(173, 157, 114, 1)" : "unset",
+            // color: "#54524C",
+            cursor: "pointer",
+            // ...(props.needHover && { color: "#54524C" })
+        }),
+        // hover: (style, props) => ({
+        //     color: "#FFE977",
+        //     borderBottom: "4px solid rgba(173, 157, 114, 1)",
+        // })
     },
     //#endregion
 
@@ -619,10 +646,12 @@ export default {
     titleBarLeftSIdeBtnContainerMobileM: {
         basic: (style, props) => ({
             ...style,
-            height: "56px",
-            width: "56px",
-            padding: "16px",
-            backgroundColor: "#00628F"
+            height: "60px",
+            width: "60px",
+            backgroundColor: "#AD9D72",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
         })
     },
     //#endregion
@@ -631,11 +660,17 @@ export default {
     titleBarLogoContainerMobileM: {
         basic: (style, props) => ({
             ...style,
-            height: "56px",
-            width: "calc( 100% - 56px - 64px )",
-            backgroundColor: "#00628F",
+            height: "60px",
+            width: "calc( 100% - 60px )",
+            backgroundColor: "transparent",
             textAlign: "center"
         })
+    },
+    //#endregion
+
+    //#region Menu圖標
+    tabletMenuIcon: {
+        height: "auto"
     },
     //#endregion
 
@@ -681,8 +716,10 @@ export default {
         content: {
             basic: (style, props) => ({
                 ...style,
-                top: "56px",
-                height: "calc( 100% - 56px )"
+                top: "60px",
+                height: "calc( 100% - 60px )",
+                width: "100%",
+                maxWidth: "none",
             })
         }
     },

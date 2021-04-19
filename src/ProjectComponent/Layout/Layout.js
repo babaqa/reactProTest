@@ -7,7 +7,7 @@ import { ReactComponent as WhiteBlock } from '../../Assets/img/BackstageLeftSide
 import { ReactComponent as LaptopLLogo } from '../../Assets/img/LaptopLLogo.svg'
 import { ReactComponent as LaptopLogo } from '../../Assets/img/LaptopLogo.svg'
 import { ReactComponent as TabletLogo } from '../../Assets/img/TabletLogo.svg'
-import { ReactComponent as MobileMLogo } from '../../Assets/img/MobileMLogo.svg'
+import { ReactComponent as MobileMLogo } from '../../Assets/img/LaptopLogo.svg'
 import { ReactComponent as MobileMMenu } from '../../Assets/img/MobileMMenu.svg'
 
 import { ReactComponent as NewsTab } from '../../Assets/img/NewsTab.svg'
@@ -310,7 +310,8 @@ export const Layout = (props) => {
                                     return (
                                         <React.Fragment key={item.path}>
                                             {
-                                                (item.path !== "/CallCar") ?
+                                                (item.path !== "/MailService")
+                                                    ?
                                                     <>
                                                         {/* Tab項目容器 */}
                                                         < BasicContainer
@@ -318,7 +319,6 @@ export const Layout = (props) => {
                                                             theme={layout.titleBarTabItemContainerLaptop}
                                                             onClick={() => { history.push(item.path) }}
                                                         >
-                                                            {item.icon}
                                                             <Text
                                                                 theme={layout.titleBarTabTextLaptop}
                                                             >
@@ -328,151 +328,51 @@ export const Layout = (props) => {
                                                         </BasicContainer>
                                                     </>
                                                     :
-                                                    <DropDown
-                                                        placement={"bottomCenter"}
-                                                        dropDownItem={
-                                                            <>
-                                                                {/* DropDown 項目容器 */}
-                                                                <BasicContainer
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    theme={layout.laptopDropDownItemContainer}
-                                                                >
-                                                                    {/* DropDown 子項目 */}
-                                                                    {item.dropDown.map((it) => {
-                                                                        return (
-                                                                            <Text
-                                                                                onMouseOver={(e) => { setNeedHover(true); props.onMouseover && props.onMouseover(e); }}
-                                                                                onMouseOut={(e) => { setNeedHover(false); props.onMouseout && props.onMouseout(e); }}
-                                                                                key={it.path}
-                                                                                baseDefaultTheme={"DefaultTheme"}
-                                                                                theme={layout.laptopDropDownSubItemContainer}
-                                                                                onClick={() => { history.push(it.path) }}
-                                                                            >
-                                                                                {it.name}
-                                                                            </Text>
-                                                                        )
-                                                                    })
-                                                                    }
-                                                                </BasicContainer>
-                                                            </>
-                                                        }
-                                                    >
-
+                                                    <>
                                                         {/* Tab項目容器 */}
                                                         < BasicContainer
-                                                            active={location.pathname === item.path}
-                                                            needHover={NeedHover}
-                                                            theme={layout.titleBarTabItemContainerLaptop}
-                                                        // onClick={() => { history.push(item.path) }}
+                                                            active={location.pathname === "/MailService"}
+                                                            theme={layout.titleBarMailServiceContainerLaptop}
+                                                            onClick={() => { history.push("/MailService") }}
                                                         >
-                                                            {item.icon}
-                                                            <Text
-                                                                theme={layout.titleBarTabTextLaptop}
-                                                            >
-                                                                {item.name}
-                                                            </Text>
-
+                                                            <MailService />
                                                         </BasicContainer>
-                                                    </DropDown>
+                                                    </>
                                             }
                                         </React.Fragment>
                                     )
                                 }))}
 
                             </Container>
+
                         </SubContainer>
 
-                        {/* 使用者名稱、登出容器 */}
-                        <SubContainer
-                            theme={layout.titleBarUserAndLogoutLaptop}
-                        >
-                            {/* 使用者名稱、登出次容器 */}
-                            <BasicContainer
-                                theme={layout.titleBarUserAndLogoutSubLaptop}
-                            >
-                                {/* 使用者名稱 */}
-                                <Text
-                                    theme={layout.titleBarUserLaptop}
-                                >
-                                    Hi! {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
-                                </Text>
-                                {/* 使用者名稱 分隔 */}
-                                <Text
-                                    theme={layout.titleBarUserStepLaptop}
-                                >
-                                    |
-                                </Text>
-
-                                {getParseItemLocalStorage("CAuth")
-                                    ?
-                                    <>
-                                        {/* 登出 */}
-                                        <Text
-                                            theme={layout.titleBarLogoutLaptop}
-                                            onClick={() => {
-                                                modalsService.infoModal.warn({
-                                                    iconRightText: "是否要登出?",
-                                                    yes: true,
-                                                    yesText: "確認",
-                                                    no: true,
-                                                    noText: "取消",
-                                                    // autoClose: true,
-                                                    backgroundClose: false,
-                                                    yesOnClick: (e, close) => {
-                                                        clearLocalStorage();
-                                                        clearSession();
-                                                        globalContextService.clear();
-                                                        Switch();
-                                                        close();
-                                                    }
-                                                })
-                                            }}
-                                        >
-                                            <LogoutLaptop style={layout.titleBarLogoutIconLaptop} />
-                                            登出
-                                        </Text>
-                                    </>
-                                    :
-                                    <>
-                                        {/* 登入 */}
-                                        <Text
-                                            theme={layout.titleBarLogoutLaptop}
-                                            onClick={() => { history.push("/Login") }}
-                                        >
-                                            <LoginLaptop style={layout.titleBarLogoutIconLaptop} />
-                                            登入
-                                    </Text>
-                                    </>
-                                }
-
-                            </BasicContainer>
-                        </SubContainer>
                     </Container>
                 </>
             }
 
             {/* 大於768 與 小於1024的畫面 (Tablet)*/}
-            {
-                (width >= 768 && width < 1024) &&
-                <>
-                    {/* 標題列容器 Tablet */}
-                    <Container
+            {/* {
+                // (width >= 768 && width < 1024) &&
+                <> */}
+            {/* 標題列容器 Tablet */}
+            {/* <Container
                         theme={layout.titleBarContainerTablet}
-                    >
-                        {/* Logo容器 Tablet */}
-                        <SubContainer
+                    > */}
+            {/* Logo容器 Tablet */}
+            {/* <SubContainer
                             theme={layout.titleBarLogoContainerTablet}
-                        >
-                            {/* Logo ICON Tablet */}
-                            <TabletLogo style={layout.titleBarLogoIconTablet} />
-                        </SubContainer>
+                        > */}
+            {/* Logo ICON Tablet */}
+            {/* <TabletLogo style={layout.titleBarLogoIconTablet} />
+                        </SubContainer> */}
 
-                        {/* Tab 容器 Tablet */}
-                        <SubContainer
+            {/* Tab 容器 Tablet */}
+            {/* <SubContainer
                             theme={layout.titleBarTabContainerTablet}
-                        >
-                            {/* Tab 次容器 Tablet */}
-                            <Container
+                        > */}
+            {/* Tab 次容器 Tablet */}
+            {/* <Container
                                 theme={layout.titleBarTabSubContainerTablet}
                             >
                                 {TabMapping("allTabNameTablet").map((item => {
@@ -480,9 +380,9 @@ export const Layout = (props) => {
                                         <React.Fragment key={item.path}>
                                             {
                                                 (item.path !== "/CallCar") ?
-                                                    <>
-                                                        {/* Tab項目容器 */}
-                                                        < BasicContainer
+                                                    <> */}
+            {/* Tab項目容器 */}
+            {/* < BasicContainer
                                                             active={location.pathname === item.path}
                                                             theme={layout.titleBarTabItemContainerTablet}
                                                             onClick={() => { history.push(item.path) }}
@@ -500,14 +400,14 @@ export const Layout = (props) => {
                                                     <DropDown
                                                         placement={"bottomCenter"}
                                                         dropDownItem={
-                                                            <>
-                                                                {/* DropDown 項目容器 */}
-                                                                <BasicContainer
+                                                            <> */}
+            {/* DropDown 項目容器 */}
+            {/* <BasicContainer
                                                                     baseDefaultTheme={"DefaultTheme"}
                                                                     theme={layout.laptopDropDownItemContainer}
-                                                                >
-                                                                    {/* DropDown 子項目 */}
-                                                                    {item.dropDown.map((it) => {
+                                                                > */}
+            {/* DropDown 子項目 */}
+            {/* {item.dropDown.map((it) => {
                                                                         return (
                                                                             <Text
                                                                                 onMouseOver={(e) => { setNeedHover(true); props.onMouseover && props.onMouseover(e); }}
@@ -525,10 +425,10 @@ export const Layout = (props) => {
                                                                 </BasicContainer>
                                                             </>
                                                         }
-                                                    >
+                                                    > */}
 
-                                                        {/* Tab項目容器 */}
-                                                        < BasicContainer
+            {/* Tab項目容器 */}
+            {/* < BasicContainer
                                                             active={location.pathname === item.path}
                                                             needHover={NeedHover}
                                                             theme={layout.titleBarTabItemContainerTablet}
@@ -549,24 +449,24 @@ export const Layout = (props) => {
                                 }))}
 
                             </Container>
-                        </SubContainer>
+                        </SubContainer> */}
 
-                        {/* 使用者名稱、登出容器 */}
-                        <SubContainer
+            {/* 使用者名稱、登出容器 */}
+            {/* <SubContainer
                             theme={layout.titleBarUserAndLogoutTablet}
-                        >
-                            {/* 使用者名稱、登出次容器 */}
-                            <BasicContainer
+                        > */}
+            {/* 使用者名稱、登出次容器 */}
+            {/* <BasicContainer
                                 theme={layout.titleBarUserAndLogoutSubTablet}
-                            >
-                                {/* 使用者名稱 */}
-                                <Text
+                            > */}
+            {/* 使用者名稱 */}
+            {/* <Text
                                     theme={layout.titleBarUserTablet}
                                 >
                                     Hi! {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
-                                </Text>
-                                {/* 使用者名稱 分隔 */}
-                                <Text
+                                </Text> */}
+            {/* 使用者名稱 分隔 */}
+            {/* <Text
                                     theme={layout.titleBarUserStepTablet}
                                 >
                                     |
@@ -574,9 +474,9 @@ export const Layout = (props) => {
 
                                 {getParseItemLocalStorage("CAuth")
                                     ?
-                                    <>
-                                        {/* 登出 */}
-                                        <Text
+                                    <> */}
+            {/* 登出 */}
+            {/* <Text
                                             theme={layout.titleBarLogoutTablet}
                                             onClick={() => {
                                                 modalsService.infoModal.warn({
@@ -602,9 +502,9 @@ export const Layout = (props) => {
                                         </Text>
                                     </>
                                     :
-                                    <>
-                                        {/* 登入 */}
-                                        <Text
+                                    <> */}
+            {/* 登入 */}
+            {/* <Text
                                             theme={layout.titleBarLogoutTablet}
                                             onClick={() => { history.push("/Login") }}
                                         >
@@ -616,24 +516,19 @@ export const Layout = (props) => {
 
                             </BasicContainer>
                         </SubContainer>
-                    </Container>
-                </>
-            }
+                    </Container> */}
+            {/* </>
+            } */}
 
             {/* 小於等於1024的畫面 (MobileM) */}
             {
-                width < 768 &&
+                width < 1024 &&
                 <>
                     {/* 標題列容器 MobileM */}
                     <Container
                         theme={layout.titleBarContainerMobileM}
                     >
-                        {/* 側邊欄按鈕容器 */}
-                        <SubContainer
-                            theme={layout.titleBarLeftSIdeBtnContainerMobileM}
-                        >
-                            <MobileMMenu onClick={() => { setDrawerCollapse(false) }} />
-                        </SubContainer>
+
 
                         {/* Logo容器 */}
                         <SubContainer
@@ -642,15 +537,21 @@ export const Layout = (props) => {
                             <MobileMLogo />
                         </SubContainer>
 
-                        {/* 登入容器 */}
+                        {/* 側邊欄按鈕容器 */}
                         <SubContainer
+                            theme={layout.titleBarLeftSIdeBtnContainerMobileM}
+                        >
+                            <MobileMMenu onClick={() => { setDrawerCollapse(false) }} />
+                        </SubContainer>
+                        {/* 登入容器 */}
+                        {/* <SubContainer
                             theme={layout.titleBarLoginContainerMobileM}
                         >
                             {!getParseItemLocalStorage("CAuth")
                                 &&
-                                <>
-                                    {/* 登入 */}
-                                    <Text
+                                <> */}
+                        {/* 登入 */}
+                        {/* <Text
                                         theme={layout.titleBarLoginMobileM}
                                         onClick={() => { history.push("/Login") }}
                                     >
@@ -659,7 +560,7 @@ export const Layout = (props) => {
                                     </Text>
                                 </>
                             }
-                        </SubContainer>
+                        </SubContainer> */}
                     </Container>
 
                     {/* LeftSideDrawer 樣式 MobileM */}
