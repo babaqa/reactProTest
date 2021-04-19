@@ -13,8 +13,8 @@ import { ReactComponent as OrderSvg } from '../Assets/img/BackstageLeftSideMenuB
 import { ReactComponent as RouteAndStopSvg } from '../Assets/img/BackstageLeftSideMenuBar/RouteAndStop.svg'
 import { ReactComponent as ContactSvg } from '../Assets/img/BackstageLeftSideMenuBar/Contact.svg'
 
-import { News } from '../Pages/News/News';
-import { CallCar } from '../Pages/CallCar/CallCar';
+import { Unit } from '../Pages/Unit/Unit';
+import { MailService } from '../Pages/MailService/MailService';
 
 //#region 快速叫車
 import { FastCallCar } from '../Pages/FastCallCar/FastCallCar';
@@ -26,13 +26,13 @@ import { EditFastCallCar } from '../Pages/FastCallCar/EditFastCallCar/EditFastCa
 import { CallCarAgain } from '../Pages/CallCarAgain/CallCarAgain'
 //#endregion
 
-import { BusRoute } from '../Pages/BusRoute/BusRoute';
+import { Member } from '../Pages/Member/Member';
 // 訂單檢視
-import { Record } from '../Pages/Record/Record';
-import { RecordDetail } from '../Pages/Record/RecordDetail/RecordDetail';
+import { LawsAndRegulations } from '../Pages/LawsAndRegulations/LawsAndRegulations';
+import { RecordDetail } from '../Pages/LawsAndRegulations/RecordDetail/RecordDetail';
 
-import { UserInfo } from '../Pages/UserInfo/UserInfo';
-import { Contact } from '../Pages/Contact/Contact';
+import { Files } from '../Pages/Files/Files';
+import { Application } from '../Pages/Application/Application';
 import { QAndA } from '../Pages/QAndA/QAndA';
 import { Test } from '../Pages/Test/Test';
 import { from } from 'rxjs';
@@ -41,22 +41,23 @@ import { from } from 'rxjs';
 export const urlMapping = {
    "/Test": <Test />,
 
-   "/News": <News />,// 最新消息
-   "/CallCar": <CallCar />,// 預約訂車
+   "/Unit": <Unit />,// 單位簡介
+   // "/CallCar": <CallCar />,// 預約訂車
 
-   "/FastCallCar": <FastCallCar />,// 快速叫車
-   "/FastCallCar/Add": <AddFastCallCar />,// 新增常用路線
-   "/FastCallCar/Edit": <EditFastCallCar />,// 編輯常用路線
-   "/CallCarAgain": <CallCarAgain />,//再次預約
+   // "/FastCallCar": <FastCallCar />,// 快速叫車
+   // "/FastCallCar/Add": <AddFastCallCar />,// 新增常用路線
+   // "/FastCallCar/Edit": <EditFastCallCar />,// 編輯常用路線
+   // "/CallCarAgain": <CallCarAgain />,//再次預約
 
-   "/BusRoute": <BusRoute />,// 快速叫車
+   "/Member": <Member />,// 成員介紹
 
-   "/Record": <Record />,// 訂單檢視
-   "/Record/Detail": <RecordDetail />,// 訂單乘車明細
+   "/LawsAndRegulations": <LawsAndRegulations />,// 法令規章
+   // "/Record/Detail": <RecordDetail />,// 訂單乘車明細
 
-   "/UserInfo": <UserInfo />,// 用戶資料
-   "/Contact": <Contact />,// 聯繫客服
+   "/Files": <Files />,// 臺藝檔案
+   "/Application": <Application />,// 檔案應用
    "/QAndA": <QAndA />,// 常見問題
+   "/MailService": <MailService />,// 郵寄服務
 
    "/Login": < Login />,// 登入畫面
    "/404": <Error404 />,// 404錯誤畫面

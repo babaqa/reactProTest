@@ -127,17 +127,17 @@ export const Layout = (props) => {
     }
 
     const TabMapping = (key) => {
-        // 最新消息  News
-        // 預約訂車  CallCar
-        // 快速叫車  FastCallCar
-        // 訂單檢視  Record
-        // 用戶資料  UserInfo
-        // 聯繫客服  Contact
-        // 常見問題  QAndA
+        // 單位介紹  Unit
+        // 成員介紹  Member
+        // 法令規章  LawsAndRegulations
+        // 臺藝檔案  Files
+        // 檔案應用  Application
+        // 文書檔案相關Q&A  QAndA
+        // 郵寄服務  MailService
         switch (key) {
             case "allTabNameLaptopL":
                 return [
-                    { path: "/News", name: "單位介紹" },
+                    { path: "/Unit", name: "單位介紹" },
                     // {
                     //     path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptopL} />,
                     //     dropDown: [
@@ -145,57 +145,60 @@ export const Layout = (props) => {
                     //         { path: "/FastCallCar", name: "快速叫車" },
                     //     ]
                     // },
-                    { path: "/BusRoute", name: "成員介紹" },
-                    { path: "/Record", name: "法令規章" },
-                    { path: "/UserInfo", name: "臺藝檔案" },
-                    { path: "/Contact", name: "檔案應用" },
+                    { path: "/Member", name: "成員介紹" },
+                    { path: "/LawsAndRegulations", name: "法令規章" },
+                    { path: "/Files", name: "臺藝檔案" },
+                    { path: "/Application", name: "檔案應用" },
                     { path: "/QAndA", name: "文書檔案相關Q&A" },
                     { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameLaptop":
                 return [
-                    { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconLaptop} /> },
-                    {
-                        path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptop} />,
-                        dropDown: [
-                            { path: "/CallCar", name: "預約訂車" },
-                            { path: "/FastCallCar", name: "快速叫車" },
-                        ]
-                    },
-                    { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/Record", name: "訂單檢視", icon: <RecordTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/Unit", name: "單位介紹", icon: <NewsTab style={layout.titleBarTabIconLaptop} /> },
+                    // {
+                    //     path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptop} />,
+                    //     dropDown: [
+                    //         { path: "/CallCar", name: "預約訂車" },
+                    //         { path: "/FastCallCar", name: "快速叫車" },
+                    //     ]
+                    // },
+                    { path: "/Member", name: "成員介紹", icon: <BusRouteTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/LawsAndRegulations", name: "法令規章", icon: <RecordTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameTablet":
                 return [
-                    { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconTablet} /> },
-                    {
-                        path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconTablet} />,
-                        dropDown: [
-                            { path: "/CallCar", name: "預約訂車" },
-                            { path: "/FastCallCar", name: "快速叫車" },
-                        ]
-                    },
-                    { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/Record", name: "訂單檢視", icon: <RecordTab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/Unit", name: "單位介紹", icon: <NewsTab style={layout.titleBarTabIconTablet} /> },
+                    // {
+                    //     path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconTablet} />,
+                    //     dropDown: [
+                    //         { path: "/CallCar", name: "預約訂車" },
+                    //         { path: "/FastCallCar", name: "快速叫車" },
+                    //     ]
+                    // },
+                    { path: "/Member", name: "成員介紹", icon: <BusRouteTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/LawsAndRegulations", name: "法令規章", icon: <RecordTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconTablet} /> },
+                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameMobileMLeftSide":
                 return [
-                    { path: "/Contact", name: "聯繫客服", icon: <ContactTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/QAndA", name: "常見問題", icon: <QAndATab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameMobileMFixBottom":
                 return [
-                    { path: "/News", name: "最新消息", icon: <NewsTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/Unit", name: "單位介紹", icon: <NewsTab style={layout.titleBarTabIconMobileM} /> },
                     { path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/BusRoute", name: "營運路線", icon: <BusRouteTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/Record", name: "訂單檢視", icon: <RecordTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/UserInfo", name: "用戶資料", icon: <UserInfoTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/Member", name: "成員介紹", icon: <BusRouteTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/LawsAndRegulations", name: "法令規章", icon: <RecordTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconMobileM} /> },
                 ]
             default:
                 break;

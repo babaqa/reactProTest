@@ -1,24 +1,24 @@
 import layout from './Layout/Layout'
 import login from './Pages/Login/Login'
-import news from './Pages/News/News'
+import unit from './Pages/Unit/Unit'
 import test from './Pages/Test/Test'
-import busRoute from './Pages/BusRoute/BusRoute'
-import allBusRouteComponent from './Pages/BusRoute/AllBusRouteComponent/AllBusRouteComponent'
+import member from './Pages/Member/Member'
+import allBusRouteComponent from './Pages/Member/AllBusRouteComponent/AllBusRouteComponent'
 
-import systemNewsComponent from './Pages/News/SystemNewsComponent/SystemNewsComponent'
-import systemTestComponent from './Pages/Test/SystemTestComponent/SystemTestComponent'
+import systemNewsComponent from './Pages/Unit/SystemNewsComponent/SystemNewsComponent'
+// import systemTestComponent from './Pages/Test/SystemTestComponent/SystemTestComponent'
 
-import callCar from './Pages/CallCar/CallCar'
-import caseCallCarComponent from './Pages/CallCar/CaseCallCarComponent/CaseCallCarComponent'
-import busCallCarComponent from './Pages/CallCar/BusCallCarComponent/BusCallCarComponent'
-import whiteCallCarComponent from './Pages/CallCar/WhiteCallCarComponent/WhiteCallCarComponent'
-import callCarAgain from './Pages/CallCarAgain/CallCarAgain'
+import mailService from './Pages/MailService/MailService'
+import caseCallCarComponent from './Pages/MailService/CaseCallCarComponent/CaseCallCarComponent'
+import busCallCarComponent from './Pages/MailService/BusCallCarComponent/BusCallCarComponent'
+import whiteCallCarComponent from './Pages/MailService/WhiteCallCarComponent/WhiteCallCarComponent'
+// import callCarAgain from './Pages/CallCarAgain/CallCarAgain'
 
-import fastCallCar from './Pages/FastCallCar/FastCallCar'
+// import fastCallCar from './Pages/FastCallCar/FastCallCar'
 
-import record from './Pages/Record/Record'
-import userInfo from './Pages/UserInfo/UserInfo'
-import contact from './Pages/Contact/Contact'
+import lawsAndRegulations from './Pages/LawsAndRegulations/LawsAndRegulations'
+import files from './Pages/Files/Files'
+import application from './Pages/Application/Application'
 import qAndA from './Pages/QAndA/QAndA'
 
 export default {
@@ -27,18 +27,18 @@ export default {
         login,
 
         //#region 測試首頁
-        test: {
-            ...test,
-            component: {
-                systemTestComponent,
-            }
-        },
+        // test: {
+        //     ...test,
+        //     component: {
+        //         systemTestComponent,
+        //     }
+        // },
 
         //#endregion
 
-        //#region 最新消息
-        news: {
-            ...news,
+        //#region 單位簡介
+        unit: {
+            ...unit,
             component: {
                 systemNewsComponent,
             }
@@ -46,9 +46,9 @@ export default {
 
         //#endregion
 
-        //#region 最新消息
-        busRoute: {
-            ...busRoute,
+        //#region 成員介紹
+        member: {
+            ...member,
             component: {
                 allBusRouteComponent,
             }
@@ -56,9 +56,9 @@ export default {
 
         //#endregion
 
-        //#region 預約訂車
-        callCar: {
-            ...callCar,
+        //#region 郵寄服務
+        mailService: {
+            ...mailService,
             component: {
                 caseCallCarComponent,
                 busCallCarComponent,
@@ -68,23 +68,23 @@ export default {
         //#endregion
 
         //#region 快速叫車
-        fastCallCar,
+        // fastCallCar,
         //#endregion
 
         //#region 再次預約
-        callCarAgain,
+        // callCarAgain,
         //#endregion
 
-        //#region 訂單檢視
-        record,
+        //#region 法令規章
+        lawsAndRegulations,
         //#endregion
 
-        //#region 用戶資料
-        userInfo,
+        //#region 臺藝檔案
+        files,
         //#endregion
 
-        //#region 聯繫客服
-        contact,
+        //#region 檔案應用
+        application,
         //#endregion
 
         //#region 常見問題
