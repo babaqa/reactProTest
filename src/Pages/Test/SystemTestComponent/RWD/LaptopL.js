@@ -13,6 +13,14 @@ import { ReactComponent as File } from '../../../../Assets/img/SystemTestCompone
 import { ReactComponent as FileUse } from '../../../../Assets/img/SystemTestComponentPage/FileUse.svg'
 import { ReactComponent as FileShow } from '../../../../Assets/img/SystemTestComponentPage/FileShow.svg'
 import { ReactComponent as Download } from '../../../../Assets/img/SystemTestComponentPage/Download.svg'
+import { ReactComponent as Leftdownlods } from '../../../../Assets/img/SystemTestComponentPage/Leftdownlods.svg'
+import { ReactComponent as Word } from '../../../../Assets/img/SystemTestComponentPage/Word.svg'
+import { ReactComponent as Pdf } from '../../../../Assets/img/SystemTestComponentPage/Pdf.svg'
+import { ReactComponent as Odf } from '../../../../Assets/img/SystemTestComponentPage/Odf.svg'
+import { ReactComponent as LawsLeftIcon } from '../../../../Assets/img/SystemTestComponentPage/LawsLeftIcon.svg'
+import { ReactComponent as SignOff } from '../../../../Assets/img/SystemTestComponentPage/SignOff.svg'
+import { ReactComponent as OurLaws } from '../../../../Assets/img/SystemTestComponentPage/OurLaws.svg'
+import { ReactComponent as ArchiveExhibition } from '../../../../Assets/img/SystemTestComponentPage/ArchiveExhibition.svg'
 import isUndefined from 'lodash/isUndefined';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { fmt } from '../../../../Handlers/DateHandler';
@@ -24,16 +32,34 @@ const LaptopLBase = (props) => {
 
     const [Width, Height] = useWindowSize();
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
+    const [isActive, setIsActive] = useState("ourLaws");
     let history = useHistory()
+
+    const textMapping = {
+        "ourLaws": "本校法規",
+        "lawsSign": "相關法規",
+    }
+    const downloadData = [
+        { title: "公文改分單" },
+        { title: "公文整合資訊入口網單位單位單位單位單位" },
+        { title: "機密文書等級變更或註銷..." },
+        { title: "國立臺灣藝術大學檔案閱..." },
+        { title: "用印申請表" },
+        { title: "國立臺灣藝術大學檔案應..." },
+        { title: "總發文補發申請單" },
+        { title: "國立臺灣藝術大學檔案應..." },
+        { title: "稽催表補發申請單" },
+        { title: "國立臺灣藝術大學檔案應..." },
+    ]
     return (
         <>
 
-            {/* Table 外側容器 */}
             <BasicContainer
                 bascDefaultTheme={"DefaultTheme"}
                 height={Height}
                 theme={laptopL.tableOutsideContainer}
             >
+                {/* 第一區塊容器 */}
                 <Container theme={laptopL.simpleMenuContainer}>
                     <SubContainer theme={laptopL.simpleMenuLeftContainer}>
 
@@ -41,7 +67,7 @@ const LaptopLBase = (props) => {
                             {/* 臺藝檔案 */}
                             <Container theme={laptopL.fileContainer}>
                                 <Container theme={laptopL.moreTextContainer}>
-                                    <Text style={{ color: "#FFFFFF" }}>More</Text>
+                                    <Text style={{ color: "#FFFFFF", letterSpacing: "3px" }}>More</Text>
                                 </Container>
                                 <File style={{
                                     position: "relative",
@@ -56,7 +82,7 @@ const LaptopLBase = (props) => {
                             {/* 檔案應用 */}
                             <Container theme={laptopL.fileUseContainer}>
                                 <Container theme={laptopL.moreTextContainer}>
-                                    <Text style={{ color: "#FFFFFF" }}>More</Text>
+                                    <Text style={{ color: "#FFFFFF", letterSpacing: "3px" }}>More</Text>
                                 </Container>
                                 <FileUse style={{
                                     position: "relative",
@@ -72,12 +98,13 @@ const LaptopLBase = (props) => {
                             {/* 線上檔案展 */}
                             <Container theme={laptopL.fileShowContainer}>
                                 <Container theme={laptopL.moreTextContainer}>
-                                    <Text style={{ color: "#FFFFFF" }}>More</Text>
+                                    <Text style={{ color: "#FFFFFF", letterSpacing: "3px" }}>More</Text>
                                 </Container>
                                 <FileShow style={{
                                     position: "relative",
                                     top: "-30px",
-                                    width: "100%"
+                                    width: "100%",
+                                    left: "12px",
                                 }} />
                                 <Text theme={laptopL.simpleMenuText}>
                                     線上檔案展
@@ -86,7 +113,7 @@ const LaptopLBase = (props) => {
                             {/* 申請下載 */}
                             <Container theme={laptopL.downloadContainer}>
                                 <Container theme={laptopL.moreTextContainer}>
-                                    <Text style={{ color: "#FFFFFF" }}>More</Text>
+                                    <Text style={{ color: "#FFFFFF", letterSpacing: "3px" }}>More</Text>
                                 </Container>
                                 <Download style={{
                                     position: "relative",
@@ -103,6 +130,102 @@ const LaptopLBase = (props) => {
                         <TextRight style={{
                             width: "100%"
                         }} />
+                    </SubContainer>
+                </Container>
+
+
+                {/* 第二區塊容器 */}
+                <Container theme={laptopL.onlineFileContainer}>
+                    <ArchiveExhibition style={{
+                        // width: "100%"
+                    }} />
+                    <Text theme={laptopL.onlineFileTitle}>線上檔案展</Text>
+                </Container>
+
+                {/* 第三區塊下載檔案容器 */}
+                <Container theme={laptopL.downloadsContainer}>
+                    <SubContainer theme={laptopL.downloadsIconContainer}>
+                        {/* 左方Icon */}
+                        <Leftdownlods style={{
+                            width: "100%"
+                        }} />
+                    </SubContainer>
+
+                    {/* 右方資料容器 */}
+                    <SubContainer theme={laptopL.downloadsTableContainer}>
+
+                        {
+                            downloadData.map((item, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        <Container theme={laptopL.downloadsDataContainer}>
+                                            <Text theme={laptopL.downloadsDataText}>
+                                                {item.title}
+                                            </Text>
+                                            <Container theme={laptopL.downloadsDataIconContainer}>
+                                                <a href="/Test" download>
+                                                    <Pdf style={laptopL.downloadDataIcon} />
+                                                </a>
+                                                <a href="/Test" download>
+                                                    <Word style={laptopL.downloadDataIcon} />
+                                                </a>
+                                                <a href="/Test" download>
+                                                    <Odf style={laptopL.downloadDataIcon} />
+                                                </a>
+                                            </Container>
+                                        </Container>
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+
+                    </SubContainer>
+                </Container>
+
+                {/* 第四區塊容器 */}
+                <Container theme={laptopL.lawsContainer}>
+                    <SubContainer theme={laptopL.lawsLeftContainer}>
+                        <Container
+                            theme={laptopL.ourLawsContainer}
+                            isActive={isActive}
+                            onClick={() => {
+                                isActive !== "ourLaws" && setIsActive("ourLaws")
+                            }}
+                        >
+                            <OurLaws style={{
+                                position: "relative",
+                                top: "17px",
+                                right: "7px",
+                            }} />
+                            <Text theme={laptopL.lawsSignText}>
+                                本校法規
+                            </Text>
+                        </Container>
+                        <Container
+                            theme={laptopL.lawsSignContainer}
+                            isActive={isActive}
+                            onClick={() => {
+                                isActive !== "lawsSign" && setIsActive("lawsSign")
+                            }}
+                        >
+                            <SignOff style={{
+                                position: "relative",
+                                top: "17px",
+                            }} />
+                            <Text theme={laptopL.lawsSignText}>
+                                相關法規
+                            </Text>
+                        </Container>
+                        <LawsLeftIcon style={{
+                            position: "absolute",
+                            bottom: "0",
+                            left: "0",
+                        }} />
+                    </SubContainer>
+                    <SubContainer theme={laptopL.lawsRightContainer}>
+                        <Text theme={laptopL.tableHeaderText}>
+                            {textMapping[isActive]}
+                        </Text>
                     </SubContainer>
                 </Container>
             </BasicContainer>

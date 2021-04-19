@@ -23,7 +23,7 @@ export default {
                 return {
                     ...style,
                     background: "linear-gradient(to right, white 0%, white 20%, rgba(249, 249, 249, 1) 20%, rgba(249, 249, 249, 1) 100%)",
-                    padding: "0 150px 680px 150px",
+                    padding: "0 150px 780px 150px",
                     minHeight: "calc( 100vh - 184px )"
                 }
             }
