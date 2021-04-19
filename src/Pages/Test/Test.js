@@ -195,7 +195,7 @@ export const Test = (props) => {
     return (
         <>
             {
-                768 <= Width &&
+                1024 <= Width &&
                 <LaptopL
                     NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面
@@ -221,7 +221,7 @@ export const Test = (props) => {
                 />
             } */}
             {
-                Width < 768 &&
+                Width < 1024 &&
                 <MobileM
                     NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面

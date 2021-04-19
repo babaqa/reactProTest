@@ -18,9 +18,16 @@ export default {
     simpleMenuLeftContainer: {
         basic: (style) => ({
             ...style,
-            width: "50%",
+            width: "100%",
             height: "auto",
         }),
+        laptopL: {
+            basic: (style) => ({
+                ...style,
+                width: "50%",
+                height: "auto",
+            }),
+        }
     },
     //#endregion
 
@@ -204,12 +211,22 @@ export default {
     downloadsDataContainer: {
         basic: (style) => ({
             ...style,
-            width: "calc(50% - 50px)",
+            width: "calc(100% - 50px)",
             height: "59px",
             display: "inline-flex",
             borderBottom: "4px solid rgba(196, 196, 196, 1)",
             margin: "0 25px 20px"
         }),
+        laptopL: {
+            basic: (style) => ({
+                ...style,
+                width: "calc(50% - 50px)",
+                height: "59px",
+                display: "inline-flex",
+                borderBottom: "4px solid rgba(196, 196, 196, 1)",
+                margin: "0 25px 20px"
+            }),
+        }
     },
     //#endregion
 
@@ -260,7 +277,13 @@ export default {
             top: "63px",
             padding: "50px 0",
             // alignItems: "flex-end",
+            justifyContent: "center",
         }),
+        laptopL: {
+            basic: (style) => ({
+                justifyContent: "flex-start",
+            }),
+        }
     },
     //#endregion
 
@@ -284,10 +307,10 @@ export default {
             height: "200px",
             background: "rgba(75, 75, 75, 1)",
             position: "absolute",
-            bottom: props.isActive === "ourLaws" ? "235px" : "200px",
+            bottom: props.width >= 1440 ? (props.isActive === "ourLaws" ? "235px" : "200px") : "200px",
             right: "200px",
             justifyContent: "center",
-            cursor: props.isActive !== "ourLaws" && "pointer",
+            cursor: props.width >= 1440 ? (props.isActive !== "ourLaws" && "pointer") : "pointer",
             // display: "flex",
             // alignItems: "flex-end"
         }),
@@ -305,10 +328,10 @@ export default {
             height: "200px",
             background: "rgba(46, 46, 46, 1)",
             position: "absolute",
-            bottom: props.isActive === "lawsSign" ? "235px" : "200px",
+            bottom: props.width >= 1440 ? (props.isActive === "lawsSign" ? "235px" : "200px") : "200px",
             right: "0",
             justifyContent: "center",
-            cursor: props.isActive !== "lawsSign" && "pointer",
+            cursor: props.width >= 1440 ? (props.isActive !== "lawsSign" && "pointer") : "pointer",
             // display: "flex",
             // alignItems: "flex-end"
         }),

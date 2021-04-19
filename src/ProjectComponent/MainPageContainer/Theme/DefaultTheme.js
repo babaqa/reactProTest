@@ -480,7 +480,8 @@ export default {
                 width: "100%",
                 top: "80px",
                 // left: props.collapse ? "4rem" : "15rem",
-                height: `calc( 100vh - 80px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                // height: `calc( 100vh - 80px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( 100vh - 80px )`,
                 //#endregion
             }
         }
@@ -692,7 +693,8 @@ export default {
                 width: "100%",
                 top: "80px",
                 // left: props.collapse ? "4rem" : "15rem",
-                height: `calc( ${props.height}px - 80px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                // height: `calc( ${props.height}px - 80px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( ${props.height}px - 80px )`,
                 //#endregion
             }
         }
@@ -901,7 +903,8 @@ export default {
                 //margin: `0 0.5rem 0 ${Collapse ? "1rem" : "1.5rem"}`,
                 width: "100%",
                 top: "56px",
-                height: `calc( ${props.height}px - 56px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                // height: `calc( ${props.height}px - 56px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( ${props.height}px - 56px )`,
                 //#endregion
             }
         }

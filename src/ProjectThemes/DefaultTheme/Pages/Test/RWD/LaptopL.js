@@ -33,7 +33,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#E5E4DB",
-                    padding: "12px 0 0 0" // 標題列的padding
+                    padding: "0 0 0 0" // 標題列的padding
                 }
             }
         },
@@ -49,9 +49,9 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
-                    padding: "0 48px 204px 48px", //188 是授權圖高度
-                    minHeight: "calc( 100vh - 164px )"
+                    background: "rgba(249, 249, 249, 1)",
+                    padding: "0 70px 780px",
+                    minHeight: "calc( 100vh - 184px )"
                 }
             }
         },

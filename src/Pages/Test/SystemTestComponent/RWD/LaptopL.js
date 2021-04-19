@@ -126,18 +126,20 @@ const LaptopLBase = (props) => {
                             </Container>
                         </Container>
                     </SubContainer>
-                    <SubContainer theme={laptopL.simpleMenuRightContainer}>
-                        <TextRight style={{
-                            width: "100%"
-                        }} />
-                    </SubContainer>
+                    {Width >= 1440 &&
+                        <SubContainer theme={laptopL.simpleMenuRightContainer}>
+                            <TextRight style={{
+                                width: "100%"
+                            }} />
+                        </SubContainer>
+                    }
                 </Container>
 
 
                 {/* 第二區塊容器 */}
                 <Container theme={laptopL.onlineFileContainer}>
                     <ArchiveExhibition style={{
-                        // width: "100%"
+                        width: "65%"
                     }} />
                     <Text theme={laptopL.onlineFileTitle}>線上檔案展</Text>
                 </Container>
@@ -153,27 +155,59 @@ const LaptopLBase = (props) => {
 
                     {/* 右方資料容器 */}
                     <SubContainer theme={laptopL.downloadsTableContainer}>
-
                         {
                             downloadData.map((item, index) => {
                                 return (
                                     <React.Fragment key={index}>
-                                        <Container theme={laptopL.downloadsDataContainer}>
-                                            <Text theme={laptopL.downloadsDataText}>
-                                                {item.title}
-                                            </Text>
-                                            <Container theme={laptopL.downloadsDataIconContainer}>
-                                                <a href="/Test" download>
-                                                    <Pdf style={laptopL.downloadDataIcon} />
-                                                </a>
-                                                <a href="/Test" download>
-                                                    <Word style={laptopL.downloadDataIcon} />
-                                                </a>
-                                                <a href="/Test" download>
-                                                    <Odf style={laptopL.downloadDataIcon} />
-                                                </a>
-                                            </Container>
-                                        </Container>
+                                        {Width >= 1440 ?
+                                            <>
+                                                {index < 10 ?
+                                                    <Container theme={laptopL.downloadsDataContainer}>
+                                                        <Text theme={laptopL.downloadsDataText}>
+                                                            {item.title}
+                                                        </Text>
+                                                        <Container theme={laptopL.downloadsDataIconContainer}>
+                                                            <a href="/Test" download>
+                                                                <Pdf style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                            <a href="/Test" download>
+                                                                <Word style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                            <a href="/Test" download>
+                                                                <Odf style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                        </Container>
+                                                    </Container>
+                                                    :
+                                                    <>
+                                                    </>
+                                                }
+                                            </>
+                                            :
+                                            <>
+                                                {index < 5 ?
+                                                    <Container theme={laptopL.downloadsDataContainer}>
+                                                        <Text theme={laptopL.downloadsDataText}>
+                                                            {item.title}
+                                                        </Text>
+                                                        <Container theme={laptopL.downloadsDataIconContainer}>
+                                                            <a href="/Test" download>
+                                                                <Pdf style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                            <a href="/Test" download>
+                                                                <Word style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                            <a href="/Test" download>
+                                                                <Odf style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                        </Container>
+                                                    </Container>
+                                                    :
+                                                    <>
+                                                    </>
+                                                }
+                                            </>
+                                        }
                                     </React.Fragment>
                                 )
                             })
@@ -188,6 +222,7 @@ const LaptopLBase = (props) => {
                         <Container
                             theme={laptopL.ourLawsContainer}
                             isActive={isActive}
+                            width={Width}
                             onClick={() => {
                                 isActive !== "ourLaws" && setIsActive("ourLaws")
                             }}
@@ -204,6 +239,7 @@ const LaptopLBase = (props) => {
                         <Container
                             theme={laptopL.lawsSignContainer}
                             isActive={isActive}
+                            width={Width}
                             onClick={() => {
                                 isActive !== "lawsSign" && setIsActive("lawsSign")
                             }}
@@ -222,11 +258,15 @@ const LaptopLBase = (props) => {
                             left: "0",
                         }} />
                     </SubContainer>
-                    <SubContainer theme={laptopL.lawsRightContainer}>
-                        <Text theme={laptopL.tableHeaderText}>
-                            {textMapping[isActive]}
-                        </Text>
-                    </SubContainer>
+
+                    {Width >= 1440 &&
+                        <SubContainer theme={laptopL.lawsRightContainer}>
+                            <Text theme={laptopL.tableHeaderText}>
+                                {textMapping[isActive]}
+                            </Text>
+                        </SubContainer>
+                    }
+
                 </Container>
             </BasicContainer>
         </>

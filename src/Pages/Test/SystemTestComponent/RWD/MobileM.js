@@ -1,15 +1,31 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { BUnitSort, MainPageContainer, Map8Canvas, map8Controll, Map8Input, CardTable } from '../../../../ProjectComponent';
+import { BUnitSort, MainPageContainer, Map8Canvas, map8Controll, Map8Input } from '../../../../ProjectComponent';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { DateTimePicker, BasicContainer, TextEditor, FormContainer, FormRow, globalContextService, Tag, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, NativeLineButton } from '../../../../Components';
+import { DateTimePicker, BasicContainer, TextEditor, RangeDateTimePicker, FormContainer, FormRow, globalContextService, Tag, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { isEqual, isNil } from 'lodash';
 import { valid } from '../../../../Handlers';
 import { toString } from 'lodash/lang';
-import { ReactComponent as NoData } from '../../../../Assets/img/SystemNewsComponentPage/NoData.svg'
+import { ReactComponent as TextRight } from '../../../../Assets/img/SystemTestComponentPage/TextRight.svg'
+import { ReactComponent as File } from '../../../../Assets/img/SystemTestComponentPage/File.svg'
+import { ReactComponent as FileUse } from '../../../../Assets/img/SystemTestComponentPage/FileUse.svg'
+import { ReactComponent as FileShow } from '../../../../Assets/img/SystemTestComponentPage/FileShow.svg'
+import { ReactComponent as Download } from '../../../../Assets/img/SystemTestComponentPage/Download.svg'
+import { ReactComponent as Leftdownlods } from '../../../../Assets/img/SystemTestComponentPage/Leftdownlods.svg'
+import { ReactComponent as Word } from '../../../../Assets/img/SystemTestComponentPage/Word.svg'
+import { ReactComponent as Pdf } from '../../../../Assets/img/SystemTestComponentPage/Pdf.svg'
+import { ReactComponent as Odf } from '../../../../Assets/img/SystemTestComponentPage/Odf.svg'
+import { ReactComponent as LawsLeftIcon } from '../../../../Assets/img/SystemTestComponentPage/LawsLeftIcon.svg'
+import { ReactComponent as SignOff } from '../../../../Assets/img/SystemTestComponentPage/SignOff.svg'
+import { ReactComponent as OurLaws } from '../../../../Assets/img/SystemTestComponentPage/OurLaws.svg'
+import { ReactComponent as ArchiveExhibition } from '../../../../Assets/img/SystemTestComponentPage/ArchiveExhibitionMobileM.svg'
+import { ReactComponent as DownloadMobileM } from '../../../../Assets/img/SystemTestComponentPage/DownloadMobileM.svg'
+import { ReactComponent as Lawsand } from '../../../../Assets/img/SystemTestComponentPage/Lawsand.svg'
+import isUndefined from 'lodash/isUndefined';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
+import { fmt } from '../../../../Handlers/DateHandler';
 
 const MobileMBase = (props) => {
 
@@ -18,33 +34,202 @@ const MobileMBase = (props) => {
 
     const [Width, Height] = useWindowSize();
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
-
-    const statusMapping = (status, getTheme = false) => {
-        switch (toString(status)) {
-            case "長照":
-                return (getTheme ? mobileM.newsIdentityTag.caseNews : "長照");
-            case "共享車隊":
-                return (getTheme ? mobileM.newsIdentityTag.whiteNews : "共享車隊");
-            case "巴士":
-                return (getTheme ? mobileM.newsIdentityTag.busNews : "巴士");
-            case "系統公告":
-                return (getTheme ? mobileM.newsIdentityTag.systemNews : "系統公告");
-            default:
-                return (getTheme ? mobileM.newsIdentityTag.unknownNews : "無此身份");
-        }
-    }
-
+    const [isActive, setIsActive] = useState("ourLaws");
     let history = useHistory()
 
+    const textMapping = {
+        "ourLaws": "本校法規",
+        "lawsSign": "相關法規",
+    }
+    const downloadData = [
+        { title: "公文改分單" },
+        { title: "公文整合資訊入口網單位單位單位單位單位" },
+        { title: "機密文書等級變更或註銷..." },
+        { title: "國立臺灣藝術大學檔案閱..." },
+        { title: "用印申請表" },
+        { title: "國立臺灣藝術大學檔案應..." },
+        { title: "總發文補發申請單" },
+        { title: "國立臺灣藝術大學檔案應..." },
+        { title: "稽催表補發申請單" },
+        { title: "國立臺灣藝術大學檔案應..." },
+    ]
     return (
         <>
-            {/* 公告外層 容器 */}
+
             <BasicContainer
                 bascDefaultTheme={"DefaultTheme"}
                 height={Height}
-                theme={mobileM.newsContainer}
+                theme={mobileM.tableOutsideContainer}
             >
-                
+                {/* 第一區塊容器 */}
+                <Container theme={mobileM.simpleMenuContainer}>
+                    <SubContainer theme={mobileM.simpleMenuLeftContainer}>
+
+                        <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                            {/* 臺藝檔案 */}
+                            <Container theme={mobileM.fileContainer}>
+                                <File style={{
+                                    position: "relative",
+                                    // top: "-30px",
+                                    width: "75%",
+                                    height: "75%",
+                                }} />
+                                <Text theme={mobileM.simpleMenuText}>
+                                    臺藝檔案
+                            </Text>
+                            </Container>
+
+                            {/* 檔案應用 */}
+                            <Container theme={mobileM.fileUseContainer}>
+                                <FileUse style={{
+                                    position: "relative",
+                                    // top: "-30px",
+                                    width: "75%",
+                                    height: "75%",
+                                }} />
+                                <Text theme={mobileM.simpleMenuText}>
+                                    檔案應用
+                            </Text>
+                            </Container>
+                        </Container>
+                        <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                            {/* 線上檔案展 */}
+                            <Container theme={mobileM.fileShowContainer}>
+                                <FileShow style={{
+                                    position: "relative",
+                                    // top: "-30px",
+                                    width: "75%",
+                                    height: "75%",
+                                    left: "6px",
+                                }} />
+                                <Text theme={mobileM.simpleMenuText}>
+                                    線上檔案展
+                            </Text>
+                            </Container>
+                            {/* 申請下載 */}
+                            <Container theme={mobileM.downloadContainer}>
+                                <Download style={{
+                                    position: "relative",
+                                    // top: "-30px",
+                                    width: "75%",
+                                    height: "75%",
+                                }} />
+                                <Text theme={mobileM.simpleMenuText}>
+                                    申請下載
+                            </Text>
+                            </Container>
+                        </Container>
+                    </SubContainer>
+                </Container>
+
+
+                {/* 第二區塊容器 */}
+                <Container theme={mobileM.onlineFileContainer}>
+                    <Text theme={mobileM.onlineFileTitle}>
+                        <ArchiveExhibition style={{
+                            width: "65%",
+                            height: "65%",
+                            maxWidth: "350px",
+                        }} />
+                    </Text>
+                </Container>
+
+                {/* 第三區塊下載檔案容器 */}
+                <Container theme={mobileM.downloadsContainer}>
+                    <Text theme={mobileM.onlineFileTitle}>
+                        <DownloadMobileM style={{
+                            width: "65%",
+                            height: "65%",
+                            maxWidth: "350px",
+                        }} />
+                    </Text>
+                    {/* 右方資料容器 */}
+                    <SubContainer theme={mobileM.downloadsTableContainer}>
+                        {
+                            downloadData.map((item, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        {index < 5 ?
+                                            <Container theme={mobileM.downloadsDataContainer}>
+                                                <Text theme={mobileM.downloadsDataText}>
+                                                    {item.title}
+                                                </Text>
+                                                <Container theme={mobileM.downloadsDataIconContainer}>
+                                                    <a href="/Test" download>
+                                                        <Pdf style={mobileM.downloadDataIcon} />
+                                                    </a>
+                                                    <a href="/Test" download>
+                                                        <Word style={mobileM.downloadDataIcon} />
+                                                    </a>
+                                                    <a href="/Test" download>
+                                                        <Odf style={mobileM.downloadDataIcon} />
+                                                    </a>
+                                                </Container>
+                                            </Container>
+                                            :
+                                            <>
+                                            </>
+                                        }
+                                    </React.Fragment>
+                                )
+                            })
+                        }
+
+                    </SubContainer>
+                </Container>
+
+                {/* 第四區塊容器 */}
+                <Container theme={mobileM.lawsContainer}>
+                    <Text theme={mobileM.onlineFileTitle}>
+                        <Lawsand style={{
+                            width: "65%",
+                            height: "65%",
+                            maxWidth: "350px",
+                        }} />
+                    </Text>
+                    <SubContainer theme={mobileM.lawsLeftContainer}>
+                        <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
+                            <Container
+                                theme={mobileM.ourLawsContainer}
+                                isActive={isActive}
+                                width={Width}
+                                onClick={() => {
+                                    isActive !== "ourLaws" && setIsActive("ourLaws")
+                                }}
+                            >
+                                <OurLaws style={{
+                                    width: "75%",
+                                    height: "75%",
+                                    position: "relative",
+                                    // top: "17px",
+                                    right: "7px",
+                                }} />
+                                <Text theme={mobileM.lawsSignText}>
+                                    本校法規
+                            </Text>
+                            </Container>
+                            <Container
+                                theme={mobileM.lawsSignContainer}
+                                isActive={isActive}
+                                width={Width}
+                                onClick={() => {
+                                    isActive !== "lawsSign" && setIsActive("lawsSign")
+                                }}
+                            >
+                                <SignOff style={{
+                                    width: "75%",
+                                    height: "75%",
+                                    position: "relative",
+                                    // top: "17px",
+                                }} />
+                                <Text theme={mobileM.lawsSignText}>
+                                    相關法規
+                            </Text>
+                            </Container>
+                        </Container>
+                    </SubContainer>
+
+                </Container>
             </BasicContainer>
         </>
     )

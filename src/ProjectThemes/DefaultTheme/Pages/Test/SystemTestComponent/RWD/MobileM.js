@@ -1,256 +1,424 @@
 export default {
-    //#region 公告外層容器
-    newsContainer: {
-        basic: (style, props) => ({
+    //#region 簡易菜單區塊
+    //#region 簡易菜單外容器
+    simpleMenuContainer: {
+        basic: (style) => ({
             ...style,
-            minHeight: `calc( ${props.height}px - 56px - 94px - 64px)`,
-            height: "auto",
             width: "100%",
-            // boxShadow: "0px 2px 8px rgba(0, 0, 0, 0.15)",
-            // borderRadius: "16px"
-        })
+            minHeight: "350px",
+            height: "auto",
+            display: "flex",
+            // top: "63px",
+            padding: "50px 0",
+        }),
     },
     //#endregion
 
-    //#region 無資料表單區容器
-    noDataContainer: {
-        basic: (style, props) => {
-            return {
+    //#region 簡易菜單左方容器
+    simpleMenuLeftContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "100%",
+            height: "auto",
+        }),
+        laptopL: {
+            basic: (style) => ({
                 ...style,
-                // padding: "24px 12px",
-                // margin: "8px 0 0",
-                background: "rgba(0,0,0,0)",
-                // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                minHeight: `calc( ${props.height}px - 56px - 94px - 64px)`,
-                width: "100%",
-                borderRadius: "16px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
-            }
+                width: "50%",
+                height: "auto",
+            }),
         }
     },
     //#endregion
 
-    //#region 公告容器
-    newsCardContainer: {
-        basic: (style, props) => ({
+    //#region 簡易菜單左方臺藝檔案容器
+    fileContainer: {
+        basic: (style) => ({
             ...style,
-            height: "87px",
+            width: "calc(50% - 30px)",
+            height: "auto",
+            minWidth: "130px",
+            minHeight: "130px",
+            maxWidth: "270px",
+            maxHeight: "270px",
+            background: "rgba(75, 75, 75, 1)",
+            margin: "15px",
+            // top: "63px",
+            display: "inline-flex",
+            justifyContent: "center",
+            aspectRatio: 1
+        }),
+    },
+    //#endregion
+
+    //#region 簡易菜單左方檔案應用容器
+    fileUseContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "calc(50% - 30px)",
+            height: "auto",
+            minWidth: "130px",
+            minHeight: "130px",
+            maxWidth: "270px",
+            maxHeight: "270px",
+            // left: "27px",
+            background: "rgba(75, 75, 75, 1)",
+            margin: "15px",
+            display: "inline-flex",
+            justifyContent: "center",
+            aspectRatio: 1
+        }),
+    },
+    //#endregion
+
+    //#region 簡易菜單左方線上檔案展容器
+    fileShowContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "calc(50% - 30px)",
+            height: "auto",
+            minWidth: "130px",
+            minHeight: "130px",
+            maxWidth: "270px",
+            maxHeight: "270px",
+            // top: "70px",
+            background: "rgba(75, 75, 75, 1)",
+            margin: "15px",
+            display: "inline-flex",
+            justifyContent: "center",
+            aspectRatio: 1
+        }),
+    },
+    //#endregion
+
+    //#region 簡易菜單左方申請下載容器
+    downloadContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "calc(50% - 30px)",
+            height: "auto",
+            minWidth: "130px",
+            minHeight: "130px",
+            maxWidth: "270px",
+            maxHeight: "270px",
+            // left: "27px",
+            // top: "70px",
+            margin: "15px",
+            background: "rgba(75, 75, 75, 1)",
+            display: "inline-flex",
+            justifyContent: "center",
+            aspectRatio: 1
+        }),
+    },
+    //#endregion
+
+    //#region More文字容器
+    moreTextContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "130px",
+            height: "45px",
+            borderRadius: "29px",
+            background: "rgba(173, 157, 114, 1)",
+            position: "relative",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            top: "-22px",
+            fontFamily: "Roboto",
+            fontWeight: 700,
+            fontSize: "20px",
+            color: "rgba(255, 255, 255, 1)",
+        }),
+    },
+    //#endregion
+
+    //#region 說明文字
+    simpleMenuText: {
+        basic: (style) => ({
+            ...style,
+            position: "relative",
+            top: "-10px",
             width: "100%",
-            boxShadow: "inset 0px -1px 0px #DBE4E8",
-            // borderRadius: "16px",
-            // margin: "8px 0 0 0",
-            backgroundColor: "#FFF"
-        })
+            textAlign: "center",
+            fontFamily: "Roboto",
+            fontWeight: 700,
+            fontSize: "16px",
+            color: "rgba(255, 255, 255, 1)",
+            letterSpacing: "0.3em",
+        }),
     },
     //#endregion
-    //#region 公告內容容器
-    newsCardContentContainer: {
-        basic: (style, props) => ({
+
+    //#region 簡易菜單右方容器
+    simpleMenuRightContainer: {
+        basic: (style) => ({
             ...style,
-            ...style.occupy(12),
-            height: "56px",
-            padding: "4px 16px 8px",
-            overflow: "hidden"
-            // width: "100%",
-        })
+            width: "50%",
+            height: "695px",
+            display: "flex",
+            alignItems: "center",
+            paddingLeft: "20px"
+        }),
     },
     //#endregion
-    //#region 公告內容文字
-    newsCardContentText: {
-        basic: (style, props) => ({
+    //#endregion
+
+    //#region 線上檔案展區塊
+    //#region 線上檔案展容器
+    onlineFileContainer: {
+        basic: (style) => ({
             ...style,
-            fontSize: "14px",
-            lineHeight: "22px",
-            fontWeight: "400",
-            color: "rgba(0, 0, 0, 0.65)",
-            cursor: "pointer",
+            width: "100%",
+            // minHeight: "795px",
+            height: "300px",
+            display: "inline-block",
+            // top: "63px",
+            padding: "50px 0",
+        }),
+    },
+    //#endregion
+    //#region 線上檔案展標題
+    onlineFileTitle: {
+        basic: (style) => ({
+            ...style,
+            width: "100%",
+            fontSize: "25px",
+            fontFamily: "Roboto",
+            fontWeight: 700,
+            letterSpacing: "0.3em",
+            padding: "0 15px",
+        }),
+    },
+    //#endregion
+    //#endregion
+
+    //#region 下載區塊
+    //#region 下載外容器
+    downloadsContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "100%",
+            // minHeight: "795px",
+            height: "auto",
+            display: "inline-block",
+            // top: "63px",
+            padding: "50px 0",
+            alignItems: "center",
+        }),
+    },
+    //#endregion
+
+    //#region 下載左方圖片容器
+    downloadsIconContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "30%",
+            height: "auto",
+        }),
+    },
+    //#endregion
+
+    //#region 下載右方Table容器
+    downloadsTableContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "100%",
+            height: "auto",
+        }),
+    },
+    //#endregion
+
+    //#region 下載右方資料容器
+    downloadsDataContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "calc(100% - 30px)",
+            height: "59px",
+            display: "inline-flex",
+            borderBottom: "4px solid rgba(196, 196, 196, 1)",
+            margin: "0 15px 20px"
+        }),
+        laptopL: {
+            basic: (style) => ({
+                ...style,
+                width: "calc(50% - 50px)",
+                height: "59px",
+                display: "inline-flex",
+                borderBottom: "4px solid rgba(196, 196, 196, 1)",
+                margin: "0 25px 20px"
+            }),
+        }
+    },
+    //#endregion
+
+    //#region 下載右方資料文字
+    downloadsDataText: {
+        basic: (style) => ({
+            ...style,
+            width: "calc(100% - 104px)",
+            lineHeight: "55px",
+            display: "inline-block",
             textOverflow: "ellipsis",
             overflow: "hidden",
-            whiteSpace: "nowrap"
-        })
+            whiteSpace: "nowrap",
+            letterSpacing: "0.2em",
+        }),
     },
     //#endregion
-    //#region 公告Tag容器
-    newsCardTagContainer: {
-        basic: (style, props) => ({
+
+    //#region 下載右方資料Icon容器
+    downloadsDataIconContainer: {
+        basic: (style) => ({
             ...style,
-            ...style.occupy(6),
+            width: "104px",
+            height: "55px",
+            display: "inline-flex",
+            justifyContent: "flex-end",
+            alignItems: "center"
+        }),
+    },
+    //#endregion
+    //#region 下載右方資料Icon
+    downloadDataIcon: {
+        // margin: "0 0 0 14px",
+        // cursor: "pointer",
+    },
+    //#endregion
+    //#endregion
+
+    //#region 法規區塊
+    //#region 法規外容器
+    lawsContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "100%",
+            // minHeight: "695px",
             height: "auto",
-            padding: "8px 16px 0"
-        })
-    },
-    //#endregion
-    //#region 公告Tag
-    newsIdentityTag: {
-        //#region Tag樣式
-        //#region 長照
-        caseNews: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    margin: "0 0 0 0",
-                    top: "0px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    color: "#EF6C00",
-                    backgroundColor: "#FFF3E0",
-                    borderColor: "#FF9800"
-                }),
-                hover: {}
-            }
-        },
-        //#endregion
-        //#region 共享車隊
-        whiteNews: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    margin: "0 0 0 0",
-                    top: "0px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    color: "#558B2F",
-                    backgroundColor: "#E8F5E9",
-                    borderColor: "#4CAF50"
-
-                }),
-                hover: {}
-            }
-        },
-        //#endregion
-        //#region 巴士
-        busNews: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    margin: "0 0 0 0",
-                    top: "0px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    color: "#00838F",
-                    backgroundColor: "#E0F7FA",
-                    borderColor: "#00838F"
-
-                }),
-                hover: {}
-            }
-        },
-        //#endregion  
-        //#region 系統公告
-        systemNews: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    margin: "0 0 0 0",
-                    // top: "3px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    // color: "#2F54EB",
-                    // backgroundColor: "#F0F5FF",
-                    // borderColor: "#ADC6FF"
-
-                }),
-                hover: {}
-            }
-        },
-        //#endregion
-        //#region 無此身份
-        unknownNews: {
-            container: {
-                basic: (style, props) => ({
-                    ...style,
-                    margin: "0 0 0 0",
-                    top: "0px",
-                    padding: "0px 7px",
-                    fontSize: "12px",
-                    lineHeight: "20px",
-                    // color: "#2F54EB",
-                    // backgroundColor: "#F0F5FF",
-                    // borderColor: "#ADC6FF"
-
-                }),
-                hover: {}
-            }
-        },
-        //#endregion      
-    },
-    //#endregion
-    //#endregion
-    //#region 公告日期容器
-    newsCardDateContainer: {
-        basic: (style, props) => ({
-            ...style,
-            ...style.occupy(6),
-            height: "auto",
-            padding: "8px 16px 0"
-        })
-    },
-    //#endregion
-    //#region 公告日期文字
-    newsCardDateText: {
-        basic: (style, props) => ({
-            ...style,
-            fontSize: "12px",
-            top: "0px",
-            right: "20px",
-            lineHeight: "18px",
-            fontWeight: "400",
-            color: "rgba(0, 0, 0, 0.45)",
-            textAlign: "right",
-        })
-    },
-    //#endregion
-
-    //#region Modal 樣式
-    newsModal: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                width: "343px"
-            }),
-            tablet: (style, props) => ({
-            }),
-        },
-        contentContainer: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "24px",
-                zIndex: 100
+            display: "flex",
+            // top: "63px",
+            padding: "50px 0",
+            // alignItems: "flex-end",
+            justifyContent: "center",
+        }),
+        laptopL: {
+            basic: (style) => ({
+                justifyContent: "flex-start",
             }),
         }
     },
     //#endregion
 
-    //#region Modal 文字
-    newsCardContentModalText: {
-        basic: (style, props) => ({
+    //#region 法規左方容器
+    lawsLeftContainer: {
+        basic: (style) => ({
             ...style,
-            fontSize: "14px",
-            fontWeight: 400,
-            lineHeight: "22px",
-            color: "rgba(0, 0, 0, 0.65)",
-        })
+            width: "100%",
+            // height: "435px",
+            display: "flex",
+            justifyContent: "center",
+            // alignItems: "flex-end"
+        }),
     },
     //#endregion
 
-    //#region 沒有更多訂單檢視 提醒 
-    noDataTip: {
+    //#region 法規左方本校法規容器
+    ourLawsContainer: {
         basic: (style, props) => ({
             ...style,
-            fontSize: "14px",
-            lineHeight: "22px",
-            color: "#1890FF",
-            padding: "8px 0 0 0",
-            // margin: "12px 0 0",
-            width: "100%",
-            textAlign: "center"
-        })
+            width: "calc(50% - 30px)",
+            height: "auto",
+            minWidth: "130px",
+            minHeight: "130px",
+            maxWidth: "200px",
+            maxHeight: "200px",
+            aspectRatio: 1,
+            background: "rgba(75, 75, 75, 1)",
+            // position: "absolute",
+            // bottom:  "200px",
+            // right: "200px",
+            justifyContent: "center",
+            cursor: "pointer",
+            margin: "15px",
+            // display: "flex",
+            // alignItems: "flex-end"
+        }),
+        // hover: () => ({
+        //     bottom: "235px",
+        // })
     },
+    //#endregion
+
+    //#region 法規左方相關法規容器
+    lawsSignContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "calc(50% - 30px)",
+            height: "auto",
+            minWidth: "130px",
+            minHeight: "130px",
+            maxWidth: "200px",
+            maxHeight: "200px",
+            aspectRatio: 1,
+            background: "rgba(46, 46, 46, 1)",
+            // position: "absolute",
+            // bottom: "200px",
+            // right: "0",
+            justifyContent: "center",
+            cursor: "pointer",
+            margin: "15px",
+            // display: "flex",
+            // alignItems: "flex-end"
+        }),
+        // hover: () => ({
+        //     bottom: "235px",
+        // })
+    },
+    //#endregion
+
+    //#region 法規左方相關法規文字
+    lawsSignText: {
+        basic: (style) => ({
+            ...style,
+            width: "100%",
+            textAlign: "center",
+            color: "rgba(255, 255, 255, 1)",
+            fontFamily: "Roboto",
+            fontWeight: 700,
+            fontSize: "16px",
+            letterSpacing: "0.3em",
+            top: "-10px",
+            // height: "435px",
+        }),
+    },
+    //#endregion
+
+    //#region 法規右方Table容器
+    lawsRightContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "calc(100% - 800px)",
+            height: "400px",
+            background: "rgba(255, 255, 255, 1)",
+            position: "absolute",
+            right: "0",
+            bottom: "50px",
+            padding: "24px",
+        }),
+    },
+    //#endregion
+
+    //#region 法規右方Table大標題
+    tableHeaderText: {
+        basic: (style) => ({
+            ...style,
+            color: "rgba(173, 157, 114, 1)",
+            fontSize: "20px",
+            fontFamily: "Roboto",
+            fontWeight: 700,
+            letterSpacing: "0.3em",
+        }),
+    },
+    //#endregion
     //#endregion
 }

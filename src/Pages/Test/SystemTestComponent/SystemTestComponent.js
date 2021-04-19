@@ -26,7 +26,7 @@ export const SystemTestComponent = (props) => {
     return (
         <>
             {
-                768 <= Width &&
+                1024 <= Width &&
                 <LaptopL
                     AllNews={props.AllNews} // 類別下所有最新消息
                     NowTab={props.NowTab} // 目前使用的頁籤資訊
@@ -56,7 +56,7 @@ export const SystemTestComponent = (props) => {
                 />
             } */}
             {
-                Width < 768 &&
+                Width < 1024 &&
                 <MobileM
                     AllNews={props.AllNews} // 類別下所有最新消息
                     NowTab={props.NowTab} // 目前使用的頁籤資訊
