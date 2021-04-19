@@ -8,6 +8,7 @@ import { ReactComponent as LaptopCopyright } from '../../Assets/img/LaptopCopyri
 import { ReactComponent as TabletCopyright } from '../../Assets/img/TabletCopyright.svg'
 import { ReactComponent as Seal } from '../../Assets/img/Seal.svg'
 import { ReactComponent as FooterLogo } from '../../Assets/img/FooterLogo.svg'
+import { ReactComponent as LaptopFooterLogo } from '../../Assets/img/LaptopFooterLogo.svg'
 import { ReactComponent as GoTop } from '../../Assets/img/GoTop.svg'
 // import { ReactComponent as MobileMCopyright } from '../../Assets/img/MobileMCopyright.svg'
 
@@ -231,33 +232,79 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                 baseDefaultTheme={"DefaultTheme"}
                                 theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopContentContainer") }} //吃theme
                             >
+                                <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopRightStickyContainer") }}>
+                                    <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopRightStickyTopLineContainer") }}></Container>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopRightStickyLeftText") }}>
+                                        藝術文史豐富檔案資產
+                                        </Text>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopRightStickyRightText") }}>
+                                        檔案道盡臺藝古今風華
+                                        </Text>
+                                    <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopRightStickyBottomLineContainer") }}></Container>
+                                    <Container
+                                        theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopRightStickygoTopContainer") }}
+                                        onClick={() => {
+                                            goTopFunc()
+                                        }}
+                                    >
+                                        <GoTop style={{
+                                            position: "relative",
+                                            top: "126px"
+
+                                        }} />
+                                    </Container>
+                                </Container>
+
                                 {props.children}
-                                <LaptopCopyright style={{
-                                    width: "100%",
+
+                                <Seal style={{
+                                    width: "121px",
                                     position: "absolute",
-                                    left: "0px",
-                                    bottom: "0px"
+                                    right: "95px",
+                                    bottom: "230px",
+                                    filter: "contrast(0.7)",
                                 }} />
 
-                                {/* COPYRIGHT (laptop) */}
-                                <Text
-                                    theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopCopyRight") }}
-                                >
-                                    COPYRIGHT © 屏東客戶端
-                                </Text>
 
-                                {/* 單位資訊 (laptop) */}
-                                <Text
-                                    theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopUnitInfo") }}
-                                >
-                                    屏東縣政府 版權所有 辦公時間：週一至週五 08:00~12:00 13:30~17:30
-                                    <br />
-                                    總機電話：(08)732-0415 地址：900219屏東縣屏東市自由路527號
-                                    <br />
-                                    1999便民服務專線(付費專線)服務時間每日08:00~22:00
-                                    <br />
-                                    縣境內直撥1999，外縣市請撥(08)732-0415
-                                </Text>
+                                <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockContainer") }}>
+                                    <LaptopFooterLogo style={{
+                                        position: "absolute",
+                                        top: "-29px"
+                                    }} />
+                                    <SubContainer theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockFirstContentContainer") }}                                    >
+                                        <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockTitle") }}>
+                                            ADDRESS
+                                        </Text>
+                                        <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockContent") }}>
+                                            220307新北市板橋區大觀路1段59號
+                                        </Text>
+                                        <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockTitle") }}>
+                                            TIME
+                                        </Text>
+                                        <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockContent") }}>
+                                            Mon~Fri/08:00-12:00.13:30-15:30
+                                        </Text>
+                                    </SubContainer>
+                                    <SubContainer theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockSecondContentContainer") }}>
+                                        <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockTitle") }}>
+                                            TEL
+                                        </Text>
+                                        <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockContent") }}>
+                                            02-22722181
+                                        </Text>
+                                        <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockTitle") }}>
+                                            FAX
+                                        </Text>
+                                        <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterLeftBlockContent") }}>
+                                            02-29601822
+                                        </Text>
+                                    </SubContainer>
+                                </Container>
+                                <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterBottomBlockContainer") }}>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "laptopFooterBottomBlockText") }}>
+                                        本網站為國立臺灣藝術大學總務處版權所有，未經允許，不得以任何形式複製和採用
+                                    </Text>
+                                </Container>
 
                             </BasicContainer>
                         </ScrollBar>
@@ -266,10 +313,10 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
             }
 
             {/* 大於768 與 小於1024的畫面 (Tablet)*/}
-            {(Width >= 768 && Width < 1024) &&
-                <>
-                    {/* 外部傳入頂部組件容器 (tablet) */}
-                    <BasicContainer
+            {/* {(Width >= 768 && Width < 1024) &&
+                <> */}
+            {/* 外部傳入頂部組件容器 (tablet) */}
+            {/* <BasicContainer
                         ref={OutsideOutContainerRef}
                         {...props.tabletOutsideOutContainerEvent}
                         className={`tabletOutsideOutContainer`}
@@ -277,25 +324,25 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                         theme={{ ...iterateTheme({ ...props, collapse: Collapse, outSideTopComponent: props?.outSideTopComponent }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletOutsideOutContainer") }}
                     >
                         {props.outSideTopComponent}
-                    </BasicContainer>
+                    </BasicContainer> */}
 
-                    {/* 容器 (tablet) */}
-                    <BasicContainer
+            {/* 容器 (tablet) */}
+            {/* <BasicContainer
                         {...props.tabletOutContainerEvent}
                         className={`tabletOutContainer`}
                         baseDefaultTheme={"DefaultTheme"}
                         theme={{ ...iterateTheme({ ...props, collapse: Collapse, outSideTopComponentHeight: OutSideTopComponentHeight, height: Height }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletOutContainer") }}
-                    >
-                        {/* 容器內滾動條 (tablet)*/}
-                        <ScrollBar
+                    > */}
+            {/* 容器內滾動條 (tablet)*/}
+            {/* <ScrollBar
                             ref={scrollBarRef}
                             autoHide={props.autoHide}
                             className={`tabletScrollBar`}
                             basedefaulttheme={"DefaultTheme"}
                             theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletScrollBar") }}
-                        >
-                            {/* 容器內 ScrollBar 下容器 (tablet)*/}
-                            <BasicContainer
+                        > */}
+            {/* 容器內 ScrollBar 下容器 (tablet)*/}
+            {/* <BasicContainer
                                 {...props.tabletContentContainerEvent}
                                 className={`tabletContentContainer`}
                                 baseDefaultTheme={"DefaultTheme"}
@@ -307,17 +354,17 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                     position: "absolute",
                                     left: "0px",
                                     bottom: "0px"
-                                }} />
+                                }} /> */}
 
-                                {/* COPYRIGHT (laptop) */}
-                                <Text
+            {/* COPYRIGHT (laptop) */}
+            {/* <Text
                                     theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletCopyRight") }}
                                 >
                                     COPYRIGHT © 屏東客戶端
-                                </Text>
+                                </Text> */}
 
-                                {/* 單位資訊 (laptop) */}
-                                <Text
+            {/* 單位資訊 (laptop) */}
+            {/* <Text
                                     theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "tabletUnitInfo") }}
                                 >
                                     屏東縣政府 版權所有 辦公時間：週一至週五 08:00~12:00 13:30~17:30
@@ -333,10 +380,10 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                         </ScrollBar>
                     </BasicContainer>
                 </>
-            }
+            } */}
 
             {/* 小於等於768的畫面 (basic) */}
-            { Width < 768 &&
+            { Width < 1024 &&
                 <>
                     {/* 外部傳入頂部組件容器 (laptop) */}
                     <BasicContainer

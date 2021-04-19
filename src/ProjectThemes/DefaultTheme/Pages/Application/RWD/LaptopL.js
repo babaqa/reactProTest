@@ -14,7 +14,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#FFFFFF"
+                    backgroundColor: "#FFFFFF",
+                    height: "calc( 100vh - 238px )"
                 }
             }
         },

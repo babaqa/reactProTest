@@ -7,7 +7,7 @@ import { ReactComponent as WhiteBlock } from '../../Assets/img/BackstageLeftSide
 import { ReactComponent as LaptopLLogo } from '../../Assets/img/LaptopLLogo.svg'
 import { ReactComponent as LaptopLogo } from '../../Assets/img/LaptopLogo.svg'
 import { ReactComponent as TabletLogo } from '../../Assets/img/TabletLogo.svg'
-import { ReactComponent as MobileMLogo } from '../../Assets/img/MobileMLogo.svg'
+import { ReactComponent as MobileMLogo } from '../../Assets/img/LaptopLogo.svg'
 import { ReactComponent as MobileMMenu } from '../../Assets/img/MobileMMenu.svg'
 
 import { ReactComponent as NewsTab } from '../../Assets/img/NewsTab.svg'
@@ -26,6 +26,8 @@ import { ReactComponent as Castle } from '../../Assets/img/Castle.svg'
 import { ReactComponent as Clock } from '../../Assets/img/Clock.svg'
 import { ReactComponent as CallWorkTime } from '../../Assets/img/CallWorkTime.svg'
 import { ReactComponent as DotOfmap } from '../../Assets/img/DotOfmap.svg'
+
+import { ReactComponent as LeftMenuTab } from '../../Assets/img/LeftMenuTab.svg'
 
 import { getParseItemLocalStorage, setStringifyItemSession, pushAndNotExsistItemSession, getParseItemSession, removeByKeyItemSession, clearLocalStorage, clearSession, setStringifyItemLocalStorage } from '../../Handlers';
 import { iconMap, pageTabBarUrlMapping, pageTextUrlMapping } from '../../Mappings/Mappings'
@@ -133,7 +135,7 @@ export const Layout = (props) => {
         // 臺藝檔案  Files
         // 檔案應用  Application
         // 文書檔案相關Q&A  QAndA
-        // 郵寄服務  MailService
+        // 郵寄查詢  MailService
         switch (key) {
             case "allTabNameLaptopL":
                 return [
@@ -150,7 +152,7 @@ export const Layout = (props) => {
                     { path: "/Files", name: "臺藝檔案" },
                     { path: "/Application", name: "檔案應用" },
                     { path: "/QAndA", name: "文書檔案相關Q&A" },
-                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
+                    { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameLaptop":
                 return [
@@ -167,7 +169,7 @@ export const Layout = (props) => {
                     { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconLaptop} /> },
                     { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconLaptop} /> },
                     { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
+                    { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameTablet":
                 return [
@@ -184,21 +186,17 @@ export const Layout = (props) => {
                     { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
+                    { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameMobileMLeftSide":
                 return [
-                    { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
-                ]
-            case "allTabNameMobileMFixBottom":
-                return [
                     { path: "/Unit", name: "單位介紹", icon: <NewsTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/MailService", name: "郵寄服務", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                     { path: "/Member", name: "成員介紹", icon: <BusRouteTab style={layout.titleBarTabIconMobileM} /> },
                     { path: "/LawsAndRegulations", name: "法令規章", icon: <RecordTab style={layout.titleBarTabIconMobileM} /> },
-                    { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconMobileM} /> },
+                    // { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconMobileM} /> },
+                    { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             default:
                 break;
@@ -310,7 +308,8 @@ export const Layout = (props) => {
                                     return (
                                         <React.Fragment key={item.path}>
                                             {
-                                                (item.path !== "/CallCar") ?
+                                                (item.path !== "/MailService")
+                                                    ?
                                                     <>
                                                         {/* Tab項目容器 */}
                                                         < BasicContainer
@@ -318,7 +317,6 @@ export const Layout = (props) => {
                                                             theme={layout.titleBarTabItemContainerLaptop}
                                                             onClick={() => { history.push(item.path) }}
                                                         >
-                                                            {item.icon}
                                                             <Text
                                                                 theme={layout.titleBarTabTextLaptop}
                                                             >
@@ -328,151 +326,51 @@ export const Layout = (props) => {
                                                         </BasicContainer>
                                                     </>
                                                     :
-                                                    <DropDown
-                                                        placement={"bottomCenter"}
-                                                        dropDownItem={
-                                                            <>
-                                                                {/* DropDown 項目容器 */}
-                                                                <BasicContainer
-                                                                    baseDefaultTheme={"DefaultTheme"}
-                                                                    theme={layout.laptopDropDownItemContainer}
-                                                                >
-                                                                    {/* DropDown 子項目 */}
-                                                                    {item.dropDown.map((it) => {
-                                                                        return (
-                                                                            <Text
-                                                                                onMouseOver={(e) => { setNeedHover(true); props.onMouseover && props.onMouseover(e); }}
-                                                                                onMouseOut={(e) => { setNeedHover(false); props.onMouseout && props.onMouseout(e); }}
-                                                                                key={it.path}
-                                                                                baseDefaultTheme={"DefaultTheme"}
-                                                                                theme={layout.laptopDropDownSubItemContainer}
-                                                                                onClick={() => { history.push(it.path) }}
-                                                                            >
-                                                                                {it.name}
-                                                                            </Text>
-                                                                        )
-                                                                    })
-                                                                    }
-                                                                </BasicContainer>
-                                                            </>
-                                                        }
-                                                    >
-
+                                                    <>
                                                         {/* Tab項目容器 */}
                                                         < BasicContainer
-                                                            active={location.pathname === item.path}
-                                                            needHover={NeedHover}
-                                                            theme={layout.titleBarTabItemContainerLaptop}
-                                                        // onClick={() => { history.push(item.path) }}
+                                                            active={location.pathname === "/MailService"}
+                                                            theme={layout.titleBarMailServiceContainerLaptop}
+                                                            onClick={() => { history.push("/MailService") }}
                                                         >
-                                                            {item.icon}
-                                                            <Text
-                                                                theme={layout.titleBarTabTextLaptop}
-                                                            >
-                                                                {item.name}
-                                                            </Text>
-
+                                                            <MailService />
                                                         </BasicContainer>
-                                                    </DropDown>
+                                                    </>
                                             }
                                         </React.Fragment>
                                     )
                                 }))}
 
                             </Container>
+
                         </SubContainer>
 
-                        {/* 使用者名稱、登出容器 */}
-                        <SubContainer
-                            theme={layout.titleBarUserAndLogoutLaptop}
-                        >
-                            {/* 使用者名稱、登出次容器 */}
-                            <BasicContainer
-                                theme={layout.titleBarUserAndLogoutSubLaptop}
-                            >
-                                {/* 使用者名稱 */}
-                                <Text
-                                    theme={layout.titleBarUserLaptop}
-                                >
-                                    Hi! {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
-                                </Text>
-                                {/* 使用者名稱 分隔 */}
-                                <Text
-                                    theme={layout.titleBarUserStepLaptop}
-                                >
-                                    |
-                                </Text>
-
-                                {getParseItemLocalStorage("CAuth")
-                                    ?
-                                    <>
-                                        {/* 登出 */}
-                                        <Text
-                                            theme={layout.titleBarLogoutLaptop}
-                                            onClick={() => {
-                                                modalsService.infoModal.warn({
-                                                    iconRightText: "是否要登出?",
-                                                    yes: true,
-                                                    yesText: "確認",
-                                                    no: true,
-                                                    noText: "取消",
-                                                    // autoClose: true,
-                                                    backgroundClose: false,
-                                                    yesOnClick: (e, close) => {
-                                                        clearLocalStorage();
-                                                        clearSession();
-                                                        globalContextService.clear();
-                                                        Switch();
-                                                        close();
-                                                    }
-                                                })
-                                            }}
-                                        >
-                                            <LogoutLaptop style={layout.titleBarLogoutIconLaptop} />
-                                            登出
-                                        </Text>
-                                    </>
-                                    :
-                                    <>
-                                        {/* 登入 */}
-                                        <Text
-                                            theme={layout.titleBarLogoutLaptop}
-                                            onClick={() => { history.push("/Login") }}
-                                        >
-                                            <LoginLaptop style={layout.titleBarLogoutIconLaptop} />
-                                            登入
-                                    </Text>
-                                    </>
-                                }
-
-                            </BasicContainer>
-                        </SubContainer>
                     </Container>
                 </>
             }
 
             {/* 大於768 與 小於1024的畫面 (Tablet)*/}
-            {
-                (width >= 768 && width < 1024) &&
-                <>
-                    {/* 標題列容器 Tablet */}
-                    <Container
+            {/* {
+                // (width >= 768 && width < 1024) &&
+                <> */}
+            {/* 標題列容器 Tablet */}
+            {/* <Container
                         theme={layout.titleBarContainerTablet}
-                    >
-                        {/* Logo容器 Tablet */}
-                        <SubContainer
+                    > */}
+            {/* Logo容器 Tablet */}
+            {/* <SubContainer
                             theme={layout.titleBarLogoContainerTablet}
-                        >
-                            {/* Logo ICON Tablet */}
-                            <TabletLogo style={layout.titleBarLogoIconTablet} />
-                        </SubContainer>
+                        > */}
+            {/* Logo ICON Tablet */}
+            {/* <TabletLogo style={layout.titleBarLogoIconTablet} />
+                        </SubContainer> */}
 
-                        {/* Tab 容器 Tablet */}
-                        <SubContainer
+            {/* Tab 容器 Tablet */}
+            {/* <SubContainer
                             theme={layout.titleBarTabContainerTablet}
-                        >
-                            {/* Tab 次容器 Tablet */}
-                            <Container
+                        > */}
+            {/* Tab 次容器 Tablet */}
+            {/* <Container
                                 theme={layout.titleBarTabSubContainerTablet}
                             >
                                 {TabMapping("allTabNameTablet").map((item => {
@@ -480,9 +378,9 @@ export const Layout = (props) => {
                                         <React.Fragment key={item.path}>
                                             {
                                                 (item.path !== "/CallCar") ?
-                                                    <>
-                                                        {/* Tab項目容器 */}
-                                                        < BasicContainer
+                                                    <> */}
+            {/* Tab項目容器 */}
+            {/* < BasicContainer
                                                             active={location.pathname === item.path}
                                                             theme={layout.titleBarTabItemContainerTablet}
                                                             onClick={() => { history.push(item.path) }}
@@ -500,14 +398,14 @@ export const Layout = (props) => {
                                                     <DropDown
                                                         placement={"bottomCenter"}
                                                         dropDownItem={
-                                                            <>
-                                                                {/* DropDown 項目容器 */}
-                                                                <BasicContainer
+                                                            <> */}
+            {/* DropDown 項目容器 */}
+            {/* <BasicContainer
                                                                     baseDefaultTheme={"DefaultTheme"}
                                                                     theme={layout.laptopDropDownItemContainer}
-                                                                >
-                                                                    {/* DropDown 子項目 */}
-                                                                    {item.dropDown.map((it) => {
+                                                                > */}
+            {/* DropDown 子項目 */}
+            {/* {item.dropDown.map((it) => {
                                                                         return (
                                                                             <Text
                                                                                 onMouseOver={(e) => { setNeedHover(true); props.onMouseover && props.onMouseover(e); }}
@@ -525,10 +423,10 @@ export const Layout = (props) => {
                                                                 </BasicContainer>
                                                             </>
                                                         }
-                                                    >
+                                                    > */}
 
-                                                        {/* Tab項目容器 */}
-                                                        < BasicContainer
+            {/* Tab項目容器 */}
+            {/* < BasicContainer
                                                             active={location.pathname === item.path}
                                                             needHover={NeedHover}
                                                             theme={layout.titleBarTabItemContainerTablet}
@@ -549,24 +447,24 @@ export const Layout = (props) => {
                                 }))}
 
                             </Container>
-                        </SubContainer>
+                        </SubContainer> */}
 
-                        {/* 使用者名稱、登出容器 */}
-                        <SubContainer
+            {/* 使用者名稱、登出容器 */}
+            {/* <SubContainer
                             theme={layout.titleBarUserAndLogoutTablet}
-                        >
-                            {/* 使用者名稱、登出次容器 */}
-                            <BasicContainer
+                        > */}
+            {/* 使用者名稱、登出次容器 */}
+            {/* <BasicContainer
                                 theme={layout.titleBarUserAndLogoutSubTablet}
-                            >
-                                {/* 使用者名稱 */}
-                                <Text
+                            > */}
+            {/* 使用者名稱 */}
+            {/* <Text
                                     theme={layout.titleBarUserTablet}
                                 >
                                     Hi! {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
-                                </Text>
-                                {/* 使用者名稱 分隔 */}
-                                <Text
+                                </Text> */}
+            {/* 使用者名稱 分隔 */}
+            {/* <Text
                                     theme={layout.titleBarUserStepTablet}
                                 >
                                     |
@@ -574,9 +472,9 @@ export const Layout = (props) => {
 
                                 {getParseItemLocalStorage("CAuth")
                                     ?
-                                    <>
-                                        {/* 登出 */}
-                                        <Text
+                                    <> */}
+            {/* 登出 */}
+            {/* <Text
                                             theme={layout.titleBarLogoutTablet}
                                             onClick={() => {
                                                 modalsService.infoModal.warn({
@@ -602,9 +500,9 @@ export const Layout = (props) => {
                                         </Text>
                                     </>
                                     :
-                                    <>
-                                        {/* 登入 */}
-                                        <Text
+                                    <> */}
+            {/* 登入 */}
+            {/* <Text
                                             theme={layout.titleBarLogoutTablet}
                                             onClick={() => { history.push("/Login") }}
                                         >
@@ -616,24 +514,19 @@ export const Layout = (props) => {
 
                             </BasicContainer>
                         </SubContainer>
-                    </Container>
-                </>
-            }
+                    </Container> */}
+            {/* </>
+            } */}
 
             {/* 小於等於1024的畫面 (MobileM) */}
             {
-                width < 768 &&
+                width < 1024 &&
                 <>
                     {/* 標題列容器 MobileM */}
                     <Container
                         theme={layout.titleBarContainerMobileM}
                     >
-                        {/* 側邊欄按鈕容器 */}
-                        <SubContainer
-                            theme={layout.titleBarLeftSIdeBtnContainerMobileM}
-                        >
-                            <MobileMMenu onClick={() => { setDrawerCollapse(false) }} />
-                        </SubContainer>
+
 
                         {/* Logo容器 */}
                         <SubContainer
@@ -642,15 +535,21 @@ export const Layout = (props) => {
                             <MobileMLogo />
                         </SubContainer>
 
-                        {/* 登入容器 */}
+                        {/* 側邊欄按鈕容器 */}
                         <SubContainer
+                            theme={layout.titleBarLeftSIdeBtnContainerMobileM}
+                        >
+                            <MobileMMenu onClick={() => { setDrawerCollapse(false) }} />
+                        </SubContainer>
+                        {/* 登入容器 */}
+                        {/* <SubContainer
                             theme={layout.titleBarLoginContainerMobileM}
                         >
                             {!getParseItemLocalStorage("CAuth")
                                 &&
-                                <>
-                                    {/* 登入 */}
-                                    <Text
+                                <> */}
+                        {/* 登入 */}
+                        {/* <Text
                                         theme={layout.titleBarLoginMobileM}
                                         onClick={() => { history.push("/Login") }}
                                     >
@@ -659,7 +558,7 @@ export const Layout = (props) => {
                                     </Text>
                                 </>
                             }
-                        </SubContainer>
+                        </SubContainer> */}
                     </Container>
 
                     {/* LeftSideDrawer 樣式 MobileM */}
@@ -669,82 +568,6 @@ export const Layout = (props) => {
                         containerEvent={{ onClick: () => { setDrawerCollapse(true) } }}
                         theme={layout.leftSideDrawerMobileM}
                     >
-                        {/* 若已登入，則秀登出按鈕 */}
-                        <BasicContainer
-                            theme={{
-                                basic: (style, props) => ({
-                                    ...style,
-                                    // position: "absolute",
-                                    // bottom: "10px",
-                                    textAlign: "center",
-                                    width: "100%",
-                                    paddingTop: "8px"
-                                })
-                            }}
-                        >
-                            <Text
-                                theme={{
-                                    basic: (style, props) => ({
-                                        ...style,
-                                        fontSize: "16px",
-                                        lineHeight: "24px",
-                                        textAlign: "center",
-                                        color: "#4DB8BE",
-                                        display: "inline-block",
-                                        marginRight: "16px",
-                                    })
-                                }}
-                            >
-                                Hi!  {getParseItemLocalStorage("CAuth") ? getParseItemLocalStorage("UserName") : "訪客"}
-                            </Text>
-
-                            {getParseItemLocalStorage("CAuth")
-                                ?
-                                <>
-                                    {/* 登出 */}
-                                    <Text
-                                        theme={layout.titleBarLogoutMobileM}
-                                        onClick={() => {
-                                            setDrawerCollapse(true);
-
-                                            modalsService.infoModal.warn({
-                                                iconRightText: "是否要登出?",
-                                                yes: true,
-                                                yesText: "確認",
-                                                no: true,
-                                                noText: "取消",
-                                                // autoClose: true,
-                                                backgroundClose: false,
-                                                yesOnClick: (e, close) => {
-                                                    clearLocalStorage();
-                                                    clearSession();
-                                                    globalContextService.clear();
-                                                    Switch();
-                                                    setDrawerCollapse(true);
-                                                    close();
-                                                }
-                                            })
-                                        }}
-                                    >
-                                        <LogoutLaptop style={layout.titleBarLogoutIconMobileM} />
-                                            登出
-                                        </Text>
-                                </>
-                                :
-                                <>
-                                    {/* 登入 */}
-                                    <Text
-                                        theme={layout.titleBarLogoutMobileM}
-                                        onClick={() => { history.push("/Login") }}
-                                    >
-                                        <LoginLaptop style={layout.titleBarLogoutIconMobileM} />
-                                            登入
-                                        </Text>
-                                </>
-                            }
-
-                        </BasicContainer>
-
                         {/* Menu區 MobileM */}
                         <ScrollBar
                             basedefaulttheme={"DefaultTheme"}
@@ -752,418 +575,40 @@ export const Layout = (props) => {
                             autoHide={true}
                             theme={layout.menuAreaScrollBarMobileM}
                         >
-                            <BasicContainer
-                                {...props.logoAreaEvent}
-                                className={`collapseMenuArea`}
-                                baseDefaultTheme={"BasicContainerDefaultTheme"}
-                                theme={layout.menuArea}
+                            {/* 固定底部容器 */}
+                            <Container
+                                theme={layout.titleBarFixedBottomMobileM}
                             >
-                                {/* 在這裡遍歷MenuItem */}
-                                {generateMenu([
-                                    {
-                                        children: [],
-                                        item: {
-                                            id: "79124b7c-12ca-4ce6-802e-15ee192aac5b",
-                                            name: "聯繫客服",
-                                            parentId: null,
-                                            parentName: "根節點",
-                                            sortNo: 3,
-                                            status: 0,
-                                            url: "/Contact",
-                                        }
-                                    },
-                                    {
-                                        children: [],
-                                        item: {
-                                            id: "77777777-33ca-6cc6-802e-16ee172aaaaa",
-                                            name: "常見問題",
-                                            parentId: null,
-                                            parentName: "根節點",
-                                            sortNo: 3,
-                                            status: 0,
-                                            url: "/QAndA",
-                                        }
-                                    },
-                                ], history, location, ExpandMenuName, setExpandMenuName, setDrawerCollapse, true)}
-
-                                {/* 手機板政府單位聯絡資訊區 */}
-                                <BasicContainer>
-                                    {/* 屏東縣政府資訊 */}
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                textAlign: "center",
-                                                color: "#4DB8BE",
-                                                paddingTop: "36px"
-                                            })
-                                        }}
-                                    >
-                                        <Line style={{
-                                            position: "relative",
-                                            top: "-6px",
-                                            left: "-18px"
-                                        }} />
-                                        <Castle style={{
-                                            position: "relative",
-                                            left: "-12px",
-                                            top: "2px"
-                                        }} />
-                                        屏東縣政府資訊
-                                        <Line style={{
-                                            position: "relative",
-                                            top: "-6px",
-                                            left: "18px"
-                                        }} />
-                                        {/* 
-CallWorkTime }
-DotOfmap } fro */}
-
-                                    </Text>
-
-                                    {/* 地址 */}
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                padding: "0 0 0 14px",
-                                                fontWeight: 500,
-                                                fontSize: "12px",
-                                                lineHeight: "18px",
-                                                color: "rgba(0, 0, 0, 0.85)"
-                                            })
-                                        }}
-                                    >
-                                        地址:
-                                    </Text>
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                padding: "0 0 0 28px",
-                                                fontSize: "14px",
-                                                lineHeight: "22px",
-                                                color: "rgba(0, 0, 0, 0.65)",
-                                            })
-                                        }}
-                                    >
-                                        <DotOfmap style={{
-                                            position: "absolute",
-                                            left: "12px",
-                                            top: "4px",
-                                        }} />
-                                        屏東縣屏東市自由路527號
-                                    </Text>
-
-                                    {/* 辦公時間 */}
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                padding: "0 0 0 14px",
-                                                fontWeight: 500,
-                                                fontSize: "12px",
-                                                lineHeight: "18px",
-                                                color: "rgba(0, 0, 0, 0.85)"
-                                            })
-                                        }}
-                                    >
-                                        辦公時間:
-                                    </Text>
-
-                                    <Container>
-                                        <SubContainer
-                                            theme={{
-                                                basic: (style, props) => ({
-                                                    ...style,
-                                                    ...style.occupy(6)
-                                                })
-                                            }}
-                                        >
-                                            <Text
-                                                theme={{
-                                                    basic: (style, props) => ({
-                                                        ...style,
-                                                        padding: "0 0 0 14px",
-                                                        fontSize: "14px",
-                                                        lineHeight: "22px",
-                                                        color: "rgba(0, 0, 0, 0.65)",
-                                                    })
-                                                }}
+                                {TabMapping("allTabNameMobileMLeftSide").map((item => {
+                                    return (
+                                        <React.Fragment key={item.path}>
+                                            {/* Tab項目容器 */}
+                                            <BasicContainer
+                                                active={location.pathname === item.path}
+                                                theme={layout.titleBarTabItemContainerMobileM}
+                                                onClick={() => { history.push(item.path) }}
                                             >
-                                                週一至週五
-                                            </Text>
-                                        </SubContainer>
+                                                {
+                                                    location.pathname === item.path
+                                                    &&
+                                                    <LeftMenuTab style={layout.LeftMenuTabPoent} />
+                                                }
+                                                
+                                                <Text
+                                                    theme={layout.titleBarTabTextMobileM}
+                                                >
+                                                    {item.name}
+                                                </Text>
 
-                                        <SubContainer
-                                            theme={{
-                                                basic: (style, props) => ({
-                                                    ...style,
-                                                    ...style.occupy(6)
-                                                })
-                                            }}
-                                        >
-                                            <Text
-                                                theme={{
-                                                    basic: (style, props) => ({
-                                                        ...style,
-                                                        fontWeight: "bold",
-                                                        fontSize: "14px",
-                                                        lineHeight: "22px",
-                                                        color: "#1890FF",
-                                                    })
-                                                }}
-                                            >
-                                                <Clock style={{
-                                                    position: "relative",
-                                                    top: "2px",
-                                                    left: "-2px"
-                                                }} />
-                                                08:00~12:00
-                                            </Text>
-                                            <Text
-                                                theme={{
-                                                    basic: (style, props) => ({
-                                                        ...style,
-                                                        fontWeight: "bold",
-                                                        fontSize: "14px",
-                                                        lineHeight: "22px",
-                                                        color: "#1890FF",
-                                                    })
-                                                }}
-                                            >
-                                                <Clock style={{
-                                                    position: "relative",
-                                                    top: "2px",
-                                                    left: "-2px"
-                                                }} />
-                                                13:30~17:30
-                                            </Text>
-                                        </SubContainer>
-                                    </Container>
+                                            </BasicContainer>
+                                        </React.Fragment >
+                                    )
+                                }))}
+                            </Container>
 
-                                    {/* 總機電話 */}
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                padding: "0 0 0 14px",
-                                                fontWeight: 500,
-                                                fontSize: "12px",
-                                                lineHeight: "18px",
-                                                color: "rgba(0, 0, 0, 0.85)"
-                                            })
-                                        }}
-                                    >
-                                        總機電話:
-                                        <a
-                                            href="tel:+886-8-7320415"
-                                            style={{
-                                                position: "relative",
-                                                left: "52px",
-                                                fontSize: "14px"
-                                            }}
-                                        >
-                                            <CallWorkTime style={{ position: "relative", top: "2px" }} />(08)732-0415
-                                        </a>
-                                    </Text>
-
-                                    {/* 分隔線 */}
-                                    <BasicContainer
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                border: "1px dashed #D9D9D9",
-                                                margin: "18px 0",
-                                                width: "100%"
-                                            })
-                                        }}
-                                    />
-
-                                    {/* 1999便民服務專線(付費專線) */}
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                fontWeight: "bold",
-                                                fontSize: "14px",
-                                                lineHeight: "22px",
-                                                color: "#fa541c",
-                                                textAlign: "center"
-                                            })
-                                        }}
-                                    >
-                                        1999便民服務專線
-                                        <Text
-                                            theme={{
-                                                basic: (style, props) => ({
-                                                    ...style,
-                                                    fontWeight: "bold",
-                                                    fontSize: "14px",
-                                                    lineHeight: "22px",
-                                                    color: "#f5222d",
-                                                    display: "inline-block"
-                                                })
-                                            }}
-                                        >
-                                            (付費專線)
-                                        </Text>
-                                    </Text>
-
-
-                                    {/* 服務時間 */}
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                padding: "0 0 0 14px",
-                                                fontWeight: 500,
-                                                fontSize: "12px",
-                                                lineHeight: "18px",
-                                                color: "rgba(0, 0, 0, 0.85)"
-                                            })
-                                        }}
-                                    >
-                                        服務時間:
-                                    </Text>
-
-                                    <Container>
-                                        <SubContainer
-                                            theme={{
-                                                basic: (style, props) => ({
-                                                    ...style,
-                                                    ...style.occupy(6)
-                                                })
-                                            }}
-                                        >
-                                            <Text
-                                                theme={{
-                                                    basic: (style, props) => ({
-                                                        ...style,
-                                                        padding: "0 0 0 14px",
-                                                        fontSize: "14px",
-                                                        lineHeight: "22px",
-                                                        color: "rgba(0, 0, 0, 0.65)",
-                                                    })
-                                                }}
-                                            >
-                                                每日
-                                            </Text>
-                                        </SubContainer>
-
-                                        <SubContainer
-                                            theme={{
-                                                basic: (style, props) => ({
-                                                    ...style,
-                                                    ...style.occupy(6)
-                                                })
-                                            }}
-                                        >
-                                            <Text
-                                                theme={{
-                                                    basic: (style, props) => ({
-                                                        ...style,
-                                                        fontWeight: "bold",
-                                                        fontSize: "14px",
-                                                        lineHeight: "22px",
-                                                        color: "#1890FF",
-                                                    })
-                                                }}
-                                            >
-                                                <Clock style={{
-                                                    position: "relative",
-                                                    top: "2px",
-                                                    left: "-2px"
-                                                }} />
-                                                08:00~22:00
-                                            </Text>
-                                        </SubContainer>
-                                    </Container>
-
-                                    {/* 縣境內直撥 */}
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                padding: "0 0 0 14px",
-                                                fontWeight: 500,
-                                                fontSize: "12px",
-                                                lineHeight: "18px",
-                                                color: "rgba(0, 0, 0, 0.85)"
-                                            })
-                                        }}
-                                    >
-                                        縣境內直撥
-                                        <a
-                                            href="tel:+886-1999"
-                                            style={{
-                                                position: "relative",
-                                                left: "44px",
-                                                fontSize: "14px"
-                                            }}
-                                        >
-                                            <CallWorkTime style={{ position: "relative", top: "2px" }} />1999
-                                        </a>
-                                    </Text>
-
-                                    {/* 縣境內直撥 */}
-                                    <Text
-                                        theme={{
-                                            basic: (style, props) => ({
-                                                ...style,
-                                                padding: "0 0 0 14px",
-                                                fontWeight: 500,
-                                                fontSize: "12px",
-                                                lineHeight: "18px",
-                                                color: "rgba(0, 0, 0, 0.85)"
-                                            })
-                                        }}
-                                    >
-                                        外縣市請撥
-                                        <a
-                                            href="tel:+886-8-732-0415"
-                                            style={{
-                                                position: "relative",
-                                                left: "44px",
-                                                fontSize: "14px"
-                                            }}
-                                        >
-                                            <CallWorkTime style={{ position: "relative", top: "2px" }} />(08)732-0415
-                                        </a>
-                                    </Text>
-
-                                </BasicContainer>
-
-
-                            </BasicContainer>
                         </ScrollBar>
                     </LeftSideDrawer>
 
-                    {/* 固定底部容器 */}
-                    <Container
-                        theme={layout.titleBarFixedBottomMobileM}
-                    >
-                        {TabMapping("allTabNameMobileMFixBottom").map((item => {
-                            return (
-                                <React.Fragment key={item.path}>
-                                    {/* Tab項目容器 */}
-                                    <BasicContainer
-                                        active={location.pathname === item.path}
-                                        theme={layout.titleBarTabItemContainerMobileM}
-                                        onClick={() => { history.push(item.path) }}
-                                    >
-                                        {item.icon}
-                                        <Text
-                                            theme={layout.titleBarTabTextMobileM}
-                                        >
-                                            {item.name}
-                                        </Text>
-
-                                    </BasicContainer>
-                                </React.Fragment >
-                            )
-                        }))}
-                    </Container>
                 </>
             }
         </>

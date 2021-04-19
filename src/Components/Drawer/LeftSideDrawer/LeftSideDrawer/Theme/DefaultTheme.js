@@ -52,12 +52,12 @@ export default {
             outline: 0,
             userSelect: "none",
             height: "100%",
-            left: `${props.collapse ? "-17rem" : "0rem"}`,//"-100%",,
+            left: `${props.collapse ? "-100%" : "0rem"}`,//"-100%",,
             top: 0,
             backgroundColor: "rgba(255,255,255)",
             zIndex: 1101,
             transition: "left .3s ease-in-out",
-            boxShadow: "0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12)"
+            // boxShadow: "0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12)"
             //#endregion
         })
     }

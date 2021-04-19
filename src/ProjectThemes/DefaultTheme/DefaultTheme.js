@@ -56,7 +56,7 @@ export default {
 
         //#endregion
 
-        //#region 郵寄服務
+        //#region 郵寄查詢
         mailService: {
             ...mailService,
             component: {
