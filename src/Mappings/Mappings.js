@@ -39,7 +39,7 @@ import { from } from 'rxjs';
 
 //#region 
 export const urlMapping = {
-   "/Test": <Test />,
+   "/": <Test />,
 
    "/Unit": <Unit />,// 單位簡介
    // "/CallCar": <CallCar />,// 預約訂車

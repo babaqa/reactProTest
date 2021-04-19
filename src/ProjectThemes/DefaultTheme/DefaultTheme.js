@@ -6,7 +6,7 @@ import member from './Pages/Member/Member'
 import allBusRouteComponent from './Pages/Member/AllBusRouteComponent/AllBusRouteComponent'
 
 import systemNewsComponent from './Pages/Unit/SystemNewsComponent/SystemNewsComponent'
-// import systemTestComponent from './Pages/Test/SystemTestComponent/SystemTestComponent'
+import systemTestComponent from './Pages/Test/SystemTestComponent/SystemTestComponent'
 
 import mailService from './Pages/MailService/MailService'
 import caseCallCarComponent from './Pages/MailService/CaseCallCarComponent/CaseCallCarComponent'
@@ -27,12 +27,12 @@ export default {
         login,
 
         //#region 測試首頁
-        // test: {
-        //     ...test,
-        //     component: {
-        //         systemTestComponent,
-        //     }
-        // },
+        test: {
+            ...test,
+            component: {
+                systemTestComponent,
+            }
+        },
 
         //#endregion
 

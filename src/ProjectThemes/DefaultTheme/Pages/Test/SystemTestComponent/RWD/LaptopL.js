@@ -158,7 +158,7 @@ export default {
             fontSize: "25px",
             fontFamily: "Roboto",
             fontWeight: 700,
-            letterSpacing:"0.3em",
+            letterSpacing: "0.3em",
         }),
     },
     //#endregion
@@ -222,7 +222,8 @@ export default {
             display: "inline-block",
             textOverflow: "ellipsis",
             overflow: "hidden",
-            whiteSpace: "nowrap"
+            whiteSpace: "nowrap",
+            letterSpacing: "0.2em",
         }),
     },
     //#endregion

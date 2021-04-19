@@ -14,7 +14,7 @@ import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 const MobileMBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { news: { component: { systemNewsComponent: { rwd: { mobileM } } } } } } = Theme;
+    const { pages: { test: { component: { systemTestComponent: { rwd: { mobileM } } } } } } = Theme;
 
     const [Width, Height] = useWindowSize();
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件

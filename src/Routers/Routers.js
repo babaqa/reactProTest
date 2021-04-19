@@ -167,7 +167,7 @@ export const Routers = (props) => {
                    Author : Arhua Ho
                    Content: 固定段，含根、登入、404
                 */}
-                <Route exact path={"/"}
+                {/* <Route exact path={"/"}
                     render={({ location }) => {
                         return (getParseItemLocalStorage("CAuth") !== null) ? (
                             // urlMapping["/"]
@@ -185,18 +185,18 @@ export const Routers = (props) => {
                         );
                     }
                     }>
-                </Route>
+                </Route> */}
                 {/* 
                    Date   : 2020-07-08 18:58:41
                    Author : Arhua Ho
                    Content: 寫死的路由
                 */}
-                <Route exact path={"/Test"}
+                <Route exact path={"/"}
                     render={({ location }) => {
                         return (getParseItemLocalStorage("CAuth") !== null) ? (
-                            urlMapping["/Test"]
+                            urlMapping["/"]
                         ) : (
-                            urlMapping["/Test"]
+                            urlMapping["/"]
                             // <Redirect
                             //     to={{
                             //         pathname: "/Login",
@@ -211,12 +211,12 @@ export const Routers = (props) => {
                         return (getParseItemLocalStorage("CAuth") !== null) ? (
                             urlMapping["/Unit"]
                         ) : (
-                            urlMapping["/Unit"]
-                            // <Redirect
-                            //     to={{
-                            //         pathname: "/Login",
-                            //     }}
-                            // />
+                            // urlMapping["/Unit"]
+                            <Redirect
+                                to={{
+                                    pathname: "/",
+                                }}
+                            />
                         );
                     }
                     }>
@@ -227,12 +227,12 @@ export const Routers = (props) => {
                             urlMapping["/MailService"]
                         ) : (
                             urlMapping["/MailService"]
-                                // <Redirect
-                                //     to={{
-                                //         pathname: "/Login",
-                                //     }}
-                                // />
-                            );
+                            // <Redirect
+                            //     to={{
+                            //         pathname: "/Login",
+                            //     }}
+                            // />
+                        );
                     }
                     }>
                 </Route>
@@ -412,7 +412,7 @@ export const Routers = (props) => {
                         ) : (
                             <Redirect
                                 to={{
-                                    pathname: "/Unit",
+                                    pathname: "/",
                                 }}
                             />
                         );
@@ -431,7 +431,7 @@ export const Routers = (props) => {
                         ) : (
                             <Redirect
                                 to={{
-                                    pathname: "/Login",
+                                    pathname: "/",
                                 }}
                             />
                         );
@@ -463,7 +463,7 @@ export const Routers = (props) => {
                         ) : (
                             <Redirect
                                 to={{
-                                    pathname: "/Login",
+                                    pathname: "/",
                                 }}
                             />
                         );
