@@ -64,8 +64,8 @@ export default {
                 width: "100%",
                 top: "95px",
                 // left: props.collapse ? "4rem" : "15rem",
-                // height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
-                height: `calc( 100vh - 117px )`,
+                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                // height: `calc( 100vh - 117px )`,
                 //#endregion
             }
         }
@@ -480,8 +480,8 @@ export default {
                 width: "100%",
                 top: "95px",
                 // left: props.collapse ? "4rem" : "15rem",
-                // height: `calc( 100vh - 80px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
-                height: `calc( 100vh - 95px )`,
+                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                // height: `calc( 100vh - 95px )`,
                 //#endregion
             }
         }

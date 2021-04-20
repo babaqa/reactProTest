@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { BasicContainer, ScrollBar } from '../../../';
 import { iterateTheme } from '../../../../Handlers/ThemeHandler';
+import { ReactComponent as LeftMenuCross } from '../../../../Assets/img/LeftMenuCross.svg'
 //#region 擴充基本樣式區
 import DefaultTheme from './Theme/DefaultTheme'
 // import PrimaryTheme from './Theme/PrimaryTheme'
@@ -37,17 +38,23 @@ export const BackstageLeftSideMenuBarBase = (props) => {
                     baseDefaultTheme={"BasicContainerDefaultTheme"}
                     theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "container") }}
                 >
-                    {/* Logo區 */}
-                    <BasicContainer
-                        {...props.logoAreaEvent}
-                        className={`logoArea`}
-                        baseDefaultTheme={"BasicContainerDefaultTheme"}
-                        theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "logoArea") }}
-                    >
-                        {/* Logo圖與文字 */}
-                        {props.logo}
-                        {props.logoText}
-                    </BasicContainer>
+                    {props.log
+                        &&
+                        <>
+                            {/* Logo區 */}
+                            < BasicContainer
+                                {...props.logoAreaEvent}
+                                className={`logoArea`}
+                                baseDefaultTheme={"BasicContainerDefaultTheme"}
+                                theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "logoArea") }}
+                            >
+                                {/* Logo圖與文字 */}
+                                {props.logo}
+                                {props.logoText}
+                            </BasicContainer>
+                        </>
+                    }
+
                     {/* Menu切換Page區 */}
                     <ScrollBar
                         basedefaulttheme={"DefaultTheme"}
@@ -61,6 +68,16 @@ export const BackstageLeftSideMenuBarBase = (props) => {
                             baseDefaultTheme={"BasicContainerDefaultTheme"}
                             theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("DefaultTheme"), "menuArea") }}
                         >
+                            <LeftMenuCross style={{
+                                position: "absolute",
+                                top: "39px",
+                                right: "29px"
+                            }}
+                                onClick={() => {
+                                    props.setDrawerCollapse(true);
+                                }}
+                            />
+
                             {/* 在這裡遍歷MenuItem */}
                             {props.menuItem}
                         </BasicContainer>
@@ -68,41 +85,42 @@ export const BackstageLeftSideMenuBarBase = (props) => {
                 </BasicContainer>)
             }
             {/* 收合的情況 */}
-            {props.collapse && (
-                <BasicContainer
-                    {...props.containerEvent}
-                    className={`${props.className} collapseContainer`}
-                    baseDefaultTheme={"BasicContainerDefaultTheme"}
-                    theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "collapseContainer") }}
-                >
-                    {/* Logo區 */}
+            {
+                props.collapse && (
                     <BasicContainer
-                        {...props.logoAreaEvent}
-                        className={`collapseLogoArea`}
+                        {...props.containerEvent}
+                        className={`${props.className} collapseContainer`}
                         baseDefaultTheme={"BasicContainerDefaultTheme"}
-                        theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "collapseLogoArea") }}
+                        theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "collapseContainer") }}
                     >
-                        {/* Logo圖 */}
-                        {props.logo}
-                    </BasicContainer>
-                    {/* Menu切換Page區 */}
-                    <ScrollBar
-                        basedefaulttheme={"DefaultTheme"}
-                        className={`collapseMenuAreaScrollBar`}
-                        autoHide={true}
-                        theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "collapseMenuAreaScrollBar") }}
-                    >
+                        {/* Logo區 */}
                         <BasicContainer
                             {...props.logoAreaEvent}
-                            className={`collapseMenuArea`}
+                            className={`collapseLogoArea`}
                             baseDefaultTheme={"BasicContainerDefaultTheme"}
-                            theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "collapseMenuArea") }}
+                            theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "collapseLogoArea") }}
                         >
-                            {/* 在這裡遍歷MenuItem */}
-                            {props.menuItem}
+                            {/* Logo圖 */}
+                            {props.logo}
                         </BasicContainer>
-                    </ScrollBar>
-                </BasicContainer>)
+                        {/* Menu切換Page區 */}
+                        <ScrollBar
+                            basedefaulttheme={"DefaultTheme"}
+                            className={`collapseMenuAreaScrollBar`}
+                            autoHide={true}
+                            theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "collapseMenuAreaScrollBar") }}
+                        >
+                            <BasicContainer
+                                {...props.logoAreaEvent}
+                                className={`collapseMenuArea`}
+                                baseDefaultTheme={"BasicContainerDefaultTheme"}
+                                theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme("BasicContainerDefaultTheme"), "collapseMenuArea") }}
+                            >
+                                {/* 在這裡遍歷MenuItem */}
+                                {props.menuItem}
+                            </BasicContainer>
+                        </ScrollBar>
+                    </BasicContainer>)
             }
         </>
     )

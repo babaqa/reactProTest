@@ -783,6 +783,14 @@ export default {
     },
     //#endregion
 
+    //#region 關閉按鈕 圖標
+    LeftMenuCrossSvg: {
+        position: "absolute",
+        top: "39px",
+        right: "29px"
+    },
+    //#endregion
+
     //#region 固定底部容器 MobileM
     titleBarFixedBottomMobileM: {
         basic: (style, props) => ({
@@ -801,16 +809,17 @@ export default {
     titleBarTabItemContainerMobileM: {
         basic: (style, props) => ({
             ...style,
+            display: "flex",
             backgroundColor: "transparent",
-            height: "21px",
+            // height: "21px",
             width: "100%",
-            color: props?.active ? "#1890FF" : "#8C8C8C",
-            margin: "0 0 39px"
+            // color: props?.active ? "#1890FF" : "#8C8C8C",
+            margin: props.extend ? 0 : "0 0 39px"
         }),
-        hover: (style, props) => ({
-            color: "#1890FF",
-            borderBottom: "3px solid",
-        })
+        // hover: (style, props) => ({
+        //     color: "#1890FF",
+        //     borderBottom: "3px solid",
+        // })
     },
     //#endregion
 
@@ -849,8 +858,42 @@ export default {
     },
     //#endregion
 
+    //#region Sub項目容器
+    titleBarSubItemContainerMobileM: {
+        basic: (style, props) => ({
+            ...style,
+            backgroundColor: "transparent",
+            width: "100%",
+            color: props?.active ? "#1890FF" : "#8C8C8C",
+            padding: "16px 0 16px 131px"
+        }),
+    },
+    //#endregion
 
+    //#region Tab項目文字
+    titleBarSubTextMobileM: {
+        basic: (style, props) => ({
+            ...style,
+            color: "#FFFFFF",
+            userSelect: "none",
+            fontWeight: 700,
+            fontSize: "18px",
+            fontFamily: "Roboto",
+            lineHeight: "21px",
+            padding: "12px 32px 12px 54px",
+            backgroundColor: "#4B4B4B",
+            width: "175px",
+        })
+    },
+    //#endregion
 
+    //#region Sub項目圖標
+    LeftMenuSubPoent: {
+        position: "absolute",
+        top: "16px",
+        left: "32px"
+    },
+    //#endregion
     //#endregion
 
 
