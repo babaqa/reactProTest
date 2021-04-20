@@ -139,7 +139,8 @@ const LaptopLBase = (props) => {
                 {/* 第二區塊容器 */}
                 <Container theme={laptopL.onlineFileContainer}>
                     <ArchiveExhibition style={{
-                        width: "65%"
+                        width: "60%",
+                        maxWidth: "750px"
                     }} />
                     <Text theme={laptopL.onlineFileTitle}>線上檔案展</Text>
                 </Container>

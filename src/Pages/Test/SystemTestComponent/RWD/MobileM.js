@@ -174,8 +174,10 @@ const MobileMBase = (props) => {
                                 )
                             })
                         }
-
                     </SubContainer>
+                    <Text theme={mobileM.moreButton}>
+                        More
+                            </Text>
                 </Container>
 
                 {/* 第四區塊容器 */}
@@ -228,6 +230,9 @@ const MobileMBase = (props) => {
                             </Container>
                         </Container>
                     </SubContainer>
+                    <Text theme={mobileM.moreButton}>
+                        More
+                            </Text>
 
                 </Container>
             </BasicContainer>

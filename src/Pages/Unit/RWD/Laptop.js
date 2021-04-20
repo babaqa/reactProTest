@@ -7,7 +7,6 @@ import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
 import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
-import { SystemNewsComponent } from '../SystemNewsComponent/SystemNewsComponent'
 
 const LaptopBase = (props) => {
 
@@ -22,7 +21,7 @@ const LaptopBase = (props) => {
             case "tabUseComponent":
                 return (
                     {
-                        "系統公告": <SystemNewsComponent />,
+                        // "系統公告": <SystemNewsComponent />,
                     }
                 );
 

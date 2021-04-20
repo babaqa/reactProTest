@@ -41,7 +41,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#E5E4DB",
                 }
             }
         },
@@ -50,7 +50,7 @@ export default {
                 return {
                     ...style,
                     background: "rgba(249, 249, 249, 1)",
-                    padding: "0 70px 780px",
+                    padding: "0 95px 420px",
                     minHeight: "calc( 100vh - 184px )"
                 }
             }

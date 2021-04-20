@@ -1,14 +1,13 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
-import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
+import { MainPageContainer, MainPageSubTitleBar, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, TextEditor, RangeDateTimePicker, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
-import { ReactComponent as Plus } from '../../../Assets/img/QAndA/Plus.svg'
+import { ReactComponent as Slash } from '../../../Assets/img/UnitPage/Slash.svg'
 import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
-import { SystemNewsComponent } from '../SystemNewsComponent/SystemNewsComponent'
 import isUndefined from 'lodash/isUndefined';
 
 const LaptopLBase = (props) => {
@@ -19,117 +18,68 @@ const LaptopLBase = (props) => {
     const [Width, Height] = useWindowSize();
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
-    //#region 分頁映射
-    const tabMap = () => {
-        // console.log(props.NewsType.map(item => { return item.label }))
-        return props.NewsType.map(item => { return item.label })
-    }
-    //#endregion
-
     return (
         <>
             <MainPageContainer
                 theme={laptopL.mainPageContainer}
                 outSideTopComponent={
                     <>
-                        {/* 標題列 */}
-                        <BasicContainer
-                            theme={laptopL.whiteContainer}
-                        >
-                            <BasicContainer
-                                theme={laptopL.tabsContainer}
+                        {/* 首頁文字 */}
+                        <Container style={{ justifyContent: "flex-end", padding: "0 50px", alignItems: "center" }}>
+                            <Text
+                                theme={laptopL.homePageText}
+                            // onClick={() => {
+                            //     history.push("/")
+                            // }}
                             >
-                                {
-                                    // <BasicContainer>
+                                {"首頁"}
 
-                                    tabMap().map((item, index) => {
-                                        return (
-                                            <React.Fragment key={index}>
-                                                <Text
-                                                    onClick={() => {
-                                                        if (props.NowTab !== item) {
-                                                            props.setNowTab(item);
-                                                            props.GetNewsTypeExecute(true, props.NewsType[index]?.value, globalContextService.get("SystemNewsComponentPage", "DateTimeRange"));
-                                                        }
-                                                    }}
-                                                    isActive={props.NowTab === item}
-                                                    theme={laptopL.titleBarCallCarTab}
-                                                >
-                                                    {item}
-                                                </Text>
-                                            </React.Fragment>
-                                        )
-                                    })
-
-                                    // </BasicContainer>
-                                }
-                            </BasicContainer>
-                        </BasicContainer>
-                    </>
-                }
-            >
-                {/* 切換使用的組件 */}
-                {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
-                {/* {console.log(props.NewsType)} */}
-                {/* {console.log(props.AllNews)} */}
-                {!isUndefined(props?.CheckDetail?.title)
-                    ?
-                    <>
-                        <Container>
-                            {/* 詳細資料外側容器 */}
-                            <BasicContainer
-                                height={Height}
-                                theme={laptopL.detailOutContainer}
+                                {/* 當前頁面文字 */}
+                            </Text>
+                            <Slash style={{ margin: "0 20px" }} />
+                            <Text
+                                theme={laptopL.nowPageText}
                             >
-                                {/* 詳細資料容器 */}
-                                <BasicContainer
-                                    theme={laptopL.detailContainer}
-                                >
-                                    {/* 詳細資料 標題 */}
-                                    <Text
-                                        theme={laptopL.detailHeader}
-                                    >
-                                        {props.CheckDetail.title}
-                                    </Text>
-
-                                    {/* 詳細資料 內文 */}
-                                    <TextEditor
-                                        viewType
-                                        value={props.CheckDetail.contents?.replaceAll('<img', `<img style="max-width:100%" `)}
-
-                                        // onChange={(e, value, onInitial) => {
-                                        //     console.log(value)
-                                        //     globalContextService.set("NewsAddPage", "NewsEditor", value)
-                                        // }}
-                                        // placeholder={'請輸入最新消息內容...'}
-                                        theme={laptopL.newsEditor}
-                                    />
-                                </BasicContainer>
-
-                                {/* 回列表按鈕 */}
-                                <NativeLineButton
-                                    baseDefaultTheme={"DefaultTheme"}
-                                    disable={false}
-                                    type="button" // 防止提交
-                                    theme={laptopL.returnButton}
-                                    onClick={() => {
-                                        props.setCheckDetail({})
-                                    }}
-                                >
-                                    回列表
-                                </NativeLineButton>
-                            </BasicContainer>
+                                {props.NowTab}
+                            </Text>
                         </Container>
-                    </>
-                    :
-                    <SystemNewsComponent
-                        AllNews={props.AllNews} // 類別下所有最新消息
-                        NowTab={props.NewsType.filter((it) => (it.label === props.NowTab))?.[0]}
-                        GetNewsTypeExecute={props.GetNewsTypeExecute}
-                        CheckDetail={props.CheckDetail} // 詳細資料
-                        setCheckDetail={props.setCheckDetail} // 設定詳細資料
+
+                        {/* 子標題列 */}
+                        <MainPageSubTitleBar
+                            bascDefaultTheme={"DefaultTheme"}
+                            titleText={props.NowTab}
+                            theme={laptopL.baseSubTitleBar}
+                        >
+                        </MainPageSubTitleBar>
+                    </>}
+            >
+
+
+                <BasicContainer
+                    theme={laptopL.unitEditorContainer}
+                >
+                    {/* 單位介紹編輯器 UnitEditor */}
+                    <TextEditor
+                        viewType
+                        value={
+                            (
+                                props.News?.contents ?
+                                    props.News?.contents
+                                    :
+                                    `文書組原置於總務處下，其職掌可概分為「文書處理」、「檔案管理」及「郵件處理」等三類，因部份業務與秘書室密切相關，103年8月1日組織再造將其移至秘書室下。
+                                    　　本組負責全校公文之總收、分、發、與繕打、校對、用印、郵寄以及公文稽催、檔案管理和全校各單位教職員生郵件之分發處理等事務。故舉凡文書處理之公文流程簡化、逾期歸檔之稽催以及檔案管理之資訊化、標準化、公開化，等提昇文書處理效率，便捷檔案檢調應用服務等有關事宜，均為本組積極努力精進之目標，由於同仁的努力和學校之支持，績效具體呈現，本校95年榮獲第四屆機關檔案金檔獎。
+                                    　　為落實數位化校園，本校公文管理系統具檔案線上調閱(影像瀏覽)功能，已建檔掃瞄完成之檔案，均具備全文檢索功能，方便同仁線上申請調閱檔案影像。`
+                            )
+                        }
+                        // value={"<p>sdfgf<strong>dg</strong></p>"}
+                        onChange={(e, value, onInitial) => {
+                            // console.log(value)
+                            globalContextService.set("UnitPage", "UnitEditor", value)
+                        }}
+                        // placeholder={'請輸入最新消息內容...'}
+                        theme={laptopL.unitEditor}
                     />
-                }
+                </BasicContainer>
             </MainPageContainer>
         </>
     )

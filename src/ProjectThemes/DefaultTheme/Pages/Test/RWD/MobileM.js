@@ -15,7 +15,8 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    height: `calc( ${props.height}px - 56px - 94px - 48px)`,
+                    height: `calc( ${props.height}px - 60px)`,
+                    // height: `calc( ${props.height}px - 56px - 94px - 48px)`,
                 }
             }
         },
@@ -23,8 +24,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#FFFFFF",
-                    padding: "0 0 16px", //188 是授權圖高度
+                    backgroundColor: "#F9F9F9",
+                    padding: "0 0 0", //188 是授權圖高度
                     // height:""
                 }
             }

@@ -201,10 +201,11 @@ export default {
             width: "100%",
             // minHeight: "795px",
             height: "auto",
-            display: "inline-block",
+            display: "inline-flex",
             // top: "63px",
             padding: "50px 0",
             alignItems: "center",
+            justifyContent: "center",
         }),
     },
     //#endregion
@@ -417,6 +418,24 @@ export default {
             fontFamily: "Roboto",
             fontWeight: 700,
             letterSpacing: "0.3em",
+        }),
+    },
+    //#endregion
+
+    //#region more按鈕
+    moreButton: {
+        basic: (style) => ({
+            ...style,
+            color: "rgba(255, 255, 255, 1)",
+            fontSize: "18px",
+            fontFamily: "Roboto",
+            fontWeight: 700,
+            letterSpacing: "0.3em",
+            background: "rgba(206, 184, 127, 1)",
+            width: "100px",
+            lineHeight: "35px",
+            textAlign: "center",
+            paddingLeft: "4px",
         }),
     },
     //#endregion

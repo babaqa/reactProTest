@@ -5,8 +5,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "12px 0 0 0" // 標題列的padding
+                    backgroundColor: "#F9F9F9",
+                    padding: "32px 119px 32px" // 標題列的padding
                 }
             }
         },
@@ -14,7 +14,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#F9F9F9",
+                    height: "calc( 100vh - 238px )"
                 }
             }
         },
@@ -22,9 +23,9 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
-                    padding: "0 150px 236px 150px",
-                    minHeight: "calc( 100vh - 184px )"
+                    backgroundColor: "#F9F9F9",
+                    padding: "8px 119px 680px", //680 是授權圖高度
+                    minHeight: "calc( 100vh - 238px)"
                 }
             }
         },
@@ -32,8 +33,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB",
-                    padding: "12px 0 0 0" // 標題列的padding
+                    backgroundColor: "#F9F9F9",
+                    padding: "32px 95px 32px" // 標題列的padding
                 }
             }
         },
@@ -41,7 +42,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#E5E4DB"
+                    backgroundColor: "#F9F9F9"
                 }
             }
         },
@@ -49,9 +50,9 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
-                    padding: "0 48px 204px 48px", //188 是授權圖高度
-                    minHeight: "calc( 100vh - 164px )"
+                    backgroundColor: "#F9F9F9",
+                    padding: "0 95px 350px",
+                    minHeight: "calc( 100vh - 253px )" //減掉footer高度
                 }
             }
         },
@@ -121,132 +122,85 @@ export default {
     },
     //#endregion
 
-    titleText: {
+    //#region 首頁文字
+    homePageText: {
         basic: (style, props) => ({
             ...style,
-            fontWeight: 600,
-            fontSize: "24px",
-            lineHeight: "32px",
-            color: "#00628F",
-            width: "100%",
-            textAlign: "center",
-            boxShadow: "inset 8px 0px #4DB8BE",
-            top: "4px"
-        })
-    },
-
-    //#region 分頁底色
-    whiteContainer: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            height: "72px",
-            backgroundColor: "#FFFFFF"
+            // display: "inline-block",
+            // position: "absolute",
+            // right: 0,
+            // width: "100%",
+            // textAlign: "right",
+            fontWeight: 400,
+            fontSize: "18px",
+            color: "#4B4B4B"
         }),
     },
     //#endregion
 
-    //#region 分頁容器
-    tabsContainer: {
+    //#region 當前頁面文字
+    nowPageText: {
         basic: (style, props) => ({
             ...style,
-            width: "100%",
-            height: "56px",
-            backgroundColor: "#6A7987"
+            // display: "inline-block",
+            fontWeight: 400,
+            fontSize: "18px",
+            color: "#B0B0B0",
+            // top: "10px"
         }),
     },
     //#endregion
 
-    //#region 標題列 預約訂車分頁
-    titleBarCallCarTab: {
-        basic: (style, props) => ({
-            ...style,
-            display: "inline-grid",
-            margin: (props.isActive ? 0 : "0 1px 0 0"),
-            lineHeight: "32px",
-            height: (props.isActive ? "56px" : "100%"),
-            fontSize: "14px",
-            cursor: "pointer",
-            width: "160px",
-            color: (props.isActive ? "rgba(0, 0, 0, 0.85)" : "#FFFFFF"),
-            boxShadow: (props.isActive ? "inset 0px 8px 0px #1890FF" : ""),
-            // borderTop: (props.isActive ? "solid 8px #1890FF" : "unset"),
-            backgroundColor: (props.isActive ? "#FFFFFF" : "#9DADBE"),
-            textAlign: "center",
-            alignItems: "center"
-        }),
-    },
-    //#endregion
-
-    //#region 詳細資料外側容器
-    detailOutContainer: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            minHeight: `calc( ${props.height}px - 240px )`,
-            margin: "60px 0 0",
-            textAlign: "right"
-        }),
-        laptopL: {
+    //#region 子標題列
+    baseSubTitleBar: {
+        container: {
             basic: (style, props) => ({
                 ...style,
-                width: "100%",
-                minHeight: `calc( ${props.height}px - 292px )`,
-                margin: "60px 0 0",
-                textAlign: "right"
-            }),
+                // width: "100%",
+                border: 0,
+                margin: 0,
+                position: "relative",
+                left: "17%"
+            })
+        },
+        titleText: {
+            basic: (style, props) => ({
+                ...style,
+                // width: "40px",
+                color: "#AD9D72",
+                fontWeight: 700,
+                fontSize: "32px",
+                lineHeight: "37.5px",
+                borderBottom: "2px solid #AD9D72",
+            })
+        },
+        rightContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: 0,
+            })
         }
     },
     //#endregion
 
-    //#region 詳細資料容器
-    detailContainer: {
+    //#region 單位介紹外容器
+    unitEditorContainer: {
         basic: (style, props) => ({
             ...style,
-            width: "100%",
-            padding: "24px",
-            backgroundColor: "#fff",
-            borderRadius: "8px",
-        }),
+            textAlign: "center",
+        })
     },
     //#endregion
 
-    //#region 詳細資料 標題
-    detailHeader: {
-        basic: (style, props) => ({
-            ...style,
-            fontWeight: 600,
-            fontSize: "20px",
-            lineHeight: "28px",
-            boxShadow: "inset 0px -1px #D9D9D9",
-            color: "#00628F",
-            padding: "0 0 16px",
-            wordBreak: "break-all"
-        }),
-    },
-    //#endregion
-
-    //#region 詳細資料 內文
-    newsEditor: {
+    //#region 單位介紹編輯器 UnitEditor
+    unitEditor: {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
                 padding: "0 0 0 0",
                 display: "inline-block",
-                ...style.occupy(12),
-            })
-        },
-        viewTypeTextEditorContainer: {
-            basic: (style, props) => ({
-                ...style,
-                height: "auto"
-            })
-        },
-        viewTypeTextEditor: {
-            basic: (style, props) => ({
-                ...style,
-                height: "auto",
-                wordBreak: "break-all"
+                ...style.occupy(8),
+                // minHeight: "500px"
             })
         },
         container: {
@@ -254,7 +208,7 @@ export default {
                 ...style,
                 padding: "0 0 24px 0",
                 display: "inline-block",
-                ...style.occupy(12),
+                ...style.occupy(8),
             })
         },
         textEditor: {
@@ -263,30 +217,6 @@ export default {
                 height: "500px",
             })
         },
-    },
-    //#endregion
-
-    //#region 回列表按鈕
-    returnButton: {
-        basic: (style) => ({
-            ...style,
-            width: "74px",
-            height: "28px",
-            fontSize: "14px",
-            lineHeight: "22px",
-            top: "2px",
-            padding: 0,
-            color: "#1890ff",
-            backgroundColor: "#fff",
-            borderColor: "#1890ff",
-            borderRadius: "2px",
-            margin: "16px 0 0"
-        }),
-        hover: (style, props) => ({
-            ...style,
-            backgroundColor: "rgba(24,144,255,0.05)"
-        }),
-        focus: (style, props) => ({})
     },
     //#endregion
 }
