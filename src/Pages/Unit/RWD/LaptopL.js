@@ -4,7 +4,7 @@ import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageSubTitleBar, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, TextEditor, RangeDateTimePicker, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { ReactComponent as Slash } from '../../../Assets/img/UnitPage/Slash.svg'
-import { ReactComponent as Edit } from '../../../Assets/img/QAndA/Edit.svg'
+import { ReactComponent as Edit } from '../../../Assets/img/FastCallCarPage/Edit.svg'
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';

@@ -29,7 +29,6 @@ import { CallCarAgain } from '../Pages/CallCarAgain/CallCarAgain'
 import { Member } from '../Pages/Member/Member';
 // 訂單檢視
 import { LawsAndRegulations } from '../Pages/LawsAndRegulations/LawsAndRegulations';
-import { RecordDetail } from '../Pages/LawsAndRegulations/RecordDetail/RecordDetail';
 
 import { Files } from '../Pages/Files/Files';
 import { Application } from '../Pages/Application/Application';

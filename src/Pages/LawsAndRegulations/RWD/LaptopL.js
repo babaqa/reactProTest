@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
-import { MainPageContainer, MainPageTitleBar } from '../../../ProjectComponent';
+import { MainPageContainer, MainPageSubTitleBar, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, RangeDateTimePicker, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
+import { ReactComponent as Point } from '../../../Assets/img/ContactPage/Point.svg'
 
-import { AllRecordComponent } from '../AllRecordComponent/AllRecordComponent'
+import { Component } from '../Component/Component'
 import { isEqual } from 'lodash';
+import { subTabMapping } from '../../../Mappings/Mappings';
 
 const LaptopLBase = (props) => {
 
@@ -18,81 +20,80 @@ const LaptopLBase = (props) => {
     const [Width, Height] = useWindowSize();
 
     //#region 分頁映射
-    const tabMap = (key) => {
-        switch (key) {
-            case "長照":
-                return props.CaseRecord
-            case "共享車隊":
-                return props.WhiteRecord
-            case "巴士":
-                return props.BusRecord
-            default:
-                return props.AllTabs
-        }
+    const tabMap = () => {
+        return ["相關法令規章", "檔案應用申請", "加值應用"]
 
     }
+
     //#endregion
-    // console.log(props.nowTab)
-    // console.log(props.CaseRecord)
-    // console.log(props.WhiteRecord)
-    // console.log(props.BusRecord)
     return (
         <>
+
             <MainPageContainer
                 theme={laptopL.mainPageContainer}
                 height={Height}
                 outSideTopComponent={
                     <>
-                        {/* 標題列 */}
-                        <BasicContainer
-                            theme={laptopL.whiteContainer}
+                        {/* 首頁文字 */}
+                        <Text
+                            theme={laptopL.homePageText}
                         >
-                            <BasicContainer
-                                theme={laptopL.tabsContainer}
+                            {`首頁　／　`}
+
+                            {/* 當前頁面文字 */}
+                            <Text
+                                theme={laptopL.nowPageText}
                             >
-                                {
-                                    // <BasicContainer>
+                                {subTabMapping[props.NowTab]}
+                            </Text>
+                        </Text>
 
-                                    tabMap().map((item, index) => {
-                                        return (
-                                            <React.Fragment key={index}>
-                                                <Text
-                                                    onClick={() => { props.setNowTab(item) }}
-                                                    isActive={props.nowTab === item}
-                                                    theme={laptopL.titleBarRecordTab}
-                                                >
-                                                    {item}
-                                                </Text>
-                                            </React.Fragment>
-                                        )
-                                    })
-
-                                    // </BasicContainer>
-                                }
-                            </BasicContainer>
-                        </BasicContainer>
+                        {/* 子標題列 */}
+                        <MainPageSubTitleBar
+                            bascDefaultTheme={"DefaultTheme"}
+                            titleText={subTabMapping[props.NowTab]}
+                            theme={laptopL.baseSubTitleBar}
+                        >
+                        </MainPageSubTitleBar>
                     </>
                 }
             >
-                {/* 切換使用的組件 */}
-                {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
-                <AllRecordComponent
-                    data={tabMap(props.nowTab)
-                        .filter(X => {
-                            // console.log(X)
-                            if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value ?? '2', '2') && (X.status === 9 || X.status === 5)) {
-                                return false
-                            }
-                            else if (isEqual(globalContextService.get("RecordPage", "OrderTime")?.value, '1') && (X.status !== 9 && X.status !== 5)) {
-                                return false
-                            }
-                            return true
-                        })
-                    }
-                    nowTab={props.nowTab}
-                    GetRecordsExecute={props.GetRecordsExecute} // 取得用戶各種訂單紀錄資料
-                    GetRecordsPending={props.GetRecordsPending}
-                />
+
+                <BasicContainer
+                    theme={laptopL.tabsContainer}
+                >
+                    {tabMap().map((item, index) => {
+                        return (
+                            <React.Fragment key={index}>
+                                <Text
+                                    onClick={() => {
+                                        // props.setNowTab(Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]) 
+                                        history.push(`/Application?subTab=${Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]}`);
+                                    }}
+                                    theme={laptopL.titleBarContactTab}
+                                >
+                                    {
+                                        subTabMapping[props.NowTab] === item
+                                        &&
+                                        <Point
+                                            style={laptopL.pointSvg}
+                                        />
+                                    }
+                                    {item}
+                                </Text>
+                            </React.Fragment>
+                        )
+                    })}
+                </BasicContainer>
+
+                <BasicContainer
+                    theme={laptopL.listContainer}
+                >
+                    {/* 切換使用的組件 */}
+                    {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
+
+                    <Component />
+                </BasicContainer>
             </MainPageContainer>
         </>
     )

@@ -6,7 +6,7 @@ import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
 import { Tablet } from './RWD/Tablet';
 import { clearLocalStorage, clearSession, getParseItemLocalStorage, valid } from '../../Handlers';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useAsync } from '../../SelfHooks/useAsync';
 import { isUndefined } from 'lodash';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
@@ -27,7 +27,14 @@ export const Files = (props) => {
     // const [UserTypeInf, setUserTypeInf] = useState([]); // 用戶所有身分
     const [Width, Height] = useWindowSize();
 
+    let urlParams = new URLSearchParams(useLocation().search);//取得參數
+    const [NowTab, setNowTab] = useState(""); // 目前搭乘紀錄頁面
+
     let history = useHistory();
+
+    useEffect(() => {
+        setNowTab(urlParams.get("subTab"));
+    }, [urlParams.get("subTab")])
 
     //#region 當頁 GlobalContextService (GCS) 值 控制
     const controllGCS = (type, payload) => {
@@ -636,8 +643,9 @@ export const Files = (props) => {
         <>
             {/* laptopL、laptop 共用theme */}
             {
-                768 <= Width &&
+                1024 <= Width &&
                 <LaptopL
+                    NowTab={NowTab}
                     BasicInf={BasicInf}  // 用戶基本資料
                     CaseInf={CaseInf} // 用戶長照資料
                     WhiteInf={WhiteInf} // 用戶白牌資料
@@ -693,8 +701,9 @@ export const Files = (props) => {
                 />
             } */}
             {
-                Width < 768 &&
+                Width < 1024 &&
                 <MobileM
+                    NowTab={NowTab}
                     BasicInf={BasicInf}  // 用戶基本資料
                     CaseInf={CaseInf} // 用戶長照資料
                     WhiteInf={WhiteInf} // 用戶白牌資料

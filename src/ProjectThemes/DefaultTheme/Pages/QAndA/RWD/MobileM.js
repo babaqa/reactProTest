@@ -6,18 +6,16 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: 0,
-                    boxShadow: "inset 0 -1px #F0F0F0"
+                    padding: "0px 40px" // 標題列的padding
                 }
             }
         },
         basicOutContainer: {
             basic: (style, props) => {
-                console.log(props)
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
-                    height: `calc( ${props.vh}px - 152px)`,
+                    backgroundColor: "#F9F9F9",
+                    height: `calc( ${props.height}px - 60px - 83px)`,
                 }
             }
         },
@@ -25,12 +23,32 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
-                    padding: "0",
-                    minHeight: "100%"
+                    backgroundColor: "#F9F9F9",
+                    padding: "0 40px 448px", //448 是授權圖高度
+                    minHeight: `calc( ${props.height}px + 280px)`,
                 }
             }
         },
+    },
+    //#endregion
+
+    //#region 標題容器
+    titleContainer: {
+        basic: (style, props) => ({
+            ...style,
+            height: "83px",
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            letterSpacing: "0.3em",
+            // padding: "0 40px"
+        })
+    },
+    //#endregion
+
+    //#region 回上一頁icon
+    goBackIcon: {
+        color: "rgba(173, 157, 114, 1)",
     },
     //#endregion
 
@@ -38,38 +56,12 @@ export default {
     titleText: {
         basic: (style, props) => ({
             ...style,
-            width: "100%",
-            height: "48px",
-            fontSize: "16px",
-            fontWeight: 500,
-            lineHeight: "48px",
-            textAlign: "center"
+            color: "rgba(173, 157, 114, 1)",
+            fontFamiy: "Roboto",
+            fontSize: "20px",
+            fontWeight: 700,
+            borderBottom: "2px solid rgba(173, 157, 114, 1)"
         })
     },
-    //#endregion
-
-    //#region 常見問題容器
-    qAContainer: {
-        basic: (style, props) => ({
-            ...style,
-            // padding: "0 0px 24px",
-            minHeight: `calc( ${props.vh}px - 152px)`,
-        })
-    },
-    //#endregion
-
-    //#region 沒有更多問題
-    noMoreData: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            textAlign: "center",
-            fontWeight: 400,
-            fontSize: "14px",
-            lineHeight: "22px",
-            color: "#1890FF",
-            padding: "16px 0"
-        })
-    }
     //#endregion
 }

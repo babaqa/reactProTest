@@ -1,11 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../Store/Store'
 import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput } from '../../Components';
 import { LaptopL } from './RWD/LaptopL';
-import { Laptop } from './RWD/Laptop';
+// import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
-import { Tablet } from './RWD/Tablet';
+// import { Tablet } from './RWD/Tablet';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
+import { useLocation } from 'react-router-dom';
 
 export const QAndA = (props) => {
 
@@ -14,14 +15,19 @@ export const QAndA = (props) => {
     const [WhichForm, setWhichForm] = useState("Login"); // 切換 登入、忘記密碼、設定登入密碼 表單
     const [SendedAuthCode, setSendedAuthCode] = useState(false); // 紀錄是否已經發送過驗證碼 (要不要顯示重新發送驗證碼)
     const [WaitSecToZero, setWaitSecToZero] = useState(true); // 控制驗證碼倒數
-    const [NowTab, setNowTab] = useState("車行公告"); // 目前公告頁面
+    let urlParams = new URLSearchParams(useLocation().search);//取得參數
+    const [NowTab, setNowTab] = useState(""); // 目前公告頁面
     const [Width, Height] = useWindowSize();
+
+    useEffect(() => {
+        setNowTab(urlParams.get("subTab"));
+    }, [urlParams.get("subTab")])
 
     return (
         <>
             {/* 共用theme */}
             {
-                768 <= Width &&
+                1024 <= Width &&
                 <LaptopL
                     WhichForm={WhichForm}
                     setWhichForm={setWhichForm}
@@ -29,7 +35,7 @@ export const QAndA = (props) => {
                     setSendedAuthCode={setSendedAuthCode}
                     WaitSecToZero={WaitSecToZero}
                     setWaitSecToZero={setWaitSecToZero}
-                    nowTab={NowTab}
+                    NowTab={NowTab}
                     setNowTab={setNowTab}
                 />
             }
@@ -60,7 +66,7 @@ export const QAndA = (props) => {
                 />
             } */}
             {
-                Width < 768 &&
+                Width < 1024 &&
                 <MobileM
                     WhichForm={WhichForm}
                     setWhichForm={setWhichForm}
@@ -68,7 +74,7 @@ export const QAndA = (props) => {
                     setSendedAuthCode={setSendedAuthCode}
                     WaitSecToZero={WaitSecToZero}
                     setWaitSecToZero={setWaitSecToZero}
-                    nowTab={NowTab}
+                    NowTab={NowTab}
                     setNowTab={setNowTab}
                 />
             }
