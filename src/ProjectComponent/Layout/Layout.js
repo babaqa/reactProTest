@@ -35,7 +35,7 @@ import { ReactComponent as LeftMenuCloseSubTab } from '../../Assets/img/LeftMenu
 import { ReactComponent as MobileMFooterLogo } from '../../Assets/img/MobileMFooterLogo.svg'
 
 import { getParseItemLocalStorage, setStringifyItemSession, pushAndNotExsistItemSession, getParseItemSession, removeByKeyItemSession, clearLocalStorage, clearSession, setStringifyItemLocalStorage } from '../../Handlers';
-import { iconMap, pageTabBarUrlMapping, pageTextUrlMapping } from '../../Mappings/Mappings'
+import { iconMap, pageTabBarUrlMapping, pageTextUrlMapping, subTabMapping, urlMapping } from '../../Mappings/Mappings'
 import { useHistory, useLocation } from 'react-router-dom';
 import { isNil } from 'lodash';
 import { ConsoleLogger } from '@microsoft/signalr/dist/esm/Utils';
@@ -175,27 +175,79 @@ export const Layout = (props) => {
                     //     ]
                     // },
                     { path: "/Member", name: "成員介紹" },
-                    { path: "/LawsAndRegulations", name: "法令規章" },
-                    { path: "/Files", name: "臺藝檔案" },
-                    { path: "/Application", name: "檔案應用" },
-                    { path: "/QAndA", name: "文書檔案相關Q&A" },
+                    {
+                        path: "/LawsAndRegulations", name: "法令規章",
+                        subName: [
+                            "SchoolRegulations",
+                            "FileRelatedRegulations",
+                        ]
+                    },
+                    {
+                        path: "/Files", name: "臺藝檔案",
+                        subName: [
+                            "KnowNTUA",
+                            "BillboardOfNTUA",
+                            "OnlineArchiveExhibition",
+                        ]
+                    },
+                    {
+                        path: "/Application", name: "檔案應用",
+                        subName: [
+                            "RelatedRegulations",
+                            "FileApplication",
+                            "ValueAddedApplications",
+                        ]
+                    },
+                    {
+                        path: "/QAndA", name: "文書檔案相關Q&A",
+                        subName: [
+                            "DownloadForm",
+                            "FrequentlyQuestions",
+                        ]
+                    },
                     { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameLaptop":
                 return [
-                    { path: "/Unit", name: "單位介紹", icon: <NewsTab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/Unit", name: "單位介紹" },
                     // {
-                    //     path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptop} />,
+                    //     path: "/CallCar", name: "預約訂車", icon: <CallCarTab style={layout.titleBarTabIconLaptopL} />,
                     //     dropDown: [
                     //         { path: "/CallCar", name: "預約訂車" },
                     //         { path: "/FastCallCar", name: "快速叫車" },
                     //     ]
                     // },
-                    { path: "/Member", name: "成員介紹", icon: <BusRouteTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/LawsAndRegulations", name: "法令規章", icon: <RecordTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconLaptop} /> },
-                    { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconLaptop} /> },
+                    { path: "/Member", name: "成員介紹" },
+                    {
+                        path: "/LawsAndRegulations", name: "法令規章",
+                        subName: [
+                            "SchoolRegulations",
+                            "FileRelatedRegulations",
+                        ]
+                    },
+                    {
+                        path: "/Files", name: "臺藝檔案",
+                        subName: [
+                            "KnowNTUA",
+                            "BillboardOfNTUA",
+                            "OnlineArchiveExhibition",
+                        ]
+                    },
+                    {
+                        path: "/Application", name: "檔案應用",
+                        subName: [
+                            "RelatedRegulations",
+                            "FileApplication",
+                            "ValueAddedApplications",
+                        ]
+                    },
+                    {
+                        path: "/QAndA", name: "文書檔案相關Q&A",
+                        subName: [
+                            "DownloadForm",
+                            "FrequentlyQuestions",
+                        ]
+                    },
                     { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameTablet":
@@ -240,7 +292,7 @@ export const Layout = (props) => {
                             id: "3",
                             url: "/LawsAndRegulations",
                             name: "法令規章",
-                            parentName: "根節點"
+                            parentName: "根節點",
                         },
                         children: [
                             {
@@ -248,7 +300,8 @@ export const Layout = (props) => {
                                     id: "3.1",
                                     url: "/LawsAndRegulations",
                                     name: "本校法規",
-                                    parentName: "法令規章"
+                                    parentName: "法令規章",
+                                    subName: "SchoolRegulations"
                                 },
                                 children: []
                             },
@@ -257,7 +310,8 @@ export const Layout = (props) => {
                                     id: "3.2",
                                     url: "/LawsAndRegulations",
                                     name: "文書檔案相關法規",
-                                    parentName: "法令規章"
+                                    parentName: "法令規章",
+                                    subName: "FileRelatedRegulations"
                                 },
                                 children: []
                             },
@@ -276,7 +330,8 @@ export const Layout = (props) => {
                                     id: "4.1",
                                     url: "/Files",
                                     name: "認識臺藝",
-                                    parentName: "臺藝檔案"
+                                    parentName: "臺藝檔案",
+                                    subName: "KnowNTUA"
                                 },
                                 children: []
                             },
@@ -285,7 +340,8 @@ export const Layout = (props) => {
                                     id: "4.2",
                                     url: "/Files",
                                     name: "臺藝風雲榜",
-                                    parentName: "臺藝檔案"
+                                    parentName: "臺藝檔案",
+                                    subName: "BillboardOfNTUA"
                                 },
                                 children: []
                             },
@@ -294,7 +350,8 @@ export const Layout = (props) => {
                                     id: "4.3",
                                     url: "/Files",
                                     name: "線上檔案展",
-                                    parentName: "臺藝檔案"
+                                    parentName: "臺藝檔案",
+                                    subName: "OnlineArchiveExhibition"
                                 },
                                 children: []
                             },
@@ -313,7 +370,8 @@ export const Layout = (props) => {
                                     id: "5.1",
                                     url: "/Application",
                                     name: "相關法令規章",
-                                    parentName: "檔案應用"
+                                    parentName: "檔案應用",
+                                    subName: "RelatedRegulations"
                                 },
                                 children: []
                             },
@@ -322,7 +380,8 @@ export const Layout = (props) => {
                                     id: "5.2",
                                     url: "/Application",
                                     name: "檔案應用申請",
-                                    parentName: "檔案應用"
+                                    parentName: "檔案應用",
+                                    subName: "FileApplication"
                                 },
                                 children: []
                             },
@@ -331,7 +390,8 @@ export const Layout = (props) => {
                                     id: "5.3",
                                     url: "/Application",
                                     name: "加值應用",
-                                    parentName: "檔案應用"
+                                    parentName: "檔案應用",
+                                    subName: "ValueAddedApplications"
                                 },
                                 children: []
                             },
@@ -350,7 +410,8 @@ export const Layout = (props) => {
                                     id: "6.1",
                                     url: "/QAndA",
                                     name: "表單申請下載",
-                                    parentName: "文書檔案相關Q&A"
+                                    parentName: "文書檔案相關Q&A",
+                                    subName: "DownloadForm"
                                 },
                                 children: []
                             },
@@ -359,7 +420,8 @@ export const Layout = (props) => {
                                     id: "6.2",
                                     url: "/QAndA",
                                     name: "文書常見問題",
-                                    parentName: "文書檔案相關Q&A"
+                                    parentName: "文書檔案相關Q&A",
+                                    subName: "FrequentlyQuestions"
                                 },
                                 children: []
                             },
@@ -416,7 +478,14 @@ export const Layout = (props) => {
                                                         < BasicContainer
                                                             active={location.pathname === item.path}
                                                             theme={layout.titleBarTabItemContainerLaptopL}
-                                                            onClick={() => { history.push(item.path) }}
+                                                            onClick={() => {
+                                                                if (item?.subName) {
+                                                                    history.push(`${item.path}?subTab=${item.subName[0]}`)
+                                                                }
+                                                                else {
+                                                                    history.push(item.path)
+                                                                }
+                                                            }}
                                                         >
                                                             {/* {item.icon} */}
                                                             <Text
@@ -492,7 +561,14 @@ export const Layout = (props) => {
                                                         < BasicContainer
                                                             active={location.pathname === item.path}
                                                             theme={layout.titleBarTabItemContainerLaptop}
-                                                            onClick={() => { history.push(item.path) }}
+                                                            onClick={() => {
+                                                                if (item?.subName) {
+                                                                    history.push(`${item.path}?subTab=${item.subName[0]}`)
+                                                                }
+                                                                else {
+                                                                    history.push(item.path)
+                                                                }
+                                                            }}
                                                         >
                                                             <Text
                                                                 theme={layout.titleBarTabTextLaptop}
@@ -1039,7 +1115,7 @@ const generateMenu = (menuData, history, location, ExpandMenuName, setExpandMenu
                                 // console.log(widthLessThan1024)
                                 // widthLessThan1024 && setDrawerCollapse(true);
                                 setDrawerCollapse(true);
-                                history.push(`${menuData.item.url.trim()}?id=${menuData.item.id.split('.')[1]}`)
+                                history.push(`${menuData.item.url.trim()}?subTab=${menuData.item.subName}`)
                             }
                         }
                     }}
@@ -1067,7 +1143,7 @@ const generateMenu = (menuData, history, location, ExpandMenuName, setExpandMenu
                                     }}
                                 >
                                     {
-                                        menuData?.item?.id.split('.')[1] === location.search.split('id=')[1]
+                                        menuData?.item?.subName === location.search.split('subTab=')[1]
                                         &&
                                         <LeftMenuTab style={{
                                             position: "absolute",

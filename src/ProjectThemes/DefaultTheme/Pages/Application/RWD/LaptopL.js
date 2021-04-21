@@ -15,7 +15,6 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    height: "calc( 100vh - 238px )"
                 }
             }
         },
@@ -25,7 +24,7 @@ export default {
                     ...style,
                     backgroundColor: "#FFFFFF",
                     padding: "8px 119px 659px", //635 是授權圖高度
-                    minHeight: "calc( 100vh - 184px)"
+                    minHeight: "calc( 100vh + 396px)"
                 }
             }
         },
@@ -34,7 +33,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "32px 24px" // 標題列的padding
+                    padding: "32px 119px 32px" // 標題列的padding
                 }
             }
         },
@@ -50,9 +49,9 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
-                    padding: "8px 24px 212px", //188 是授權圖高度
-                    minHeight: "calc( 100vh - 164px)"
+                    backgroundColor: "#FFFFFF",
+                    padding: "8px 119px 353px", //337 是授權圖高度
+                    minHeight: "calc( 100vh + 99px)"
                 }
             }
         },
@@ -77,7 +76,7 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
+                    backgroundColor: "#FFFFFF",
                     padding: "8px 24px 212px", //188 是授權圖高度
                     minHeight: `calc( ${props.height}px - 164px)`
                 }
@@ -140,7 +139,7 @@ export default {
                 border: 0,
                 margin: 0,
                 position: "relative",
-                left: "34%"
+                left: "25%"
             })
         },
         titleText: {
@@ -169,7 +168,7 @@ export default {
             ...style,
             // ...style.occupy(4),
             display: "inline-block",
-            width: "34%",
+            width: "25%",
             // height: "56px",
             backgroundColor: "#transparent",
             verticalAlign: "top"

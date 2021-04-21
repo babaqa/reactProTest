@@ -15,7 +15,6 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#F9F9F9",
-                    height: "calc( 100vh - 238px )"
                 }
             }
         },
@@ -25,7 +24,7 @@ export default {
                     ...style,
                     backgroundColor: "#F9F9F9",
                     padding: "8px 119px 680px", //680 是授權圖高度
-                    minHeight: "calc( 100vh - 238px)"
+                    minHeight: "calc( 100vh + 381px)"
                 }
             }
         },
@@ -52,7 +51,7 @@ export default {
                     ...style,
                     backgroundColor: "#F9F9F9",
                     padding: "0 95px 350px",
-                    minHeight: "calc( 100vh - 253px )" //減掉footer高度
+                    minHeight: "calc( 100vh + 84px )" //減掉footer高度
                 }
             }
         },

@@ -57,7 +57,7 @@ export const CaseContactComponent = (props) => {
         <>
             {/* laptopL、laptop、tablet 共用theme */}
             {
-                768 <= Width &&
+                1024 <= Width &&
                 <LaptopL
                     UserId={urlParams.get("userId")}
                     UserName={urlParams.get("caseName")}
@@ -96,7 +96,7 @@ export const CaseContactComponent = (props) => {
                 />
             } */}
             {
-                Width < 768 &&
+                Width < 1024 &&
                 <MobileM
 
                 />

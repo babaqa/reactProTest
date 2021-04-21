@@ -1799,3 +1799,34 @@ export const weekDayChMapping = {
    "7": "星期日",
 }
 //#endregion
+
+//#region 子頁面中文對照
+export const subTabMapping = {
+   //#region 非OpenAuth路由
+
+   //#region 法令規章
+   "SchoolRegulations": "本校法規",// 法令規章/本校法規
+   "FileRelatedRegulations": "文書檔案相關法規",// 法令規章/文書檔案相關法規
+   //#endregion
+
+   //#region 派車調度
+   "KnowNTUA": "認識臺藝",// 臺藝檔案/認識臺藝
+   "BillboardOfNTUA": "臺藝風雲榜",// 臺藝檔案/臺藝風雲榜
+   "OnlineArchiveExhibition": "線上檔案展",// 臺藝檔案/線上檔案展
+   //#endregion
+
+   //#region 檔案應用
+   "RelatedRegulations": "相關法令規章",// 檔案應用/相關法令規章
+   "FileApplication": "檔案應用申請",// 檔案應用/檔案應用申請
+   "ValueAddedApplications": "加值應用",// 檔案應用/加值應用
+   //#endregion
+
+   //#region 文書檔案相關Q&A
+   "DownloadForm": "表單申請下載",// 文書檔案相關Q&A/表單申請下載
+   "FrequentlyQuestions": "文書常見問題",// 文書檔案相關Q&A/文書常見問題
+   //#endregion
+
+
+   //#endregion
+}
+//#endregion
