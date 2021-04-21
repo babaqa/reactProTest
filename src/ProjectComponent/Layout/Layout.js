@@ -85,6 +85,10 @@ export const Layout = (props) => {
     }, [location])
 
     useEffect(() => {
+        setDrawerCollapse(true);
+    }, [width])
+
+    useEffect(() => {
         //#region 設定剛登入時，開啟歡迎頁
         // console.log(getParseItemSession("Ctab"))
         if (isNil(getParseItemSession("Ctab")) || (getParseItemSession("Ctab") ?? []).length === 0) {
@@ -145,11 +149,12 @@ export const Layout = (props) => {
                 }
             )
         }
+        // console.log(res)
         //#endregion
         setExpandMenuName(res.length > 1 ? res : [])
         //#endregion
 
-    }, [Collapse]) // 除了初始設置外，由窄版 切換至 寬版 亦需要重新設定展開 應該展開的 父層
+    }, [DrawerCollapse]) // 除了初始設置外，由窄版 切換至 寬版 亦需要重新設定展開 應該展開的 父層
 
     if (localStorage.getItem("CAuth") === null) {
         // return null
