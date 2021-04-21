@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { BasicContainer, ScrollBar } from '../../../';
+import { BasicContainer, ScrollBar, Container, TextContainer, Text } from '../../../';
 import { iterateTheme } from '../../../../Handlers/ThemeHandler';
 import { ReactComponent as LeftMenuCross } from '../../../../Assets/img/LeftMenuCross.svg'
 //#region 擴充基本樣式區
 import DefaultTheme from './Theme/DefaultTheme'
+import { ReactComponent as MobileMFooterLogo } from '../../../../Assets/img/MobileMFooterLogo.svg'
 // import PrimaryTheme from './Theme/PrimaryTheme'
 // import DisableTheme from './Theme/DisableTheme'
 // import SecondaryTheme from './Theme/SecondaryTheme'
@@ -80,6 +81,43 @@ export const BackstageLeftSideMenuBarBase = (props) => {
 
                             {/* 在這裡遍歷MenuItem */}
                             {props.menuItem}
+
+                            <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContainer") }}>
+                                <MobileMFooterLogo style={{
+                                    position: "absolute",
+                                    top: "-29px"
+                                }} />
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockTitle") }}>
+                                    {`ADDRESS`}
+                                </Text>
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContent") }}>
+                                    {`220307新北市板橋區大觀路1段59號`}
+                                </Text>
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockTitle") }}>
+                                    {`TIME`}
+                                </Text>
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContent") }}>
+                                    {`Mon~Fri/08:00-12:00.13:30-15:30`}
+                                </Text>
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockTitle") }}>
+                                    {`TEL`}
+                                </Text>
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContent") }}>
+                                    {`02-22722181`}
+                                </Text>
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockTitle") }}>
+                                    {`FAX`}
+                                </Text>
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContent") }}>
+                                    {`02-29601822`}
+                                </Text>
+                            </Container>
+                            <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterBottomBlockContainer") }}>
+                                <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterBottomBlockText") }}>
+                                    {`本網站為國立臺灣藝術大學總務處版權所有，未經允許，不得以任何形式複製和採用`}
+                                </Text>
+                            </Container>
+
                         </BasicContainer>
                     </ScrollBar>
                 </BasicContainer>)

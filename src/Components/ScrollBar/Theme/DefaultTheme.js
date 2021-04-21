@@ -3,6 +3,9 @@ export default {
         maxHeight: "10rem",
         maxWidth: "5rem"
     },
+    content: {
+        // height: "100%"
+    },
     scrollbarTrackX: {
         height: "8px",
         display: "block"

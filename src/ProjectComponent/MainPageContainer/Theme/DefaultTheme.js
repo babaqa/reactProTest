@@ -64,7 +64,7 @@ export default {
                 width: "100%",
                 top: "95px",
                 // left: props.collapse ? "4rem" : "15rem",
-                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight ? `- ${props?.outSideTopComponentHeight}px ` : "- 0px"})`,
                 // height: `calc( 100vh - 117px )`,
                 //#endregion
             }
@@ -480,7 +480,7 @@ export default {
                 width: "100%",
                 top: "95px",
                 // left: props.collapse ? "4rem" : "15rem",
-                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight && `- ${props?.outSideTopComponentHeight}px `})`,
+                height: `calc( 100vh - 95px ${props?.outSideTopComponentHeight ? `- ${props?.outSideTopComponentHeight}px ` : "- 0px"})`,
                 // height: `calc( 100vh - 95px )`,
                 //#endregion
             }
@@ -1093,5 +1093,93 @@ export default {
         }
     },
     //#endregion
+
+    //#region Footer左上區塊容器
+    mobileMFooterLeftBlockContainer: {
+        basic: (style, props) => ({
+            position: "absolute",
+            bottom: "60px",
+            background: "rgba(173, 157, 114, 1)",
+            width: "100%",
+            height: "334px",
+            left: "0",
+            zIndex: 98,
+            justifyContent: "center",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            padding: "74px 54px 19px"
+        })
+    },
+    //#endregion
+
+    //#region Footer左上區塊標題
+    mobileMFooterLeftBlockTitle: {
+        basic: (style, props) => ({
+            width: "100%",
+            fontFamily: "Roboto",
+            fontSize: "22px",
+            fontWeight: 700,
+            lineHeight: "26px",
+            color: "rgba(255, 255, 255, 1)",
+            position: "relative",
+            // top: "105px",
+            /* left          : "80px", */
+            letterSpacing: "15px",
+            margin: "0 0 3px",
+            borderBottom: "1px solid #ffffff",
+        })
+    },
+    //#endregion
+
+    //#region Footer左上區塊內文
+    mobileMFooterLeftBlockContent: {
+        basic: (style, props) => ({
+            width: "100%",
+            position: "relative",
+            /* left          : "80px", */
+            fontFamily: "Roboto",
+            fontSize: "14px",
+            fontWeight: 400,
+            lineHeight: "16px",
+            color: "##606060",
+            // top: "105px",
+            letterSpacing: "5px",
+            margin: "0 0 15px",
+        })
+    },
+    //#endregion
+
+
+    //#region Footer下方區塊容器
+    mobileMFooterBottomBlockContainer: {
+        basic: (style, props) => ({
+            position: "absolute",
+            bottom: "0",
+            background: "rgba(75, 75, 75, 1)",
+            width: "100%",
+            height: "60px",
+            left: "0",
+            zIndex: 97,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center"
+        })
+    },
+    //#endregion
+
+    //#region Footer下方區塊文字
+    mobileMFooterBottomBlockText: {
+        basic: (style, props) => ({
+            color: "rgba(255, 255, 255, 1)",
+            width: "75%",
+            fontFamily: "Roboto",
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "18px",
+        })
+    },
+    //#endregion //#endregion
+
     //#endregion
 }

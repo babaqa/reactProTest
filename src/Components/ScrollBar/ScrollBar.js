@@ -41,7 +41,9 @@ const ScrollBarBase = React.forwardRef((props, ref) => {
 //     ${props => cssifyObject(themeBeUsed(props.basedefaulttheme, switchDefaultTheme, props.theme ?? switchDefaultTheme(props.basedefaulttheme), "basic"))};
 // }
 export const ScrollBar = styled(ScrollBarBase).attrs((props) => ({}))`
-
+.simplebar-content{
+    ${props => cssifyObject(themeBeUsed(props.basedefaulttheme, switchDefaultTheme, props.theme ?? switchDefaultTheme(props.basedefaulttheme), "content"))};
+}
 // x 方向  
 .simplebar-horizontal {
    ${props => cssifyObject(themeBeUsed(props.basedefaulttheme, switchDefaultTheme, props.theme ?? switchDefaultTheme(props.basedefaulttheme), "scrollbarTrackX"))};

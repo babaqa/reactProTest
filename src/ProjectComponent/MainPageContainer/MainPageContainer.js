@@ -6,9 +6,11 @@ import { iterateTheme } from '../../Handlers/ThemeHandler';
 import { ReactComponent as LaptopLCopyright } from '../../Assets/img/LaptopLCopyright.svg'
 import { ReactComponent as LaptopCopyright } from '../../Assets/img/LaptopCopyright.svg'
 import { ReactComponent as TabletCopyright } from '../../Assets/img/TabletCopyright.svg'
-import { ReactComponent as Seal } from '../../Assets/img/Seal.svg'
+import { ReactComponent as SealLaptopL } from '../../Assets/img/SealLaptopL.svg'
+import { ReactComponent as SealLaptop } from '../../Assets/img/SealLaptop.svg'
 import { ReactComponent as FooterLogo } from '../../Assets/img/FooterLogo.svg'
 import { ReactComponent as LaptopFooterLogo } from '../../Assets/img/LaptopFooterLogo.svg'
+import { ReactComponent as MobileMFooterLogo } from '../../Assets/img/MobileMFooterLogo.svg'
 import { ReactComponent as GoTop } from '../../Assets/img/GoTop.svg'
 // import { ReactComponent as MobileMCopyright } from '../../Assets/img/MobileMCopyright.svg'
 
@@ -138,7 +140,7 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                 </Container>
                                 {props.children}
 
-                                <Seal style={{
+                                <SealLaptopL style={{
                                     width: "121px",
                                     position: "absolute",
                                     right: "95px",
@@ -257,11 +259,10 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
 
                                 {props.children}
 
-                                <Seal style={{
-                                    width: "121px",
+                                <SealLaptop style={{
                                     position: "absolute",
                                     right: "95px",
-                                    bottom: "230px",
+                                    bottom: "128px",
                                     filter: "contrast(0.7)",
                                 }} />
 
@@ -423,6 +424,42 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                     left: "0px",
                                     bottom: "0px"
                                 }} /> */}
+
+                                <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContainer") }}>
+                                    <MobileMFooterLogo style={{
+                                        position: "absolute",
+                                        top: "-29px"
+                                    }} />
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockTitle") }}>
+                                        {`ADDRESS`}
+                                    </Text>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContent") }}>
+                                        {`220307新北市板橋區大觀路1段59號`}
+                                    </Text>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockTitle") }}>
+                                        {`TIME`}
+                                    </Text>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContent") }}>
+                                        {`Mon~Fri/08:00-12:00.13:30-15:30`}
+                                    </Text>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockTitle") }}>
+                                        {`TEL`}
+                                    </Text>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContent") }}>
+                                        {`02-22722181`}
+                                    </Text>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockTitle") }}>
+                                        {`FAX`}
+                                    </Text>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterLeftBlockContent") }}>
+                                        {`02-29601822`}
+                                    </Text>
+                                </Container>
+                                <Container theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterBottomBlockContainer") }}>
+                                    <Text theme={{ ...iterateTheme({ ...props, }, props.theme, switchDefaultTheme(props.baseDefaultTheme), "mobileMFooterBottomBlockText") }}>
+                                        {`本網站為國立臺灣藝術大學總務處版權所有，未經允許，不得以任何形式複製和採用`}
+                                    </Text>
+                                </Container>
                             </BasicContainer>
                         </ScrollBar>
                     </BasicContainer>

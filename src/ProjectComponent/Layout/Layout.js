@@ -32,6 +32,8 @@ import { ReactComponent as LeftMenuCross } from '../../Assets/img/LeftMenuCross.
 import { ReactComponent as LeftMenuPlus } from '../../Assets/img/LeftMenuPlus.svg'
 import { ReactComponent as LeftMenuCloseSubTab } from '../../Assets/img/LeftMenuCloseSubTab.svg'
 
+import { ReactComponent as MobileMFooterLogo } from '../../Assets/img/MobileMFooterLogo.svg'
+
 import { getParseItemLocalStorage, setStringifyItemSession, pushAndNotExsistItemSession, getParseItemSession, removeByKeyItemSession, clearLocalStorage, clearSession, setStringifyItemLocalStorage } from '../../Handlers';
 import { iconMap, pageTabBarUrlMapping, pageTextUrlMapping } from '../../Mappings/Mappings'
 import { useHistory, useLocation } from 'react-router-dom';
@@ -43,7 +45,7 @@ export const Layout = (props) => {
     const [DrawerCollapse, setDrawerCollapse] = useState(true);
     const [NeedHover, setNeedHover] = useState(false); // DropDown 開啟時需要hover
     const [ExtendSubTab, setExtendSubTab] = useState(""); // 展開的子Tab
-    const [width] = useWindowSize();
+    const [width, Height] = useWindowSize();
 
     const { Collapse, setCollapse, Theme, Switch } = useContext(Context);
     const { layout } = Theme;
@@ -752,14 +754,9 @@ export const Layout = (props) => {
                         >
                             {/* 固定底部容器 */}
                             <Container
+                                height={Height}
                                 theme={layout.titleBarFixedBottomMobileM}
                             >
-                                <LeftMenuCross
-                                    style={layout.LeftMenuCrossSvg}
-                                    onClick={() => { setDrawerCollapse(true) }}
-
-                                />
-
                                 <BackstageLeftSideMenuBar baseDefaultTheme={"DefaultTheme"}
                                     collapse={DrawerCollapse}
                                     logo={false}
@@ -849,6 +846,7 @@ export const Layout = (props) => {
                                         </React.Fragment >
                                     )
                                 }))} */}
+
                             </Container>
 
                         </ScrollBar>
