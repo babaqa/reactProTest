@@ -30,7 +30,7 @@ export const Component = (props) => {
         switch (type) {
             case "return":
                 //#region 當點擊 回列表 按鈕時，要清除的資料
-                globalContextService.remove("CaseCallCarComponentPage");
+                globalContextService.remove("QAndAPage");
                 //#endregion
                 break;
             default:
@@ -43,8 +43,8 @@ export const Component = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             // console.log(location, action, "路由變化")
-            globalContextService.remove("CaseCallCarComponentPage", "firstUseAPIgetClient");
-            globalContextService.remove("CaseCallCarComponentPage", "firstUseAPIgetSubOrgs");
+            globalContextService.remove("QAndAPage", "firstUseAPIgetClient");
+            globalContextService.remove("QAndAPage", "firstUseAPIgetSubOrgs");
         });
 
         return () => {

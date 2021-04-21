@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { ReactComponent as NoData } from '../../../../Assets/img/ContactPage/NoData.svg'
-import { ReactComponent as Phone } from '../../../../Assets/img/ContactPage/Phone.svg'
-import { ReactComponent as Search } from '../../../../Assets/img/ContactPage/Search.svg'
+import { ReactComponent as NoData } from '../../../../Assets/img/FilesPage/NoData.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable, OldList } from '../../../../Components';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
@@ -12,7 +10,7 @@ import { CardTable } from '../../../../ProjectComponent';
 const LaptopLBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { application: { component: { rwd: { laptopL } } } } } = Theme;
+    const { pages: { files: { component: { rwd: { laptopL } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
     const [Width, Height] = useWindowSize();
@@ -51,19 +49,19 @@ const LaptopLBase = (props) => {
                     <CardTable
                         dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
                         dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                            if (globalContextService.get("RecordPage", "orgId") !== globalContextService.get("RecordPage", "TableCheckedClearKey")) {
-                                globalContextService.remove("RecordPage", "CheckedRowKeys");
-                                globalContextService.remove("RecordPage", "CheckedRowsData");
+                            if (globalContextService.get("FilesPage", "orgId") !== globalContextService.get("FilesPage", "TableCheckedClearKey")) {
+                                globalContextService.remove("FilesPage", "CheckedRowKeys");
+                                globalContextService.remove("FilesPage", "CheckedRowsData");
                             }
                         }}
                         checkbox={false}
-                        checked={globalContextService.get("RecordPage", "CheckedRowKeys") && globalContextService.get("RecordPage", "CheckedRowKeys")}
+                        checked={globalContextService.get("FilesPage", "CheckedRowKeys") && globalContextService.get("FilesPage", "CheckedRowKeys")}
                         checkedRowKeyName={"id"}
                         checkboxOnChecked={
                             (checkedRowKeys, checkedRows) => {
                                 // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                globalContextService.set("RecordPage", "CheckedRowKeys", checkedRowKeys);
-                                globalContextService.set("RecordPage", "CheckedRowsData", checkedRows);
+                                globalContextService.set("FilesPage", "CheckedRowKeys", checkedRowKeys);
+                                globalContextService.set("FilesPage", "CheckedRowsData", checkedRows);
                                 //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
                                 //#endregion
                             }

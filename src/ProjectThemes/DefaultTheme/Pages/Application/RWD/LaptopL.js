@@ -190,18 +190,18 @@ export default {
         basic: (style, props) => ({
             ...style,
             display: "block",
-            margin: 0,
+            margin: "0 0 24px",
             padding: "0 48px 0 24px",
-            lineHeight: "32px",
+            lineHeight: "21px",
             height: "100%",
             fontWeight: 700,
             fontSize: "18px",
             cursor: "pointer",
-            width: "160px",
+            width: "162px",
             color: "rgba(0, 0, 0, 0.85)",
             backgroundColor: "transparent",
             float: "right",
-            clear: "both"
+            clear: "both",
         }),
     },
     //#endregion

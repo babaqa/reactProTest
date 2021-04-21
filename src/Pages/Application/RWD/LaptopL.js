@@ -4,7 +4,7 @@ import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageSubTitleBar, MainPageTitleBar } from '../../../ProjectComponent';
 import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { useHistory } from 'react-router-dom';
-import { ReactComponent as Point } from '../../../Assets/img/ContactPage/Point.svg'
+import { ReactComponent as Point } from '../../../Assets/img/ApplicationPage/Point.svg'
 
 import { Component } from '../Component/Component'
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';

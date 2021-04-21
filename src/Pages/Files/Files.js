@@ -41,22 +41,22 @@ export const Files = (props) => {
         switch (type) {
             case "changePwd":
                 //#region 當 編輯 Modal 關閉時，要清除的資料
-                globalContextService.remove("UserInfoPage", "OldPwd");
-                globalContextService.remove("UserInfoPage", "NewPwd");
-                globalContextService.remove("UserInfoPage", "ConfirmPwd");
+                globalContextService.remove("FilesPage", "OldPwd");
+                globalContextService.remove("FilesPage", "NewPwd");
+                globalContextService.remove("FilesPage", "ConfirmPwd");
                 //#endregion
                 break;
             case "whiteModalClose":
                 //#region 當 編輯 Modal 關閉時，要清除的資料
-                globalContextService.remove("UserInfoPage", "County");
-                globalContextService.remove("UserInfoPage", "District");
-                globalContextService.remove("UserInfoPage", "Address");
-                globalContextService.remove("UserInfoPage", "Longitude0");
-                globalContextService.remove("UserInfoPage", "Latitude0");
-                globalContextService.remove("UserInfoPage", "ContactName");
-                globalContextService.remove("UserInfoPage", "Relationship");
-                globalContextService.remove("UserInfoPage", "ContactCellphone");
-                globalContextService.remove("UserInfoPage", "ContactTelephone");
+                globalContextService.remove("FilesPage", "County");
+                globalContextService.remove("FilesPage", "District");
+                globalContextService.remove("FilesPage", "Address");
+                globalContextService.remove("FilesPage", "Longitude0");
+                globalContextService.remove("FilesPage", "Latitude0");
+                globalContextService.remove("FilesPage", "ContactName");
+                globalContextService.remove("FilesPage", "Relationship");
+                globalContextService.remove("FilesPage", "ContactCellphone");
+                globalContextService.remove("FilesPage", "ContactTelephone");
                 //#endregion
                 break;
             default:
@@ -69,8 +69,8 @@ export const Files = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             //console.log(location, action)
-            globalContextService.remove("UserInfoPage", "firstUseAPIgetUsers");
-            globalContextService.remove("UserInfoPage")
+            globalContextService.remove("FilesPage", "firstUseAPIgetUsers");
+            globalContextService.remove("FilesPage")
         });
 
         return () => {
@@ -83,7 +83,7 @@ export const Files = (props) => {
     // const getUsers = useCallback(async (useAPI = false) => {
 
     //     //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
-    //     if (isUndefined(globalContextService.get("UserInfoPage", "firstUseAPIgetUsers")) || useAPI) {
+    //     if (isUndefined(globalContextService.get("FilesPage", "firstUseAPIgetUsers")) || useAPI) {
     //         //#endregion
 
     //         //#region 取得用戶基本資料 API
@@ -145,7 +145,7 @@ export const Files = (props) => {
     //             })
     //             .finally(() => {
     //                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                 // globalContextService.set("UserInfoPage", "firstUseAPIgetUsers", false);
+    //                 // globalContextService.set("FilesPage", "firstUseAPIgetUsers", false);
     //                 //#endregion
     //             });
     //         //#endregion
@@ -266,7 +266,7 @@ export const Files = (props) => {
     //                                 })
     //                                 .finally(() => {
     //                                     //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                                     // globalContextService.set("UserInfoPage", "firstUseAPIgetUsers", false);
+    //                                     // globalContextService.set("FilesPage", "firstUseAPIgetUsers", false);
     //                                     //#endregion
     //                                 });
     //                             //#endregion
@@ -314,7 +314,7 @@ export const Files = (props) => {
     //             })
     //             .finally(() => {
     //                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                 globalContextService.set("UserInfoPage", "firstUseAPIgetUsers", false);
+    //                 globalContextService.set("FilesPage", "firstUseAPIgetUsers", false);
     //                 //#endregion
     //             });
     //         //#endregion
@@ -388,7 +388,7 @@ export const Files = (props) => {
     //         })
     //         .finally(() => {
     //             //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //             // globalContextService.set("UserInfoPage", "firstUseAPIgetUsers", false);
+    //             // globalContextService.set("FilesPage", "firstUseAPIgetUsers", false);
     //             //#endregion
     //         });
     //     //#endregion
@@ -473,7 +473,7 @@ export const Files = (props) => {
             })
             .finally(() => {
                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-                // globalContextService.set("UserInfoPage", "firstUseAPIgetUsers", false);
+                // globalContextService.set("FilesPage", "firstUseAPIgetUsers", false);
                 //#endregion
             });
         //#endregion
@@ -506,8 +506,8 @@ export const Files = (props) => {
                 if (PreResult.code === 200) {
                     // 成功取得經緯度  
                     // console.log(PreResult.result)
-                    globalContextService.set("UserInfoPage", "Latitude0", PreResult?.result?.lat)
-                    globalContextService.set("UserInfoPage", "Longitude0", PreResult?.result?.lon)
+                    globalContextService.set("FilesPage", "Latitude0", PreResult?.result?.lat)
+                    globalContextService.set("FilesPage", "Longitude0", PreResult?.result?.lon)
                     Switch();
                 }
                 else {

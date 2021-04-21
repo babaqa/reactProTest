@@ -10,7 +10,7 @@ import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextSe
 const TabletBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { application: { component: { rwd: { tablet } } } } } = Theme;
+    const { pages: { files: { component: { rwd: { tablet } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 

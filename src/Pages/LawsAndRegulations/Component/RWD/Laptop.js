@@ -10,7 +10,7 @@ import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextSe
 const LaptopBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { application: { component: { rwd: { laptop } } } } } = Theme;
+    const { pages: { lawsAndRegulations: { component: { rwd: { laptop } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 

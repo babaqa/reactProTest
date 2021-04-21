@@ -6,10 +6,9 @@ import { Container, RangeDateTimePicker, BasicContainer, TreeSelector, Tooltip, 
 import { useHistory } from 'react-router-dom';
 import moment from 'moment';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
-import { ReactComponent as Point } from '../../../Assets/img/ContactPage/Point.svg'
+import { ReactComponent as Point } from '../../../Assets/img/LawsAndRegulationsPage/Point.svg'
 
 import { Component } from '../Component/Component'
-import { isEqual } from 'lodash';
 import { subTabMapping } from '../../../Mappings/Mappings';
 
 const LaptopLBase = (props) => {
@@ -21,7 +20,7 @@ const LaptopLBase = (props) => {
 
     //#region 分頁映射
     const tabMap = () => {
-        return ["相關法令規章", "檔案應用申請", "加值應用"]
+        return ["本校法規", "文書檔案相關法規"]
 
     }
 
@@ -68,7 +67,7 @@ const LaptopLBase = (props) => {
                                 <Text
                                     onClick={() => {
                                         // props.setNowTab(Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]) 
-                                        history.push(`/Application?subTab=${Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]}`);
+                                        history.push(`/LawsAndRegulations?subTab=${Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]}`);
                                     }}
                                     theme={laptopL.titleBarContactTab}
                                 >

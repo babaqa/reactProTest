@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
-import { ReactComponent as NoData } from '../../../../Assets/img/ContactPage/NoData.svg'
-import { ReactComponent as Phone } from '../../../../Assets/img/ContactPage/Phone2.svg'
-import { ReactComponent as RightArrow } from '../../../../Assets/img/ApplicationPage/RightArrow.svg'
+import { ReactComponent as NoData } from '../../../../Assets/img/LawsAndRegulationsPage/NoData.svg'
+import { ReactComponent as RightArrow } from '../../../../Assets/img/LawsAndRegulationsPage/RightArrow.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
@@ -11,7 +10,7 @@ import { CardTable } from '../../../../ProjectComponent';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { application: { component: { rwd: { mobileM } } } } } = Theme;
+    const { pages: { lawsAndRegulations: { component: { rwd: { mobileM } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
     const [Width, Height] = useWindowSize();
@@ -51,19 +50,19 @@ const MobileMBase = (props) => {
                     <CardTable
                         dataChangeClearChecked={true} //當Data變動時 是否清空已勾選項
                         dataChangeClearCheckedToDo={() => { //當Data變動時 要清空已勾選項時執行的函數
-                            if (globalContextService.get("RecordPage", "orgId") !== globalContextService.get("RecordPage", "TableCheckedClearKey")) {
-                                globalContextService.remove("RecordPage", "CheckedRowKeys");
-                                globalContextService.remove("RecordPage", "CheckedRowsData");
+                            if (globalContextService.get("LawsAndRegulationsPage", "orgId") !== globalContextService.get("LawsAndRegulationsPage", "TableCheckedClearKey")) {
+                                globalContextService.remove("LawsAndRegulationsPage", "CheckedRowKeys");
+                                globalContextService.remove("LawsAndRegulationsPage", "CheckedRowsData");
                             }
                         }}
                         checkbox={false}
-                        checked={globalContextService.get("RecordPage", "CheckedRowKeys") && globalContextService.get("RecordPage", "CheckedRowKeys")}
+                        checked={globalContextService.get("LawsAndRegulationsPage", "CheckedRowKeys") && globalContextService.get("LawsAndRegulationsPage", "CheckedRowKeys")}
                         checkedRowKeyName={"id"}
                         checkboxOnChecked={
                             (checkedRowKeys, checkedRows) => {
                                 // console.log(`checkedRowKeys: ${checkedRowKeys}`, 'checkedRowsData: ', checkedRows);
-                                globalContextService.set("RecordPage", "CheckedRowKeys", checkedRowKeys);
-                                globalContextService.set("RecordPage", "CheckedRowsData", checkedRows);
+                                globalContextService.set("LawsAndRegulationsPage", "CheckedRowKeys", checkedRowKeys);
+                                globalContextService.set("LawsAndRegulationsPage", "CheckedRowsData", checkedRows);
                                 //#region 必須要在勾選項"有異動"之後除˙存一個可判斷值，以保持"已異動勾選項"不被重置
                                 //#endregion
                             }
