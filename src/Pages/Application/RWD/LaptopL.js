@@ -6,8 +6,9 @@ import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Select
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as Point } from '../../../Assets/img/ContactPage/Point.svg'
 
-import { CaseContactComponent } from '../CaseContactComponent/CaseContactComponent'
+import { Component } from '../Component/Component'
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
+import { subTabMapping } from '../../../Mappings/Mappings';
 
 const LaptopLBase = (props) => {
 
@@ -15,6 +16,7 @@ const LaptopLBase = (props) => {
     const { pages: { application: { rwd: { laptopL } } } } = Theme;
     let history = useHistory()
     const [Width, Height] = useWindowSize();
+    const [UpdateComponent, setUpdateComponent] = useState(false);
 
     //#region 分頁映射
     const tabMap = () => {
@@ -41,14 +43,14 @@ const LaptopLBase = (props) => {
                             <Text
                                 theme={laptopL.nowPageText}
                             >
-                                {props.nowTab}
+                                {subTabMapping[props.NowTab]}
                             </Text>
                         </Text>
 
                         {/* 子標題列 */}
                         <MainPageSubTitleBar
                             bascDefaultTheme={"DefaultTheme"}
-                            titleText={props.nowTab}
+                            titleText={subTabMapping[props.NowTab]}
                             theme={laptopL.baseSubTitleBar}
                         >
                         </MainPageSubTitleBar>
@@ -63,11 +65,15 @@ const LaptopLBase = (props) => {
                         return (
                             <React.Fragment key={index}>
                                 <Text
-                                    onClick={() => { props.setNowTab(item) }}
+                                    onClick={() => {
+                                        // props.setNowTab(Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]) 
+                                        history.push(`/Application?subTab=${Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]}`);
+                                        setUpdateComponent(u => !u);
+                                    }}
                                     theme={laptopL.titleBarContactTab}
                                 >
                                     {
-                                        props.nowTab === item
+                                        subTabMapping[props.NowTab] === item
                                         &&
                                         <Point
                                             style={laptopL.pointSvg}
@@ -86,7 +92,7 @@ const LaptopLBase = (props) => {
                     {/* 切換使用的組件 */}
                     {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
 
-                    <CaseContactComponent />
+                    <Component />
                 </BasicContainer>
             </MainPageContainer>
 

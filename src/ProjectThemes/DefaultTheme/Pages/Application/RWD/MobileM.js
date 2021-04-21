@@ -6,7 +6,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: 0,
+                    padding: "0px 40px" // 標題列的padding
                 }
             }
         },
@@ -14,8 +14,8 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
-                    height: `calc( ${props.height}px - 245px)`
+                    backgroundColor: "#F9F9F9",
+                    height: `calc( ${props.height}px - 60px - 83px)`,
                 }
             }
         },
@@ -23,101 +23,45 @@ export default {
             basic: (style, props) => {
                 return {
                     ...style,
-                    backgroundColor: "#DBE4E8",
-                    padding: "4px 0 24px",
-                    minHeight: `calc( ${props.height}px - 246px)`
+                    backgroundColor: "#F9F9F9",
+                    padding: "0 40px 448px", //448 是授權圖高度
+                    minHeight: `calc( ${props.height}px + 280px)`,
                 }
             }
         },
     },
     //#endregion
 
-    //#region 標題 TitleText
-    titleText: {
+    //#region 標題容器
+    titleContainer: {
         basic: (style, props) => ({
             ...style,
+            height: "83px",
             width: "100%",
-            height: "48px",
-            fontSize: "16px",
-            fontWeight: 500,
-            lineHeight: "48px",
-            textAlign: "center",
-            boxShadow: "inset 0px -1px 0px #F0F0F0"
+            display: "flex",
+            alignItems: "center",
+            letterSpacing: "0.3em",
+            // padding: "0 40px"
         })
     },
     //#endregion
 
-    //#region 關鍵字 Keyword
-    keyword: {
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "8px 16px",
-                display: "inline-block",
-                width: "100%"
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-            })
-        },
-        textInputContainer: {
-            basic: (style, props) => {
-
-                return {
-                    ...style,
-                    color: (props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.65)"
-                }
-            }
-        },
-        textInput: {
-            basic: (style, props) => {
-                //console.log(style, props)
-                return {
-                    ...style,
-                    //#region 當有開啟 openEye 並且 hover 或 focus 時變色
-                    ...(
-                        props.openEye && {
-                            border: `1px solid ${(props.focus || props.hover) ? "#1890ff" : "#d9d9d9"}`,
-                            boxShadow: (props.focus) ? "0px 0px 0px 2px rgba(24, 144, 255, 0.2)" : null
-                        }
-                    ),
-                    //#endregion
-                    height: "28px",
-                    width: "100%"
-                }
-            }
-        }
-    },
-    //#endregion
-    //#region 關鍵字 右方圖標
-    keywordRightIcon: {
-        position: "absolute",
-        height: "100%",
-        right: "8px",
-        cursor: "pointer",
-        top: 0,
+    //#region 回上一頁icon
+    goBackIcon: {
+        color: "rgba(173, 157, 114, 1)",
     },
     //#endregion
 
-    //#region 標題列 聯繫客服分頁
-    titleBarContactTab: {
+    //#region 標題文字
+    titleText: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
-            // margin: "0 16px",
-            lineHeight: "46px",
-            height: "46px",
-            fontSize: "14px",
-            cursor: "pointer",
-            color: (props.isActive ? "#1890FF" : "rgba(0, 0, 0, 0.65)"),
-            borderBottom: (props.isActive ? "solid 2px #1890FF" : "unset"),
-            width: "33%",
-            textAlign: "center"
-        }),
+            color: "rgba(173, 157, 114, 1)",
+            fontFamiy: "Roboto",
+            fontSize: "20px",
+            fontWeight: 700,
+            borderBottom: "2px solid rgba(173, 157, 114, 1)"
+        })
     },
     //#endregion
-
 }

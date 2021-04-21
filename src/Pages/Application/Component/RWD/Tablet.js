@@ -7,10 +7,10 @@ import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 
 
-const LaptopBase = (props) => {
+const TabletBase = (props) => {
 
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { application: { caseContactComponent: { rwd: { laptop } } } } } = Theme;
+    const { pages: { application: { component: { rwd: { tablet } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
 
@@ -29,7 +29,6 @@ const LaptopBase = (props) => {
         { companyName: "凡亨國際租賃有限公司凡亨國際租賃有限公司", companyPhone: "(02)2912-1966", carServiceWeek: "週一至週五", carServiceTime: "08:00-18:00", customerServiceWeek: "週一至週五", customerServiceTime: "08:00-18:00", carServiceTimeTip: "國定假日提前預約，皆可服務，依車行調度情況" },
 
     ]
-
     return (
         <>
             {data.length === 0
@@ -38,9 +37,9 @@ const LaptopBase = (props) => {
                     {/* 無資料表單區容器 */}
                     < BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
-                        theme={laptop.noDataContainer}
+                        theme={tablet.noDataContainer}
                     >
-                        <NoData style={laptop.noDataSvg} />
+                        <NoData style={tablet.noDataSvg} />
                     </BasicContainer>
                 </>
                 :
@@ -53,31 +52,31 @@ const LaptopBase = (props) => {
 
                                         {/* 卡片資料外層容器 */}
                                         <SubContainer
-                                            theme={laptop.cardOutContainer}
+                                            theme={tablet.cardOutContainer}
                                         >
                                             {/* 卡片資料表單區容器 */}
                                             < BasicContainer
                                                 baseDefaultTheme={"DefaultTheme"}
-                                                theme={laptop.cardContainer}
+                                                theme={tablet.cardContainer}
                                             >
 
                                                 {/* 公司 容器 */}
                                                 <Container
-                                                    theme={laptop.companyContainer}
+                                                    theme={tablet.companyContainer}
                                                 >
                                                     {/* 公司名稱 */}
                                                     <Text
-                                                        theme={laptop.companyName}
+                                                        theme={tablet.companyName}
                                                     >
                                                         {item?.companyName}
                                                     </Text>
 
                                                     {/* 公司電話 */}
                                                     <Text
-                                                        theme={laptop.companyPhone}
+                                                        theme={tablet.companyPhone}
                                                     >
                                                         <Phone
-                                                            style={laptop.phoneSvg}
+                                                            style={tablet.phoneSvg}
                                                         />
                                                         {item?.companyPhone}
                                                     </Text>
@@ -88,11 +87,11 @@ const LaptopBase = (props) => {
 
                                                     {/* 車趟服務時間 容器 */}
                                                     <Container
-                                                        theme={laptop.carServiceTimeContainer}
+                                                        theme={tablet.carServiceTimeContainer}
                                                     >
                                                         {/* 車趟服務時間 標題 */}
                                                         <Text
-                                                            theme={laptop.carServiceTimeTitle}
+                                                            theme={tablet.carServiceTimeTitle}
                                                         >
                                                             車趟服務時間
                                                     </Text>
@@ -100,12 +99,12 @@ const LaptopBase = (props) => {
                                                         {/* 車趟服務時間 內文 */}
                                                         {/* 車趟服務時間 星期 */}
                                                         <Text
-                                                            theme={laptop.carServiceWeekText}
+                                                            theme={tablet.carServiceWeekText}
                                                         >
                                                             {item?.carServiceWeek}
                                                             {/* 車趟服務時間 時段 */}
                                                             <Text
-                                                                theme={laptop.carServiceTimeText}
+                                                                theme={tablet.carServiceTimeText}
                                                             >
                                                                 {item?.carServiceTime}
                                                             </Text>
@@ -113,7 +112,7 @@ const LaptopBase = (props) => {
 
                                                         {/* 車趟服務時間 通知 */}
                                                         <Text
-                                                            theme={laptop.carServiceTimeTip}
+                                                            theme={tablet.carServiceTimeTip}
                                                         >
                                                             {item?.carServiceTimeTip}
                                                         </Text>
@@ -123,11 +122,11 @@ const LaptopBase = (props) => {
 
                                                     {/* 客服服務時間 容器 */}
                                                     <Container
-                                                        theme={laptop.customerServiceTimeContainer}
+                                                        theme={tablet.customerServiceTimeContainer}
                                                     >
                                                         {/* 客服服務時間 */}
                                                         <Text
-                                                            theme={laptop.customerServiceTime}
+                                                            theme={tablet.customerServiceTime}
                                                         >
                                                             客服服務時間
                                                     </Text>
@@ -135,12 +134,12 @@ const LaptopBase = (props) => {
                                                         {/* 客服服務時間 內文 */}
                                                         {/* 客服服務時間 星期 */}
                                                         <Text
-                                                            theme={laptop.customerServiceWeekText}
+                                                            theme={tablet.customerServiceWeekText}
                                                         >
                                                             {item?.customerServiceWeek}
                                                             {/* 客服服務時間 時段 */}
                                                             <Text
-                                                                theme={laptop.customerServiceTimeText}
+                                                                theme={tablet.customerServiceTimeText}
                                                             >
                                                                 {item?.customerServiceTime}
                                                             </Text>
@@ -148,7 +147,7 @@ const LaptopBase = (props) => {
 
                                                         {/* 客服服務時間 通知 */}
                                                         <Text
-                                                            theme={laptop.customerServiceTimeTip}
+                                                            theme={tablet.customerServiceTimeTip}
                                                         >
                                                             {item?.customerServiceTimeTip}
                                                         </Text>
@@ -171,6 +170,5 @@ const LaptopBase = (props) => {
     )
 }
 
-export const Laptop = styled(LaptopBase).attrs((props) => ({}))`
- 
+export const Tablet = styled(TabletBase).attrs((props) => ({}))`
 `

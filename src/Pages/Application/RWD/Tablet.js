@@ -6,7 +6,7 @@ import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Select
 // import { ReactComponent as Search } from '../../../Assets/img/CasePage/Search.svg'
 import { useHistory } from 'react-router-dom';
 
-import { CaseContactComponent } from '../CaseContactComponent/CaseContactComponent'
+import { CaseContactComponent } from '../Component/Component'
 import { BusContactComponent } from '../BusContactComponent/BusContactComponent'
 import { FleetContactComponent } from '../FleetContactComponent/FleetContactComponent'
 
@@ -78,14 +78,14 @@ const TabletBase = (props) => {
                                 type="text"
                                 placeholder={"請輸入車行名稱"}
                                 // rightIcon={
-                                    // <Search
-                                    //     style={tablet.keywordRightIcon}
-                                    //     onClick={(e) => {
-                                    //         console.log("目前不支援搜尋功能")
-                                    //         // props.GetSubOrgsExecute(true, "");
-                                    //     }
-                                    //     }
-                                    // />
+                                // <Search
+                                //     style={tablet.keywordRightIcon}
+                                //     onClick={(e) => {
+                                //         console.log("目前不支援搜尋功能")
+                                //         // props.GetSubOrgsExecute(true, "");
+                                //     }
+                                //     }
+                                // />
                                 // }
                                 value={globalContextService.get("ContactPage", "Keyword") ?? ""}
                                 onChange={(e, value, onInitial) => {

@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
 import { Context } from '../../Store/Store'
 import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput } from '../../Components';
 import { LaptopL } from './RWD/LaptopL';
@@ -6,13 +6,19 @@ import { LaptopL } from './RWD/LaptopL';
 import { MobileM } from './RWD/MobileM';
 // import { Tablet } from './RWD/Tablet';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
+import { useLocation } from 'react-router-dom';
 
 export const Application = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
-    const [NowTab, setNowTab] = useState("相關法令規章"); // 目前預約訂車頁面
+    let urlParams = new URLSearchParams(useLocation().search);//取得參數
+    const [NowTab, setNowTab] = useState(""); // 目前預約訂車頁面
     const [Width, Height] = useWindowSize();
+
+    useEffect(() => {
+        setNowTab(urlParams.get("subTab"));
+    }, [urlParams.get("subTab")])
 
     return (
         <>
@@ -20,7 +26,7 @@ export const Application = (props) => {
             {
                 1024 <= Width &&
                 <LaptopL
-                    nowTab={NowTab}
+                    NowTab={NowTab}
                     setNowTab={setNowTab}
                 />
             }
@@ -41,7 +47,7 @@ export const Application = (props) => {
             {
                 Width < 1024 &&
                 <MobileM
-                    nowTab={NowTab}
+                    NowTab={NowTab}
                     setNowTab={setNowTab}
                 />
             }

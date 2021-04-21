@@ -2,20 +2,20 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
 import { ReactComponent as NoData } from '../../../../Assets/img/ContactPage/NoData.svg'
-import { ReactComponent as Phone } from '../../../../Assets/img/ContactPage/Phone.svg'
-import { ReactComponent as Search } from '../../../../Assets/img/ContactPage/Search.svg'
+import { ReactComponent as Phone } from '../../../../Assets/img/ContactPage/Phone2.svg'
+import { ReactComponent as RightArrow } from '../../../../Assets/img/ApplicationPage/RightArrow.svg'
 import { useHistory } from 'react-router-dom';
-import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable, OldList } from '../../../../Components';
+import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { CardTable } from '../../../../ProjectComponent';
 
-const LaptopLBase = (props) => {
-
+const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
-    const { pages: { application: { caseContactComponent: { rwd: { laptopL } } } } } = Theme;
+    const { pages: { application: { component: { rwd: { mobileM } } } } } = Theme;
 
     const [ForceUpdate, setForceUpdate] = useState(false); // 供強制刷新組件
     const [Width, Height] = useWindowSize();
+
     let history = useHistory()
 
     let data = [
@@ -41,7 +41,7 @@ const LaptopLBase = (props) => {
                     < BasicContainer
                         baseDefaultTheme={"DefaultTheme"}
                         height={Height}
-                        theme={laptopL.noDataContainer}
+                        theme={mobileM.noDataContainer}
                     >
                         <NoData />
                     </BasicContainer>
@@ -89,50 +89,25 @@ const LaptopLBase = (props) => {
 
                                         return (
                                             <>
+                                                {/* 每一行資料容器 */}
                                                 <BasicContainer
-                                                    theme={{
-                                                        basic: (style, props) => ({
-                                                            ...style,
-                                                            width: "100%",
-                                                            height: "72px",
-                                                            display: "flex",
-                                                            padding: "8px",
-                                                            borderBottom: "2px solid #C4C4C4",
-                                                        }),
-                                                    }}
+                                                    theme={mobileM.lineContainer}
                                                 >
+                                                    {/* 日期 文字 */}
                                                     <Text
-                                                        theme={{
-                                                            basic: (style, props) => ({
-                                                                ...style,
-                                                                display: "inline-block",
-                                                                fontWeight: 400,
-                                                                fontSize: "16px",
-                                                                color: "#B0B0B0",
-                                                                padding: "18px 12px"
-                                                            }),
-                                                        }}
+                                                        theme={mobileM.dateTimeText}
                                                     >
                                                         {rowData.date}
                                                     </Text>
 
+                                                    {/* 資料標題 文字 */}
                                                     <Text
-                                                        theme={{
-                                                            basic: (style, props) => ({
-                                                                ...style,
-                                                                display: "inline-block",
-                                                                fontWeight: 400,
-                                                                fontSize: "16px",
-                                                                color: "#5F5D56",
-                                                                padding: "18px 12px",
-                                                                width: "calc( 100% - 104px )",
-                                                                whiteSpace: "nowrap",
-                                                                textOverflow: "ellipsis",
-                                                                overflow: "hidden",
-                                                            }),
-                                                        }}
+                                                        theme={mobileM.dataTitleText}
                                                     >
                                                         {rowData.title}
+
+                                                        {/* 向右箭頭 圖標 */}
+                                                        <RightArrow style={mobileM.rightArrow} />
                                                     </Text>
                                                 </BasicContainer>
                                             </>
@@ -149,13 +124,12 @@ const LaptopLBase = (props) => {
                         clickPage={(currentPage, pageSize) => {
                         }}
                     />
-
                 </>
             }
         </>
     )
 }
 
-export const LaptopL = styled(LaptopLBase).attrs((props) => ({}))`
+export const MobileM = styled(MobileMBase).attrs((props) => ({}))`
  
 `

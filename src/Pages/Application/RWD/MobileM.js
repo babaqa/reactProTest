@@ -8,20 +8,14 @@ import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Select
 import { useHistory } from 'react-router-dom';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 
-import { CaseContactComponent } from '../CaseContactComponent/CaseContactComponent'
+import { Component } from '../Component/Component'
+import { subTabMapping } from '../../../Mappings/Mappings';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { application: { rwd: { mobileM } } } } = Theme;
     const [Width, Height] = useWindowSize();
     let history = useHistory()
-
-    //#region 分頁映射
-    const tabMap = () => {
-        return ["相關法令規章", "檔案應用申請", "加值應用"]
-
-    }
-    //#endregion
 
     return (
         <>
@@ -38,7 +32,7 @@ const MobileMBase = (props) => {
                                 }}
                             />
 
-                            <Text theme={mobileM.titleText}>{props.NowTab}</Text>
+                            <Text theme={mobileM.titleText}>{subTabMapping[props.NowTab]}</Text>
                         </Container>
 
                     </>
@@ -46,7 +40,7 @@ const MobileMBase = (props) => {
             >
                 {/* 切換使用的組件 */}
                 {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
-                <CaseContactComponent />
+                <Component />
             </MainPageContainer>
         </>
     )

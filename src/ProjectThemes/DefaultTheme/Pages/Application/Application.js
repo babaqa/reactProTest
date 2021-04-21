@@ -2,7 +2,7 @@ import mobileM from './RWD/MobileM'
 import tablet from './RWD/Tablet'
 import laptop from './RWD/Laptop'
 import laptopL from './RWD/LaptopL'
-import caseContactComponent from './CaseContactComponent/CaseContactComponent'
+import component from './Component/Component'
 
 
 export default {
@@ -12,5 +12,5 @@ export default {
         laptop,
         laptopL
     },
-    caseContactComponent,
+    component,
 }

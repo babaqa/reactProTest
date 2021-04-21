@@ -11,7 +11,7 @@ import { isUndefined } from 'lodash';
 import { clearLocalStorage, clearSession, getParseItemLocalStorage } from '../../../Handlers';
 import { useAsync } from '../../../SelfHooks/useAsync';
 
-export const CaseContactComponent = (props) => {
+export const Component = (props) => {
 
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
