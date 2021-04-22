@@ -8,7 +8,7 @@ export default {
                 margin: 0,
                 background: "transparent",
                 // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: `calc( ${props.height}px - 273px)`,
+                height: `calc( ${props.height}px - 452px)`,
                 width: "100%",
                 borderRadius: "16px",
                 display: "flex",
@@ -24,10 +24,10 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
-            // height: "65px",
-            display: "inline-block",
-            margin: "0 0 12px",
-            borderBottom: "1px solid #C4C4C4",
+            height: "72px",
+            display: "flex",
+            padding: "8px",
+            borderBottom: "2px solid #C4C4C4",
         }),
     },
     //#endregion
@@ -38,11 +38,9 @@ export default {
             ...style,
             display: "inline-block",
             fontWeight: 400,
-            fontSize: "14px",
-            lineHeight: "16px",
+            fontSize: "16px",
             color: "#B0B0B0",
-            margin: "0 0 8px",
-            width: "100%"
+            padding: "18px 12px"
         }),
     },
     //#endregion
@@ -51,30 +49,19 @@ export default {
     dataTitleText: {
         basic: (style, props) => ({
             ...style,
-            // display: "inline-block",
-            display: "-webkit-box",
+            display: "inline-block",
             fontWeight: 400,
             fontSize: "16px",
-            lineHeight: "24px",
             color: "#5F5D56",
-            width: "100%",
-            // whiteSpace: "nowrap",
+            padding: "18px 12px",
+            width: "calc( 100% - 104px )",
+            whiteSpace: "nowrap",
             textOverflow: "ellipsis",
             overflow: "hidden",
-            padding: "0 24px 3px 0",
-            WebkitLineClamp: 2,
-            WebkitBoxOrient: "vertical"
         }),
     },
     //#endregion
 
-    //#region 向右箭頭 圖標
-    rightArrow: {
-        position: "absolute",
-        right: "10px",
-        top: "7px"
-    },
-    //#endregion
 
     //#region 線上檔案展
     //#region 列表
@@ -83,22 +70,25 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
-            height: "160px",
+            height: "455px",
             backgroundColor: "#C4C4C4"
         }),
     },
     //#endregion
 
+
     //#region 年度 文字
     exhibitionYearText: {
         basic: (style, props) => ({
             ...style,
+            width: "100%",
             color: "#AD9D72",
             fontWeight: 700,
             fontSize: "18px",
             lineHeight: "21px",
             fontFanily: "Roboto",
-            margin: "24px 0"
+            margin: "0 0 34px",
+            textAlign: "right"
         }),
     },
     //#endregion
@@ -154,23 +144,14 @@ export default {
     },
     //#endregion
 
-    //#region 展覽資料 容器
-    exhibitionContentContainer: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            margin: "0 0 30px"
-        }),
-    },
-    //#endregion
 
-    //#region 展覽資料 圖片
+    //#region 詳細資料 圖片
     exhibitionImg: {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "100%",
-                // height: "100%",
+                width: "520px",
+                height: "324px",
                 padding: 0,
                 flexGrow: 1
             })
@@ -184,8 +165,9 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "100%",
-                // height: "100%",
+                width: "520px",
+                height: "324px",
+                display: "inline-block",
                 padding: 0,
                 flexGrow: 1
             })
@@ -202,7 +184,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                minHeight: "100%",
+                height: "100%",
                 padding: 0,
             })
         },
@@ -223,10 +205,10 @@ export default {
             alignItems: "center",
             width: "100%",
             fontWeight: 700,
-            fontSize: "18px",
+            fontSize: "28px",
             lineHeight: "32px",
             color: "#AD9D72",
-            padding: "9px 0"
+            margin: "0 0 20px"
         }),
     },
     //#endregion
@@ -237,8 +219,8 @@ export default {
             ...style,
             width: "100%",
             fontWeight: 400,
-            fontSize: "16px",
-            lineHeight: "18px",
+            fontSize: "18px",
+            lineHeight: "21px",
             color: "#B0B0B0",
             margin: "0 0 0 16px"
         }),
@@ -251,10 +233,10 @@ export default {
             ...style,
             width: "100%",
             fontWeight: 700,
-            fontSize: "18px",
-            lineHeight: "21px",
+            fontSize: "22px",
+            lineHeight: "26px",
             color: "#5F5D56",
-            margin: "0 0 10px"
+            margin: "0 0 26px"
         }),
     },
     //#endregion
@@ -264,15 +246,22 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
+            height: "223px",
             fontWeight: 500,
-            fontSize: "14px",
-            lineHeight: "21px",
+            fontSize: "22px",
+            lineHeight: "33px",
             color: "#5F5D56",
+            textOverflow: "ellipsis",
+            overflow: "hidden",
+            display: "-webkit-box",
+            WebkitBoxOrient: "vertical",
+            WebkitLineClamp: 7
         }),
     },
     //#endregion
 
     //#endregion
 
+    //#endregion
     //#endregion
 }

@@ -139,6 +139,8 @@ const LaptopLBase = (props) => {
 
                     <Component
                         NowTab={props.NowTab}
+                        ExhibitionDetail={props.ExhibitionDetail}
+                        setExhibitionDetail={props.setExhibitionDetail}
                     />
                 </BasicContainer>
             </MainPageContainer>

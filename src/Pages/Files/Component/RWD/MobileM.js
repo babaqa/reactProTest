@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
 import { ReactComponent as NoData } from '../../../../Assets/img/FilesPage/NoData.svg'
 import { ReactComponent as RightArrow } from '../../../../Assets/img/FilesPage/RightArrow.svg'
+import { ReactComponent as Download } from '../../../../Assets/img/FilesPage/Download.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, Upload, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
@@ -34,21 +35,22 @@ const MobileMBase = (props) => {
 
     let data1 = [
         { date: "2012.11.29", title: "123", content: "機關檔案點收作業要點" },
-        { date: "2017.08.16", title: "123", content: "會計憑證應否適用檔案法及其如何辦理立案編目等作業乙案" },
-        { date: "2017.07.31", title: "123", content: "國家檔案內含政治受難者私人文書申請返還作業要點" },
-        { date: "2017.07.13", title: "123", content: "文書流程管理作業規範" },
-        { date: "2017.07.13", title: "123", content: "人事類檔案保存年限基準表" },
-        { date: "2017.07.13", title: "123", content: "「100年度教育部檔案管理作業成效訪視」簡報檔" },
-        { date: "2017.07.13", title: "123", content: "本組檔案活動相簿" },
-        { date: "2017.07.13", title: "123", content: "為遴選檔案管理人員參加第15屆機關績優檔案管理人員金質獎評獎乙案" },
-        { date: "2017.07.13", title: "123", content: "臺南市左鎮區 公所遷回原辦公處所，其地址變更及公文電子交換收發文等事項臺南市左鎮區 公所遷回原辦公處所，其地址變更及公文電子交換收發文等事項臺南市左鎮區 公所遷回原辦公處所，其地址變更及公文電子交換收發文等事項" },
-        { date: "2017.07.13", title: "123", content: "國家發展委員會檔案管理局函請就「大專校院類檔案保存年限基準表(草案)」專校院類檔案保存年限基準表(草案)」專校院類檔案保存年限基準表(草案)」專校院類檔案保存年限基準表(草案)」" },
-        { date: "2017.07.13", title: "123", content: "國家發展委員會檔案管理局函請就「大專校院類檔案保存年限基準表(草案)」案)」案)」案)」案)」" },
+        { date: "2017.08.16", title: "321", content: "會計憑證應否適用檔案法及其如何辦理立案編目等作業乙案" },
+        { date: "2017.07.31", title: "513", content: "國家檔案內含政治受難者私人文書申請返還作業要點" },
+        { date: "2017.07.13", title: "823", content: "文書流程管理作業規範" },
+        { date: "2017.07.13", title: "513", content: "人事類檔案保存年限基準表" },
+        { date: "2017.07.13", title: "684", content: "「100年度教育部檔案管理作業成效訪視」簡報檔" },
+        { date: "2017.07.13", title: "877", content: "本組檔案活動相簿" },
+        { date: "2017.07.13", title: "315", content: "為遴選檔案管理人員參加第15屆機關績優檔案管理人員金質獎評獎乙案" },
+        { date: "2017.07.13", title: "315", content: "臺南市左鎮區 公所遷回原辦公處所，其地址變更及公文電子交換收發文等事項臺南市左鎮區 公所遷回原辦公處所，其地址變更及公文電子交換收發文等事項臺南市左鎮區 公所遷回原辦公處所，其地址變更及公文電子交換收發文等事項" },
+        { date: "2017.07.13", title: "684", content: "國家發展委員會檔案管理局函請就「大專校院類檔案保存年限基準表(草案)」專校院類檔案保存年限基準表(草案)」專校院類檔案保存年限基準表(草案)」專校院類檔案保存年限基準表(草案)」" },
+        { date: "2017.07.13", title: "Hi~~~", content: "國家發展委員會檔案管理局函請就「大專校院類檔案保存年限基準表(草案)」案)」案)」案)」案)」" },
 
     ]
 
     return (
         <>
+            {/* 非線上檔案展 */}
             { props.NowTab !== "OnlineArchiveExhibition"
                 ?
                 <>
@@ -148,11 +150,12 @@ const MobileMBase = (props) => {
                 </>
                 :
                 <>
+                    {/* 線上檔案展 */}
                     {/* 輪播容器 */}
                     <Container
                         theme={mobileM.carouselContainer}
                     >
-                        我是輪播 ~~~~~~~~
+                        {`我是輪播 ~~~~~~~~`}
                     </Container>
 
                     {/* 年度 文字 */}
@@ -193,7 +196,9 @@ const MobileMBase = (props) => {
                                     {/* 展覽資料 容器 */}
                                     <BasicContainer
                                         theme={mobileM.exhibitionContentContainer}
-
+                                        onClick={() => {
+                                            props.setExhibitionDetail(item);
+                                        }}
                                     >
                                         {/* 線上檔案展 圖片 */}
                                         <Upload

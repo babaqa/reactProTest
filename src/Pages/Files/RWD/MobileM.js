@@ -9,6 +9,7 @@ import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { subTabMapping } from '../../../Mappings/Mappings';
 
 import { Component } from '../Component/Component'
+import { DetailComponent } from '../DetailComponent/DetailComponent'
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
@@ -27,11 +28,26 @@ const MobileMBase = (props) => {
                             <GoBack
                                 style={mobileM.goBackIcon}
                                 onClick={() => {
-                                    history.goBack();
+                                    if (props?.ExhibitionDetail) {
+                                        props.setExhibitionDetail(undefined);
+                                    }
+                                    else {
+                                        history.goBack();
+                                    }
                                 }}
                             />
 
-                            <Text theme={mobileM.titleText}>{subTabMapping[props.NowTab]}</Text>
+                            <Text theme={mobileM.titleText}>
+                                {
+                                    props?.ExhibitionDetail
+                                        ?
+                                        props.ExhibitionDetail.title
+                                        :
+                                        subTabMapping[props.NowTab]
+                                }
+
+                            </Text>
+
                         </Container>
 
                     </>
@@ -39,11 +55,22 @@ const MobileMBase = (props) => {
             >
                 {/* 切換使用的組件 */}
                 {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
-                <Component
-                    NowTab={props.NowTab}
-                    ExhibitionDetail={props.ExhibitionDetail}
-                    setExhibitionDetail={props.setExhibitionDetail}
-                />
+                {
+                    props?.ExhibitionDetail
+                        ?
+                        <DetailComponent
+                            NowTab={props.NowTab}
+                            ExhibitionDetail={props.ExhibitionDetail}
+                            setExhibitionDetail={props.setExhibitionDetail}
+                        />
+                        :
+                        <Component
+                            NowTab={props.NowTab}
+                            ExhibitionDetail={props.ExhibitionDetail}
+                            setExhibitionDetail={props.setExhibitionDetail}
+                        />
+                }
+
             </MainPageContainer>
         </>
     )
