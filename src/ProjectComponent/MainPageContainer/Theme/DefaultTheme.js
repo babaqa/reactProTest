@@ -511,6 +511,7 @@ export default {
         },
         scrollbarThumbY: {
             backgroundImage: "linear-gradient(90deg, rgba(144, 147, 153, 0.3) 100%, rgba(144, 147, 153, 0.3) 100%)",
+            background: "white",
             opacity: 0.3,
             transition: "opacity 0s linear",
             right: "0px",
@@ -1172,11 +1173,13 @@ export default {
     mobileMFooterBottomBlockText: {
         basic: (style, props) => ({
             color: "rgba(255, 255, 255, 1)",
-            width: "75%",
+            // width: "75%",
             fontFamily: "Roboto",
             fontWeight: 400,
             fontSize: "14px",
             lineHeight: "18px",
+            width: "auto",
+            padding: "0 10%"
         })
     },
     //#endregion //#endregion

@@ -12,16 +12,16 @@ export const Member = (props) => {
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
     const [CheckDetail, setCheckDetail] = useState({}); // 詳細資料
-    const [NowTab, setNowTab] = useState("全部路線"); // 目前公告頁面
+    const [NowTab, setNowTab] = useState("成員介紹"); // 目前公告頁面
     const [Width, Height] = useWindowSize();
 
     return (
         <>
             {/* 共用theme */}
             {
-                768 <= Width &&
+                1024 <= Width &&
                 <LaptopL
-                    nowTab={NowTab}
+                    NowTab={NowTab}
                     setNowTab={setNowTab}
                     CheckDetail={CheckDetail}
                     setCheckDetail={setCheckDetail}
@@ -42,9 +42,9 @@ export const Member = (props) => {
                 />
             } */}
             {
-                Width < 768 &&
+                Width < 1024 &&
                 <MobileM
-                    nowTab={NowTab}
+                    NowTab={NowTab}
                     setNowTab={setNowTab}
                     CheckDetail={CheckDetail}
                     setCheckDetail={setCheckDetail}
