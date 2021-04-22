@@ -69,6 +69,7 @@ export default {
                 justifyContent: "center",
                 height: "95px",
                 width: "auto",
+                alignItems: "center",
                 borderBottom: props?.active ? "6px solid rgba(173, 157, 114, 1)" : "unset",
                 color: props?.active ? "#54524C" : "#54524C",
                 display: "flex",
@@ -341,15 +342,18 @@ export default {
     titleBarTabTextLaptop: {
         basic: (style, props) => ({
             ...style,
-            color: "inherit",
+            // color: "inherit",
             cursor: "pointer",
             position: "relative",
-            // top: "48px",
-            // left: "0px",
+            // top: "38px",
+            // left: "32px",
             userSelect: "none",
+            lineHeight: "95px",
+            textDecoration: "none",
+            color: "rgba(84, 82, 76, 1)",
+            fontWeight: 500,
             fontSize: "14px",
-            lineHeight: "16px",
-            fontWeight: 500
+            fontFamily: "Roboto",
         })
     },
     //#endregion

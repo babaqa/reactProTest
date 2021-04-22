@@ -215,7 +215,8 @@ export default {
             height: "59px",
             display: "inline-flex",
             borderBottom: "4px solid rgba(196, 196, 196, 1)",
-            margin: "0 25px 20px"
+            margin: "0 25px 20px",
+            alignItems: "center"
         }),
         laptopL: {
             basic: (style) => ({
@@ -224,7 +225,8 @@ export default {
                 height: "59px",
                 display: "inline-flex",
                 borderBottom: "4px solid rgba(196, 196, 196, 1)",
-                margin: "0 25px 20px"
+                margin: "0 25px 20px",
+                alignItems: "center"
             }),
         }
     },
@@ -235,7 +237,8 @@ export default {
         basic: (style) => ({
             ...style,
             width: "calc(100% - 104px)",
-            lineHeight: "55px",
+            lineHeight: "21px",
+            fontSize: "18px",
             display: "inline-block",
             textOverflow: "ellipsis",
             overflow: "hidden",

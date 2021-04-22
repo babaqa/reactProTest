@@ -24,6 +24,7 @@ import { ReactComponent as ArchiveExhibition } from '../../../../Assets/img/Syst
 import isUndefined from 'lodash/isUndefined';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { fmt } from '../../../../Handlers/DateHandler';
+import { Tooltip } from '@material-ui/core';
 
 const LaptopLBase = (props) => {
 
@@ -164,9 +165,11 @@ const LaptopLBase = (props) => {
                                             <>
                                                 {index < 10 ?
                                                     <Container theme={laptopL.downloadsDataContainer}>
-                                                        <Text theme={laptopL.downloadsDataText}>
-                                                            {item.title}
-                                                        </Text>
+                                                        <Tooltip placement="top-start" title={item.title}>
+                                                            <Text theme={laptopL.downloadsDataText}>
+                                                                {item.title}
+                                                            </Text>
+                                                        </Tooltip>
                                                         <Container theme={laptopL.downloadsDataIconContainer}>
                                                             <a href="/Test" download>
                                                                 <Pdf style={laptopL.downloadDataIcon} />
@@ -188,9 +191,11 @@ const LaptopLBase = (props) => {
                                             <>
                                                 {index < 5 ?
                                                     <Container theme={laptopL.downloadsDataContainer}>
-                                                        <Text theme={laptopL.downloadsDataText}>
-                                                            {item.title}
-                                                        </Text>
+                                                        <Tooltip placement="top-start" title={item.title}>
+                                                            <Text theme={laptopL.downloadsDataText}>
+                                                                {item.title}
+                                                            </Text>
+                                                        </Tooltip>
                                                         <Container theme={laptopL.downloadsDataIconContainer}>
                                                             <a href="/Test" download>
                                                                 <Pdf style={laptopL.downloadDataIcon} />

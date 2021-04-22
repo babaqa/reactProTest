@@ -12,6 +12,7 @@ import { ReactComponent as FooterLogo } from '../../Assets/img/FooterLogo.svg'
 import { ReactComponent as LaptopFooterLogo } from '../../Assets/img/LaptopFooterLogo.svg'
 import { ReactComponent as MobileMFooterLogo } from '../../Assets/img/MobileMFooterLogo.svg'
 import { ReactComponent as GoTop } from '../../Assets/img/GoTop.svg'
+import { ReactComponent as GoTopMobileM } from '../../Assets/img/GoTopMobileM.svg'
 // import { ReactComponent as MobileMCopyright } from '../../Assets/img/MobileMCopyright.svg'
 
 //#region 擴充基本樣式區
@@ -417,6 +418,13 @@ export const MainPageContainer = React.forwardRef((props, ref) => {
                                 baseDefaultTheme={"DefaultTheme"}
                                 theme={{ ...iterateTheme(props, props.theme, switchDefaultTheme(props.baseDefaultTheme), "basicContentContainer") }} //吃theme
                             >
+                                <GoTopMobileM style={{
+                                    position: "fixed",
+                                    right: "20px",
+                                    top: "80%",
+                                    zIndex: "99",
+                                }} />
+
                                 {props.children}
                                 {/* <MobileMCopyright style={{
                                     width: "100%",

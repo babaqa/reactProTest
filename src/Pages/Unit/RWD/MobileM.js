@@ -34,7 +34,8 @@ const MobileMBase = (props) => {
 
                             <Text theme={mobileM.titleText}>{props.NowTab}</Text>
                         </Container>
-                    </>}
+                    </>
+                }
             >
 
 

@@ -25,7 +25,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#F9F9F9",
-                    padding: "0 0 0", //188 是授權圖高度
+                    padding: "0 0 448px", //188 是授權圖高度
                     // height:""
                 }
             }
