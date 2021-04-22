@@ -30,8 +30,46 @@ const LaptopLBase = (props) => {
                 height={Height}
                 outSideTopComponent={
                     <>
+                        {
+                            props.NowTab === "OnlineArchiveExhibition"
+                            &&
+                            <>
+                                {/* 分頁tab 容器 */}
+                                <BasicContainer
+                                    exhibition={props.NowTab === "OnlineArchiveExhibition"}
+                                    theme={laptopL.tabsContainer}
+                                >
+                                    {tabMap().map((item, index) => {
+                                        return (
+                                            <React.Fragment key={index}>
+                                                <Text
+                                                    onClick={() => {
+                                                        // props.setNowTab(Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]) 
+                                                        history.push(`/Files?subTab=${Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]}`);
+                                                    }}
+                                                    exhibition={props.NowTab === "OnlineArchiveExhibition"}
+                                                    theme={laptopL.titleBarContactTab}
+                                                >
+                                                    {
+                                                        subTabMapping[props.NowTab] === item
+                                                        &&
+                                                        <Point
+                                                            style={laptopL.pointSvg}
+                                                        />
+                                                    }
+                                                    {item}
+                                                </Text>
+                                            </React.Fragment>
+                                        )
+                                    })}
+                                </BasicContainer>
+
+                            </>
+                        }
+
                         {/* 首頁文字 */}
                         <Text
+                            exhibition={props.NowTab === "OnlineArchiveExhibition"}
                             theme={laptopL.homePageText}
                         >
                             {`首頁　／　`}
@@ -48,6 +86,7 @@ const LaptopLBase = (props) => {
                         <MainPageSubTitleBar
                             bascDefaultTheme={"DefaultTheme"}
                             titleText={subTabMapping[props.NowTab]}
+                            exhibition={props.NowTab === "OnlineArchiveExhibition"}
                             theme={laptopL.baseSubTitleBar}
                         >
                         </MainPageSubTitleBar>
@@ -55,40 +94,52 @@ const LaptopLBase = (props) => {
                 }
             >
 
-                <BasicContainer
-                    theme={laptopL.tabsContainer}
-                >
-                    {tabMap().map((item, index) => {
-                        return (
-                            <React.Fragment key={index}>
-                                <Text
-                                    onClick={() => {
-                                        // props.setNowTab(Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]) 
-                                        history.push(`/Files?subTab=${Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]}`);
-                                    }}
-                                    theme={laptopL.titleBarContactTab}
-                                >
-                                    {
-                                        subTabMapping[props.NowTab] === item
-                                        &&
-                                        <Point
-                                            style={laptopL.pointSvg}
-                                        />
-                                    }
-                                    {item}
-                                </Text>
-                            </React.Fragment>
-                        )
-                    })}
-                </BasicContainer>
+                {
+                    props.NowTab !== "OnlineArchiveExhibition"
+                    &&
+                    <>
+                        {/* 分頁tab 容器 */}
+                        <BasicContainer
+                            theme={laptopL.tabsContainer}
+                        >
+                            {tabMap().map((item, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        <Text
+                                            onClick={() => {
+                                                // props.setNowTab(Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]) 
+                                                history.push(`/Files?subTab=${Object.keys(subTabMapping).filter((x) => subTabMapping[x] === item)[0]}`);
+                                            }}
+                                            theme={laptopL.titleBarContactTab}
+                                        >
+                                            {
+                                                subTabMapping[props.NowTab] === item
+                                                &&
+                                                <Point
+                                                    style={laptopL.pointSvg}
+                                                />
+                                            }
+                                            {item}
+                                        </Text>
+                                    </React.Fragment>
+                                )
+                            })}
+                        </BasicContainer>
 
+                    </>
+                }
+
+                {/* 列表 容器 */}
                 <BasicContainer
+                    exhibition={props.NowTab === "OnlineArchiveExhibition"}
                     theme={laptopL.listContainer}
                 >
                     {/* 切換使用的組件 */}
                     {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
 
-                    <Component />
+                    <Component
+                        NowTab={props.NowTab}
+                    />
                 </BasicContainer>
             </MainPageContainer>
 

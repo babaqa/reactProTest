@@ -21,7 +21,8 @@ export default {
         color: '#000',
         //fontFamily: '"Arial", Microsoft JhengHei, "微軟正黑體", Helvetica, sans-serif',
         //fontFamily: "Noto",
-        fontFamily: `'Noto Sans TC', sans-serif`,
+        // fontFamily: `'Noto Sans TC', sans-serif`,
+        fontFamily: "Roboto",
         fontWeight: 'normal',
         letterSpacing: 'normal'
         //#endregion
@@ -48,7 +49,8 @@ export default {
         color: '#000',
         //fontFamily: '"Arial", Microsoft JhengHei, "微軟正黑體", Helvetica, sans-serif',
         //fontFamily: "Noto",
-        fontFamily: `'Noto Sans TC', sans-serif`,
+        // fontFamily: `'Noto Sans TC', sans-serif`,
+        fontFamily: "Roboto",
         fontWeight: 'normal',
         letterSpacing: 'normal'
         //#endregion
@@ -75,7 +77,8 @@ export default {
         color: '#000',
         //fontFamily: '"Arial", Microsoft JhengHei, "微軟正黑體", Helvetica, sans-serif',
         //fontFamily: "Noto",
-        fontFamily: `'Noto Sans TC', sans-serif`,
+        // fontFamily: `'Noto Sans TC', sans-serif`,
+        fontFamily: "Roboto",
         fontWeight: 'normal',
         letterSpacing: 'normal'
         //#endregion

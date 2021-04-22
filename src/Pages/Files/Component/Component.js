@@ -67,6 +67,11 @@ export const Component = (props) => {
                     setTodayToDoOpen={setTodayToDoOpen}
 
                     controllGCS={controllGCS}
+
+
+                    NowTab={props.NowTab}
+                    ExhibitionDetail={props.ExhibitionDetail}
+                    setExhibitionDetail={props.setExhibitionDetail}
                 />
             }
             {/* {
@@ -98,7 +103,9 @@ export const Component = (props) => {
             {
                 Width < 1024 &&
                 <MobileM
-
+                    NowTab={props.NowTab}
+                    ExhibitionDetail={props.ExhibitionDetail}
+                    setExhibitionDetail={props.setExhibitionDetail}
                 />
             }
         </>

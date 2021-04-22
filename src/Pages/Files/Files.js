@@ -29,7 +29,7 @@ export const Files = (props) => {
 
     let urlParams = new URLSearchParams(useLocation().search);//取得參數
     const [NowTab, setNowTab] = useState(""); // 目前搭乘紀錄頁面
-
+    const [ExhibitionDetail, setExhibitionDetail] = ([]); // 展覽詳細資料
     let history = useHistory();
 
     useEffect(() => {
@@ -646,6 +646,8 @@ export const Files = (props) => {
                 1024 <= Width &&
                 <LaptopL
                     NowTab={NowTab}
+
+                    
                     BasicInf={BasicInf}  // 用戶基本資料
                     CaseInf={CaseInf} // 用戶長照資料
                     WhiteInf={WhiteInf} // 用戶白牌資料
@@ -704,6 +706,14 @@ export const Files = (props) => {
                 Width < 1024 &&
                 <MobileM
                     NowTab={NowTab}
+                    ExhibitionDetail={ExhibitionDetail}
+                    setExhibitionDetail={setExhibitionDetail}
+
+
+
+
+
+
                     BasicInf={BasicInf}  // 用戶基本資料
                     CaseInf={CaseInf} // 用戶長照資料
                     WhiteInf={WhiteInf} // 用戶白牌資料

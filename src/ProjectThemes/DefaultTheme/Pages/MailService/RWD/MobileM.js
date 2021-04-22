@@ -127,7 +127,7 @@ export default {
             // whiteSpace: "nowrap",
             textOverflow: "ellipsis",
             overflow: "hidden",
-            padding: "0 24px 6px 0",
+            padding: "0 24px 3px 0",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical"
         }),

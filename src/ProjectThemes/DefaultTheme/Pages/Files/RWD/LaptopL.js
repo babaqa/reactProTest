@@ -6,7 +6,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "32px 119px 32px" // 標題列的padding
+                    padding: "32px 119px 32px", // 標題列的padding
                 }
             }
         },
@@ -24,7 +24,7 @@ export default {
                     ...style,
                     backgroundColor: "#FFFFFF",
                     padding: "8px 119px 659px", //635 是授權圖高度
-                    minHeight: "calc( 100vh + 396px)"
+                    minHeight: "calc( 100vh + 396px)",
                 }
             }
         },
@@ -33,7 +33,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "32px 119px 32px" // 標題列的padding
+                    padding: "32px 119px 32px", // 標題列的padding
                 }
             }
         },
@@ -51,7 +51,7 @@ export default {
                     ...style,
                     backgroundColor: "#FFFFFF",
                     padding: "8px 119px 353px", //337 是授權圖高度
-                    minHeight: "calc( 100vh + 99px)"
+                    minHeight: "calc( 100vh + 99px)",
                 }
             }
         },
@@ -109,7 +109,7 @@ export default {
             display: "inline-block",
             // position: "absolute",
             // right: 0,
-            width: "100%",
+            width: props.exhibition ? "25%" : "100%",
             textAlign: "right",
             fontWeight: 400,
             fontSize: "18px",
@@ -135,11 +135,11 @@ export default {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "66%",
+                width: props.exhibition ? "70%" : "66%",
                 border: 0,
                 margin: 0,
                 position: "relative",
-                left: "25%"
+                left: props.exhibition ? "15%" : "25%",
             })
         },
         titleText: {
@@ -167,11 +167,18 @@ export default {
         basic: (style, props) => ({
             ...style,
             // ...style.occupy(4),
-            display: "inline-block",
-            width: "25%",
+            display: "inline-flex",
+            width: props.exhibition ? "75%" : "25%",
             // height: "56px",
             backgroundColor: "#transparent",
-            verticalAlign: "top"
+            verticalAlign: "top",
+            flexDirection: props.exhibition ? "unset" : "column",
+            alignItems: props.exhibition ? "baseline" : "flex-end",
+            ...(
+                props.exhibition && {
+                    paddingLeft: "15%"
+                }
+            )
         }),
     },
     //#endregion
@@ -180,8 +187,13 @@ export default {
         basic: (style, props) => ({
             ...style,
             // ...style.occupy(8),
-            width: "66%",
+            width: props.exhibition ? "70%" : "66%",
             display: "inline-block",
+            ...(
+                props.exhibition && {
+                    left: "15%"
+                }
+            )
         }),
     },
     //#endregion
@@ -189,7 +201,7 @@ export default {
     titleBarContactTab: {
         basic: (style, props) => ({
             ...style,
-            display: "block",
+            display: "inline-block",
             margin: "0 0 24px",
             padding: "0 48px 0 24px",
             lineHeight: "21px",
@@ -200,8 +212,6 @@ export default {
             width: "162px",
             color: "rgba(0, 0, 0, 0.85)",
             backgroundColor: "transparent",
-            float: "right",
-            clear: "both",
         }),
     },
     //#endregion

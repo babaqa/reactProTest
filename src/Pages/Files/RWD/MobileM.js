@@ -39,7 +39,11 @@ const MobileMBase = (props) => {
             >
                 {/* 切換使用的組件 */}
                 {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
-                <Component />
+                <Component
+                    NowTab={props.NowTab}
+                    ExhibitionDetail={props.ExhibitionDetail}
+                    setExhibitionDetail={props.setExhibitionDetail}
+                />
             </MainPageContainer>
         </>
     )
