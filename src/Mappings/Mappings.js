@@ -56,7 +56,7 @@ export const urlMapping = {
    "/Files": <Files />,// 臺藝檔案
    "/Application": <Application />,// 檔案應用
    "/QAndA": <QAndA />,// 常見問題
-   "/MailService": <MailService />,// 郵寄查詢
+   "/MailService": <MailService />,// 郵務查詢
 
    "/Login": < Login />,// 登入畫面
    "/404": <Error404 />,// 404錯誤畫面

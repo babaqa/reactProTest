@@ -74,7 +74,7 @@ export const Layout = (props) => {
                 "文書檔案相關Q&A": ["/QAndA"],
                 "表單申請下載": ["/QAndA"],
                 "文書常見問題": ["/QAndA"],
-                "郵寄查詢": ["/MailService"],
+                "郵務查詢": ["/MailService"],
             })
     }
 
@@ -167,7 +167,7 @@ export const Layout = (props) => {
         // 臺藝檔案  Files
         // 檔案應用  Application
         // 文書檔案相關Q&A  QAndA
-        // 郵寄查詢  MailService
+        // 郵務查詢  MailService
         switch (key) {
             case "allTabNameLaptopL":
                 return [
@@ -210,7 +210,7 @@ export const Layout = (props) => {
                             "FrequentlyQuestions",
                         ]
                     },
-                    { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
+                    { path: "/MailService", name: "郵務查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameLaptop":
                 return [
@@ -253,7 +253,7 @@ export const Layout = (props) => {
                             "FrequentlyQuestions",
                         ]
                     },
-                    { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
+                    { path: "/MailService", name: "郵務查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameTablet":
                 return [
@@ -270,7 +270,7 @@ export const Layout = (props) => {
                     { path: "/Files", name: "臺藝檔案", icon: <UserInfoTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/Application", name: "檔案應用", icon: <ContactTab style={layout.titleBarTabIconTablet} /> },
                     { path: "/QAndA", name: "文書檔案相關Q&A", icon: <QAndATab style={layout.titleBarTabIconTablet} /> },
-                    { path: "/MailService", name: "郵寄查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
+                    { path: "/MailService", name: "郵務查詢", icon: <MailService style={layout.titleBarTabMailIconLaptopL} /> },
                 ]
             case "allTabNameMobileMLeftSide":
                 return [
@@ -436,7 +436,7 @@ export const Layout = (props) => {
                         item: {
                             id: "7",
                             url: "/MailService",
-                            name: "郵寄查詢",
+                            name: "郵務查詢",
                             parentName: "根節點"
                         },
                         children: []
@@ -462,7 +462,12 @@ export const Layout = (props) => {
                             theme={layout.titleBarLogoContainerLaptopL}
                         >
                             {/* Logo ICON LaptopL */}
-                            <LaptopLLogo style={layout.titleBarLogoIconLaptopL} />
+                            <LaptopLLogo
+                                style={layout.titleBarLogoIconLaptopL}
+                                onClick={() => {
+                                    history.push("/");
+                                }}
+                            />
                         </SubContainer>
 
                         {/* Tab 容器 LaptopL */}
@@ -544,7 +549,12 @@ export const Layout = (props) => {
                             theme={layout.titleBarLogoContainerLaptop}
                         >
                             {/* Logo ICON Laptop */}
-                            <LaptopLogo style={layout.titleBarLogoIconLaptop} />
+                            <LaptopLogo
+                                style={layout.titleBarLogoIconLaptop}
+                                onClick={() => {
+                                    history.push("/");
+                                }}
+                            />
                         </SubContainer>
 
                         {/* Tab 容器 Laptop */}
@@ -790,7 +800,11 @@ export const Layout = (props) => {
                         <SubContainer
                             theme={layout.titleBarLogoContainerMobileM}
                         >
-                            <MobileMLogo />
+                            <MobileMLogo
+                                onClick={() => {
+                                    history.push("/");
+                                }}
+                            />
                         </SubContainer>
 
                         {/* 側邊欄按鈕容器 */}
@@ -834,32 +848,32 @@ export const Layout = (props) => {
                             theme={layout.menuAreaScrollBarMobileM}
                         >
                             {/* 固定底部容器 */}
-                            <Container
+                            {/* <Container
                                 height={Height}
                                 theme={layout.titleBarFixedBottomMobileM}
-                            >
-                                <BackstageLeftSideMenuBar baseDefaultTheme={"DefaultTheme"}
-                                    collapse={DrawerCollapse}
-                                    logo={false}
-                                    setDrawerCollapse={setDrawerCollapse}
-                                    // logoText={
-                                    //     <LogoAll />
-                                    //     // <Text
-                                    //     //     baseDefaultTheme={"TextDefaultTheme"}
-                                    //     //     theme={layout.laptopBackstageLeftSideMenuBarLogoText}
-                                    //     // >
-                                    //     //     屏東派車管理系統
-                                    //     // </Text>
-                                    // }
-                                    menuItem={
-                                        generateMenu(TabMapping("allTabNameMobileMLeftSide"), history, location, ExpandMenuName, setExpandMenuName, setDrawerCollapse)
-                                    }
-                                />
-                                {/* {TabMapping("allTabNameMobileMLeftSide").map((item => {
+                            > */}
+                            <BackstageLeftSideMenuBar baseDefaultTheme={"DefaultTheme"}
+                                collapse={DrawerCollapse}
+                                logo={false}
+                                setDrawerCollapse={setDrawerCollapse}
+                                // logoText={
+                                //     <LogoAll />
+                                //     // <Text
+                                //     //     baseDefaultTheme={"TextDefaultTheme"}
+                                //     //     theme={layout.laptopBackstageLeftSideMenuBarLogoText}
+                                //     // >
+                                //     //     屏東派車管理系統
+                                //     // </Text>
+                                // }
+                                menuItem={
+                                    generateMenu(TabMapping("allTabNameMobileMLeftSide"), history, location, ExpandMenuName, setExpandMenuName, setDrawerCollapse)
+                                }
+                            />
+                            {/* {TabMapping("allTabNameMobileMLeftSide").map((item => {
                                     return (
                                         <React.Fragment key={item.path}> */}
-                                {/* Tab項目容器 */}
-                                {/* <BasicContainer
+                            {/* Tab項目容器 */}
+                            {/* <BasicContainer
                                                 extend={(item?.subTab ?? []).length > 0 && ExtendSubTab.pathname === item.path}
                                                 theme={layout.titleBarTabItemContainerMobileM}
                                                 onClick={() => {
@@ -899,8 +913,8 @@ export const Layout = (props) => {
                                                 )
                                                 &&
                                                 <> */}
-                                {/* Sub項目容器 */}
-                                {/* < BasicContainer
+                            {/* Sub項目容器 */}
+                            {/* < BasicContainer
                                                         theme={layout.titleBarSubItemContainerMobileM}
                                                     >
                                                         {
@@ -928,7 +942,7 @@ export const Layout = (props) => {
                                     )
                                 }))} */}
 
-                            </Container>
+                            {/* </Container> */}
 
                         </ScrollBar>
                     </LeftSideDrawer>

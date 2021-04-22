@@ -35,6 +35,7 @@ export default {
         // left: "-8px",
         height: "78px",
         width: "292px",
+        cursor: "pointer"
     },
     //#endregion
 
@@ -276,6 +277,7 @@ export default {
 
     //#region Logo ICON Laptop
     titleBarLogoIconLaptop: {
+        cursor: "pointer"
         // position: "absolute",
         // top: "0px",
         // left: "0px"

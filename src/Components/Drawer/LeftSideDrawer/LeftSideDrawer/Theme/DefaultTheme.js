@@ -23,11 +23,11 @@ export default {
                 //#region 覆寫樣式
                 position: "fixed",
                 height: "100%",
-                left: `${props.collapse ? "-100%" : "0rem"}`,//"-100%",
+                right: `${props.collapse ? "-100%" : "0rem"}`,//"-100%",
                 top: 0,
                 backgroundColor: "rgba(0,0,0,0.2)",
                 zIndex: 1100,
-                transition: "left 0s ease-in-out",
+                transition: "right 0s ease-in-out",
                 //boxShadow: "inset -1px 0px 0px #f0f0f0"
                 //#endregion
             }
@@ -52,11 +52,11 @@ export default {
             outline: 0,
             userSelect: "none",
             height: "100%",
-            left: `${props.collapse ? "-100%" : "0rem"}`,//"-100%",,
+            right: `${props.collapse ? "-100%" : "0rem"}`,//"-100%",,
             top: 0,
             backgroundColor: "rgba(255,255,255)",
             zIndex: 1101,
-            transition: "left .3s ease-in-out",
+            transition: "right .3s ease-in-out",
             // boxShadow: "0px 8px 10px -5px rgba(0,0,0,0.2), 0px 16px 24px 2px rgba(0,0,0,0.14), 0px 6px 30px 5px rgba(0,0,0,0.12)"
             //#endregion
         })
