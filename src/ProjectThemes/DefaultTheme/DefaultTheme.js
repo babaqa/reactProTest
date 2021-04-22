@@ -9,9 +9,6 @@ import systemNewsComponent from './Pages/Unit/SystemNewsComponent/SystemNewsComp
 import systemTestComponent from './Pages/Test/SystemTestComponent/SystemTestComponent'
 
 import mailService from './Pages/MailService/MailService'
-import caseCallCarComponent from './Pages/MailService/CaseCallCarComponent/CaseCallCarComponent'
-import busCallCarComponent from './Pages/MailService/BusCallCarComponent/BusCallCarComponent'
-import whiteCallCarComponent from './Pages/MailService/WhiteCallCarComponent/WhiteCallCarComponent'
 // import callCarAgain from './Pages/CallCarAgain/CallCarAgain'
 
 // import fastCallCar from './Pages/FastCallCar/FastCallCar'
@@ -57,14 +54,7 @@ export default {
         //#endregion
 
         //#region 郵務查詢
-        mailService: {
-            ...mailService,
-            component: {
-                caseCallCarComponent,
-                busCallCarComponent,
-                whiteCallCarComponent,
-            }
-        },
+        mailService,
         //#endregion
 
         //#region 快速叫車

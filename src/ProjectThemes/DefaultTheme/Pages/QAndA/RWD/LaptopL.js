@@ -210,7 +210,7 @@ export default {
     pointSvg: {
         position: "absolute",
         left: 0,
-        top: "12px"
+        top: "6px"
     },
     //#endregion
 }

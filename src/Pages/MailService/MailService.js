@@ -3,9 +3,9 @@ import { Context } from '../../Store/Store'
 import { SubContainer, globalContextService, Text, FormContainer, FormRow, TextInput, modalsService } from '../../Components';
 import { mapGoogleControll } from '../../ProjectComponent';
 import { LaptopL } from './RWD/LaptopL';
-import { Laptop } from './RWD/Laptop';
+// import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
-import { Tablet } from './RWD/Tablet';
+// import { Tablet } from './RWD/Tablet';
 import { clearLocalStorage, clearSession, getParseItemLocalStorage, valid } from '../../Handlers';
 import { useHistory } from 'react-router-dom';
 import { useAsync } from '../../SelfHooks/useAsync';
@@ -58,10 +58,10 @@ export const MailService = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             //console.log(location, action)
-            globalContextService.remove("CallCarPage", "firstUseAPIgetUsers");
-            globalContextService.remove("CallCarPage", "firstUseAPIgetAllRoute");
-            globalContextService.remove("CallCarPage", "firstUseAPIgetAllStation");
-            globalContextService.remove("CallCarPage")
+            globalContextService.remove("MailServicePage", "firstUseAPIgetUsers");
+            globalContextService.remove("MailServicePage", "firstUseAPIgetAllRoute");
+            globalContextService.remove("MailServicePage", "firstUseAPIgetAllStation");
+            globalContextService.remove("MailServicePage")
         });
 
         return () => {
@@ -74,7 +74,7 @@ export const MailService = (props) => {
     // const getUsers = useCallback(async (useAPI = false) => {
 
     //     //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
-    //     if (isUndefined(globalContextService.get("CallCarPage", "firstUseAPIgetUsers")) || useAPI) {
+    //     if (isUndefined(globalContextService.get("MailServicePage", "firstUseAPIgetUsers")) || useAPI) {
     //         //#endregion
 
     //         //#region 取得用戶基本資料 API
@@ -136,7 +136,7 @@ export const MailService = (props) => {
     //             })
     //             .finally(() => {
     //                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                 // globalContextService.set("CallCarPage", "firstUseAPIgetUsers", false);
+    //                 // globalContextService.set("MailServicePage", "firstUseAPIgetUsers", false);
     //                 //#endregion
     //             });
     //         //#endregion
@@ -341,7 +341,7 @@ export const MailService = (props) => {
     //                                     // setTabMenu(allTabs)
     //                                     // setNowTab(allTabs?.[0])
     //                                     //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                                     // globalContextService.set("CallCarPage", "firstUseAPIgetUsers", false);
+    //                                     // globalContextService.set("MailServicePage", "firstUseAPIgetUsers", false);
     //                                     //#endregion
     //                                 });
     //                             //#endregion
@@ -391,7 +391,7 @@ export const MailService = (props) => {
     //             })
     //             .finally(() => {
     //                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                 globalContextService.set("CallCarPage", "firstUseAPIgetUsers", false);
+    //                 globalContextService.set("MailServicePage", "firstUseAPIgetUsers", false);
     //                 //#endregion
     //             });
     //         //#endregion
@@ -530,7 +530,7 @@ export const MailService = (props) => {
             })
             .finally(() => {
                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-                // globalContextService.set("CallCarPage", "firstUseAPIgetUsers", false);
+                // globalContextService.set("MailServicePage", "firstUseAPIgetUsers", false);
                 //#endregion
             });
         //#endregion
@@ -545,7 +545,7 @@ export const MailService = (props) => {
     // const getAllRoute = useCallback(async (useAPI = false) => {
 
     //     //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
-    //     if (isUndefined(globalContextService.get("CallCarPage", "firstUseAPIgetAllRoute")) || useAPI) {
+    //     if (isUndefined(globalContextService.get("MailServicePage", "firstUseAPIgetAllRoute")) || useAPI) {
     //         //#endregion
 
     //         //#region 取得 全部路線下拉選單選項 API
@@ -595,7 +595,7 @@ export const MailService = (props) => {
     //             })
     //             .finally(() => {
     //                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                 globalContextService.set("CallCarPage", "firstUseAPIgetAllRoute", false);
+    //                 globalContextService.set("MailServicePage", "firstUseAPIgetAllRoute", false);
     //                 //#endregion
     //             });
     //         //#endregion
@@ -610,7 +610,7 @@ export const MailService = (props) => {
     // const getAllStation = useCallback(async (useAPI = false) => {
 
     //     //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
-    //     if (isUndefined(globalContextService.get("CallCarPage", "firstUseAPIgetAllStation")) || useAPI) {
+    //     if (isUndefined(globalContextService.get("MailServicePage", "firstUseAPIgetAllStation")) || useAPI) {
     //         //#endregion
 
     //         //#region 取得 全部站牌 API
@@ -660,7 +660,7 @@ export const MailService = (props) => {
     //             })
     //             .finally(() => {
     //                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                 globalContextService.set("CallCarPage", "firstUseAPIgetAllStation", false);
+    //                 globalContextService.set("MailServicePage", "firstUseAPIgetAllStation", false);
     //                 //#endregion
     //             });
     //         //#endregion
@@ -723,7 +723,7 @@ export const MailService = (props) => {
     //             })
     //             .finally(() => {
     //                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                 globalContextService.set("CallCarPage", "firstUseAPIgetStationOnRoute", false);
+    //                 globalContextService.set("MailServicePage", "firstUseAPIgetStationOnRoute", false);
     //                 //#endregion
     //             });
     //         //#endregion
@@ -809,7 +809,7 @@ export const MailService = (props) => {
         <>
             {/* 共用theme */}
             {
-                768 <= Width &&
+                1024 <= Width &&
                 <LaptopL
                     BasicInf={BasicInf}
                     BUnits={BUnits}
@@ -829,7 +829,7 @@ export const MailService = (props) => {
                     StationOnRoute={StationOnRoute}
                     // getStationOnRoute={getStationOnRoute}
 
-                    nowTab={NowTab}
+                    NowTab={NowTab}
                     setNowTab={setNowTab}
                     TabMenu={TabMenu}
                     controllGCS={controllGCS}
@@ -838,7 +838,7 @@ export const MailService = (props) => {
                 />
             }
             {
-                Width < 768 &&
+                Width < 1024 &&
                 <MobileM
                     BasicInf={BasicInf}
                     BUnits={BUnits}
@@ -858,7 +858,7 @@ export const MailService = (props) => {
                     StationOnRoute={StationOnRoute}
                     // getStationOnRoute={getStationOnRoute}
 
-                    nowTab={NowTab}
+                    NowTab={NowTab}
                     setNowTab={setNowTab}
                     TabMenu={TabMenu}
                     controllGCS={controllGCS}
