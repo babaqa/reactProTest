@@ -28,7 +28,7 @@ const MobileMBase = (props) => {
                 {/* 線上檔案展 詳細資料 圖片 */}
                 <Upload
                     viewType
-                    imageUrl={undefined}
+                    imageUrl={"https://pingtungdev.1966.org.tw/WebContents/20210423/2021042317152385780093.jpg"}
                     onChange={(info, acceptFileType, imageUrl, OnInitial) => {
                         globalContextService.set("MailServicePage", "CarPic", info?.file?.originFileObj)
                     }}

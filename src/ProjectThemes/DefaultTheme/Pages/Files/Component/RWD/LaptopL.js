@@ -76,6 +76,15 @@ export default {
     },
     //#endregion
 
+    //#region 展覽資料 外側容器
+    exhibitionOutContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            margin: "104px 0 0"
+        }),
+    },
+    //#endregion
 
     //#region 年度 文字
     exhibitionYearText: {
@@ -144,13 +153,26 @@ export default {
     },
     //#endregion
 
+    //#region 展覽資料 容器
+    exhibitionContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-flex",
+            flexDirection: props.reverse ? "row-reverse" : "row",
+            width: "100%",
+            height: "324px",
+            margin: "0 0 78px"
+
+        }),
+    },
+    //#endregion
 
     //#region 詳細資料 圖片
     exhibitionImg: {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "520px",
+                width: "50%",
                 height: "324px",
                 padding: 0,
                 flexGrow: 1
@@ -165,7 +187,7 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "520px",
+                width: "50%",
                 height: "324px",
                 display: "inline-block",
                 padding: 0,
@@ -194,6 +216,19 @@ export default {
                 height: "0px"
             })
         },
+    },
+    //#endregion
+
+    //#region 展覽資料 內側容器
+    exhibitionInsideContainer: {
+        basic: (style, props) => ({
+            ...style,
+            display: "inline-block",
+            width: "50%",
+            height: "324px",
+            verticalAlign: "top",
+            margin: props.reverse ? "0 10% 0 0" : "0 0 0 10%"
+        }),
     },
     //#endregion
 
