@@ -153,13 +153,7 @@ const LaptopLBase = (props) => {
 
                         {/* 展覽資料 外側容器 */}
                         <BasicContainer
-                            theme={{
-                                basic: (style, props) => ({
-                                    ...style,
-                                    width: "100%",
-                                    margin: "104px 0 0"
-                                }),
-                            }}
+                            theme={laptopL.exhibitionOutContainer}
                         >
                             {/* 年度 文字 */}
                             <Text
@@ -199,23 +193,16 @@ const LaptopLBase = (props) => {
                                             {/* 展覽資料 容器 */}
                                             <BasicContainer
                                                 reverse={index % 2 === 1}
-                                                theme={{
-                                                    basic: (style, props) => ({
-                                                        ...style,
-                                                        display: "inline-flex",
-                                                        flexDirection: props.reverse ? "row-reverse" : "row",
-                                                        width: "100%",
-                                                        height: "324px",
-                                                        margin: "0 0 78px"
-
-                                                    }),
+                                                theme={laptopL.exhibitionContainer}
+                                                onClick={() => {
+                                                    props.setExhibitionDetail(item);
                                                 }}
                                             >
 
                                                 {/* 線上檔案展 圖片 */}
                                                 <Upload
                                                     viewType
-                                                    imageUrl={undefined}
+                                                    imageUrl={"https://pingtungdev.1966.org.tw/WebContents/20210423/2021042317152385780093.jpg"}
                                                     onChange={(info, acceptFileType, imageUrl, OnInitial) => {
                                                         globalContextService.set("MailServicePage", "CarPic", info?.file?.originFileObj)
                                                     }}
@@ -225,16 +212,7 @@ const LaptopLBase = (props) => {
                                                 {/* 展覽資料 內側容器 */}
                                                 <Container
                                                     reverse={index % 2 === 1}
-                                                    theme={{
-                                                        basic: (style, props) => ({
-                                                            ...style,
-                                                            display: "inline-block",
-                                                            width: "calc( 100% - 520px - 84px )",
-                                                            height: "324px",
-                                                            verticalAlign: "top",
-                                                            margin: props.reverse ? "0 84px 0 0" : "0 0 0 84px"
-                                                        }),
-                                                    }}
+                                                    theme={laptopL.exhibitionInsideContainer}
                                                 >
                                                     {/* 順序編號 文字 */}
                                                     <Text

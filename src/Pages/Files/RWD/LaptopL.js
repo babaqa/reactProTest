@@ -8,6 +8,7 @@ import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { ReactComponent as Point } from '../../../Assets/img/FilesPage/Point.svg'
 
 import { Component } from '../Component/Component'
+import { DetailComponent } from '../DetailComponent/DetailComponent'
 import { subTabMapping } from '../../../Mappings/Mappings';
 
 const LaptopLBase = (props) => {
@@ -136,12 +137,23 @@ const LaptopLBase = (props) => {
                 >
                     {/* 切換使用的組件 */}
                     {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
+                    {
+                        props?.ExhibitionDetail
+                            ?
+                            <DetailComponent
+                                NowTab={props.NowTab}
+                                ExhibitionDetail={props.ExhibitionDetail}
+                                setExhibitionDetail={props.setExhibitionDetail}
+                            />
+                            :
+                            <Component
+                                NowTab={props.NowTab}
+                                ExhibitionDetail={props.ExhibitionDetail}
+                                setExhibitionDetail={props.setExhibitionDetail}
+                            />
+                    }
 
-                    <Component
-                        NowTab={props.NowTab}
-                        ExhibitionDetail={props.ExhibitionDetail}
-                        setExhibitionDetail={props.setExhibitionDetail}
-                    />
+
                 </BasicContainer>
             </MainPageContainer>
 

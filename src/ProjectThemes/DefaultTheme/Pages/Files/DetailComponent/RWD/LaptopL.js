@@ -1,157 +1,25 @@
 export default {
-    //#region 無資料表單區容器
-    noDataContainer: {
-        basic: (style, props) => {
-            return {
-                ...style,
-                // padding: "24px 12px",
-                margin: 0,
-                background: "transparent",
-                // boxShadow: " 0px 2px 8px rgba(0, 0, 0, 0.15)",
-                height: `calc( ${props.height}px - 452px)`,
-                width: "100%",
-                borderRadius: "16px",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center"
-            }
-        }
-    },
-    //#endregion
+    //#region 詳細資料
 
-    //#region 每一行資料容器
-    lineContainer: {
+    //#region 線上檔案展 詳細資料 上側容器
+    detailTopContainer: {
         basic: (style, props) => ({
             ...style,
+            display: "inline-flex",
             width: "100%",
-            height: "72px",
-            display: "flex",
-            padding: "8px",
-            borderBottom: "2px solid #C4C4C4",
+            padding: "0 0 57px",
+            borderBottom: "1px solid #AD9D72"
         }),
     },
     //#endregion
-
-    //#region 日期 文字
-    dateTimeText: {
-        basic: (style, props) => ({
-            ...style,
-            display: "inline-block",
-            fontWeight: 400,
-            fontSize: "16px",
-            color: "#B0B0B0",
-            padding: "18px 12px"
-        }),
-    },
-    //#endregion
-
-    //#region 資料標題 文字
-    dataTitleText: {
-        basic: (style, props) => ({
-            ...style,
-            display: "inline-block",
-            fontWeight: 400,
-            fontSize: "16px",
-            color: "#5F5D56",
-            padding: "18px 12px",
-            width: "calc( 100% - 104px )",
-            whiteSpace: "nowrap",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-        }),
-    },
-    //#endregion
-
-
-    //#region 線上檔案展
-    //#region 列表
-    //#region 輪播容器
-    carouselContainer: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            height: "455px",
-            backgroundColor: "#C4C4C4"
-        }),
-    },
-    //#endregion
-
-
-    //#region 年度 文字
-    exhibitionYearText: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            color: "#AD9D72",
-            fontWeight: 700,
-            fontSize: "18px",
-            lineHeight: "21px",
-            fontFanily: "Roboto",
-            margin: "0 0 34px",
-            textAlign: "right"
-        }),
-    },
-    //#endregion
-
-    //#region 年度 下拉式選單
-    exhibitionYearSelector: {
-        viewTypeContainer: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 12px",
-                display: "inline-block",
-                width: "160px"
-                // ...style.occupy(4),
-            })
-        },
-        container: {
-            basic: (style, props) => ({
-                ...style,
-                padding: "0 12px",
-                display: "inline-block",
-                // ...style.occupy(4),
-                width: "160px"
-            })
-        },
-        topLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-            })
-        },
-        dateTimePickerContainer: {
-            basic: (style, props) => {
-                return {
-                    ...style,
-                    color: props.disable ? null : ((props.focus || props.hover) ? "#1890ff" : "rgba(0, 0, 0, 0.25)")
-                }
-            }
-        },
-        dateTimePickerSubContainer: {
-            basic: (style, props) => ({
-                ...style,
-                height: "25px",
-            })
-        },
-        bottomLabel: {
-            basic: (style, props) => ({
-                ...style,
-                height: "0px"
-                // minHeight: "24px",
-                // height: "auto"
-            })
-        }
-    },
-    //#endregion
-
 
     //#region 詳細資料 圖片
-    exhibitionImg: {
+    exhibitionDetailImg: {
         container: {
             basic: (style, props) => ({
                 ...style,
-                width: "520px",
-                height: "324px",
+                width: "50%",
+                height: "370px",
                 padding: 0,
                 flexGrow: 1
             })
@@ -165,9 +33,8 @@ export default {
         viewTypeContainer: {
             basic: (style, props) => ({
                 ...style,
-                width: "520px",
-                height: "324px",
-                display: "inline-block",
+                width: "50%",
+                height: "370px",
                 padding: 0,
                 flexGrow: 1
             })
@@ -197,71 +64,250 @@ export default {
     },
     //#endregion
 
-    //#region 順序編號 文字
-    exhibitionIndexText: {
+    //#region 線上檔案展 詳細資料 標題
+    detailTitle: {
         basic: (style, props) => ({
             ...style,
-            display: "flex",
-            alignItems: "center",
             width: "100%",
             fontWeight: 700,
-            fontSize: "28px",
-            lineHeight: "32px",
-            color: "#AD9D72",
-            margin: "0 0 20px"
+            fontSize: "24px",
+            lineHeight: "28px",
+            borderLeft: "5px solid #AD9D72",
+            margin: "0 0 40px",
+            padding: " 0 0 0 24px"
         }),
     },
     //#endregion
 
-    //#region 日期 文字
-    exhibitionDateTimeText: {
+    //#region 線上檔案展 詳細資料 日期
+    detailDateTimeText: {
         basic: (style, props) => ({
             ...style,
+            position: "absolute",
+            top: 0,
             width: "100%",
             fontWeight: 400,
-            fontSize: "18px",
-            lineHeight: "21px",
-            color: "#B0B0B0",
-            margin: "0 0 0 16px"
+            fontSize: "14px",
+            lineHeight: "16px",
         }),
     },
     //#endregion
 
-    //#region 檔案展 標題
-    exhibitionTitle: {
+    //#region 下載 容器
+    downloadContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "302px",
+            padding: "0 0 0 21px",
+            borderLeft: "1px solid #AD9D72",
+            alignContent: "flex-end"
+            // margin: "0 0 14px"
+        }),
+    },
+    //#endregion
+
+    //#region 下載 按鈕
+    downloadButton: {
+        basic: (style, props) => ({
+            ...style,
+            width: props.width < 1440 ? "100%" : "50%",
+            height: "50px",
+            backgroundColor: "#606060",
+            borderRadius: "44px",
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "50px",
+            padding: "0 24px",
+            color: "#FFFFFF",
+            margin: "8px 0 0"
+        }),
+    },
+    //#endregion
+
+    //#region 下載 圖標
+    downloadSvg: {
+        position: "absolute",
+        right: "24px",
+        top: "12px"
+    },
+    //#endregion
+
+    //#region 連結 按鈕
+    connectButton: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            height: "50px",
+            backgroundColor: "#606060",
+            borderRadius: "44px",
+            fontWeight: 400,
+            fontSize: "14px",
+            lineHeight: "50px",
+            padding: "0 24px",
+            color: "#FFFFFF",
+            margin: "8px 0 0"
+        }),
+    },
+    //#endregion
+
+    //#region 連結 圖標
+    connectSvg: {
+        position: "absolute",
+        right: "24px",
+        top: "12px"
+    },
+    //#endregion
+
+    //#region 詳細資料 內文
+    textEditor: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "45px 0",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTextEditorContainer: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto"
+            })
+        },
+        viewTypeTextEditor: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto",
+                wordBreak: "break-all"
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 24px 0",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        textEditor: {
+            basic: (style, props) => ({
+                ...style,
+                height: "auto",
+            })
+        },
+    },
+    //#endregion
+
+    //#region 回上一頁 容器
+    goBackContainer: {
+        basic: (style, props) => ({
+            ...style,
+            width: "100%",
+            justifyContent: "center"
+        }),
+    },
+    //#endregion
+
+    //#region 回上一頁 按鈕
+    goBackButton: {
+        basic: (style) => ({
+            ...style,
+            width: "176px",
+            height: "50px",
+            fontWeight: 700,
+            fontSize: "20px",
+            lineHeight: "24px",
+            padding: "0",
+            color: "#272727",
+            backgroundColor: "#AD9D72",
+            borderColor: "#AD9D72",
+            // borderRadius: "2px",
+            margin: 0
+        }),
+        hover: (style, props) => ({
+            ...style,
+            backgroundColor: "rgba(173, 157, 114, 0.85)"
+        }),
+        focus: (style, props) => ({})
+    },
+    //#endregion
+
+    //#region 回上一頁 圖標
+    goBackSvg: {
+        position: "relative",
+        top: "4px"
+    },
+    //#endregion
+
+    //#region 相關影音圖
+    relatedImgText: {
         basic: (style, props) => ({
             ...style,
             width: "100%",
             fontWeight: 700,
-            fontSize: "22px",
-            lineHeight: "26px",
-            color: "#5F5D56",
-            margin: "0 0 26px"
+            fontSize: "32px",
+            lineHeight: "28px",
+            color: "#AD9D72",
+            margin: "50px 0"
         }),
     },
     //#endregion
 
-    //#region 檔案展內容 文字
-    exhibitionContentText: {
-        basic: (style, props) => ({
-            ...style,
-            width: "100%",
-            height: "223px",
-            fontWeight: 500,
-            fontSize: "22px",
-            lineHeight: "33px",
-            color: "#5F5D56",
-            textOverflow: "ellipsis",
-            overflow: "hidden",
-            display: "-webkit-box",
-            WebkitBoxOrient: "vertical",
-            WebkitLineClamp: 7
-        }),
+    //#region 相關影音圖 圖片
+    relatedImg: {
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                width: props.isMiddle ? "34%" : "33%",
+                height: "230px",
+                padding: props.isMiddle ? "0 12px" : 0,
+                margin: "20px 0 0"
+                // flexGrow: 1
+            })
+        },
+        topLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: props.isMiddle ? "34%" : "33%",
+                height: "230px",
+                padding: props.isMiddle ? "0 12px" : 0,
+                margin: "20px 0 0"
+                // flexGrow: 1
+            })
+        },
+        viewTypeTextInputContainer: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                height: "100%",
+                minHeight: "100%",
+            })
+        },
+        viewTypeFileInput: {
+            basic: (style, props) => ({
+                ...style,
+                width: "100%",
+                height: "100%",
+                padding: 0,
+            })
+        },
+        viewTypeTopLabel: {
+            basic: (style, props) => ({
+                ...style,
+                height: "0px"
+            })
+        },
     },
     //#endregion
 
     //#endregion
 
-    //#endregion
     //#endregion
 }
