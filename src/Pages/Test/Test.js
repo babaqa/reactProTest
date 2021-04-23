@@ -21,6 +21,8 @@ export const Test = (props) => {
     const [NewsType, setNewsType] = useState([]); //所有最新消息類別
     const [AllNews, setAllNews] = useState([]); // 類別下所有最新消息
     const [CheckDetail, setCheckDetail] = useState({}); // 詳細資料
+    const [LawsType1, setLawsType1] = useState([]); // 本校法規
+    const [LawsType2, setLawsType2] = useState([]); // 文書檔案相關法規
     const [Width, Height] = useWindowSize();
 
     let history = useHistory();
@@ -29,7 +31,7 @@ export const Test = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             //console.log(location, action)
-            globalContextService.remove("NewsPage", "firstUseAPIgetNewsType");
+            globalContextService.remove("TestPage", "firstUseAPIgetFileApp");
         });
 
         return () => {
@@ -38,94 +40,18 @@ export const Test = (props) => {
     }, [])
     //#endregion
 
-    //#region 取得所有最新消息類別 選項 API
-    const getNewsType = useCallback(async (useAPI = false, newsCategoryId = "", releaseDate = fmt(moment(), "YYYY-MM")) => {
+    //#region 取得 法令規章 API
+    const getFileApp = useCallback(async (useAPI = false) => {
 
-        let defaultLoad;
         //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
-        if (isUndefined(globalContextService.get("NewsPage", "firstUseAPIgetNewsType")) || useAPI) {
+        if (isUndefined(globalContextService.get("TestPage", "firstUseAPIgetFileApp")) || useAPI) {
             //#endregion
 
-            if (!useAPI) {
-                // 代表初次調用
-                //#region 取得所有最新消息類別 API
-                await fetch(`${APIUrl}categorys/load?page=1&limit=99999&TypeId=SYS_NEWS`, //categorys/load?page=1&limit=20&TypeId=SYS_DRIVER_LICENSE
-                    {
-                        headers: {
-                            "X-Token": getParseItemLocalStorage("Auth"),
-                            "content-type": "application/json; charset=utf-8",
-                        },
-                        method: "GET"
-                    })
-                    .then(Result => {
-                        const ResultJson = Result.clone().json();//Respone.clone()
-                        return ResultJson;
-                    })
-                    .then((PreResult) => {
-
-                        if (PreResult.code === 200) {
-                            // 成功取得司機 證照 API
-                            // console.log(PreResult)
-                            // console.log(PreResult?.data.sort((a, b) => {
-                            //     return a.sortNo - b.sortNo;
-                            // }).map(d => ({ data: { ...d }, value: d?.id, label: d?.name })))
-
-                            let sortData = PreResult?.data.sort((a, b) => {
-                                return a.sortNo - b.sortNo;
-                            }).map(d => ({ data: { ...d }, value: d?.id, label: d?.name }));
-                            defaultLoad = sortData?.[0]?.value ?? "沒有分類"
-                            setNewsType(sortData);
-                        }
-                        else {
-                            throw PreResult;
-                        }
-                    })
-                    .catch((Error) => {
-                        modalsService.infoModal.warn({
-                            iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
-                            yes: true,
-                            yesText: "確認",
-                            // no: true,
-                            // autoClose: true,
-                            backgroundClose: false,
-                            yesOnClick: (e, close) => {
-                                if (Error.code === 401) {
-                                    clearSession();
-                                    clearLocalStorage();
-                                    globalContextService.clear();
-                                    Switch();
-                                }
-                                close();
-                            }
-                            // theme: {
-                            //     yesButton: {
-                            //         text: {
-                            //             basic: (style, props) => {
-                            //                 console.log(style)
-                            //                 return {
-                            //                     ...style,
-                            //                     color: "red"
-                            //                 }
-                            //             },
-                            //         }
-                            //     }
-                            // }
-                        })
-                        throw Error.message;
-                    })
-                    .finally(() => {
-                        //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-                        // globalContextService.set("NewsPage", "firstUseAPIgetNewsType", false);
-                        //#endregion
-                    });
-                //#endregion
-            }
-
-            //#region 取得所有最新消息類別 API
-            await fetch(`${APIUrl}Newss/Load?page=1&limit=99999&IsClient=true&NewsCategoryId=${defaultLoad ?? newsCategoryId}&ReleaseDate=${releaseDate}`, //categorys/load?page=1&limit=20&TypeId=SYS_DRIVER_LICENSE  
+            //#region 取得 法令規章 API
+            fetch(`${APIUrl}Decrees/Load?limit=5`,
                 {
                     headers: {
-                        "X-Token": getParseItemLocalStorage("Auth"),
+                        // "X-Token": getParseItemLocalStorage("Auth"),
                         "content-type": "application/json; charset=utf-8",
                     },
                     method: "GET"
@@ -137,10 +63,14 @@ export const Test = (props) => {
                 .then((PreResult) => {
 
                     if (PreResult.code === 200) {
-                        // 成功取得司機 證照 API
-                        console.log(PreResult)
-                        setAllNews(PreResult.data)
-                        setCheckDetail({})
+                        // 成功取得 法令規章 
+
+                        //本校法規
+                        setLawsType1(PreResult.data.filter(item => item.typeId === "1"));
+
+                        //文書檔案相關法規
+                        setLawsType2(PreResult.data.filter(item => item.typeId === "2"));
+
                     }
                     else {
                         throw PreResult;
@@ -163,25 +93,12 @@ export const Test = (props) => {
                             }
                             close();
                         }
-                        // theme: {
-                        //     yesButton: {
-                        //         text: {
-                        //             basic: (style, props) => {
-                        //                 console.log(style)
-                        //                 return {
-                        //                     ...style,
-                        //                     color: "red"
-                        //                 }
-                        //             },
-                        //         }
-                        //     }
-                        // }
                     })
                     throw Error.message;
                 })
                 .finally(() => {
                     //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-                    globalContextService.set("NewsPage", "firstUseAPIgetNewsType", false);
+                    globalContextService.set("TestPage", "firstUseAPIgetFileApp", false);
                     //#endregion
                 });
             //#endregion
@@ -189,8 +106,8 @@ export const Test = (props) => {
         }
     }, [APIUrl, Switch])
 
-    const [GetNewsTypeExecute, GetNewsTypePending] = useAsync(getNewsType, false);
-    //#endregion
+    const [GetFileAppExecute, GetFileAppPending] = useAsync(getFileApp, true);
+    //#endregion 
 
     return (
         <>
@@ -199,11 +116,12 @@ export const Test = (props) => {
                 <LaptopL
                     NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面
-                    NewsType={NewsType} // 所有最新消息類別
-                    AllNews={AllNews} // 類別下所有最新消息
                     CheckDetail={CheckDetail} // 詳細資料
                     setCheckDetail={setCheckDetail} // 設定詳細資料
-                    GetNewsTypeExecute={GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消息
+
+                    LawsType1={LawsType1}
+                    LawsType2={LawsType2}
+                    GetFileAppExecute={GetFileAppExecute}
                 />
             }
             {/* {
@@ -225,11 +143,12 @@ export const Test = (props) => {
                 <MobileM
                     NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面
-                    NewsType={NewsType} // 所有最新消息類別
-                    AllNews={AllNews} // 類別下所有最新消息
                     CheckDetail={CheckDetail} // 詳細資料
                     setCheckDetail={setCheckDetail} // 設定詳細資料
-                    GetNewsTypeExecute={GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消息
+
+                    LawsType1={LawsType1}
+                    LawsType2={LawsType2}
+                    GetFileAppExecute={GetFileAppExecute}
                 />
             }
         </>

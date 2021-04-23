@@ -75,11 +75,9 @@ const LaptopLBase = (props) => {
                         </BasicContainer> */}
 
                 <SystemTestComponent
-                // AllNews={props.AllNews} // 類別下所有最新消息
-                // NowTab={props.NewsType.filter((it) => (it.label === props.NowTab))?.[0]}
-                // GetNewsTypeExecute={props.GetNewsTypeExecute}
-                // CheckDetail={props.CheckDetail} // 詳細資料
-                // setCheckDetail={props.setCheckDetail} // 設定詳細資料
+                    LawsType1={props.LawsType1}
+                    LawsType2={props.LawsType2}
+                    GetFileAppExecute={props.GetFileAppExecute}
                 />
 
             </MainPageContainer>

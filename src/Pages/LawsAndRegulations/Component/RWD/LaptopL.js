@@ -6,6 +6,8 @@ import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable, OldList } from '../../../../Components';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { CardTable } from '../../../../ProjectComponent';
+import { fmt } from '../../../../Handlers/DateHandler';
+import moment from 'moment';
 
 const LaptopLBase = (props) => {
 
@@ -32,7 +34,7 @@ const LaptopLBase = (props) => {
     ]
     return (
         <>
-            {data.length === 0
+            {(props.NowTab === "本校法規" ? props.LawsType1 : props.LawsType2).length === 0
                 ?
                 <>
                     {/* 無資料表單區容器 */}
@@ -95,7 +97,7 @@ const LaptopLBase = (props) => {
                                                     <Text
                                                         theme={laptopL.dateTimeText}
                                                     >
-                                                        {rowData.date}
+                                                        {fmt(moment(rowData.postDate), "YYYY-MM-DD")}
                                                     </Text>
 
                                                     {/* 資料標題 文字 */}
@@ -115,7 +117,7 @@ const LaptopLBase = (props) => {
                         }
                         //sort
                         showHeader={false}
-                        data={data}
+                        data={props.NowTab === "本校法規" ? props.LawsType1 : props.LawsType2}
                         clickPage={(currentPage, pageSize) => {
                         }}
                     />

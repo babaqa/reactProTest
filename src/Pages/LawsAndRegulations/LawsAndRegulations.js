@@ -5,7 +5,7 @@ import { LaptopL } from './RWD/LaptopL';
 // import { Laptop } from './RWD/Laptop';
 import { MobileM } from './RWD/MobileM';
 // import { Tablet } from './RWD/Tablet';
-import { useHistory,useLocation } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useWindowSize } from '../../SelfHooks/useWindowSize';
 import { useAsync } from '../../SelfHooks/useAsync';
 import { clearSession, clearLocalStorage, getParseItemLocalStorage } from '../../Handlers';
@@ -26,21 +26,35 @@ export const LawsAndRegulations = (props) => {
     let urlParams = new URLSearchParams(useLocation().search);//取得參數
     const [NowTab, setNowTab] = useState(""); // 目前搭乘紀錄頁面
     const [AllTabs, setAllTabs] = useState([]); // 用戶身分頁面
+    const [LawsType1, setLawsType1] = useState([]); // 本校法規
+    const [LawsType2, setLawsType2] = useState([]); // 文書檔案相關法規
     const [Width, Height] = useWindowSize();
+
     let history = useHistory();
 
-    
     useEffect(() => {
         setNowTab(urlParams.get("subTab"));
     }, [urlParams.get("subTab")])
 
+    //#region 當頁 GlobalContextService (GCS) 值 控制
+    const controllGCS = (type, payload) => {
+        switch (type) {
+            case "return":
+                //#region 當 編輯 Modal 關閉時，要清除的資料
+                globalContextService.remove("LawsAndRegulationsPage", "firstUseAPIgetFileApp");
+                //#endregion
+                break;
+            default:
+                break;
+        }
+    }
+    //#endregion
+
     //#region 路由監聽，清除API紀錄 (渲染即觸發的每一個API都要有)
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
-            // console.log(location, action)
-            globalContextService.remove("LawsAndRegulationsPage", "firstUseAPIgetRecords");
-            globalContextService.remove("LawsAndRegulationsPage", "firstUseAPIgetUsers");
-            globalContextService.remove("LawsAndRegulationsPage")
+            //console.log(location, action)
+            globalContextService.remove("LawsAndRegulationsPage", "firstUseAPIgetFileApp");
         });
 
         return () => {
@@ -49,219 +63,74 @@ export const LawsAndRegulations = (props) => {
     }, [])
     //#endregion
 
-    // //#region 取得用戶所有身分 API
-    // const getUsers = useCallback(async (useAPI = false) => {
+    //#region 取得 法令規章 API
+    const getFileApp = useCallback(async (useAPI = false) => {
 
-    //     //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
-    //     if (isUndefined(globalContextService.get("LawsAndRegulationsPage", "firstUseAPIgetUsers")) || useAPI) {
-    //         //#endregion
+        //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
+        if (isUndefined(globalContextService.get("LawsAndRegulationsPage", "firstUseAPIgetFileApp")) || useAPI) {
+            //#endregion
 
-    //         //#region 取得用戶所有身分 API
-    //         fetch(`${APIUrl}Users/GetUnPermissionUserType?userId=${getParseItemLocalStorage("UserID")}&UID=${getParseItemLocalStorage("UserAccount")}`, //Users/GetUnPermissionUserType
-    //             {
-    //                 headers: {
-    //                     "X-Token": getParseItemLocalStorage("CAuth"),
-    //                     "content-type": "application/json; charset=utf-8",
-    //                 },
-    //                 method: "GET"
-    //             })
-    //             .then(Result => {
-    //                 const ResultJson = Result.clone().json();//Respone.clone()
-    //                 return ResultJson;
-    //             })
-    //             .then((PreResult) => {
+            //#region 取得 法令規章 API
+            fetch(`${APIUrl}Decrees/Load`,
+                {
+                    headers: {
+                        // "X-Token": getParseItemLocalStorage("Auth"),
+                        "content-type": "application/json; charset=utf-8",
+                    },
+                    method: "GET"
+                })
+                .then(Result => {
+                    const ResultJson = Result.clone().json();//Respone.clone()
+                    return ResultJson;
+                })
+                .then((PreResult) => {
 
-    //                 if (PreResult.code === 200) {
-    //                     // 成功用戶資料 API
-    //                     // console.log(PreResult.data.filter(X => X.isEnable === true))
-    //                     // console.log(PreResult.data);
-    //                     let CaseYet = 0;
-    //                     let filterTabs = PreResult.data
-    //                         .map(X => {
-    //                             // console.log(X.userType)
-    //                             if (X.userType === "caseuser") {
-    //                                 if (CaseYet === 0 && X.isEnable === true) {
-    //                                     CaseYet = 1;
-    //                                     return allCaseListMapping[X.userType];
-    //                                 }
-    //                                 else {
-    //                                     return null
-    //                                 }
-    //                             }
-    //                             else if (X.isEnable === true) {
-    //                                 return allCaseListMapping[X.userType];
-    //                             }
-    //                             return null
-    //                         })
-    //                     let allTabs = Object.values(allCaseListMapping)
-    //                         .filter(V => {
-    //                             return filterTabs.includes(V)
-    //                         })
-    //                     // console.log(allTabs)
-    //                     setAllTabs(allTabs)
-    //                     setNowTab(allTabs[0])
-    //                 }
-    //                 else {
-    //                     throw PreResult;
-    //                 }
-    //             })
-    //             .catch((Error) => {
-    //                 modalsService.infoModal.warn({
-    //                     iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
-    //                     yes: true,
-    //                     yesText: "確認",
-    //                     // no: true,
-    //                     // autoClose: true,
-    //                     backgroundClose: false,
-    //                     yesOnClick: (e, close) => {
-    //                         if (Error.code === 401) {
-    //                             clearSession();
-    //                             clearLocalStorage();
-    //                             globalContextService.clear();
-    //                             Switch();
-    //                         }
-    //                         close();
-    //                     }
-    //                     // theme: {
-    //                     //     yesButton: {
-    //                     //         text: {
-    //                     //             basic: (style, props) => {
-    //                     //                 console.log(style)
-    //                     //                 return {
-    //                     //                     ...style,
-    //                     //                     color: "red"
-    //                     //                 }
-    //                     //             },
-    //                     //         }
-    //                     //     }
-    //                     // }
-    //                 })
-    //                 throw Error.message;
-    //             })
-    //             .finally(() => {
-    //                 //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                 globalContextService.set("LawsAndRegulationsPage", "firstUseAPIgetUsers", false);
-    //                 //#endregion
-    //             });
-    //         //#endregion
-    //     }
-    // }, [APIUrl, Switch])
+                    if (PreResult.code === 200) {
+                        // 成功取得 法令規章 
 
+                        //本校法規
+                        setLawsType1(PreResult.data.filter(item => item.typeId === "1"));
 
-    // const [GetUsersExecute, GetUsersPending] = useAsync(getUsers, true);
-    // //#endregion
+                        //文書檔案相關法規
+                        setLawsType2(PreResult.data.filter(item => item.typeId === "2"));
 
+                    }
+                    else {
+                        throw PreResult;
+                    }
+                })
+                .catch((Error) => {
+                    modalsService.infoModal.warn({
+                        iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                        yes: true,
+                        yesText: "確認",
+                        // no: true,
+                        // autoClose: true,
+                        backgroundClose: false,
+                        yesOnClick: (e, close) => {
+                            if (Error.code === 401) {
+                                clearSession();
+                                clearLocalStorage();
+                                globalContextService.clear();
+                                Switch();
+                            }
+                            close();
+                        }
+                    })
+                    throw Error.message;
+                })
+                .finally(() => {
+                    //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
+                    globalContextService.set("LawsAndRegulationsPage", "firstUseAPIgetFileApp", false);
+                    //#endregion
+                });
+            //#endregion
 
-    // //#region 取得用戶各種訂單紀錄資料 API
-    // const getRecords = useCallback(async (useAPI = false, startData = fmt(moment().startOf("day")), endDate = fmt(moment().add(1, 'months').endOf('month'))) => {
-    //     setCaseRecord([])
-    //     setWhiteRecord([])
-    //     setBusRecord([])
-    //     //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
-    //     if (isUndefined(globalContextService.get("LawsAndRegulationsPage", "firstUseAPIgetRecords")) || useAPI) {
-    //         //#endregion
+        }
+    }, [APIUrl, Switch])
 
-    //         //#region 取得用戶各種訂單紀錄資料 API
-    //         [
-    //             "CaseUsers",
-    //             "SelfPayUsers",
-    //             "BusUsers",
-    //             // "RemoteCityUser"
-    //         ].map(async item => {
-
-    //             //#region 取得用戶身分資料 API
-    //             await fetch(`${APIUrl}OrderOf${item}/load?page=1&limit=99999&StartDate=${startData}&EndDate=${endDate}`, //orderOfSelfPayUsers/load?page=1&limit=99999&StartDate=2021-01-21%2000:00:00&EndDate=2021-02-28%2023:59:59
-    //                 {
-    //                     headers: {
-    //                         "X-Token": getParseItemLocalStorage("CAuth"),
-    //                         "content-type": "application/json; charset=utf-8",
-    //                     },
-    //                     method: "GET"
-    //                 })
-    //                 .then(Result => {
-    //                     const ResultJson = Result.clone().json();//Respone.clone()
-    //                     return ResultJson;
-    //                 })
-    //                 .then((PreResult) => {
-
-    //                     if (PreResult.code === 200) {
-    //                         // 成功用戶資料 API
-    //                         // console.log(item, PreResult)
-    //                         switch (item) {
-    //                             case "CaseUsers":
-    //                                 setCaseRecord(PreResult.data);
-    //                                 break;
-    //                             case "BusUsers":
-    //                                 setBusRecord(PreResult.data);
-    //                                 break;
-    //                             case "SelfPayUsers":
-    //                                 setWhiteRecord(PreResult.data);
-    //                                 break;
-    //                             // case "RemoteCityUser":
-    //                             //     setRemoteCithRecord(PreResult.result);
-    //                             //     break;
-    //                             // case "daycare":
-    //                             //     setDayCareRecord(PreResult.result);
-    //                             //     break;
-    //                             default:
-    //                                 break;
-    //                         }
-    //                         // setCaseInf(PreResult);
-    //                     }
-    //                     else {
-    //                         throw PreResult;
-    //                     }
-    //                 })
-    //                 .catch((Error) => {
-    //                     modalsService.infoModal.warn({
-    //                         iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
-    //                         yes: true,
-    //                         yesText: "確認",
-    //                         // no: true,
-    //                         // autoClose: true,
-    //                         backgroundClose: false,
-    //                         yesOnClick: (e, close) => {
-    //                             if (Error.code === 401) {
-    //                                 clearSession();
-    //                                 clearLocalStorage();
-    //                                 globalContextService.clear();
-    //                                 Switch();
-    //                             }
-    //                             close();
-    //                         }
-    //                         // theme: {
-    //                         //     yesButton: {
-    //                         //         text: {
-    //                         //             basic: (style, props) => {
-    //                         //                 console.log(style)
-    //                         //                 return {
-    //                         //                     ...style,
-    //                         //                     color: "red"
-    //                         //                 }
-    //                         //             },
-    //                         //         }
-    //                         //     }
-    //                         // }
-    //                     })
-    //                     throw Error.message;
-    //                 })
-    //                 .finally(() => {
-    //                     //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
-    //                     globalContextService.set("LawsAndRegulationsPage", "firstUseAPIgetRecords", false);
-    //                     //#endregion
-    //                 });
-    //             //#endregion
-
-
-    //             return item;
-    //         })
-    //         //#endregion
-    //     }
-    // }, [APIUrl, Switch])
-
-
-    // const [GetRecordsExecute, GetRecordsPending] = useAsync(getRecords, true);
-    // //#endregion
+    const [GetFileAppExecute, GetFileAppPending] = useAsync(getFileApp, true);
+    //#endregion 
 
     return (
         <>
@@ -276,6 +145,10 @@ export const LawsAndRegulations = (props) => {
                     // GetRecordsPending={GetRecordsPending}
                     setNowTab={setNowTab} // 設定目前搭乘紀錄葉面
                     AllTabs={AllTabs} // 用戶身分頁面
+
+                    LawsType1={LawsType1}
+                    LawsType2={LawsType2}
+                    GetFileAppExecute={GetFileAppExecute}
                 />
             }
             {/* {
@@ -307,14 +180,14 @@ export const LawsAndRegulations = (props) => {
             {
                 Width < 1024 &&
                 <MobileM
-                    CaseRecord={CaseRecord} // 長照搭乘紀錄
-                    WhiteRecord={WhiteRecord} // 共享車隊搭乘紀錄
-                    BusRecord={BusRecord}  // 巴士搭乘紀錄
-                    NowTab={NowTab}  // 目前搭乘紀錄頁面
-                    // GetRecordsExecute={GetRecordsExecute} // 取得用戶各種訂單紀錄資料
-                    // GetRecordsPending={GetRecordsPending}
-                    setNowTab={setNowTab} // 設定目前搭乘紀錄葉面
-                    AllTabs={AllTabs} // 用戶身分頁面
+                    NowTab={NowTab}  // 目前頁面
+                    setNowTab={setNowTab} // 設定目前頁面
+
+                    LawsType1={LawsType1}
+                    LawsType2={LawsType2}
+                    GetFileAppExecute={GetFileAppExecute}
+
+                    controllGCS={controllGCS}
                 />
             }
         </>

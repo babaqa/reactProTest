@@ -641,7 +641,7 @@ export default {
     titleBarContainerMobileM: {
         basic: (style, props) => ({
             ...style,
-            height: "56px",
+            height: "60px",
             width: "100%",
             position: "fixed",
         })
@@ -684,7 +684,7 @@ export default {
     titleBarLoginContainerMobileM: {
         basic: (style, props) => ({
             ...style,
-            height: "56px",
+            height: "60px",
             width: "64px",
             padding: "12px 0 0 0 ",
             backgroundColor: "#00628F"

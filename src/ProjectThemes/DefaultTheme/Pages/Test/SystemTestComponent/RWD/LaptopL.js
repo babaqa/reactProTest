@@ -39,9 +39,11 @@ export default {
             height: "270px",
             background: "rgba(75, 75, 75, 1)",
             // margin: "63px 27px 0 0",
-            top: "63px",
+            // top: "63px",
+            marginTop: "63px",
             display: "inline-flex",
             justifyContent: "center",
+            cursor: "pointer"
         }),
     },
     //#endregion
@@ -57,6 +59,7 @@ export default {
             // margin: "63px 27px 0 0",
             display: "inline-flex",
             justifyContent: "center",
+            cursor: "pointer"
         }),
     },
     //#endregion
@@ -67,11 +70,13 @@ export default {
             ...style,
             width: "270px",
             height: "270px",
-            top: "133px",
+            // top: "133px",
+            marginTop: "63px",
             background: "rgba(75, 75, 75, 1)",
             // margin: "63px 27px 0 0",
             display: "inline-flex",
             justifyContent: "center",
+            cursor: "pointer"
         }),
     },
     //#endregion
@@ -83,10 +88,12 @@ export default {
             width: "270px",
             height: "270px",
             left: "27px",
-            top: "70px",
+            // top: "70px",
+            // marginTop:"63px",
             background: "rgba(75, 75, 75, 1)",
             display: "inline-flex",
             justifyContent: "center",
+            cursor: "pointer"
         }),
     },
     //#endregion
@@ -108,6 +115,7 @@ export default {
             fontWeight: 700,
             fontSize: "20px",
             color: "rgba(255, 255, 255, 1)",
+            cursor: "pointer"
         }),
     },
     //#endregion
@@ -125,6 +133,7 @@ export default {
             fontSize: "20px",
             color: "rgba(255, 255, 255, 1)",
             letterSpacing: "0.3em",
+            cursor: "pointer"
         }),
     },
     //#endregion
@@ -370,7 +379,7 @@ export default {
             position: "absolute",
             right: "0",
             bottom: "50px",
-            padding: "24px",
+            padding: "24px 0",
         }),
     },
     //#endregion
@@ -384,6 +393,56 @@ export default {
             fontFamily: "Roboto",
             fontWeight: 700,
             letterSpacing: "0.3em",
+            padding: "0 0 0 0"
+        }),
+    },
+    //#endregion
+
+    //#region 法規右方Table內文容器
+    lawsListContainer: {
+        basic: (style) => ({
+            ...style,
+            padding: "0 30px",
+            display: "inline-block",
+            height: "calc(100% - 23px)"
+        }),
+    },
+    //#endregion
+
+    //#region 法規右方Table內文
+    lawsListText: {
+        basic: (style) => ({
+            color: "rgba(95, 93, 86, 1)",
+            fontSize: "18px",
+            fontFamily: "Roboto",
+            fontWeight: 400,
+            letterSpacing: "0.2em",
+            lineHeight: "40px",
+            width: "100%",
+            margin: "15px 0 0 0",
+            borderBottom: "solid 2px rgba(196, 196, 196, 1)",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            whiteSpace: "nowrap",
+            cursor: "pointer"
+        }),
+    },
+    //#endregion
+
+    //#region 法規右方Table More文字
+    lawsListMoreText: {
+        basic: (style) => ({
+            color: "rgba(39, 39, 39, 1)",
+            fontSize: "20px",
+            fontFamily: "Roboto",
+            fontWeight: 700,
+            letterSpacing: "0.3em",
+            lineHeight: "23px",
+            width: "100%",
+            padding: "0 30px",
+            textAlign: "right",
+            cursor: "pointer"
+            // margin: "15px 0 0 0",
         }),
     },
     //#endregion

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../Store/Store'
 import { MainPageContainer, MainPageSubTitleBar, MainPageTitleBar } from '../../../ProjectComponent';
-import { Container, BasicContainer, RangeDateTimePicker, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
+import { Container, BasicContainer, RangeDateTimePicker, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService, TextEditor } from '../../../Components';
 import { ReactComponent as Slash } from '../../../Assets/img/MemberPage/Slash.svg'
 import { ReactComponent as GoBack } from '../../../Assets/img/MemberPage/GoBack.svg'
 import { useHistory } from 'react-router-dom';
@@ -55,6 +55,7 @@ const MobileMBase = (props) => {
                                 style={mobileM.goBackIcon}
                                 onClick={() => {
                                     history.goBack();
+                                    props.controllGCS("return")
                                 }}
                             />
 
@@ -69,115 +70,69 @@ const MobileMBase = (props) => {
                 // theme={mobileM.unitEditorContainer}
                 >
                     <Container>
+                        {
+                            props?.Member?.map((item, index) => {
+                                return (
+                                    <React.Fragment key={index}>
+                                        {/* 單一區塊外容器 */}
+                                        <SubContainer theme={mobileM.memberBlockOutContainer}>
+                                            <Container>
 
-                        {/* 單一區塊外容器 */}
-                        <SubContainer theme={mobileM.memberBlockOutContainer}>
-                            <Container>
+                                                {/* 右半部容器 */}
+                                                <SubContainer theme={mobileM.memberInsideRightContainer}>
+                                                    {/* 左半部容器 */}
+                                                    <Container theme={mobileM.memberInsideLeftContainer}>
+                                                        <Text theme={mobileM.jobTitleText}>
+                                                            {item.title}
+                                                        </Text>
+                                                        <Text theme={mobileM.nameText}>
+                                                            {item.name}
+                                                        </Text>
+                                                        <Text theme={mobileM.telText}>
+                                                            分機:{item.ext}
+                                                        </Text>
+                                                    </Container>
 
-                                {/* 右半部容器 */}
-                                <SubContainer theme={mobileM.memberInsideRightContainer}>
-                                    {/* 左半部容器 */}
-                                    <Container theme={mobileM.memberInsideLeftContainer}>
-                                        <Text theme={mobileM.jobTitleText}>
-                                            組長
-                                    </Text>
-                                        <Text theme={mobileM.nameText}>
-                                            陳汎瑩
-                                    </Text>
-                                        <Text theme={mobileM.telText}>
-                                            分機:1241
-                                    </Text>
-                                    </Container>
+                                                    <Container style={{ minHeight: "396px", display: "inline-block" }}>
+                                                        <Text theme={mobileM.businessListTitleText}>
+                                                            業務項目
+                                                        </Text>
 
-                                    <Container style={{ minHeight: "396px", display: "inline-block" }}>
-                                        <Text theme={mobileM.businessListTitleText}>
-                                            業務項目
-                                    </Text>
-                                        {
-                                            data.map((item, index) => {
-                                                return (
-                                                    <React.Fragment key={index}>
-                                                        <>
-                                                            <Text theme={mobileM.businessListText}>
-                                                                {index + 1}.{item.content}
-                                                            </Text>
-                                                        </>
+                                                        {/* 業務項目編輯器 BusinessListEditor */}
+                                                        <TextEditor
+                                                            viewType
+                                                            value={item.works}
+                                                            // onChange={(e, value, onInitial) => {
+                                                            //     console.log(value)
+                                                            //     globalContextService.set("MemberPage", "NewsEditor", value)
+                                                            // }}
+                                                            // placeholder={'請輸入最新消息內容...'}
+                                                            theme={mobileM.businessListEditor}
+                                                        />
+                                                        {/* <Text theme={mobileM.businessListText}>
+                                                            {item.works}
+                                                        </Text> */}
 
-                                                    </React.Fragment>
-                                                )
-                                            })
-                                        }
-                                    </Container>
-                                    <Container theme={mobileM.businessListBottomContainer}>
-                                        <Text theme={mobileM.positionAgentText}>
-                                            職務代理人
-                                        </Text>
+                                                    </Container>
+                                                    <Container theme={mobileM.businessListBottomContainer}>
+                                                        <Text theme={mobileM.positionAgentText}>
+                                                            職務代理人
+                                                        </Text>
 
-                                        <Container theme={mobileM.lineContainer} />
+                                                        <Container theme={mobileM.lineContainer} />
 
-                                        <Text theme={mobileM.positionAgentNameText}>
-                                            劉立婉、楊情雅
-                                        </Text>
-                                    </Container>
+                                                        <Text theme={mobileM.positionAgentNameText}>
+                                                            {item.workAgent}
+                                                        </Text>
+                                                    </Container>
 
-                                </SubContainer>
-                            </Container>
-                        </SubContainer>
-
-                        {/* 單一區塊外容器 */}
-                        <SubContainer theme={mobileM.memberBlockOutContainer}>
-                            <Container>
-                                {/* 左半部容器 */}
-                                <SubContainer theme={mobileM.memberInsideLeftContainer}>
-                                    <Text theme={mobileM.jobTitleText}>
-                                        組長
-                                    </Text>
-                                    <Text theme={mobileM.nameText}>
-                                        陳汎瑩
-                                    </Text>
-                                    <Text theme={mobileM.telText}>
-                                        分機:1241
-                                    </Text>
-                                </SubContainer>
-
-                                {/* 右半部容器 */}
-                                <SubContainer theme={mobileM.memberInsideRightContainer}>
-                                    <Container style={{ minHeight: "396px", display: "inline-block" }}>
-                                        <Text theme={mobileM.businessListTitleText}>
-                                            業務項目
-                                    </Text>
-                                        {
-                                            data.map((item, index) => {
-                                                return (
-                                                    <React.Fragment key={index}>
-                                                        <>
-                                                            <Text theme={mobileM.businessListText}>
-                                                                {index + 1}.{item.content}
-                                                            </Text>
-                                                        </>
-
-                                                    </React.Fragment>
-                                                )
-
-                                            })
-                                        }
-                                    </Container>
-                                    <Container theme={mobileM.businessListBottomContainer}>
-                                        <Text theme={mobileM.positionAgentText}>
-                                            職務代理人
-                                        </Text>
-
-                                        <Container theme={mobileM.lineContainer} />
-
-                                        <Text theme={mobileM.positionAgentNameText}>
-                                            劉立婉、楊情雅
-                                        </Text>
-                                    </Container>
-
-                                </SubContainer>
-                            </Container>
-                        </SubContainer>
-
+                                                </SubContainer>
+                                            </Container>
+                                        </SubContainer>
+                                    </React.Fragment>
+                                )
+                            })
+                        }
                     </Container>
                 </BasicContainer>
             </MainPageContainer>

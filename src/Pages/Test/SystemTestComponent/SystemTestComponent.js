@@ -28,11 +28,13 @@ export const SystemTestComponent = (props) => {
             {
                 1024 <= Width &&
                 <LaptopL
-                    AllNews={props.AllNews} // 類別下所有最新消息
                     NowTab={props.NowTab} // 目前使用的頁籤資訊
-                    GetNewsTypeExecute={props.GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消
                     CheckDetail={props.CheckDetail} // 詳細資料
                     setCheckDetail={props.setCheckDetail} // 設定詳細資料
+
+                    LawsType1={props.LawsType1}
+                    LawsType2={props.LawsType2}
+                    GetFileAppExecute={props.GetFileAppExecute}
                 />
             }
             {/* {
@@ -58,7 +60,6 @@ export const SystemTestComponent = (props) => {
             {
                 Width < 1024 &&
                 <MobileM
-                    AllNews={props.AllNews} // 類別下所有最新消息
                     NowTab={props.NowTab} // 目前使用的頁籤資訊
                     CheckDetail={props.CheckDetail} // 詳細資料
                     setCheckDetail={props.setCheckDetail} // 設定詳細資料

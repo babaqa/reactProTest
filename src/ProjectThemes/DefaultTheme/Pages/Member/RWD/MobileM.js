@@ -278,6 +278,39 @@ export default {
     },
     //#endregion
 
+    //#region 業務項目編輯器 BusinessListEditor
+    businessListEditor: {
+        viewTypeContainer: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 0 0",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        container: {
+            basic: (style, props) => ({
+                ...style,
+                padding: "0 0 24px 0",
+                display: "inline-block",
+                ...style.occupy(12),
+            })
+        },
+        viewTypeTextEditor: {
+            basic: (style, props) => ({
+                ...style,
+                color: "rgba(255, 255, 255, 1)",
+            })
+        },
+        textEditor: {
+            basic: (style, props) => ({
+                ...style,
+                height: "500px",
+            })
+        },
+    },
+    //#endregion
+
     //#region 成員介紹業務項目底部容器
     businessListBottomContainer: {
         basic: (style, props) => ({

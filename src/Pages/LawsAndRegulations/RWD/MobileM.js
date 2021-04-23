@@ -27,6 +27,7 @@ const MobileMBase = (props) => {
                                 style={mobileM.goBackIcon}
                                 onClick={() => {
                                     history.goBack();
+                                    props.controllGCS("return")
                                 }}
                             />
 
@@ -38,7 +39,12 @@ const MobileMBase = (props) => {
             >
                 {/* 切換使用的組件 */}
                 {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
-                <Component />
+                <Component
+                    NowTab={subTabMapping[props.NowTab]}
+                    LawsType1={props.LawsType1}
+                    LawsType2={props.LawsType2}
+                    GetFileAppExecute={props.GetFileAppExecute}
+                />
             </MainPageContainer>
         </>
     )

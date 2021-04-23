@@ -21,6 +21,7 @@ import { ReactComponent as LawsLeftIcon } from '../../../../Assets/img/SystemTes
 import { ReactComponent as SignOff } from '../../../../Assets/img/SystemTestComponentPage/SignOff.svg'
 import { ReactComponent as OurLaws } from '../../../../Assets/img/SystemTestComponentPage/OurLaws.svg'
 import { ReactComponent as ArchiveExhibition } from '../../../../Assets/img/SystemTestComponentPage/ArchiveExhibition.svg'
+import { ReactComponent as Square } from '../../../../Assets/img/SystemTestComponentPage/Square.svg'
 import isUndefined from 'lodash/isUndefined';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { fmt } from '../../../../Handlers/DateHandler';
@@ -52,6 +53,11 @@ const LaptopLBase = (props) => {
         { title: "稽催表補發申請單" },
         { title: "國立臺灣藝術大學檔案應..." },
     ]
+    // const LawsType1 = props.LawsType1;
+    // useEffect(() => {
+    //     let LawsType1 = props.LawsType1;
+    // },[props.LawsType1])
+
     return (
         <>
 
@@ -66,7 +72,12 @@ const LaptopLBase = (props) => {
 
                         <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                             {/* 臺藝檔案 */}
-                            <Container theme={laptopL.fileContainer}>
+                            <Container
+                                theme={laptopL.fileContainer}
+                                onClick={() => {
+                                    history.push("/Files?subTab=KnowNTUA")
+                                }}
+                            >
                                 <Container theme={laptopL.moreTextContainer}>
                                     <Text style={{ color: "#FFFFFF", letterSpacing: "3px" }}>More</Text>
                                 </Container>
@@ -81,7 +92,12 @@ const LaptopLBase = (props) => {
                             </Container>
 
                             {/* 檔案應用 */}
-                            <Container theme={laptopL.fileUseContainer}>
+                            <Container
+                                theme={laptopL.fileUseContainer}
+                                onClick={() => {
+                                    history.push("/Application?subTab=RelatedRegulations")
+                                }}
+                            >
                                 <Container theme={laptopL.moreTextContainer}>
                                     <Text style={{ color: "#FFFFFF", letterSpacing: "3px" }}>More</Text>
                                 </Container>
@@ -97,7 +113,12 @@ const LaptopLBase = (props) => {
                         </Container>
                         <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                             {/* 線上檔案展 */}
-                            <Container theme={laptopL.fileShowContainer}>
+                            <Container
+                                theme={laptopL.fileShowContainer}
+                                onClick={() => {
+                                    history.push("/Files?subTab=OnlineArchiveExhibition")
+                                }}
+                            >
                                 <Container theme={laptopL.moreTextContainer}>
                                     <Text style={{ color: "#FFFFFF", letterSpacing: "3px" }}>More</Text>
                                 </Container>
@@ -112,7 +133,12 @@ const LaptopLBase = (props) => {
                             </Text>
                             </Container>
                             {/* 申請下載 */}
-                            <Container theme={laptopL.downloadContainer}>
+                            <Container
+                                theme={laptopL.downloadContainer}
+                                onClick={() => {
+                                    history.push("/QAndA?subTab=DownloadForm")
+                                }}
+                            >
                                 <Container theme={laptopL.moreTextContainer}>
                                     <Text style={{ color: "#FFFFFF", letterSpacing: "3px" }}>More</Text>
                                 </Container>
@@ -230,7 +256,12 @@ const LaptopLBase = (props) => {
                             isActive={isActive}
                             width={Width}
                             onClick={() => {
-                                isActive !== "ourLaws" && setIsActive("ourLaws")
+                                Width >= 1440 ?
+                                    (
+                                        isActive !== "ourLaws" && setIsActive("ourLaws")
+                                    )
+                                    :
+                                    history.push("/LawsAndRegulations?subTab=SchoolRegulations")
                             }}
                         >
                             <OurLaws style={{
@@ -247,7 +278,12 @@ const LaptopLBase = (props) => {
                             isActive={isActive}
                             width={Width}
                             onClick={() => {
-                                isActive !== "lawsSign" && setIsActive("lawsSign")
+                                Width >= 1440 ?
+                                    (
+                                        isActive !== "lawsSign" && setIsActive("lawsSign")
+                                    )
+                                    :
+                                    history.push("/LawsAndRegulations?subTab=FileRelatedRegulations")
                             }}
                         >
                             <SignOff style={{
@@ -267,8 +303,44 @@ const LaptopLBase = (props) => {
 
                     {Width >= 1440 &&
                         <SubContainer theme={laptopL.lawsRightContainer}>
-                            <Text theme={laptopL.tableHeaderText}>
-                                {textMapping[isActive]}
+                            <Container theme={laptopL.lawsListContainer}>
+                                <Text theme={laptopL.tableHeaderText}>
+                                    {textMapping[isActive]}
+                                </Text>
+                                {
+
+                                    (isActive === "ourLaws" ? props.LawsType1 : props.LawsType2)?.map((item, index) => {
+                                        return (
+                                            <React.Fragment key={index}>
+
+                                                <Text
+                                                    theme={laptopL.lawsListText}
+                                                    onClick={() => {
+                                                        console.log(item.url)
+                                                        // history.push(item.url)
+                                                    }}
+                                                >
+                                                    <Square style={{
+                                                        position: "relative",
+                                                        margin: "0 14px 0 0"
+                                                    }} />
+                                                    {item.title}
+                                                </Text>
+                                            </React.Fragment>
+                                        )
+                                    })
+                                }
+                            </Container>
+                            <Text
+                                theme={laptopL.lawsListMoreText}
+                                onClick={() => {
+                                    isActive === "ourLaws" ?
+                                        history.push("/LawsAndRegulations?subTab=SchoolRegulations")
+                                        :
+                                        history.push("/LawsAndRegulations?subTab=FileRelatedRegulations")
+                                }}
+                            >
+                                More
                             </Text>
                         </SubContainer>
                     }

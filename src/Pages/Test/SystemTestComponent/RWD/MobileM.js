@@ -67,7 +67,12 @@ const MobileMBase = (props) => {
 
                         <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                             {/* 臺藝檔案 */}
-                            <Container theme={mobileM.fileContainer}>
+                            <Container
+                                theme={mobileM.fileContainer}
+                                onClick={() => {
+                                    history.push("/Files?subTab=KnowNTUA")
+                                }}
+                            >
                                 <File style={{
                                     position: "relative",
                                     // top: "-30px",
@@ -80,7 +85,12 @@ const MobileMBase = (props) => {
                             </Container>
 
                             {/* 檔案應用 */}
-                            <Container theme={mobileM.fileUseContainer}>
+                            <Container
+                                theme={mobileM.fileUseContainer}
+                                onClick={() => {
+                                    history.push("/Application?subTab=RelatedRegulations")
+                                }}
+                            >
                                 <FileUse style={{
                                     position: "relative",
                                     // top: "-30px",
@@ -94,7 +104,12 @@ const MobileMBase = (props) => {
                         </Container>
                         <Container style={{ width: "100%", display: "flex", justifyContent: "center" }}>
                             {/* 線上檔案展 */}
-                            <Container theme={mobileM.fileShowContainer}>
+                            <Container
+                                theme={mobileM.fileShowContainer}
+                                onClick={() => {
+                                    history.push("/Files?subTab=OnlineArchiveExhibition")
+                                }}
+                            >
                                 <FileShow style={{
                                     position: "relative",
                                     // top: "-30px",
@@ -107,7 +122,12 @@ const MobileMBase = (props) => {
                             </Text>
                             </Container>
                             {/* 申請下載 */}
-                            <Container theme={mobileM.downloadContainer}>
+                            <Container
+                                theme={mobileM.downloadContainer}
+                                onClick={() => {
+                                    history.push("/QAndA?subTab=DownloadForm")
+                                }}
+                            >
                                 <Download style={{
                                     position: "relative",
                                     // top: "-30px",
@@ -196,7 +216,7 @@ const MobileMBase = (props) => {
                                 isActive={isActive}
                                 width={Width}
                                 onClick={() => {
-                                    isActive !== "ourLaws" && setIsActive("ourLaws")
+                                    history.push("/LawsAndRegulations?subTab=SchoolRegulations")
                                 }}
                             >
                                 <OurLaws style={{
@@ -215,7 +235,7 @@ const MobileMBase = (props) => {
                                 isActive={isActive}
                                 width={Width}
                                 onClick={() => {
-                                    isActive !== "lawsSign" && setIsActive("lawsSign")
+                                    history.push("/LawsAndRegulations?subTab=FileRelatedRegulations")
                                 }}
                             >
                                 <SignOff style={{
