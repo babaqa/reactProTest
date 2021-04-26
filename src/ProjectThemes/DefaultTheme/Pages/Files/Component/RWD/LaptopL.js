@@ -173,7 +173,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "50%",
-                height: "324px",
+                // height: "324px",
                 padding: 0,
                 flexGrow: 1
             })
@@ -188,7 +188,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "50%",
-                height: "324px",
+                // height: "324px",
                 display: "inline-block",
                 padding: 0,
                 flexGrow: 1
@@ -200,13 +200,16 @@ export default {
                 width: "100%",
                 height: "100%",
                 minHeight: "100%",
+                display: "inline-flex",
+                flexDirection: "column",
+                justifyContent: "center"
             })
         },
         viewTypeFileInput: {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                height: "100%",
+                height: "auto",
                 padding: 0,
             })
         },

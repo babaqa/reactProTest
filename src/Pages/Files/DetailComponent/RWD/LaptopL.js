@@ -39,7 +39,7 @@ const LaptopLBase = (props) => {
                         basic: (style, props) => ({
                             ...style,
                             ...style.occupy(6),
-                            height: "370px",
+                            // height: "370px",
                             paddingLeft: "10%"
                         })
                     }}
@@ -65,41 +65,53 @@ const LaptopLBase = (props) => {
                             {`日期：${props.ExhibitionDetail?.date}`}
                         </Text>
 
-                        {
-                            [1, 2, 3].map(() => {
-                                return (
-                                    <>
-                                        {/* 下載 按鈕 */}
-                                        <Text
-                                            width={Width}
-                                            theme={laptopL.downloadButton}
-                                            onClick={() => {
-
-                                            }}
-                                        >
-                                            {`檔案下載`}
-
-                                            {/* 下載 圖標 */}
-                                            <Download style={laptopL.downloadSvg} />
-                                        </Text>
-                                    </>
-                                )
-                            })
-                        }
-
-
-                        {/* 連結 按鈕 */}
-                        <Text
-                            theme={laptopL.connectButton}
-                            onClick={() => {
-
+                        <Container
+                            theme={{
+                                basic: (style, props) => ({
+                                    ...style,
+                                    height: "calc( 100% - 56px )",
+                                    alignContent: "flex-end"
+                                })
                             }}
-                        >
-                            {`連結`}
 
-                            {/* 連結 圖標 */}
-                            <Connect style={laptopL.connectSvg} />
-                        </Text>
+                        >
+                            {
+                                [1, 2, 3].map(() => {
+                                    return (
+                                        <>
+                                            {/* 下載 按鈕 */}
+                                            <Text
+                                                width={Width}
+                                                theme={laptopL.downloadButton}
+                                                onClick={() => {
+
+                                                }}
+                                            >
+                                                {`檔案下載`}
+
+                                                {/* 下載 圖標 */}
+                                                <Download style={laptopL.downloadSvg} />
+                                            </Text>
+                                        </>
+                                    )
+                                })
+                            }
+
+
+                            {/* 連結 按鈕 */}
+                            <Text
+                                theme={laptopL.connectButton}
+                                onClick={() => {
+
+                                }}
+                            >
+                                {`連結`}
+
+                                {/* 連結 圖標 */}
+                                <Connect style={laptopL.connectSvg} />
+                            </Text>
+
+                        </Container>
                     </Container>
                 </SubContainer>
             </BasicContainer>

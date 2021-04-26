@@ -19,7 +19,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "50%",
-                height: "370px",
+                // height: "370px",
                 padding: 0,
                 flexGrow: 1
             })
@@ -34,7 +34,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "50%",
-                height: "370px",
+                // height: "370px",
                 padding: 0,
                 flexGrow: 1
             })
@@ -45,13 +45,16 @@ export default {
                 width: "100%",
                 height: "100%",
                 minHeight: "100%",
+                display: "inline-flex",
+                flexDirection: "column",
+                justifyContent: "center"
             })
         },
         viewTypeFileInput: {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                height: "100%",
+                height: "auto",
                 padding: 0,
             })
         },
@@ -83,8 +86,8 @@ export default {
     detailDateTimeText: {
         basic: (style, props) => ({
             ...style,
-            position: "absolute",
-            top: 0,
+            // position: "absolute",
+            margin: "0 0 40px",
             width: "100%",
             fontWeight: 400,
             fontSize: "14px",
@@ -98,10 +101,11 @@ export default {
         basic: (style, props) => ({
             ...style,
             width: "100%",
-            height: "302px",
+            height: "calc( 100% - 68px )",
             padding: "0 0 0 21px",
             borderLeft: "1px solid #AD9D72",
-            alignContent: "flex-end"
+            alignContent: "baseline"
+            // alignContent: "flex-end"
             // margin: "0 0 14px"
         }),
     },

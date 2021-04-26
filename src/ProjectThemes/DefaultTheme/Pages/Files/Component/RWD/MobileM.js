@@ -202,6 +202,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
+                height: "auto",
                 minHeight: "100%",
                 padding: 0,
             })

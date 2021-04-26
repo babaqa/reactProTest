@@ -17,7 +17,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                height: "178px",
+                // height: "178px",
                 padding: 0,
                 flexGrow: 1
             })
@@ -32,7 +32,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                height: "178px",
+                // height: "178px",
                 padding: 0,
                 flexGrow: 1
             })
@@ -187,7 +187,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                height: "190px",
+                // height: "190px",
                 padding: "6px 0",
                 flexGrow: 1
             })
@@ -202,7 +202,7 @@ export default {
             basic: (style, props) => ({
                 ...style,
                 width: "100%",
-                height: "190px",
+                // height: "190px",
                 padding: "6px 0",
                 flexGrow: 1
             })
