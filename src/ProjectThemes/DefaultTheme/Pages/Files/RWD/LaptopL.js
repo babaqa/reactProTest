@@ -169,7 +169,7 @@ export default {
             ...style,
             // ...style.occupy(4),
             display: "inline-flex",
-            width: props.exhibition ? "75%" : "25%",
+            width: props.exhibition ? "100%" : "25%",
             // height: "56px",
             backgroundColor: "#transparent",
             verticalAlign: "top",
