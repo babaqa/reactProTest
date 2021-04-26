@@ -29,6 +29,7 @@ const MobileMBase = (props) => {
                                 style={mobileM.goBackIcon}
                                 onClick={() => {
                                     history.goBack();
+                                    props.controllGCS("return")
                                 }}
                             />
 
@@ -40,7 +41,12 @@ const MobileMBase = (props) => {
             >
                 {/* 切換使用的組件 */}
                 {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
-                <Component />
+                <Component
+                    NowTab={subTabMapping[props.NowTab]} // 當前頁面
+                    Application1={props.Application1} // 相關法令規章
+                    Application2={props.Application2} // 本校檔案應用申請
+                    Application3={props.Application3} // 加值應用
+                />
             </MainPageContainer>
         </>
     )

@@ -59,14 +59,10 @@ export const Component = (props) => {
             {
                 1024 <= Width &&
                 <LaptopL
-                    UserId={urlParams.get("userId")}
-                    UserName={urlParams.get("caseName")}
-                    Client={Client} // 客戶端用戶的基本資料
-
-                    TodayToDoOpen={TodayToDoOpen}
-                    setTodayToDoOpen={setTodayToDoOpen}
-
-                    controllGCS={controllGCS}
+                    NowTab={props.NowTab} // 當前頁面
+                    Application1={props.Application1} // 相關法令規章
+                    Application2={props.Application2} // 本校檔案應用申請
+                    Application3={props.Application3} // 加值應用
                 />
             }
             {/* {
@@ -98,7 +94,10 @@ export const Component = (props) => {
             {
                 Width < 1024 &&
                 <MobileM
-
+                    NowTab={props.NowTab} // 當前頁面
+                    Application1={props.Application1} // 相關法令規章
+                    Application2={props.Application2} // 本校檔案應用申請
+                    Application3={props.Application3} // 加值應用
                 />
             }
         </>

@@ -40,7 +40,8 @@ export default {
             fontWeight: 400,
             fontSize: "16px",
             color: "#B0B0B0",
-            padding: "18px 12px"
+            padding: "18px 12px",
+            width:"100px"
         }),
     },
     //#endregion
@@ -54,7 +55,7 @@ export default {
             fontSize: "16px",
             color: "#5F5D56",
             padding: "18px 12px",
-            width: "calc( 100% - 104px - 104px)",
+            width: "calc( 100% - 100px - 104px)",
             whiteSpace: "nowrap",
             textOverflow: "ellipsis",
             overflow: "hidden",

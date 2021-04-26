@@ -5,6 +5,7 @@ import { MainPageContainer, MainPageSubTitleBar, MainPageTitleBar } from '../../
 import { Container, BasicContainer, TreeSelector, Tooltip, Tag, OldTable, Selector, NativeLineButton, SubContainer, LineButton, Text, FormContainer, FormRow, TextInput, globalContextService, modalsService } from '../../../Components';
 import { useHistory } from 'react-router-dom';
 import { ReactComponent as Point } from '../../../Assets/img/ApplicationPage/Point.svg'
+import { ReactComponent as Slash } from '../../../Assets/img/ApplicationPage/Slash.svg'
 
 import { Component } from '../Component/Component'
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
@@ -34,18 +35,24 @@ const LaptopLBase = (props) => {
                 outSideTopComponent={
                     <>
                         {/* 首頁文字 */}
-                        <Text
-                            theme={laptopL.homePageText}
-                        >
-                            {`首頁　／　`}
+                        <Container style={{ justifyContent: "flex-end", padding: "0 50px", alignItems: "center" }}>
+                            <Text
+                                theme={laptopL.homePageText}
+                            // onClick={() => {
+                            //     history.push("/")
+                            // }}
+                            >
+                                {"首頁"}
 
-                            {/* 當前頁面文字 */}
+                                {/* 當前頁面文字 */}
+                            </Text>
+                            <Slash style={{ margin: "0 20px" }} />
                             <Text
                                 theme={laptopL.nowPageText}
                             >
                                 {subTabMapping[props.NowTab]}
                             </Text>
-                        </Text>
+                        </Container>
 
                         {/* 子標題列 */}
                         <MainPageSubTitleBar
@@ -92,7 +99,12 @@ const LaptopLBase = (props) => {
                     {/* 切換使用的組件 */}
                     {/* {tabMap("tabUseComponent")?.[props.nowTab]} */}
 
-                    <Component />
+                    <Component
+                        NowTab={subTabMapping[props.NowTab]} // 當前頁面
+                        Application1={props.Application1} // 相關法令規章
+                        Application2={props.Application2} // 本校檔案應用申請
+                        Application3={props.Application3} // 加值應用
+                    />
                 </BasicContainer>
             </MainPageContainer>
 
