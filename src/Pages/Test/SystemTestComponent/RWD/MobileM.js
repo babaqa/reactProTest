@@ -166,7 +166,7 @@ const MobileMBase = (props) => {
                     {/* 右方資料容器 */}
                     <SubContainer theme={mobileM.downloadsTableContainer}>
                         {
-                            downloadData.map((item, index) => {
+                            props.QuestionA.map((item, index) => {
                                 return (
                                     <React.Fragment key={index}>
                                         {index < 5 ?
@@ -195,9 +195,14 @@ const MobileMBase = (props) => {
                             })
                         }
                     </SubContainer>
-                    <Text theme={mobileM.moreButton}>
+                    <Text
+                        theme={mobileM.moreButton}
+                        onClick={() => {
+                            history.push("/QAndA?subTab=DownloadForm")
+                        }}
+                    >
                         More
-                            </Text>
+                    </Text>
                 </Container>
 
                 {/* 第四區塊容器 */}
@@ -250,9 +255,14 @@ const MobileMBase = (props) => {
                             </Container>
                         </Container>
                     </SubContainer>
-                    <Text theme={mobileM.moreButton}>
+                    <Text
+                        theme={mobileM.moreButton}
+                        onClick={() => {
+                            history.push("/LawsAndRegulations?subTab=SchoolRegulations")
+                        }}
+                    >
                         More
-                            </Text>
+                    </Text>
 
                 </Container>
             </BasicContainer>

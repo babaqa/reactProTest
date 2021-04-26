@@ -48,10 +48,7 @@ const MobileMBase = (props) => {
                 {/* {console.log(props.AllNews)} */}
 
                 <SystemTestComponent
-                // AllNews={props.AllNews} // 類別下所有最新消息
-                // NowTab={props.NewsType.filter((it) => (it.label === props.NowTab))?.[0]}
-                // CheckDetail={props.CheckDetail} // 詳細資料
-                // setCheckDetail={props.setCheckDetail} // 設定詳細資料
+                    QuestionA={props.QuestionA} // 文書相關檔案QA
                 />
 
             </MainPageContainer>

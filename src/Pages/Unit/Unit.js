@@ -18,9 +18,7 @@ export const Unit = (props) => {
     const { APIUrl, Theme, Switch } = useContext(Context);
     //const { pages: { login } } = Theme;
     const [NowTab, setNowTab] = useState("單位介紹"); // 目前公告頁面
-    const [NewsType, setNewsType] = useState([]); //所有最新消息類別
-    const [AllUnit, setUnit] = useState([]); // 類別下所有最新消息
-    const [CheckDetail, setCheckDetail] = useState({}); // 詳細資料
+    const [Unit, setUnit] = useState([]); // 單位介紹
     const [Width, Height] = useWindowSize();
 
     let history = useHistory();
@@ -49,7 +47,7 @@ export const Unit = (props) => {
             if (!useAPI) {
                 // 代表初次調用
                 //#region 取得單位介紹 API
-                fetch(`${APIUrl}/api/GenericContents/Load`, //categorys/load?page=1&limit=20&TypeId=SYS_DRIVER_LICENSE
+                fetch(`${APIUrl}GenericContents/Get?id=6781646802071887872`, //GenericContents/Get?id=6781646802071887872
                     {
                         headers: {
                             "X-Token": getParseItemLocalStorage("Auth"),
@@ -65,8 +63,7 @@ export const Unit = (props) => {
 
                         if (PreResult.code === 200) {
                             // 成功取得單位介紹
-
-                            setUnit(PreResult.data);
+                            setUnit(PreResult.result);
                         }
                         else {
                             throw PreResult;
@@ -115,7 +112,7 @@ export const Unit = (props) => {
         }
     }, [APIUrl, Switch])
 
-    const [GetUnitTypeExecute, GetUnitTypePending] = useAsync(getUnit, false);
+    const [GetUnitTypeExecute, GetUnitTypePending] = useAsync(getUnit, true);
     //#endregion
 
     return (
@@ -125,11 +122,7 @@ export const Unit = (props) => {
                 <LaptopL
                     NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面
-                    NewsType={NewsType} // 所有最新消息類別
-                    Unit={Unit} // 類別下所有最新消息
-                    CheckDetail={CheckDetail} // 詳細資料
-                    setCheckDetail={setCheckDetail} // 設定詳細資料
-                    // GetNewsTypeExecute={GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消息
+                    Unit={Unit} // 單位介紹
                 />
             }
             {/* {
@@ -151,11 +144,7 @@ export const Unit = (props) => {
                 <MobileM
                     NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面
-                    NewsType={NewsType} // 所有最新消息類別
-                    Unit={Unit} // 類別下所有最新消息
-                    CheckDetail={CheckDetail} // 詳細資料
-                    setCheckDetail={setCheckDetail} // 設定詳細資料
-                    // GetNewsTypeExecute={GetNewsTypeExecute} // 選單更新值調用，取得特定類別所有最新消息
+                    Unit={Unit} // 單位介紹
                 />
             }
         </>

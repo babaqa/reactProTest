@@ -75,9 +75,10 @@ const LaptopLBase = (props) => {
                         </BasicContainer> */}
 
                 <SystemTestComponent
-                    LawsType1={props.LawsType1}
-                    LawsType2={props.LawsType2}
-                    GetFileAppExecute={props.GetFileAppExecute}
+                    QuestionA={props.QuestionA} // 文書相關檔案QA
+                    LawsType1={props.LawsType1} // 本校法規
+                    LawsType2={props.LawsType2} // 相關法規
+                    GetFileAppExecute={props.GetFileAppExecute} // 重新取得全部法規
                 />
 
             </MainPageContainer>

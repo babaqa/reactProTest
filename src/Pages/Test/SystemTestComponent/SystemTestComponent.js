@@ -32,9 +32,10 @@ export const SystemTestComponent = (props) => {
                     CheckDetail={props.CheckDetail} // 詳細資料
                     setCheckDetail={props.setCheckDetail} // 設定詳細資料
 
-                    LawsType1={props.LawsType1}
-                    LawsType2={props.LawsType2}
-                    GetFileAppExecute={props.GetFileAppExecute}
+                    QuestionA={props.QuestionA} // 文書相關檔案QA
+                    LawsType1={props.LawsType1} // 本校法規
+                    LawsType2={props.LawsType2} // 相關法規
+                    GetFileAppExecute={props.GetFileAppExecute} // 重新取得全部法規
                 />
             }
             {/* {
@@ -63,6 +64,8 @@ export const SystemTestComponent = (props) => {
                     NowTab={props.NowTab} // 目前使用的頁籤資訊
                     CheckDetail={props.CheckDetail} // 詳細資料
                     setCheckDetail={props.setCheckDetail} // 設定詳細資料
+
+                    QuestionA={props.QuestionA} // 文書相關檔案QA
                 />
             }
         </>

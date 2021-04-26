@@ -21,6 +21,7 @@ export const Test = (props) => {
     const [NewsType, setNewsType] = useState([]); //所有最新消息類別
     const [AllNews, setAllNews] = useState([]); // 類別下所有最新消息
     const [CheckDetail, setCheckDetail] = useState({}); // 詳細資料
+    const [QuestionA, setQuestionA] = useState([]); // 文書相關檔案QA
     const [LawsType1, setLawsType1] = useState([]); // 本校法規
     const [LawsType2, setLawsType2] = useState([]); // 文書檔案相關法規
     const [Width, Height] = useWindowSize();
@@ -31,7 +32,8 @@ export const Test = (props) => {
     useEffect(() => {
         const historyUnlisten = history.listen((location, action) => {
             //console.log(location, action)
-            globalContextService.remove("TestPage", "firstUseAPIgetFileApp");
+            globalContextService.remove("TestPage");
+            // globalContextService.remove("TestPage", "firstUseAPIgetFileApp");
         });
 
         return () => {
@@ -39,6 +41,72 @@ export const Test = (props) => {
         }
     }, [])
     //#endregion
+
+    //#region 取得 檔案下載(文書檔案相關QA) API
+    const getQuestionA = useCallback(async (useAPI = false) => {
+
+        //#region 規避左側欄收合影響組件重新渲染 (渲染即觸發的每一個API都要有，useAPI (預設) = 0、globalContextService.set 第二個參數要隨API改變)
+        if (isUndefined(globalContextService.get("TestPage", "firstUseAPIgetQuestionA")) || useAPI) {
+            //#endregion
+
+            //#region 取得 檔案下載(文書檔案相關QA) API
+            fetch(`${APIUrl}QuestionA/Load`,
+                {
+                    headers: {
+                        // "X-Token": getParseItemLocalStorage("Auth"),
+                        "content-type": "application/json; charset=utf-8",
+                    },
+                    method: "GET"
+                })
+                .then(Result => {
+                    const ResultJson = Result.clone().json();//Respone.clone()
+                    return ResultJson;
+                })
+                .then((PreResult) => {
+
+                    if (PreResult.code === 200) {
+                        // 成功取得 檔案下載(文書檔案相關QA) 
+
+                        //本校法規
+                        setQuestionA(PreResult.data);
+
+                    }
+                    else {
+                        throw PreResult;
+                    }
+                })
+                .catch((Error) => {
+                    // modalsService.infoModal.warn({
+                    //     iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                    //     yes: true,
+                    //     yesText: "確認",
+                    //     // no: true,
+                    //     // autoClose: true,
+                    //     backgroundClose: false,
+                    //     yesOnClick: (e, close) => {
+                    //         if (Error.code === 401) {
+                    //             clearSession();
+                    //             clearLocalStorage();
+                    //             globalContextService.clear();
+                    //             Switch();
+                    //         }
+                    //         close();
+                    //     }
+                    // })
+                    throw Error.message;
+                })
+                .finally(() => {
+                    //#region 規避左側欄收合影響組件重新渲染 (每一個API都要有)
+                    globalContextService.set("TestPage", "firstUseAPIgetQuestionA", false);
+                    //#endregion
+                });
+            //#endregion
+
+        }
+    }, [APIUrl, Switch])
+
+    const [GetQuestionAExecute, GetQuestionAPending] = useAsync(getQuestionA, true);
+    //#endregion 
 
     //#region 取得 法令規章 API
     const getFileApp = useCallback(async (useAPI = false) => {
@@ -48,7 +116,7 @@ export const Test = (props) => {
             //#endregion
 
             //#region 取得 法令規章 API
-            fetch(`${APIUrl}Decrees/Load?limit=5`,
+            fetch(`${APIUrl}Decrees/Load`,
                 {
                     headers: {
                         // "X-Token": getParseItemLocalStorage("Auth"),
@@ -77,23 +145,23 @@ export const Test = (props) => {
                     }
                 })
                 .catch((Error) => {
-                    modalsService.infoModal.warn({
-                        iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
-                        yes: true,
-                        yesText: "確認",
-                        // no: true,
-                        // autoClose: true,
-                        backgroundClose: false,
-                        yesOnClick: (e, close) => {
-                            if (Error.code === 401) {
-                                clearSession();
-                                clearLocalStorage();
-                                globalContextService.clear();
-                                Switch();
-                            }
-                            close();
-                        }
-                    })
+                    // modalsService.infoModal.warn({
+                    //     iconRightText: Error.code === 401 ? "請重新登入。" : Error.message,
+                    //     yes: true,
+                    //     yesText: "確認",
+                    //     // no: true,
+                    //     // autoClose: true,
+                    //     backgroundClose: false,
+                    //     yesOnClick: (e, close) => {
+                    //         if (Error.code === 401) {
+                    //             clearSession();
+                    //             clearLocalStorage();
+                    //             globalContextService.clear();
+                    //             Switch();
+                    //         }
+                    //         close();
+                    //     }
+                    // })
                     throw Error.message;
                 })
                 .finally(() => {
@@ -119,9 +187,11 @@ export const Test = (props) => {
                     CheckDetail={CheckDetail} // 詳細資料
                     setCheckDetail={setCheckDetail} // 設定詳細資料
 
-                    LawsType1={LawsType1}
-                    LawsType2={LawsType2}
-                    GetFileAppExecute={GetFileAppExecute}
+
+                    QuestionA={QuestionA} // 文書相關檔案QA
+                    LawsType1={LawsType1} // 本校法規
+                    LawsType2={LawsType2} // 相關法規
+                    GetFileAppExecute={GetFileAppExecute} // 重新取得全部法規
                 />
             }
             {/* {
@@ -146,9 +216,10 @@ export const Test = (props) => {
                     CheckDetail={CheckDetail} // 詳細資料
                     setCheckDetail={setCheckDetail} // 設定詳細資料
 
-                    LawsType1={LawsType1}
-                    LawsType2={LawsType2}
-                    GetFileAppExecute={GetFileAppExecute}
+                    QuestionA={QuestionA} // 文書相關檔案QA
+                    LawsType1={LawsType1} // 本校法規
+                    LawsType2={LawsType2} // 相關法規
+                    GetFileAppExecute={GetFileAppExecute} // 重新取得全部法規
                 />
             }
         </>

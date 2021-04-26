@@ -184,7 +184,7 @@ const LaptopLBase = (props) => {
                     {/* 右方資料容器 */}
                     <SubContainer theme={laptopL.downloadsTableContainer}>
                         {
-                            downloadData.map((item, index) => {
+                            props.QuestionA.map((item, index) => {
                                 return (
                                     <React.Fragment key={index}>
                                         {Width >= 1440 ?
@@ -311,6 +311,9 @@ const LaptopLBase = (props) => {
 
                                     (isActive === "ourLaws" ? props.LawsType1 : props.LawsType2)?.map((item, index) => {
                                         return (
+
+                                            // 只顯示五筆
+                                            (index < 5) &&
                                             <React.Fragment key={index}>
 
                                                 <Text
