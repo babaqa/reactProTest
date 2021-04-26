@@ -6,6 +6,7 @@ import { Container, BasicContainer, BasicButton, TreeSelector, Tooltip, DateTime
 import { useHistory } from 'react-router-dom';
 import { useWindowSize } from '../../../SelfHooks/useWindowSize';
 import { ReactComponent as Point } from '../../../Assets/img/FilesPage/Point.svg'
+import { ReactComponent as Slash } from '../../../Assets/img/FilesPage/Slash.svg'
 
 import { Component } from '../Component/Component'
 import { DetailComponent } from '../DetailComponent/DetailComponent'
@@ -69,26 +70,32 @@ const LaptopLBase = (props) => {
                         }
 
                         {/* 首頁文字 */}
-                        <Text
-                            exhibition={props.NowTab === "OnlineArchiveExhibition"}
-                            theme={laptopL.homePageText}
-                        >
-                            {`首頁　／　`}
+                        <Container style={{ justifyContent: "flex-end", padding: "0 50px", alignItems: "center" }}>
+                            <Text
+                                theme={laptopL.homePageText}
+                                exhibition={props.NowTab === "OnlineArchiveExhibition"}
+                            // onClick={() => {
+                            //     history.push("/")
+                            // }}
+                            >
+                                {"首頁"}
 
-                            {/* 當前頁面文字 */}
+                                {/* 當前頁面文字 */}
+                            </Text>
+                            <Slash style={{ margin: "0 20px" }} />
                             <Text
                                 theme={laptopL.nowPageText}
                             >
                                 {subTabMapping[props.NowTab]}
                             </Text>
-                        </Text>
+                        </Container>
 
                         {/* 子標題列 */}
                         <MainPageSubTitleBar
                             bascDefaultTheme={"DefaultTheme"}
                             titleText={subTabMapping[props.NowTab]}
-                            exhibition={props.NowTab === "OnlineArchiveExhibition"}
                             theme={laptopL.baseSubTitleBar}
+                            exhibition={props.NowTab === "OnlineArchiveExhibition"}
                         >
                         </MainPageSubTitleBar>
                     </>

@@ -106,11 +106,11 @@ export default {
     homePageText: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
+            // display: "inline-block",
             // position: "absolute",
             // right: 0,
-            width: props.exhibition ? "25%" : "100%",
-            textAlign: "right",
+            // width: "100%",
+            // textAlign: "right",
             fontWeight: 400,
             fontSize: "18px",
             color: "#4B4B4B"
@@ -122,10 +122,11 @@ export default {
     nowPageText: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
+            // display: "inline-block",
             fontWeight: 400,
             fontSize: "18px",
-            color: "#B0B0B0"
+            color: "#B0B0B0",
+            // top: "10px"
         }),
     },
     //#endregion
@@ -197,14 +198,15 @@ export default {
         }),
     },
     //#endregion
+
     //#region 標題列 聯繫客服分頁
     titleBarContactTab: {
         basic: (style, props) => ({
             ...style,
-            display: "inline-block",
+            display: "block",
             margin: "0 0 24px",
             padding: "0 48px 0 24px",
-            lineHeight: "21px",
+            lineHeight: "20px",
             height: "100%",
             fontWeight: 700,
             fontSize: "18px",
@@ -212,6 +214,8 @@ export default {
             width: "162px",
             color: "rgba(0, 0, 0, 0.85)",
             backgroundColor: "transparent",
+            float: "right",
+            clear: "both",
         }),
     },
     //#endregion
@@ -220,7 +224,7 @@ export default {
     pointSvg: {
         position: "absolute",
         left: 0,
-        top: "6px"
+        top: "4px"
     },
     //#endregion
 }
