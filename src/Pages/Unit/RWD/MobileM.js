@@ -29,6 +29,7 @@ const MobileMBase = (props) => {
                                 style={mobileM.goBackIcon}
                                 onClick={() => {
                                     history.goBack();
+                                    props.controllGCS("return")
                                 }}
                             />
 

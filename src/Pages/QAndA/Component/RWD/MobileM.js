@@ -7,6 +7,8 @@ import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable } from '../../../../Components';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { CardTable } from '../../../../ProjectComponent';
+import { fmt } from '../../../../Handlers/DateHandler';
+import moment from 'moment';
 
 const MobileMBase = (props) => {
     const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
@@ -33,7 +35,7 @@ const MobileMBase = (props) => {
     ]
     return (
         <>
-            {data.length === 0
+            {(props.NowTab === "表單申請下載" ? props.QuestionA1 : props.QuestionA2).length === 0
                 ?
                 <>
                     {/* 無資料表單區容器 */}
@@ -96,7 +98,7 @@ const MobileMBase = (props) => {
                                                     <Text
                                                         theme={mobileM.dateTimeText}
                                                     >
-                                                        {rowData.date}
+                                                        {fmt(moment(rowData.postDate), "YYYY-MM-DD")}
                                                     </Text>
 
                                                     {/* 資料標題 文字 */}
@@ -119,7 +121,7 @@ const MobileMBase = (props) => {
                         }
                         //sort
                         showHeader={false}
-                        data={data}
+                        data={props.NowTab === "表單申請下載" ? props.QuestionA1 : props.QuestionA2}
                         clickPage={(currentPage, pageSize) => {
                         }}
                     />

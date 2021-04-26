@@ -54,11 +54,30 @@ export default {
             fontSize: "16px",
             color: "#5F5D56",
             padding: "18px 12px",
-            width: "calc( 100% - 104px )",
+            width: "calc( 100% - 104px - 104px)",
             whiteSpace: "nowrap",
             textOverflow: "ellipsis",
             overflow: "hidden",
         }),
+    },
+    //#endregion
+
+    //#region 下載右方資料Icon容器
+    downloadsDataIconContainer: {
+        basic: (style) => ({
+            ...style,
+            width: "104px",
+            height: "56px",
+            display: "inline-flex",
+            justifyContent: "flex-end",
+            alignItems: "center"
+        }),
+    },
+    //#endregion
+    //#region 下載右方資料Icon
+    downloadDataIcon: {
+        // margin: "0 0 0 14px",
+        // cursor: "pointer",
     },
     //#endregion
 

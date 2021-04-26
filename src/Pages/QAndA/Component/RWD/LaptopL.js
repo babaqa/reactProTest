@@ -2,10 +2,15 @@ import React, { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { Context } from '../../../../Store/Store'
 import { ReactComponent as NoData } from '../../../../Assets/img/QAndA/NoData.svg'
+import { ReactComponent as Pdf } from '../../../../Assets/img/QAndA/Pdf.svg'
+import { ReactComponent as Odf } from '../../../../Assets/img/QAndA/Odf.svg'
+import { ReactComponent as Word } from '../../../../Assets/img/QAndA/Word.svg'
 import { useHistory } from 'react-router-dom';
 import { DateTimePicker, BasicContainer, FormContainer, FormRow, globalContextService, NativeLineButton, NewSelector, SubContainer, Text, TextInput, Radio, RadioItem, modalsService, Container, OldTable, OldList } from '../../../../Components';
 import { useWindowSize } from '../../../../SelfHooks/useWindowSize';
 import { CardTable } from '../../../../ProjectComponent';
+import { fmt } from '../../../../Handlers/DateHandler';
+import moment from 'moment';
 
 const LaptopLBase = (props) => {
 
@@ -32,7 +37,7 @@ const LaptopLBase = (props) => {
     ]
     return (
         <>
-            {data.length === 0
+            {(props.NowTab === "表單申請下載" ? props.QuestionA1 : props.QuestionA2).length === 0
                 ?
                 <>
                     {/* 無資料表單區容器 */}
@@ -95,7 +100,7 @@ const LaptopLBase = (props) => {
                                                     <Text
                                                         theme={laptopL.dateTimeText}
                                                     >
-                                                        {rowData.date}
+                                                        {fmt(moment(rowData.postDate), "YYYY-MM-DD")}
                                                     </Text>
 
                                                     {/* 資料標題 文字 */}
@@ -104,6 +109,20 @@ const LaptopLBase = (props) => {
                                                     >
                                                         {rowData.title}
                                                     </Text>
+
+                                                    {props.NowTab === "表單申請下載" &&
+                                                        <Container theme={laptopL.downloadsDataIconContainer}>
+                                                            <a href="/Test" download>
+                                                                <Pdf style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                            <a href="/Test" download>
+                                                                <Word style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                            <a href="/Test" download>
+                                                                <Odf style={laptopL.downloadDataIcon} />
+                                                            </a>
+                                                        </Container>
+                                                    }
                                                 </BasicContainer>
                                             </>
                                         )
@@ -115,7 +134,7 @@ const LaptopLBase = (props) => {
                         }
                         //sort
                         showHeader={false}
-                        data={data}
+                        data={props.NowTab === "表單申請下載" ? props.QuestionA1 : props.QuestionA2}
                         clickPage={(currentPage, pageSize) => {
                         }}
                     />

@@ -67,8 +67,8 @@ export const Test = (props) => {
                     if (PreResult.code === 200) {
                         // 成功取得 檔案下載(文書檔案相關QA) 
 
-                        //本校法規
-                        setQuestionA(PreResult.data);
+                        //文書檔案相關QA
+                        setQuestionA(PreResult.data.filter(item => item.typeId === "1"));
 
                     }
                     else {

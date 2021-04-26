@@ -67,6 +67,11 @@ export const Component = (props) => {
                     setTodayToDoOpen={setTodayToDoOpen}
 
                     controllGCS={controllGCS}
+
+                    NowTab={props.NowTab} // 當前頁面
+
+                    QuestionA1={props.QuestionA1} // 文書相關檔案QA(表單申請下載)
+                    QuestionA2={props.QuestionA2} // 文書相關檔案QA(文書常見問題)
                 />
             }
             {/* {
@@ -98,7 +103,10 @@ export const Component = (props) => {
             {
                 Width < 1024 &&
                 <MobileM
+                    NowTab={props.NowTab} // 當前頁面
 
+                    QuestionA1={props.QuestionA1} // 文書相關檔案QA(表單申請下載)
+                    QuestionA2={props.QuestionA2} // 文書相關檔案QA(文書常見問題)
                 />
             }
         </>

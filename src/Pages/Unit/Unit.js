@@ -36,6 +36,20 @@ export const Unit = (props) => {
     }, [])
     //#endregion
 
+    //#region 當頁 GlobalContextService (GCS) 值 控制
+    const controllGCS = (type, payload) => {
+        switch (type) {
+            case "return":
+                //#region 當 編輯 Modal 關閉時，要清除的資料
+                globalContextService.remove("UinitPage");
+                //#endregion
+                break;
+            default:
+                break;
+        }
+    }
+    //#endregion
+
     //#region 取得單位介紹API
     const getUnit = useCallback(async (useAPI = false, newsCategoryId = "", releaseDate = fmt(moment(), "YYYY-MM")) => {
 
@@ -120,6 +134,7 @@ export const Unit = (props) => {
             {
                 1024 <= Width &&
                 <LaptopL
+                    controllGCS={controllGCS}
                     NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面
                     Unit={Unit} // 單位介紹
@@ -142,6 +157,7 @@ export const Unit = (props) => {
             {
                 Width < 1024 &&
                 <MobileM
+                    controllGCS={controllGCS}
                     NowTab={NowTab} // 目前公告頁面
                     setNowTab={setNowTab} // 設定目前公告頁面
                     Unit={Unit} // 單位介紹
