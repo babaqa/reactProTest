@@ -29,7 +29,7 @@ import { fmt } from '../../../../Handlers/DateHandler';
 
 const MobileMBase = (props) => {
 
-    const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
+    const { APIUrl, APIFileUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { test: { component: { systemTestComponent: { rwd: { mobileM } } } } } } = Theme;
 
     const [Width, Height] = useWindowSize();
@@ -37,22 +37,12 @@ const MobileMBase = (props) => {
     const [isActive, setIsActive] = useState("ourLaws");
     let history = useHistory()
 
-    const textMapping = {
-        "ourLaws": "本校法規",
-        "lawsSign": "相關法規",
+    const checkFileType = (fileStr, type) => {
+        const fileList = fileStr?.split(",");
+        const checkType = (element) => element.includes(type);
+        return fileList[fileList.findIndex(checkType, type)];
     }
-    const downloadData = [
-        { title: "公文改分單" },
-        { title: "公文整合資訊入口網單位單位單位單位單位" },
-        { title: "機密文書等級變更或註銷..." },
-        { title: "國立臺灣藝術大學檔案閱..." },
-        { title: "用印申請表" },
-        { title: "國立臺灣藝術大學檔案應..." },
-        { title: "總發文補發申請單" },
-        { title: "國立臺灣藝術大學檔案應..." },
-        { title: "稽催表補發申請單" },
-        { title: "國立臺灣藝術大學檔案應..." },
-    ]
+
     return (
         <>
 
@@ -175,15 +165,24 @@ const MobileMBase = (props) => {
                                                     {item.title}
                                                 </Text>
                                                 <Container theme={mobileM.downloadsDataIconContainer}>
-                                                    <a href="/Test" download>
-                                                        <Pdf style={mobileM.downloadDataIcon} />
-                                                    </a>
-                                                    <a href="/Test" download>
-                                                        <Word style={mobileM.downloadDataIcon} />
-                                                    </a>
-                                                    <a href="/Test" download>
-                                                        <Odf style={mobileM.downloadDataIcon} />
-                                                    </a>
+                                                    {!isNil(checkFileType(item.filels, "pdf"))
+                                                        &&
+                                                        <a href={APIFileUrl + checkFileType(item.filels, "pdf")} download>
+                                                            <Pdf style={mobileM.downloadDataIcon} />
+                                                        </a>
+                                                    }
+                                                    {!isNil(checkFileType(item.filels, "doc"))
+                                                        &&
+                                                        <a href={APIFileUrl + checkFileType(item.filels, "doc")} download>
+                                                            <Word style={mobileM.downloadDataIcon} />
+                                                        </a>
+                                                    }
+                                                    {!isNil(checkFileType(item.filels, "odf"))
+                                                        &&
+                                                        <a href={APIFileUrl + checkFileType(item.filels, "odf")} download>
+                                                            <Odf style={mobileM.downloadDataIcon} />
+                                                        </a>
+                                                    }
                                                 </Container>
                                             </Container>
                                             :

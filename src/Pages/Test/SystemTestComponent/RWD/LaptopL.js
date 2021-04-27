@@ -41,22 +41,12 @@ const LaptopLBase = (props) => {
         "ourLaws": "本校法規",
         "lawsSign": "相關法規",
     }
-    const downloadData = [
-        { title: "公文改分單" },
-        { title: "公文整合資訊入口網單位單位單位單位單位" },
-        { title: "機密文書等級變更或註銷..." },
-        { title: "國立臺灣藝術大學檔案閱..." },
-        { title: "用印申請表" },
-        { title: "國立臺灣藝術大學檔案應..." },
-        { title: "總發文補發申請單" },
-        { title: "國立臺灣藝術大學檔案應..." },
-        { title: "稽催表補發申請單" },
-        { title: "國立臺灣藝術大學檔案應..." },
-    ]
-    // const LawsType1 = props.LawsType1;
-    // useEffect(() => {
-    //     let LawsType1 = props.LawsType1;
-    // },[props.LawsType1])
+
+    const checkFileType = (fileStr, type) => {
+        const fileList = fileStr?.split(",");
+        const checkType = (element) => element.includes(type);
+        return fileList[fileList.findIndex(checkType, type)];
+    }
 
     return (
         <>
@@ -197,15 +187,24 @@ const LaptopLBase = (props) => {
                                                             </Text>
                                                         </Tooltip>
                                                         <Container theme={laptopL.downloadsDataIconContainer}>
-                                                            <a href="/Test" download>
-                                                                <Pdf style={laptopL.downloadDataIcon} />
-                                                            </a>
-                                                            <a href="/Test" download>
-                                                                <Word style={laptopL.downloadDataIcon} />
-                                                            </a>
-                                                            <a href="/Test" download>
-                                                                <Odf style={laptopL.downloadDataIcon} />
-                                                            </a>
+                                                            {!isNil(checkFileType(item.filels, "pdf"))
+                                                                &&
+                                                                <a href={APIFileUrl + checkFileType(item.filels, "pdf")} download>
+                                                                    <Pdf style={laptopL.downloadDataIcon} />
+                                                                </a>
+                                                            }
+                                                            {!isNil(checkFileType(item.filels, "doc"))
+                                                                &&
+                                                                <a href={APIFileUrl + checkFileType(item.filels, "doc")} download>
+                                                                    <Word style={laptopL.downloadDataIcon} />
+                                                                </a>
+                                                            }
+                                                            {!isNil(checkFileType(item.filels, "odf"))
+                                                                &&
+                                                                <a href={APIFileUrl + checkFileType(item.filels, "odf")} download>
+                                                                    <Odf style={laptopL.downloadDataIcon} />
+                                                                </a>
+                                                            }
                                                         </Container>
                                                     </Container>
                                                     :
