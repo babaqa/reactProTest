@@ -33,7 +33,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "32px 119px 32px" // 標題列的padding
+                    padding: "32px 95px 32px" // 標題列的padding
                 }
             }
         },
@@ -50,7 +50,7 @@ export default {
                 return {
                     ...style,
                     backgroundColor: "#FFFFFF",
-                    padding: "8px 119px 353px", //337 是授權圖高度
+                    padding: "8px 95px 353px", //337 是授權圖高度
                     minHeight: "calc( 100vh + 99px)"
                 }
             }

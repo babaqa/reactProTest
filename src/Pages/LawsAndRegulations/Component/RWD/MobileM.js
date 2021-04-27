@@ -102,14 +102,16 @@ const MobileMBase = (props) => {
                                                     </Text>
 
                                                     {/* 資料標題 文字 */}
-                                                    <Text
-                                                        theme={mobileM.dataTitleText}
-                                                    >
-                                                        {rowData.title}
+                                                    <a href={rowData.url}>
+                                                        <Text
+                                                            theme={mobileM.dataTitleText}
+                                                        >
+                                                            {rowData.title}
 
-                                                        {/* 向右箭頭 圖標 */}
-                                                        <RightArrow style={mobileM.rightArrow} />
-                                                    </Text>
+                                                            {/* 向右箭頭 圖標 */}
+                                                            <RightArrow style={mobileM.rightArrow} />
+                                                        </Text>
+                                                    </a>
                                                 </BasicContainer>
                                             </>
                                         )

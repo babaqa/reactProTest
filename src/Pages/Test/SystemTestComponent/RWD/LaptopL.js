@@ -29,7 +29,7 @@ import { Tooltip } from '@material-ui/core';
 
 const LaptopLBase = (props) => {
 
-    const { APIUrl, Theme, Switch, History, Location } = useContext(Context);
+    const { APIUrl, APIFileUrl, Theme, Switch, History, Location } = useContext(Context);
     const { pages: { test: { component: { systemTestComponent: { rwd: { laptopL } } } } } } = Theme;
 
     const [Width, Height] = useWindowSize();
@@ -316,19 +316,17 @@ const LaptopLBase = (props) => {
                                             (index < 5) &&
                                             <React.Fragment key={index}>
 
-                                                <Text
-                                                    theme={laptopL.lawsListText}
-                                                    onClick={() => {
-                                                        console.log(item.url)
-                                                        // history.push(item.url)
-                                                    }}
-                                                >
-                                                    <Square style={{
-                                                        position: "relative",
-                                                        margin: "0 14px 0 0"
-                                                    }} />
-                                                    {item.title}
-                                                </Text>
+                                                <a href={item.url}>
+                                                    <Text
+                                                        theme={laptopL.lawsListText}
+                                                    >
+                                                        <Square style={{
+                                                            position: "relative",
+                                                            margin: "0 14px 0 0"
+                                                        }} />
+                                                        {item.title}
+                                                    </Text>
+                                                </a>
                                             </React.Fragment>
                                         )
                                     })

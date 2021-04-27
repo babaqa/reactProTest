@@ -101,11 +101,13 @@ const LaptopLBase = (props) => {
                                                     </Text>
 
                                                     {/* 資料標題 文字 */}
-                                                    <Text
-                                                        theme={laptopL.dataTitleText}
-                                                    >
-                                                        {rowData.title}
-                                                    </Text>
+                                                    <a href={rowData.url} style={{ width: "calc( 100% - 104px )" }}>
+                                                        <Text
+                                                            theme={laptopL.dataTitleText}
+                                                        >
+                                                            {rowData.title}
+                                                        </Text>
+                                                    </a>
                                                 </BasicContainer>
                                             </>
                                         )
